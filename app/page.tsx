@@ -5,6 +5,7 @@ export default function Home() {
     <div>
       <main>BITZ</main>
       <h2>beste App der Welt</h2>
+      <h3>Test H3</h3>
     </div>
   );
 }
