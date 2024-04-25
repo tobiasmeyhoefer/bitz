@@ -1,11 +1,8 @@
-import { SignIn } from "@/components/sign-in"
+import { RegisterForm } from "@/components/register"
 
 const Register = () => {
   return (
-    <div>
-      <h1>Login</h1>
-      <SignIn />
-    </div>
+    <RegisterForm/>
   )
 }
 

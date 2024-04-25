@@ -7,6 +7,8 @@ const NavBar = async () => {
   const session = await auth()
   const isLoggedIn = !!session?.user
 
+  console.log(isLoggedIn)
+
   return (
     <nav className="flex justify-between px-20 h-[100px] items-center">
       <h1>Bitz</h1>
