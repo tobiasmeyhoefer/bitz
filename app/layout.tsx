@@ -1,9 +1,11 @@
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Space_Grotesk, Montserrat } from "next/font/google"
 import "./globals.css"
 import NavBar from "@/components/navigation/NavBar"
+import { cn } from "@/lib/utils"
 
-const inter = Inter({ subsets: ["latin"] })
+const space_grotesk = Space_Grotesk({ subsets: ["latin"], variable: "--space_grotesk" })
+const montserrat = Montserrat({ subsets: ["latin"], variable: "--montserrat" })
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,7 +19,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de">
-      <body className={inter.className}>
+      <body className={cn(
+        "min-h-screen bg-background antialiased",
+        space_grotesk.variable,
+        montserrat.variable
+      )}>
         <header>
           <NavBar />
         </header>
