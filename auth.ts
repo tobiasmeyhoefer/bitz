@@ -6,6 +6,7 @@ import authConfig from "./auth.config"
 import Resend from "next-auth/providers/resend"
  
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  adapter: DrizzleAdapter(db),
   session: { strategy: "jwt" },
   ...authConfig,
 })
