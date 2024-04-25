@@ -5,7 +5,7 @@ export function SignIn() {
     <form
       action={async () => {
         "use server"
-        await signIn("google", {redirectTo: "/protected"})
+        await signIn("google")
       }}
     >
       <button type="submit">Signin with Google</button>
