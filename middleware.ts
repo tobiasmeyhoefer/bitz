@@ -17,6 +17,8 @@ export default auth((req) => {
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname)
   const isAuthRoute = authRoutes.includes(nextUrl.pathname)
+
+  console.log(isLoggedIn)
   
   if(isApiAuthRoute) {
     return 
@@ -35,13 +37,8 @@ export default auth((req) => {
 
   return 
 
-  // if(nextUrl.pathname === "/protected" && !isLoggedIn) {
-  //   return Response.redirect(new URL("/", nextUrl))
-  // }
-
 })
 
-// Optionally, don't invoke Middleware on some paths
 export const config = {
   matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
 }

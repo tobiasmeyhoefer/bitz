@@ -1,6 +1,6 @@
 {
-  "id": "7f9e9124-c771-45db-aa86-19f91f0d7262",
-  "prevId": "ff5d2ded-626d-4ef9-ac1f-b948f99a3c9f",
+  "id": "e64fdf06-0221-456c-9f61-b4feae5fb1c4",
+  "prevId": "242d2924-a9a5-4d43-bd7c-49e1c8e4fd1d",
   "version": "5",
   "dialect": "pg",
   "tables": {
@@ -75,15 +75,7 @@
           "notNull": false
         }
       },
-      "indexes": {
-        "account_userId_index": {
-          "name": "account_userId_index",
-          "columns": [
-            "userId"
-          ],
-          "isUnique": false
-        }
-      },
+      "indexes": {},
       "foreignKeys": {
         "account_userId_user_id_fk": {
           "name": "account_userId_user_id_fk",
@@ -114,16 +106,10 @@
       "name": "session",
       "schema": "",
       "columns": {
-        "id": {
-          "name": "id",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true
-        },
         "sessionToken": {
           "name": "sessionToken",
           "type": "text",
-          "primaryKey": false,
+          "primaryKey": true,
           "notNull": true
         },
         "userId": {
@@ -139,15 +125,7 @@
           "notNull": true
         }
       },
-      "indexes": {
-        "session_userId_index": {
-          "name": "session_userId_index",
-          "columns": [
-            "userId"
-          ],
-          "isUnique": false
-        }
-      },
+      "indexes": {},
       "foreignKeys": {
         "session_userId_user_id_fk": {
           "name": "session_userId_user_id_fk",
@@ -164,15 +142,7 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "session_sessionToken_unique": {
-          "name": "session_sessionToken_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "sessionToken"
-          ]
-        }
-      }
+      "uniqueConstraints": {}
     },
     "user": {
       "name": "user",
@@ -207,20 +177,18 @@
           "type": "text",
           "primaryKey": false,
           "notNull": false
+        },
+        "password": {
+          "name": "password",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "user_email_unique": {
-          "name": "user_email_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "email"
-          ]
-        }
-      }
+      "uniqueConstraints": {}
     },
     "verificationToken": {
       "name": "verificationToken",
@@ -256,15 +224,7 @@
           ]
         }
       },
-      "uniqueConstraints": {
-        "verificationToken_token_unique": {
-          "name": "verificationToken_token_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "token"
-          ]
-        }
-      }
+      "uniqueConstraints": {}
     }
   },
   "enums": {},

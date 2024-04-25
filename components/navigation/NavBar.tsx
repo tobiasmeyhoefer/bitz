@@ -1,11 +1,12 @@
 import { auth } from "@/auth"
-import { SignIn } from "../sign-in"
-import { SignOut } from "../sign-out"
 import Link from "next/link"
+import { SignOut } from "../auth/sign-out"
 
 const NavBar = async () => {
   const session = await auth()
   const isLoggedIn = !!session?.user
+
+  console.log(isLoggedIn)
 
   return (
     <nav className="flex justify-between px-20 h-[100px] items-center">
