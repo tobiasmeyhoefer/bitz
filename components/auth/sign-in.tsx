@@ -1,7 +1,7 @@
 import { signIn } from "@/auth"
-import { Button } from "./ui/button"
+import { Button } from "../ui/button"
  
-export function RegisterForm() {
+export function SignIn() {
   return (
     <form
       action={async (formData) => {
@@ -9,7 +9,9 @@ export function RegisterForm() {
         await signIn("google")
       }}
     >
-      <Button type="submit">Or Signin with Google</Button>
+
+      <Button type="submit"/>
+      
     </form>
   )
-} 
+}

@@ -22,6 +22,7 @@ export const users = pgTable("user", {
   email: text("email").notNull(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
+  password: text("password")
 })
  
 export const accounts = pgTable(
@@ -67,3 +68,5 @@ export const verificationTokens = pgTable(
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
   })
 )
+
+export type UserType = typeof users.$inferSelect;
