@@ -9,7 +9,7 @@ import { getUserFromDb } from "./actions/actions"
 import credentials from "next-auth/providers/credentials"
 
 export default {
-  providers: [google, resend({
+  providers: [google , resend({
     from: "auth@yournal.de"
   })],
 } satisfies NextAuthConfig

@@ -14,8 +14,7 @@ const NavBar = async () => {
       <ul className="flex">
         {!isLoggedIn ? (
           <li className="flex gap-10">
-            <Link href={"/auth/register"}>Registrieren</Link>
-            <Link href={"/auth/login"}>Anmelden</Link>
+            <Link href={"/auth/login"}>LogIn</Link>
           </li>
         ) : null}
         {isLoggedIn ? (
