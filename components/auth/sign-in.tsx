@@ -1,6 +1,6 @@
 import { signIn } from "@/auth"
 import { Button } from "../ui/button"
- 
+import { FaSignInAlt } from "react-icons/fa";
 export function SignIn() {
   return (
     <form
@@ -10,7 +10,7 @@ export function SignIn() {
       }}
     >
 
-      <Button type="submit"/>
+      <Button variant="outline" type="submit"> <FaSignInAlt/> </Button>
       
     </form>
   )
