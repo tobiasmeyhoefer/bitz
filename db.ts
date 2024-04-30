@@ -1,5 +1,4 @@
 import { Pool } from "@neondatabase/serverless"
-import { config } from "dotenv"
 import { drizzle } from "drizzle-orm/neon-serverless"
 
 console.log("testo")
