@@ -33,11 +33,13 @@ import { DEFAULT_LOGIN_REDIRECT, apiAuthPrefix, authRoutes, customPages, publicR
 
 import authConfig from "./auth.config"
 import NextAuth from "next-auth"
-export const { auth: middleware } = NextAuth(authConfig)
+import { NextRequest } from 'next/server'
+export const { auth } = NextAuth(authConfig)
 
-// export function middleware(request: NextRequest) {
-//   console.log("testtt")
-// }
+export function middleware(request: NextRequest) {
+  console.log("test")
+  console.log(auth)
+}
 
 export const config = {
   matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
