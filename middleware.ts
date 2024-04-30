@@ -1,6 +1,7 @@
 import { DEFAULT_LOGIN_REDIRECT, apiAuthPrefix, authRoutes, customPages, publicRoutes } from '@/routes'
 
 import { auth } from './auth'
+import { NextResponse } from 'next/server'
 
 export default auth((req) => {
   console.log("testolinolin")
@@ -13,19 +14,21 @@ export default auth((req) => {
   const isCustomRoute = customPages.includes(nextUrl.pathname)
 
   if (isApiAuthRoute || isCustomRoute) {
-    return
+    return NextResponse.next();
   }
 
   if (isAuthRoute) {
     if (isLoggedIn) {
-      return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl))
+      return NextResponse.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl))
     }
-    return
+    return NextResponse.next();
   }
 
   if (!isLoggedIn && !isPublicRoute) {
     return Response.redirect(new URL('/', nextUrl))
   }
+
+  return NextResponse.next();
 })
 
 export const config = {
