@@ -8,9 +8,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: DrizzleAdapter(db),
   providers: [
     google,
-    resend({
-      from: "auth@yournal.de",
-    }),
+    // resend({
+    //   from: "auth@yournal.de",
+    // }),
   ],
   // pages: {
   //   signIn: "/auth/error",
