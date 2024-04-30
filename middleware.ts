@@ -3,6 +3,7 @@ import { DEFAULT_LOGIN_REDIRECT, apiAuthPrefix, authRoutes, customPages, publicR
 import { auth } from './auth'
 
 export default auth((req) => {
+  console.log("testolinolin")
   // const nextUrl = req.nextUrl
   // const isLoggedIn = !!req.auth
 
