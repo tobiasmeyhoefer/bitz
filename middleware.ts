@@ -36,9 +36,11 @@ import NextAuth from "next-auth"
 import { NextRequest } from 'next/server'
 export const { auth } = NextAuth(authConfig)
 
-export function middleware(request: NextRequest) {
-  console.log("test")
-  console.log(auth)
+export const middleware = async (req: any) => {
+  const session = await auth(req);
+  console.log(session?.user)
+  
+  // Überprüfen, ob der Benutzer eingeloggt ist
 }
 
 export const config = {
