@@ -1,6 +1,7 @@
 import { DEFAULT_LOGIN_REDIRECT, apiAuthPrefix, authRoutes, customPages, publicRoutes } from '@/routes'
 
 import { auth } from './auth'
+import { redirect } from 'next/navigation'
 
 export default auth((req) => {
   console.log("testolinolin")
@@ -19,12 +20,14 @@ export default auth((req) => {
   if (isAuthRoute) {
     if (isLoggedIn) {
       // return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl))
+      redirect("/test")
     }
     return
   }
 
   if (!isLoggedIn && !isPublicRoute) {
     // return Response.redirect(new URL('/', nextUrl))
+    redirect("/bomob")
   }
 })
 
