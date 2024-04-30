@@ -48,7 +48,7 @@ export const middleware = async (req: any) => {
   const isAuthRoute = authRoutes.includes(nextUrl.pathname)
   const isCustomRoute = customPages.includes(nextUrl.pathname)
 
-  if (isApiAuthRoute || isCustomRoute) {
+  if (isApiAuthRoute) {
     return NextResponse.next();
   }
 
