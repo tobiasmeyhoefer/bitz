@@ -12,9 +12,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       from: "auth@yournal.de",
     }),
   ],
-  pages: {
-    signIn: "/auth/error",
-    verifyRequest: "/auth/verify"
-  },
+  // pages: {
+  //   signIn: "/auth/error",
+  //   verifyRequest: "/auth/verify"
+  // },
 })
 
