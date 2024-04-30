@@ -7,7 +7,7 @@ export function SignOut() {
       action={async () => {
         "use server"
         console.log("before signout")
-        await signOut()
+        await signOut({redirect: false})
         console.log("after signout")
       }}
     >
