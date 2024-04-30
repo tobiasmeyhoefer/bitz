@@ -6,9 +6,9 @@ export function SignOut() {
     <form
       action={async () => {
         "use server"
-        console.log("before signout")
+        // console.log("before signout")
         await signOut()
-        console.log("after signout")
+        // console.log("after signout")
       }}
     >
       <Button type="submit">abmelden</Button>

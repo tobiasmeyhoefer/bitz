@@ -18,7 +18,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const session = await auth()
   return (
     <html lang="de">
       <body
@@ -31,8 +30,7 @@ export default async function RootLayout({
         <header>
           <NavBar />
         </header>
-        {!!session?.user ? <main>test</main> : <main>{children}</main>}
-        {/* // <main>{children}</main> */}
+        <main>{children}</main>
       </body>
     </html>
   )

@@ -5,7 +5,7 @@ import { Button } from '../ui/button'
 
 const NavBar = async () => {
   const session = await auth()
-  console.log(session?.user)
+  // console.log(session?.user)
   const isLoggedIn = !!session?.user
 
   return (

@@ -1,3 +1,4 @@
+import { auth } from '@/auth'
 import { SignInGoogle } from '@/components/auth/sign-in-google'
 import { SignInResend } from '@/components/auth/sign-in-resend'
 import {
@@ -8,8 +9,13 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { redirect } from 'next/navigation'
 
-const Login = () => {
+const Login = async () => {
+  const session = await auth()
+  if(!!session?.user) {
+    redirect("/browse")
+  }
   return (
     <div className="flex h-screen w-full items-center justify-center">
       <Card className="w-[500px] p-10">
