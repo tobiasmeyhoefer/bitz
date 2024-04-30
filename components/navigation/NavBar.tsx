@@ -1,6 +1,7 @@
 import { auth } from '@/auth'
 import Link from 'next/link'
 import { SignOut } from '../auth/sign-out'
+import { Button } from '../ui/button'
 
 const NavBar = async () => {
   const session = await auth()
@@ -12,7 +13,9 @@ const NavBar = async () => {
       <ul className="flex">
         {!isLoggedIn ? (
           <li className="flex gap-10">
-            <Link href={'/auth/login'}>anmelden</Link>
+            <Button>
+              <Link href={'/auth/login'}>anmelden</Link>
+            </Button>
           </li>
         ) : null}
         {isLoggedIn ? (
