@@ -41,7 +41,7 @@ export const middleware = async (req: any) => {
   console.log(session?.user)
   
   const nextUrl = req.nextUrl
-  const isLoggedIn = session?.user
+  const isLoggedIn = !!session?.user
 
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname)
