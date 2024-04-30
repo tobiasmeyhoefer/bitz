@@ -19,7 +19,7 @@ export default auth((req) => {
 
   if (isAuthRoute) {
     if (isLoggedIn) {
-      return NextResponse.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl))
+      return NextResponse.redirect(DEFAULT_LOGIN_REDIRECT)
     }
     return NextResponse.next();
   }
