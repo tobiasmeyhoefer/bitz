@@ -4,29 +4,29 @@ import { auth } from './auth'
 import { NextRequest, NextResponse } from 'next/server'
 
 export default auth((req) => {
-  // console.log("testolinolin")
-  // const nextUrl = req.nextUrl
-  // const isLoggedIn = !!req.auth
+  console.log("testolinolin")
+  const nextUrl = req.nextUrl
+  const isLoggedIn = !!req.auth
 
-  // const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
-  // const isPublicRoute = publicRoutes.includes(nextUrl.pathname)
-  // const isAuthRoute = authRoutes.includes(nextUrl.pathname)
-  // const isCustomRoute = customPages.includes(nextUrl.pathname)
+  const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
+  const isPublicRoute = publicRoutes.includes(nextUrl.pathname)
+  const isAuthRoute = authRoutes.includes(nextUrl.pathname)
+  const isCustomRoute = customPages.includes(nextUrl.pathname)
 
-  // if (isApiAuthRoute || isCustomRoute) {
-  //   return NextResponse.next();
-  // }
+  if (isApiAuthRoute || isCustomRoute) {
+    return NextResponse.next();
+  }
 
-  // if (isAuthRoute) {
-  //   if (isLoggedIn) {
-  //     return NextResponse.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl))
-  //   }
-  //   return NextResponse.next();
-  // }
+  if (isAuthRoute) {
+    if (isLoggedIn) {
+      return NextResponse.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl))
+    }
+    return NextResponse.next();
+  }
 
-  // if (!isLoggedIn && !isPublicRoute) {
-  //   return NextResponse.redirect(new URL("/", nextUrl))
-  // }
+  if (!isLoggedIn && !isPublicRoute) {
+    return NextResponse.redirect(new URL("/", nextUrl))
+  }
 
   return NextResponse.next();
 })
