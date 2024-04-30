@@ -4,11 +4,9 @@ import { SignOut } from '../auth/sign-out'
 import { Button } from '../ui/button'
 
 const NavBar = async () => {
-  // const session = await auth()
-  // console.log(session?.user)
-  // const isLoggedIn = !!session?.user
-
-  const isLoggedIn = true
+  const session = await auth()
+  console.log(session?.user)
+  const isLoggedIn = !!session?.user
 
   return (
     <nav className="absolute left-0 right-0 flex h-[100px] items-center justify-between px-20">
