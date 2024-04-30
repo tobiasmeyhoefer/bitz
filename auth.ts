@@ -32,7 +32,7 @@ import { db } from "./db"
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: DrizzleAdapter(db),
   providers: [
-    // google,
+    google,
     resend({
       from: "auth@yournal.de",
     }),
