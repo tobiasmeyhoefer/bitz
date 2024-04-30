@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { useParams, useSearchParams } from 'next/navigation'
+import { Suspense } from 'react'
 
 enum Error {
   Configuration = 'Configuration',
@@ -28,6 +29,7 @@ export default function AuthErrorPage() {
   const error = search.get('error') as Error
 
   return (
+    <Suspense fallback={<p>loading</p>}>
     <div className="flex h-screen w-full flex-col items-center justify-center">
       <div
         className="block max-w-sm rounded-lg border border-gray-200 bg-white p-6 text-center shadow dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
@@ -44,5 +46,6 @@ export default function AuthErrorPage() {
       </div>
       <div></div>
     </div>
+    </Suspense>
   )
 }
