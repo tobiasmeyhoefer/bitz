@@ -5,7 +5,7 @@ import google from "next-auth/providers/google"
 import { db } from "./db"
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  adapter: DrizzleAdapter(db),
+  // adapter: DrizzleAdapter(db),
   providers: [
     google,
     // resend({
