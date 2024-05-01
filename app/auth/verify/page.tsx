@@ -1,5 +1,5 @@
-const Testo = () => {
-  return ( <h1>Bitte Email verifizieren</h1> );
+const VerifyPage = () => {
+  return ( <h2>Bitte Email verifizieren</h2> );
 }
  
-export default Testo;
+export default VerifyPage;
