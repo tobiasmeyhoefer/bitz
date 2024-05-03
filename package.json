@@ -22,6 +22,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.30.9",
+    "framer-motion": "^11.1.7",
     "next": "^14.2.3",
     "next-auth": "^5.0.0-beta.17",
     "react": "^18",
