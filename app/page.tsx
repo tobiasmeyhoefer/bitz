@@ -17,7 +17,7 @@ export default async function Home() {
     //   <h1 className="bottom-0 text-9xl">Bitz</h1>
     //   <h2 className="text-4xl">von heute für morgen mit Technik versorgen</h2>
     //   <div className="right-0 size-96 w-full">
-    <main className="relative h-screen">
+    <main className="static h-screen pt-24">
       <CubeScene />
     </main>
     //   </div>
