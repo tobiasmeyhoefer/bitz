@@ -8,7 +8,6 @@ export default function Scene() {
   return (
     <Canvas dpr={[1, 2]}>
       {/* <directionalLight position={[-5, -5, -5]} intensity={2000} /> */}
-
       <OrbitControls enableZoom={false} />
       <ambientLight position={[-5, -5, -5]} intensity={5} />
       <directionalLight position={[-5, 5, 5]} intensity={16} />
