@@ -6,14 +6,14 @@ import { useMotionValue, useSpring } from 'framer-motion'
 import { useRef } from 'react'
 import { AnimationMixer, Group, LoopOnce, MathUtils } from 'three'
 
-useGLTF.preload('/bitz_explosion.glb')
+useGLTF.preload('/bitz_explosion_normal.glb')
 
 export default function Cube() {
   // const [isPlaying, setIsPlaying] = useState(false);
   const motionVal = useMotionValue(0)
   const spring = useSpring(motionVal, { damping: 1, stiffness: 20 })
   const group = useRef<Group>(null)
-  const { animations, scene } = useGLTF('/bitz_explosion.glb')
+  const { animations, scene } = useGLTF('/bitz_explosion_normal.glb')
   let mixer = new AnimationMixer(scene)
 
   const handleClick = () => {
