@@ -12,10 +12,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       from: "auth@bitztech.de",
     }),
   ],
-  pages: {
-    signIn: "/auth/error",
-    verifyRequest: "/auth/verify"
-  },
+  // pages: {
+  //   signIn: "/auth/error",
+  //   verifyRequest: "/auth/verify"
+  // },
 })
 
 

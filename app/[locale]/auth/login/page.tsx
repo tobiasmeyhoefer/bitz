@@ -9,9 +9,11 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { redirect } from 'next/navigation'
+import { redirect } from '@/navigation'
+import { getTranslations } from 'next-intl/server'
 
 const Login = async () => {
+  const t = await getTranslations("LoginForm")
   const session = await auth()
   if(!!session?.user) {
     redirect("/browse")
@@ -20,8 +22,8 @@ const Login = async () => {
     <div className="flex h-screen w-full items-center justify-center">
       <Card className="w-[500px] p-10">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl">anmelden</CardTitle>
-          <CardDescription>via Google oder Email</CardDescription>
+          <CardTitle className="text-2xl">{t("loginButton")}</CardTitle>
+          <CardDescription>{t("loginMessage")}</CardDescription>
         </CardHeader>
         <CardContent className="text-center">
           <div className="grid w-full items-center gap-8">

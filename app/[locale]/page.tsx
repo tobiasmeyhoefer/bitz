@@ -1,6 +1,6 @@
 import { auth } from '@/auth'
 import dynamic from 'next/dynamic'
-import { redirect } from 'next/navigation'
+import { redirect } from '@/navigation'
 
 const CubeScene = dynamic(() => import('@/components/explosion/cubeScene'), {
   ssr: false,
@@ -13,14 +13,8 @@ export default async function Home() {
   }
 
   return (
-    // <div className="mt-10 h-full">
-    //   <h1 className="bottom-0 text-9xl">Bitz</h1>
-    //   <h2 className="text-4xl">von heute für morgen mit Technik versorgen</h2>
-    //   <div className="right-0 size-96 w-full">
     <main className="static h-screen pt-24">
       <CubeScene />
     </main>
-    //   </div>
-    // </div>
   )
 }
