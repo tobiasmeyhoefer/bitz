@@ -1,6 +1,6 @@
 {
   "$schema": "https://inlang.com/schema/project-settings",
-  "sourceLanguageTag": "en",
+  "sourceLanguageTag": "de",
   "languageTags": ["en", "de"],
   "modules": [
     "https://cdn.jsdelivr.net/npm/@inlang/plugin-next-intl@latest/dist/index.js",
