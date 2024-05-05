@@ -16,7 +16,21 @@ export const users = pgTable("user", {
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
 })
- 
+
+export const products = pgTable("product", {
+  id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
+  title: text("title").notNull(),
+  description: text("description"),
+  price: integer("price").notNull(),
+  currency: text("currency").notNull(),
+  quantity: integer("quantity").notNull().$default(() => 1),
+  location: text("location"),
+  sellerId: text("sellerId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  status: text("status").notNull().$default(() => "available"),
+  createdAt: timestamp("createdAt", { mode: "date" }).notNull(),
+  image: text(" "),
+});
+
 export const accounts = pgTable(
   "account",
   {
