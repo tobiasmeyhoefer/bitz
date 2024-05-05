@@ -1,0 +1,26 @@
+{
+  "Index": {
+    "title": "Hallo Welt!"
+  },
+  "Browse": {
+    "title": "Entdecken"
+  },
+  "Search": {
+    "title": "Suchen"
+  },
+  "MyShop": {
+    "title": "Mein Shop"
+  },
+  "Settings": {
+    "title": "Einstellungen"
+  },
+  "Navbar": {
+    "loginButton": "anmelden",
+    "logoutButton": "abmelden"
+  },
+  "LoginForm": {
+    "loginButton": "anmelden",
+    "loginMessage": "via Email oder Google",
+    "loginGoogleMessage": "mit Google anmelden"
+  }
+}

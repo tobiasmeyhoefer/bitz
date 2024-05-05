@@ -1,7 +1,9 @@
 import { signOut } from "@/auth"
 import { Button } from "../ui/button"
+import {useTranslations} from 'next-intl';
  
 export function SignOut() {
+  const t = useTranslations("Navbar")
   return (
     <form
       action={async () => {
@@ -9,7 +11,7 @@ export function SignOut() {
         await signOut()
       }}
     >
-      <Button type="submit">abmelden</Button>
+      <Button type="submit">{t("logoutButton")}</Button>
     </form>
   )
 }

@@ -13,13 +13,15 @@ export const metadata: Metadata = {
   description: 'Kauf- und Verkaufsplattform',
 }
 
-export default async function RootLayout({
+export default async function LocaleLayout({
   children,
+  params: {locale}
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode,
+  params: {locale: string};
 }>) {
   return (
-    <html lang="de">
+    <html lang={locale}>
       <body
         className={cn(
           'min-h-screen bg-background antialiased',
