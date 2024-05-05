@@ -11,6 +11,9 @@
   "MyShop": {
     "title": "My Shop"
   },
+  "AddURL": {
+    "url": "/en/myshop/add"
+  },
   "Settings": {
     "title": "Settings"
   },
