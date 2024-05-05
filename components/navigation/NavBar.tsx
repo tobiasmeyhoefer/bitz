@@ -1,9 +1,12 @@
 import { auth } from '@/auth'
-import Link from 'next/link'
 import { SignOut } from '../auth/sign-out'
 import { Button } from '../ui/button'
+import { Link } from '@/navigation'
+import {useTranslations} from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 
 const NavBar = async () => {
+  const t = await getTranslations("Navbar")
   const session = await auth()
   const isLoggedIn = !!session?.user
 
@@ -14,7 +17,7 @@ const NavBar = async () => {
         {!isLoggedIn ? (
           <li className="flex gap-10">
             <Button>
-              <Link href={'/auth/login'}>anmelden</Link>
+              <Link href={'/auth/login'}>{t("loginButton")}</Link>
             </Button>
           </li>
         ) : null}
