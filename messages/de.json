@@ -14,9 +14,6 @@
   "MyShopUrl": {
     "url": "/de/myshop"
   },
-  "AddURL": {
-    "url": "/de/myshop/add"
-  },
   "Settings": {
     "title": "Einstellungen"
   },
