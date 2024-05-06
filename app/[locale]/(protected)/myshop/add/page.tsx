@@ -9,6 +9,9 @@ const AddProductPage = () => {
   return(
     <div className="flex flex-col items-center absolute top-24 inset-x-1/2">
       <AddProductForm/>
+      <Button asChild >
+        <Link href={url("url")}> <IoMdArrowRoundBack /> </Link>
+      </Button>
     </div>
   )
 }
