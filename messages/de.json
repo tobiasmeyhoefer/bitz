@@ -22,5 +22,9 @@
     "loginButton": "anmelden",
     "loginMessage": "via Email oder Google",
     "loginGoogleMessage": "mit Google anmelden"
+  },
+  "LocaleSwitcher": {
+    "label": "Sprache ändern",
+    "locale": "{locale, select, de {🇩🇪 Deutsch} en {🇺🇸 English} other {Unbekannt}}"
   }
 }
