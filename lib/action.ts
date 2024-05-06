@@ -1,7 +1,6 @@
 'use server'
 import { products } from '@/schema'
 import { db } from '../db'
-import { revalidatePath } from 'next/cache'
 import { eq } from 'drizzle-orm'
 import { auth } from '@/auth'
 
@@ -20,7 +19,7 @@ export async function addProduct(values: any) {
       location: location,
       sellerId: id,
       status: status,
-      createdAt: new Date(Date.now()),
+      createdAt: new Date(),
       image: '',
     })
   }
