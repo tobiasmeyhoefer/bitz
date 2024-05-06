@@ -5,13 +5,12 @@ import { eq } from 'drizzle-orm'
 import { auth } from '@/auth'
 
 export async function getProducts() {
-  const response = await db.select().from(products);
-  return response;
+  const response = await db.select().from(products)
+  return response
 }
 
 export async function addProduct(values: any) {
-  const { title, description, price, currency, quantity, location, status } =
-    values
+  const { title, description, price, currency, quantity, location, status } = values
   const session = await auth()
   const id = session?.user?.id
   if (id) {

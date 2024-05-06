@@ -14,6 +14,12 @@
   "MyShopUrl": {
     "url": "/en/myshop"
   },
+  "addProducts": {
+    "title": "add Products"
+  },
+  "submitForm": {
+    "title": "submit"
+  },
   "Settings": {
     "title": "Settings"
   },

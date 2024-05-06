@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import { Input } from '../ui/input'
 import { addProduct } from '@/lib/action'
 import { z } from 'zod'
@@ -38,7 +38,7 @@ export function AddProductForm() {
 
   return (
     <>
-      <Card className="w-[500px] h-[620px] p-10">
+      <Card className="h-[620px] w-[500px] p-10">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
