@@ -25,6 +25,6 @@
   },
   "LocaleSwitcher": {
     "label": "change language",
-    "locale": "{locale, select, de {🇩🇪 german} en {🇺🇸 English} other {Unbekannt}}"
+    "locale": "{locale, select, de {🇩🇪 Deutsch} en {🇺🇸 English} other {Unbekannt}}"
   }
 }
