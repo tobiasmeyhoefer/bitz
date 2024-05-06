@@ -4,6 +4,11 @@ import { db } from '../db'
 import { eq } from 'drizzle-orm'
 import { auth } from '@/auth'
 
+export async function getProducts() {
+  const response = await db.select().from(products);
+  return response;
+}
+
 export async function addProduct(values: any) {
   const { title, description, price, currency, quantity, location, status } =
     values
