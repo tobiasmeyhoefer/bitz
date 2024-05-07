@@ -16,8 +16,10 @@ export default async function Home() {
   }
 
   return (
-    <main className="static h-screen pt-16">
-      <CubeScene />
+    <main className="static h-screen ">
+      <div className="static h-96 pt-24 md:static md:h-screen md:pt-24">
+        <CubeScene />
+      </div>
 
       {/* Call-to-Action Button  */}
 
@@ -26,18 +28,20 @@ export default async function Home() {
           <div className="absolute right-6 mt-6 h-12 w-12 rounded-full bg-white md:right-9 md:mt-4 md:h-16 md:w-16">
             <ChevronRightIcon className="relative size-12 text-black md:size-16" />
           </div>
-          <div className="relative left-0 mt-7 md:left-10">{t('button')}</div>
+          <div className="relative left-0 mt-7 text-3xl md:left-10">
+            {t('button')}
+          </div>
         </div>
       </Link>
 
       {/* Beschreibungstext  */}
-      <div className="absolute left-8 rounded-md p-5 font-space_grotesk text-black drop-shadow-2xl  md:left-24 lg:bottom-16 lg:w-7/12">
-        <p className="text-5xl">
+      <div className="absolute bottom-48 left-8 rounded-md p-5 font-space_grotesk text-black drop-shadow-2xl  md:left-24 lg:bottom-16 lg:w-7/12">
+        <p className="text-2xl md:text-5xl">
           <em>Bitz</em>
         </p>
-        <p className="mt-4 text-2xl">{t('subtitle')}</p>
-        <p className="mt-4 text-xl">{t('description')}</p>
-        <p className="mt-4 text-2xl">{t('call')}</p>
+        <p className="mt-4 text-lg md:text-2xl">{t('subtitle')}</p>
+        <p className="mt-4 text-sm md:text-xl">{t('description')}</p>
+        <p className="mt-4 text-lg md:text-2xl">{t('call')}</p>
       </div>
     </main>
   )
