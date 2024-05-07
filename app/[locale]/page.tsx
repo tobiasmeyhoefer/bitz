@@ -1,6 +1,7 @@
 import { auth } from '@/auth'
 import { Link, redirect } from '@/navigation'
 import { ChevronRightIcon } from '@radix-ui/react-icons'
+import { getTranslations } from 'next-intl/server'
 import dynamic from 'next/dynamic'
 
 const CubeScene = dynamic(() => import('@/components/explosion/cubeScene'), {
@@ -8,6 +9,7 @@ const CubeScene = dynamic(() => import('@/components/explosion/cubeScene'), {
 })
 
 export default async function Home() {
+  const t = await getTranslations('Landingpage')
   const session = await auth()
   if (!!session?.user) {
     redirect('/browse')
@@ -24,7 +26,7 @@ export default async function Home() {
           <div className="absolute right-6 mt-6 h-12 w-12 rounded-full bg-white md:right-9 md:mt-4 md:h-16 md:w-16">
             <ChevronRightIcon className="relative size-12 text-black md:size-16" />
           </div>
-          <div className="relative left-0 mt-7 md:left-10">Loslegen</div>
+          <div className="relative left-0 mt-7 md:left-10">t("button")</div>
         </div>
       </Link>
 
@@ -33,16 +35,9 @@ export default async function Home() {
         <p className="text-5xl">
           <em>Bitz</em>
         </p>
-        <p className="mt-4 text-2xl">
-          von heute für morgen mit Technik versorgen
-        </p>
-        <p className="mt-4 text-xl">
-          Entdecke bei <em>Bitz</em> die neuesten Technikgeräte zu unschlagbaren
-          Preisen! Kaufe, verkaufe und tausche deine Lieblingsgadgets in einer
-          sicheren Umgebung. Trete unserer lebendigen Community bei und finde
-          noch heute dein nächstes Technik-Highlight.
-        </p>
-        <p className="mt-4 text-2xl">Jetzt anmelden und durchstarten!</p>
+        <p className="mt-4 text-2xl">t("subtitle")</p>
+        <p className="mt-4 text-xl">t("description")</p>
+        <p className="mt-4 text-2xl">t("call")</p>
       </div>
     </main>
   )
