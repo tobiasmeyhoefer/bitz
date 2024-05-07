@@ -20,16 +20,16 @@ export default async function Home() {
       {/* Call-to-Action Button  */}
 
       <Link href={'/auth/login'}>
-        <div className="absolute bottom-24 right-24 h-24 w-96 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 px-8 font-space_grotesk text-4xl text-white hover:scale-105 hover:opacity-85">
-          <div className="absolute right-9 mt-4 h-16 w-16 rounded-full bg-white">
-            <ChevronRightIcon className="relative size-16 text-black" />
+        <div className="absolute bottom-24 right-7 h-24 w-72 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 px-8 font-space_grotesk text-4xl text-white hover:scale-105 hover:opacity-85 md:right-24 md:w-96 lg:h-24">
+          <div className="absolute right-6 mt-6 h-12 w-12 rounded-full bg-white md:right-9 md:mt-4 md:h-16 md:w-16">
+            <ChevronRightIcon className="relative size-12 text-black md:size-16" />
           </div>
-          <div className="relative left-10 mt-7">Loslegen</div>
+          <div className="relative left-0 mt-7 md:left-10">Loslegen</div>
         </div>
       </Link>
 
       {/* Beschreibungstext  */}
-      <div className="absolute  left-24 rounded-md p-5 font-space_grotesk text-black drop-shadow-2xl  md:bottom-16 md:w-7/12">
+      <div className="absolute left-8 rounded-md p-5 font-space_grotesk text-black drop-shadow-2xl  md:left-24 lg:bottom-16 lg:w-7/12">
         <p className="text-5xl">
           <em>Bitz</em>
         </p>
