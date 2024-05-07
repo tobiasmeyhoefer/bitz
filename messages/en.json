@@ -9,7 +9,11 @@
     "title": "Search"
   },
   "MyShop": {
-    "title": "My Shop"
+    "title": "My Shop",
+    "addProducts": "add Product"
+  },
+  "addProductPage": {
+    "submitTitle": "submit"
   },
   "Settings": {
     "title": "Settings"

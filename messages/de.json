@@ -9,7 +9,11 @@
     "title": "Suchen"
   },
   "MyShop": {
-    "title": "Mein Shop"
+    "title": "Mein Shop",
+    "addProducts": "Produkt hinzufügen"
+  },
+  "addProductPage": {
+    "submitTitle": "absenden"
   },
   "Settings": {
     "title": "Einstellungen"
