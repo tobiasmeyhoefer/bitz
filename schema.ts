@@ -82,3 +82,7 @@ export const verificationTokens = pgTable(
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
   }),
 )
+
+export type ProductType = typeof products.$inferSelect;
+export type UserType = typeof users.$inferSelect;
+

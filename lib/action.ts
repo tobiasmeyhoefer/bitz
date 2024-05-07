@@ -3,13 +3,14 @@ import { products } from '@/schema'
 import { db } from '../db'
 import { eq } from 'drizzle-orm'
 import { auth } from '@/auth'
+import { ProductType} from '@/models/product-model'
 
 export async function getProducts() {
   const response = await db.select().from(products)
   return response
 }
 
-export async function addProduct(values: any) {
+export async function addProduct(values:ProductType) {
   const { title, description, price, currency, quantity, location, status } = values
   const session = await auth()
   const id = session?.user?.id

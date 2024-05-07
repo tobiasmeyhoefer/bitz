@@ -9,16 +9,11 @@
     "title": "Suchen"
   },
   "MyShop": {
-    "title": "Mein Shop"
+    "title": "Mein Shop",
+    "addProducts": "Produkt hinzufügen"
   },
-  "MyShopUrl": {
-    "url": "/de/myshop"
-  },
-  "addProducts": {
-    "title": "Produkt hinzufügen"
-  },
-  "submitForm": {
-    "title": "absenden"
+  "addProductPage": {
+    "submitTitle": "absenden"
   },
   "Settings": {
     "title": "Einstellungen"

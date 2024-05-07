@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/form'
 import { Card } from '@/components/ui/card'
 import { Button } from '../ui/button'
+import { useRouter } from '@/navigation'
 
 const minError = 'Eingabe erfordert'
 const formSchema = z.object({
@@ -27,13 +28,15 @@ const formSchema = z.object({
   description: z.string().min(1, { message: minError }).max(250),
 })
 
-export function AddProductForm() {
+export function AddProductForm({ submitText }: { submitText: string }) {
+  const router = useRouter()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   })
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    window.location.reload()
     await addProduct(values)
+    router.push('/myshop')
   }
 
   return (
@@ -133,7 +136,7 @@ export function AddProductForm() {
               )}
             />
             <Button className="mt-4" type="submit">
-              Submit
+              {submitText}
             </Button>
           </form>
         </Form>
