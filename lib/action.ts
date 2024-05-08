@@ -1,5 +1,5 @@
 'use server'
-import { products } from '@/schema'
+import { products, users } from '@/schema'
 import { db } from '../db'
 import { eq } from 'drizzle-orm'
 import { auth } from '@/auth'
@@ -37,3 +37,11 @@ export async function deleteProduct(productId: string) {
 
 // Update function requiring productData as
 export async function updateProduct() {}
+
+export async function saveUserLocation() {
+  const session = await auth()
+  const id = session?.user?.id
+  if(id) {
+    
+  }
+}
