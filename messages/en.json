@@ -2,6 +2,12 @@
   "Index": {
     "title": "Hello World"
   },
+  "Landingpage": {
+    "subtitle": "Supplying you with technology from today to tomorrow",
+    "description": "Discover the latest tech gadgets at Bitz at unbeatable prices! Buy, sell, and trade your favorite gadgets in a secure environment. Join our vibrant community and find your next tech highlight today.",
+    "call": "Sign up now and get started!",
+    "button": "Get Started"
+  },
   "Browse": {
     "title": "Browse",
     "searchPlaceholder": "What are you searching for?",
@@ -11,7 +17,11 @@
     "title": "Search"
   },
   "MyShop": {
-    "title": "My Shop"
+    "title": "My Shop",
+    "addProducts": "add Product"
+  },
+  "addProductPage": {
+    "submitTitle": "submit"
   },
   "Settings": {
     "title": "Settings"
