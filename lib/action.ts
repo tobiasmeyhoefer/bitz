@@ -38,10 +38,12 @@ export async function deleteProduct(productId: string) {
 // Update function requiring productData as
 export async function updateProduct() {}
 
-export async function saveUserLocation() {
+export async function saveUserLocation(values : {city: string, postcode: number}) {
   const session = await auth()
   const id = session?.user?.id
   if(id) {
-    
+    // await db.update(users)
+    // .set({ name: 'Mr. Dan' })
+    // .where(eq(users.id, id));
   }
 }

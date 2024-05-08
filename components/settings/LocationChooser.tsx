@@ -29,22 +29,21 @@ export default function LocationChooser() {
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    await saveUserLocation()
+    await saveUserLocation(values)
   }
 
   return (
     <>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className= "flex flex-row items-end">
+        <form onSubmit={form.handleSubmit(onSubmit)} className= "flex flex-row items-end gap-1">
           <FormField
             control={form.control}
             name={'city'}
             render={({ field }) => (
               <FormItem>
                 <FormMessage/>
-                <FormLabel>City</FormLabel>
                 <FormControl>
-                  <Input placeholder="title" {...field} />
+                  <Input placeholder="city" {...field} />
                 </FormControl>
               </FormItem>
             )}
@@ -55,9 +54,8 @@ export default function LocationChooser() {
             render={({ field }) => (
               <FormItem>
                 <FormMessage/>
-                <FormLabel>Postcode</FormLabel>
                 <FormControl>
-                  <Input placeholder="title" {...field} />
+                  <Input placeholder="postcode" {...field} />
                 </FormControl>
               </FormItem>
             )}
