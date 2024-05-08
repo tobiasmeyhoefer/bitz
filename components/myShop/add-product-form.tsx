@@ -16,6 +16,7 @@ import {
 import { Card } from '@/components/ui/card'
 import { Button } from '../ui/button'
 import { useRouter } from '@/navigation'
+import { ProductType} from '@/models/product-model'
 
 const minError = 'Eingabe erfordert'
 const formSchema = z.object({
@@ -24,24 +25,27 @@ const formSchema = z.object({
   quantity: z.coerce.number().safe().positive(),
   location: z.string().min(1, { message: minError }).max(50),
   status: z.string().min(1, { message: minError }).max(50),
-  currency: z.string().min(1, { message: minError }).max(30),
+  currency: z.string().min(1, { message: minError }).max(30).refine((value) => typeof value === 'string' && !/^\d+$/.test(value)),
   description: z.string().min(1, { message: minError }).max(250),
 })
 
-export function AddProductForm({ submitText }: { submitText: string }) {
+export function AddProductForm({ submitText, action }: { submitText: string , action: (values: ProductType) => Promise<void>}) {
   const router = useRouter()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      quantity: 1,
+    },
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    await addProduct(values)
+    await action(values)
     router.push('/myshop')
   }
 
   return (
     <>
-      <Card className="h-[620px] w-[500px] p-10">
+      <Card className=" w-[500px] p-10">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
