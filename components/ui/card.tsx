@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { FaRegHeart } from 'react-icons/fa'
-import { StaticImport } from 'next/dist/shared/lib/get-img-props'
+import { CardWithImageProps } from '@/lib/types'
 
 const Card = React.forwardRef<
   HTMLDivElement,
@@ -76,16 +76,6 @@ const CardFooter = React.forwardRef<
   />
 ))
 CardFooter.displayName = 'CardFooter'
-
-type CardWithImageProps = {
-  title: string
-  desc: string
-  content?: string
-  imgUrl: string | string[]
-  previewType: string /* shop || article */
-  className?: React.HTMLAttributes<HTMLDivElement>
-  icon?: any
-}
 
 const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
   ({ className, ...props }, ref) => {

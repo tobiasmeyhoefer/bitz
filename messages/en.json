@@ -3,7 +3,9 @@
     "title": "Hello World"
   },
   "Browse": {
-    "title": "Browse"
+    "title": "Browse",
+    "searchPlaceholder": "What are you searching for?",
+    "suggestions": "Suggestions"
   },
   "Search": {
     "title": "Search"
