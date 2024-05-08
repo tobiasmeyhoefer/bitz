@@ -11,10 +11,14 @@ export async function getProducts() {
 }
 
 export async function addProduct(values:ProductType) {
-  const { title, description, price, currency, quantity, location, status } = values
+  let { title, description, price, currency, quantity, location, status } = values
   const session = await auth()
   const id = session?.user?.id
   if (id) {
+    const user = await getUserById(id)
+    // if(user.location) {
+    //   location = user.location
+    // }
     await db.insert(products).values({
       title: title,
       description: description,
@@ -43,7 +47,13 @@ export async function saveUserLocation(values : {city: string, postcode: number}
   const id = session?.user?.id
   if(id) {
     // await db.update(users)
-    // .set({ name: 'Mr. Dan' })
+    // .set({ location: city + " " + postcode })
     // .where(eq(users.id, id));
   }
 }
+
+export async function getUserById(userId :string) {
+  const response = await db.select().from(users).where(eq(users.id, userId))
+  return response
+}
+
