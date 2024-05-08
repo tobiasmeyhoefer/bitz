@@ -29,7 +29,7 @@ const formSchema = z.object({
   description: z.string().min(1, { message: minError }).max(250),
 })
 
-export function AddProductForm({ submitText, action }: { submitText: string , action: (values: ProductType) => Promise<void>}) {
+export function AddProductForm({ submitText, action, locationSet}: { submitText: string , action: (values: ProductType) => Promise<void> , locationSet:boolean}) {
   const router = useRouter()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -113,19 +113,21 @@ export function AddProductForm({ submitText, action }: { submitText: string , ac
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name={'location'}
-              render={({ field }) => (
-                <FormItem>
-                  <FormMessage />
-                  <FormLabel>Location</FormLabel>
-                  <FormControl>
-                    <Input placeholder="location" {...field} />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
+            {!locationSet && (
+              <FormField
+                control={form.control}
+                name={'location'}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormMessage />
+                    <FormLabel>Location</FormLabel>
+                    <FormControl>
+                      <Input placeholder="location" {...field} />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            )}
             <FormField
               control={form.control}
               name={'status'}

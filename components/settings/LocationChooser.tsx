@@ -30,6 +30,10 @@ export default function LocationChooser() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     await saveUserLocation(values)
+    form.reset({
+      city: '',
+      postcode: 0,
+  });
   }
 
   return (
