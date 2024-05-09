@@ -29,7 +29,8 @@
     "logoutButton": "logout",
     "discover" : "Discover",
     "myBitz" : "My Bitz",
-    "search" : "Search"
+    "search" : "Search",
+    "profile": "my profile"
   },
   "LoginForm": {
     "loginButton": "login",

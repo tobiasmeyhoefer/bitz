@@ -16,25 +16,33 @@ const NavBar = async ({ pathname }: { pathname: string }) => {
   return (
     <nav className="bg-gray-300 absolute left-0 right-0 flex h-[100px] items-center px-4 sm:px-20 justify-between">
       <div className="flex items-center">
-        {!isLoggedIn ? (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Link href="/" className="text-blue-500 font-montserrat text-4xl font-bold mr-4 sm:mr-10 block sm:hidden">
-                B
-              </Link>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="absolute z-10 mt-2">
-              <DropdownMenuItem>
-                <Link href="/browse">{t("discover")}</Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link href="/search">{t("search")}</Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link href="/profile">{t("myBitz")}</Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
+        {isLoggedIn ? ( 
+          <li>
+            <DropdownMenu>
+              
+              <DropdownMenuTrigger>
+                <Link href="/" className="text-blue-500 font-montserrat text-4xl font-bold mr-4 sm:mr-10">
+                  <span className="sm:hidden">B</span>
+                  <span className="hidden sm:inline">BITZ</span>
+                </Link>
+              </DropdownMenuTrigger>
+              
+              <DropdownMenuContent className="absolute z-10 mt-2">
+                <DropdownMenuItem>
+                  <Button className="bg-yellow-300 text-black hover:bg-orange-400"><Link href="/browse">{t("discover")}</Link></Button>
+                </DropdownMenuItem>
+                
+                <DropdownMenuItem>
+                  <Button className="bg-yellow-300 text-black hover:bg-orange-400"><Link href="/search">{t("search")}</Link></Button>
+                </DropdownMenuItem>
+                
+                <DropdownMenuItem>
+                  <Button className="bg-yellow-300 text-black hover:bg-orange-400"><Link href="/profile">{t("myBitz")}</Link></Button>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+              
           </DropdownMenu>
+            </li>
         ) : (
           <Link href="/" className="text-blue-500 font-montserrat text-4xl font-bold mr-4 sm:mr-10">
             <span className="block sm:hidden">B</span>
@@ -42,7 +50,7 @@ const NavBar = async ({ pathname }: { pathname: string }) => {
           </Link>
         )}
         <div className="hidden sm:flex">
-          {!isLoggedIn && (
+          {isLoggedIn && (
             <>           
               <Button variant={pathname === '/browse' ? 'secondary' : 'ghost'}
               className="mr-5 text-lg font-normal hover:bg-yellow-300 hover:text-black" asChild>
@@ -65,21 +73,21 @@ const NavBar = async ({ pathname }: { pathname: string }) => {
       </div>
       <ul className="flex">
         {isLoggedIn ? (
-          <li>
+          
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <FaUserCircle className="text-yellow-300 h-12 w-12 p-1" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="absolute z-10 mt-2">
+              <DropdownMenuContent className="relative z-10 mt-2">
                 <DropdownMenuItem>
-                  <Link href="/profile">Profil verwalten</Link>
+                  <Button className="bg-yellow-300 text-black hover:bg-orange-400"> <Link href="/profile">{t('profile')}</Link></Button>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <SignOut />
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-          </li>
+          
         ) : (
             <li className="flex space-x-2">
               <Button className="bg-yellow-300 text-black hover:bg-orange-400"> <Link href="/auth/login">{t('loginButton')}</Link></Button>

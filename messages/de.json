@@ -29,7 +29,8 @@
     "logoutButton": "abmelden",
     "discover" : "Entdecken",
     "myBitz" : "Meine Bitz",
-    "search" : "Suchen"
+    "search" : "Suchen",
+    "profile": "Profil vewalten"
   },
   "LoginForm": {
     "loginButton": "anmelden",
