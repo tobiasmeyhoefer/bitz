@@ -5,20 +5,23 @@ import NavBar from '@/components/navigation/NavBar'
 import { cn } from '@/lib/utils'
 import { auth } from '@/auth'
 
-const space_grotesk = Space_Grotesk({ subsets: ['latin'], variable: '--space_grotesk' })
+const space_grotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--space_grotesk',
+})
 const montserrat = Montserrat({ subsets: ['latin'], variable: '--montserrat' })
 
 export const metadata: Metadata = {
   title: 'BITZ',
   description: 'Kauf- und Verkaufsplattform',
 }
-/** hier wird page.tsx eingebunden */ 
+/** hier wird page.tsx eingebunden */
 export default async function LocaleLayout({
   children,
-  params: {locale}
+  params: { locale },
 }: Readonly<{
-  children: React.ReactNode,
-  params: {locale: string};
+  children: React.ReactNode
+  params: { locale: string }
 }>) {
   return (
     <html lang={locale}>
@@ -32,7 +35,7 @@ export default async function LocaleLayout({
         <header>
           <NavBar />
         </header>
-        <main className='min-h-screen h-0'>{children}</main>   
+        <main className="h-0 min-h-screen">{children}</main>
       </body>
     </html>
   )
