@@ -43,27 +43,32 @@ const NavBar = async ({ pathname }: { pathname: string }) => {
           </Link>
         )}
         <div className="hidden sm:flex">
-          <Button
-            variant={pathname === '/browse' ? 'secondary' : 'ghost'}
-            className="mr-5 text-lg font-normal hover:bg-yellow-300 hover:text-black"
-            asChild
-          >
-            <Link href="/browse">Entdecken</Link>
-          </Button>
-          <Button
-            variant={pathname === '/search' ? 'secondary' : 'ghost'}
-            className="mr-5 text-lg font-normal hover:bg-yellow-300 hover:text-black"
-            asChild
-          >
-            <Link href="/search">Suchen</Link>
-          </Button>
-          <Button
-            variant={pathname === '/profile' ? 'secondary' : 'ghost'}
-            className="text-lg font-normal hover:bg-yellow-300 hover:text-black"
-            asChild
-          >
-            <Link href="/">Meine Bitz</Link>
-          </Button>
+{isLoggedIn && (
+  <>
+    <Button
+      variant={pathname === '/browse' ? 'secondary' : 'ghost'}
+      className="mr-5 text-lg font-normal hover:bg-yellow-300 hover:text-black"
+      asChild
+    >
+      <Link href="/browse">Entdecken</Link>
+    </Button>
+    <Button
+      variant={pathname === '/search' ? 'secondary' : 'ghost'}
+      className="mr-5 text-lg font-normal hover:bg-yellow-300 hover:text-black"
+      asChild
+    >
+      <Link href="/search">Suchen</Link>
+    </Button>
+    <Button
+      variant={pathname === '/profile' ? 'secondary' : 'ghost'}
+      className="text-lg font-normal hover:bg-yellow-300 hover:text-black"
+      asChild
+    >
+      <Link href="/">Meine Bitz</Link>
+    </Button>
+  </>
+)}
+
         </div>
       </div>
       <ul className="flex">
@@ -85,29 +90,20 @@ const NavBar = async ({ pathname }: { pathname: string }) => {
           </li>
         ) : (
           <>
-            <li className="hidden sm:block">
-              <DropdownMenu>
-                <DropdownMenuTrigger>
-                  <IoKeyOutline className="text-yellow-300 h-12 w-12 border-2 border-yellow-300 rounded-full p-1" />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="absolute z-10 mt-2">
-                  <DropdownMenuItem>
-                    <Link href="/auth/login">Anmelden</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Link href="/auth/register">Registrieren</Link>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </li>
-            <div className="flex sm:hidden space-x-2">
-              <Button asChild>
-                <Link href="/auth/login">Anmelden</Link>
-              </Button>
-              <Button asChild>
-                <Link href="/auth/register">Registrieren</Link>
-              </Button>
-            </div>
+{isLoggedIn ? (
+  <div className="flex space-x-2">
+    <Button asChild>
+      <SignOut />
+    </Button>
+  </div>
+) : (
+  <div className="flex space-x-2">
+    <Button asChild>
+      <Link href="/auth/login">Anmelden</Link>
+    </Button>
+  </div>
+)}
+
           </>
         )}
       </ul>
