@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: 'BITZ',
   description: 'Kauf- und Verkaufsplattform',
 }
-
+/** hier wird page.tsx eingebunden */ 
 export default async function LocaleLayout({
   children,
   params: {locale}
@@ -32,7 +32,7 @@ export default async function LocaleLayout({
         <header>
           <NavBar />
         </header>
-        <main className='min-h-screen h-0'>{children}</main>
+        <main className='min-h-screen h-0'>{children}</main>   
       </body>
     </html>
   )
