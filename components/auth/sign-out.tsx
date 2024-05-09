@@ -11,7 +11,9 @@ export function SignOut() {
         await signOut()
       }}
     >
-      <Button type="submit">{t("logoutButton")}</Button>
+            <Button 
+        className="bg-yellow-300 text-black hover:bg-orange-400"
+        type="submit">{t("logoutButton")}</Button>
     </form>
   )
 }

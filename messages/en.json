@@ -26,7 +26,10 @@
   },
   "Navbar": {
     "loginButton": "login",
-    "logoutButton": "logout"
+    "logoutButton": "logout",
+    "discover" : "Discover",
+    "myBitz" : "My Bitz",
+    "search" : "Search"
   },
   "LoginForm": {
     "loginButton": "login",
