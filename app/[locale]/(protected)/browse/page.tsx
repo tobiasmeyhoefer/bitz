@@ -10,8 +10,7 @@ const Browse = () => {
     suggestions: t('suggestions'),
   }
   return (
-    <div>
-      <h1>{t('title')}</h1>
+    <div className="h-screen">
       <BrowseContent searchTranslations={searchTranslations} />
     </div>
   )
