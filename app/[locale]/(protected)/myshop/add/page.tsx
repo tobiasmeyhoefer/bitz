@@ -7,8 +7,12 @@ const AddProductPage = async () => {
   let locationSet = false
   const session = await auth();
   const user = await getUserById(session?.user?.id!);
-  if(user[0].location) {
-    locationSet = true; 
+  try{
+    if(user[0].location) {
+      locationSet = true; 
+    }
+  }
+  catch(err) {
   }
   const t = await getTranslations('addProductPage')
   return (
