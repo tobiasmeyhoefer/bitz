@@ -1,6 +1,8 @@
 'use client'
+import { FullProductType, ProductType} from '@/models/product-model'
+import React, { useEffect, useState } from 'react';
 import { Input } from '../ui/input'
-import { addProduct } from '@/lib/action'
+import { getProductById } from '@/lib/action'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -16,7 +18,6 @@ import {
 import { Card } from '@/components/ui/card'
 import { Button } from '../ui/button'
 import { useRouter } from '@/navigation'
-import { ProductType} from '@/models/product-model'
 
 const minError = 'Eingabe erfordert'
 const formSchema = z.object({
@@ -29,14 +30,65 @@ const formSchema = z.object({
   description: z.string().min(1, { message: minError }).max(250),
 })
 
-export function AddProductForm({ submitText, action, locationSet}: { submitText: string , action: (values: ProductType) => Promise<void> , locationSet:boolean}) {
+export function AddProductForm({ submitText, action, locationSet, whichFunction}: { submitText: string , action: (values: ProductType) => Promise<void> , locationSet:boolean, whichFunction:string}) {
+  const [data, setData] = useState<FullProductType>({
+    id: '', // Falls notwendig, fülle `id` mit einem Standardwert
+    title: '',
+    description: '',
+    price: 2,
+    currency: '',
+    quantity: 2,
+    location: '',
+    status: '',
+    sellerId: '',
+    image: '',
+    createdAt: new Date(),
+  });
+
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const result = await getProductById('c712fb22-42ac-4dfa-a557-4b709df293ba');
+        const r = result[0]
+        console.log("----------" + r)
+        setData(r);
+      } catch (error) {
+        console.error('Fehler beim Laden der Daten:', error);
+      }
+    };
+
+    getProduct();
+  }, []);
+
   const router = useRouter()
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      quantity: 1,
-    },
-  })
+  let defaultValues
+  if (whichFunction === 'update' || data.title != ''){
+    defaultValues = {
+      title: data.title!,
+      description : data.description!,
+      price: data.price!,
+      currency: data.currency!,
+      quantity: data.quantity!,
+      location: data.location!,
+      status: data.status!,
+      id: ""
+    };
+  }
+
+  // Ruf useForm auf und übergib die ausgewählten defaultValues
+  const form = useForm({
+      resolver: zodResolver(formSchema),
+      defaultValues: {
+        title: data.title!,
+        description : data.description!,
+        price: data.price!,
+        currency: data.currency!,
+        quantity: data.quantity!,
+        location: data.location!,
+        status: data.status!,
+        id: ""
+      },
+  });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     await action(values)

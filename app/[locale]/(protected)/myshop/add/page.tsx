@@ -17,7 +17,7 @@ const AddProductPage = async () => {
   const t = await getTranslations('addProductPage')
   return (
     <div className="absolute inset-x-1/2 top-24 flex flex-col items-center">
-      <AddProductForm submitText={t('submitTitle')} action={addProduct} locationSet={locationSet} />
+      <AddProductForm submitText={t('submitTitle')} action={addProduct} locationSet={locationSet} whichFunction='add'/>
     </div>
   )}
 
