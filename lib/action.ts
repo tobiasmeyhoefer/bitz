@@ -40,7 +40,35 @@ export async function deleteProduct(productId: string) {
 }
 
 // Update function requiring productData as
-export async function updateProduct() {}
+export async function updateProduct(productId: string, values:ProductType) {
+    const session = await auth()
+    const id = session?.user?.id
+    if (id) {
+        const existingProduct = await getProductById(productId)
+        if (existingProduct && existingProduct[0].sellerId === id) {
+          const { title, description, price, currency, quantity, location, status } = values
+          await db.update(products)
+            .set({
+              title: title || existingProduct[0].title,
+              description: description || existingProduct[0].description,
+              price: price || existingProduct[0].price,
+              currency: currency || existingProduct[0].currency,
+              quantity: quantity || existingProduct[0].quantity,
+              location: location || existingProduct[0].location,
+              status: status || existingProduct[0].status,
+            })
+            .where(eq(products.id, productId));
+        } else {
+          throw new Error("Product not found or unauthorized to update.");
+        }
+      }
+}
+
+// getter for a Product with id as param
+export async function getProductById(productId: string) {
+    const response = await db.select().from(products).where(eq(products.id, productId))
+    return response
+  }
 
 export async function saveUserLocation(values : {city: string, postcode: number}) {
   const session = await auth()
