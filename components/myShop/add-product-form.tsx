@@ -31,64 +31,51 @@ const formSchema = z.object({
 })
 
 export function AddProductForm({ submitText, action, locationSet, whichFunction}: { submitText: string , action: (values: ProductType) => Promise<void> , locationSet:boolean, whichFunction:string}) {
-  const [data, setData] = useState<FullProductType>({
-    id: '', // Falls notwendig, fülle `id` mit einem Standardwert
+  const router = useRouter()
+  const [data, setData] = useState<ProductType>({
     title: '',
     description: '',
-    price: 2,
+    price: 0,
     currency: '',
-    quantity: 2,
+    quantity: 0,
     location: '',
     status: '',
-    sellerId: '',
-    image: '',
-    createdAt: new Date(),
   });
 
   useEffect(() => {
     const getProduct = async () => {
       try {
-        const result = await getProductById('c712fb22-42ac-4dfa-a557-4b709df293ba');
-        const r = result[0]
-        console.log("----------" + r)
-        setData(r);
+        if(whichFunction == 'update') {
+          const result = await getProductById('c712fb22-42ac-4dfa-a557-4b709df293ba');
+          const r = result[0]
+          const updatedData: ProductType = {
+            title: r.title || '',
+            description: r.description || '', // Setze auf leere Zeichenkette, falls `null`
+            price: r.price,
+            currency: r.currency || '',
+            quantity: r.quantity,
+            location: r.location || '', // Setze auf leere Zeichenkette, falls `null`
+            status: r.status,
+          };
+            setData(updatedData);  
+        }
       } catch (error) {
         console.error('Fehler beim Laden der Daten:', error);
       }
     };
-
     getProduct();
-  }, []);
+  }, [whichFunction]);
 
-  const router = useRouter()
-  let defaultValues
-  if (whichFunction === 'update' || data.title != ''){
-    defaultValues = {
-      title: data.title!,
-      description : data.description!,
-      price: data.price!,
-      currency: data.currency!,
-      quantity: data.quantity!,
-      location: data.location!,
-      status: data.status!,
-      id: ""
-    };
-  }
-
-  // Ruf useForm auf und übergib die ausgewählten defaultValues
   const form = useForm({
-      resolver: zodResolver(formSchema),
-      defaultValues: {
-        title: data.title!,
-        description : data.description!,
-        price: data.price!,
-        currency: data.currency!,
-        quantity: data.quantity!,
-        location: data.location!,
-        status: data.status!,
-        id: ""
-      },
+    resolver: zodResolver(formSchema),
+    defaultValues: data,
   });
+
+  useEffect(() => {
+    if (data && whichFunction == 'update') {
+        form.reset(data);
+    }
+  }, [data, form, whichFunction]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     await action(values)
@@ -108,7 +95,7 @@ export function AddProductForm({ submitText, action, locationSet, whichFunction}
                   <FormMessage />
                   <FormLabel>Title</FormLabel>
                   <FormControl>
-                    <Input placeholder="title" {...field} />
+                    <Input placeholder={data.title} {...field} />
                   </FormControl>
                 </FormItem>
               )}
