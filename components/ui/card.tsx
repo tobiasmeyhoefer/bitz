@@ -128,7 +128,6 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                 {props.desc}
               </CardDescription>
             </CardHeader>
-            <CardContent className="p-3 pt-0">{props.content}</CardContent>
           </Card>
         ) : (
           <Card className={cn(`w-[${cardWidth}px]`, className)} ref={ref}>

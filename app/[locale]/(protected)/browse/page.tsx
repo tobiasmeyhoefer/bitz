@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl'
-import BrowseContent from '@/components/wrapper/browseContent'
+import BrowseContent from '@/components/browse/browseContent'
 import { SearchTranslations } from '@/lib/types'
 
 const Browse = () => {
@@ -9,11 +9,7 @@ const Browse = () => {
     searchPlaceholder: t('searchPlaceholder'),
     suggestions: t('suggestions'),
   }
-  return (
-    <div className="h-screen">
-      <BrowseContent searchTranslations={searchTranslations} />
-    </div>
-  )
+  return <BrowseContent searchTranslations={searchTranslations} />
 }
 
 export default Browse

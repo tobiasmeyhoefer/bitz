@@ -10,7 +10,8 @@ import {
   RevealOnScrollProps,
 } from '@/lib/types'
 import { CardWithImage } from '../ui/card'
-import * as React from 'react'
+import { SlClose } from 'react-icons/sl'
+import { Button } from '@/components/ui/button'
 
 const BrowseContent = (props: BrowseContentProps) => {
   const [searchValue, setSearchValue] = useState('')
@@ -57,7 +58,7 @@ const BrowseContent = (props: BrowseContentProps) => {
 
   return (
     <div
-      className={`${loading && `h-full`} flex w-full flex-col items-center justify-center px-10 py-20 md:px-[20px] lg:px-[80px]`}
+      className={`${loading && `h-full`} flex w-full flex-col items-center justify-center px-10 py-20 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
     >
       <SearchDialog
         placeholder={
@@ -108,15 +109,23 @@ const SearchDialog = (props: SearchBarProps) => {
           readOnly
         />
       </DialogTrigger>
-      <DialogContent className="gap-0 border-0 p-0">
-        <Input
-          className="rounded-t-l m-0 h-14 rounded-b-none px-4"
-          type="search"
-          placeholder={props.placeholder}
-          onChange={(e) => props.setSearchValue(e.target.value)}
-          value={props.searchValue ? props.searchValue : ''}
-          onKeyDown={(e) => e.key === 'Enter' && setOpen(false)} // Data fetching trigger
-        />
+      <DialogContent className="gap-0 border-0 bg-white p-0">
+        <div className="flex">
+          <Input
+            className="rounded-t-l m-0 h-14 rounded-b-none px-4"
+            type="input"
+            placeholder={props.placeholder}
+            onChange={(e) => props.setSearchValue(e.target.value)}
+            value={props.searchValue ? props.searchValue : ''}
+            onKeyDown={(e) => e.key === 'Enter' && setOpen(false)} // Data fetching trigger
+          />
+          {props.searchValue.length > 0 && (
+            <SlClose
+              onClick={() => props.setSearchValue('')}
+              className="absolute right-[20px] top-[20%] h-[20px] w-[20px]"
+            />
+          )}
+        </div>
         {!props.searchValue ? (
           <>
             <h1 className="px-4 pt-2 text-lg font-medium">

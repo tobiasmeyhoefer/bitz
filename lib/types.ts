@@ -33,13 +33,13 @@ type Product = {
   quantity: number
   location: string
   status: string
-  imgUrl?: string | undefined
+  imgUrl?: string
 }
 
 type Shop = {
   title: string
   description: string
-  imgUrl?: string[] | undefined
+  imgUrl?: string[]
 }
 
 type RevealOnScrollProps = {
@@ -53,5 +53,5 @@ export type {
   BrowseContentProps,
   Product,
   Shop,
-  RevealOnScroll,
+  RevealOnScrollProps,
 }
