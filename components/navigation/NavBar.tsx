@@ -2,7 +2,9 @@ import { auth } from '@/auth'
 import { SignOut } from '../auth/sign-out'
 import { Link } from '@/navigation'
 import { getTranslations } from 'next-intl/server'
-import { FaUserCircle } from 'react-icons/fa'
+import { SlSettings } from 'react-icons/sl'
+import { TbMenu } from 'react-icons/tb'
+
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -10,6 +12,16 @@ import {
   DropdownMenuItem,
 } from '../ui/dropdown-menu'
 import { NavLoginLink, NavItemLink } from './navbarItem'
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '../ui/drawer'
+import { Button } from '../ui/button'
+import { FaBullseye } from 'react-icons/fa'
 
 const NavBar = async () => {
   const t = await getTranslations('Navbar')
@@ -21,31 +33,11 @@ const NavBar = async () => {
       <div className="flex items-center">
         {isLoggedIn ? (
           <>
-            <div className="sm:hidden">
-              <DropdownMenu>
-                <DropdownMenuTrigger>
-                  <Link
-                    href="/"
-                    className="mr-4 font-montserrat text-4xl font-bold text-blue-500 sm:mr-10"
-                  >
-                    <span>B</span>
-                  </Link>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="absolute z-10 mt-2">
-                  <DropdownMenuItem>
-                    <NavItemLink linkTo="/browse" text={t('discover')} />
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <NavItemLink linkTo="/myshop" text={t('myBitz')} />
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
             <Link
               href="/"
               className="mr-4 font-montserrat text-4xl font-bold text-blue-500 sm:mr-10"
             >
-              <span className="hidden sm:inline">BITZ</span>
+              <span>BITZ</span>
             </Link>
           </>
         ) : (
@@ -60,31 +52,64 @@ const NavBar = async () => {
         <div className="hidden sm:flex">
           {isLoggedIn && (
             <>
-              <NavItemLink linkTo="/browse" text={t('discover')} />
-              <NavItemLink linkTo="/myshop" text={t('myBitz')} />
+              <NavItemLink
+                className="mr-10"
+                linkTo="/browse"
+                text={t('discover')}
+              />
+              <NavItemLink
+                className="mr-10"
+                linkTo="/myshop"
+                text={t('myBitz')}
+              />
             </>
           )}
         </div>
       </div>
-      <ul className="flex">
-        {isLoggedIn ? (
-          <DropdownMenu>
-            <DropdownMenuTrigger>
-              <FaUserCircle className="h-12 w-12 p-1 text-yellow-300" />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="relative z-10 mt-2">
-              <DropdownMenuItem>
-                <NavItemLink linkTo="/settings" text={t('profile')} />
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <SignOut />
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        ) : (
-          <NavLoginLink text={t('loginButton')} />
-        )}
-      </ul>
+      {isLoggedIn ? (
+        <>
+          <div className="hidden sm:flex">
+            <NavItemLink
+              linkTo="/settings"
+              icon={<SlSettings className="mr-3 h-[20px] w-[20px]" />}
+            ></NavItemLink>
+            <SignOut typeText={false} />
+          </div>
+          <div className="block sm:hidden">
+            <Drawer>
+              <DrawerTrigger asChild>
+                <Button className="h-fit bg-transparent p-0 text-black shadow-none hover:bg-transparent hover:text-black ">
+                  <TbMenu className="h-[20px] w-[20px]" />
+                </Button>
+              </DrawerTrigger>
+              <DrawerContent className="max-w-smd mx-auto w-full border-0 bg-black p-3">
+                <NavItemLink
+                  className="mr-10 py-2 text-2xl text-white  hover:underline hover:underline-offset-8"
+                  linkTo="/browse"
+                  text={t('discover')}
+                />
+                <NavItemLink
+                  className="mr-10 py-2 text-2xl text-white"
+                  linkTo="/myshop"
+                  text={t('myBitz')}
+                />
+                <NavItemLink
+                  className="mr-10 py-2 text-2xl text-white"
+                  linkTo="/settings"
+                  text={t('settings')}
+                ></NavItemLink>
+                <SignOut
+                  typeText={true}
+                  text={t('logoutButton')}
+                  className="mr-10 py-2 text-2xl text-white hover:text-white hover:underline hover:underline-offset-8"
+                />
+              </DrawerContent>
+            </Drawer>
+          </div>
+        </>
+      ) : (
+        <NavLoginLink text={t('loginButton')} />
+      )}
     </nav>
   )
 }

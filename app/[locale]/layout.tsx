@@ -35,7 +35,7 @@ export default async function LocaleLayout({
         <header>
           <NavBar />
         </header>
-        <main className="h-fit bg-white">{children}</main>
+        <main className="h-fit min-h-screen bg-white">{children}</main>
       </body>
     </html>
   )

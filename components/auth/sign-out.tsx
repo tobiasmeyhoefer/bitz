@@ -1,8 +1,16 @@
 import { signOut } from '@/auth'
 import { Button } from '../ui/button'
 import { useTranslations } from 'next-intl'
+import { SlLogout } from 'react-icons/sl'
+import { cn } from '@/lib/utils'
 
-export function SignOut() {
+type SignOutProps = {
+  typeText: boolean
+  className?: string
+  text?: string
+}
+
+export function SignOut(props: SignOutProps) {
   const t = useTranslations('Navbar')
   return (
     <form
@@ -12,10 +20,17 @@ export function SignOut() {
       }}
     >
       <Button
-        className="bg-transparent text-black hover:bg-black hover:text-white"
+        className={cn(
+          'h-fit bg-transparent p-0 text-black shadow-none hover:bg-transparent hover:text-black ',
+          props.className,
+        )}
         type="submit"
       >
-        {t('logoutButton')}
+        {props.text ? (
+          props.text
+        ) : (
+          <SlLogout className="h-[20px] w-[20px] rotate-180" />
+        )}
       </Button>
     </form>
   )

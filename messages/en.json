@@ -29,10 +29,11 @@
   "Navbar": {
     "loginButton": "login",
     "logoutButton": "logout",
-    "discover" : "Discover",
-    "myBitz" : "My Bitz",
-    "search" : "Search",
-    "profile": "my profile"
+    "discover": "Discover",
+    "myBitz": "My Bitz",
+    "search": "Search",
+    "profile": "my profile",
+    "settings": "Settings"
   },
   "LoginForm": {
     "loginButton": "login",

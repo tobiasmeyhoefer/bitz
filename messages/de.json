@@ -29,10 +29,11 @@
   "Navbar": {
     "loginButton": "anmelden",
     "logoutButton": "abmelden",
-    "discover" : "Entdecken",
-    "myBitz" : "Meine Bitz",
-    "search" : "Suchen",
-    "profile": "Profil vewalten"
+    "discover": "Entdecken",
+    "myBitz": "Meine Bitz",
+    "search": "Suchen",
+    "profile": "Profil vewalten",
+    "settings": "Einstellungen"
   },
   "LoginForm": {
     "loginButton": "anmelden",
