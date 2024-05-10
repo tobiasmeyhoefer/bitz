@@ -1,7 +1,6 @@
 import { AddProductForm } from '@/components/myShop/add-product-form'
 import { getTranslations } from 'next-intl/server'
-import { updateProduct } from '@/lib/action'
-import { auth } from '@/auth'
+import { updateProduct } from '@/lib/productaction'
 import { ProductType} from '@/models/product-model'
 
 const UpdateProductPage = async () => {

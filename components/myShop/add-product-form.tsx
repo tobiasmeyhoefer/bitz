@@ -1,8 +1,8 @@
 'use client'
-import { FullProductType, ProductType} from '@/models/product-model'
-import React, { useEffect, useState } from 'react';
+import {ProductType } from '@/models/product-model'
+import React, { useEffect, useState } from 'react'
 import { Input } from '../ui/input'
-import { getProductById } from '@/lib/action'
+import { getProductById } from '@/lib/productaction'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -26,11 +26,21 @@ const formSchema = z.object({
   quantity: z.coerce.number().safe().positive(),
   location: z.string().min(1, { message: minError }).max(50),
   status: z.string().min(1, { message: minError }).max(50),
-  currency: z.string().min(1, { message: minError }).max(30).refine((value) => typeof value === 'string' && !/^\d+$/.test(value)),
+  currency: z
+    .string()
+    .min(1, { message: minError })
+    .max(30)
+    .refine((value) => typeof value === 'string' && !/^\d+$/.test(value)),
   description: z.string().min(1, { message: minError }).max(250),
 })
 
-export function AddProductForm({ submitText, action, locationSet, whichFunction}: { submitText: string , action: (values: ProductType) => Promise<void> , locationSet:boolean, whichFunction:string}) {
+export function AddProductForm({submitText,action,locationSet,whichFunction,}: {
+  submitText: string
+  action: (values: ProductType) => Promise<void>
+  locationSet: boolean
+  whichFunction: string
+}) {
+  
   const router = useRouter()
   const [data, setData] = useState<ProductType>({
     title: '',
@@ -40,42 +50,44 @@ export function AddProductForm({ submitText, action, locationSet, whichFunction}
     quantity: 0,
     location: '',
     status: '',
-  });
-
-  useEffect(() => {
-    const getProduct = async () => {
-      try {
-        if(whichFunction == 'update') {
-          const result = await getProductById('c712fb22-42ac-4dfa-a557-4b709df293ba');
-          const r = result[0]
-          const updatedData: ProductType = {
-            title: r.title || '',
-            description: r.description || '', // Setze auf leere Zeichenkette, falls `null`
-            price: r.price,
-            currency: r.currency || '',
-            quantity: r.quantity,
-            location: r.location || '', // Setze auf leere Zeichenkette, falls `null`
-            status: r.status,
-          };
-            setData(updatedData);  
-        }
-      } catch (error) {
-        console.error('Fehler beim Laden der Daten:', error);
-      }
-    };
-    getProduct();
-  }, [whichFunction]);
+  })
 
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: data,
-  });
+  })
+
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        if (whichFunction == 'update') {
+          const result = await getProductById(
+            'c712fb22-42ac-4dfa-a557-4b709df293ba',
+          )
+          const r = result[0]
+          const updatedData: ProductType = {
+            title: r.title,
+            description: r.description || '', 
+            price: r.price,
+            currency: r.currency,
+            quantity: r.quantity,
+            location: r.location || '', 
+            status: r.status,
+          }
+          setData(updatedData)
+        }
+      } catch (error) {
+        console.error('Fehler beim Laden der Daten:', error)
+      }
+    }
+    getProduct()
+  }, [whichFunction])
 
   useEffect(() => {
     if (data && whichFunction == 'update') {
-        form.reset(data);
+      form.reset(data)
     }
-  }, [data, form, whichFunction]);
+  }, [data, form, whichFunction])
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     await action(values)
