@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { FaRegHeart } from 'react-icons/fa'
-import { StaticImport } from 'next/dist/shared/lib/get-img-props'
+import { CardWithImageProps } from '@/lib/types'
 
 const Card = React.forwardRef<
   HTMLDivElement,
@@ -77,20 +77,9 @@ const CardFooter = React.forwardRef<
 ))
 CardFooter.displayName = 'CardFooter'
 
-type CardWithImageProps = {
-  title: string
-  desc: string
-  content?: string
-  imgUrl: string | string[]
-  previewType: string /* shop || article */
-  className?: React.HTMLAttributes<HTMLDivElement>
-  icon?: any
-}
-
 const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
   ({ className, ...props }, ref) => {
-    const cardWidth = props.previewType === 'article' ? 300 : 500
-
+    const cardWidth = props.previewType === 'product' ? 300 : 600
     const getImgBorder = (index: number, arraylength: number) => {
       switch (index) {
         case 0:
@@ -104,16 +93,25 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
 
     return (
       <>
-        {props.previewType === 'article' ? (
-          <Card className="w-[300px]" ref={ref}>
-            <Image
-              src={props.imgUrl as string}
-              width={cardWidth}
-              height={300}
-              className="rounded-t-xl"
-              alt="Preview Image Article"
-              style={{ objectFit: 'cover', height: '250px' }}
-            />
+        {props.previewType === 'product' ? (
+          <Card className={cn(`w-[${cardWidth}px]`, className)} ref={ref}>
+            {props.imgUrl !== undefined ? (
+              <Image
+                src={props.imgUrl as string}
+                width={cardWidth}
+                height={300}
+                className="rounded-t-xl"
+                alt="Preview Image Article"
+                style={{ objectFit: 'cover', height: '300px' }}
+              />
+            ) : (
+              <div
+                className={`w-[${cardWidth}px] flex h-[300px] items-center justify-center rounded-t-xl`}
+              >
+                <div>Placeholder Image</div>
+              </div>
+            )}
+
             <CardHeader className="p-3">
               <div className="flex justify-between">
                 <CardTitle
@@ -130,23 +128,30 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                 {props.desc}
               </CardDescription>
             </CardHeader>
-            <CardContent className="p-3 pt-0">{props.content}</CardContent>
           </Card>
         ) : (
-          <Card className="w-[500px]" ref={ref}>
+          <Card className={cn(`w-[${cardWidth}px]`, className)} ref={ref}>
             <div className="flex rounded-t-xl">
-              {Array.isArray(props.imgUrl) &&
+              {props.imgUrl !== undefined ? (
+                Array.isArray(props.imgUrl) &&
                 props.imgUrl.map((iUrl: string, index) => (
                   <Image
                     key={iUrl}
                     src={iUrl}
-                    width={cardWidth / props.imgUrl.length}
+                    width={cardWidth / props.imgUrl!.length}
                     height={300}
                     alt="Preview Image Shop"
-                    className={getImgBorder(index, props.imgUrl.length)}
-                    style={{ objectFit: 'cover', height: '250px' }}
+                    className={getImgBorder(index, props.imgUrl!.length)}
+                    style={{ objectFit: 'cover', height: '300px' }}
                   />
-                ))}
+                ))
+              ) : (
+                <div
+                  className={`w-[${cardWidth}px] flex h-[300px] items-center justify-center rounded-t-xl`}
+                >
+                  <div>Placeholder Image</div>
+                </div>
+              )}
             </div>
 
             <CardHeader className="p-3">

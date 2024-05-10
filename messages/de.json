@@ -9,7 +9,9 @@
     "button": "Loslegen"
   },
   "Browse": {
-    "title": "Entdecken"
+    "title": "Entdecken",
+    "searchPlaceholder": "Wonach suchst du?",
+    "suggestions": "Vorschläge"
   },
   "Search": {
     "title": "Suchen"
