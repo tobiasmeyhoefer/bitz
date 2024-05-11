@@ -3,7 +3,6 @@ import { Space_Grotesk, Montserrat } from 'next/font/google'
 import './globals.css'
 import NavBar from '@/components/navigation/NavBar'
 import { cn } from '@/lib/utils'
-import { auth } from '@/auth'
 import { Toaster } from '@/components/ui/toaster'
 
 const space_grotesk = Space_Grotesk({

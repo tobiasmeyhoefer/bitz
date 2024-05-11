@@ -8,14 +8,12 @@ import type {
   AdapterAuthenticator,
 } from 'next-auth/adapters'
 
-/**
- * Drizzle Adapter with Passkey support
- */
+// Dieser Code ist mit Hilfe eines Discord Users Julius uas Schweden entstanden
+
 export const drizzleAdapter = {
   ...DrizzleAdapter(db, {
     usersTable: users,
     accountsTable: accounts,
-    // I don't use DB Sessions or Email sign-in so I don't have these tables
     sessionsTable: sessions,
     verificationTokensTable: verificationTokens,
   }),
