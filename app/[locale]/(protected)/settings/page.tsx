@@ -1,9 +1,10 @@
 import RegisterPasskey from '@/components/auth/register-passkey'
 import LocaleSwitcher from '@/components/settings/LocaleSwitcher'
-// import { checkPasskey } from '@/lib/action'
+import { checkPasskey } from '@/lib/action'
 
 const Settings = async () => {
-  // const hasPasskey = await checkPasskey()
+  const hasPasskey = await checkPasskey()
+  console.log(hasPasskey)
   return (
     <div className="flex h-full flex-col items-center px-20 py-40">
       <h1 className="mb-10 text-3xl">Settings</h1>

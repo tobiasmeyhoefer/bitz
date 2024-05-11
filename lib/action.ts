@@ -39,13 +39,18 @@ export async function deleteProduct(productId: string) {
 export async function updateProduct() {}
 
 //TODO funcion checking if user already has passkey registerted
-// export async function checkPasskey(){
-//   const session = await auth()
-//   const response = await db.select().from(Authenticator).where(eq(Authenticator.userId, session!.user.id))
+export async function checkPasskey(){
+  const session = await auth()
+  const id = session?.user?.id
+  if(!id) {
+    return false;
+  }
+
+  const response = await db.select().from(Authenticator).where(eq(Authenticator.userId, id))
   
-//   if(response.length > 0) {
-//     return true
-//   } else {
-//     return false
-//   }
-// }
+  if(response.length > 0) {
+    return true
+  } else {
+    return false
+  }
+}
