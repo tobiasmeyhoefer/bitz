@@ -23,7 +23,7 @@ const formSchema = z.object({
   postcode: z.coerce.number().safe().positive(),
 })
 
-export default function LocationChooser() {
+export default function LocationChooser({city, postcode} : {city: string, postcode: string}) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   })
@@ -47,7 +47,7 @@ export default function LocationChooser() {
               <FormItem>
                 <FormMessage/>
                 <FormControl>
-                  <Input placeholder="city" {...field} />
+                  <Input placeholder={city} {...field} />
                 </FormControl>
               </FormItem>
             )}
@@ -59,7 +59,7 @@ export default function LocationChooser() {
               <FormItem>
                 <FormMessage/>
                 <FormControl>
-                  <Input placeholder="postcode" {...field} />
+                  <Input placeholder={postcode} {...field} />
                 </FormControl>
               </FormItem>
             )}

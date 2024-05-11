@@ -10,13 +10,16 @@
   },
   "MyShop": {
     "title": "Mein Shop",
-    "addProducts": "Produkt hinzufügen"
+    "addProducts": "Produkt hinzufügen",
+    "updateProducts": "Produkt aktualisieren"
   },
   "addProductPage": {
     "submitTitle": "absenden"
   },
   "Settings": {
-    "title": "Einstellungen"
+    "title": "Einstellungen",
+    "city": "Stadt",
+    "postcode": "Postleitzahl"
   },
   "Navbar": {
     "loginButton": "anmelden",

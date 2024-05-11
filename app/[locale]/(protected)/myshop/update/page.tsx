@@ -1,4 +1,4 @@
-import { AddProductForm } from '@/components/myShop/add-product-form'
+import { ProductForm } from '@/components/myShop/product-form'
 import { getTranslations } from 'next-intl/server'
 import { updateProduct } from '@/lib/productaction'
 import { ProductType} from '@/models/product-model'
@@ -6,13 +6,13 @@ import { ProductType} from '@/models/product-model'
 const UpdateProductPage = async () => {
   async function updateProductWrapper(values: ProductType) {
     "use server"
-    const productId = "c712fb22-42ac-4dfa-a557-4b709df293ba"; 
+    const productId = "3f4cb90e-6819-4c65-925b-9e563fdf9aae"; 
     return updateProduct(productId, values);
   }
   const t = await getTranslations('addProductPage')
   return (
     <div className="absolute inset-x-1/2 top-24 flex flex-col items-center">
-      <AddProductForm submitText={t('submitTitle')} action={updateProductWrapper} locationSet={false} whichFunction='update'/>
+      <ProductForm submitText={t('submitTitle')} action={updateProductWrapper} userLocation="" whichFunction='update'/>
     </div>
   )}
 

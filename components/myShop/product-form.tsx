@@ -2,7 +2,7 @@
 import {ProductType } from '@/models/product-model'
 import React, { useEffect, useState } from 'react'
 import { Input } from '../ui/input'
-import { addProduct, getProductById } from '@/lib/productaction'
+import { getProductById } from '@/lib/productaction'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -34,50 +34,48 @@ const formSchema = z.object({
   description: z.string().min(1, { message: minError }).max(250),
 })
 
-export function AddProductForm({submitText,action,locationSet,whichFunction,}: {
+export function ProductForm({submitText,action,userLocation,whichFunction}: {
   submitText: string
   action: (values: ProductType) => Promise<void>
-  locationSet: boolean
+  userLocation: string
   whichFunction: string
 }) {
-  
   const router = useRouter()
-  // const [data, setData] = useState<ProductType>({
-  //   title: '',
-  //   description: '',
-  //   price: 0,
-  //   currency: '',
-  //   quantity: 0,
-  //   location: '',
-  //   status: '',
-  // })
-
+  const [data, setData] = useState<ProductType>({
+    title: '',
+    description: '',
+    price: 0,
+    currency: '',
+    quantity: 0,
+    location: '',
+    status: '',
+  })
   
-  // useEffect(() => {
-  //   const getProduct = async () => {
-  //     try {
-  //       if (whichFunction == 'update') {
-  //         const result = await getProductById(
-  //           'c712fb22-42ac-4dfa-a557-4b709df293ba',
-  //         )
-  //         const r = result[0]
-  //         const updatedData: ProductType = {
-  //           title: r.title,
-  //           description: r.description || '', 
-  //           price: r.price,
-  //           currency: r.currency,
-  //           quantity: r.quantity,
-  //           location: r.location || '', 
-  //           status: r.status,
-  //         }
-  //         setData(updatedData)
-  //       }
-  //     } catch (error) {
-  //       console.error('Fehler beim Laden der Daten:', error)
-  //     }
-  //   }
-  //   getProduct()
-  // }, [whichFunction])
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        if (whichFunction == 'update') {
+          const result = await getProductById(
+            '3f4cb90e-6819-4c65-925b-9e563fdf9aae',
+          )
+          const r = result[0]
+          const updatedData: ProductType = {
+            title: r.title,
+            description: r.description || '', 
+            price: r.price,
+            currency: r.currency,
+            quantity: r.quantity,
+            location: r.location || '', 
+            status: r.status,
+          }
+          setData(updatedData)
+        }
+      } catch (error) {
+        console.error('Fehler beim Laden der Daten:', error)
+      }
+    }
+    getProduct()
+  }, [whichFunction])
   
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -87,25 +85,25 @@ export function AddProductForm({submitText,action,locationSet,whichFunction,}: {
       price: 0,
       currency: '',
       quantity: 0,
-      location: '',
+      location: userLocation,
       status: '',
     }
   })
 
-  // useEffect(() => {
-  //   if (data && whichFunction == 'update') {
-  //     form.reset(data)
-  //   }
-  // }, [data, form, whichFunction])
+  useEffect(() => {
+    if (data && whichFunction == 'update') {
+      form.reset(data)
+    }
+  }, [data, form, whichFunction])
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    await addProduct(values)
+    await action(values)
     router.push('/myshop')
   }
 
   return (
     <>
-      <Card className=" w-[500px] p-10">
+      <Card className="w-[500px] p-10">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
@@ -116,7 +114,7 @@ export function AddProductForm({submitText,action,locationSet,whichFunction,}: {
                   <FormMessage />
                   <FormLabel>Title</FormLabel>
                   <FormControl>
-                    <Input placeholder="location" {...field} />
+                    <Input placeholder="title" {...field} />
                   </FormControl>
                 </FormItem>
               )}
@@ -173,21 +171,19 @@ export function AddProductForm({submitText,action,locationSet,whichFunction,}: {
                 </FormItem>
               )}
             />
-            {!locationSet && (
-              <FormField
-                control={form.control}
-                name={'location'}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormMessage />
-                    <FormLabel>Location</FormLabel>
-                    <FormControl>
-                      <Input placeholder="location" {...field} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-            )}
+            <FormField
+              control={form.control}
+              name={'location'}
+              render={({ field }) => (
+                <FormItem>
+                  <FormMessage />
+                  <FormLabel>Location</FormLabel>
+                  <FormControl>
+                    <Input placeholder="location" {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name={'status'}
