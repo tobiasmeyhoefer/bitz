@@ -17,6 +17,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
     passkey,
   ],
+  callbacks: {
+    async session({session, user}) {
+      session.user.id = user.id
+      return session
+    },
+  },
   experimental: { enableWebAuthn: true },
   // pages: {
   //   signIn: "/auth/error",

@@ -1,12 +1,13 @@
 "use client"
 
 import { signIn } from "next-auth/webauthn"
+import { Button } from "../ui/button"
 
 const RegisterPasskey = () => {
   return (
-    <button onClick={() => signIn('passkey', { action: 'register' })}>
+    <Button onClick={() => signIn('passkey', { action: 'register' })}>
       Register new Passkey
-    </button>
+    </Button>
   )
 }
 

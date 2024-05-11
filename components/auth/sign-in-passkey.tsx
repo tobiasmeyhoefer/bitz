@@ -1,9 +1,12 @@
 "use client"
 
 import { signIn } from "next-auth/webauthn"
+import { Button } from "../ui/button"
+import { useRouter } from "@/navigation"
 
 const SignInPasskey = () => {
-  return <button onClick={() => signIn('passkey')}>Sign in with Passkey</button>
+  const router = useRouter()
+  return <Button onClick={() => signIn('passkey').catch(router.refresh)}>Sign in with Passkey</Button>
 }
 
 export default SignInPasskey
