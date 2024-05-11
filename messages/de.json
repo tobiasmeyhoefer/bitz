@@ -2,8 +2,16 @@
   "Index": {
     "title": "Hallo Welt!"
   },
+  "Landingpage": {
+    "subtitle": "von heute für morgen mit Technik versorgen",
+    "description": "Entdecke bei Bitz die neuesten Technikgeräte zu unschlagbaren Preisen! Kaufe, verkaufe und tausche deine Lieblingsgadgets in einer sicheren Umgebung. Trete unserer lebendigen Community bei und finde noch heute dein nächstes Technik-Highlight.",
+    "call": "Jetzt anmelden und durchstarten!",
+    "button": "Loslegen"
+  },
   "Browse": {
-    "title": "Entdecken"
+    "title": "Entdecken",
+    "searchPlaceholder": "Wonach suchst du?",
+    "suggestions": "Vorschläge"
   },
   "Search": {
     "title": "Suchen"
@@ -23,7 +31,12 @@
   },
   "Navbar": {
     "loginButton": "anmelden",
-    "logoutButton": "abmelden"
+    "logoutButton": "abmelden",
+    "discover": "Entdecken",
+    "myBitz": "Meine Bitz",
+    "search": "Suchen",
+    "profile": "Profil vewalten",
+    "settings": "Einstellungen"
   },
   "LoginForm": {
     "loginButton": "anmelden",
