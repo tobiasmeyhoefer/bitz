@@ -30,7 +30,6 @@
     "@types/three": "^0.163.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "daisyui": "^4.11.1",
     "drizzle-orm": "^0.30.9",
     "framer-motion": "^11.1.7",
     "lucide-react": "^0.378.0",
