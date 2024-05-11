@@ -10,7 +10,7 @@ const Settings = async () => {
       <h1 className="text-3xl mb-10">Settings</h1>
       <div className="flex flex-col gap-6">
       <LocaleSwitcher/>
-      {hasPasskey ? <p>Passkey already registered</p> : <RegisterPasskey/>}
+      {hasPasskey ? <p>Passkey registered</p> : <RegisterPasskey/>}
       </div>
       {/* <RegisterPasskey/> */}
     </div>
