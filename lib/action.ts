@@ -1,5 +1,5 @@
 'use server'
-import { products } from '@/schema'
+import { Authenticator, products } from '@/schema'
 import { db } from '../db'
 import { eq } from 'drizzle-orm'
 import { auth } from '@/auth'
@@ -37,3 +37,8 @@ export async function deleteProduct(productId: string) {
 
 // Update function requiring productData as
 export async function updateProduct() {}
+
+//TODO funcion checking if user already has passkey registerted
+export async function checkPasskey() {
+  await db.select().from(Authenticator).where(eq(Authenticator.userId, ''))
+}

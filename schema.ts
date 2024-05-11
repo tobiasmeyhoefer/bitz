@@ -4,8 +4,11 @@ import {
   text,
   primaryKey,
   integer,
+  uniqueIndex,
+  boolean,
 } from 'drizzle-orm/pg-core'
 import type { AdapterAccount } from 'next-auth/adapters'
+import { genId } from './lib/utils'
 
 export const users = pgTable('user', {
   id: text('id')
@@ -15,6 +18,7 @@ export const users = pgTable('user', {
   email: text('email').notNull(),
   emailVerified: timestamp('emailVerified', { mode: 'date' }),
   image: text('image'),
+  location: text('location'),
 })
 
 export const products = pgTable('product', {
@@ -83,6 +87,30 @@ export const verificationTokens = pgTable(
   }),
 )
 
-export type ProductType = typeof products.$inferSelect;
-export type UserType = typeof users.$inferSelect;
+export const Authenticator = pgTable(
+  'authenticator',
+  {
+    id: text('id')
+      .notNull()
+      .primaryKey()
+      .$defaultFn(() => genId('ath')),
+    credentialID: text('credentialId').notNull(),
+    userId: text('userId')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade', onUpdate: 'cascade' }),
+    providerAccountId: text('providerAccountId').notNull(),
+    credentialPublicKey: text('credentialPublicKey').notNull(),
+    counter: integer('counter').notNull(),
+    credentialDeviceType: text('credentialDeviceType').notNull(),
+    credentialBackedUp: boolean('credentialBackedUp').notNull(),
+    transports: text('transports'),
+  },
+  (authenticator) => ({
+    userIdIdx: uniqueIndex('Authenticator_credentialID_key').on(
+      authenticator.credentialID,
+    ),
+  }),
+)
 
+export type ProductType = typeof products.$inferSelect
+export type UserType = typeof users.$inferSelect
