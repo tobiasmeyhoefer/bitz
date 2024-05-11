@@ -1,6 +1,6 @@
 import RegisterPasskey from '@/components/auth/register-passkey'
 import LocaleSwitcher from '@/components/settings/LocaleSwitcher'
-import { checkPasskey } from '@/lib/action'
+// import { checkPasskey } from '@/lib/action'
 
 const Settings = async () => {
   // const hasPasskey = await checkPasskey()
