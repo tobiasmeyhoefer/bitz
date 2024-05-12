@@ -11,19 +11,21 @@ import {
 } from '@/components/ui/card'
 import { redirect } from '@/navigation'
 import { getTranslations } from 'next-intl/server'
+import { signIn } from 'next-auth/webauthn'
+import SignInPasskey from '@/components/auth/sign-in-passkey'
 
 const Login = async () => {
-  const t = await getTranslations("LoginForm")
+  const t = await getTranslations('LoginForm')
   const session = await auth()
-  if(!!session?.user) {
-    redirect("/browse")
+  if (!!session?.user) {
+    redirect('/browse')
   }
   return (
     <div className="flex h-screen w-full items-center justify-center">
       <Card className="w-[500px] p-10">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl">{t("loginButton")}</CardTitle>
-          <CardDescription>{t("loginMessage")}</CardDescription>
+          <CardTitle className="text-2xl">{t('loginButton')}</CardTitle>
+          <CardDescription>{t('loginMessage')}</CardDescription>
         </CardHeader>
         <CardContent className="text-center">
           <div className="grid w-full items-center gap-8">
@@ -32,6 +34,10 @@ const Login = async () => {
             </div>
             <div>
               <SignInGoogle />
+            </div>
+            {/* Testing */}
+            <div>
+              <SignInPasskey/>
             </div>
           </div>
         </CardContent>
