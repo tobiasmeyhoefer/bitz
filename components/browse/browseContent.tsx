@@ -12,49 +12,78 @@ import {
 import { CardWithImage } from '../ui/card'
 import { SlClose } from 'react-icons/sl'
 import { Button } from '@/components/ui/button'
+import { getProductsBrowse } from '@/lib/productaction'
+import { FullProductType } from '@/models/product-model'
 
 const BrowseContent = (props: BrowseContentProps) => {
   const [searchValue, setSearchValue] = useState('')
-  const [loading, setLoading] = useState(false) // fetching indicator
-  let products: (Product | Shop)[] = []
-  let isProduct = (item: any) => item.price !== undefined
+  const [loading, setLoading] = useState(false)
+  const [productsx, setProductsx] = useState<FullProductType[]>([]);
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const result = await getProductsBrowse();
+        if(result) {
+          // weil einige werte nicht notNull sind und dann fehler kommen weil sie null  ein könnten
+          const typedResults: FullProductType[] = result.map((item) => ({
+            title: item.title,
+            description: item.description ?? '',
+            price: item.price,
+            currency: item.currency,
+            quantity: item.quantity,
+            location: item.location ?? '',
+            status: item.status,
+            sellerId: item.sellerId,
+            createdAt: new Date(item.createdAt),
+            image: "/test_img.jpg",
+          }));
+          setProductsx(typedResults);
+        }
+      } catch (error) {
+        console.error('Fehler beim Laden der Daten:', error);
+      }
+    };
+    getProducts();
+  }, []);
 
-  // Mock data
-  const suggestions = ['Receiver', 'Monitor', 'Audio', 'Laptop', 'Headphone']
+  // ---Mock data---
+  // let products: (Product | Shop)[] = []
+  // let isProduct = (item: any) => item.price !== undefined
+  // const suggestions = ['Receiver', 'Monitor', 'Audio', 'Laptop', 'Headphone']
 
-  for (let i = 0; i < 20; i++) {
-    products.push({
-      title: `Title ${i}`,
-      description: `Description ${i}`,
-      price: i,
-      currency: `Currency ${i}`,
-      quantity: i,
-      location: `Location ${i}`,
-      status: `Status ${i}`,
-      imgUrl: '/test_img.jpg',
-    })
-  }
+  // for (let i = 0; i < 20; i++) {
+  //   products.push({
+  //     title: `Title ${i}`,
+  //     description: `Description ${i}`,
+  //     price: i,
+  //     currency: `Currency ${i}`,
+  //     quantity: i,
+  //     location: `Location ${i}`,
+  //     status: `Status ${i}`,
+  //     image: '/test_img.jpg',
+  //   })
+  // }
 
-  products[5] = {
-    title: 'Shop1',
-    description: 'ShopDesc1',
-    imgUrl: ['/test_img.jpg', '/test_img.jpg', '/test_img.jpg'],
-  }
-  products[9] = {
-    title: 'Shop2',
-    description: 'ShopDesc2',
-    imgUrl: ['/test_img.jpg', '/test_img.jpg', '/test_img.jpg'],
-  }
-  products[10] = {
-    title: 'Shop3',
-    description: 'ShopDesc3',
-    imgUrl: ['/test_img.jpg', '/test_img.jpg', '/test_img.jpg'],
-  }
-  products[11] = {
-    title: 'Shop4',
-    description: 'ShopDesc4',
-    imgUrl: ['/test_img.jpg', '/test_img.jpg', '/test_img.jpg'],
-  }
+  // products[5] = {
+  //   title: 'Shop1',
+  //   description: 'ShopDesc1',
+  //   image: ['/test_img.jpg', '/test_img.jpg', '/test_img.jpg'],
+  // }
+  // products[9] = {
+  //   title: 'Shop2',
+  //   description: 'ShopDesc2',
+  //   image: ['/test_img.jpg', '/test_img.jpg', '/test_img.jpg'],
+  // }
+  // products[10] = {
+  //   title: 'Shop3',
+  //   description: 'ShopDesc3',
+  //   image: ['/test_img.jpg', '/test_img.jpg', '/test_img.jpg'],
+  // }
+  // products[11] = {
+  //   title: 'Shop4',
+  //   description: 'ShopDesc4',
+  //   image: ['/test_img.jpg', '/test_img.jpg', '/test_img.jpg'],
+  // }
 
   return (
     <div
@@ -73,13 +102,13 @@ const BrowseContent = (props: BrowseContentProps) => {
       />
       {!loading ? (
         <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
-          {products.map((p, index) => (
+          {productsx.map((p, index) => (
             <RevealOnScroll key={`prx-${index}`}>
               <CardWithImage
                 key={`pr-${index}`}
                 title={p.title}
                 desc={p.description}
-                imgUrl={p.imgUrl && p.imgUrl}
+                imgUrl={p.image && p.image}
                 previewType={isProduct(p) ? 'product' : 'shop'}
                 className="mx-[5px] my-[0.5rem]"
               />

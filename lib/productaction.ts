@@ -11,9 +11,11 @@ export async function getProductsBrowse() {
   const id = session?.user?.id
   let response
   if (id) {
-  response = await db.select().from(products).where(ne(products.sellerId, id))
+    response = await db.select().from(products).where(ne(products.sellerId, id))
+    if(response) {
+      return response
+    }
   }
-  return response
 }
 
 export async function addProduct(values:ProductType) {

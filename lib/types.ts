@@ -33,13 +33,13 @@ type Product = {
   quantity: number
   location: string
   status: string
-  imgUrl?: string
+  image?: string
 }
 
 type Shop = {
   title: string
   description: string
-  imgUrl?: string[]
+  image?: string[]
 }
 
 type RevealOnScrollProps = {
