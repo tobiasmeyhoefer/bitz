@@ -13,7 +13,7 @@ const Settings = async () => {
       <div className="flex flex-col gap-6">
         <LocaleSwitcher />
         {hasPasskey ? <p>Passkey registered</p> : <RegisterPasskey />}
-        <LocationChooser city={t('city')} postcode={t('postcode')}/>
+        <LocationChooser postcode={t('postcode')}/>
       </div>
    </div>
   )
