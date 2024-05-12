@@ -1,10 +1,10 @@
 'use server'
-
-import { products, users, Authenticator } from '@/schema'
+import { products, users } from '@/schema'
 import { db } from '../db'
 import { eq } from 'drizzle-orm'
 import { auth } from '@/auth'
 import { ProductType} from '@/models/product-model'
+import { getUserById } from './useraction'
 
 export async function getProducts() {
   const response = await db.select().from(products)
@@ -41,24 +41,6 @@ export async function deleteProduct(productId: string) {
 }
 
 // Update function requiring productData as
-
-//TODO funcion checking if user already has passkey registerted
-export async function checkPasskey(){
-  const session = await auth()
-  const id = session?.user?.id
-  if(!id) {
-    return false;
-  }
-
-  const response = await db.select().from(Authenticator).where(eq(Authenticator.userId, id))
-  
-  if(response.length > 0) {
-    return true
-  } else {
-    return false
-  }
-}
-
 export async function updateProduct(productId: string, values:ProductType) {
     const session = await auth()
     const id = session?.user?.id
@@ -88,18 +70,3 @@ export async function getProductById(productId: string) {
     const response = await db.select().from(products).where(eq(products.id, productId))
     return response
   }
-
-export async function saveUserLocation(values : {city: string, postcode: number}) {
-  const session = await auth()
-  const id = session?.user?.id
-  if(id) {
-    await db.update(users)
-    .set({ location: values.city + " " + values.postcode})
-    .where(eq(users.id, id));
-  }
-}
-
-export async function getUserById(userId :string) {
-  const response = await db.select().from(users).where(eq(users.id, userId))
-  return response
-}

@@ -7,8 +7,11 @@ const MyShop = () => {
   return (
     <>
       <h1>{t('title')}</h1>
-      <Button className="absolute bottom-20 left-1/2">
+      <Button className="absolute bottom-20 left-1/4">
         <Link href="myshop/add">{t('addProducts')}</Link>
+      </Button>
+      <Button className="absolute bottom-20 left-3/4">
+        <Link href="myshop/update">{t('updateProducts')}</Link>
       </Button>
     </>
   )

@@ -1,13 +1,25 @@
-import { AddProductForm } from '@/components/myShop/add-product-form'
-import { useTranslations } from 'next-intl'
+import { ProductForm } from '@/components/myShop/product-form'
+import { getTranslations } from 'next-intl/server'
+import {getUserById } from '@/lib/useraction'
+import { addProduct } from '@/lib/productaction'
+import { auth } from '@/auth'
 
-const AddProductPage = () => {
-  const t = useTranslations('addProductPage')
+const AddProductPage = async () => {
+  let location
+  const session = await auth();
+  const user = await getUserById(session?.user?.id!);
+  try{
+    if(user[0].location) {
+      location = user[0].location; 
+    }
+  }
+  catch(err) {
+  }
+  const t = await getTranslations('addProductPage')
   return (
     <div className="absolute inset-x-1/2 top-24 flex flex-col items-center">
-      <AddProductForm submitText={t('submitTitle')} />
+      <ProductForm submitText={t('submitTitle')} action={addProduct} userLocation= {location!} whichFunction='add'/>
     </div>
-  )
-}
+  )}
 
 export default AddProductPage

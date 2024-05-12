@@ -18,13 +18,16 @@
   },
   "MyShop": {
     "title": "My Shop",
-    "addProducts": "add Product"
+    "addProducts": "add Product",
+    "updateProducts": "update Product"
   },
   "addProductPage": {
     "submitTitle": "submit"
   },
   "Settings": {
-    "title": "Settings"
+    "title": "Settings",
+    "city": "city",
+    "postcode": "postcode"
   },
   "Navbar": {
     "loginButton": "login",
