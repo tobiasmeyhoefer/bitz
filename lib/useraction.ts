@@ -4,12 +4,12 @@ import { db } from '../db'
 import { eq } from 'drizzle-orm'
 import { auth } from '@/auth'
 
-export async function saveUserLocation(values : {city: string, postcode: number}) {
+export async function saveUserLocation(values : {postcode: string}) {
   const session = await auth()
   const id = session?.user?.id
   if(id) {
     await db.update(users)
-    .set({ location: values.city + " " + values.postcode})
+    .set({ location: values.postcode})
     .where(eq(users.id, id));
   }
 }

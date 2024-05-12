@@ -15,15 +15,10 @@ import {
 import { saveUserLocation } from '@/lib/useraction'
 
 const formSchema = z.object({
-  city: z
-    .string()
-    .min(1)
-    .max(50)
-    .refine((value) => typeof value === 'string' && !/^\d+$/.test(value)),
-  postcode: z.coerce.number().safe().positive(),
+  postcode: z.string().regex(/^\d+$/, { message: "only numbers are valid"}).length(5)
 })
 
-export default function LocationChooser({city, postcode} : {city: string, postcode: string}) {
+export default function LocationChooser({postcode} : {postcode: string}) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   })
@@ -31,8 +26,7 @@ export default function LocationChooser({city, postcode} : {city: string, postco
   async function onSubmit(values: z.infer<typeof formSchema>) {
     await saveUserLocation(values)
     form.reset({
-      city: '',
-      postcode: 0,
+      postcode: "",
   });
   }
 
@@ -40,18 +34,6 @@ export default function LocationChooser({city, postcode} : {city: string, postco
     <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className= "flex flex-row items-end gap-1">
-          <FormField
-            control={form.control}
-            name={'city'}
-            render={({ field }) => (
-              <FormItem>
-                <FormMessage/>
-                <FormControl>
-                  <Input placeholder={city} {...field} />
-                </FormControl>
-              </FormItem>
-            )}
-          />
           <FormField
             control={form.control}
             name={'postcode'}

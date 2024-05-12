@@ -1,14 +1,21 @@
 'use server'
-import { products, users } from '@/schema'
+import { products } from '@/schema'
 import { db } from '../db'
-import { eq } from 'drizzle-orm'
+import { eq ,ne} from 'drizzle-orm'
 import { auth } from '@/auth'
 import { ProductType} from '@/models/product-model'
 import { getUserById } from './useraction'
 
-export async function getProducts() {
-  const response = await db.select().from(products)
-  return response
+export async function getProductsBrowse() {
+  const session = await auth()
+  const id = session?.user?.id
+  let response
+  if (id) {
+    response = await db.select().from(products).where(ne(products.sellerId, id))
+    if(response) {
+      return response
+    }
+  }
 }
 
 export async function addProduct(values:ProductType) {
