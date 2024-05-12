@@ -15,7 +15,7 @@ import {
 import { saveUserLocation } from '@/lib/useraction'
 
 const formSchema = z.object({
-  postcode: z.string().regex(/^\d+$/).length(5)
+  postcode: z.string().regex(/^\d+$/, { message: "only numbers are valid"}).length(5)
 })
 
 export default function LocationChooser({postcode} : {postcode: string}) {
