@@ -46,10 +46,10 @@ const BrowseContent = (props: BrowseContentProps) => {
     getProducts();
   }, []);
 
+  const suggestions = ['Receiver', 'Monitor', 'Audio', 'Laptop', 'Headphone']
+  let isProduct = (item: any) => item.price !== undefined
   // ---Mock data---
   // let products: (Product | Shop)[] = []
-  // let isProduct = (item: any) => item.price !== undefined
-  // const suggestions = ['Receiver', 'Monitor', 'Audio', 'Laptop', 'Headphone']
 
   // for (let i = 0; i < 20; i++) {
   //   products.push({
