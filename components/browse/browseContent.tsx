@@ -18,7 +18,7 @@ import { FullProductType } from '@/lib/types'
 const BrowseContent = (props: BrowseContentProps) => {
   const [searchValue, setSearchValue] = useState('')
   const [loading, setLoading] = useState(false)
-  const [productsx, setProductsx] = useState<FullProductType[] | Shop[]>([]);
+  const [products, setProducts] = useState<FullProductType[] | Shop[]>([]);
   useEffect(() => {
     const getProducts = async () => {
       try {
@@ -37,7 +37,7 @@ const BrowseContent = (props: BrowseContentProps) => {
             createdAt: item.createdAt,
             image: "/test_img.jpg",
           }));
-          setProductsx(checkedResults);
+          setProducts(checkedResults);
         }
       } catch (error) {
         console.error('Fehler beim Laden der Daten:', error);
@@ -102,7 +102,7 @@ const BrowseContent = (props: BrowseContentProps) => {
       />
       {!loading ? (
         <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
-          {productsx.map((p, index) => (
+          {products.map((p, index) => (
             <RevealOnScroll key={`prx-${index}`}>
               <CardWithImage
                 key={`pr-${index}`}

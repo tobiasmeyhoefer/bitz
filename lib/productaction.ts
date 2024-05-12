@@ -1,5 +1,5 @@
 'use server'
-import { products, users } from '@/schema'
+import { products } from '@/schema'
 import { db } from '../db'
 import { eq ,ne} from 'drizzle-orm'
 import { auth } from '@/auth'

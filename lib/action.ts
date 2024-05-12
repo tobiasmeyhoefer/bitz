@@ -3,7 +3,6 @@ import { products, users, Authenticator } from '@/schema'
 import { db } from '../db'
 import { eq } from 'drizzle-orm'
 import { auth } from '@/auth'
-import { ProductType} from '@/models/product-model'
 
 //TODO funcion checking if user already has passkey registerted
 export async function checkPasskey(){
