@@ -13,19 +13,19 @@ import { CardWithImage } from '../ui/card'
 import { SlClose } from 'react-icons/sl'
 import { Button } from '@/components/ui/button'
 import { getProductsBrowse } from '@/lib/productaction'
-import { FullProductType } from '@/models/product-model'
+import { FullProductType } from '@/lib/types'
 
 const BrowseContent = (props: BrowseContentProps) => {
   const [searchValue, setSearchValue] = useState('')
   const [loading, setLoading] = useState(false)
-  const [productsx, setProductsx] = useState<FullProductType[]>([]);
+  const [productsx, setProductsx] = useState<FullProductType[] | Shop[]>([]);
   useEffect(() => {
     const getProducts = async () => {
       try {
         const result = await getProductsBrowse();
         if(result) {
           // weil einige werte nicht notNull sind und dann fehler kommen weil sie null  ein könnten
-          const typedResults: FullProductType[] = result.map((item) => ({
+          const checkedResults: FullProductType[] = result.map((item) => ({
             title: item.title,
             description: item.description ?? '',
             price: item.price,
@@ -34,10 +34,10 @@ const BrowseContent = (props: BrowseContentProps) => {
             location: item.location ?? '',
             status: item.status,
             sellerId: item.sellerId,
-            createdAt: new Date(item.createdAt),
+            createdAt: item.createdAt,
             image: "/test_img.jpg",
           }));
-          setProductsx(typedResults);
+          setProductsx(checkedResults);
         }
       } catch (error) {
         console.error('Fehler beim Laden der Daten:', error);
