@@ -2,10 +2,10 @@ import RegisterPasskey from '@/components/auth/register-passkey'
 import LocaleSwitcher from '@/components/settings/LocaleSwitcher'
 import LocationChooser from '@/components/settings/LocationChooser'
 import { checkPasskey } from '@/lib/action'
-import { useTranslations } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
 
 const Settings = async () => {
-  const t = useTranslations('Settings')
+  const t = await getTranslations('Settings')
   const hasPasskey = await checkPasskey()
   return (
     <div className="flex h-full flex-col items-center px-20 py-40">
