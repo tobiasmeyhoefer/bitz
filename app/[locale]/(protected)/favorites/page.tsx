@@ -5,7 +5,7 @@ import {
   RevealOnScrollProps,
 } from '@/lib/types'
 import { CardWithImage } from '@/components/ui/card'
-import { getProductsBrowse } from '@/lib/productaction'
+import { getFavorites } from '@/lib/productaction'
 import { FullProductType } from '@/lib/types'
 
 const Favorites = () => {
@@ -13,12 +13,41 @@ const Favorites = () => {
   const [products, setProducts] = useState<FullProductType[] | Shop[]>([]);
   let isProduct = (item: any) => item.price !== undefined
 
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const result = await getFavorites();
+        if(result) {
+          // weil einige werte nicht notNull sind und dann fehler kommen weil sie null  ein könnten
+          const checkedResults: FullProductType[] = result.map((item) => ({
+            id: item.id,
+            title: item.title,
+            description: item.description ?? '',
+            price: item.price,
+            currency: item.currency,
+            quantity: item.quantity,
+            location: item.location ?? '',
+            status: item.status,
+            sellerId: item.sellerId,
+            createdAt: item.createdAt,
+            image: "/test_img.jpg",
+          }));
+          setProducts(checkedResults);
+        }
+      } catch (error) {
+        console.error('Fehler beim Laden der Daten:', error);
+      }
+    };
+    getProducts();
+  }, []);
+  console.log("-----" + products)
   return (
     <div
       className={`${loading && `h-full`} flex w-full flex-col items-center justify-center px-10 py-20 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
     >
       {!loading ? (
         <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
+          {/* <h1> {products[0].title}</h1> */}
           {products.map((p, index) => (
             <RevealOnScroll key={`prx-${index}`}>
               <CardWithImage

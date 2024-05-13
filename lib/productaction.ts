@@ -4,7 +4,8 @@ import { db } from '../db'
 import { eq ,ne} from 'drizzle-orm'
 import { auth } from '@/auth'
 import { ProductType} from '@/models/product-model'
-import { getUserById } from './useraction'
+import { getUserById } from '@/lib/useraction'
+import { FullProductNullType } from '@/lib/types'
 
 export async function getProductsBrowse() {
   const session = await auth()
@@ -106,14 +107,15 @@ export async function addToFavorites(productId:string) {
 export async function getFavorites() {
   const session = await auth()
   const id = session?.user?.id
-  if(id) {
-    //hier favorite tabelle einsetzen
-    const userProducts = await db.select().from(favorites).where(eq(favorites.userId, id));
-    if(userProducts) {
-      const productPromises = userProducts.map(async (product) => {
-        const response =  await db.select().from(products).where(eq(products.id, product.id));
-        return response
-      });
-    }
+  let productPromises: FullProductNullType[] = [];
+  if (id) {
+    const userFavorites = await db.select().from(favorites).where(eq(favorites.userId, id));
+    const favoriteProducts = userFavorites.map(async (product) => {
+      return await db.select().from(products).where(eq(products.id, product.productId));
+    });
+    const productsBySeller = await Promise.all(favoriteProducts);
+    productPromises = productsBySeller.flat()
   }
+
+  return productPromises
 }

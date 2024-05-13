@@ -51,6 +51,20 @@ type FullProductType = {
   image: string
 };
 
+type FullProductNullType = {
+  id: string
+  title: string
+  description: string | null
+  price: number 
+  currency: string 
+  quantity: number 
+  location: string | null
+  status: string
+  sellerId: string
+  createdAt: Date
+  image: string | null
+};
+
 type Shop = {
   id: string
   title: string
@@ -70,5 +84,6 @@ export type {
   Product,
   Shop,
   RevealOnScrollProps,
-  FullProductType
+  FullProductType,
+  FullProductNullType
 }
