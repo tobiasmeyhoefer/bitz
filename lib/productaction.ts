@@ -78,6 +78,17 @@ export async function getProductById(productId: string) {
     return response
   }
 
+export async function addToFavorites(productId:string) {
+  const session = await auth()
+  const id = session?.user?.id
+  if(id) {
+    // await db.insert(favorites).values({
+    //   userId: id,
+    //   productId: productId,
+    // })
+  }
+}
+
 export async function getFavorites() {
   const session = await auth()
   const id = session?.user?.id
