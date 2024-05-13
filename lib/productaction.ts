@@ -77,3 +77,18 @@ export async function getProductById(productId: string) {
     const response = await db.select().from(products).where(eq(products.id, productId))
     return response
   }
+
+export async function getFavorites() {
+  const session = await auth()
+  const id = session?.user?.id
+  if(id) {
+    //hier favorite tabelle einsetzen
+    const userProducts = await db.select().from(products).where(eq(products.sellerId, id));
+    if(userProducts) {
+      const productPromises = userProducts.map(async (product) => {
+        const response =  await db.select().from(products).where(eq(products.id, product.id));
+        return response
+      });
+    }
+  }
+}
