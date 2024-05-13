@@ -26,6 +26,7 @@ const BrowseContent = (props: BrowseContentProps) => {
         if(result) {
           // weil einige werte nicht notNull sind und dann fehler kommen weil sie null  ein könnten
           const checkedResults: FullProductType[] = result.map((item) => ({
+            id: item.id,
             title: item.title,
             description: item.description ?? '',
             price: item.price,
@@ -111,6 +112,7 @@ const BrowseContent = (props: BrowseContentProps) => {
                 imgUrl={p.image && p.image}
                 previewType={isProduct(p) ? 'product' : 'shop'}
                 className="mx-[5px] my-[0.5rem]"
+                productId={p.id}
               />
             </RevealOnScroll>
           ))}

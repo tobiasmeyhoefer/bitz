@@ -1,5 +1,5 @@
 'use server'
-import { products } from '@/schema'
+import { products, favorites} from '@/schema'
 import { db } from '../db'
 import { eq ,ne} from 'drizzle-orm'
 import { auth } from '@/auth'
@@ -82,10 +82,24 @@ export async function addToFavorites(productId:string) {
   const session = await auth()
   const id = session?.user?.id
   if(id) {
-    // await db.insert(favorites).values({
-    //   userId: id,
-    //   productId: productId,
-    // })
+    const response = await db.select().from(favorites).where(eq(favorites.productId, productId));
+    if(response.length > 0) {
+      if(response[0].userId == id) {
+        console.log("schon vorhanden")
+      }
+      else{
+        await db.insert(favorites).values({
+          userId: id,
+          productId: productId,
+        })
+      }
+    }
+    else{
+      await db.insert(favorites).values({
+        userId: id,
+        productId: productId,
+      })
+    }
   }
 }
 
@@ -94,7 +108,7 @@ export async function getFavorites() {
   const id = session?.user?.id
   if(id) {
     //hier favorite tabelle einsetzen
-    const userProducts = await db.select().from(products).where(eq(products.sellerId, id));
+    const userProducts = await db.select().from(favorites).where(eq(favorites.userId, id));
     if(userProducts) {
       const productPromises = userProducts.map(async (product) => {
         const response =  await db.select().from(products).where(eq(products.id, product.id));

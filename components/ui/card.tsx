@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { FaRegHeart } from 'react-icons/fa'
 import { CardWithImageProps } from '@/lib/types'
+import { addToFavorites } from '@/lib/productaction'
 
 const Card = React.forwardRef<
   HTMLDivElement,
@@ -118,11 +119,13 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                   className="align-middle text-2xl"
                   style={{ lineHeight: 'unset' }}
                 >
-                  {props.title}
-                </CardTitle>
-                <Button variant="ghost" size="icon">
-                  <FaRegHeart />
-                </Button>
+                  {props.title} 
+                </CardTitle> 
+                 <form action={() => addToFavorites(props.productId!)}> {/*man könnte useState und Farbe bie Click ändern*/}
+                  <Button variant="ghost" size="icon" type="submit">
+                    <FaRegHeart />
+                  </Button>
+                </form>
               </div>
               <CardDescription className="text-xl text-black">
                 {props.desc}

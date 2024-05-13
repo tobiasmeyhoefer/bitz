@@ -6,6 +6,7 @@ type CardWithImageProps = {
   previewType: string /* shop || article */
   className?: React.HTMLAttributes<HTMLDivElement> | string
   icon?: any
+  productId?: string
 }
 
 type SearchBarProps = {
@@ -37,19 +38,21 @@ type Product = {
 }
 
 type FullProductType = {
-  title: string;
-  description: string;
-  price: number;
-  currency: string;
-  quantity: number;
-  location: string;
-  status: string;
-  sellerId: string;
-  createdAt: Date;
-  image: string;
+  id: string
+  title: string
+  description: string
+  price: number
+  currency: string
+  quantity: number
+  location: string
+  status: string
+  sellerId: string
+  createdAt: Date
+  image: string
 };
 
 type Shop = {
+  id: string
   title: string
   description: string
   image?: string[]
