@@ -107,15 +107,25 @@ export async function addToFavorites(productId:string) {
 export async function getFavorites() {
   const session = await auth()
   const id = session?.user?.id
-  let productPromises: FullProductNullType[] = [];
+  let response: FullProductNullType[] = [];
   if (id) {
     const userFavorites = await db.select().from(favorites).where(eq(favorites.userId, id));
     const favoriteProducts = userFavorites.map(async (product) => {
       return await db.select().from(products).where(eq(products.id, product.productId));
     });
     const productsBySeller = await Promise.all(favoriteProducts);
-    productPromises = productsBySeller.flat()
+    response = productsBySeller.flat()
   }
 
-  return productPromises
+  return response
+}
+
+export async function checkFavorite(productId : string) {
+  const session = await auth()
+  const id = session?.user?.id
+  if (id) {
+    const userFavorites = await db.select().from(favorites).where(eq(favorites.userId, id));
+    return userFavorites.some(product => product.productId === productId);
+  }
+  return false;
 }

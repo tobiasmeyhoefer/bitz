@@ -4,8 +4,9 @@ import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { FaRegHeart } from 'react-icons/fa'
+import { FaHeart } from "react-icons/fa";
 import { CardWithImageProps } from '@/lib/types'
-import { addToFavorites } from '@/lib/productaction'
+import { addToFavorites, checkFavorite } from '@/lib/productaction'
 
 const Card = React.forwardRef<
   HTMLDivElement,
@@ -81,6 +82,15 @@ CardFooter.displayName = 'CardFooter'
 const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
   ({ className, ...props }, ref) => {
     const cardWidth = props.previewType === 'product' ? 300 : 600
+    const [isFavorite, setIsFavorite] = React.useState(false);
+    React.useEffect(() => {
+      async function fetchFavorite() {
+        const isFav = await checkFavorite(props.productId!);
+        console.log(isFav)
+        setIsFavorite(isFav);
+      }
+      fetchFavorite();
+    }, [props.productId]);
     const getImgBorder = (index: number, arraylength: number) => {
       switch (index) {
         case 0:
@@ -91,7 +101,6 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
           return ''
       }
     }
-
     return (
       <>
         {props.previewType === 'product' ? (
@@ -123,7 +132,7 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                 </CardTitle> 
                  <form action={() => addToFavorites(props.productId!)}> {/*man könnte useState und Farbe bie Click ändern*/}
                   <Button variant="ghost" size="icon" type="submit">
-                    <FaRegHeart />
+                  {isFavorite ? <FaHeart /> : <FaRegHeart/>}
                   </Button>
                 </form>
               </div>
@@ -166,7 +175,7 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                   {props.title}
                 </CardTitle>
                 <Button variant="ghost" size="icon">
-                  <FaRegHeart />
+                  <FaRegHeart/>
                 </Button>
               </div>
               <CardDescription className="text-xl text-black">

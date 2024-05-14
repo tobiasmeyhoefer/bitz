@@ -47,7 +47,6 @@ const Favorites = () => {
     >
       {!loading ? (
         <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
-          {/* <h1> {products[0].title}</h1> */}
           {products.map((p, index) => (
             <RevealOnScroll key={`prx-${index}`}>
               <CardWithImage
