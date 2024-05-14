@@ -6,6 +6,7 @@ import { auth } from '@/auth'
 import { ProductType} from '@/models/product-model'
 import { getUserById } from '@/lib/useraction'
 import { FullProductNullType } from '@/lib/types'
+import { revalidatePath } from 'next/cache'
 
 export async function getProductsBrowse() {
   const session = await auth()
@@ -86,7 +87,7 @@ export async function addToFavorites(productId:string) {
     const response = await db.select().from(favorites).where(eq(favorites.productId, productId));
     if(response.length > 0) {
       if(response[0].userId == id) {
-        console.log("schon vorhanden")
+        await db.delete(favorites).where(eq(favorites.productId, productId))
       }
       else{
         await db.insert(favorites).values({

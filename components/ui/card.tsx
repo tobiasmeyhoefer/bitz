@@ -7,6 +7,7 @@ import { FaRegHeart } from 'react-icons/fa'
 import { FaHeart } from "react-icons/fa";
 import { CardWithImageProps } from '@/lib/types'
 import { addToFavorites, checkFavorite } from '@/lib/productaction'
+import { revalidatePath } from 'next/cache'
 
 const Card = React.forwardRef<
   HTMLDivElement,
@@ -86,7 +87,6 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
     React.useEffect(() => {
       async function fetchFavorite() {
         const isFav = await checkFavorite(props.productId!);
-        console.log(isFav)
         setIsFavorite(isFav);
       }
       fetchFavorite();
@@ -130,7 +130,7 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                 >
                   {props.title} 
                 </CardTitle> 
-                 <form action={() => addToFavorites(props.productId!)}> {/*man könnte useState und Farbe bie Click ändern*/}
+                 <form action={() => addToFavorites(props.productId!)}>
                   <Button variant="ghost" size="icon" type="submit">
                   {isFavorite ? <FaHeart /> : <FaRegHeart/>}
                   </Button>
