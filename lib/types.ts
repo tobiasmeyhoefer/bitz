@@ -48,7 +48,11 @@ type FullProductType = {
   status: string
   sellerId: string
   createdAt: Date
-  image: string
+  imageUrl1: string | null
+  imageUrl2: string | null
+  imageUrl3: string | null
+  imageUrl4: string | null
+  imageUrl5: string | null
 };
 
 type FullProductNullType = {
@@ -69,7 +73,11 @@ type Shop = {
   id: string
   title: string
   description: string
-  image?: string[]
+  imageUrl1: string | null
+  imageUrl2: string | null
+  imageUrl3: string | null
+  imageUrl4: string | null
+  imageUrl5: string | null
 }
 
 type RevealOnScrollProps = {

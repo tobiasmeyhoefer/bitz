@@ -7,13 +7,13 @@ import { ProductType} from '@/models/product-model'
 import { getUserById } from '@/lib/useraction'
 import { FullProductNullType } from '@/lib/types'
 import { revalidatePath } from 'next/cache'
+import { FullProductType } from '@/lib/types'
 
 export async function getProductsBrowse() {
   const session = await auth()
   const id = session?.user?.id
-  let response
   if (id) {
-    response = await db.select().from(products).where(ne(products.sellerId, id))
+    const response = await db.select().from(products).where(ne(products.sellerId, id))
     if(response) {
       return response
     }

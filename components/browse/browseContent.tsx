@@ -36,7 +36,12 @@ const BrowseContent = (props: BrowseContentProps) => {
             status: item.status,
             sellerId: item.sellerId,
             createdAt: item.createdAt,
-            image: "/test_img.jpg",
+            imageUrl1: "/test_img.jpg",
+            imageUrl2: "/test_img.jpg",
+            imageUrl3: "/test_img.jpg",
+            imageUrl4: "/test_img.jpg",
+            imageUrl5: "/test_img.jpg",
+
           }));
           setProducts(checkedResults);
         }
@@ -109,7 +114,7 @@ const BrowseContent = (props: BrowseContentProps) => {
                 key={`pr-${index}`}
                 title={p.title}
                 desc={p.description}
-                imgUrl={p.image && p.image}
+                imgUrl={p.imageUrl1! && p.imageUrl1!}
                 previewType={isProduct(p) ? 'product' : 'shop'}
                 className="mx-[5px] my-[0.5rem]"
                 productId={p.id}
