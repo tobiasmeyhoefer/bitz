@@ -1,8 +1,8 @@
 'use client'
-import {ProductType } from '@/models/product-model'
+import { ProductType } from '@/models/product-model'
 import React, { useEffect, useState } from 'react'
 import { Input } from '../ui/input'
-import { getProductById } from '@/lib/productaction'
+import { addProduct, getProductById } from '@/lib/productaction'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -18,6 +18,18 @@ import {
 import { Card } from '@/components/ui/card'
 import { Button } from '../ui/button'
 import { useRouter } from '@/navigation'
+import Image from 'next/image'
+import { PutBlobResult, put } from '@vercel/blob'
+import { upload } from '@vercel/blob/client'
+import { getSignedURL } from '@/lib/action'
+
+const ACCEPTED_IMAGE_TYPES = [
+  'image/jpeg',
+  'image/jpg',
+  'image/png',
+  'image/webp',
+]
+const MAX_FILE_SIZE = 4000000
 
 const minError = 'Eingabe erfordert'
 const formSchema = z.object({
@@ -32,15 +44,35 @@ const formSchema = z.object({
     .max(30)
     .refine((value) => typeof value === 'string' && !/^\d+$/.test(value)),
   description: z.string().min(1, { message: minError }).max(250),
+  // images: z
+  //   .any()
+  //   // To not allow empty files
+  //   .refine((files) => files?.length >= 1 && files?.length <= 5, {
+  //     message: 'There are 1-5 Images allowed',
+  //   })
+  //   // To not allow files other than images
+  //   .refine((files) => ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type), {
+  //     message: '.jpg, .jpeg, .png and .webp files are accepted.',
+  //   })
+  //   // To not allow files larger than 5MB
+  //   .refine((files) => files?.[0]?.size <= MAX_FILE_SIZE, {
+  //     message: `Max file size is 4MB.`,
+  //   }),
 })
 
-export function ProductForm({submitText,action,userLocation,whichFunction}: {
+export function ProductForm({
+  submitText,
+  action,
+  userLocation,
+  whichFunction,
+}: {
   submitText: string
   action: (values: ProductType) => Promise<void>
   userLocation: string
   whichFunction: string
 }) {
   const router = useRouter()
+  //muss eventuell um Image url oder so ersetzt werden
   const [data, setData] = useState<ProductType>({
     title: '',
     description: '',
@@ -50,7 +82,7 @@ export function ProductForm({submitText,action,userLocation,whichFunction}: {
     location: '',
     status: '',
   })
-  
+
   useEffect(() => {
     const getProduct = async () => {
       try {
@@ -61,11 +93,11 @@ export function ProductForm({submitText,action,userLocation,whichFunction}: {
           const r = result[0]
           const updatedData: ProductType = {
             title: r.title,
-            description: r.description || '', 
+            description: r.description || '',
             price: r.price,
             currency: r.currency,
             quantity: r.quantity,
-            location: r.location || '', 
+            location: r.location || '',
             status: r.status,
           }
           setData(updatedData)
@@ -76,7 +108,7 @@ export function ProductForm({submitText,action,userLocation,whichFunction}: {
     }
     getProduct()
   }, [whichFunction])
-  
+
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -87,7 +119,8 @@ export function ProductForm({submitText,action,userLocation,whichFunction}: {
       quantity: 0,
       location: userLocation,
       status: '',
-    }
+      // images: undefined
+    },
   })
 
   useEffect(() => {
@@ -96,9 +129,55 @@ export function ProductForm({submitText,action,userLocation,whichFunction}: {
     }
   }, [data, form, whichFunction])
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    await action(values)
-    router.push('/myshop')
+  async function onSubmit(values: ProductType) {
+    console.log('Test')
+    console.log(files)
+    let imageUrls = []
+    if (files) {
+      for (let i = 0; i < files.length; i++) {
+        if (files[i]) {
+          const signedURLResult = await getSignedURL(files[i].name)
+          if (signedURLResult.failure !== undefined) {
+            console.error(signedURLResult.failure)
+            return
+          }
+
+          const { url } = signedURLResult.success
+          console.log({ url })
+          const response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': files[i].type,
+            },
+            body: files[i],
+          })
+          console.log(response)
+          imageUrls.push(url.split("?")[0])
+          // values.imageUrls.push(url)
+        }
+      }
+    }
+    // console.log(JSON.stringify(blobs))
+    // await addProduct(values, imageUrls)
+    // router.push('/myshop')
+  }
+
+  const [files, setFiles] = useState<FileList | null>(null)
+  const [previewUrls, setPreviewUrls] = useState<string[] | null>(null)
+  // const [blobs, setBlobs] = useState<PutBlobResult[] | null>(null)
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files ?? null
+    setFiles(files)
+    if (previewUrls) {
+      previewUrls.map((url) => URL.revokeObjectURL(url))
+    }
+    if (files) {
+      const urls = Array.from(files).map((file) => URL.createObjectURL(file))
+      setPreviewUrls(urls)
+    } else {
+      setPreviewUrls(null)
+    }
   }
 
   return (
@@ -197,6 +276,66 @@ export function ProductForm({submitText,action,userLocation,whichFunction}: {
                 </FormItem>
               )}
             />
+            <Input
+              type="file"
+              multiple
+              accept="image/jpeg,image/png,image/webp"
+              onChange={handleFileChange}
+            />
+            {/* <FormField
+              control={form.control}
+              name={'images'}
+              render={({ field }) => (
+                <FormItem>
+                  <FormMessage />
+                  <FormLabel>Image</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="file"
+                      multiple
+                      accept="image/jpeg,image/png,image/webp"
+                      onChange={handleFileChange}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            /> */}
+            {/* Die Architektur muss noch auf multiple ausgebaut werden */}
+            {/* <Input
+              type="file"
+              multiple
+              accept="image/jpeg,image/png,image/webp"
+              onChange={handleFileChange}
+            /> */}
+            {previewUrls && files && (
+              <div className="flex flex-wrap">
+                {previewUrls.map((url) => (
+                  <Image
+                    src={url}
+                    key={url}
+                    alt="Selected files"
+                    width={150}
+                    height={150}
+                    className="border"
+                  />
+                ))}
+              </div>
+            )}
+
+            {/* {previewUrl && file && (
+              <div className="mt-4">
+                {file.type.startsWith('image/') ? (
+                  <Image
+                    src={previewUrl}
+                    alt="Selected file"
+                    width={150}
+                    height={150}
+                    className="border"
+                  />
+                ) : null}
+              </div>
+            )} */}
+
             <Button className="mt-4" type="submit">
               {submitText}
             </Button>

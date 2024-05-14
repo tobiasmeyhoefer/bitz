@@ -40,7 +40,11 @@ export const products = pgTable('product', {
     .notNull()
     .$default(() => 'available'),
   createdAt: timestamp('createdAt', { mode: 'date' }).notNull(),
-  image: text('image'),
+  imageUrl1: text('imageUrl1').notNull(),
+  imageUrl2: text('imageUrl2'),
+  imageUrl3: text('imageUrl3'),
+  imageUrl4: text('imageUrl4'),
+  imageUrl5: text('imageUrl5'),
 })
 
 export const accounts = pgTable(
@@ -111,6 +115,14 @@ export const Authenticator = pgTable(
     ),
   }),
 )
+
+export const favorites = pgTable('favorites', {
+  id: text('id')
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  userId: text('userId').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  productId: text('productId').notNull().references(() => products.id, { onDelete: 'cascade' })
+})
 
 export type ProductType = typeof products.$inferSelect
 export type UserType = typeof users.$inferSelect

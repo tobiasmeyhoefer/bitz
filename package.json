@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.0.1",
+    "@aws-sdk/client-s3": "^3.575.0",
+    "@aws-sdk/s3-request-presigner": "^3.575.0",
     "@hookform/resolvers": "^3.3.4",
     "@neondatabase/serverless": "^0.9.1",
     "@radix-ui/react-dialog": "^1.0.5",
@@ -27,6 +29,7 @@
     "@simplewebauthn/browser": "^9.0.1",
     "@simplewebauthn/server": "^9.0.3",
     "@types/three": "^0.163.0",
+    "@vercel/blob": "^0.23.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.30.9",
