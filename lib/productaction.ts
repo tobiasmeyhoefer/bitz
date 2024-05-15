@@ -109,8 +109,6 @@ export async function getSignedURL({
   checksum,
 }: GetSignedURLParams): Promise<SignedURLResponse> {
   const session = await auth()
-  console.log(process.env.AWS_ACCESS_KEY_ID!)
-  console.log(process.env.AWS_SECRET_ACCESS_KEY!)
   if (!session) {
     return { failure: 'not authenticated' }
   }
