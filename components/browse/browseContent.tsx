@@ -5,43 +5,40 @@ import { Dialog, DialogTrigger, DialogContent } from '../ui/dialog'
 import {
   BrowseContentProps,
   SearchBarProps,
-  Product,
   Shop,
   RevealOnScrollProps,
+  ProductType,
 } from '@/lib/types'
 import { CardWithImage } from '../ui/card'
 import { SlClose } from 'react-icons/sl'
 import { Button } from '@/components/ui/button'
 import { getProductsBrowse } from '@/lib/productaction'
-import { FullProductType } from '@/lib/types'
-
 const BrowseContent = (props: BrowseContentProps) => {
   const [searchValue, setSearchValue] = useState('')
   const [loading, setLoading] = useState(false)
-  const [products, setProducts] = useState<FullProductType[] | Shop[]>([]);
+  const [products, setProducts] = useState<ProductType[]>([]);
   useEffect(() => {
     const getProducts = async () => {
       try {
         const result = await getProductsBrowse();
         if(result) {
           // weil einige werte nicht notNull sind und dann fehler kommen weil sie null  ein könnten
-          const checkedResults: FullProductType[] = result.map((item) => ({
-            id: item.id,
+          const checkedResults: ProductType[] = result.map((item) => ({
             title: item.title,
             description: item.description ?? '',
             price: item.price,
-            currency: item.currency,
+            // currency: item.currency,
             quantity: item.quantity,
-            location: item.location ?? '',
-            status: item.status,
+            // location: item.location ?? '',
+            // status: item.status,
             sellerId: item.sellerId,
             createdAt: item.createdAt,
-            imageUrl1: "/test_img.jpg",
-            imageUrl2: "/test_img.jpg",
-            imageUrl3: "/test_img.jpg",
-            imageUrl4: "/test_img.jpg",
-            imageUrl5: "/test_img.jpg",
-
+            imageUrl1: item.imageUrl1,
+            imageUrl2: item.imageUrl2,
+            imageUrl3: item.imageUrl3,
+            imageUrl4: item.imageUrl4,
+            imageUrl5: item.imageUrl5
+            // image: "/test_img.jpg",
           }));
           setProducts(checkedResults);
         }
@@ -114,10 +111,9 @@ const BrowseContent = (props: BrowseContentProps) => {
                 key={`pr-${index}`}
                 title={p.title}
                 desc={p.description}
-                imgUrl={p.imageUrl1! && p.imageUrl1!}
+                imgUrl1={p.imageUrl1}
                 previewType={isProduct(p) ? 'product' : 'shop'}
                 className="mx-[5px] my-[0.5rem]"
-                productId={p.id}
               />
             </RevealOnScroll>
           ))}

@@ -105,9 +105,9 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
       <>
         {props.previewType === 'product' ? (
           <Card className={cn(`w-[${cardWidth}px]`, className)} ref={ref}>
-            {props.imgUrl !== undefined ? (
+            {props.imgUrl1 !== undefined ? (
               <Image
-                src={props.imgUrl as string}
+                src={props.imgUrl1 as string}
                 width={cardWidth}
                 height={300}
                 className="rounded-t-xl"
@@ -144,16 +144,16 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
         ) : (
           <Card className={cn(`w-[${cardWidth}px]`, className)} ref={ref}>
             <div className="flex rounded-t-xl">
-              {props.imgUrl !== undefined ? (
-                Array.isArray(props.imgUrl) &&
-                props.imgUrl.map((iUrl: string, index) => (
+              {props.imgUrl1 !== undefined ? (
+                Array.isArray(props.imgUrl1) &&
+                props.imgUrl1.map((iUrl: string, index) => (
                   <Image
                     key={iUrl}
                     src={iUrl}
-                    width={cardWidth / props.imgUrl!.length}
+                    width={cardWidth / props.imgUrl1!.length}
                     height={300}
                     alt="Preview Image Shop"
-                    className={getImgBorder(index, props.imgUrl!.length)}
+                    className={getImgBorder(index, props.imgUrl1!.length)}
                     style={{ objectFit: 'cover', height: '300px' }}
                   />
                 ))
