@@ -86,6 +86,7 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
   ({ className, ...props }, ref) => {
     const cardWidth = props.previewType === 'product' ? 300 : 600
     const [isFavorite, setIsFavorite] = React.useState(false);
+
     React.useEffect(() => {
       async function fetchFavorite() {
         const isFav = await checkFavorite(props.productId!);
@@ -133,9 +134,8 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                   {props.title} 
                 </CardTitle> 
                  <form action={() => addToFavorites(props.productId!)}>
-                  <Button variant="ghost" size="icon" type="submit">
-                  {/* {isFavorite ? <FaHeart /> : <FaRegHeart/>} */}
-                  <Like className= {isFavorite ?'w-5 fill-red-600' : 'w-5 fill-black'}/>
+                  <Button variant="ghost" size="icon" type="submit" onClick={() => setIsFavorite(!isFavorite)}>
+                  <Like className= {isFavorite ?'w-5 fill-red-600' : 'w-5 fill-black '}/>
                   </Button>
                 </form>
               </div>

@@ -12,9 +12,8 @@ import { ProductType } from './types'
 export async function getProductsBrowse() {
   const session = await auth()
   const id = session?.user?.id
-  let response
   if (id) {
-    response = await db.select().from(products).where(ne(products.sellerId, id))
+    const response = await db.select().from(products).where(ne(products.sellerId, id))
     if (response) {
       return response
     }

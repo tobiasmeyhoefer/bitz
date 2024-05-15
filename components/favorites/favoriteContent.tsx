@@ -27,7 +27,7 @@ const FavoriteContent = () => {
             quantity: item.quantity,
             sellerId: item.sellerId,
             createdAt: item.createdAt,
-            image: "/test_img.jpg",
+            imageUrl1: item.imageUrl1,
           }));
           setProducts(checkedResults);
         }
