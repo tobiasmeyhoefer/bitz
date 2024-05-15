@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.0.1",
+    "@aws-sdk/client-s3": "^3.575.0",
+    "@aws-sdk/s3-request-presigner": "^3.575.0",
     "@hookform/resolvers": "^3.3.4",
     "@neondatabase/serverless": "^0.9.1",
     "@radix-ui/react-dialog": "^1.0.5",
@@ -29,6 +31,7 @@
     "@types/three": "^0.163.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "crypto": "^1.0.1",
     "drizzle-orm": "^0.30.9",
     "framer-motion": "^11.1.7",
     "nanoid": "^5.0.7",
