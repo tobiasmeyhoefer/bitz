@@ -39,7 +39,7 @@ export async function addProduct(values:ProductType) {
       sellerId: id,
       status: status,
       createdAt: new Date(),
-      image: '',
+      imageUrl1: '',
     })
   }
 }

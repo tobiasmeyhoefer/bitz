@@ -40,7 +40,11 @@ export const products = pgTable('product', {
     .notNull()
     .$default(() => 'available'),
   createdAt: timestamp('createdAt', { mode: 'date' }).notNull(),
-  image: text('image'),
+  imageUrl1: text('imageUrl1').notNull(),
+  imageUrl2: text('imageUrl2'),
+  imageUrl3: text('imageUrl3'),
+  imageUrl4: text('imageUrl4'),
+  imageUrl5: text('imageUrl5'),
 })
 
 export const accounts = pgTable(
