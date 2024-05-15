@@ -4,11 +4,8 @@ import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { FaRegHeart } from 'react-icons/fa'
-import { FaHeart } from "react-icons/fa";
 import { CardWithImageProps } from '@/lib/types'
 import { addToFavorites, checkFavorite } from '@/lib/productaction'
-import { revalidatePath } from 'next/cache'
-import like from "@/public/like.svg"
 import Like from '../svg/like'
 
 const Card = React.forwardRef<

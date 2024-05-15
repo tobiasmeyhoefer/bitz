@@ -28,7 +28,7 @@ export default function LocationChooser({postcode, userId} : {postcode: string, 
           setLocation(r.location ?? "")
     }
     getProduct()
-  }, [])
+  }, [userId])
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   })
@@ -51,7 +51,7 @@ export default function LocationChooser({postcode, userId} : {postcode: string, 
               <FormItem>
                 <FormMessage/>
                 <FormControl>
-                  <Input placeholder={postcode} {...field} value={location}/>
+                  <Input placeholder={postcode} {...field} defaultValue={location}/>
                 </FormControl>
               </FormItem>
             )}
