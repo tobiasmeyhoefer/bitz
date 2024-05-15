@@ -1,39 +1,25 @@
 'use server'
-import { products } from '@/schema'
+import { Authenticator } from '@/schema'
 import { db } from '../db'
 import { eq } from 'drizzle-orm'
 import { auth } from '@/auth'
-import { ProductType} from '@/models/product-model'
 
-export async function getProducts() {
-  const response = await db.select().from(products)
-  return response
-}
-
-export async function addProduct(values:ProductType) {
-  const { title, description, price, currency, quantity, location, status } = values
+//TODO funcion checking if user already has passkey registerted
+export async function checkPasskey() {
   const session = await auth()
   const id = session?.user?.id
-  if (id) {
-    await db.insert(products).values({
-      title: title,
-      description: description,
-      price: price,
-      currency: currency,
-      quantity: quantity,
-      location: location,
-      sellerId: id,
-      status: status,
-      createdAt: new Date(),
-      image: '',
-    })
+  if (!id) {
+    return false
+  }
+
+  const response = await db
+    .select()
+    .from(Authenticator)
+    .where(eq(Authenticator.userId, id))
+
+  if (response.length > 0) {
+    return true
+  } else {
+    return false
   }
 }
-
-// Delete function requiring productId as string
-export async function deleteProduct(productId: string) {
-  await db.delete(products).where(eq(products.id, productId))
-}
-
-// Update function requiring productData as
-export async function updateProduct() {}

@@ -4,8 +4,11 @@ import {
   text,
   primaryKey,
   integer,
+  uniqueIndex,
+  boolean,
 } from 'drizzle-orm/pg-core'
 import type { AdapterAccount } from 'next-auth/adapters'
+import { genId } from './lib/utils'
 
 export const users = pgTable('user', {
   id: text('id')
@@ -15,6 +18,7 @@ export const users = pgTable('user', {
   email: text('email').notNull(),
   emailVerified: timestamp('emailVerified', { mode: 'date' }),
   image: text('image'),
+  location: text('location'),
 })
 
 export const products = pgTable('product', {
@@ -24,7 +28,7 @@ export const products = pgTable('product', {
   title: text('title').notNull(),
   description: text('description'),
   price: integer('price').notNull(),
-  currency: text('currency').notNull(),
+  // currency: text('currency').notNull(),
   quantity: integer('quantity')
     .notNull()
     .$default(() => 1),
@@ -32,11 +36,15 @@ export const products = pgTable('product', {
   sellerId: text('sellerId')
     .notNull()
     .references(() => users.id, { onDelete: 'cascade' }),
-  status: text('status')
-    .notNull()
-    .$default(() => 'available'),
+  // status: text('status')
+  //   .notNull()
+  //   .$default(() => 'available'),
   createdAt: timestamp('createdAt', { mode: 'date' }).notNull(),
-  image: text('image'),
+  imageUrl1: text('imageUrl1'),
+  imageUrl2: text('imageUrl2'),
+  imageUrl3: text('imageUrl3'),
+  imageUrl4: text('imageUrl4'),
+  imageUrl5: text('imageUrl5'),
 })
 
 export const accounts = pgTable(
@@ -83,6 +91,40 @@ export const verificationTokens = pgTable(
   }),
 )
 
-export type ProductType = typeof products.$inferSelect;
-export type UserType = typeof users.$inferSelect;
+export const Authenticator = pgTable(
+  'authenticator',
+  {
+    id: text('id')
+      .notNull()
+      .primaryKey()
+      .$defaultFn(() => genId('ath')),
+    credentialID: text('credentialId').notNull(),
+    userId: text('userId')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade', onUpdate: 'cascade' }),
+    providerAccountId: text('providerAccountId').notNull(),
+    credentialPublicKey: text('credentialPublicKey').notNull(),
+    counter: integer('counter').notNull(),
+    credentialDeviceType: text('credentialDeviceType').notNull(),
+    credentialBackedUp: boolean('credentialBackedUp').notNull(),
+    transports: text('transports'),
+  },
+  (authenticator) => ({
+    userIdIdx: uniqueIndex('Authenticator_credentialID_key').on(authenticator.credentialID),
+  }),
+)
 
+export const favorites = pgTable('favorites', {
+  id: text('id')
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  userId: text('userId')
+    .notNull()
+    .references(() => users.id, { onDelete: 'cascade' }),
+  productId: text('productId')
+    .notNull()
+    .references(() => products.id, { onDelete: 'cascade' }),
+})
+
+// export type ProductType = typeof products.$inferSelect
+export type UserType = typeof users.$inferSelect

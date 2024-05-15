@@ -1,21 +1,26 @@
-import NextAuth from "next-auth"
-import { DrizzleAdapter } from "@auth/drizzle-adapter"
-import resend from "next-auth/providers/resend"
-import google from "next-auth/providers/google"
-import { db } from "./db"
+import NextAuth from 'next-auth'
+import resend from 'next-auth/providers/resend'
+import google from 'next-auth/providers/google'
+import passkey from 'next-auth/providers/passkey'
+import { drizzleAdapter } from './adapter'
+import { useLocale } from 'next-intl'
+
+// const locale = useLocale();
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  adapter: DrizzleAdapter(db),
+  adapter: drizzleAdapter,
   providers: [
     google,
     resend({
-      from: "auth@bitztech.de",
+      from: 'auth@bitztech.de',
     }),
+    passkey,
   ],
-  // pages: {
-  //   signIn: "/auth/error",
-  //   verifyRequest: "/auth/verify"
-  // },
+  callbacks: {
+    async session({session, user}) {
+      session.user.id = user.id
+      return session
+    },
+  },
+  experimental: { enableWebAuthn: true }
 })
-
-
