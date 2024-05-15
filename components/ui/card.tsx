@@ -8,6 +8,8 @@ import { FaHeart } from "react-icons/fa";
 import { CardWithImageProps } from '@/lib/types'
 import { addToFavorites, checkFavorite } from '@/lib/productaction'
 import { revalidatePath } from 'next/cache'
+import like from "@/public/like.svg"
+import Like from '../svg/like'
 
 const Card = React.forwardRef<
   HTMLDivElement,
@@ -132,7 +134,8 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                 </CardTitle> 
                  <form action={() => addToFavorites(props.productId!)}>
                   <Button variant="ghost" size="icon" type="submit">
-                  {isFavorite ? <FaHeart /> : <FaRegHeart/>}
+                  {/* {isFavorite ? <FaHeart /> : <FaRegHeart/>} */}
+                  <Like className= {isFavorite ?'w-5 fill-red-600' : 'w-5 fill-black'}/>
                   </Button>
                 </form>
               </div>

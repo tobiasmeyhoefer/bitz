@@ -37,7 +37,6 @@ const FavoriteContent = () => {
     };
     getProducts();
   }, []);
-  console.log("-----" + products)
 
   return (
     <div
