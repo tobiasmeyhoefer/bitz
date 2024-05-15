@@ -6,7 +6,7 @@ import {
 } from '@/lib/types'
 import { CardWithImage } from '@/components/ui/card'
 import { getFavorites } from '@/lib/productaction'
-import { FullProductType } from '@/lib/types'
+import { ProductType } from '@/lib/types'
 import FavoriteContent from '@/components/favorites/favoriteContent'
 
 const Favorites = () => {

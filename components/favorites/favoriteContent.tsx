@@ -6,11 +6,11 @@ import {
 } from '@/lib/types'
 import { CardWithImage } from '@/components/ui/card'
 import { getFavorites } from '@/lib/productaction'
-import { FullProductType } from '@/lib/types'
+import { ProductType } from '@/lib/types'
 
 const FavoriteContent = () => {
   const [loading, setLoading] = useState(false)
-  const [products, setProducts] = useState<FullProductType[] | Shop[]>([]);
+  const [products, setProducts] = useState<ProductType[]>([]);
   let isProduct = (item: any) => item.price !== undefined
 
   useEffect(() => {
@@ -19,15 +19,11 @@ const FavoriteContent = () => {
         const result = await getFavorites();
         if(result) {
           // weil einige werte nicht notNull sind und dann fehler kommen weil sie null  ein könnten
-          const checkedResults: FullProductType[] = result.map((item) => ({
-            id: item.id,
+          const checkedResults: ProductType[] = result.map((item) => ({
             title: item.title,
             description: item.description ?? '',
             price: item.price,
-            currency: item.currency,
             quantity: item.quantity,
-            location: item.location ?? '',
-            status: item.status,
             sellerId: item.sellerId,
             createdAt: item.createdAt,
             image: "/test_img.jpg",
@@ -41,6 +37,7 @@ const FavoriteContent = () => {
     getProducts();
   }, []);
   console.log("-----" + products)
+
   return (
     <div
       className={`${loading && `h-full`} flex w-full flex-col items-center justify-center px-10 py-20 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
@@ -53,10 +50,9 @@ const FavoriteContent = () => {
                 key={`pr-${index}`}
                 title={p.title}
                 desc={p.description}
-                imgUrl={p.image && p.image}
+                imgUrl1={p.imageUrl1}
                 previewType={isProduct(p) ? 'product' : 'shop'}
                 className="mx-[5px] my-[0.5rem]"
-                productId={p.id}
               />
             </RevealOnScroll>
           ))}
