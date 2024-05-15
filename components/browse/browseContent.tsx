@@ -58,7 +58,7 @@ const BrowseContent = (props: BrowseContentProps) => {
 
   return (
     <div
-      className={`${loading && `h-full`} flex w-full flex-col items-center justify-center px-10 py-20 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
+      className={`${loading && `h-full`} flex w-full flex-col items-center justify-center  px-4 py-20 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
     >
       <SearchDialog
         placeholder={

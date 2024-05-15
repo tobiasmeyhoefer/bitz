@@ -28,12 +28,13 @@
   },
   "Navbar": {
     "loginButton": "login",
-    "logoutButton": "logout",
+    "logoutButton": "Logout",
     "discover": "Discover",
     "myBitz": "My Bitz",
     "search": "Search",
     "profile": "my profile",
-    "settings": "Settings"
+    "settings": "Settings",
+    "favorites": "Favorites"
   },
   "LoginForm": {
     "loginButton": "login",
