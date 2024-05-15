@@ -12,22 +12,32 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { saveUserLocation } from '@/lib/useraction'
+import { getUserById, saveUserLocation } from '@/lib/useraction'
+import { useEffect, useState } from 'react'
 
 const formSchema = z.object({
   postcode: z.string().regex(/^\d+$/, { message: "only numbers are valid"}).length(5)
 })
 
-export default function LocationChooser({postcode} : {postcode: string}) {
+export default function LocationChooser({postcode, userId} : {postcode: string, userId:string}) {
+  const [location, setLocation] = useState<string>("")
+  useEffect(() => {
+    const getProduct = async () => {
+          const result = await getUserById(userId)
+          const r = result[0]
+          setLocation(r.location ?? "")
+    }
+    getProduct()
+  }, [])
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     await saveUserLocation(values)
-    form.reset({
-      postcode: "",
-  });
+    // form.reset({
+    //   postcode: "",
+    // });
   }
 
   return (
@@ -41,7 +51,7 @@ export default function LocationChooser({postcode} : {postcode: string}) {
               <FormItem>
                 <FormMessage/>
                 <FormControl>
-                  <Input placeholder={postcode} {...field} />
+                  <Input placeholder={postcode} {...field} value={location}/>
                 </FormControl>
               </FormItem>
             )}
