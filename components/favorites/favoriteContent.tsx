@@ -20,6 +20,7 @@ const FavoriteContent = () => {
         if(result) {
           // weil einige werte nicht notNull sind und dann fehler kommen weil sie null  ein könnten
           const checkedResults: ProductType[] = result.map((item) => ({
+            id: item.id,
             title: item.title,
             description: item.description ?? '',
             price: item.price,
@@ -49,10 +50,11 @@ const FavoriteContent = () => {
               <CardWithImage
                 key={`pr-${index}`}
                 title={p.title}
-                desc={p.description}
+                desc={p.description!}
                 imgUrl1={p.imageUrl1}
                 previewType={isProduct(p) ? 'product' : 'shop'}
                 className="mx-[5px] my-[0.5rem]"
+                productId={p.id}
               />
             </RevealOnScroll>
           ))}
@@ -81,9 +83,9 @@ const RevealOnScroll = ({ children }: RevealOnScrollProps) => {
     scrollObserver.observe(ref.current!)
 
     return () => {
-      if (ref.current) {
-        scrollObserver.unobserve(ref.current)
-      }
+      // if (ref.current) {
+      //   scrollObserver.unobserve(ref.current)
+      // }
     }
   }, [])
 

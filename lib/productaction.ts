@@ -106,16 +106,15 @@ export async function addToFavorites(productId:string) {
 export async function getFavorites() {
   const session = await auth()
   const id = session?.user?.id
-  let response: ProductType[] = [];
+  let response;
   if (id) {
     const userFavorites = await db.select().from(favorites).where(eq(favorites.userId, id));
     const favoriteProducts = userFavorites.map(async (product) => {
       return await db.select().from(products).where(eq(products.id, product.productId));
     });
     const productsBySeller = await Promise.all(favoriteProducts);
-    // response = productsBySeller.flat()
+    response = productsBySeller.flat()
   }
-
   return response
 }
 
