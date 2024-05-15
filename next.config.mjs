@@ -4,15 +4,13 @@ const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-        remotePatterns: [
-          {
-            protocol: 'https',
-            hostname: 'PWNzPSZhoVSIlxRT.public.blob.vercel-storage.com',
-            port: '',
-          },
-        ],
-      },
+  images: {
+    remotePatterns:[
+      {
+        hostname: "bhtbitzbucket.s3.eu-central-1.amazonaws.com"
+      }
+    ]
+  },
 };
 
 export default withNextIntl(nextConfig);
