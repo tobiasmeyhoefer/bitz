@@ -16,12 +16,12 @@ import { getProductsBrowse } from '@/lib/productaction'
 const BrowseContent = (props: BrowseContentProps) => {
   const [searchValue, setSearchValue] = useState('')
   const [loading, setLoading] = useState(false)
-  const [products, setProducts] = useState<ProductType[]>([]);
+  const [products, setProducts] = useState<ProductType[]>([])
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const result = await getProductsBrowse();
-        if(result) {
+        const result = await getProductsBrowse()
+        if (result) {
           // weil einige werte nicht notNull sind und dann fehler kommen weil sie null  ein könnten
           const checkedResults: ProductType[] = result.map((item) => ({
             title: item.title,
@@ -37,17 +37,17 @@ const BrowseContent = (props: BrowseContentProps) => {
             imageUrl2: item.imageUrl2,
             imageUrl3: item.imageUrl3,
             imageUrl4: item.imageUrl4,
-            imageUrl5: item.imageUrl5
+            imageUrl5: item.imageUrl5,
             // image: "/test_img.jpg",
-          }));
-          setProducts(checkedResults);
+          }))
+          setProducts(checkedResults)
         }
       } catch (error) {
-        console.error('Fehler beim Laden der Daten:', error);
+        console.error('Fehler beim Laden der Daten:', error)
       }
-    };
-    getProducts();
-  }, []);
+    }
+    getProducts()
+  }, [])
 
   const suggestions = ['Receiver', 'Monitor', 'Audio', 'Laptop', 'Headphone']
   let isProduct = (item: any) => item.price !== undefined
@@ -88,15 +88,14 @@ const BrowseContent = (props: BrowseContentProps) => {
   //   image: ['/test_img.jpg', '/test_img.jpg', '/test_img.jpg'],
   // }
 
+  const imgArr = ['/test_img.jpg', '/test_img.jpg', '/test_img.jpg']
   return (
     <div
       className={`${loading && `h-full`} flex w-full flex-col items-center justify-center  px-4 py-20 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
     >
       <SearchDialog
         placeholder={
-          searchValue.length > 0
-            ? searchValue
-            : props.searchTranslations.searchPlaceholder
+          searchValue.length > 0 ? searchValue : props.searchTranslations.searchPlaceholder
         }
         searchValue={searchValue}
         setSearchValue={setSearchValue}
@@ -105,6 +104,15 @@ const BrowseContent = (props: BrowseContentProps) => {
       />
       {!loading ? (
         <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
+          <CardWithImage
+            key={`pr-`}
+            title="Shop"
+            desc="Shop"
+            imgUrl1={imgArr}
+            previewType="shop"
+            className="mx-[5px] my-[0.5rem]"
+            shopID={1} // TODO: add real shop ID
+          />
           {products.map((p, index) => (
             <RevealOnScroll key={`prx-${index}`}>
               <CardWithImage
@@ -135,9 +143,7 @@ const SearchDialog = (props: SearchBarProps) => {
         <Input
           className="sticky top-[20px] h-14 w-full bg-white sm:w-2/3 md:w-1/2"
           type="search"
-          placeholder={
-            props.searchValue ? props.searchValue : props.placeholder
-          }
+          placeholder={props.searchValue ? props.searchValue : props.placeholder}
           readOnly
         />
       </DialogTrigger>
@@ -160,9 +166,7 @@ const SearchDialog = (props: SearchBarProps) => {
         </div>
         {!props.searchValue ? (
           <>
-            <h1 className="px-4 pt-2 text-lg font-medium">
-              {props.suggestionsTitle}
-            </h1>
+            <h1 className="px-4 pt-2 text-lg font-medium">{props.suggestionsTitle}</h1>
             {props.suggestions.map((suggestion, index) => (
               <div
                 onClick={() => {
