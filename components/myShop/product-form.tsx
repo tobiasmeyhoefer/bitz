@@ -1,5 +1,4 @@
 'use client'
-import { ProductType } from '@/models/product-model'
 import React, { useEffect, useState } from 'react'
 import { Input } from '../ui/input'
 import { addProduct, getProductById } from '@/lib/productaction'
@@ -19,16 +18,11 @@ import { Card } from '@/components/ui/card'
 import { Button } from '../ui/button'
 import { useRouter } from '@/navigation'
 import Image from 'next/image'
-import { PutBlobResult, put } from '@vercel/blob'
-import { upload } from '@vercel/blob/client'
-import { getSignedURL } from '@/lib/action'
+import { getSignedURL } from '@/lib/productaction'
+import { ProductType } from '@/lib/types'
 
-const ACCEPTED_IMAGE_TYPES = [
-  'image/jpeg',
-  'image/jpg',
-  'image/png',
-  'image/webp',
-]
+const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
+
 const MAX_FILE_SIZE = 4000000
 
 const minError = 'Eingabe erfordert'
@@ -36,13 +30,13 @@ const formSchema = z.object({
   title: z.string().min(1, { message: minError }).max(50),
   price: z.coerce.number().safe().positive(),
   quantity: z.coerce.number().safe().positive(),
-  location: z.string().min(1, { message: minError }).max(50),
-  status: z.string().min(1, { message: minError }).max(50),
-  currency: z
-    .string()
-    .min(1, { message: minError })
-    .max(30)
-    .refine((value) => typeof value === 'string' && !/^\d+$/.test(value)),
+  // location: z.string().min(1, { message: minError }).max(50),
+  // status: z.string().min(1, { message: minError }).max(50),
+  // currency: z
+  //   .string()
+  //   .min(1, { message: minError })
+  //   .max(30)
+  //   .refine((value) => typeof value === 'string' && !/^\d+$/.test(value)),
   description: z.string().min(1, { message: minError }).max(250),
   // images: z
   //   .any()
@@ -62,12 +56,12 @@ const formSchema = z.object({
 
 export function ProductForm({
   submitText,
-  action,
+  // action,
   userLocation,
   whichFunction,
 }: {
   submitText: string
-  action: (values: ProductType) => Promise<void>
+  // action: (values: ProductType) => Promise<void>
   userLocation: string
   whichFunction: string
 }) {
@@ -77,28 +71,20 @@ export function ProductForm({
     title: '',
     description: '',
     price: 0,
-    currency: '',
     quantity: 0,
-    location: '',
-    status: '',
   })
 
   useEffect(() => {
     const getProduct = async () => {
       try {
         if (whichFunction == 'update') {
-          const result = await getProductById(
-            '3f4cb90e-6819-4c65-925b-9e563fdf9aae',
-          )
+          const result = await getProductById('3f4cb90e-6819-4c65-925b-9e563fdf9aae')
           const r = result[0]
           const updatedData: ProductType = {
             title: r.title,
             description: r.description || '',
             price: r.price,
-            currency: r.currency,
             quantity: r.quantity,
-            location: r.location || '',
-            status: r.status,
           }
           setData(updatedData)
         }
@@ -115,11 +101,7 @@ export function ProductForm({
       title: '',
       description: '',
       price: 0,
-      currency: '',
       quantity: 0,
-      location: userLocation,
-      status: '',
-      // images: undefined
     },
   })
 
@@ -130,13 +112,25 @@ export function ProductForm({
   }, [data, form, whichFunction])
 
   async function onSubmit(values: ProductType) {
-    console.log('Test')
-    console.log(files)
+    // console.log('Test')
+    // console.log(files)
     let imageUrls = []
     if (files) {
       for (let i = 0; i < files.length; i++) {
         if (files[i]) {
-          const signedURLResult = await getSignedURL(files[i].name)
+          // const signedURLResult = await getSignedURL(files[i].name)
+          const computeSHA256 = async (file: File) => {
+            const buffer = await file.arrayBuffer()
+            const hashBuffer = await crypto.subtle.digest('SHA-256', buffer)
+            const hashArray = Array.from(new Uint8Array(hashBuffer))
+            const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('')
+            return hashHex
+          }
+          const signedURLResult = await getSignedURL({
+            fileSize: files[i].size,
+            fileType: files[i].type,
+            checksum: await computeSHA256(files[i]),
+          })
           if (signedURLResult.failure !== undefined) {
             console.error(signedURLResult.failure)
             return
@@ -152,19 +146,16 @@ export function ProductForm({
             body: files[i],
           })
           console.log(response)
-          imageUrls.push(url.split("?")[0])
-          // values.imageUrls.push(url)
+          imageUrls.push(url.split('?')[0])
         }
       }
     }
-    // console.log(JSON.stringify(blobs))
-    // await addProduct(values, imageUrls)
-    // router.push('/myshop')
+    await addProduct(values, imageUrls)
+    router.push('/myshop')
   }
 
   const [files, setFiles] = useState<FileList | null>(null)
   const [previewUrls, setPreviewUrls] = useState<string[] | null>(null)
-  // const [blobs, setBlobs] = useState<PutBlobResult[] | null>(null)
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files ?? null
@@ -224,7 +215,7 @@ export function ProductForm({
                 </FormItem>
               )}
             />
-            <FormField
+            {/* <FormField
               control={form.control}
               name={'currency'}
               render={({ field }) => (
@@ -236,7 +227,7 @@ export function ProductForm({
                   </FormControl>
                 </FormItem>
               )}
-            />
+            /> */}
             <FormField
               control={form.control}
               name={'quantity'}
@@ -250,7 +241,7 @@ export function ProductForm({
                 </FormItem>
               )}
             />
-            <FormField
+            {/* <FormField
               control={form.control}
               name={'location'}
               render={({ field }) => (
@@ -262,8 +253,8 @@ export function ProductForm({
                   </FormControl>
                 </FormItem>
               )}
-            />
-            <FormField
+            /> */}
+            {/* <FormField
               control={form.control}
               name={'status'}
               render={({ field }) => (
@@ -275,7 +266,7 @@ export function ProductForm({
                   </FormControl>
                 </FormItem>
               )}
-            />
+            /> */}
             <Input
               type="file"
               multiple
