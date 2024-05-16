@@ -122,6 +122,8 @@ const BrowseContent = (props: BrowseContentProps) => {
                 imgUrl1={p.imageUrl1}
                 previewType={isProduct(p) ? 'product' : 'shop'}
                 className="mx-[5px] my-[0.5rem]"
+                productID={index}
+                product={products[index]}
               />
             </RevealOnScroll>
           ))}

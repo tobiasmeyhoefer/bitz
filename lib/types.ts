@@ -7,6 +7,8 @@ type CardWithImageProps = {
   className?: React.HTMLAttributes<HTMLDivElement> | string
   icon?: any
   shopID?: number
+  productID?: number
+  product?: any
 }
 
 type SearchBarProps = {

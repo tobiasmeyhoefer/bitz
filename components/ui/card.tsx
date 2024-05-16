@@ -75,36 +75,38 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
     return (
       <>
         {props.previewType === 'product' ? (
-          <Card className={cn(`w-[${cardWidth}px]`, className)} ref={ref}>
-            {props.imgUrl1 !== undefined ? (
-              <Image
-                src={props.imgUrl1 as string}
-                width={cardWidth}
-                height={300}
-                className="rounded-t-xl"
-                alt="Preview Image Article"
-                style={{ objectFit: 'cover', height: '300px' }}
-              />
-            ) : (
-              <div
-                className={`w-[${cardWidth}px] flex h-[300px] items-center justify-center rounded-t-xl`}
-              >
-                <div>Placeholder Image</div>
-              </div>
-            )}
+          <Link href={`/product/${props.productID}?p=${JSON.stringify(props.product)}`}>
+            <Card className={cn(`w-[${cardWidth}px]`, className)} ref={ref}>
+              {props.imgUrl1 !== undefined ? (
+                <Image
+                  src={props.imgUrl1 as string}
+                  width={cardWidth}
+                  height={300}
+                  className="rounded-t-xl"
+                  alt="Preview Image Article"
+                  style={{ objectFit: 'cover', height: '300px' }}
+                />
+              ) : (
+                <div
+                  className={`w-[${cardWidth}px] flex h-[300px] items-center justify-center rounded-t-xl`}
+                >
+                  <div>Placeholder Image</div>
+                </div>
+              )}
 
-            <CardHeader className="p-3">
-              <div className="flex justify-between">
-                <CardTitle className="align-middle text-2xl" style={{ lineHeight: 'unset' }}>
-                  {props.title}
-                </CardTitle>
-                <Button variant="ghost" size="icon">
-                  <FaRegHeart />
-                </Button>
-              </div>
-              <CardDescription className="text-xl text-black">{props.desc}</CardDescription>
-            </CardHeader>
-          </Card>
+              <CardHeader className="p-3">
+                <div className="flex justify-between">
+                  <CardTitle className="align-middle text-2xl" style={{ lineHeight: 'unset' }}>
+                    {props.title}
+                  </CardTitle>
+                  <Button variant="ghost" size="icon">
+                    <FaRegHeart />
+                  </Button>
+                </div>
+                <CardDescription className="text-xl text-black">{props.desc}</CardDescription>
+              </CardHeader>
+            </Card>
+          </Link>
         ) : (
           <Link href={`/shop/${props.shopID}`}>
             <Card className={cn(`w-[${cardWidth}px]`, className)} ref={ref}>
