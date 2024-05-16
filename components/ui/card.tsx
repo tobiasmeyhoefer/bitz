@@ -1,3 +1,4 @@
+"use client"
 import * as React from 'react'
 
 import { cn } from '@/lib/utils'
@@ -83,7 +84,6 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
   ({ className, ...props }, ref) => {
     const cardWidth = props.previewType === 'product' ? 300 : 600
     const [isFavorite, setIsFavorite] = React.useState(false);
-
     React.useEffect(() => {
       async function fetchFavorite() {
         const isFav = await checkFavorite(props.productId!);
@@ -91,6 +91,7 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
       }
       fetchFavorite();
     }, [props.productId]);
+ 
     const getImgBorder = (index: number, arraylength: number) => {
       switch (index) {
         case 0:

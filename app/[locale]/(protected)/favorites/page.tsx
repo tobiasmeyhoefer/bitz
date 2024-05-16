@@ -1,18 +1,26 @@
-"use client"
-import { useEffect, useRef, useState } from 'react'
-import {
-  Shop,
-  RevealOnScrollProps,
-} from '@/lib/types'
 import { CardWithImage } from '@/components/ui/card'
 import { getFavorites } from '@/lib/productaction'
-import { ProductType } from '@/lib/types'
-import FavoriteContent from '@/components/favorites/favoriteContent'
 
-const Favorites = () => {
+const Favorites = async () => {
+  const products = await getFavorites()
   return (
-    <div>
-      <FavoriteContent/>
+    <div
+      className={`${`h-full`} flex w-full flex-col items-center justify-center px-10 py-20 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
+      // !loading ?
+    >
+        <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
+          {products?.map((p, index) => (
+              <CardWithImage
+                key={`pr-${index}`}
+                title={p.title}
+                desc={p.description!}
+                imgUrl1={p.imageUrl1}
+                previewType={'product'}
+                className="mx-[5px] my-[0.5rem]"
+                productId={p.id}
+              />
+          ))}
+        </div>
     </div>
   )
 }
