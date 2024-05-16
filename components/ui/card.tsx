@@ -1,4 +1,3 @@
-"use client"
 import * as React from 'react'
 
 import { cn } from '@/lib/utils'
@@ -8,6 +7,7 @@ import { FaRegHeart } from 'react-icons/fa'
 import { CardWithImageProps } from '@/lib/types'
 import { addToFavorites, checkFavorite, deleteFavorite } from '@/lib/productaction'
 import Like from '../svg/like'
+import FavoriteLike from '../favorites/favoriteLike'
 
 const Card = React.forwardRef<
   HTMLDivElement,
@@ -83,14 +83,6 @@ CardFooter.displayName = 'CardFooter'
 const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
   ({ className, ...props }, ref) => {
     const cardWidth = props.previewType === 'product' ? 300 : 600
-    const [isFavorite, setIsFavorite] = React.useState(false);
-    React.useEffect(() => {
-      async function fetchFavorite() {
-        const isFav = await checkFavorite(props.productId!);
-        setIsFavorite(isFav);
-      }
-      fetchFavorite();
-    }, [props.productId]);
  
     const getImgBorder = (index: number, arraylength: number) => {
       switch (index) {
@@ -131,11 +123,7 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                 >
                   {props.title} 
                 </CardTitle> 
-                <form onSubmit={(e) => e.preventDefault()}>
-                  <Button variant="ghost" size="icon" type="submit" onClick={() => {isFavorite ? deleteFavorite(props.productId!) : addToFavorites(props.productId!); setIsFavorite(!isFavorite);}}>
-                    <Like className={isFavorite ? 'w-5 fill-red-600' : 'w-5 fill-black'} />
-                  </Button>
-                </form>
+                <FavoriteLike productId={props.productId!}/> 
               </div>
               <CardDescription className="text-xl text-black">
                 {props.desc}
