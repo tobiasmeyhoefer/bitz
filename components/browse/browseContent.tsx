@@ -9,10 +9,10 @@ import {
   RevealOnScrollProps,
   ProductType,
 } from '@/lib/types'
-import { CardWithImage } from '../ui/card'
+import { CardWithImage } from '../ui/cardWithImage'
 import { SlClose } from 'react-icons/sl'
-import { Button } from '@/components/ui/button'
 import { getProductsBrowse } from '@/lib/productaction'
+
 const BrowseContent = (props: BrowseContentProps) => {
   const [searchValue, setSearchValue] = useState('')
   const [loading, setLoading] = useState(false)
