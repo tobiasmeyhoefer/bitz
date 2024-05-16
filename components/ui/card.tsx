@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { FaRegHeart } from 'react-icons/fa'
 import { CardWithImageProps } from '@/lib/types'
-import { addToFavorites, checkFavorite } from '@/lib/productaction'
+import { addToFavorites, checkFavorite, deleteFavorite } from '@/lib/productaction'
 import Like from '../svg/like'
 
 const Card = React.forwardRef<
@@ -131,9 +131,9 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                 >
                   {props.title} 
                 </CardTitle> 
-                 <form action={() => addToFavorites(props.productId!)}>
-                  <Button variant="ghost" size="icon" type="submit" onClick={() => setIsFavorite(!isFavorite)}>
-                  <Like className= {isFavorite ?'w-5 fill-red-600' : 'w-5 fill-black '}/>
+                <form onSubmit={(e) => e.preventDefault()}>
+                  <Button variant="ghost" size="icon" type="submit" onClick={() => {isFavorite ? deleteFavorite(props.productId!) : addToFavorites(props.productId!); setIsFavorite(!isFavorite);}}>
+                    <Like className={isFavorite ? 'w-5 fill-red-600' : 'w-5 fill-black'} />
                   </Button>
                 </form>
               </div>

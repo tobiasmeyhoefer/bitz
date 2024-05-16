@@ -81,47 +81,41 @@ export async function addToFavorites(productId:string) {
   const session = await auth()
   const id = session?.user?.id
   if(id) {
-    const response = await db.select().from(favorites).where(eq(favorites.productId, productId));
-    if(response.length > 0) {
-      if(response[0].userId == id) {
-        await db.delete(favorites).where(eq(favorites.productId, productId))
-      }
-      else{
-        await db.insert(favorites).values({
-          userId: id,
-          productId: productId,
-        })
-      }
-    }
-    else{
-      await db.insert(favorites).values({
-        userId: id,
-        productId: productId,
-      })
-    }
+    await db.insert(favorites).values({
+      userId: id,
+      productId: productId,
+    })
   }
 }
 
-export async function getFavorites() {
+export async function deleteFavorite(productId:string) {
+  await db.delete(favorites).where(eq(favorites.productId, productId))
+}
+
+export async function getUserFavorites() {
   const session = await auth()
   const id = session?.user?.id
-  let response;
-  if (id) {
-    const userFavorites = await db.select().from(favorites).where(eq(favorites.userId, id));
+  if(id) {
+    const response = await db.select().from(favorites).where(eq(favorites.userId, id));
+    return response
+  }
+}
+
+export async function getFavoriteProducts() {
+  const userFavorites = await getUserFavorites()
+  if(userFavorites) {
     const favoriteProducts = userFavorites.map(async (product) => {
       return await db.select().from(products).where(eq(products.id, product.productId));
     });
     const productsBySeller = await Promise.all(favoriteProducts);
-    response = productsBySeller.flat()
+    const response = productsBySeller.flat()
+    return response
   }
-  return response
 }
 
 export async function checkFavorite(productId : string) {
-  const session = await auth()
-  const id = session?.user?.id
-  if (id) {
-    const userFavorites = await db.select().from(favorites).where(eq(favorites.userId, id));
+  const userFavorites = await getUserFavorites();
+  if (userFavorites) {
     return userFavorites.some(product => product.productId === productId);
   }
   return false;

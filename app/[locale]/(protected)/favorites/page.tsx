@@ -1,8 +1,8 @@
 import { CardWithImage } from '@/components/ui/card'
-import { getFavorites } from '@/lib/productaction'
+import { getFavoriteProducts } from '@/lib/productaction'
 
 const Favorites = async () => {
-  const products = await getFavorites()
+  const products = await getFavoriteProducts()
   return (
     <div
       className={`${`h-full`} flex w-full flex-col items-center justify-center px-10 py-20 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
