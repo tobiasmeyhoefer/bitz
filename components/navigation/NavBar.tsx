@@ -42,27 +42,17 @@ const NavBar = async () => {
   return (
     <nav className="absolute left-0 right-0 flex h-[80px] items-center justify-between px-4 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]">
       <div className="flex items-center">
-        {isLoggedIn ? (
+        {isLoggedIn && (
           <>
             <Link href="/" className="static mr-4 h-[80px] w-[100px] sm:mr-10">
               <CubeSceneNav />
             </Link>
-          </>
-        ) : (
-          <Link href="/" className="mr-4 font-montserrat text-4xl font-bold sm:mr-10">
-            {/* <span className="block sm:hidden">B</span>
-            <span className="hidden sm:block">BITZ</span> */}
-            {/* TODO: Insert logo ?? */}
-          </Link>
-        )}
-        <div className="hidden sm:flex">
-          {isLoggedIn && (
-            <>
+            <div className="hidden sm:flex">
               <NavItemLink className="mr-14" linkTo="/browse" text={t('discover')} />
               <NavItemLink className="mr-14" linkTo="/myshop" text={t('myBitz')} />
-            </>
-          )}
-        </div>
+            </div>
+          </>
+        )}
       </div>
       {isLoggedIn ? (
         <>
