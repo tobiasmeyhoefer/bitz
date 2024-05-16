@@ -123,7 +123,7 @@ export const favorites = pgTable('favorites', {
     .references(() => products.id, { onDelete: 'cascade' }),
 }, (table) => {
   return {
-    pk: primaryKey({ columns: [table.userId, table.productId] }),
+    id: primaryKey({ name: 'id', columns: [table.userId, table.productId] }),
   };
 });
 
