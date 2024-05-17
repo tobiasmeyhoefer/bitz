@@ -2,109 +2,83 @@ import { auth } from '@/auth'
 import { SignOut } from '../auth/sign-out'
 import { Link } from '@/navigation'
 import { getTranslations } from 'next-intl/server'
-import { SlSettings } from 'react-icons/sl'
-import { TbMenu } from 'react-icons/tb'
-
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from '../ui/dropdown-menu'
-import { NavLoginLink, NavItemLink } from './navbarItem'
-import {
-  Drawer,
-  DrawerContent,
-  DrawerDescription,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from '../ui/drawer'
-import { Button } from '../ui/button'
-import { FaBullseye } from 'react-icons/fa'
-
+import { NavLoginLink, NavItemLink, NavbarItemDropdown, NavMenuDrawer } from './navbarItem'
+import dynamic from 'next/dynamic'
 const NavBar = async () => {
   const t = await getTranslations('Navbar')
   const session = await auth()
   const isLoggedIn = !!session?.user
+  const CubeSceneNav = dynamic(() => import('@/components/explosion/cubeSceneNav'), {
+    ssr: false,
+  })
+
+  const drawerItems = [
+    <NavItemLink
+      key={'dil-1'}
+      className="py-4 text-center text-2xl hover:no-underline"
+      linkTo="/browse"
+      text={t('discover')}
+    />,
+    <NavItemLink
+      key={'dil-2'}
+      className="py-4 text-center text-2xl hover:no-underline"
+      linkTo="/myshop"
+      text={t('myBitz')}
+    />,
+    <NavItemLink
+      key={'dil-3'}
+      className="py-4 text-center text-2xl hover:no-underline"
+      linkTo="/favorites"
+      text={t('favorites')}
+    />,
+    <NavItemLink
+      key={'dil-4'}
+      className="py-4 text-center text-2xl hover:no-underline"
+      linkTo="/settings"
+      text={t('settings')}
+    ></NavItemLink>,
+  ]
 
   return (
-    <nav className="absolute left-0 right-0 flex h-[80px] items-center justify-between px-4 sm:px-10">
+    <nav className="absolute left-0 right-0 flex h-[80px] items-center justify-between px-4 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]">
       <div className="flex items-center">
-        {isLoggedIn ? (
+        {isLoggedIn && (
           <>
-            <Link
-              href="/"
-              className="mr-4 font-montserrat text-4xl font-bold text-blue-500 sm:mr-10"
-            >
-              <span>BITZ</span>
+            <Link href="/" className="static mr-4 h-[80px] w-[100px] sm:mr-10">
+              <CubeSceneNav />
             </Link>
+            <div className="hidden sm:flex">
+              <NavItemLink className="mr-14" linkTo="/browse" text={t('discover')} />
+              <NavItemLink className="mr-14" linkTo="/myshop" text={t('myBitz')} />
+            </div>
           </>
-        ) : (
-          <Link
-            href="/"
-            className="mr-4 font-montserrat text-4xl font-bold text-blue-500 sm:mr-10"
-          >
-            <span className="block sm:hidden">B</span>
-            <span className="hidden sm:block">BITZ</span>
-          </Link>
         )}
-        <div className="hidden sm:flex">
-          {isLoggedIn && (
-            <>
-              <NavItemLink
-                className="mr-10"
-                linkTo="/browse"
-                text={t('discover')}
-              />
-              <NavItemLink
-                className="mr-10"
-                linkTo="/myshop"
-                text={t('myBitz')}
-              />
-            </>
-          )}
-        </div>
       </div>
       {isLoggedIn ? (
         <>
           <div className="hidden sm:flex">
-            <NavItemLink
-              linkTo="/settings"
-              icon={<SlSettings className="mr-3 h-[20px] w-[20px]" />}
-            ></NavItemLink>
-            <SignOut typeText={false} />
+            <NavbarItemDropdown
+              signOut={<SignOut text={t('logoutButton')} typeText={false} className="mr-3" />}
+              settingsLinkText={t('settings')}
+              favoritesLinkText={t('favorites')}
+            />
           </div>
           <div className="block sm:hidden">
-            <Drawer>
-              <DrawerTrigger asChild>
-                <Button className="h-fit bg-transparent p-0 text-black shadow-none hover:bg-transparent hover:text-black ">
-                  <TbMenu className="h-[20px] w-[20px]" />
-                </Button>
-              </DrawerTrigger>
-              <DrawerContent className="max-w-smd mx-auto w-full border-0 bg-black p-3">
-                <NavItemLink
-                  className="mr-10 py-2 text-2xl text-white  hover:underline hover:underline-offset-8"
-                  linkTo="/browse"
-                  text={t('discover')}
-                />
-                <NavItemLink
-                  className="mr-10 py-2 text-2xl text-white"
-                  linkTo="/myshop"
-                  text={t('myBitz')}
-                />
-                <NavItemLink
-                  className="mr-10 py-2 text-2xl text-white"
-                  linkTo="/settings"
-                  text={t('settings')}
-                ></NavItemLink>
-                <SignOut
-                  typeText={true}
-                  text={t('logoutButton')}
-                  className="mr-10 py-2 text-2xl text-white hover:text-white hover:underline hover:underline-offset-8"
-                />
-              </DrawerContent>
-            </Drawer>
+            <NavMenuDrawer
+              menuItems={drawerItems}
+              signOut={
+                <div
+                  key={'dil-5'}
+                  className="flex justify-center py-4 text-center  text-2xl hover:bg-slate-100"
+                >
+                  <SignOut
+                    typeText={true}
+                    text={t('logoutButton')}
+                    className="w-full text-2xl font-normal hover:no-underline"
+                  />
+                </div>
+              }
+            />
           </div>
         </>
       ) : (

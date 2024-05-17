@@ -31,12 +31,13 @@
   },
   "Navbar": {
     "loginButton": "anmelden",
-    "logoutButton": "abmelden",
+    "logoutButton": "Abmelden",
     "discover": "Entdecken",
     "myBitz": "Meine Bitz",
     "search": "Suchen",
     "profile": "Profil vewalten",
-    "settings": "Einstellungen"
+    "settings": "Einstellungen",
+    "favorites": "Favoriten"
   },
   "LoginForm": {
     "loginButton": "anmelden",
