@@ -16,31 +16,35 @@ export default async function Home() {
   }
 
   return (
-    <main className="static h-screen ">
-      <div className="static h-96 pt-24 md:static md:h-screen md:pt-24">
-        <CubeScene />
-      </div>
-
-      {/* Call-to-Action Button  */}
-
-      <Link href={'/auth/login'}>
-        <div className="absolute bottom-24 right-7 h-24 w-72 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 px-8 font-space_grotesk text-4xl text-white hover:scale-105 hover:opacity-85 md:right-24 md:w-96 lg:h-24">
-          <div className="absolute right-6 mt-6 h-12 w-12 rounded-full bg-white md:right-9 md:mt-4 md:h-16 md:w-16">
-            <ChevronRightIcon className="relative size-12 text-black md:size-16" />
-          </div>
-          <div className="relative left-0 mt-7 text-3xl md:left-10">{t('button')}</div>
+    <main className="static h-screen snap-y snap-mandatory overflow-y-scroll">
+      <section className="h-screen snap-start">
+        <div className="top h-96 pt-16 md:static md:h-screen md:pt-24">
+          <CubeScene />
         </div>
-      </Link>
 
-      {/* Beschreibungstext  */}
-      <div className="absolute bottom-48 left-8 rounded-md p-5 font-space_grotesk text-black drop-shadow-2xl  md:left-24 lg:bottom-16 lg:w-7/12">
-        <p className="text-2xl md:text-5xl">
-          <em>Bitz</em>
-        </p>
-        <p className="mt-4 text-lg md:text-2xl">{t('subtitle')}</p>
-        <p className="mt-4 text-sm md:text-xl">{t('description')}</p>
-        <p className="mt-4 text-lg md:text-2xl">{t('call')}</p>
-      </div>
+        <Link href={'/auth/login'}>
+          <div className="absolute bottom-24 right-7 h-24 w-72 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 px-8 font-space_grotesk text-4xl text-white hover:scale-105 hover:opacity-85 md:right-24 md:w-96 lg:h-24">
+            <div className="absolute right-6 mt-6 h-12 w-12 rounded-full bg-white md:right-9 md:mt-4 md:h-16 md:w-16">
+              <ChevronRightIcon className="relative size-12 text-black md:size-16" />
+            </div>
+            <div className="relative left-0 mt-7 text-3xl md:left-10">{t('button')}</div>
+          </div>
+        </Link>
+        <div className="static bottom-48 left-8 rounded-md p-5 font-space_grotesk text-black drop-shadow-2xl  md:left-24 lg:bottom-16 lg:w-7/12">
+          <p className="text-2xl md:text-5xl">
+            <em>Bitz</em>
+          </p>
+          <p className="mt-4 text-lg md:text-2xl">{t('subtitle')}</p>
+          <p className="mt-4 text-sm md:text-xl">{t('description')}</p>
+          <p className="mt-4 text-lg md:text-2xl">{t('call')}</p>
+        </div>
+      </section>
+      <section className="realtive h-screen snap-start flex-col items-center justify-center bg-red-600 pb-[10vh] text-[3.5vw] text-white">
+        Hello World!
+      </section>
+      <section className="realtive h-screen snap-start flex-col items-center justify-center bg-blue-600 pb-[10vh] text-[3.5vw] text-white">
+        Bye World!
+      </section>
     </main>
   )
 }
