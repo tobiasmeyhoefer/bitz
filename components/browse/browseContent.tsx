@@ -2,13 +2,7 @@
 import { Input } from '@/components/ui/input'
 import { useEffect, useRef, useState } from 'react'
 import { Dialog, DialogTrigger, DialogContent } from '../ui/dialog'
-import {
-  BrowseContentProps,
-  SearchBarProps,
-  Shop,
-  RevealOnScrollProps,
-  ProductType,
-} from '@/lib/types'
+import { BrowseContentProps, SearchBarProps, RevealOnScrollProps, ProductType } from '@/lib/types'
 import { CardWithImage } from '../ui/cardWithImage'
 import { SlClose } from 'react-icons/sl'
 import { getProductsBrowse } from '@/lib/productaction'
@@ -50,43 +44,6 @@ const BrowseContent = (props: BrowseContentProps) => {
   }, [])
 
   const suggestions = ['Receiver', 'Monitor', 'Audio', 'Laptop', 'Headphone']
-  let isProduct = (item: any) => item.price !== undefined
-  // ---Mock data---
-  // let products: (Product | Shop)[] = []
-
-  // for (let i = 0; i < 20; i++) {
-  //   products.push({
-  //     title: `Title ${i}`,
-  //     description: `Description ${i}`,
-  //     price: i,
-  //     currency: `Currency ${i}`,
-  //     quantity: i,
-  //     location: `Location ${i}`,
-  //     status: `Status ${i}`,
-  //     image: '/test_img.jpg',
-  //   })
-  // }
-
-  // products[5] = {
-  //   title: 'Shop1',
-  //   description: 'ShopDesc1',
-  //   image: ['/test_img.jpg', '/test_img.jpg', '/test_img.jpg'],
-  // }
-  // products[9] = {
-  //   title: 'Shop2',
-  //   description: 'ShopDesc2',
-  //   image: ['/test_img.jpg', '/test_img.jpg', '/test_img.jpg'],
-  // }
-  // products[10] = {
-  //   title: 'Shop3',
-  //   description: 'ShopDesc3',
-  //   image: ['/test_img.jpg', '/test_img.jpg', '/test_img.jpg'],
-  // }
-  // products[11] = {
-  //   title: 'Shop4',
-  //   description: 'ShopDesc4',
-  //   image: ['/test_img.jpg', '/test_img.jpg', '/test_img.jpg'],
-  // }
 
   const imgArr = ['/test_img.jpg', '/test_img.jpg', '/test_img.jpg']
   return (
@@ -104,7 +61,7 @@ const BrowseContent = (props: BrowseContentProps) => {
       />
       {!loading ? (
         <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
-          <CardWithImage
+          {/* <CardWithImage
             key={`pr-`}
             title="Shop"
             desc="Shop"
@@ -112,7 +69,7 @@ const BrowseContent = (props: BrowseContentProps) => {
             previewType="shop"
             className="mx-[5px] my-[0.5rem]"
             shopID={1} // TODO: add real shop ID
-          />
+          /> */}
           {products.map((p, index) => (
             <RevealOnScroll key={`prx-${index}`}>
               <CardWithImage
@@ -120,10 +77,10 @@ const BrowseContent = (props: BrowseContentProps) => {
                 title={p.title}
                 desc={p.description}
                 imgUrl1={p.imageUrl1}
-                previewType={isProduct(p) ? 'product' : 'shop'}
                 className="mx-[5px] my-[0.5rem]"
                 productID={index}
                 product={products[index]}
+                favIcon
               />
             </RevealOnScroll>
           ))}
