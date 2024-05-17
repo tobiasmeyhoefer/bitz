@@ -19,7 +19,8 @@
   "MyShop": {
     "title": "My Shop",
     "addProducts": "add Product",
-    "updateProducts": "update Product"
+    "updateProducts": "update Product",
+    "deleteProduct": "delete Product"
   },
   "addProductPage": {
     "submitTitle": "submit"

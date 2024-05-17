@@ -26,7 +26,7 @@ export async function getProductsOwned() {
   const id = session?.user?.id
   let response
   if (id) {
-    response = await db.select().from(products).where(eq(products.sellerId, id))
+    response = await db.select().from(products).where(ne(products.sellerId, id))
     if (response) {
       return response
     }
