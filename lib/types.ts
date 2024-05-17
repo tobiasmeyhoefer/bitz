@@ -7,6 +7,21 @@ type CardWithImageProps = {
   className?: React.HTMLAttributes<HTMLDivElement> | string
   icon?: any
 }
+/* type User = {
+  userId: string
+//  email: string
+//  name: string
+//  avatar: string
+}
+
+type UserId = {
+  id: string
+} */
+
+type MyShopProps = {
+  userId: string,
+  location: any
+}
 
 type SearchBarProps = {
   placeholder: string
@@ -78,5 +93,8 @@ export type {
   BrowseContentProps,
   Shop,
   RevealOnScrollProps,
-  ProductType
+  ProductType,
+  User,
+  UserId,
+  MyShopProps
 }

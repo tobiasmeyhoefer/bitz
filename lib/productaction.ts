@@ -21,6 +21,19 @@ export async function getProductsBrowse() {
   }
 }
 
+export async function getProductsOwned() {
+  const session = await auth()
+  const id = session?.user?.id
+  let response
+  if (id) {
+    response = await db.select().from(products).where(eq(products.sellerId, id))
+    if (response) {
+      return response
+    }
+  }
+}
+
+
 export async function addProduct(values: ProductType, imageUrls: string[]) {
   let { title, description, price, quantity } = values
   const session = await auth()

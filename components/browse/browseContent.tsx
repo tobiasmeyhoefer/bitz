@@ -13,6 +13,9 @@ import { CardWithImage } from '../ui/card'
 import { SlClose } from 'react-icons/sl'
 import { Button } from '@/components/ui/button'
 import { getProductsBrowse } from '@/lib/productaction'
+import RevealOnScroll from '../navigation/revealOnScroll'
+
+
 const BrowseContent = (props: BrowseContentProps) => {
   const [searchValue, setSearchValue] = useState('')
   const [loading, setLoading] = useState(false)
@@ -22,7 +25,7 @@ const BrowseContent = (props: BrowseContentProps) => {
       try {
         const result = await getProductsBrowse();
         if(result) {
-          // weil einige werte nicht notNull sind und dann fehler kommen weil sie null  ein könnten
+          // weil einige werte nicht notNull sind und dann fehler kommen weil sie null sein könnten
           const checkedResults: ProductType[] = result.map((item) => ({
             title: item.title,
             description: item.description ?? '',
@@ -92,17 +95,7 @@ const BrowseContent = (props: BrowseContentProps) => {
     <div
       className={`${loading && `h-full`} flex w-full flex-col items-center justify-center  px-4 py-20 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
     >
-      <SearchDialog
-        placeholder={
-          searchValue.length > 0
-            ? searchValue
-            : props.searchTranslations.searchPlaceholder
-        }
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
-        suggestions={suggestions}
-        suggestionsTitle={props.searchTranslations.suggestions}
-      />
+      <SearchDialog placeholder={searchValue.length > 0? searchValue: props.searchTranslations.searchPlaceholder}searchValue={searchValue}setSearchValue={setSearchValue} suggestions={suggestions} suggestionsTitle={props.searchTranslations.suggestions}/>
       {!loading ? (
         <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
           {products.map((p, index) => (
@@ -181,37 +174,6 @@ const SearchDialog = (props: SearchBarProps) => {
         )}
       </DialogContent>
     </Dialog>
-  )
-}
-
-const RevealOnScroll = ({ children }: RevealOnScrollProps) => {
-  const [isVisible, setIsVisible] = useState(false)
-  const ref = useRef(null)
-
-  useEffect(() => {
-    const scrollObserver = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setIsVisible(true)
-        scrollObserver.unobserve(entry.target)
-      }
-    })
-
-    scrollObserver.observe(ref.current!)
-
-    return () => {
-      if (ref.current) {
-        scrollObserver.unobserve(ref.current)
-      }
-    }
-  }, [])
-
-  const classes = `transition-opacity duration-1000
-      ${isVisible ? 'opacity-100' : 'opacity-0'}`
-
-  return (
-    <div ref={ref} className={classes}>
-      {children}
-    </div>
   )
 }
 
