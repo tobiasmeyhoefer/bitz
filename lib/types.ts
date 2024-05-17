@@ -2,10 +2,12 @@ type CardWithImageProps = {
   title: string
   desc: string
   content?: string
-  imgUrl1?: string | null
-  previewType: string /* shop || article */
+  imgUrl1?: string | null | string[]
   className?: React.HTMLAttributes<HTMLDivElement> | string
-  icon?: any
+  favIcon?: boolean
+  shopID?: number
+  productID?: number
+  product?: any
 }
 
 type SearchBarProps = {
@@ -37,17 +39,17 @@ type BrowseContentProps = {
 // }
 
 type ProductType = {
-  title: string;
-  description: string;
-  price: number;
-  quantity: number;
-  createdAt?: Date;
-  sellerId?: string;
-  imageUrl1?: string | null;
-  imageUrl2?: string | null;
-  imageUrl3?: string | null;
-  imageUrl4?: string | null;
-  imageUrl5?: string | null;
+  title: string
+  description: string
+  price: number
+  quantity: number
+  createdAt?: Date
+  sellerId?: string
+  imageUrl1?: string | null
+  imageUrl2?: string | null
+  imageUrl3?: string | null
+  imageUrl4?: string | null
+  imageUrl5?: string | null
 
   // title: string;
   // description: string;
@@ -59,12 +61,6 @@ type ProductType = {
   // sellerId: string;
   // createdAt: Date;
   // image: string;
-};
-
-type Shop = {
-  title: string
-  description: string
-  image?: string[]
 }
 
 type RevealOnScrollProps = {
@@ -76,7 +72,6 @@ export type {
   SearchBarProps,
   SearchTranslations,
   BrowseContentProps,
-  Shop,
   RevealOnScrollProps,
-  ProductType
+  ProductType,
 }
