@@ -24,7 +24,11 @@
   },
   "addProductPage": {
     "submitTitle": "absenden"
-  },
+  }, 
+  "deleteProductPage": {
+    "submitTitle": "löschen",
+    "yousure": "Bist du sicher, dass du diese Ware löschen möchtest?"
+    },
   "Settings": {
     "title": "Einstellungen",
     "city": "Stadt",

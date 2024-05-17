@@ -21,12 +21,14 @@ export async function getProductsBrowse() {
   }
 }
 
-export async function getProductsOwned() {
-  const session = await auth()
-  const id = session?.user?.id
+export async function getProductsOwned(userId: string) {
+  return (userId)
+  /* const session = await auth()
+  const id = session?.user?.id */
+  let id = userId
   let response
   if (id) {
-    response = await db.select().from(products).where(ne(products.sellerId, id))
+    response = await db.select().from(products).where(ne(products.sellerId, id))  //muss 'eq' sein und nicht 'ne'
     if (response) {
       return response
     }

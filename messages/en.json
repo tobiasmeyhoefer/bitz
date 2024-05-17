@@ -25,6 +25,10 @@
   "addProductPage": {
     "submitTitle": "submit"
   },
+  "deleteProductPage": {
+    "submitTitle": "löschen",
+    "yousure": "Bist du sicher, dass du diese Ware löschen möchtest?"
+    },
   "Settings": {
     "title": "Settings",
     "city": "city",
