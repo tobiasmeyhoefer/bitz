@@ -4,8 +4,6 @@ import Image from 'next/image'
 import { CardWithImageProps } from '@/lib/types'
 import { cn } from '@/lib/utils'
 import { Link } from '@/navigation'
-import { FaRegHeart } from 'react-icons/fa'
-import { Button } from './button'
 import { Card, CardHeader, CardTitle, CardDescription } from './card'
 import FavoriteLike from '../favorites/favoriteLike'
 
@@ -44,20 +42,18 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                   <div>Placeholder Image</div>
                 </div>
               )}
-              </Link>
+            </Link>
 
-              <CardHeader className="p-3">
-                <div className="flex justify-between">
-                  <CardTitle className="align-middle text-2xl" style={{ lineHeight: 'unset' }}>
-                    {props.title}
-                  </CardTitle>
-                  {props.favIcon && (
-                    <FavoriteLike productId={props.productID!}/> 
-                  )}
-                </div>
-                <CardDescription className="text-xl text-black">{props.desc}</CardDescription>
-              </CardHeader>
-            </Card>
+            <CardHeader className="p-3">
+              <div className="flex justify-between">
+                <CardTitle className="align-middle text-2xl" style={{ lineHeight: 'unset' }}>
+                  {props.title}
+                </CardTitle>
+                {props.favIcon && <FavoriteLike productId={props.productID!} />}
+              </div>
+              <CardDescription className="text-xl text-black">{props.desc}</CardDescription>
+            </CardHeader>
+          </Card>
         ) : (
           <></>
           // Not needed until user shops/profiles are clarified

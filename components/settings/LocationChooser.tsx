@@ -16,16 +16,22 @@ import { getUserById, saveUserLocation } from '@/lib/useraction'
 import { useEffect, useState } from 'react'
 
 const formSchema = z.object({
-  postcode: z.string().regex(/^\d+$/, { message: "only numbers are valid"}).length(5)
+  postcode: z.string().regex(/^\d+$/, { message: 'only numbers are valid' }).length(5),
 })
 
-export default function LocationChooser({postcode, userId} : {postcode: string, userId:string}) {
-  const [location, setLocation] = useState<string>("")
+export default function LocationChooser({
+  postcode,
+  userId,
+}: {
+  postcode: string
+  userId: string
+}) {
+  const [location, setLocation] = useState<string>('')
   useEffect(() => {
     const getProduct = async () => {
-          const result = await getUserById(userId)
-          const r = result[0]
-          setLocation(r.location ?? "")
+      const result = await getUserById(userId)
+      const r = result[0]
+      setLocation(r.location ?? '')
     }
     getProduct()
   }, [userId])
@@ -43,15 +49,15 @@ export default function LocationChooser({postcode, userId} : {postcode: string, 
   return (
     <>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className= "flex flex-row items-end gap-1">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-row items-end gap-1">
           <FormField
             control={form.control}
             name={'postcode'}
             render={({ field }) => (
               <FormItem>
-                <FormMessage/>
+                <FormMessage />
                 <FormControl>
-                  <Input placeholder={postcode} {...field} defaultValue={location}/>
+                  <Input placeholder={postcode} {...field} defaultValue={location} />
                 </FormControl>
               </FormItem>
             )}
