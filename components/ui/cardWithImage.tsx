@@ -7,6 +7,7 @@ import { Link } from '@/navigation'
 import { FaRegHeart } from 'react-icons/fa'
 import { Button } from './button'
 import { Card, CardHeader, CardTitle, CardDescription } from './card'
+import FavoriteLike from '../favorites/favoriteLike'
 
 const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
   ({ className, ...props }, ref) => {
@@ -25,8 +26,8 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
     return (
       <>
         {props ? (
-          <Link href={`/product/${props.productID}?p=${JSON.stringify(props.product)}`}>
-            <Card className={cn(`w-[${cardWidth}px]`, className)} ref={ref}>
+          <Card className={cn(`w-[${cardWidth}px]`, className)} ref={ref}>
+            <Link href={`/product/${props.productID}?p=${JSON.stringify(props.product)}`}>
               {props.imgUrl1 !== undefined ? (
                 <Image
                   src={props.imgUrl1 as string}
@@ -43,6 +44,7 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                   <div>Placeholder Image</div>
                 </div>
               )}
+              </Link>
 
               <CardHeader className="p-3">
                 <div className="flex justify-between">
@@ -50,22 +52,12 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                     {props.title}
                   </CardTitle>
                   {props.favIcon && (
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={(e) => {
-                        e.preventDefault()
-                        console.log('LIKED')
-                      }}
-                    >
-                      <FaRegHeart />
-                    </Button>
+                    <FavoriteLike productId={props.productID!}/> 
                   )}
                 </div>
                 <CardDescription className="text-xl text-black">{props.desc}</CardDescription>
               </CardHeader>
             </Card>
-          </Link>
         ) : (
           <></>
           // Not needed until user shops/profiles are clarified

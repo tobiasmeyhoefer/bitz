@@ -8,6 +8,7 @@ import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import crypto from 'crypto'
 import { ProductType } from './types'
+import { revalidatePath } from 'next/cache'
 
 export async function getProductsBrowse() {
   const session = await auth()
