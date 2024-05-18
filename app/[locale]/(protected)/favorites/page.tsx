@@ -1,4 +1,4 @@
-import { CardWithImage } from '@/components/ui/card'
+import { CardWithImage } from '@/components/ui/cardWithImage'
 import { getFavoriteProducts } from '@/lib/productaction'
 
 const Favorites = async () => {
@@ -15,9 +15,8 @@ const Favorites = async () => {
                 title={p.title}
                 desc={p.description!}
                 imgUrl1={p.imageUrl1}
-                previewType={'product'}
                 className="mx-[5px] my-[0.5rem]"
-                productId={p.id}
+                productID={p.id}
               />
           ))}
         </div>

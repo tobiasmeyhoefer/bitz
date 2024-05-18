@@ -2,11 +2,12 @@ type CardWithImageProps = {
   title: string
   desc: string
   content?: string
-  imgUrl1?: string | null
-  previewType: string /* shop || article */
+  imgUrl1?: string | null | string[]
   className?: React.HTMLAttributes<HTMLDivElement> | string
-  icon?: any
-  productId?: string
+  favIcon?: boolean
+  shopID?: string
+  productID?: string
+  product?: any
 }
 
 type SearchBarProps = {
@@ -83,7 +84,6 @@ export type {
   SearchBarProps,
   SearchTranslations,
   BrowseContentProps,
-  Shop,
   RevealOnScrollProps,
-  ProductType
+  ProductType,
 }
