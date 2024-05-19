@@ -25,9 +25,9 @@
   "addProductPage": {
     "submitTitle": "submit"
   },
-  "deleteProductPage": {
+  "popAlert": {
     "submitTitle": "löschen",
-    "yousure": "Bist du sicher, dass du diese Ware löschen möchtest?"
+    "yousure": "This will permanently delete your product from the database and remove your data from our servers. This action cannot be undone. "
     },
   "Settings": {
     "title": "Settings",

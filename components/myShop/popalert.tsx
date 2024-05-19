@@ -11,9 +11,11 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { FaTrash } from 'react-icons/fa';
+import { useTranslations } from "next-intl";
 
 
 export function PopAlert() {
+  const t = useTranslations();
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -21,9 +23,10 @@ export function PopAlert() {
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogTitle>Sicher?</AlertDialogTitle>
           <AlertDialogDescription>
-            This will permanently delete your product from the database and remove your data from our servers. This action cannot be undone. 
+GANZ SICHER?! Produkt Lsöchen ?
+{/* {t('yousure')}   */}          
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

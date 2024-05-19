@@ -8,7 +8,7 @@ import NavBar from '@/components/navigation/NavBar';
 import { useSession } from 'next-auth/react';
 import { auth } from '@/auth';
 import { MyShopProps } from '@/lib/types';
-import { PopAlert } from '@/components/myShop/popalert';
+import { PopAlert } from '@/components/myShop/popAlert';
 
 const MyShop = async () => {
   let location;
