@@ -87,12 +87,12 @@ export async function addToFavorites(productId: string) {
       productId: productId,
     })
   }
-  revalidatePath('/')
+  revalidatePath('/favorites')
 }
 
 export async function deleteFavorite(productId: string) {
   await db.delete(favorites).where(eq(favorites.productId, productId))
-  revalidatePath('/')
+  revalidatePath('/favorites')
 }
 
 export async function getUserFavorites() {
