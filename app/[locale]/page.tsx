@@ -1,9 +1,9 @@
 import { auth } from '@/auth'
 import { Button } from '@/components/ui/button'
+import { Icons } from '@/components/ui/icons'
 import { Link, redirect } from '@/navigation'
 import { getTranslations } from 'next-intl/server'
 import dynamic from 'next/dynamic'
-// import { ShieldPlus } from 'lucide-react';
 
 const CubeScene = dynamic(() => import('@/components/explosion/cubeScene'), {
   ssr: false,
@@ -44,12 +44,47 @@ export default async function Home() {
 
       <section
         id="next-section"
-        className="relative h-screen snap-start flex-col items-center justify-center bg-red-600 pb-[10vh] text-[3.5vw] text-white"
+        className="relative flex h-screen snap-start flex-col items-center justify-center bg-blue-400 pb-[10vh] font-space_grotesk text-white"
       >
-        Hello World!
+        <h2 className="mb-8 text-4xl font-bold">Was machen wir anders?</h2>
+        <div className="mt-4 flex flex-col items-center space-y-8 md:flex-row md:space-x-16 md:space-y-0">
+          <div className="flex flex-col items-center">
+            <Icons.shield className="h-48 w-96" />
+            <p className="mt-2 text-4xl">Sicherheit</p>
+          </div>
+          <div className="flex flex-col items-center">
+            <Icons.cable className="h-12 w-12" />
+            <p className="mt-2 text-4xl">Technik Fokus</p>
+          </div>
+          <div className="flex flex-col items-center">
+            <Icons.paintbrush className="h-24 w-24" />
+            <p className="mt-2 text-4xl">Design</p>
+          </div>
+        </div>
       </section>
-      <section className="relative h-screen snap-start flex-col items-center justify-center bg-blue-600 pb-[10vh] text-[3.5vw] text-white">
-        Bye World!
+      <section
+        id="circle-section"
+        className="relative flex h-screen snap-start flex-col items-center justify-center bg-blue-950 pb-[10vh] text-white"
+      >
+        <h2 className="mb-8 text-4xl font-bold">Wie Gehts?</h2>
+        <div className="relative grid w-11/12 grid-cols-3 grid-rows-3 items-center justify-center">
+          <div className="col-start-2 row-start-1 flex flex-col items-center justify-center text-center">
+            <Icons.store className="h-12 w-12" />
+            <p className="mt-2 text-xl">Shop erstellen</p>
+          </div>
+          <div className="col-start-3 row-start-2 flex flex-col items-center justify-center text-center">
+            <Icons.shoppingCart className="h-12 w-12" />
+            <p className="mt-2 text-xl">Produkte kaufen</p>
+          </div>
+          <div className="col-start-2 row-start-3 flex flex-col items-center justify-center text-center">
+            <Icons.handshake className="h-12 w-12" />
+            <p className="mt-2 text-xl">Technik-Produkte verkaufen</p>
+          </div>
+          <div className="col-start-1 row-start-2 flex flex-col items-center justify-center text-center">
+            <Icons.user className="h-12 w-12" />
+            <p className="mt-2 text-xl">Account erstellen</p>
+          </div>
+        </div>
       </section>
     </main>
   )
