@@ -11,11 +11,5 @@ export default async function RootLayout({
   if (!session?.user) {
     redirect('/')
   }
-  return (
-    <>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-        {children}
-      </ThemeProvider>
-    </>
-  )
+  return <>{children}</>
 }

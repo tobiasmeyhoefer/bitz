@@ -33,11 +33,18 @@ export default async function LocaleLayout({
           montserrat.variable,
         )}
       >
-        <header>
-          <NavBar />
-        </header>
-        <main className="h-fit min-h-screen">{children}</main> {/* bg-white rausgenommen*/}
-        <Toaster />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <header>
+            <NavBar />
+          </header>
+          <main className="h-fit min-h-screen">{children}</main> {/* bg-white rausgenommen*/}
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   )
