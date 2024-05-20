@@ -4,14 +4,7 @@ import { Button } from '../ui/button'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { getUserById, saveUserLocation } from '@/lib/useraction'
 import { useEffect, useState } from 'react'
 
@@ -19,31 +12,22 @@ const formSchema = z.object({
   postcode: z.string().regex(/^\d+$/, { message: 'only numbers are valid' }).length(5),
 })
 
-export default function LocationChooser({
-  postcode,
-  userId,
-}: {
-  postcode: string
-  userId: string
-}) {
+export default function LocationChooser({ postcode }: { postcode: string }) {
   const [location, setLocation] = useState<string>('')
   useEffect(() => {
     const getProduct = async () => {
-      const result = await getUserById(userId)
-      const r = result[0]
+      const result = await getUserById()
+      const r = result![0]
       setLocation(r.location ?? '')
     }
     getProduct()
-  }, [userId])
+  }, [])
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     await saveUserLocation(values)
-    // form.reset({
-    //   postcode: "",
-    // });
   }
 
   return (
