@@ -7,7 +7,16 @@
     "description": "Entdecke bei Bitz die neuesten Technikgeräte zu unschlagbaren Preisen! Kaufe, verkaufe und tausche deine Lieblingsgadgets in einer sicheren Umgebung. Trete unserer lebendigen Community bei und finde noch heute dein nächstes Technik-Highlight.",
     "call": "Jetzt anmelden und durchstarten!",
     "callButton": "Loslegen",
-    "learnButton": "Mehr Lernen"
+    "learnButton": "Mehr Lernen",
+    "secondSectionTitle": "Was machen wir anders?",
+    "security": "Sicherheit",
+    "focus": "Technik Fokus",
+    "design": "Design",
+    "thirdSectionTitle": "Wie Gehts?",
+    "createShop": "Shop erstellen",
+    "buy": "Produkte kaufen",
+    "sell": "Technik-Produkte verkaufen",
+    "createAccount": "Account erstellen"
   },
   "Browse": {
     "title": "Entdecken",
