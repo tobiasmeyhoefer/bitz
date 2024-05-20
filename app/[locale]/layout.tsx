@@ -4,6 +4,7 @@ import './globals.css'
 import NavBar from '@/components/navigation/NavBar'
 import { cn } from '@/lib/utils'
 import { Toaster } from '@/components/ui/toaster'
+import { ThemeProvider } from '@/components/darkmode/themeProvider'
 
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -35,7 +36,7 @@ export default async function LocaleLayout({
         <header>
           <NavBar />
         </header>
-        <main className="h-fit min-h-screen bg-white">{children}</main>
+        <main className="h-fit min-h-screen">{children}</main> {/* bg-white rausgenommen*/}
         <Toaster />
       </body>
     </html>

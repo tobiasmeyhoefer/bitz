@@ -1,4 +1,5 @@
 import { auth } from '@/auth'
+import { ThemeProvider } from '@/components/darkmode/themeProvider'
 import { redirect } from '@/navigation'
 
 export default async function RootLayout({
@@ -10,5 +11,11 @@ export default async function RootLayout({
   if (!session?.user) {
     redirect('/')
   }
-  return <>{children}</>
+  return (
+    <>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        {children}
+      </ThemeProvider>
+    </>
+  )
 }
