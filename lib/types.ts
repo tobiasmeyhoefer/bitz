@@ -5,8 +5,8 @@ type CardWithImageProps = {
   imgUrl1?: string | null | string[]
   className?: React.HTMLAttributes<HTMLDivElement> | string
   favIcon?: boolean
-  shopID?: number
-  productID?: number
+  shopID?: string
+  productID?: string
   product?: any
 }
 
@@ -39,17 +39,18 @@ type BrowseContentProps = {
 // }
 
 type ProductType = {
-  title: string
-  description: string
-  price: number
-  quantity: number
-  createdAt?: Date
-  sellerId?: string
-  imageUrl1?: string | null
-  imageUrl2?: string | null
-  imageUrl3?: string | null
-  imageUrl4?: string | null
-  imageUrl5?: string | null
+  id?: string;
+  title: string;
+  description?: string;
+  price: number;
+  quantity: number;
+  createdAt?: Date;
+  sellerId?: string;
+  imageUrl1?: string | null;
+  imageUrl2?: string | null;
+  imageUrl3?: string | null;
+  imageUrl4?: string | null;
+  imageUrl5?: string | null;
 
   // title: string;
   // description: string;
@@ -61,6 +62,17 @@ type ProductType = {
   // sellerId: string;
   // createdAt: Date;
   // image: string;
+};
+
+type Shop = {
+  id: string
+  title: string
+  description: string
+  imageUrl1: string | null
+  imageUrl2: string | null
+  imageUrl3: string | null
+  imageUrl4: string | null
+  imageUrl5: string | null
 }
 
 type RevealOnScrollProps = {

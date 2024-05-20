@@ -18,6 +18,7 @@ const BrowseContent = (props: BrowseContentProps) => {
         if (result) {
           // weil einige werte nicht notNull sind und dann fehler kommen weil sie null  ein könnten
           const checkedResults: ProductType[] = result.map((item) => ({
+            id: item.id,
             title: item.title,
             description: item.description ?? '',
             price: item.price,
@@ -75,10 +76,10 @@ const BrowseContent = (props: BrowseContentProps) => {
               <CardWithImage
                 key={`pr-${index}`}
                 title={p.title}
-                desc={p.description}
+                desc={p.description!}
                 imgUrl1={p.imageUrl1}
                 className="mx-[5px] my-[0.5rem]"
-                productID={index}
+                productID={p.id}
                 product={products[index]}
                 favIcon
               />

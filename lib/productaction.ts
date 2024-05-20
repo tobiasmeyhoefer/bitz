@@ -1,5 +1,5 @@
 'use server'
-import { products } from '@/schema'
+import { products, favorites } from '@/schema'
 import { db } from '../db'
 import { eq, ne } from 'drizzle-orm'
 import { auth } from '@/auth'
@@ -8,13 +8,13 @@ import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import crypto from 'crypto'
 import { ProductType } from './types'
+import { revalidatePath } from 'next/cache'
 
 export async function getProductsBrowse() {
   const session = await auth()
   const id = session?.user?.id
-  let response
   if (id) {
-    response = await db.select().from(products).where(ne(products.sellerId, id))
+    const response = await db.select().from(products).where(ne(products.sellerId, id))
     if (response) {
       return response
     }
@@ -76,6 +76,52 @@ export async function updateProduct(productId: string, values: ProductType) {
 export async function getProductById(productId: string) {
   const response = await db.select().from(products).where(eq(products.id, productId))
   return response
+}
+
+export async function addToFavorites(productId: string) {
+  const session = await auth()
+  const id = session?.user?.id
+  if (id) {
+    await db.insert(favorites).values({
+      userId: id,
+      productId: productId,
+    })
+  }
+  revalidatePath('/favorites')
+}
+
+export async function deleteFavorite(productId: string) {
+  await db.delete(favorites).where(eq(favorites.productId, productId))
+  revalidatePath('/favorites')
+}
+
+export async function getUserFavorites() {
+  const session = await auth()
+  const id = session?.user?.id
+  if (id) {
+    const response = await db.select().from(favorites).where(eq(favorites.userId, id))
+    return response
+  }
+}
+
+export async function getFavoriteProducts() {
+  const userFavorites = await getUserFavorites()
+  if (userFavorites) {
+    const favoriteProducts = userFavorites.map(async (product) => {
+      return await db.select().from(products).where(eq(products.id, product.productId))
+    })
+    const productsBySeller = await Promise.all(favoriteProducts)
+    const response = productsBySeller.flat()
+    return response
+  }
+}
+
+export async function checkFavorite(productId: string) {
+  const userFavorites = await getUserFavorites()
+  if (userFavorites) {
+    return userFavorites.some((product) => product.productId === productId)
+  }
+  return false
 }
 
 //Code for Storing Images

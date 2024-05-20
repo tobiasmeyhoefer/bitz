@@ -115,16 +115,17 @@ export const Authenticator = pgTable(
 )
 
 export const favorites = pgTable('favorites', {
-  id: text('id')
-    .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
   userId: text('userId')
     .notNull()
     .references(() => users.id, { onDelete: 'cascade' }),
   productId: text('productId')
     .notNull()
     .references(() => products.id, { onDelete: 'cascade' }),
-})
+}, (table) => {
+  return {
+    id: primaryKey({ columns: [table.userId, table.productId]}),
+  };
+});
 
 // export type ProductType = typeof products.$inferSelect
 export type UserType = typeof users.$inferSelect
