@@ -58,7 +58,9 @@ const NavBar = async () => {
         <>
           <div className="hidden sm:flex">
             <NavbarItemDropdown
-              signOut={<SignOut text={t('logoutButton')} typeText={false} className="mr-3" />}
+              signOut={
+                <SignOut text={t('logoutButton')} typeText={false} className="mr-3 text-inherit" />
+              }
               settingsLinkText={t('settings')}
               favoritesLinkText={t('favorites')}
             />
