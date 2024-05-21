@@ -1,16 +1,13 @@
 import { ProductForm } from '@/components/myShop/product-form'
 import { getTranslations } from 'next-intl/server'
 import { getUserById } from '@/lib/useraction'
-import { addProduct } from '@/lib/productaction'
-import { auth } from '@/auth'
 
 const AddProductPage = async () => {
   let location
-  const session = await auth()
-  const user = await getUserById(session?.user?.id!)
+  const user = await getUserById()
   try {
-    if (user[0].location) {
-      location = user[0].location
+    if (user![0]!.location) {
+      location = user![0].location
     }
   } catch (err) {}
   const t = await getTranslations('addProductPage')
