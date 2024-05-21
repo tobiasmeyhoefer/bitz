@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: 'BITZ',
   description: 'Kauf- und Verkaufsplattform',
 }
-/** hier wird page.tsx eingebunden */
+
 export default async function LocaleLayout({
   children,
   params: { locale },

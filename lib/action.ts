@@ -23,3 +23,11 @@ export async function checkPasskey() {
     return false
   }
 }
+
+export async function getCurrentUserId() {
+  const session = await auth()
+  const id = session?.user?.id
+  if(id) {
+    return id
+  }
+}
