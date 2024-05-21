@@ -22,6 +22,14 @@ export default async function Home() {
         id="first-section"
         className="mt-20 flex h-screen snap-start flex-col font-space_grotesk lg:flex-row"
       >
+        <Image
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 transform animate-bounce"
+          width={24}
+          height={24}
+          src="/icons/chevron-up.svg"
+          alt="Chevron Arrow up Icon"
+        />
+
         <div className="flex w-screen flex-col justify-center p-4 lg:mr-12 lg:w-1/2 lg:p-24">
           <h1 className="text-4xl font-bold lg:text-5xl">Bitz</h1>
           <h2 className="mt-16 text-xl lg:mt-4 lg:text-2xl">{t('subtitle')}</h2>
