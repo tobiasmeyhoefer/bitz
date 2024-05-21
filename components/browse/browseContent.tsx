@@ -22,10 +22,7 @@ const BrowseContent = (props: BrowseContentProps) => {
             title: item.title,
             description: item.description ?? '',
             price: item.price,
-            // currency: item.currency,
             quantity: item.quantity,
-            // location: item.location ?? '',
-            // status: item.status,
             sellerId: item.sellerId,
             createdAt: item.createdAt,
             imageUrl1: item.imageUrl1,
@@ -33,7 +30,6 @@ const BrowseContent = (props: BrowseContentProps) => {
             imageUrl3: item.imageUrl3,
             imageUrl4: item.imageUrl4,
             imageUrl5: item.imageUrl5,
-            // image: "/test_img.jpg",
           }))
           setProducts(checkedResults)
         }
@@ -62,15 +58,6 @@ const BrowseContent = (props: BrowseContentProps) => {
       />
       {!loading ? (
         <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
-          {/* <CardWithImage
-            key={`pr-`}
-            title="Shop"
-            desc="Shop"
-            imgUrl1={imgArr}
-            previewType="shop"
-            className="mx-[5px] my-[0.5rem]"
-            shopID={1} // TODO: add real shop ID
-          /> */}
           {products.map((p, index) => (
             <RevealOnScroll key={`prx-${index}`}>
               <CardWithImage
@@ -126,14 +113,14 @@ const SearchDialog = (props: SearchBarProps) => {
         </div>
         {!props.searchValue ? (
           <>
-            <h1 className="px-4 pt-2 text-lg font-medium">{props.suggestionsTitle}</h1>
+            <h1 className="px-4 pt-2 text-lg font-medium text-black">{props.suggestionsTitle}</h1>
             {props.suggestions.map((suggestion, index) => (
               <div
                 onClick={() => {
                   setOpen(false)
                   props.setSearchValue(suggestion)
                 }}
-                className="rounded- px-8 py-2 hover:rounded-b-lg hover:bg-gray-100"
+                className="rounded- px-8 py-2 text-black hover:rounded-b-lg hover:bg-gray-100"
                 key={`s-${index}`}
               >
                 {suggestion}

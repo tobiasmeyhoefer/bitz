@@ -36,7 +36,7 @@ const NavItemLink = (props: NavbarItemLinkProps) => {
   return (
     <Link
       className={cn(
-        `bg-none text-lg font-normal ${pathname === props.linkTo ? 'cursor-default text-black underline underline-offset-8' : ' hover:underline hover:underline-offset-8'} hover:bg-none`,
+        `bg-none text-lg font-normal ${pathname === props.linkTo ? 'cursor-default text-inherit underline underline-offset-8' : ' hover:underline hover:underline-offset-8'} hover:bg-none`,
         props.className,
       )}
       href={props.linkTo}
@@ -51,7 +51,7 @@ const NavLoginLink = ({ text }: NavLoginProps) => {
   const pathname = usePathname()
   return (
     pathname !== '/auth/login' && (
-      <Button className="bg-transparent text-black hover:bg-black hover:text-white">
+      <Button className="bg-transparent text-inherit hover:bg-black hover:text-white">
         <Link href="/auth/login">{text}</Link>
       </Button>
     )

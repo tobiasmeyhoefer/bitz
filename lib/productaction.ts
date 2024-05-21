@@ -1,4 +1,5 @@
 'use server'
+
 import { products, favorites } from '@/schema'
 import { db } from '../db'
 import { eq, ne } from 'drizzle-orm'
@@ -9,6 +10,7 @@ import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import crypto from 'crypto'
 import { ProductType } from './types'
 import { revalidatePath } from 'next/cache'
+import { getCurrentUserId } from './action'
 
 export async function getProductsBrowse() {
   const session = await auth()
@@ -23,17 +25,16 @@ export async function getProductsBrowse() {
 
 export async function addProduct(values: ProductType, imageUrls: string[]) {
   let { title, description, price, quantity } = values
-  const session = await auth()
-  const id = session?.user?.id
+  const id = await getCurrentUserId()
   if (id) {
-    const user = await getUserById(id)
+    const user = await getUserById()
     await db.insert(products).values({
       title: title,
       description: description,
       price: price,
       quantity: quantity,
       sellerId: id,
-      location: user[0].location ?? null,
+      location: user![0].location ?? null,
       createdAt: new Date(),
       imageUrl1: imageUrls[0],
       imageUrl2: imageUrls[1],
@@ -162,9 +163,6 @@ export async function getSignedURL({
   if (!allowedFileTypes.includes(fileType)) {
     return { failure: 'File type not allowed' }
   }
-
-  console.log(fileSize)
-  console.log(maxFileSize)
 
   if (fileSize > maxFileSize) {
     return { failure: 'File size too large' }
