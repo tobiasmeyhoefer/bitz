@@ -1,27 +1,15 @@
 'use client'
-import { useTranslations } from 'next-intl'
-import { getTranslations } from 'next-intl/server'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { CardWithImage } from '@/components/ui/cardWithImage'
-import { getProductsBrowse, getProductsOwned } from '@/lib/productaction'
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
-import { Input } from '@/components/ui/input'
-import { Dialog, DialogTrigger, DialogContent } from '../ui/dialog'
+import { getProductsOwned } from '@/lib/productaction'
 import {
-  BrowseContentProps,
-  SearchBarProps,
-  Shop,
-  RevealOnScrollProps,
   ProductType,
   MyShopProps
 } from '@/lib/types'
-import { SlClose } from 'react-icons/sl'
 import RevealOnScroll from '../navigation/revealOnScroll'
 
 const MyShopContent = (props: MyShopProps) => {
-  const [searchValue, setSearchValue] = useState('')
-  const [loading, setLoading] = useState(false)
+  const [loading] = useState(false)
   const [products, setProducts] = useState<ProductType[]>([]);
 
   useEffect(() => {
@@ -56,7 +44,7 @@ const MyShopContent = (props: MyShopProps) => {
   return  <>
     <div className={`${loading && `h-full`}  `}>
       {!loading ? (
-        <div className="grid grid-cols-4 gap-4 mt-[20px]">
+        <div className="grid grid-cols-4 gap-8 mt-[20px]">
           {products.map((p, index) => (
             <RevealOnScroll key={`prx-${index}`}>
               <CardWithImage
