@@ -84,25 +84,25 @@ const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
         )}
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>Menu</DropdownMenuLabel>
+        <DropdownMenuLabel className="text-right">Menu</DropdownMenuLabel>
         <DropdownMenuItem>
           <NavItemLink
+            className="ml-auto text-sm no-underline hover:no-underline"
+            text={props.favoritesLinkText}
             linkTo="/favorites"
-            icon={<SlHeart className="mr-3 h-[20px] w-[20px]" />}
           ></NavItemLink>
-          <div>{props.favoritesLinkText}</div>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <NavItemLink
+            className="ml-auto text-sm no-underline hover:no-underline"
+            text={props.settingsLinkText}
             linkTo="/settings"
-            icon={<SlSettings className="mr-3 h-[20px] w-[20px]" />}
           ></NavItemLink>
-          <div>{props.settingsLinkText}</div>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem className="pl-[40px] font-normal">
-          <div className="mr-3 h-[20px] w-[20px]">{props.signOut}</div>
+        <DropdownMenuItem className="font-normal">
+          <div className="ml-auto mr-[-12px]">{props.signOut}</div>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
@@ -126,10 +126,7 @@ const NavMenuDrawer = (props: any) => {
       <DrawerContent className="max-w-smd mx-auto w-full border-0 bg-white">
         {props.menuItems.map((item: any, index: number) => {
           if (pathname === item.props.linkTo)
-            item.props.className = cn(
-              item.props.className,
-              'text-black no-underline',
-            )
+            item.props.className = cn(item.props.className, 'text-black no-underline')
           return (
             <div
               className={`flex justify-center hover:bg-slate-100 ${index === 0 && `rounded-t-xl`} ${pathname === item.props.linkTo && 'cursor-default bg-slate-100 text-black no-underline'}`}
