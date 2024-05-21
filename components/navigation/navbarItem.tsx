@@ -13,9 +13,8 @@ import {
 } from '../ui/dropdown-menu'
 import { Drawer, DrawerContent, DrawerTrigger } from '../ui/drawer'
 import Image from 'next/image'
-import { SlSettings, SlHeart } from 'react-icons/sl'
 import { TbMenu } from 'react-icons/tb'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { HiUserCircle } from 'react-icons/hi2'
 import { Separator } from '@/components/ui/separator'
 
@@ -113,6 +112,10 @@ const NavMenuDrawer = (props: any) => {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const pathname = usePathname()
 
+  useEffect(() => {
+    setDrawerOpen(false)
+  }, [pathname])
+
   return (
     <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
       <DrawerTrigger asChild>
@@ -130,7 +133,6 @@ const NavMenuDrawer = (props: any) => {
           return (
             <div
               className={`flex justify-center hover:bg-slate-100 ${index === 0 && `rounded-t-xl`} ${pathname === item.props.linkTo && 'cursor-default bg-slate-100 text-black no-underline'}`}
-              onClick={() => setDrawerOpen(false)}
               key={item.key}
             >
               {item}
