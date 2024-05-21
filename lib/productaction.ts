@@ -24,7 +24,7 @@ export async function getProductsBrowse() {
 }
 
 export async function addProduct(values: ProductType, imageUrls: string[]) {
-  let { title, description, price, quantity } = values
+  let { title, description, price, quantity, category } = values
   const id = await getCurrentUserId()
   if (id) {
     const user = await getUserById()
@@ -33,6 +33,7 @@ export async function addProduct(values: ProductType, imageUrls: string[]) {
       description: description,
       price: price,
       quantity: quantity,
+      category: category,
       sellerId: id,
       location: user![0].location ?? null,
       createdAt: new Date(),
@@ -57,7 +58,7 @@ export async function updateProduct(productId: string, values: ProductType) {
   if (id) {
     const existingProduct = await getProductById(productId)
     if (existingProduct && existingProduct[0].sellerId === id) {
-      const { title, description, price, quantity } = values
+      const { title, description, price, quantity, category } = values
       await db
         .update(products)
         .set({
@@ -65,6 +66,7 @@ export async function updateProduct(productId: string, values: ProductType) {
           description: description || existingProduct[0].description,
           price: price || existingProduct[0].price,
           quantity: quantity || existingProduct[0].quantity,
+          category: category || existingProduct[0].category,
         })
         .where(eq(products.id, productId))
     } else {

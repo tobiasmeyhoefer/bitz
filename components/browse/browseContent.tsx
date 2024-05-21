@@ -23,6 +23,7 @@ const BrowseContent = (props: BrowseContentProps) => {
             description: item.description ?? '',
             price: item.price,
             quantity: item.quantity,
+            category: item.category ?? '',
             sellerId: item.sellerId,
             createdAt: item.createdAt,
             imageUrl1: item.imageUrl1,

@@ -39,18 +39,19 @@ type BrowseContentProps = {
 // }
 
 type ProductType = {
-  id?: string;
-  title: string;
-  description?: string;
-  price: number;
-  quantity: number;
-  createdAt?: Date;
-  sellerId?: string;
-  imageUrl1?: string | null;
-  imageUrl2?: string | null;
-  imageUrl3?: string | null;
-  imageUrl4?: string | null;
-  imageUrl5?: string | null;
+  id?: string
+  title: string
+  description?: string
+  price: number
+  quantity: number
+  category?: string
+  createdAt?: Date
+  sellerId?: string
+  imageUrl1?: string | null
+  imageUrl2?: string | null
+  imageUrl3?: string | null
+  imageUrl4?: string | null
+  imageUrl5?: string | null
 
   // title: string;
   // description: string;
@@ -62,7 +63,7 @@ type ProductType = {
   // sellerId: string;
   // createdAt: Date;
   // image: string;
-};
+}
 
 type Shop = {
   id: string
