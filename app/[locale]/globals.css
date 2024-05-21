@@ -40,6 +40,8 @@
     --ring: 20 14.3% 4.1%;
 
     --radius: 0.5rem;
+
+    --filter-normal: 0%;
   }
 
   .dark {
@@ -51,6 +53,17 @@
 
     --primary: 60 9.1% 97.8%;
     --primary-foreground: 24 9.8% 10%;
+
+    --filter-normal: 100%;
+  }
+
+  .white-filter {
+    filter: invert(var(--filter-normal));
+  }
+
+  .scroll-to-top {
+    color: hsl(var(--background));
+    border: 1px solid hsl(var(--background));
   }
 }
 
