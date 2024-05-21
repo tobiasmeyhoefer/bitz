@@ -1,4 +1,5 @@
 'use client'
+
 import React, { useEffect, useState } from 'react'
 import { Input } from '../ui/input'
 import { addProduct, getProductById } from '@/lib/productaction'
@@ -21,9 +22,7 @@ import Image from 'next/image'
 import { getSignedURL } from '@/lib/productaction'
 import { ProductType } from '@/lib/types'
 
-const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
-
-const MAX_FILE_SIZE = 4000000
+const MAX_FILE_SIZE = 8000000
 
 const minError = 'Eingabe erfordert'
 const formSchema = z.object({
@@ -31,34 +30,32 @@ const formSchema = z.object({
   price: z.coerce.number().safe().positive(),
   quantity: z.coerce.number().safe().positive(),
   description: z.string().min(1, { message: minError }).max(250),
-  // .any()
-  // // To not allow empty files
-  // .refine((files) => {
-  //   console.log(files)
-  //   console.log("test")
-  //   return files?.length >= 1 && files?.length <= 5
-  // }, {
-  //   message: 'There are 1-5 Images allowed',
-  // })
-  // To not allow files larger than 5MB
-  // .refine((files) => files.every((file: { size: number }) => file.size <= MAX_FILE_SIZE), {
-  //   message: 'Each file must be no larger than 5MB',
-  // })
-  // .refine((files) => {
-  //   if (files instanceof FileList) {
-  //     const filesArray = Array.from(files)
-  //     return filesArray.every((file) => file.size <= MAX_FILE_SIZE)
-  //   }
+  images: z
+    .any()
+    .refine(
+      (files) => {
+        return files?.length >= 1 && files?.length <= 5
+      },
+      {
+        message: 'There are 1-5 Images allowed',
+      },
+    )
+    .refine(
+      (files) => {
+        // console.log(files)
+        if (files instanceof FileList) {
+          const filesArray = Array.from(files)
+          return filesArray.every((file) => file.size <= MAX_FILE_SIZE)
+        }
 
-  //   if (files instanceof File) {
-  //     return files.size <= MAX_FILE_SIZE
-  //   }
-
-  //   // const filesArray = Array.from(files)
-  //   // return filesArray.every((file) => file.size <= MAX_FILE_SIZE)
-  // }, {
-  //   message: 'Each file must be no larger than 5MB',
-  // })
+        if (files instanceof File) {
+          return files.size <= MAX_FILE_SIZE
+        }
+      },
+      {
+        message: 'Each file must be no larger than 8MB',
+      },
+    ),
 })
 
 export function ProductForm({
@@ -108,8 +105,8 @@ export function ProductForm({
       title: '',
       description: '',
       price: 0,
-      quantity: 0,
-      images: undefined,
+      quantity: 1,
+      images: null,
     },
   })
 
@@ -142,7 +139,6 @@ export function ProductForm({
           }
 
           const { url } = signedURLResult.success
-          console.log({ url })
           const response = await fetch(url, {
             method: 'PUT',
             headers: {
@@ -150,7 +146,6 @@ export function ProductForm({
             },
             body: files[i],
           })
-          console.log(response)
           imageUrls.push(url.split('?')[0])
         }
       }
@@ -180,7 +175,7 @@ export function ProductForm({
     <>
       <Card className="w-[500px] p-10">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
+          <form className='space-y-4' onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
               control={form.control}
               name={'title'}
@@ -235,16 +230,21 @@ export function ProductForm({
             />
             <FormField
               control={form.control}
-              name={'images'}
-              render={({ field }) => (
+              name="images"
+              render={({ field: { value, onChange, ...fieldProps } }) => (
                 <FormItem>
-                  <FormLabel>Image</FormLabel>
+                  <FormLabel>Images</FormLabel>
                   <FormControl>
                     <Input
-                      type="file"
+                      {...fieldProps}
                       multiple
+                      type="file"
                       accept="image/jpeg,image/png,image/webp"
-                      onChange={handleFileChange}
+                      onChange={(event) => {
+                        onChange(event.target.files)
+                        // onChange(event.target.files && event.target.files[0])
+                        handleFileChange(event)
+                      }}
                     />
                   </FormControl>
                   <FormMessage />

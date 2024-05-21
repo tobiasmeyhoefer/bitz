@@ -163,9 +163,6 @@ export async function getSignedURL({
     return { failure: 'File type not allowed' }
   }
 
-  console.log(fileSize)
-  console.log(maxFileSize)
-
   if (fileSize > maxFileSize) {
     return { failure: 'File size too large' }
   }
