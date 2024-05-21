@@ -43,8 +43,8 @@ const MyShop = async () => {
     <Link href="myshop/update">{t('updateProducts')}</Link>
   </Button>
         </div>
-
-        <MyShopContent userId={userId} location={location} />
+    <MyShopContent {...myShopProps} />
+        
       </div>
     </div>
   );
