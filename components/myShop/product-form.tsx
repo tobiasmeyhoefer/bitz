@@ -31,20 +31,34 @@ const formSchema = z.object({
   price: z.coerce.number().safe().positive(),
   quantity: z.coerce.number().safe().positive(),
   description: z.string().min(1, { message: minError }).max(250),
-  images: z
-    .any()
-    // To not allow empty files
-    .refine((files) => files?.length >= 1 && files?.length <= 5, {
-      message: 'There are 1-5 Images allowed',
-    })
-    // // To not allow files other than images
-    // .refine((files) => ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type), {
-    //   message: '.jpg, .jpeg, .png and .webp files are accepted.',
-    // })
-    // To not allow files larger than 5MB
-    .refine((files) => files?.[0]?.size <= MAX_FILE_SIZE, {
-      message: `Max file size is 4MB.`,
-    // }),
+  // .any()
+  // // To not allow empty files
+  // .refine((files) => {
+  //   console.log(files)
+  //   console.log("test")
+  //   return files?.length >= 1 && files?.length <= 5
+  // }, {
+  //   message: 'There are 1-5 Images allowed',
+  // })
+  // To not allow files larger than 5MB
+  // .refine((files) => files.every((file: { size: number }) => file.size <= MAX_FILE_SIZE), {
+  //   message: 'Each file must be no larger than 5MB',
+  // })
+  // .refine((files) => {
+  //   if (files instanceof FileList) {
+  //     const filesArray = Array.from(files)
+  //     return filesArray.every((file) => file.size <= MAX_FILE_SIZE)
+  //   }
+
+  //   if (files instanceof File) {
+  //     return files.size <= MAX_FILE_SIZE
+  //   }
+
+  //   // const filesArray = Array.from(files)
+  //   // return filesArray.every((file) => file.size <= MAX_FILE_SIZE)
+  // }, {
+  //   message: 'Each file must be no larger than 5MB',
+  // })
 })
 
 export function ProductForm({
@@ -95,7 +109,7 @@ export function ProductForm({
       description: '',
       price: 0,
       quantity: 0,
-      images: null
+      images: undefined,
     },
   })
 
@@ -106,13 +120,10 @@ export function ProductForm({
   // }, [data, form, whichFunction])
 
   async function onSubmit(values: ProductType) {
-    // console.log('Test')
-    // console.log(files)
     let imageUrls = []
     if (files) {
       for (let i = 0; i < files.length; i++) {
         if (files[i]) {
-          // const signedURLResult = await getSignedURL(files[i].name)
           const computeSHA256 = async (file: File) => {
             const buffer = await file.arrayBuffer()
             const hashBuffer = await crypto.subtle.digest('SHA-256', buffer)
@@ -222,12 +233,6 @@ export function ProductForm({
                 </FormItem>
               )}
             />
-            {/* <Input
-              type="file"
-              multiple
-              accept="image/jpeg,image/png,image/webp"
-              onChange={handleFileChange}
-            /> */}
             <FormField
               control={form.control}
               name={'images'}
@@ -260,21 +265,6 @@ export function ProductForm({
                 ))}
               </div>
             )}
-
-            {/* {previewUrl && file && (
-              <div className="mt-4">
-                {file.type.startsWith('image/') ? (
-                  <Image
-                    src={previewUrl}
-                    alt="Selected file"
-                    width={150}
-                    height={150}
-                    className="border"
-                  />
-                ) : null}
-              </div>
-            )} */}
-
             <Button className="mt-4" type="submit">
               {submitText}
             </Button>
