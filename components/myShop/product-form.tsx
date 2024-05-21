@@ -21,6 +21,7 @@ import { useRouter } from '@/navigation'
 import Image from 'next/image'
 import { getSignedURL } from '@/lib/productaction'
 import { ProductType } from '@/lib/types'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 
 const MAX_FILE_SIZE = 8000000
 
@@ -38,6 +39,7 @@ const formSchema = z.object({
     .min(1, { message: minError })
     .max(250)
     .refine((value) => !/#/.test(value)),
+  category: z.string().min(1, { message: minError }).max(250),
   images: z
     .any()
     .refine(
@@ -115,6 +117,7 @@ export function ProductForm({
       description: '',
       price: 0,
       quantity: 1,
+      category: '',
       images: null,
     },
   })
@@ -234,6 +237,28 @@ export function ProductForm({
                   <FormControl>
                     <Input type="number" placeholder="quantity" {...field} />
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="category"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Category</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="choose Category" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="Gaming">Gaming</SelectItem>
+                      <SelectItem value="Haushaltsgeräte">Haushaltsgeräte</SelectItem>
+                      <SelectItem value="Kabel">Kabel</SelectItem>
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}
