@@ -48,7 +48,7 @@ export default async function Home() {
             </Link>
           </div>
         </div>
-        <div className="flex h-1/2 w-screen items-center justify-center rounded-full lg:h-screen lg:w-screen lg:justify-center">
+        <div className="flex h-1/2 w-screen items-center justify-center rounded-full lg:mt-12 lg:h-screen lg:w-screen lg:justify-center">
           <CubeScene />
         </div>
       </section>
