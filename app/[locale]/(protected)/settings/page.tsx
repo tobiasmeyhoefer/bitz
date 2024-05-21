@@ -2,6 +2,8 @@ import RegisterPasskey from '@/components/auth/register-passkey'
 import LocaleSwitcher from '@/components/settings/LocaleSwitcher'
 import LocationChooser from '@/components/settings/LocationChooser'
 import { useTranslations } from 'next-intl'
+import { checkPasskey } from '@/lib/action'
+import { DarkmodeToggler } from '@/components/settings/DarkmodeToggler'
 
 const Settings = () => {
   const t = useTranslations('Settings')
@@ -12,6 +14,7 @@ const Settings = () => {
         <LocaleSwitcher />
         <RegisterPasskey />
         <LocationChooser postcode={t('postcode')} />
+        <DarkmodeToggler />
       </div>
     </div>
   )

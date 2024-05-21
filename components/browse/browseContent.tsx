@@ -113,14 +113,14 @@ const SearchDialog = (props: SearchBarProps) => {
         </div>
         {!props.searchValue ? (
           <>
-            <h1 className="px-4 pt-2 text-lg font-medium">{props.suggestionsTitle}</h1>
+            <h1 className="px-4 pt-2 text-lg font-medium text-black">{props.suggestionsTitle}</h1>
             {props.suggestions.map((suggestion, index) => (
               <div
                 onClick={() => {
                   setOpen(false)
                   props.setSearchValue(suggestion)
                 }}
-                className="rounded- px-8 py-2 hover:rounded-b-lg hover:bg-gray-100"
+                className="rounded- px-8 py-2 text-black hover:rounded-b-lg hover:bg-gray-100"
                 key={`s-${index}`}
               >
                 {suggestion}

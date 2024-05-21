@@ -36,7 +36,7 @@ const NavItemLink = (props: NavbarItemLinkProps) => {
   return (
     <Link
       className={cn(
-        `bg-none text-lg font-normal ${pathname === props.linkTo ? 'cursor-default text-black underline underline-offset-8' : ' hover:underline hover:underline-offset-8'} hover:bg-none`,
+        `bg-none text-lg font-normal ${pathname === props.linkTo ? 'cursor-default text-inherit underline underline-offset-8' : ' hover:underline hover:underline-offset-8'} hover:bg-none`,
         props.className,
       )}
       href={props.linkTo}
@@ -51,7 +51,7 @@ const NavLoginLink = ({ text }: NavLoginProps) => {
   const pathname = usePathname()
   return (
     pathname !== '/auth/login' && (
-      <Button className="bg-transparent text-black hover:bg-black hover:text-white">
+      <Button className="bg-transparent text-inherit hover:bg-black hover:text-white">
         <Link href="/auth/login">{text}</Link>
       </Button>
     )
@@ -102,7 +102,7 @@ const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
         <DropdownMenuSeparator />
 
         <DropdownMenuItem className="pl-[40px] font-normal">
-          <div className="mr-3 h-[20px] w-[20px]">{props.signOut}</div>
+          <div className=" mr-3 h-[20px] w-[20px]">{props.signOut}</div>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
@@ -126,10 +126,7 @@ const NavMenuDrawer = (props: any) => {
       <DrawerContent className="max-w-smd mx-auto w-full border-0 bg-white">
         {props.menuItems.map((item: any, index: number) => {
           if (pathname === item.props.linkTo)
-            item.props.className = cn(
-              item.props.className,
-              'text-black no-underline',
-            )
+            item.props.className = cn(item.props.className, 'text-black no-underline')
           return (
             <div
               className={`flex justify-center hover:bg-slate-100 ${index === 0 && `rounded-t-xl`} ${pathname === item.props.linkTo && 'cursor-default bg-slate-100 text-black no-underline'}`}
