@@ -26,7 +26,7 @@ export function PopAlert() {
           <AlertDialogTitle>Sicher?</AlertDialogTitle>
           <AlertDialogDescription>
 GANZ SICHER?! Produkt Löschen ?
-{t('submitTitle')}
+{/* {t('submitTitle')} */}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
