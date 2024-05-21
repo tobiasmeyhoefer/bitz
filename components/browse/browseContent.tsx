@@ -2,100 +2,61 @@
 import { Input } from '@/components/ui/input'
 import { useEffect, useRef, useState } from 'react'
 import { Dialog, DialogTrigger, DialogContent } from '../ui/dialog'
-import {
-  BrowseContentProps,
-  SearchBarProps,
-  Shop,
-  RevealOnScrollProps,
-  ProductType,
-} from '@/lib/types'
-import { CardWithImage } from '../ui/card'
+import { BrowseContentProps, SearchBarProps, RevealOnScrollProps, ProductType } from '@/lib/types'
+import { CardWithImage } from '../ui/cardWithImage'
 import { SlClose } from 'react-icons/sl'
-import { Button } from '@/components/ui/button'
 import { getProductsBrowse } from '@/lib/productaction'
 import RevealOnScroll from '../navigation/revealOnScroll'
-
 
 const BrowseContent = (props: BrowseContentProps) => {
   const [searchValue, setSearchValue] = useState('')
   const [loading, setLoading] = useState(false)
-  const [products, setProducts] = useState<ProductType[]>([]);
+  const [products, setProducts] = useState<ProductType[]>([])
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const result = await getProductsBrowse();
-        if(result) {
-          // weil einige werte nicht notNull sind und dann fehler kommen weil sie null sein könnten
+        const result = await getProductsBrowse()
+        if (result) {
+          // weil einige werte nicht notNull sind und dann fehler kommen weil sie null  ein könnten
           const checkedResults: ProductType[] = result.map((item) => ({
+            id: item.id,
             title: item.title,
             description: item.description ?? '',
             price: item.price,
-            // currency: item.currency,
             quantity: item.quantity,
-            // location: item.location ?? '',
-            // status: item.status,
             sellerId: item.sellerId,
             createdAt: item.createdAt,
             imageUrl1: item.imageUrl1,
             imageUrl2: item.imageUrl2,
             imageUrl3: item.imageUrl3,
             imageUrl4: item.imageUrl4,
-            imageUrl5: item.imageUrl5
-            // image: "/test_img.jpg",
-          }));
-          setProducts(checkedResults);
+            imageUrl5: item.imageUrl5,
+          }))
+          setProducts(checkedResults)
         }
       } catch (error) {
-        console.error('Fehler beim Laden der Daten:', error);
+        console.error('Fehler beim Laden der Daten:', error)
       }
-    };
-    getProducts();
-  }, []);
+    }
+    getProducts()
+  }, [])
 
   const suggestions = ['Receiver', 'Monitor', 'Audio', 'Laptop', 'Headphone']
-  let isProduct = (item: any) => item.price !== undefined
-  // ---Mock data---
-  // let products: (Product | Shop)[] = []
 
-  // for (let i = 0; i < 20; i++) {
-  //   products.push({
-  //     title: `Title ${i}`,
-  //     description: `Description ${i}`,
-  //     price: i,
-  //     currency: `Currency ${i}`,
-  //     quantity: i,
-  //     location: `Location ${i}`,
-  //     status: `Status ${i}`,
-  //     image: '/test_img.jpg',
-  //   })
-  // }
-
-  // products[5] = {
-  //   title: 'Shop1',
-  //   description: 'ShopDesc1',
-  //   image: ['/test_img.jpg', '/test_img.jpg', '/test_img.jpg'],
-  // }
-  // products[9] = {
-  //   title: 'Shop2',
-  //   description: 'ShopDesc2',
-  //   image: ['/test_img.jpg', '/test_img.jpg', '/test_img.jpg'],
-  // }
-  // products[10] = {
-  //   title: 'Shop3',
-  //   description: 'ShopDesc3',
-  //   image: ['/test_img.jpg', '/test_img.jpg', '/test_img.jpg'],
-  // }
-  // products[11] = {
-  //   title: 'Shop4',
-  //   description: 'ShopDesc4',
-  //   image: ['/test_img.jpg', '/test_img.jpg', '/test_img.jpg'],
-  // }
-
+  const imgArr = ['/test_img.jpg', '/test_img.jpg', '/test_img.jpg']
   return (
     <div
       className={`${loading && `h-full`} flex w-full flex-col items-center justify-center  px-4 py-20 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
     >
-      <SearchDialog placeholder={searchValue.length > 0? searchValue: props.searchTranslations.searchPlaceholder}searchValue={searchValue}setSearchValue={setSearchValue} suggestions={suggestions} suggestionsTitle={props.searchTranslations.suggestions}/>
+      <SearchDialog
+        placeholder={
+          searchValue.length > 0 ? searchValue : props.searchTranslations.searchPlaceholder
+        }
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+        suggestions={suggestions}
+        suggestionsTitle={props.searchTranslations.suggestions}
+      />
       {!loading ? (
         <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
           {products.map((p, index) => (
@@ -103,10 +64,12 @@ const BrowseContent = (props: BrowseContentProps) => {
               <CardWithImage
                 key={`pr-${index}`}
                 title={p.title}
-                desc={p.description}
+                desc={p.description!}
                 imgUrl1={p.imageUrl1}
-                previewType={isProduct(p) ? 'product' : 'shop'}
                 className="mx-[5px] my-[0.5rem]"
+                productID={p.id}
+                product={products[index]}
+                favIcon
               />
             </RevealOnScroll>
           ))}
@@ -128,9 +91,7 @@ const SearchDialog = (props: SearchBarProps) => {
         <Input
           className="sticky top-[20px] h-14 w-full bg-white sm:w-2/3 md:w-1/2"
           type="search"
-          placeholder={
-            props.searchValue ? props.searchValue : props.placeholder
-          }
+          placeholder={props.searchValue ? props.searchValue : props.placeholder}
           readOnly
         />
       </DialogTrigger>
@@ -153,16 +114,14 @@ const SearchDialog = (props: SearchBarProps) => {
         </div>
         {!props.searchValue ? (
           <>
-            <h1 className="px-4 pt-2 text-lg font-medium">
-              {props.suggestionsTitle}
-            </h1>
+            <h1 className="px-4 pt-2 text-lg font-medium text-black">{props.suggestionsTitle}</h1>
             {props.suggestions.map((suggestion, index) => (
               <div
                 onClick={() => {
                   setOpen(false)
                   props.setSearchValue(suggestion)
                 }}
-                className="rounded- px-8 py-2 hover:rounded-b-lg hover:bg-gray-100"
+                className="rounded- px-8 py-2 text-black hover:rounded-b-lg hover:bg-gray-100"
                 key={`s-${index}`}
               >
                 {suggestion}

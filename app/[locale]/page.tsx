@@ -1,53 +1,46 @@
-import { useTranslations } from 'next-intl';
-import { getTranslations } from 'next-intl/server';
-import { getUserById } from '@/lib/useraction';
-import { Button } from '@/components/ui/button';
-import { Link } from '@/navigation';
-import MyShopContent from '@/components/myShop/myshopContent';
-import NavBar from '@/components/navigation/NavBar';
-import { useSession } from 'next-auth/react';
-import { auth } from '@/auth';
-import { MyShopProps } from '@/lib/types';
+import { auth } from '@/auth'
+import { Link, redirect } from '@/navigation'
+import { ChevronRightIcon } from '@radix-ui/react-icons'
+import { getTranslations } from 'next-intl/server'
+import dynamic from 'next/dynamic'
 
-const MyShop = async () => {
-  let location;
-  const t = await getTranslations('MyShop');
-  const session = await auth();
-  const user = await getUserById(session?.user?.id!);
-  const userId = session?.user?.id!;
-  try {
-    if (user[0].location) {
-      location = user[0].location;
-    }
-  } catch (err) {}
+const CubeScene = dynamic(() => import('@/components/explosion/cubeScene'), {
+  ssr: false,
+})
 
-  const myShopProps: MyShopProps = {
-    userId: userId,
-    location: location
-  };
+export default async function Home() {
+  const t = await getTranslations('Landingpage')
+  const session = await auth()
+  if (!!session?.user) {
+    redirect('/browse')
+  }
 
   return (
-    <div className="pt-24 inset-x-1/2 top-24 flex flex-col items-center">  // Hinzugefügtes Padding oben
-      <div className="w-full max-w-4xl p-5 border-2 border-gray-300 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-center mb-4">Mein Bitz</h1>
-        <p className="text-center">Aktuelle Benutzer-ID: {userId}</p>
-
-        <div className="flex justify-center space-x-4 mt-8">
-          <Button>
-            <Link href="myshop/add">{t('addProducts')}</Link>
-          </Button>
-          <Button>
-            <Link href="myshop/">{t('deleteProduct')}</Link>
-          </Button>
-          <Button>
-            <Link href="myshop/update">{t('updateProducts')}</Link>
-          </Button>
-        </div>
-
-        <MyShopContent userId={userId} location={location} />
+    <main className="static h-screen ">
+      <div className="static h-96 pt-24 md:static md:h-screen md:pt-24">
+        <CubeScene />
       </div>
-    </div>
-  );
-}
 
-export default MyShop;
+      {/* Call-to-Action Button  /}
+
+      <Link href={'/auth/login'}>
+        <div className="absolute bottom-24 right-7 h-24 w-72 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 px-8 font-space_grotesk text-4xl text-white hover:scale-105 hover:opacity-85 md:right-24 md:w-96 lg:h-24">
+          <div className="absolute right-6 mt-6 h-12 w-12 rounded-full bg-white md:right-9 md:mt-4 md:h-16 md:w-16">
+            <ChevronRightIcon className="relative size-12 text-black md:size-16" />
+          </div>
+          <div className="relative left-0 mt-7 text-3xl md:left-10">{t('button')}</div>
+        </div>
+      </Link>
+
+      {/ Beschreibungstext  */}
+      <div className="absolute bottom-48 left-8 rounded-md p-5 font-space_grotesk text-black drop-shadow-2xl  md:left-24 lg:bottom-16 lg:w-7/12">
+        <p className="text-2xl md:text-5xl">
+          <em>Bitz</em>
+        </p>
+        <p className="mt-4 text-lg md:text-2xl">{t('subtitle')}</p>
+        <p className="mt-4 text-sm md:text-xl">{t('description')}</p>
+        <p className="mt-4 text-lg md:text-2xl">{t('call')}</p>
+      </div>
+    </main>
+  )
+}

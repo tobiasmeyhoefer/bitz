@@ -4,12 +4,11 @@ import { Link } from '@/navigation'
 import { getTranslations } from 'next-intl/server'
 import { NavLoginLink, NavItemLink, NavbarItemDropdown, NavMenuDrawer } from './navbarItem'
 import dynamic from 'next/dynamic'
-
 const NavBar = async () => {
   const t = await getTranslations('Navbar')
   const session = await auth()
   const isLoggedIn = !!session?.user
-  const CubeScene = dynamic(() => import('@/components/explosion/cubeScene'), {
+  const CubeSceneNav = dynamic(() => import('@/components/explosion/cubeSceneNav'), {
     ssr: false,
   })
 
@@ -41,37 +40,27 @@ const NavBar = async () => {
   ]
 
   return (
-    <nav className="absolute left-0 right-0 flex h-[80px] items-center justify-between pr-4 sm:pr-10">
+    <nav className="absolute left-0 right-0 flex h-[80px] items-center justify-between px-4 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]">
       <div className="flex items-center">
-        {isLoggedIn ? (
+        {isLoggedIn && (
           <>
-            <Link href="/" className=" mx-0 mb-4 font-montserrat text-4xl font-bold text-blue-500 ">
-              <div className="static left-0 top-0 h-[80px] w-[200px] pt-0	">
-                <CubeScene /> {/* TODO: Replace logo */}
-              </div>
+            <Link href="/" className="static mr-4 h-[80px] w-[100px] sm:mr-10">
+              <CubeSceneNav />
             </Link>
-          </>
-        ) : (
-          <Link href="/" className="mr-4 font-montserrat text-4xl font-bold text-blue-500 sm:mr-10">
-            {/* <span className="block sm:hidden">B</span>
-            <span className="hidden sm:block">BITZ</span> */}
-            {/* TODO: Insert logo */}
-          </Link>
-        )}
-        <div className="hidden sm:flex">
-          {isLoggedIn && (
-            <>
+            <div className="hidden sm:flex">
               <NavItemLink className="mr-14" linkTo="/browse" text={t('discover')} />
               <NavItemLink className="mr-14" linkTo="/myshop" text={t('myBitz')} />
-            </>
-          )}
-        </div>
+            </div>
+          </>
+        )}
       </div>
       {isLoggedIn ? (
         <>
           <div className="hidden sm:flex">
             <NavbarItemDropdown
-              signOut={<SignOut text={t('logoutButton')} typeText={false} className="mr-3" />}
+              signOut={
+                <SignOut text={t('logoutButton')} typeText={false} className="mr-3 text-inherit" />
+              }
               settingsLinkText={t('settings')}
               favoritesLinkText={t('favorites')}
             />
