@@ -25,7 +25,9 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
       <>
         {props ? (
           <Card className={cn(`w-[${cardWidth}px]`, className)} ref={ref}>
-            <Link href={`/product/${props.productID}?p=${JSON.stringify(props.product)}`}>
+            <Link
+              href={`/product/${btoa(props.productID!)}?p=${btoa(JSON.stringify(props.product))}`}
+            >
               {props.imgUrl1 !== undefined ? (
                 <Image
                   src={props.imgUrl1 as string}
