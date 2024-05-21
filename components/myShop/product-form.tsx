@@ -1,4 +1,5 @@
 'use client'
+
 import React, { useEffect, useState } from 'react'
 import { Input } from '../ui/input'
 import { addProduct, getProductById } from '@/lib/productaction'
@@ -21,37 +22,40 @@ import Image from 'next/image'
 import { getSignedURL } from '@/lib/productaction'
 import { ProductType } from '@/lib/types'
 
-const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
-
-const MAX_FILE_SIZE = 4000000
+const MAX_FILE_SIZE = 8000000
 
 const minError = 'Eingabe erfordert'
 const formSchema = z.object({
   title: z.string().min(1, { message: minError }).max(50),
   price: z.coerce.number().safe().positive(),
   quantity: z.coerce.number().safe().positive(),
-  // location: z.string().min(1, { message: minError }).max(50),
-  // status: z.string().min(1, { message: minError }).max(50),
-  // currency: z
-  //   .string()
-  //   .min(1, { message: minError })
-  //   .max(30)
-  //   .refine((value) => typeof value === 'string' && !/^\d+$/.test(value)),
   description: z.string().min(1, { message: minError }).max(250),
-  // images: z
-  //   .any()
-  //   // To not allow empty files
-  //   .refine((files) => files?.length >= 1 && files?.length <= 5, {
-  //     message: 'There are 1-5 Images allowed',
-  //   })
-  //   // To not allow files other than images
-  //   .refine((files) => ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type), {
-  //     message: '.jpg, .jpeg, .png and .webp files are accepted.',
-  //   })
-  //   // To not allow files larger than 5MB
-  //   .refine((files) => files?.[0]?.size <= MAX_FILE_SIZE, {
-  //     message: `Max file size is 4MB.`,
-  //   }),
+  images: z
+    .any()
+    .refine(
+      (files) => {
+        return files?.length >= 1 && files?.length <= 5
+      },
+      {
+        message: 'There are 1-5 Images allowed',
+      },
+    )
+    .refine(
+      (files) => {
+        // console.log(files)
+        if (files instanceof FileList) {
+          const filesArray = Array.from(files)
+          return filesArray.every((file) => file.size <= MAX_FILE_SIZE)
+        }
+
+        if (files instanceof File) {
+          return files.size <= MAX_FILE_SIZE
+        }
+      },
+      {
+        message: 'Each file must be no larger than 8MB',
+      },
+    ),
 })
 
 export function ProductForm({
@@ -67,33 +71,33 @@ export function ProductForm({
 }) {
   const router = useRouter()
   //muss eventuell um Image url oder so ersetzt werden
-  const [data, setData] = useState<ProductType>({
-    title: '',
-    description: '',
-    price: 0,
-    quantity: 0,
-  })
+  // const [data, setData] = useState<ProductType>({
+  //   title: '',
+  //   description: '',
+  //   price: 0,
+  //   quantity: 0,
+  // })
 
-  useEffect(() => {
-    const getProduct = async () => {
-      try {
-        if (whichFunction == 'update') {
-          const result = await getProductById('3f4cb90e-6819-4c65-925b-9e563fdf9aae')
-          const r = result[0]
-          const updatedData: ProductType = {
-            title: r.title,
-            description: r.description || '',
-            price: r.price,
-            quantity: r.quantity,
-          }
-          setData(updatedData)
-        }
-      } catch (error) {
-        console.error('Fehler beim Laden der Daten:', error)
-      }
-    }
-    getProduct()
-  }, [whichFunction])
+  // useEffect(() => {
+  //   const getProduct = async () => {
+  //     try {
+  //       if (whichFunction == 'update') {
+  //         const result = await getProductById('3f4cb90e-6819-4c65-925b-9e563fdf9aae')
+  //         const r = result[0]
+  //         const updatedData: ProductType = {
+  //           title: r.title,
+  //           description: r.description || '',
+  //           price: r.price,
+  //           quantity: r.quantity,
+  //         }
+  //         setData(updatedData)
+  //       }
+  //     } catch (error) {
+  //       console.error('Fehler beim Laden der Daten:', error)
+  //     }
+  //   }
+  //   getProduct()
+  // }, [whichFunction])
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -101,24 +105,22 @@ export function ProductForm({
       title: '',
       description: '',
       price: 0,
-      quantity: 0,
+      quantity: 1,
+      images: null,
     },
   })
 
-  useEffect(() => {
-    if (data && whichFunction == 'update') {
-      form.reset(data)
-    }
-  }, [data, form, whichFunction])
+  // useEffect(() => {
+  //   if (data && whichFunction == 'update') {
+  //     form.reset(data)
+  //   }
+  // }, [data, form, whichFunction])
 
   async function onSubmit(values: ProductType) {
-    // console.log('Test')
-    // console.log(files)
     let imageUrls = []
     if (files) {
       for (let i = 0; i < files.length; i++) {
         if (files[i]) {
-          // const signedURLResult = await getSignedURL(files[i].name)
           const computeSHA256 = async (file: File) => {
             const buffer = await file.arrayBuffer()
             const hashBuffer = await crypto.subtle.digest('SHA-256', buffer)
@@ -137,7 +139,6 @@ export function ProductForm({
           }
 
           const { url } = signedURLResult.success
-          console.log({ url })
           const response = await fetch(url, {
             method: 'PUT',
             headers: {
@@ -145,12 +146,12 @@ export function ProductForm({
             },
             body: files[i],
           })
-          console.log(response)
           imageUrls.push(url.split('?')[0])
         }
       }
     }
-    await addProduct(values, imageUrls)
+    // console.log(JSON.parse(JSON.stringify(values)))
+    await addProduct(JSON.parse(JSON.stringify(values)), imageUrls)
     router.push('/myshop')
   }
 
@@ -175,17 +176,17 @@ export function ProductForm({
     <>
       <Card className="w-[500px] p-10">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
+          <form className='space-y-4' onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
               control={form.control}
               name={'title'}
               render={({ field }) => (
                 <FormItem>
-                  <FormMessage />
                   <FormLabel>Title</FormLabel>
                   <FormControl>
                     <Input placeholder="title" {...field} />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -194,11 +195,11 @@ export function ProductForm({
               name={'description'}
               render={({ field }) => (
                 <FormItem>
-                  <FormMessage />
                   <FormLabel> Description</FormLabel>
                   <FormControl>
                     <Textarea placeholder="description" {...field} />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -207,97 +208,50 @@ export function ProductForm({
               name={'price'}
               render={({ field }) => (
                 <FormItem>
-                  <FormMessage />
                   <FormLabel>Price</FormLabel>
                   <FormControl>
                     <Input type="number" placeholder="price" {...field} />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
-            {/* <FormField
-              control={form.control}
-              name={'currency'}
-              render={({ field }) => (
-                <FormItem>
-                  <FormMessage />
-                  <FormLabel>Currency</FormLabel>
-                  <FormControl>
-                    <Input placeholder="currency" {...field} />
-                  </FormControl>
-                </FormItem>
-              )}
-            /> */}
             <FormField
               control={form.control}
               name={'quantity'}
               render={({ field }) => (
                 <FormItem>
-                  <FormMessage />
                   <FormLabel>Quantity</FormLabel>
                   <FormControl>
                     <Input type="number" placeholder="quantity" {...field} />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
-            {/* <FormField
+            <FormField
               control={form.control}
-              name={'location'}
-              render={({ field }) => (
+              name="images"
+              render={({ field: { value, onChange, ...fieldProps } }) => (
                 <FormItem>
-                  <FormMessage />
-                  <FormLabel>Location</FormLabel>
-                  <FormControl>
-                    <Input placeholder="location" {...field} />
-                  </FormControl>
-                </FormItem>
-              )}
-            /> */}
-            {/* <FormField
-              control={form.control}
-              name={'status'}
-              render={({ field }) => (
-                <FormItem>
-                  <FormMessage />
-                  <FormLabel>Status</FormLabel>
-                  <FormControl>
-                    <Input placeholder="status" {...field} />
-                  </FormControl>
-                </FormItem>
-              )}
-            /> */}
-            <Input
-              type="file"
-              multiple
-              accept="image/jpeg,image/png,image/webp"
-              onChange={handleFileChange}
-            />
-            {/* <FormField
-              control={form.control}
-              name={'images'}
-              render={({ field }) => (
-                <FormItem>
-                  <FormMessage />
-                  <FormLabel>Image</FormLabel>
+                  <FormLabel>Images</FormLabel>
                   <FormControl>
                     <Input
-                      type="file"
+                      {...fieldProps}
                       multiple
+                      type="file"
                       accept="image/jpeg,image/png,image/webp"
-                      onChange={handleFileChange}
+                      onChange={(event) => {
+                        onChange(event.target.files)
+                        // onChange(event.target.files && event.target.files[0])
+                        handleFileChange(event)
+                      }}
                     />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
-            /> */}
-            {/* Die Architektur muss noch auf multiple ausgebaut werden */}
-            {/* <Input
-              type="file"
-              multiple
-              accept="image/jpeg,image/png,image/webp"
-              onChange={handleFileChange}
-            /> */}
+            />
             {previewUrls && files && (
               <div className="flex flex-wrap">
                 {previewUrls.map((url) => (
@@ -312,21 +266,6 @@ export function ProductForm({
                 ))}
               </div>
             )}
-
-            {/* {previewUrl && file && (
-              <div className="mt-4">
-                {file.type.startsWith('image/') ? (
-                  <Image
-                    src={previewUrl}
-                    alt="Selected file"
-                    width={150}
-                    height={150}
-                    className="border"
-                  />
-                ) : null}
-              </div>
-            )} */}
-
             <Button className="mt-4" type="submit">
               {submitText}
             </Button>
