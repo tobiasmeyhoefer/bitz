@@ -20,8 +20,9 @@ import { Button } from '../ui/button'
 import { useRouter } from '@/navigation'
 import Image from 'next/image'
 import { getSignedURL } from '@/lib/productaction'
-import { ProductType } from '@/lib/types'
+import { FormTranslations, ProductType } from '@/lib/types'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
+import { useToast } from '@/components/ui/use-toast'
 
 const MAX_FILE_SIZE = 8000000
 
@@ -71,15 +72,28 @@ const formSchema = z.object({
 export function ProductForm({
   submitText,
   // action,
-  userLocation,
   whichFunction,
+  translations,
 }: {
   submitText: string
   // action: (values: ProductType) => Promise<void>
-  userLocation: string
   whichFunction: string
+  translations: FormTranslations
 }) {
   const router = useRouter()
+  const { toast } = useToast()
+  const {
+    title,
+    description,
+    price,
+    quantity,
+    category,
+    categoryPlaceholder,
+    images,
+    toastTitle,
+    toastDescription,
+    submitTitle,
+  } = translations
   //muss eventuell um Image url oder so ersetzt werden
   // const [data, setData] = useState<ProductType>({
   //   title: '',
@@ -165,6 +179,11 @@ export function ProductForm({
     // console.log(JSON.parse(JSON.stringify(values)))
     await addProduct(JSON.parse(JSON.stringify(values)), imageUrls)
     router.push('/myshop')
+    toast({
+      title: toastTitle,
+      description: toastDescription,
+      duration: 2200,
+    })
   }
 
   const [files, setFiles] = useState<FileList | null>(null)
@@ -194,9 +213,9 @@ export function ProductForm({
               name={'title'}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Title</FormLabel>
+                  <FormLabel>{title}</FormLabel>
                   <FormControl>
-                    <Input placeholder="title" {...field} />
+                    <Input placeholder={title} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -207,9 +226,9 @@ export function ProductForm({
               name={'description'}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel> Description</FormLabel>
+                  <FormLabel> {description}</FormLabel>
                   <FormControl>
-                    <Textarea placeholder="description" {...field} />
+                    <Textarea placeholder={description} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -220,7 +239,7 @@ export function ProductForm({
               name={'price'}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Price</FormLabel>
+                  <FormLabel>{price}</FormLabel>
                   <FormControl>
                     <Input type="number" placeholder="price" {...field} />
                   </FormControl>
@@ -233,7 +252,7 @@ export function ProductForm({
               name={'quantity'}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Quantity</FormLabel>
+                  <FormLabel>{quantity}</FormLabel>
                   <FormControl>
                     <Input type="number" placeholder="quantity" {...field} />
                   </FormControl>
@@ -246,11 +265,11 @@ export function ProductForm({
               name="category"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Category</FormLabel>
+                  <FormLabel>{category}</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="choose Category" />
+                        <SelectValue placeholder={categoryPlaceholder} />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -268,7 +287,7 @@ export function ProductForm({
               name="images"
               render={({ field: { value, onChange, ...fieldProps } }) => (
                 <FormItem>
-                  <FormLabel>Images</FormLabel>
+                  <FormLabel>{images}</FormLabel>
                   <FormControl>
                     <Input
                       {...fieldProps}
@@ -301,7 +320,7 @@ export function ProductForm({
               </div>
             )}
             <Button className="mt-4" type="submit">
-              {submitText}
+              {submitTitle}
             </Button>
           </form>
         </Form>

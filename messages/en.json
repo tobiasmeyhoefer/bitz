@@ -32,6 +32,15 @@
     "updateProducts": "update Product"
   },
   "addProductPage": {
+    "title": "Title",
+    "description": "Description",
+    "price": "Price",
+    "quantity": "Quantity",
+    "category": "Category",
+    "categoryPlaceholder": "choose Category",
+    "images": "Images",
+    "toastTitle": "Success",
+    "toastDescription": "added Product",
     "submitTitle": "submit"
   },
   "Settings": {

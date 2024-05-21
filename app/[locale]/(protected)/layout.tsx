@@ -1,5 +1,4 @@
 import { auth } from '@/auth'
-import { ThemeProvider } from '@/components/darkmode/themeProvider'
 import { redirect } from '@/navigation'
 
 export default async function RootLayout({

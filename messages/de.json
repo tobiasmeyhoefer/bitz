@@ -32,6 +32,15 @@
     "updateProducts": "Produkt aktualisieren"
   },
   "addProductPage": {
+    "title": "Titel",
+    "description": "Beschreibung",
+    "price": "Preis",
+    "quantity": "Anzahl",
+    "category": "Kategorie",
+    "categoryPlaceholder": "wähle Kategorie",
+    "images": "Bilder",
+    "toastTitle": "Erfolgreich",
+    "toastDescription": "Produkt wurde hinzugefügt",
     "submitTitle": "absenden"
   },
   "Settings": {

@@ -23,6 +23,19 @@ type SearchTranslations = {
   suggestions: string
 }
 
+type FormTranslations = {
+  title: string
+  description: string
+  price: string
+  quantity: string
+  category: string
+  categoryPlaceholder: string
+  images: string
+  toastTitle: string
+  toastDescription: string
+  submitTitle: string
+}
+
 type BrowseContentProps = {
   searchTranslations: SearchTranslations
 }
@@ -87,4 +100,5 @@ export type {
   BrowseContentProps,
   RevealOnScrollProps,
   ProductType,
+  FormTranslations,
 }
