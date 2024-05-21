@@ -2,7 +2,7 @@
 import { useTranslations } from 'next-intl'
 import { getTranslations } from 'next-intl/server'
 import { useEffect, useRef, useState } from 'react'
-import { CardWithImage } from '@/components/ui/card'
+import { CardWithImage } from '@/components/ui/cardWithImage'
 import { getProductsBrowse, getProductsOwned } from '@/lib/productaction'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
@@ -64,7 +64,6 @@ const MyShopContent = (props: MyShopProps) => {
                 title={p.title}
                 desc={p.description}
                 imgUrl1={p.imageUrl1}
-                previewType={isProduct(p) ? 'product' : 'shop'}
                 className="mx-[5px] my-[0.5rem]"
               />
             </RevealOnScroll>

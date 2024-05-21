@@ -39,16 +39,17 @@ export async function getProductsOwned(userId: string) {
 
 export async function addProduct(values: ProductType, imageUrls: string[]) {
   let { title, description, price, quantity } = values
-  const id = await getCurrentUserId()
+  const session = await auth()
+  const id = session?.user?.id
   if (id) {
-    const user = await getUserById()
+    const user = await getUserById(id)
     await db.insert(products).values({
       title: title,
       description: description,
       price: price,
       quantity: quantity,
       sellerId: id,
-      location: user![0].location ?? null,
+      location: user[0].location ?? null,
       createdAt: new Date(),
       imageUrl1: imageUrls[0],
       imageUrl2: imageUrls[1],
