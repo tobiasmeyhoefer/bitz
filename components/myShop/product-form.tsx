@@ -26,10 +26,18 @@ const MAX_FILE_SIZE = 8000000
 
 const minError = 'Eingabe erfordert'
 const formSchema = z.object({
-  title: z.string().min(1, { message: minError }).max(50),
+  title: z
+    .string()
+    .min(1, { message: minError })
+    .max(50)
+    .refine((value) => !/#/.test(value)),
   price: z.coerce.number().safe().positive(),
   quantity: z.coerce.number().safe().positive(),
-  description: z.string().min(1, { message: minError }).max(250),
+  description: z
+    .string()
+    .min(1, { message: minError })
+    .max(250)
+    .refine((value) => !/#/.test(value)),
   images: z
     .any()
     .refine(
@@ -101,6 +109,7 @@ export function ProductForm({
 
   const form = useForm({
     resolver: zodResolver(formSchema),
+    mode: 'onChange',
     defaultValues: {
       title: '',
       description: '',
@@ -176,7 +185,7 @@ export function ProductForm({
     <>
       <Card className="w-[500px] p-10">
         <Form {...form}>
-          <form className='space-y-4' onSubmit={form.handleSubmit(onSubmit)}>
+          <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
               control={form.control}
               name={'title'}
