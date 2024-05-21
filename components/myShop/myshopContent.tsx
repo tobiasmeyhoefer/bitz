@@ -54,7 +54,7 @@ const MyShopContent = (props: MyShopProps) => {
   let isProduct = (item: any) => item.price !== undefined
 
   return  <>
-    <div className={`${loading && `h-full`} flex w-full flex-col items-center justify-center px-4 py-20 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}>
+    <div className={`${loading && `h-full`}  `}>
       {!loading ? (
         <div className="grid grid-cols-4 gap-4 mt-[20px]">
           {products.map((p, index) => (
@@ -64,7 +64,8 @@ const MyShopContent = (props: MyShopProps) => {
                 title={p.title}
                 desc={p.description}
                 imgUrl1={p.imageUrl1}
-                className="mx-[5px] my-[0.5rem]"
+                className=""
+
               />
             </RevealOnScroll>
           ))}
