@@ -37,11 +37,6 @@ const MyShop = async () => {
     <Link href="myshop/add">{t('addProducts')}</Link>
   </Button>
   
-    <PopAlert />
-  
-  <Button>
-    <Link href="myshop/update">{t('updateProducts')}</Link>
-  </Button>
         </div>
     <MyShopContent {...myShopProps} />
         
