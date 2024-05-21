@@ -15,7 +15,7 @@ import { useTranslations } from "next-intl";
 
 
 export function PopAlert() {
-  //const t = useTranslations();
+  const t = useTranslations();
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -26,7 +26,7 @@ export function PopAlert() {
           <AlertDialogTitle>Sicher?</AlertDialogTitle>
           <AlertDialogDescription>
 GANZ SICHER?! Produkt Löschen ?
-
+{t('submitTitle')}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
