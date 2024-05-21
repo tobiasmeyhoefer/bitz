@@ -43,6 +43,6 @@ const MyShop = async () => {
       </div>
     </div>
   );
-}
+} 
 
 export default MyShop;
