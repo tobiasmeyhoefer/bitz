@@ -150,7 +150,8 @@ export function ProductForm({
         }
       }
     }
-    await addProduct(values, imageUrls)
+    // console.log(JSON.parse(JSON.stringify(values)))
+    await addProduct(JSON.parse(JSON.stringify(values)), imageUrls)
     router.push('/myshop')
   }
 
