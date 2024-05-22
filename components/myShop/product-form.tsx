@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { Input } from '../ui/input'
-import { addProduct, getProductById } from '@/lib/productaction'
+import { addProduct } from '@/lib/productaction'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'

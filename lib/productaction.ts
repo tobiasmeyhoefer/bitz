@@ -185,21 +185,22 @@ export async function getSignedURL({
   return { success: { url } }
 }
 
-// deletes an image
-export async function deleteImage(imageUrl: string, imageIndex: number, productId: string) {
-  //delete image AWS
-  const key = imageUrl.split('/').slice(-1)[0]
-  const deleteParams = {
-    Bucket: process.env.AWS_BUCKET_NAME!,
-    Key: key,
-  }
-  await s3Client.send(new DeleteObjectCommand(deleteParams))
-
-  //deleteimage neon
+export async function deleteImageNeon(imageIndex: number, productId: string) {
   const dynamicImageUrl: keyof typeof products =
     `${'imageUrl'}${imageIndex}` as keyof typeof products
   await db
     .update(products)
     .set({ [dynamicImageUrl]: null })
     .where(eq(products.id, productId))
+}
+
+export async function deleteImageOnAws(imageUrl: string) {
+  console.log("test")
+  const key = imageUrl.split('/').slice(-1)[0]
+  console.log(key)
+  const deleteParams = {
+    Bucket: process.env.AWS_BUCKET_NAME!,
+    Key: key,
+  }
+  await s3Client.send(new DeleteObjectCommand(deleteParams))
 }
