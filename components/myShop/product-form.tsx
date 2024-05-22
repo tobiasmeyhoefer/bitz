@@ -21,8 +21,6 @@ import { useRouter } from '@/navigation'
 import Image from 'next/image'
 import { getSignedURL } from '@/lib/productaction'
 import { ProductType } from '@/lib/types'
-import sharp from 'sharp'
-import { compressImages } from '@/lib/imageActions'
 
 const MAX_FILE_SIZE = 8000000
 
