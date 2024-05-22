@@ -43,7 +43,6 @@ const BrowseContent = (props: BrowseContentProps) => {
 
   const suggestions = ['Receiver', 'Monitor', 'Audio', 'Laptop', 'Headphone']
 
-  const imgArr = ['/test_img.jpg', '/test_img.jpg', '/test_img.jpg']
   return (
     <div
       className={`${loading && `h-full`} flex w-full flex-col items-center justify-center  px-4 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}

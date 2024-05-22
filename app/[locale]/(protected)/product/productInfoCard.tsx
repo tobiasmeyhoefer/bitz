@@ -5,6 +5,7 @@ import { useTranslations, useLocale } from 'next-intl'
 
 type ProductInfoType = {
   product: ProductType
+  userId: string
 }
 
 export default function ProductInfoCard(props: ProductInfoType) {
@@ -66,23 +67,47 @@ export default function ProductInfoCard(props: ProductInfoType) {
     }
   }
   return (
-    <Card className="my-3 h-full w-[90vw] lg:my-0 lg:h-[60vh] lg:w-[40vw]">
-      <CardHeader className="flex h-[20%] flex-row items-center justify-between">
-        <CardTitle className="text-center">{product.title}</CardTitle>
-        <CardTitle className="text-3xl">
-          {product.price} {locale === 'en' ? '$' : '€'}
-        </CardTitle>
-      </CardHeader>
-      <Separator />
-      <CardContent className="flex h-[80%] flex-col justify-between p-6">
-        <div className="flex justify-between pb-6">
-          <div>{product.description}</div>
-          <div className="text-nowrap text-right lg:w-[20vw]">
-            {tProduct('quantity')}: {product.quantity}
-          </div>
-        </div>
-        <div>{getDate(product.createdAt)}</div>
-      </CardContent>
-    </Card>
+    <>
+      {props.userId === product.sellerId ? (
+        <Card className="my-3 h-full w-[90vw] lg:my-0 lg:h-[60vh] lg:w-[40vw]">
+          {/* <CardHeader className="flex h-[20%] flex-row items-center justify-between">
+            <CardTitle className="text-center">{product.title}</CardTitle>
+            <CardTitle className="text-3xl">
+              {product.price} {locale === 'en' ? '$' : '€'}
+            </CardTitle>
+          </CardHeader>
+          <Separator />
+          <CardContent className="flex h-[80%] flex-col justify-between p-6">
+            <div className="flex justify-between pb-6">
+              <div>{product.description}</div>
+              <div className="text-nowrap text-right lg:w-[20vw]">
+                {tProduct('quantity')}: {product.quantity}
+              </div>
+            </div>
+            <div>{getDate(product.createdAt)}</div>
+          </CardContent> */}
+          add updateoptions here
+        </Card>
+      ) : (
+        <Card className="my-3 h-full w-[90vw] lg:my-0 lg:h-[60vh] lg:w-[40vw]">
+          <CardHeader className="flex h-[20%] flex-row items-center justify-between">
+            <CardTitle className="text-center">{product.title}</CardTitle>
+            <CardTitle className="text-3xl">
+              {product.price} {locale === 'en' ? '$' : '€'}
+            </CardTitle>
+          </CardHeader>
+          <Separator />
+          <CardContent className="flex h-[80%] flex-col justify-between p-6">
+            <div className="flex justify-between pb-6">
+              <div>{product.description}</div>
+              <div className="text-nowrap text-right lg:w-[20vw]">
+                {tProduct('quantity')}: {product.quantity}
+              </div>
+            </div>
+            <div>{getDate(product.createdAt)}</div>
+          </CardContent>
+        </Card>
+      )}
+    </>
   )
 }

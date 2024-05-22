@@ -10,10 +10,12 @@ export default function Page({
   params: { id: string }
   searchParams: { p: string }
 }) {
-  // const productId = atob(params.id)
   const t = useTranslations('Product')
+  const userId = atob(params.id)
 
   const product: ProductType = JSON.parse(atob(searchParams.p))
+  const ownsProduct = '12345' === product.sellerId
+
   const unfilteredImgs = [
     product.imageUrl1,
     product.imageUrl2,
@@ -36,8 +38,9 @@ export default function Page({
         translations={carouselTranslations}
         images={images}
         className="h-[50vh] lg:h-[60vh]"
+        ownsProduct={ownsProduct}
       />
-      <ProductInfoCard product={product} />
+      <ProductInfoCard product={product} ownsProduct={'1234'} />
     </div>
   )
 }
