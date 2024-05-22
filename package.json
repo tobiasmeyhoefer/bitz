@@ -51,6 +51,7 @@
     "zod": "^3.23.6"
   },
   "devDependencies": {
+    "@types/imagemin": "^8.0.5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

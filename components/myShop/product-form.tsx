@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { Input } from '../ui/input'
-import { addProduct, getProductById } from '@/lib/productaction'
+import { addProduct } from '@/lib/productaction'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -118,9 +118,9 @@ export function ProductForm({
 
   async function onSubmit(values: ProductType) {
     let imageUrls = []
-    if (files) {
-      for (let i = 0; i < files.length; i++) {
-        if (files[i]) {
+    if (compressedFiles) {
+      for (let i = 0; i < compressedFiles.length; i++) {
+        if (compressedFiles[i]) {
           const computeSHA256 = async (file: File) => {
             const buffer = await file.arrayBuffer()
             const hashBuffer = await crypto.subtle.digest('SHA-256', buffer)
@@ -129,9 +129,9 @@ export function ProductForm({
             return hashHex
           }
           const signedURLResult = await getSignedURL({
-            fileSize: files[i].size,
-            fileType: files[i].type,
-            checksum: await computeSHA256(files[i]),
+            fileSize: compressedFiles[i].size,
+            fileType: compressedFiles[i].type,
+            checksum: await computeSHA256(compressedFiles[i]),
           })
           if (signedURLResult.failure !== undefined) {
             console.error(signedURLResult.failure)
@@ -142,9 +142,9 @@ export function ProductForm({
           const response = await fetch(url, {
             method: 'PUT',
             headers: {
-              'Content-Type': files[i].type,
+              'Content-Type': compressedFiles[i].type,
             },
-            body: files[i],
+            body: compressedFiles[i],
           })
           imageUrls.push(url.split('?')[0])
         }
@@ -156,9 +156,10 @@ export function ProductForm({
   }
 
   const [files, setFiles] = useState<FileList | null>(null)
+  const [compressedFiles, setCompressedFiles] = useState<File[] | null>(null)
   const [previewUrls, setPreviewUrls] = useState<string[] | null>(null)
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files ?? null
     setFiles(files)
     if (previewUrls) {
@@ -167,16 +168,58 @@ export function ProductForm({
     if (files) {
       const urls = Array.from(files).map((file) => URL.createObjectURL(file))
       setPreviewUrls(urls)
+      const compFiles = await compressImages(Array.from(files))
+      setCompressedFiles(compFiles)
+      // console.log(compFiles[0].size)
+      // console.log(files[0].size)
     } else {
       setPreviewUrls(null)
     }
+  }
+
+  // Funktion zur Bildkomprimierung
+  async function compressImages(files: File[]): Promise<File[]> {
+    console.log("test")
+    const compressedFiles = await Promise.all(
+      files.map(async (file) => {
+        const imageBitmap = await createImageBitmap(file)
+        const canvas = document.createElement('canvas')
+        const ctx = canvas.getContext('2d')
+
+        // Setze die gewünschte Breite und Höhe
+        const MAX_WIDTH = 800
+        const scale = MAX_WIDTH / imageBitmap.width
+        const newWidth = MAX_WIDTH
+        const newHeight = imageBitmap.height * scale
+
+        canvas.width = newWidth
+        canvas.height = newHeight
+
+        ctx!.drawImage(imageBitmap, 0, 0, newWidth, newHeight)
+
+        // Konvertiere das Canvas-Bild in einen Blob
+        return new Promise<File>((resolve) => {
+          canvas.toBlob(
+            (blob) => {
+              if (blob) {
+                resolve(new File([blob], file.name, { type: file.type }))
+              }
+            },
+            file.type,
+            0.8,
+          ) // 0.8 ist die Qualitätsstufe, 0.8 bedeutet 80% Qualität
+        })
+      }),
+    )
+
+    return compressedFiles
   }
 
   return (
     <>
       <Card className="w-[500px] p-10">
         <Form {...form}>
-          <form className='space-y-4' onSubmit={form.handleSubmit(onSubmit)}>
+          <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
               control={form.control}
               name={'title'}
