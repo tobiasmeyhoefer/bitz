@@ -9,108 +9,66 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from '@/components/ui/carousel'
-import { cn } from '@/lib/utils'
 import Image from 'next/image'
 
 export function ProductImageCarousel(props: any) {
-  //     <Carousel
-  //       className={cn('w-full max-w-lg', props.className)}
-  //       opts={{
-  //         loop: true,
-  //       }}
-  //       orientation="vertical"
-  //     >
-  //       <CarouselContent className="-ml-1">
-  //         {Array.from({ length: 5 }).map((_, index) => (
-  //           <CarouselItem key={index} className="pl-1 md:basis-1/2 lg:basis-1/3">
-  //             <div className="p-1">
-  //               <Card>
-  //                 <CardContent className="flex aspect-square items-center justify-center p-6">
-  //                   <span className="text-2xl font-semibold">{index + 1}</span>
-  //                 </CardContent>
-  //               </Card>
-  //             </div>
-  //           </CarouselItem>
-  //         ))}
-  //       </CarouselContent>
-  //       <CarouselPrevious />
-  //       <CarouselNext />
-  //     </Carousel>
-  //     <Carousel
-  //       opts={{
-  //         align: 'start',
-  //       }}
-  //       orientation="vertical"
-  //       className="w-full max-w-xs"
-  //     >
-  //       <CarouselContent className="-mt-1 h-[280px]">
-  //         {Array.from({ length: 5 }).map((_, index) => (
-  //           <CarouselItem key={index} className="">
-  //             <Card className="">
-  //               <CardContent className="p-0">
-  //                 <Image
-  //                   width={400}
-  //                   height={400}
-  //                   src="/test_img.jpg"
-  //                   alt="Product Image"
-  //                   className="rounded-xl "
-  //                 />
-  //               </CardContent>
-  //             </Card>
-  //           </CarouselItem>
-  //         ))}
-  //       </CarouselContent>
-  //       <CarouselPrevious />
-  //       <CarouselNext />
-  //     </Carousel>
   const [api, setApi] = React.useState<CarouselApi>()
   const [current, setCurrent] = React.useState(0)
-  const [count, setCount] = React.useState(0)
 
   React.useEffect(() => {
     if (!api) {
       return
     }
-
-    setCount(api.scrollSnapList().length)
     setCurrent(api.selectedScrollSnap() + 1)
-
     api.on('select', () => {
       setCurrent(api.selectedScrollSnap() + 1)
     })
   }, [api])
 
   return (
-    <div className="h-full">
+    <div className={props.className}>
       <Carousel
         setApi={setApi}
         opts={{
           loop: true,
         }}
+        className="h-[50vh] w-[90vw] lg:h-[60vh] lg:w-[50vw] xl:w-[60vh] 2xl:w-[70vh]"
       >
-        <CarouselContent className=" h-full w-[40vh]  md:h-[50vh] md:w-[50vh]  lg:w-[60vh]  xl:w-[70vh]">
-          {Array.from({ length: 5 }).map((_, index) => (
-            <CarouselItem key={index}>
+        <CarouselContent>
+          {props.images.map((img: string, index: number) => (
+            <CarouselItem key={`ci-${index}`}>
               <Card className="h-fit w-fit">
                 <CardContent className="p-0">
-                  <Image
-                    width={500}
-                    height={500}
-                    src="/test_img.jpg"
-                    alt="Product Image"
-                    className="aspect-square h-full w-[40vh] rounded-xl object-cover md:h-[50vh] md:w-[50vh] lg:w-[60vh] xl:w-[70vh]"
-                    style={{ objectFit: 'cover' }}
-                  />
+                  {img ? (
+                    <Image
+                      width={500}
+                      height={500}
+                      src={img} //"/test_img.jpg"
+                      alt="Product Image"
+                      className="aspect-square h-[50vh] w-[90vw] rounded-xl object-cover lg:h-[60vh] lg:w-[50vw] xl:w-[60vh] 2xl:w-[70vh]"
+                      style={{ objectFit: 'cover' }}
+                    />
+                  ) : (
+                    <div
+                      className={`-mr-1 flex h-[50vh] w-[90vw] items-center justify-center lg:h-[60vh] lg:w-[50vw] xl:w-[60vh] 2xl:w-[70vh]`}
+                    >
+                      <div>Placeholder Image</div>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+        {props.images.length > 1 && (
+          <>
+            <CarouselPrevious className="left-3 top-[90%] bg-white/50 xl:-left-12 xl:top-1/2" />
+            <CarouselNext className="right-3 top-[90%] bg-white/50 xl:-right-12 xl:top-1/2" />
+          </>
+        )}
       </Carousel>
-      <div className="py-2 text-sm text-muted-foreground">
-        Slide {current} of {count}
+      <div className="hidden py-2 text-sm text-muted-foreground lg:block">
+        {props.translations.image} {current} {props.translations.of} {props.images.length}
       </div>
     </div>
   )

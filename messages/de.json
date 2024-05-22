@@ -2,6 +2,20 @@
   "Index": {
     "title": "Hallo Welt!"
   },
+  "Date": {
+    "january": "Januar",
+    "february": "Februar",
+    "march": "März",
+    "april": "April",
+    "may": "Mai",
+    "june": "Juni",
+    "july": "Juli",
+    "august": "August",
+    "september": "September",
+    "october": "Oktober",
+    "november": "November",
+    "december": "Dezember"
+  },
   "Landingpage": {
     "subtitle": "von heute für morgen mit Technik versorgen",
     "description": "Entdecke bei Bitz die neuesten Technikgeräte zu unschlagbaren Preisen! Kaufe, verkaufe und tausche deine Lieblingsgadgets in einer sicheren Umgebung. Trete unserer lebendigen Community bei und finde noch heute dein nächstes Technik-Highlight.",
@@ -30,6 +44,11 @@
     "title": "Mein Shop",
     "addProducts": "Produkt hinzufügen",
     "updateProducts": "Produkt aktualisieren"
+  },
+  "Product": {
+    "quantity": "Häufigkeit",
+    "image": "Bild",
+    "of": "von"
   },
   "addProductPage": {
     "submitTitle": "absenden"
