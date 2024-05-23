@@ -177,7 +177,7 @@ export function ProductForm({
       }
     }
     // console.log(JSON.parse(JSON.stringify(values)))
-    await addProduct(JSON.parse(JSON.stringify(values)), imageUrls)
+    // await addProduct(JSON.parse(JSON.stringify(values)), imageUrls)
     router.push('/myshop')
     toast({
       title: toastTitle,
@@ -319,7 +319,7 @@ export function ProductForm({
                 ))}
               </div>
             )}
-            <Button className="mt-4" type="submit">
+            <Button className="mt-4 border-2" type="submit">
               {submitTitle}
             </Button>
           </form>
