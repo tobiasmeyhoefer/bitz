@@ -166,9 +166,11 @@ export function ProductForm({
       previewUrls.map((url) => URL.revokeObjectURL(url))
     }
     if (files) {
-      const urls = Array.from(files).map((file) => URL.createObjectURL(file))
-      setPreviewUrls(urls)
+      // const urls = Array.from(files).map((file) => URL.createObjectURL(file))
+      // setPreviewUrls(urls)
       const compFiles = await compressImages(Array.from(files))
+      const urls2 = compFiles.map((file) => URL.createObjectURL(file))
+      setPreviewUrls(urls2)
       setCompressedFiles(compFiles)
       // console.log(compFiles[0].size)
       // console.log(files[0].size)
@@ -179,41 +181,53 @@ export function ProductForm({
 
   // Funktion zur Bildkomprimierung
   async function compressImages(files: File[]): Promise<File[]> {
-    console.log("test")
     const compressedFiles = await Promise.all(
       files.map(async (file) => {
-        const imageBitmap = await createImageBitmap(file)
-        const canvas = document.createElement('canvas')
-        const ctx = canvas.getContext('2d')
-
-        // Setze die gewünschte Breite und Höhe
-        const MAX_WIDTH = 800
-        const scale = MAX_WIDTH / imageBitmap.width
-        const newWidth = MAX_WIDTH
-        const newHeight = imageBitmap.height * scale
-
-        canvas.width = newWidth
-        canvas.height = newHeight
-
-        ctx!.drawImage(imageBitmap, 0, 0, newWidth, newHeight)
-
+        const imageBitmap = await createImageBitmap(file);
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+  
+        // Setze die gewünschte Breite und Höhe für das quadratische Format
+        const MAX_DIMENSION = 800;
+        canvas.width = MAX_DIMENSION;
+        canvas.height = MAX_DIMENSION;
+  
+        // Berechne die neue Größe und Position für das 1:1-Format
+        const aspectRatio = imageBitmap.width / imageBitmap.height;
+        let sourceX = 0;
+        let sourceY = 0;
+        let sourceWidth = imageBitmap.width;
+        let sourceHeight = imageBitmap.height;
+  
+        if (aspectRatio > 1) {
+          // Landscape
+          sourceX = (imageBitmap.width - imageBitmap.height) / 2;
+          sourceWidth = imageBitmap.height;
+        } else if (aspectRatio < 1) {
+          // Portrait
+          sourceY = (imageBitmap.height - imageBitmap.width) / 2;
+          sourceHeight = imageBitmap.width;
+        }
+  
+        ctx!.drawImage(imageBitmap, sourceX, sourceY, sourceWidth, sourceHeight, 0, 0, MAX_DIMENSION, MAX_DIMENSION);
+  
         // Konvertiere das Canvas-Bild in einen Blob
         return new Promise<File>((resolve) => {
           canvas.toBlob(
             (blob) => {
               if (blob) {
-                resolve(new File([blob], file.name, { type: file.type }))
+                resolve(new File([blob], file.name, { type: file.type }));
               }
             },
             file.type,
             0.8,
-          ) // 0.8 ist die Qualitätsstufe, 0.8 bedeutet 80% Qualität
-        })
+          ); // 0.8 ist die Qualitätsstufe, 0.8 bedeutet 80% Qualität
+        });
       }),
-    )
-
-    return compressedFiles
+    );
+    return compressedFiles;
   }
+  
 
   return (
     <>
