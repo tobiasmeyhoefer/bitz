@@ -40,7 +40,11 @@ const BrowseContent = (props: BrowseContentProps) => {
     getProducts()
   }, [])
 
-  const suggestions = ['Receiver', 'Monitor', 'Audio', 'Laptop', 'Headphone']
+  const suggestions = [
+    'Receiver', 'Monitor', 'Audio', 'Laptop', 'Headphone', 'Smartphone', 'Tablet', 'Smartwatch', 'Printer', 'Camera',
+    'Speaker', 'Projector', 'Game Console', 'Drone', 'Router', 'Hard Drive', 'SSD', 'Keyboard', 'Mouse', 'Graphics Card', 'Motherboard',
+    'Power Supply', 'RAM', 'Cooling System', 'VR Headset', 'E-Reader', 'Fitness Tracker', 'Charger'
+  ]
 
   const imgArr = ['/test_img.jpg', '/test_img.jpg', '/test_img.jpg']
   return (
@@ -84,6 +88,22 @@ const BrowseContent = (props: BrowseContentProps) => {
 
 const SearchDialog = (props: SearchBarProps) => {
   const [open, setOpen] = useState(false)
+  const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([])
+
+  // Funktion zum Filtern der Ergebnisse auf Basis der aktuellen Eingabe 
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value
+    props.setSearchValue(value)
+    if (value.length > 0) {
+      const filtered = props.suggestions.filter(suggestion =>
+        suggestion.toLowerCase().includes(value.toLowerCase())
+      )
+      setFilteredSuggestions(filtered)
+    } else {
+      setFilteredSuggestions([])
+    }
+  }
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -100,7 +120,7 @@ const SearchDialog = (props: SearchBarProps) => {
             className="rounded-t-l m-0 h-14 rounded-b-none px-4"
             type="input"
             placeholder={props.placeholder}
-            onChange={(e) => props.setSearchValue(e.target.value)}
+            onChange= {handleSearchChange} // {(e) => props.setSearchValue(e.target.value)}
             value={props.searchValue ? props.searchValue : ''}
             onKeyDown={(e) => e.key === 'Enter' && setOpen(false)} // Data fetching trigger
           />
@@ -128,7 +148,26 @@ const SearchDialog = (props: SearchBarProps) => {
             ))}
           </>
         ) : (
-          <div className="px-4 py-2">{props.searchValue}</div>
+
+          <div className="px-4 py-2">
+            {filteredSuggestions.length > 0 ? (
+              filteredSuggestions.map((suggestion, index) => (
+                <div
+                  onClick={() => {
+                    setOpen(false)
+                    props.setSearchValue(suggestion)
+                  }}
+                  className="rounded- px-8 py-2 text-black hover:rounded-b-lg hover:bg-gray-100"
+                  key={`fs-${index}`}
+                >
+                  {suggestion}
+                </div>
+              ))
+            ) : (
+              <div className="text-black px-4">Keine Vorschläge gefunden</div>
+            )}
+          </div>
+
         )}
       </DialogContent>
     </Dialog>
