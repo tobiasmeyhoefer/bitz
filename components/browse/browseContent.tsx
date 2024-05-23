@@ -1,11 +1,12 @@
 'use client'
 import { Input } from '@/components/ui/input'
-import { useEffect, useRef, useState } from 'react'
-import { Dialog, DialogTrigger, DialogContent } from '../ui/dialog'
-import { BrowseContentProps, SearchBarProps, RevealOnScrollProps, ProductType } from '@/lib/types'
-import { CardWithImage } from '../ui/cardWithImage'
-import { SlClose } from 'react-icons/sl'
 import { getProductsBrowse } from '@/lib/productaction'
+import { BrowseContentProps, ProductType, SearchBarProps } from '@/lib/types'
+import { motion, useAnimation } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
+import { SlClose } from 'react-icons/sl'
+import { CardWithImage } from '../ui/cardWithImage'
+import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog'
 
 const BrowseContent = (props: BrowseContentProps) => {
   const [searchValue, setSearchValue] = useState('')
@@ -135,14 +136,14 @@ const SearchDialog = (props: SearchBarProps) => {
   )
 }
 
-const RevealOnScroll = ({ children }: RevealOnScrollProps) => {
-  const [isVisible, setIsVisible] = useState(false)
+const RevealOnScroll = ({ children }: { children: React.ReactNode }) => {
+  const controls = useAnimation()
   const ref = useRef(null)
 
   useEffect(() => {
     const scrollObserver = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
-        setIsVisible(true)
+        controls.start({ opacity: 1, y: 0 })
         scrollObserver.unobserve(entry.target)
       }
     })
@@ -154,15 +155,17 @@ const RevealOnScroll = ({ children }: RevealOnScrollProps) => {
         scrollObserver.unobserve(ref.current)
       }
     }
-  }, [])
-
-  const classes = `transition-opacity duration-1000
-      ${isVisible ? 'opacity-100' : 'opacity-0'}`
+  }, [controls])
 
   return (
-    <div ref={ref} className={classes}>
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 50 }}
+      animate={controls}
+      transition={{ duration: 0.6 }}
+    >
       {children}
-    </div>
+    </motion.div>
   )
 }
 
