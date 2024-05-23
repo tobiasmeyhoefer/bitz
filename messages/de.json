@@ -28,9 +28,9 @@
   },
   "MyShop": {
     "title": "Mein Shop",
-    "addProducts": "Ware hinzufügen",
-    "updateProducts": "Ware aktualisieren",
-    "deleteProduct": "Ware löschen"
+    "addProducts": "Bitz hinzufügen",
+    "updateProducts": "Bitz aktualisieren",
+    "deleteProduct": "Bitz löschen"
   },
   "addProductPage": {
     "submitTitle": "absenden"
