@@ -15,6 +15,14 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+} from '@/components/ui/command'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Card } from '@/components/ui/card'
 import { Button } from '../ui/button'
 import { useRouter } from '@/navigation'
@@ -23,6 +31,7 @@ import { getSignedURL } from '@/lib/productaction'
 import { FormTranslations, ProductType } from '@/lib/types'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 import { useToast } from '@/components/ui/use-toast'
+import { cn } from '@/lib/utils'
 
 const MAX_FILE_SIZE = 8000000
 
@@ -82,6 +91,38 @@ export function ProductForm({
 }) {
   const router = useRouter()
   const { toast } = useToast()
+  const [open, setOpen] = React.useState(false)
+  const [categoryValue, setcategoryValue] = React.useState('')
+  const suggestions = [
+    { value: 'Reciever' },
+    { value: 'Monitor' },
+    { value: 'Audio' },
+    { value: 'Laptop' },
+    { value: 'Headphone' },
+    { value: 'Smartphone' },
+    { value: 'Tablet' },
+    { value: 'Smartwatch' },
+    { value: 'Printer' },
+    { value: 'Camera' },
+    { value: 'Speaker' },
+    { value: 'Projector' },
+    { value: 'Game Console' },
+    { value: 'Drone' },
+    { value: 'Router' },
+    { value: 'Hard Drive' },
+    { value: 'SSD' },
+    { value: 'Keyboard' },
+    { value: 'Mouse' },
+    { value: 'Graphics Card' },
+    { value: 'Motherboard' },
+    { value: 'RAM' },
+    { value: 'Cooling System' },
+    { value: 'VR Headset' },
+    { value: 'E-Reader' },
+    { value: 'Fitness Tracker' },
+    { value: 'Charger' },
+  ]
+
   const {
     title,
     description,
@@ -266,18 +307,47 @@ export function ProductForm({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>{category}</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder={categoryPlaceholder} />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="Gaming">Gaming</SelectItem>
-                      <SelectItem value="Haushaltsgeräte">Haushaltsgeräte</SelectItem>
-                      <SelectItem value="Kabel">Kabel</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <Popover open={open} onOpenChange={setOpen}>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant="outline"
+                        role="combobox"
+                        aria-expanded={open}
+                        className="w-[200px] justify-between"
+                      >
+                        {categoryValue
+                          ? suggestions.find((framework) => framework.value === categoryValue)
+                              ?.value
+                          : 'Select framework...'}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-[200px] p-0">
+                      <Command>
+                        <CommandInput placeholder="Search framework..." />
+                        <CommandEmpty>No framework found.</CommandEmpty>
+                        <CommandGroup>
+                          {suggestions.map((framework) => (
+                            <CommandItem
+                              key={framework.value}
+                              value={framework.value}
+                              onSelect={(currentValue) => {
+                                setcategoryValue(currentValue === categoryValue ? '' : currentValue)
+                                setOpen(false)
+                              }}
+                            >
+                              <p
+                                className={cn(
+                                  'mr-2 h-4 w-4',
+                                  categoryValue === framework.value ? 'opacity-100' : 'opacity-0',
+                                )}
+                              />
+                              {framework.value}
+                            </CommandItem>
+                          ))}
+                        </CommandGroup>
+                      </Command>
+                    </PopoverContent>
+                  </Popover>
                   <FormMessage />
                 </FormItem>
               )}
