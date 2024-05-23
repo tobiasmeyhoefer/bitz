@@ -119,18 +119,18 @@ const NavMenuDrawer = (props: any) => {
       <DrawerTrigger asChild>
         <Button
           onClick={() => setDrawerOpen(true)}
-          className="h-fit bg-transparent p-0 text-black shadow-none hover:bg-transparent hover:text-black "
+          className="text-bg-primary-foreground h-fit bg-transparent p-0 shadow-none hover:bg-transparent hover:text-primary-hover "
         >
           <TbMenu className="h-[30px] w-[40px]" />
         </Button>
       </DrawerTrigger>
-      <DrawerContent className="max-w-smd mx-auto w-full border-0 bg-white">
+      <DrawerContent className="max-w-smd mx-auto w-full border-0 bg-primary-foreground text-primary">
         {props.menuItems.map((item: any, index: number) => {
           if (pathname === item.props.linkTo)
-            item.props.className = cn(item.props.className, 'text-black no-underline')
+            item.props.className = cn(item.props.className, ' no-underline')
           return (
             <div
-              className={`flex justify-center hover:bg-slate-100 ${index === 0 && `rounded-t-xl`} ${pathname === item.props.linkTo && 'cursor-default bg-slate-100 text-black no-underline'}`}
+              className={`flex justify-center hover:bg-slate-100 ${index === 0 && `rounded-t-xl`} ${pathname === item.props.linkTo && 'cursor-default bg-slate-100 text-primary no-underline'}`}
               onClick={() => setDrawerOpen(false)}
               key={item.key}
             >
