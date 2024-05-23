@@ -26,17 +26,18 @@ const MyShop = async () => {
     <div className="pt-24 inset-x-1/2 top-24 flex flex-col items-center"> 
       <div className="w-full max-w-max p-2 border-2 border-gray-300 rounded-lg shadow-lg">
 
-        <h1 className="text-3xl font-bold text-left mb-4">Meine Bitz</h1>
+        <h1 className="mt-10 text-3xl font-bold text-left mb-4">Meine Bitz</h1>
 
-        <div className="flex justify-left space-x-4 mt-8">
-         <Button>
-          <Link href="myshop/add">{t('addProducts')}</Link>
-         </Button>
-        </div>
         <div className="m-5">
           <MyShopContent {...myShopProps} />  
         </div>
         
+        
+        <div className="flex justify-end space-x-4 mt-8">
+         <Button>
+          <Link href="myshop/add">{t('addProducts')}</Link>
+         </Button>
+        </div>
         
       </div>
     </div>
