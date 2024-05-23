@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { Input } from '../ui/input'
-import { addProduct, getProductById } from '@/lib/productaction'
+import { addProduct } from '@/lib/productaction'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -118,9 +118,9 @@ export function ProductForm({
 
   async function onSubmit(values: ProductType) {
     let imageUrls = []
-    if (files) {
-      for (let i = 0; i < files.length; i++) {
-        if (files[i]) {
+    if (compressedFiles) {
+      for (let i = 0; i < compressedFiles.length; i++) {
+        if (compressedFiles[i]) {
           const computeSHA256 = async (file: File) => {
             const buffer = await file.arrayBuffer()
             const hashBuffer = await crypto.subtle.digest('SHA-256', buffer)
@@ -129,9 +129,9 @@ export function ProductForm({
             return hashHex
           }
           const signedURLResult = await getSignedURL({
-            fileSize: files[i].size,
-            fileType: files[i].type,
-            checksum: await computeSHA256(files[i]),
+            fileSize: compressedFiles[i].size,
+            fileType: compressedFiles[i].type,
+            checksum: await computeSHA256(compressedFiles[i]),
           })
           if (signedURLResult.failure !== undefined) {
             console.error(signedURLResult.failure)
@@ -142,9 +142,9 @@ export function ProductForm({
           const response = await fetch(url, {
             method: 'PUT',
             headers: {
-              'Content-Type': files[i].type,
+              'Content-Type': compressedFiles[i].type,
             },
-            body: files[i],
+            body: compressedFiles[i],
           })
           imageUrls.push(url.split('?')[0])
         }
@@ -156,27 +156,84 @@ export function ProductForm({
   }
 
   const [files, setFiles] = useState<FileList | null>(null)
+  const [compressedFiles, setCompressedFiles] = useState<File[] | null>(null)
   const [previewUrls, setPreviewUrls] = useState<string[] | null>(null)
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files ?? null
     setFiles(files)
     if (previewUrls) {
       previewUrls.map((url) => URL.revokeObjectURL(url))
     }
     if (files) {
-      const urls = Array.from(files).map((file) => URL.createObjectURL(file))
-      setPreviewUrls(urls)
+      // const urls = Array.from(files).map((file) => URL.createObjectURL(file))
+      // setPreviewUrls(urls)
+      const compFiles = await compressImages(Array.from(files))
+      const urls2 = compFiles.map((file) => URL.createObjectURL(file))
+      setPreviewUrls(urls2)
+      setCompressedFiles(compFiles)
+      // console.log(compFiles[0].size)
+      // console.log(files[0].size)
     } else {
       setPreviewUrls(null)
     }
   }
 
+  // Funktion zur Bildkomprimierung
+  async function compressImages(files: File[]): Promise<File[]> {
+    const compressedFiles = await Promise.all(
+      files.map(async (file) => {
+        const imageBitmap = await createImageBitmap(file);
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+  
+        // Setze die gewünschte Breite und Höhe für das quadratische Format
+        const MAX_DIMENSION = 800;
+        canvas.width = MAX_DIMENSION;
+        canvas.height = MAX_DIMENSION;
+  
+        // Berechne die neue Größe und Position für das 1:1-Format
+        const aspectRatio = imageBitmap.width / imageBitmap.height;
+        let sourceX = 0;
+        let sourceY = 0;
+        let sourceWidth = imageBitmap.width;
+        let sourceHeight = imageBitmap.height;
+  
+        if (aspectRatio > 1) {
+          // Landscape
+          sourceX = (imageBitmap.width - imageBitmap.height) / 2;
+          sourceWidth = imageBitmap.height;
+        } else if (aspectRatio < 1) {
+          // Portrait
+          sourceY = (imageBitmap.height - imageBitmap.width) / 2;
+          sourceHeight = imageBitmap.width;
+        }
+  
+        ctx!.drawImage(imageBitmap, sourceX, sourceY, sourceWidth, sourceHeight, 0, 0, MAX_DIMENSION, MAX_DIMENSION);
+  
+        // Konvertiere das Canvas-Bild in einen Blob
+        return new Promise<File>((resolve) => {
+          canvas.toBlob(
+            (blob) => {
+              if (blob) {
+                resolve(new File([blob], file.name, { type: file.type }));
+              }
+            },
+            file.type,
+            0.8,
+          ); // 0.8 ist die Qualitätsstufe, 0.8 bedeutet 80% Qualität
+        });
+      }),
+    );
+    return compressedFiles;
+  }
+  
+
   return (
     <>
       <Card className="w-[500px] p-10">
         <Form {...form}>
-          <form className='space-y-4' onSubmit={form.handleSubmit(onSubmit)}>
+          <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
               control={form.control}
               name={'title'}
