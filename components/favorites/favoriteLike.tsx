@@ -28,7 +28,13 @@ const FavoriteLike = ({ productId }: { productId: string }) => {
             setIsFavorite(!isFavorite)
           }}
         >
-          <Image width={30} height={30} src={isFavorite ? filled : heart} alt="LikeIcon" />
+          <Image
+            width={30}
+            height={30}
+            src={isFavorite ? filled : heart}
+            className={isFavorite ? '' : 'white-filter'}
+            alt="LikeIcon"
+          />
         </Button>
       </form>
     </>

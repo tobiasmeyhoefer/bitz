@@ -51,7 +51,7 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                 </CardTitle>
                 {props.favIcon && <FavoriteLike productId={props.productID!} />}
               </div>
-              <CardDescription className="text-xl text-black">{props.desc}</CardDescription>
+              <CardDescription className="text-xl ">{props.desc}</CardDescription>
             </CardHeader>
           </Card>
         ) : (

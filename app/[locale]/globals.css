@@ -22,6 +22,7 @@
 
     --primary: 24 9.8% 10%;
     --primary-foreground: 60 9.1% 97.8%;
+    --primary-hover: 24 9.8% 15%;
 
     --secondary: 60 4.8% 95.9%;
     --secondary-foreground: 24 9.8% 10%;
@@ -45,16 +46,47 @@
   }
 
   .dark {
-    --background: 0, 0%, 10%;
+    /* --background: 0, 0%, 10%;
     --foreground: 60 9.1% 97.8%;
 
     --card: 0 0% 100%;
     --card-foreground: 20 14.3% 4.1%;
 
     --primary: 60 9.1% 97.8%;
-    --primary-foreground: 24 9.8% 10%;
+    --primary-foreground: 24 9.8% 10%; */
 
-    --filter-normal: 100%;
+    --background: 0 0% 10%;
+    --foreground: 0 0% 90%;
+
+    --card: 0 0% 20%;
+    --card-foreground: 0 0% 90%;
+
+    --popover: 0 0% 20%;
+    --popover-foreground: 0 0% 90%;
+
+    --primary: 0 0% 20%;
+    --primary-foreground: 0 0% 90%;
+    --primary-hover: 0 0% 30%;
+
+    --secondary: 0 0% 20%;
+    --secondary-foreground: 0 0% 90%;
+
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 90%;
+
+    --accent: 0 0% 40%;
+    --accent-foreground: 0 0% 90%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 90%;
+
+    --border: 0 0% 30%;
+    --input: 0 0% 40%;
+    --ring: 0 0% 50%;
+
+    --filter-normal: 90%;
+
+    --link: 120 50% 75%;
   }
 
   .white-filter {
