@@ -64,7 +64,7 @@ const MyShopContent = (props: MyShopProps) => {
         </div>
       )}
     </div>
-    <p>Current User ID: {props.userId}</p>
+    {/* <p>Current User ID: {props.userId}</p> */}
   </>
 }
 
