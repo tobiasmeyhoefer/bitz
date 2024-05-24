@@ -16,8 +16,11 @@ const localeMiddleware = createMiddleware({
 
 export async function middleware(req: NextRequest) {
   const cookies = req.cookies;
+  console.log(cookies.toString())
+
   const { nextUrl } = req
   const isLoggedIn = !!cookies.get("authjs.session-token")
+
 
   console.log(isLoggedIn)
 
