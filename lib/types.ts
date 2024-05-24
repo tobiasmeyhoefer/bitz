@@ -1,6 +1,6 @@
 type CardWithImageProps = {
   title: string
-  desc: string
+  desc: string | undefined
   content?: string
   imgUrl1?: string | null | string[]
   className?: React.HTMLAttributes<HTMLDivElement> | string
@@ -8,6 +8,21 @@ type CardWithImageProps = {
   shopID?: string
   productID?: string
   product?: any
+}
+ type User = {
+  userId: string
+//  email: string
+//  name: string
+//  avatar: string
+}
+
+type UserId = {
+  id: string
+} 
+
+type MyShopProps = {
+  userId: string,
+  location: any
 }
 
 type SearchBarProps = {
@@ -86,4 +101,8 @@ export type {
   BrowseContentProps,
   RevealOnScrollProps,
   ProductType,
+  User,
+  UserId,
+  MyShopProps,
+  Shop
 }
