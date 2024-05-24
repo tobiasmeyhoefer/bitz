@@ -19,6 +19,8 @@ export async function middleware(req: NextRequest) {
   const { nextUrl } = req
   const isLoggedIn = !!cookies.get("authjs.session-token")
 
+  console.log(isLoggedIn)
+
   const localeWithSlash = "/" + nextUrl.pathname.split("/")[1]
   const pathNameWithoutLocale = nextUrl.pathname.substring(nextUrl.pathname.indexOf("/", 1));
 
