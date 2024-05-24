@@ -28,9 +28,9 @@
   },
   "MyShop": {
     "title": "My Shop",
-    "addProducts": "add Bitz",
-    "updateProducts": "update Bitz",
-    "deleteProduct": "delete Bitz"
+    "addProducts": "add Bit",
+    "updateProducts": "update Bit",
+    "deleteProduct": "delete Bit"
   },
   "addProductPage": {
     "submitTitle": "submit"
