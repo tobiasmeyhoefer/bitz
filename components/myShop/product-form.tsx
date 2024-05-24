@@ -33,6 +33,36 @@ import { FormTranslations, ProductType } from '@/lib/types'
 import { useToast } from '@/components/ui/use-toast'
 import { cn } from '@/lib/utils'
 
+const suggestions = [
+  { value: 'Reciever' },
+  { value: 'Monitor' },
+  { value: 'Audio' },
+  { value: 'Laptop' },
+  { value: 'Headphone' },
+  { value: 'Smartphone' },
+  { value: 'Tablet' },
+  { value: 'Smartwatch' },
+  { value: 'Printer' },
+  { value: 'Camera' },
+  { value: 'Speaker' },
+  { value: 'Projector' },
+  { value: 'Game Console' },
+  { value: 'Drone' },
+  { value: 'Router' },
+  { value: 'Hard Drive' },
+  { value: 'SSD' },
+  { value: 'Keyboard' },
+  { value: 'Mouse' },
+  { value: 'Graphics Card' },
+  { value: 'Motherboard' },
+  { value: 'RAM' },
+  { value: 'Cooling System' },
+  { value: 'VR Headset' },
+  { value: 'E-Reader' },
+  { value: 'Fitness Tracker' },
+  { value: 'Charger' },
+]
+
 const MAX_FILE_SIZE = 8000000
 
 const minError = 'Eingabe erfordert'
@@ -93,35 +123,6 @@ export function ProductForm({
   const { toast } = useToast()
   const [open, setOpen] = React.useState(false)
   const [categoryValue, setcategoryValue] = React.useState('')
-  const suggestions = [
-    { value: 'Reciever' },
-    { value: 'Monitor' },
-    { value: 'Audio' },
-    { value: 'Laptop' },
-    { value: 'Headphone' },
-    { value: 'Smartphone' },
-    { value: 'Tablet' },
-    { value: 'Smartwatch' },
-    { value: 'Printer' },
-    { value: 'Camera' },
-    { value: 'Speaker' },
-    { value: 'Projector' },
-    { value: 'Game Console' },
-    { value: 'Drone' },
-    { value: 'Router' },
-    { value: 'Hard Drive' },
-    { value: 'SSD' },
-    { value: 'Keyboard' },
-    { value: 'Mouse' },
-    { value: 'Graphics Card' },
-    { value: 'Motherboard' },
-    { value: 'RAM' },
-    { value: 'Cooling System' },
-    { value: 'VR Headset' },
-    { value: 'E-Reader' },
-    { value: 'Fitness Tracker' },
-    { value: 'Charger' },
-  ]
 
   const {
     title,
