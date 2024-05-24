@@ -4,17 +4,24 @@ import { db } from '../db'
 import { eq } from 'drizzle-orm'
 import { auth } from '@/auth'
 
-export async function saveUserLocation(values : {postcode: string}) {
+export async function saveUserLocation(values: { postcode: string }) {
   const session = await auth()
   const id = session?.user?.id
-  if(id) {
-    await db.update(users)
-    .set({ location: values.postcode})
-    .where(eq(users.id, id));
+  if (id) {
+    await db.update(users).set({ location: values.postcode }).where(eq(users.id, id))
   }
 }
 
-export async function getUserById(userId :string) {
+export async function getUserById(userId: string) {
   const response = await db.select().from(users).where(eq(users.id, userId))
   return response
+}
+
+export async function getUser() {
+  const session = await auth()
+  const id = session?.user?.id
+  if (id) {
+    const response = await db.select().from(users).where(eq(users.id, id))
+    return response
+  }
 }
