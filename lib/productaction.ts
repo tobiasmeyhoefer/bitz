@@ -24,23 +24,24 @@ export async function getProductsBrowse() {
 }
 
 export async function getProductsOwned(userId: string) {
-   /* const session = await auth()
+  /* const session = await auth()
   const id = session?.user?.id */
   let id = userId
   let response
   if (id) {
-    response = await db.select().from(products).where(eq(products.sellerId, id))  //muss 'eq' sein und nicht 'ne'
+    response = await db.select().from(products).where(eq(products.sellerId, id)) //muss 'eq' sein und nicht 'ne'
     if (response) {
       return response
     }
   }
 }
 
-
 export async function addProduct(values: ProductType, imageUrls: string[]) {
   let { title, description, price, quantity } = values
   const session = await auth()
   const id = session?.user?.id
+  const created = new Date(Date.now())
+  created.setHours(created.getHours() + 2)
   if (id) {
     const user = await getUserById(id)
     await db.insert(products).values({
@@ -50,7 +51,7 @@ export async function addProduct(values: ProductType, imageUrls: string[]) {
       quantity: quantity,
       sellerId: id,
       location: user[0].location ?? null,
-      createdAt: new Date(),
+      createdAt: created,
       imageUrl1: imageUrls[0],
       imageUrl2: imageUrls[1],
       imageUrl3: imageUrls[2],
@@ -210,7 +211,7 @@ export async function deleteImageNeon(imageIndex: number, productId: string) {
 }
 
 export async function deleteImageOnAws(imageUrl: string) {
-  console.log("test")
+  console.log('test')
   const key = imageUrl.split('/').slice(-1)[0]
   console.log(key)
   const deleteParams = {

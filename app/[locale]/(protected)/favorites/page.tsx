@@ -5,7 +5,7 @@ const Favorites = async () => {
   const products = await getFavoriteProducts()
   return (
     <>
-      <h1 className='text-3xl font-bold'>Favoriten</h1>
+      <h1 className="text-3xl font-bold">Favoriten</h1>
       <div
         className={`${`h-full`} flex w-full flex-col items-center justify-center px-10 py-20 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
       >
