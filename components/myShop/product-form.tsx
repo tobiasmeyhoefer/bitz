@@ -332,7 +332,7 @@ export function ProductForm({
                               <CommandItem
                                 key={framework.value}
                                 value={framework.value}
-                                onSelect={(currentValue) => {
+                                onSelect={(currentValue: string) => {
                                   form.setValue('category', framework.value),
                                     setcategoryValue(
                                       currentValue === categoryValue ? '' : currentValue,
