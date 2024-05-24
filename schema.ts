@@ -33,6 +33,7 @@ export const products = pgTable('product', {
     .notNull()
     .$default(() => 1),
   location: text('location'),
+  category: text('category'),
   sellerId: text('sellerId')
     .notNull()
     .references(() => users.id, { onDelete: 'cascade' }),
@@ -114,18 +115,22 @@ export const Authenticator = pgTable(
   }),
 )
 
-export const favorites = pgTable('favorites', {
-  userId: text('userId')
-    .notNull()
-    .references(() => users.id, { onDelete: 'cascade' }),
-  productId: text('productId')
-    .notNull()
-    .references(() => products.id, { onDelete: 'cascade' }),
-}, (table) => {
-  return {
-    id: primaryKey({ columns: [table.userId, table.productId]}),
-  };
-});
+export const favorites = pgTable(
+  'favorites',
+  {
+    userId: text('userId')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    productId: text('productId')
+      .notNull()
+      .references(() => products.id, { onDelete: 'cascade' }),
+  },
+  (table) => {
+    return {
+      id: primaryKey({ columns: [table.userId, table.productId] }),
+    }
+  },
+)
 
 // export type ProductType = typeof products.$inferSelect
 export type UserType = typeof users.$inferSelect

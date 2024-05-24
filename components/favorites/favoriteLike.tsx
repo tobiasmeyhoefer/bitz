@@ -2,7 +2,9 @@
 import { addToFavorites, checkFavorite, deleteFavorite } from '@/lib/productaction'
 import { useEffect, useState } from 'react'
 import { Button } from '../ui/button'
-import Like from '../svg/like'
+import filled from '@/public/icons/filledheart.svg'
+import heart from '@/public/icons/heart.svg'
+import Image from 'next/image'
 
 const FavoriteLike = ({ productId }: { productId: string }) => {
   const [isFavorite, setIsFavorite] = useState(false)
@@ -20,13 +22,19 @@ const FavoriteLike = ({ productId }: { productId: string }) => {
           variant="ghost"
           size="icon"
           type="submit"
-          aria-label='like product'
+          aria-label="like product"
           onClick={() => {
             isFavorite ? deleteFavorite(productId) : addToFavorites(productId)
             setIsFavorite(!isFavorite)
           }}
         >
-          <Like className={isFavorite ? 'w-5 fill-red-600' : 'w-5 fill-black'} />
+          <Image
+            width={30}
+            height={30}
+            src={isFavorite ? filled : heart}
+            className={isFavorite ? '' : 'white-filter'}
+            alt="LikeIcon"
+          />
         </Button>
       </form>
     </>

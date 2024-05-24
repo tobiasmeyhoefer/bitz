@@ -23,8 +23,8 @@ export default function ScrollToTopButton() {
   }
 
   return (
-    // showButton && (
-    <button className="fixed bottom-8 right-12 z-50 h-12 w-12 rounded-sm border border-white text-white hover:bg-accent hover:text-accent-foreground">
+    // showButton && ( ""scroll-to-top"""
+    <button className=" fixed bottom-8 right-12 z-50 h-12 w-12 rounded-sm border hover:bg-accent hover:text-accent-foreground">
       ↑
     </button>
   )

@@ -37,7 +37,7 @@ export async function getProductsOwned(userId: string) {
 }
 
 export async function addProduct(values: ProductType, imageUrls: string[]) {
-  let { title, description, price, quantity } = values
+  let { title, description, price, quantity, category } = values
   const session = await auth()
   const id = session?.user?.id
   const created = new Date(Date.now())
@@ -49,6 +49,7 @@ export async function addProduct(values: ProductType, imageUrls: string[]) {
       description: description,
       price: price,
       quantity: quantity,
+      category: category,
       sellerId: id,
       location: user[0].location ?? null,
       createdAt: created,
@@ -73,7 +74,7 @@ export async function updateProduct(productId: string, values: ProductType) {
   if (id) {
     const existingProduct = await getProductById(productId)
     if (existingProduct && existingProduct[0].sellerId === id) {
-      const { title, description, price, quantity } = values
+      const { title, description, price, quantity, category } = values
       await db
         .update(products)
         .set({
@@ -81,6 +82,7 @@ export async function updateProduct(productId: string, values: ProductType) {
           description: description || existingProduct[0].description,
           price: price || existingProduct[0].price,
           quantity: quantity || existingProduct[0].quantity,
+          category: category || existingProduct[0].category,
         })
         .where(eq(products.id, productId))
     } else {

@@ -5,9 +5,8 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
-import { getUserById, saveUserLocation } from '@/lib/useraction'
+import { getUser, saveUserLocation } from '@/lib/useraction'
 import { useEffect, useState } from 'react'
-import { auth } from '@/auth'
 
 const formSchema = z.object({
   postcode: z.string().regex(/^\d+$/, { message: 'only numbers are valid' }).length(5),
@@ -17,8 +16,7 @@ export default function LocationChooser({ postcode }: { postcode: string }) {
   const [location, setLocation] = useState<string>('')
   useEffect(() => {
     const getProduct = async () => {
-      const session = await auth()
-      const result = await getUserById(session?.user?.id!)
+      const result = await getUser()
       const r = result![0]
       setLocation(r.location ?? '')
     }

@@ -23,7 +23,7 @@ export default async function Home() {
         className="mt-20 flex h-screen snap-start flex-col font-space_grotesk lg:flex-row"
       >
         <Image
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 transform animate-bounce"
+          className=" white-filter absolute bottom-8 left-1/2 -translate-x-1/2 transform animate-bounce"
           width={24}
           height={24}
           src="/icons/chevron-up.svg"

@@ -24,6 +24,7 @@ const BrowseContent = (props: BrowseContentProps) => {
             description: item.description ?? '',
             price: item.price,
             quantity: item.quantity,
+            category: item.category ?? '',
             sellerId: item.sellerId,
             createdAt: item.createdAt,
             imageUrl1: item.imageUrl1,
@@ -89,13 +90,13 @@ const SearchDialog = (props: SearchBarProps) => {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Input
-          className="sticky top-[20px] h-14 w-full bg-white sm:w-2/3 md:w-1/2"
+          className="sticky top-[20px] h-14 w-full bg-background  sm:w-2/3 md:w-1/2"
           type="search"
           placeholder={props.searchValue ? props.searchValue : props.placeholder}
           readOnly
         />
       </DialogTrigger>
-      <DialogContent className="gap-0 border-0 bg-white p-0">
+      <DialogContent className="gap-0 border-0  p-0">
         <div className="flex">
           <Input
             className="rounded-t-l m-0 h-14 rounded-b-none px-4"
@@ -114,14 +115,14 @@ const SearchDialog = (props: SearchBarProps) => {
         </div>
         {!props.searchValue ? (
           <>
-            <h1 className="px-4 pt-2 text-lg font-medium text-black">{props.suggestionsTitle}</h1>
+            <h1 className="px-4 pt-2 text-lg font-medium ">{props.suggestionsTitle}</h1>
             {props.suggestions.map((suggestion, index) => (
               <div
                 onClick={() => {
                   setOpen(false)
                   props.setSearchValue(suggestion)
                 }}
-                className="rounded- px-8 py-2 text-black hover:rounded-b-lg hover:bg-gray-100"
+                className="rounded- px-8 py-2 hover:rounded-b-lg hover:bg-input"
                 key={`s-${index}`}
               >
                 {suggestion}
