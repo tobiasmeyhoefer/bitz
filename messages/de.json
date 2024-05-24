@@ -28,8 +28,9 @@
   },
   "MyShop": {
     "title": "Mein Shop",
-    "addProducts": "Produkt hinzufügen",
-    "updateProducts": "Produkt aktualisieren"
+    "addProducts": "Bit hinzufügen",
+    "updateProducts": "Bit aktualisieren",
+    "deleteProduct": "Bit löschen"
   },
   "addProductPage": {
     "title": "Titel",
@@ -42,7 +43,11 @@
     "toastTitle": "Erfolgreich",
     "toastDescription": "Produkt wurde hinzugefügt",
     "submitTitle": "absenden"
-  },
+  }, 
+  "popAlert": {
+    "submitTitle": "löschen",
+    "yousure": "Bist du sicher, dass du diese Ware löschen möchtest?"
+    },
   "Settings": {
     "title": "Einstellungen",
     "city": "Stadt",

@@ -23,11 +23,27 @@ export async function getProductsBrowse() {
   }
 }
 
+export async function getProductsOwned(userId: string) {
+  /* const session = await auth()
+  const id = session?.user?.id */
+  let id = userId
+  let response
+  if (id) {
+    response = await db.select().from(products).where(eq(products.sellerId, id)) //muss 'eq' sein und nicht 'ne'
+    if (response) {
+      return response
+    }
+  }
+}
+
 export async function addProduct(values: ProductType, imageUrls: string[]) {
   let { title, description, price, quantity, category } = values
-  const id = await getCurrentUserId()
+  const session = await auth()
+  const id = session?.user?.id
+  const created = new Date(Date.now())
+  created.setHours(created.getHours() + 2)
   if (id) {
-    const user = await getUserById()
+    const user = await getUserById(id)
     await db.insert(products).values({
       title: title,
       description: description,
@@ -35,8 +51,8 @@ export async function addProduct(values: ProductType, imageUrls: string[]) {
       quantity: quantity,
       category: category,
       sellerId: id,
-      location: user![0].location ?? null,
-      createdAt: new Date(),
+      location: user[0].location ?? null,
+      createdAt: created,
       imageUrl1: imageUrls[0],
       imageUrl2: imageUrls[1],
       imageUrl3: imageUrls[2],
@@ -187,21 +203,22 @@ export async function getSignedURL({
   return { success: { url } }
 }
 
-// deletes an image
-export async function deleteImage(imageUrl: string, imageIndex: number, productId: string) {
-  //delete image AWS
-  const key = imageUrl.split('/').slice(-1)[0]
-  const deleteParams = {
-    Bucket: process.env.AWS_BUCKET_NAME!,
-    Key: key,
-  }
-  await s3Client.send(new DeleteObjectCommand(deleteParams))
-
-  //deleteimage neon
+export async function deleteImageNeon(imageIndex: number, productId: string) {
   const dynamicImageUrl: keyof typeof products =
     `${'imageUrl'}${imageIndex}` as keyof typeof products
   await db
     .update(products)
     .set({ [dynamicImageUrl]: null })
     .where(eq(products.id, productId))
+}
+
+export async function deleteImageOnAws(imageUrl: string) {
+  console.log('test')
+  const key = imageUrl.split('/').slice(-1)[0]
+  console.log(key)
+  const deleteParams = {
+    Bucket: process.env.AWS_BUCKET_NAME!,
+    Key: key,
+  }
+  await s3Client.send(new DeleteObjectCommand(deleteParams))
 }

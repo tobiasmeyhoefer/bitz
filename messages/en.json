@@ -28,8 +28,9 @@
   },
   "MyShop": {
     "title": "My Shop",
-    "addProducts": "add Product",
-    "updateProducts": "update Product"
+    "addProducts": "add Bit",
+    "updateProducts": "update Bit",
+    "deleteProduct": "delete Bit"
   },
   "addProductPage": {
     "title": "Title",
@@ -43,6 +44,10 @@
     "toastDescription": "added Product",
     "submitTitle": "submit"
   },
+  "popAlert": {
+    "submitTitle": "löschen",
+    "yousure": "This will permanently delete your product from the database and remove your data from our servers. This action cannot be undone. "
+    },
   "Settings": {
     "title": "Settings",
     "city": "city",
