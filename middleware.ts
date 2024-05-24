@@ -19,7 +19,7 @@ export async function middleware(req: NextRequest) {
   console.log(cookies.toString())
 
   const { nextUrl } = req
-  const isLoggedIn = !!cookies.get("authjs.session-token")
+  const isLoggedIn = !!cookies.get("__Secure-authjs.session-token")
 
 
   console.log(isLoggedIn)
