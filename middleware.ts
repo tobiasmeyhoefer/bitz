@@ -5,6 +5,7 @@ import {
   DEFAULT_LOGIN_REDIRECT,
   apiAuthPrefix,
   authRoutes,
+  errorRoutes,
   publicRoutes
 } from "@/routes"
  
@@ -25,26 +26,26 @@ export async function middleware(req: NextRequest) {
   const isPublicRoute = publicRoutes.includes(pathNameWithoutLocale)
   const isAuthRoute = authRoutes.includes(pathNameWithoutLocale)
   const isLandingPageRoute = nextUrl.pathname === localeWithSlash
+  const isErrorRoute = errorRoutes.includes(nextUrl.pathname)
 
-  //first site
-  if(!nextUrl.pathname.includes("de") && !nextUrl.pathname.includes("en")) {
-    // console.log(localeMiddleware.toString())
+  //error routen werden ignoriert
+  if(isErrorRoute) {
     return localeMiddleware(req)
   }
 
-  // console.log("test")
-  console.log(nextUrl.pathname)
+  //first site
+  if(!nextUrl.pathname.includes("de") && !nextUrl.pathname.includes("en")) {
+    return localeMiddleware(req)
+  }
 
   //werden ignoriert
   if(isApiAuthRoute) {
-    // console.log("test1")
     return localeMiddleware(req)
   }
 
   //auth routes werden immer erlaubt wenn man nicht eingeloggt ist, falls man aber eingeloggt ist dann geht zur browse seite
   if(isAuthRoute) {
     if(isLoggedIn) {
-      // console.log("test2")
       return Response.redirect(new URL(localeWithSlash + DEFAULT_LOGIN_REDIRECT, nextUrl))
     }
     return localeMiddleware(req)
@@ -52,15 +53,12 @@ export async function middleware(req: NextRequest) {
 
   //protected routes wenn nicht eingeloggt dann Startseite
   if(!isLoggedIn && !isPublicRoute) {
-    // console.log("test3")
     return Response.redirect(new URL(localeWithSlash, nextUrl))
   }
 
   //wenn eingeloggt dann kann man nicht auf landingpage
   if(isLoggedIn && isLandingPageRoute) {
-    // console.log("test4")
     const route = localeWithSlash + DEFAULT_LOGIN_REDIRECT
-    // const env = process.env.NODE_ENV;
     return Response.redirect(new URL(route, nextUrl))
   }
 

@@ -8,16 +8,16 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { getTranslations } from 'next-intl/server'
 import SignInPasskey from '@/components/auth/sign-in-passkey'
 import { BorderBeam } from '@/components/magicui/border-beam'
 import RadialGradient from '@/components/magicui/radial-gradient'
 import DotPattern from '@/components/magicui/dot-pattern'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 
-const Login = async () => {
-  const t = await getTranslations('LoginForm')
+const Login = () => {
+  const t = useTranslations('LoginForm')
   const CubeSceneNav = dynamic(() => import('@/components/explosion/cubeSceneNav'), {
     ssr: false,
   })

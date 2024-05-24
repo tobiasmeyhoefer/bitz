@@ -22,7 +22,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     },
   },
   experimental: { enableWebAuthn: true },
-  // pages: {
-  //   error: "/en/error"
-  // }
+  pages: {
+    error: "/en/auth/error",
+    signIn: "/en/auth/error"
+  }
 })
