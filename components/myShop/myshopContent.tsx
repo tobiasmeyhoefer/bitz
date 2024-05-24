@@ -44,7 +44,6 @@ const MyShopContent = (props: MyShopProps) => {
       {!loading ? (
         <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
           {products.map((p, index) => (
-            <RevealOnScroll key={`prx-${index}`}>
               <CardWithImage
                 key={`pr-${index}`}
                 title={p.title}
@@ -55,7 +54,6 @@ const MyShopContent = (props: MyShopProps) => {
                 product={products[index]}
                 favIcon
               />
-            </RevealOnScroll>
           ))}
         </div>
       ) : (
