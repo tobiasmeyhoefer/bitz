@@ -19,10 +19,10 @@ import DotPattern from '@/components/magicui/dot-pattern'
 
 const Login = async () => {
   const t = await getTranslations('LoginForm')
-  const session = await auth()
-  if (!!session?.user) {
-    redirect('/browse')
-  }
+  // const session = await auth()
+  // if (!!session?.user) {
+  //   redirect('/browse')
+  // }
   return (
     <div className="flex h-screen w-full items-center justify-center">
       <div className='relative md:w-[800px] w-full rounded-xl p-[1px] mx-8'>
