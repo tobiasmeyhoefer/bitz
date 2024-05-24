@@ -1,12 +1,12 @@
 'use client'
+
 import { useEffect, useState } from 'react'
 import { CardWithImage } from '@/components/ui/cardWithImage'
 import { getProductsOwned } from '@/lib/productaction'
 import { ProductType, MyShopProps } from '@/lib/types'
-import RevealOnScroll from '../navigation/revealOnScroll'
 
 const MyShopContent = (props: MyShopProps) => {
-  const [loading] = useState(false)
+  //const [loading] = useState(false)
   const [products, setProducts] = useState<ProductType[]>([])
 
   useEffect(() => {
@@ -40,8 +40,8 @@ const MyShopContent = (props: MyShopProps) => {
   let isProduct = (item: any) => item.price !== undefined
 
   return (
-    <div className={`${loading && `h-full`} flex flex-col items-center justify-center px-4 py-20 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}>
-      {!loading ? (
+    <div className={`h-full flex flex-col items-center justify-center px-4 py-20 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}>
+      { (
         <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
           {products.map((p, index) => (
               <CardWithImage
@@ -56,11 +56,7 @@ const MyShopContent = (props: MyShopProps) => {
               />
           ))}
         </div>
-      ) : (
-        <div className="flex h-full items-center justify-center">
-          <div className="h-20 w-20 animate-ping rounded-[30px] bg-black"></div>
-        </div>
-      )}
+      ) }
     </div>
   )
 }
