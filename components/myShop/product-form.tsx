@@ -21,6 +21,7 @@ import {
   CommandGroup,
   CommandInput,
   CommandItem,
+  CommandList,
 } from '@/components/ui/command'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Card } from '@/components/ui/card'
@@ -29,7 +30,6 @@ import { useRouter } from '@/navigation'
 import Image from 'next/image'
 import { getSignedURL } from '@/lib/productaction'
 import { FormTranslations, ProductType } from '@/lib/types'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 import { useToast } from '@/components/ui/use-toast'
 import { cn } from '@/lib/utils'
 
@@ -218,7 +218,7 @@ export function ProductForm({
       }
     }
     // console.log(JSON.parse(JSON.stringify(values)))
-    // await addProduct(JSON.parse(JSON.stringify(values)), imageUrls)
+    await addProduct(JSON.parse(JSON.stringify(values)), imageUrls)
     router.push('/myshop')
     toast({
       title: toastTitle,
@@ -246,7 +246,7 @@ export function ProductForm({
 
   return (
     <>
-      <Card className="w-[500px] p-10">
+      <Card className=" p-10">
         <Form {...form}>
           <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
@@ -313,7 +313,7 @@ export function ProductForm({
                         variant="outline"
                         role="combobox"
                         aria-expanded={open}
-                        className="w-[200px] justify-between"
+                        className="w-[30em] justify-between bg-card"
                       >
                         {categoryValue
                           ? suggestions.find((framework) => framework.value === categoryValue)
@@ -321,30 +321,35 @@ export function ProductForm({
                           : 'Select framework...'}
                       </Button>
                     </PopoverTrigger>
-                    <PopoverContent className="w-[200px] p-0">
+                    <PopoverContent className=" w-[15em]">
                       <Command>
-                        <CommandInput placeholder="Search framework..." />
-                        <CommandEmpty>No framework found.</CommandEmpty>
-                        <CommandGroup>
-                          {suggestions.map((framework) => (
-                            <CommandItem
-                              key={framework.value}
-                              value={framework.value}
-                              onSelect={(currentValue) => {
-                                setcategoryValue(currentValue === categoryValue ? '' : currentValue)
-                                setOpen(false)
-                              }}
-                            >
-                              <p
-                                className={cn(
-                                  'mr-2 h-4 w-4',
-                                  categoryValue === framework.value ? 'opacity-100' : 'opacity-0',
-                                )}
-                              />
-                              {framework.value}
-                            </CommandItem>
-                          ))}
-                        </CommandGroup>
+                        <CommandList>
+                          <CommandInput placeholder="Search framework..." />
+                          <CommandEmpty>No framework found.</CommandEmpty>
+                          <CommandGroup>
+                            {suggestions.map((framework) => (
+                              <CommandItem
+                                key={framework.value}
+                                value={framework.value}
+                                onSelect={(currentValue) => {
+                                  form.setValue('category', framework.value),
+                                    setcategoryValue(
+                                      currentValue === categoryValue ? '' : currentValue,
+                                    )
+                                  setOpen(false)
+                                }}
+                              >
+                                <p
+                                  className={cn(
+                                    'mr-2 h-4 w-4',
+                                    categoryValue === framework.value ? 'opacity-100' : 'opacity-0',
+                                  )}
+                                />
+                                {framework.value}
+                              </CommandItem>
+                            ))}
+                          </CommandGroup>
+                        </CommandList>
                       </Command>
                     </PopoverContent>
                   </Popover>
