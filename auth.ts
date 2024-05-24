@@ -3,7 +3,6 @@ import resend from 'next-auth/providers/resend'
 import google from 'next-auth/providers/google'
 import passkey from 'next-auth/providers/passkey'
 import { drizzleAdapter } from './adapter'
-import { useLocale } from 'next-intl'
 
 // const locale = useLocale();
 
@@ -22,5 +21,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return session
     },
   },
-  experimental: { enableWebAuthn: true }
+  experimental: { enableWebAuthn: true },
+  pages: {
+    error: "/error"
+  }
 })

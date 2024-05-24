@@ -52,7 +52,11 @@
   "LoginForm": {
     "loginButton": "anmelden",
     "loginMessage": "via Email oder Google",
-    "loginGoogleMessage": "mit Google anmelden"
+    "loginGoogleMessage": "mit Google",
+    "loginPasskeyTip": "registriere einen Passkey in den Einstellungen",
+    "loginOrPasskey": "oder",
+    "loginPasskeyButton": "mit Passkey"
+    
   },
   "LocaleSwitcher": {
     "label": "Sprache ändern",
