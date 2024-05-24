@@ -13,9 +13,8 @@ export function SignInResend() {
         await signIn('resend', formData)
       }}
     >
-      <Input className="h-[60px] w-full p-4" type="text" name="email" placeholder="john@doe.com" />
-
-      <Button className=" h-[60px] w-full bg-inherit" variant={'outline'} type="submit">
+      <Input className="h-[60px] w-full p-4" type="email" name="email" placeholder="john@doe.com" />
+      <Button className=" h-[60px] w-full" variant={"default"} type="submit">
         {t('loginButton')}
       </Button>
     </form>

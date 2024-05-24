@@ -11,10 +11,10 @@ const CubeScene = dynamic(() => import('@/components/explosion/cubeScene'), {
 
 export default async function Home() {
   const t = await getTranslations('Landingpage')
-  const session = await auth()
-  if (!!session?.user) {
-    redirect('/browse')
-  }
+  // const session = await auth()
+  // if (!!session?.user) {
+  //   redirect('/browse')
+  // }
 
   return (
     <main className="static h-screen snap-y snap-mandatory overflow-y-scroll">
