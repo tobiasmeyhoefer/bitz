@@ -212,9 +212,9 @@ export async function deleteImageNeon(imageIndex: number, productId: string) {
 }
 
 export async function deleteImageOnAws(imageUrl: string) {
-  console.log('test')
+  // console.log('test')
   const key = imageUrl.split('/').slice(-1)[0]
-  console.log(key)
+  // console.log(key)
   const deleteParams = {
     Bucket: process.env.AWS_BUCKET_NAME!,
     Key: key,
