@@ -11,12 +11,8 @@ export function genId(pfx: string) {
   return [pfx, nanoid()].join('_')
 }
 
-// export const computeSHA256 = async (file: File) => {
-//   const buffer = await file.arrayBuffer();
-//   const hashBuffer = await crypto.subtle.digest("SHA-256", buffer);
-//   const hashArray = Array.from(new Uint8Array(hashBuffer));
-//   const hashHex = hashArray
-//     .map((b) => b.toString(16).padStart(2, "0"))
-//     .join("");
-//   return hashHex;
-// };
+export function generateRandomSixDigitNumber(): string {
+  const randomNum = Math.floor(Math.random() * 1000000);
+  const randomSixDigitStr = randomNum.toString().padStart(6, '0');
+  return randomSixDigitStr;
+}

@@ -12,10 +12,16 @@ export async function saveUserLocation(values: { postcode: string }) {
   }
 }
 
-export async function getUserById() {
+export async function getUserById(userId: string) {
+  const response = await db.select().from(users).where(eq(users.id, userId))
+  return response
+}
+
+export async function getUser() {
   const session = await auth()
   const id = session?.user?.id
   if (id) {
-    return await db.select().from(users).where(eq(users.id, id))
+    const response = await db.select().from(users).where(eq(users.id, id))
+    return response
   }
 }

@@ -19,6 +19,7 @@ export const users = pgTable('user', {
   emailVerified: timestamp('emailVerified', { mode: 'date' }),
   image: text('image'),
   location: text('location'),
+  phoneVerified: boolean("phoneVerified").default(false)
 })
 
 export const products = pgTable('product', {
@@ -33,6 +34,7 @@ export const products = pgTable('product', {
     .notNull()
     .$default(() => 1),
   location: text('location'),
+  category: text('category'),
   sellerId: text('sellerId')
     .notNull()
     .references(() => users.id, { onDelete: 'cascade' }),
@@ -79,6 +81,13 @@ export const sessions = pgTable('session', {
   expires: timestamp('expires', { mode: 'date' }).notNull(),
 })
 
+export const verificationNumberSessions = pgTable('verificationNumberSessions', {
+  verificationNumber: text('verificationNumber').notNull(),
+  userId: text('userId')
+    .notNull()
+    .references(() => users.id, { onDelete: 'cascade' })
+})
+
 export const verificationTokens = pgTable(
   'verificationToken',
   {
@@ -114,18 +123,22 @@ export const Authenticator = pgTable(
   }),
 )
 
-export const favorites = pgTable('favorites', {
-  userId: text('userId')
-    .notNull()
-    .references(() => users.id, { onDelete: 'cascade' }),
-  productId: text('productId')
-    .notNull()
-    .references(() => products.id, { onDelete: 'cascade' }),
-}, (table) => {
-  return {
-    id: primaryKey({ columns: [table.userId, table.productId]}),
-  };
-});
+export const favorites = pgTable(
+  'favorites',
+  {
+    userId: text('userId')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    productId: text('productId')
+      .notNull()
+      .references(() => products.id, { onDelete: 'cascade' }),
+  },
+  (table) => {
+    return {
+      id: primaryKey({ columns: [table.userId, table.productId] }),
+    }
+  },
+)
 
 // export type ProductType = typeof products.$inferSelect
 export type UserType = typeof users.$inferSelect

@@ -1,21 +1,21 @@
 import { signIn } from '@/auth'
 import { Button } from '../ui/button'
-import { FcGoogle } from 'react-icons/fc'
+import { FaGithub } from 'react-icons/fa'
 import { useTranslations } from 'next-intl'
 
-export function SignInGoogle() {
+export function SignInGithub() {
   const t = useTranslations('LoginForm')
   return (
     <form
       className="w-full"
       action={async () => {
         'use server'
-        await signIn('google')
+        await signIn('github')
       }}
     >
       <Button className="h-[60px] w-full bg-inherit" variant="outline" type="submit">
         {' '}
-        <FcGoogle />
+        <FaGithub />
       </Button>
     </form>
   )

@@ -1,5 +1,4 @@
 import { auth } from '@/auth'
-import { ThemeProvider } from '@/components/darkmode/themeProvider'
 import { redirect } from '@/navigation'
 
 export default async function RootLayout({
@@ -7,9 +6,9 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const session = await auth()
-  if (!session?.user) {
-    redirect('/')
-  }
+  // const session = await auth()
+  // if (!session?.user) {
+  //   redirect('/')
+  // }
   return <>{children}</>
 }

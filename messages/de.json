@@ -42,8 +42,9 @@
   },
   "MyShop": {
     "title": "Mein Shop",
-    "addProducts": "Produkt hinzufügen",
-    "updateProducts": "Produkt aktualisieren"
+    "addProducts": "Bit hinzufügen",
+    "updateProducts": "Bit aktualisieren",
+    "deleteProduct": "Bit löschen"
   },
   "Product": {
     "quantity": "Häufigkeit",
@@ -51,8 +52,21 @@
     "of": "von"
   },
   "addProductPage": {
+    "title": "Titel",
+    "description": "Beschreibung",
+    "price": "Preis",
+    "quantity": "Anzahl",
+    "category": "Kategorie",
+    "categoryPlaceholder": "wähle Kategorie",
+    "images": "Bilder",
+    "toastTitle": "Erfolgreich",
+    "toastDescription": "Produkt wurde hinzugefügt",
     "submitTitle": "absenden"
-  },
+  }, 
+  "popAlert": {
+    "submitTitle": "löschen",
+    "yousure": "Bist du sicher, dass du diese Ware löschen möchtest?"
+    },
   "Settings": {
     "title": "Einstellungen",
     "city": "Stadt",
@@ -71,7 +85,11 @@
   "LoginForm": {
     "loginButton": "anmelden",
     "loginMessage": "via Email oder Google",
-    "loginGoogleMessage": "mit Google anmelden"
+    "loginOAuthMessage": "mit Google ode Github",
+    "loginPasskeyTip": "registriere einen Passkey in den Einstellungen",
+    "loginOrPasskey": "oder",
+    "loginPasskeyButton": "mit Passkey"
+    
   },
   "LocaleSwitcher": {
     "label": "Sprache ändern",

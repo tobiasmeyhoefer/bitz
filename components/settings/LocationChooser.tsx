@@ -5,7 +5,7 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
-import { getUserById, saveUserLocation } from '@/lib/useraction'
+import { getUser, saveUserLocation } from '@/lib/useraction'
 import { useEffect, useState } from 'react'
 
 const formSchema = z.object({
@@ -16,7 +16,7 @@ export default function LocationChooser({ postcode }: { postcode: string }) {
   const [location, setLocation] = useState<string>('')
   useEffect(() => {
     const getProduct = async () => {
-      const result = await getUserById()
+      const result = await getUser()
       const r = result![0]
       setLocation(r.location ?? '')
     }
