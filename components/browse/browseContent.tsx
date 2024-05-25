@@ -89,6 +89,7 @@ const BrowseContent = (props: BrowseContentProps) => {
 const SearchDialog = (props: SearchBarProps) => {
   const [open, setOpen] = useState(false)
   const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([])
+  const [selectedIndex, setSelectedIndex] = useState(-1) // Index für ausgesuchten Vorschlag
 
   // Funktion zum Filtern der Ergebnisse auf Basis der aktuellen Eingabe 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -101,6 +102,29 @@ const SearchDialog = (props: SearchBarProps) => {
       setFilteredSuggestions(filtered)
     } else {
       setFilteredSuggestions([])
+    }
+  }
+
+  // Funktion zum Handhaben der Tastaturereignisse
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'ArrowDown') {
+      setSelectedIndex((prevIndex) => {
+        const newIndex = (prevIndex + 1) % filteredSuggestions.length
+        props.setSearchValue(filteredSuggestions[newIndex])
+        return newIndex
+      })
+    } else if (e.key === 'ArrowUp') {
+      setSelectedIndex((prevIndex) => {
+        const newIndex = (prevIndex - 1 + filteredSuggestions.length) % filteredSuggestions.length
+        props.setSearchValue(filteredSuggestions[newIndex])
+        return newIndex
+      })
+    } else if (e.key === 'Enter') {
+      if (selectedIndex >= 0 && selectedIndex < filteredSuggestions.length) {
+        props.setSearchValue(filteredSuggestions[selectedIndex])
+        setFilteredSuggestions([])
+        setOpen(false)
+      }
     }
   }
 
@@ -120,9 +144,10 @@ const SearchDialog = (props: SearchBarProps) => {
             className="rounded-t-l m-0 h-14 rounded-b-none px-4"
             type="input"
             placeholder={props.placeholder}
-            onChange= {handleSearchChange} // {(e) => props.setSearchValue(e.target.value)}
+            onChange={handleSearchChange} // {(e) => props.setSearchValue(e.target.value)}
             value={props.searchValue ? props.searchValue : ''}
-            onKeyDown={(e) => e.key === 'Enter' && setOpen(false)} // Data fetching trigger
+            onKeyDown={handleKeyDown}
+            //onKeyDown={(e) => e.key === 'Enter' && setOpen(false)} // Data fetching trigger
           />
           {props.searchValue.length > 0 && (
             <SlClose
@@ -148,7 +173,6 @@ const SearchDialog = (props: SearchBarProps) => {
             ))}
           </>
         ) : (
-
           <div className="px-4 py-2">
             {filteredSuggestions.length > 0 ? (
               filteredSuggestions.map((suggestion, index) => (
@@ -167,7 +191,6 @@ const SearchDialog = (props: SearchBarProps) => {
               <div className="text-black px-4">Keine Vorschläge gefunden</div>
             )}
           </div>
-
         )}
       </DialogContent>
     </Dialog>
