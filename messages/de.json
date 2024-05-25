@@ -66,7 +66,7 @@
   "LoginForm": {
     "loginButton": "anmelden",
     "loginMessage": "via Email oder Google",
-    "loginGoogleMessage": "mit Google",
+    "loginOAuthMessage": "mit Google ode Github",
     "loginPasskeyTip": "registriere einen Passkey in den Einstellungen",
     "loginOrPasskey": "oder",
     "loginPasskeyButton": "mit Passkey"
