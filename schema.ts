@@ -86,7 +86,6 @@ export const verificationNumberSessions = pgTable('verificationNumberSessions', 
   userId: text('userId')
     .notNull()
     .references(() => users.id, { onDelete: 'cascade' })
-    .primaryKey()
 })
 
 export const verificationTokens = pgTable(
