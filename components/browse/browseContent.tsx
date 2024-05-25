@@ -71,6 +71,7 @@ const BrowseContent = (props: BrowseContentProps) => {
                 productID={p.id}
                 product={products[index]}
                 favIcon
+                isOwner={false}
               />
               {/* </RevealOnScroll> */}
             </div>

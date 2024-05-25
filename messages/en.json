@@ -61,12 +61,14 @@
     "images": "Images",
     "toastTitle": "Success",
     "toastDescription": "added Product",
-    "submitTitle": "submit"
+    "submitTitle": "submit",
+    "cancel": "Cancel",
+    "edit": "Edit"
   },
   "popAlert": {
     "submitTitle": "löschen",
     "yousure": "This will permanently delete your product from the database and remove your data from our servers. This action cannot be undone. "
-    },
+  },
   "Settings": {
     "title": "Settings",
     "city": "city",

@@ -61,12 +61,14 @@
     "images": "Bilder",
     "toastTitle": "Erfolgreich",
     "toastDescription": "Produkt wurde hinzugefügt",
-    "submitTitle": "absenden"
-  }, 
+    "submitTitle": "Absenden",
+    "cancel": "Abbrechen",
+    "edit": "Bearbeiten"
+  },
   "popAlert": {
     "submitTitle": "löschen",
     "yousure": "Bist du sicher, dass du diese Ware löschen möchtest?"
-    },
+  },
   "Settings": {
     "title": "Einstellungen",
     "city": "Stadt",
@@ -89,7 +91,6 @@
     "loginPasskeyTip": "registriere einen Passkey in den Einstellungen",
     "loginOrPasskey": "oder",
     "loginPasskeyButton": "mit Passkey"
-    
   },
   "LocaleSwitcher": {
     "label": "Sprache ändern",

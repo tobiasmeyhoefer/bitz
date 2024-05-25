@@ -1,18 +1,29 @@
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
-import { ProductType } from '@/lib/types'
 import { useTranslations, useLocale } from 'next-intl'
+import ProductInfoCardEditable from './productInfoCardEditable'
+import { ProductType } from '@/lib/types'
 
 type ProductInfoType = {
-  product: ProductType
-  userId: string
+  productInfo: ProductType & { isOwner: boolean }
 }
 
 export default function ProductInfoCard(props: ProductInfoType) {
-  const product = props.product
+  const product = props.productInfo
   const tDate = useTranslations('Date')
   const tProduct = useTranslations('Product')
+  const tProductForm = useTranslations('addProductPage')
   const locale = useLocale()
+
+  const editableCardTranslations = {
+    quantity: tProduct('quantity'),
+    title: tProductForm('title'),
+    price: tProductForm('price'),
+    description: tProductForm('description'),
+    cancel: tProductForm('cancel'),
+    submitTitle: tProductForm('submitTitle'),
+    edit: tProductForm('edit'),
+  }
 
   const getDate = (timestamp: any) => {
     const date = new Date(timestamp)
@@ -66,28 +77,16 @@ export default function ProductInfoCard(props: ProductInfoType) {
       )
     }
   }
+
   return (
     <>
-      {props.userId === product.sellerId ? (
-        <Card className="my-3 h-full w-[90vw] lg:my-0 lg:h-[60vh] lg:w-[40vw]">
-          {/* <CardHeader className="flex h-[20%] flex-row items-center justify-between">
-            <CardTitle className="text-center">{product.title}</CardTitle>
-            <CardTitle className="text-3xl">
-              {product.price} {locale === 'en' ? '$' : '€'}
-            </CardTitle>
-          </CardHeader>
-          <Separator />
-          <CardContent className="flex h-[80%] flex-col justify-between p-6">
-            <div className="flex justify-between pb-6">
-              <div>{product.description}</div>
-              <div className="text-nowrap text-right lg:w-[20vw]">
-                {tProduct('quantity')}: {product.quantity}
-              </div>
-            </div>
-            <div>{getDate(product.createdAt)}</div>
-          </CardContent> */}
-          add updateoptions here
-        </Card>
+      {product.isOwner ? (
+        <ProductInfoCardEditable
+          productInfo={product}
+          translations={editableCardTranslations}
+          date={getDate(product.createdAt)}
+          locale={locale}
+        />
       ) : (
         <Card className="my-3 h-full w-[90vw] lg:my-0 lg:h-[60vh] lg:w-[40vw]">
           <CardHeader className="flex h-[20%] flex-row items-center justify-between">
@@ -97,10 +96,10 @@ export default function ProductInfoCard(props: ProductInfoType) {
             </CardTitle>
           </CardHeader>
           <Separator />
-          <CardContent className="flex h-[80%] flex-col justify-between p-6">
-            <div className="flex justify-between pb-6">
-              <div>{product.description}</div>
-              <div className="text-nowrap text-right lg:w-[20vw]">
+          <CardContent className="flex min-h-[80%] flex-col justify-between p-6">
+            <div className="flex justify-between text-wrap pb-6">
+              <div className="h-fit w-9/12 break-words">{product.description}</div>
+              <div className="whitespace-nowrap text-right lg:w-[20vw]">
                 {tProduct('quantity')}: {product.quantity}
               </div>
             </div>
