@@ -36,6 +36,7 @@ export async function getVerificationNumber(): Promise<string> {
 //sends the sms
 export async function sendSmsToUser(number: string) {
   const verificationNumber = generateRandomSixDigitNumber()
+  console.log(process.env.TWILIO_ACCOUNT_SID!)
 
   const client = twilio(
     process.env.TWILIO_ACCOUNT_SID!,
