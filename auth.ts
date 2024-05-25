@@ -1,6 +1,7 @@
 import NextAuth from 'next-auth'
 import resend from 'next-auth/providers/resend'
 import google from 'next-auth/providers/google'
+import github from 'next-auth/providers/github'
 import passkey from 'next-auth/providers/passkey'
 import { drizzleAdapter } from './adapter'
 
@@ -10,6 +11,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: drizzleAdapter,
   providers: [
     google,
+    github,
     resend({
       from: 'auth@bitztech.de',
     }),

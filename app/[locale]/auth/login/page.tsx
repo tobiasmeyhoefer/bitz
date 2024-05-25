@@ -15,6 +15,7 @@ import DotPattern from '@/components/magicui/dot-pattern'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
+import { SignInGithub } from '@/components/auth/sign-in-github'
 
 const Login = () => {
   const t = useTranslations('LoginForm')
@@ -41,9 +42,14 @@ const Login = () => {
               <div>
                 <SignInResend />
               </div>
-              <div>
-                <SignInGoogle />
+              <p className='text-neutral-600 text-sm'>{t('loginOAuthMessage')}</p>
+              <div className='flex gap-2 w-full'>
+                <SignInGoogle/>
+                <SignInGithub/>
               </div>
+              {/* <div>
+                <SignInGithub/>
+              </div> */}
               <div>
                 <SignInPasskey
                   text={t('loginOrPasskey')}
