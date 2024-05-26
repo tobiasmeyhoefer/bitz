@@ -28,12 +28,10 @@ export async function getUser() {
 }
 
 // kann man vlt noch schöner machen
-export async function deleteYourAccount() {
+export async function deleteAccount() {
   const session = await auth()
   const id = session?.user?.id
   if (id) {
-    await signOut()
-    await db.delete(users).where(eq(users.id, id))
     const products = await getProductsOwned(id)
     // imageUrls wenn gesetzt aus AWS löschen
     if (products) {
@@ -47,11 +45,13 @@ export async function deleteYourAccount() {
         ]
         for (const imageUrl of imageUrls) {
           if (imageUrl) {
-            console.log(imageUrl)
+            console.log('---------------_DSJHIAHSIDS')
             await deleteImageOnAws(imageUrl)
           }
         }
       }
     }
+    await db.delete(users).where(eq(users.id, id))
+    await signOut()
   }
 }
