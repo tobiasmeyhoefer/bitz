@@ -17,6 +17,7 @@ import { SlSettings, SlHeart } from 'react-icons/sl'
 import { TbMenu } from 'react-icons/tb'
 import { useState } from 'react'
 import { HiUserCircle } from 'react-icons/hi2'
+import { FaUserCircle } from 'react-icons/fa'
 import { Separator } from '@/components/ui/separator'
 
 type NavbarItemLinkProps = {
@@ -60,7 +61,7 @@ const NavLoginLink = ({ text }: NavLoginProps) => {
 }
 
 type NavbarItemDropdownProps = {
-  userImgSrc?: string
+  userImgSrc?: string | null
   signOut?: any
   signOutLinkText?: string
   settingsLinkText?: string
@@ -71,9 +72,9 @@ const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        {!props.userImgSrc ? (
+        {props.userImgSrc ? (
           <Image
-            src="/test_img.jpg" // TODO: {props?.userImgSrc as string}
+            src={props.userImgSrc!} // TODO: {props?.userImgSrc as string}
             width={50}
             height={50}
             className="rounded-full"
@@ -81,7 +82,7 @@ const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
             style={{ objectFit: 'cover', height: '50px' }}
           />
         ) : (
-          <HiUserCircle className="h-[40px] w-[40px]" color="gray" />
+          <FaUserCircle className="h-[45px] w-[45px]" color="gray" />
         )}
       </DropdownMenuTrigger>
       <DropdownMenuContent>
