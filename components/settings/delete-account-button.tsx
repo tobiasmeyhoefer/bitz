@@ -28,13 +28,13 @@ export function DeleteAccountButton() {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction className="bg-transparent hover:bg-transparent">
-            <form className="w-full" action={deleteAccount}>
-              <Button className="w-full" variant={'destructive'}>
+          <form action={deleteAccount}>
+            <Button variant={'destructive'}>
+              <AlertDialogAction className="bg-transparent hover:bg-transparent">
                 Delete Account
-              </Button>
-            </form>
-          </AlertDialogAction>
+              </AlertDialogAction>
+            </Button>
+          </form>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

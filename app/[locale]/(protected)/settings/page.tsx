@@ -4,7 +4,7 @@ import LocationChooser from '@/components/settings/LocationChooser'
 import { useTranslations } from 'next-intl'
 import { DarkmodeToggler } from '@/components/settings/DarkmodeToggler'
 import PhoneVerification from '@/components/settings/phone-verifiaction'
-import { DeleteAccountButton } from '@/components/settings/DeleteAccountButton'
+import { DeleteAccountButton } from '@/components/settings/delete-account-button'
 
 const Settings = () => {
   const t = useTranslations('Settings')
