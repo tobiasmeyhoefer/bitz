@@ -1,10 +1,18 @@
-import { auth } from '@/auth'
 import { Button } from '@/components/ui/button'
 import ScrollToTopButton from '@/components/ui/scrollToTopButton'
-import { Link, redirect } from '@/navigation'
+import { Link } from '@/navigation'
 import { getTranslations } from 'next-intl/server'
 import dynamic from 'next/dynamic'
-import Image from 'next/image'
+import { FaRegHandshake } from 'react-icons/fa6'
+import {
+  LuChevronUp,
+  LuCpu,
+  LuPaintbrush,
+  LuShieldCheck,
+  LuShoppingCart,
+  LuStore,
+  LuUserCircle,
+} from 'react-icons/lu'
 const CubeScene = dynamic(() => import('@/components/explosion/cubeScene'), {
   ssr: false,
 })
@@ -22,13 +30,7 @@ export default async function Home() {
         id="first-section"
         className="mt-20 flex h-screen snap-start flex-col font-space_grotesk lg:flex-row"
       >
-        <Image
-          className=" white-filter absolute bottom-8 left-1/2 -translate-x-1/2 transform animate-bounce"
-          width={24}
-          height={24}
-          src="/icons/chevron-up.svg"
-          alt="Chevron Arrow up Icon"
-        />
+        <LuChevronUp className="absolute bottom-8 left-1/2 h-6 w-6 -translate-x-1/2 transform animate-bounce" />
 
         <div className="flex w-screen flex-col justify-center p-4 lg:mr-12 lg:w-1/2 lg:p-24">
           <h1 className="text-4xl font-bold lg:text-5xl">Bitz</h1>
@@ -60,33 +62,16 @@ export default async function Home() {
         <h2 className="mb-8 text-center text-4xl font-bold">{t('secondSectionTitle')}</h2>
         <div className="mt-4 flex flex-col items-center space-y-8 md:flex-row md:space-x-16 md:space-y-0">
           <div className="flex flex-col items-center">
-            <Image
-              className="stroke-white"
-              width={72}
-              height={72}
-              src="/icons/shield-plus.svg"
-              alt="Schild Icon"
-            />
+            <LuShieldCheck className="h-20 w-20" stroke-width="1.5" />
             <p className="mt-2 text-4xl">{t('security')}</p>
           </div>
           <div className="color flex flex-col items-center">
-            <Image
-              className="stroke-white"
-              width={72}
-              height={72}
-              src="/icons/cable.svg"
-              alt="Kabel Icon"
-            />
+            <LuCpu className="h-20 w-20" stroke-width="1.5" />
             <p className="mt-2 text-center text-4xl">{t('focus')}</p>
           </div>
           <div className="flex flex-col items-center">
-            <Image
-              className="stroke-white"
-              width={72}
-              height={72}
-              src="/icons/paintbrush.svg"
-              alt="Pinsel Icon"
-            />
+            <LuPaintbrush className="h-20 w-20" stroke-width="1.5" />
+
             <p className="mt-2 text-4xl">{t('design')}</p>
           </div>
         </div>
@@ -98,43 +83,21 @@ export default async function Home() {
         <h2 className="mb-8 text-4xl font-bold">{t('thirdSectionTitle')}</h2>
         <div className="relative grid w-11/12 grid-cols-3 grid-rows-3 items-center justify-center">
           <div className="col-start-2 row-start-1 flex flex-col items-center justify-center text-center">
-            <Image
-              className="stroke-white"
-              width={72}
-              height={72}
-              src="/icons/store.svg"
-              alt="Laden Icon"
-            />
+            <LuStore className="h-20 w-20" stroke-width="1.5" />
             <p className="mt-2 text-3xl">{t('createShop')}</p>
           </div>
           <div className="col-start-2 row-start-3 flex flex-col items-center justify-center text-center">
-            <Image
-              className="stroke-white"
-              width={72}
-              height={72}
-              src="/icons/handshake.svg"
-              alt="Haendedruck Icon"
-            />
+            <FaRegHandshake className="h-20 w-20" />
             <p className="mt-2 text-3xl">{t('sell')}</p>
           </div>
           <div className="col-start-3 row-start-2 flex flex-col items-center justify-center text-center">
-            <Image
-              className="stroke-white"
-              width={72}
-              height={72}
-              src="/icons/shopping-cart.svg"
-              alt="Einkaufswagen Icon"
-            />
+            <LuShoppingCart className="h-20 w-20" stroke-width="1.5" />
+
             <p className="mt-2 text-3xl">{t('buy')}</p>
           </div>
           <div className="col-start-1 row-start-2 flex flex-col items-center justify-center text-center">
-            <Image
-              className="stroke-white"
-              width={72}
-              height={72}
-              src="/icons/circle-user.svg"
-              alt="User Icon"
-            />
+            <LuUserCircle className="h-20 w-20" stroke-width="1.5" />
+
             <p className="mt-2 text-3xl">{t('createAccount')}</p>
           </div>
         </div>
