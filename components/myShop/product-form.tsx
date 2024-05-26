@@ -15,21 +15,71 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from '@/components/ui/command'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Card } from '@/components/ui/card'
 import { Button } from '../ui/button'
 import { useRouter } from '@/navigation'
 import Image from 'next/image'
 import { getSignedURL } from '@/lib/productaction'
-import { ProductType } from '@/lib/types'
+import { FormTranslations, ProductType } from '@/lib/types'
+import { useToast } from '@/components/ui/use-toast'
+import { cn } from '@/lib/utils'
+
+const suggestions = [
+  { value: 'Reciever' },
+  { value: 'Monitor' },
+  { value: 'Audio' },
+  { value: 'Laptop' },
+  { value: 'Headphone' },
+  { value: 'Smartphone' },
+  { value: 'Tablet' },
+  { value: 'Smartwatch' },
+  { value: 'Printer' },
+  { value: 'Camera' },
+  { value: 'Speaker' },
+  { value: 'Projector' },
+  { value: 'Game Console' },
+  { value: 'Drone' },
+  { value: 'Router' },
+  { value: 'Hard Drive' },
+  { value: 'SSD' },
+  { value: 'Keyboard' },
+  { value: 'Mouse' },
+  { value: 'Graphics Card' },
+  { value: 'Motherboard' },
+  { value: 'RAM' },
+  { value: 'Cooling System' },
+  { value: 'VR Headset' },
+  { value: 'E-Reader' },
+  { value: 'Fitness Tracker' },
+  { value: 'Charger' },
+]
 
 const MAX_FILE_SIZE = 8000000
 
 const minError = 'Eingabe erfordert'
 const formSchema = z.object({
-  title: z.string().min(1, { message: minError }).max(50),
+  title: z
+    .string()
+    .min(1, { message: minError })
+    .max(50)
+    .refine((value) => !/#/.test(value)),
   price: z.coerce.number().safe().positive(),
   quantity: z.coerce.number().safe().positive(),
-  description: z.string().min(1, { message: minError }).max(250),
+  description: z
+    .string()
+    .min(1, { message: minError })
+    .max(250)
+    .refine((value) => !/#/.test(value)),
+  category: z.string().min(1, { message: minError }).max(250),
   images: z
     .any()
     .refine(
@@ -61,15 +111,31 @@ const formSchema = z.object({
 export function ProductForm({
   submitText,
   // action,
-  userLocation,
   whichFunction,
+  translations,
 }: {
   submitText: string
   // action: (values: ProductType) => Promise<void>
-  userLocation: string
   whichFunction: string
+  translations: FormTranslations
 }) {
   const router = useRouter()
+  const { toast } = useToast()
+  const [open, setOpen] = React.useState(false)
+  const [categoryValue, setcategoryValue] = React.useState('')
+
+  const {
+    title,
+    description,
+    price,
+    quantity,
+    category,
+    categoryPlaceholder,
+    images,
+    toastTitle,
+    toastDescription,
+    submitTitle,
+  } = translations
   //muss eventuell um Image url oder so ersetzt werden
   // const [data, setData] = useState<ProductType>({
   //   title: '',
@@ -101,11 +167,13 @@ export function ProductForm({
 
   const form = useForm({
     resolver: zodResolver(formSchema),
+    mode: 'onChange',
     defaultValues: {
       title: '',
       description: '',
       price: 0,
       quantity: 1,
+      category: '',
       images: null,
     },
   })
@@ -153,6 +221,11 @@ export function ProductForm({
     // console.log(JSON.parse(JSON.stringify(values)))
     await addProduct(JSON.parse(JSON.stringify(values)), imageUrls)
     router.push('/myshop')
+    toast({
+      title: toastTitle,
+      description: toastDescription,
+      duration: 2200,
+    })
   }
 
   const [files, setFiles] = useState<FileList | null>(null)
@@ -231,7 +304,7 @@ export function ProductForm({
 
   return (
     <>
-      <Card className="w-[500px] p-10">
+      <Card className=" p-10">
         <Form {...form}>
           <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
@@ -239,9 +312,9 @@ export function ProductForm({
               name={'title'}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Title</FormLabel>
+                  <FormLabel>{title}</FormLabel>
                   <FormControl>
-                    <Input placeholder="title" {...field} />
+                    <Input placeholder={title} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -252,9 +325,9 @@ export function ProductForm({
               name={'description'}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel> Description</FormLabel>
+                  <FormLabel> {description}</FormLabel>
                   <FormControl>
-                    <Textarea placeholder="description" {...field} />
+                    <Textarea placeholder={description} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -265,7 +338,7 @@ export function ProductForm({
               name={'price'}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Price</FormLabel>
+                  <FormLabel>{price}</FormLabel>
                   <FormControl>
                     <Input type="number" placeholder="price" {...field} />
                   </FormControl>
@@ -278,7 +351,7 @@ export function ProductForm({
               name={'quantity'}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Quantity</FormLabel>
+                  <FormLabel>{quantity}</FormLabel>
                   <FormControl>
                     <Input type="number" placeholder="quantity" {...field} />
                   </FormControl>
@@ -288,10 +361,66 @@ export function ProductForm({
             />
             <FormField
               control={form.control}
+              name="category"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{category}</FormLabel>
+                  <Popover open={open} onOpenChange={setOpen}>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant="outline"
+                        role="combobox"
+                        aria-expanded={open}
+                        className="w-[30em] justify-between bg-card"
+                      >
+                        {categoryValue
+                          ? suggestions.find((framework) => framework.value === categoryValue)
+                              ?.value
+                          : 'Select framework...'}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className=" w-[15em]">
+                      <Command>
+                        <CommandList>
+                          <CommandInput placeholder="Search framework..." />
+                          <CommandEmpty>No framework found.</CommandEmpty>
+                          <CommandGroup>
+                            {suggestions.map((framework) => (
+                              <CommandItem
+                                key={framework.value}
+                                value={framework.value}
+                                onSelect={(currentValue: string) => {
+                                  form.setValue('category', framework.value),
+                                    setcategoryValue(
+                                      currentValue === categoryValue ? '' : currentValue,
+                                    )
+                                  setOpen(false)
+                                }}
+                              >
+                                <p
+                                  className={cn(
+                                    'mr-2 h-4 w-4',
+                                    categoryValue === framework.value ? 'opacity-100' : 'opacity-0',
+                                  )}
+                                />
+                                {framework.value}
+                              </CommandItem>
+                            ))}
+                          </CommandGroup>
+                        </CommandList>
+                      </Command>
+                    </PopoverContent>
+                  </Popover>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
               name="images"
               render={({ field: { value, onChange, ...fieldProps } }) => (
                 <FormItem>
-                  <FormLabel>Images</FormLabel>
+                  <FormLabel>{images}</FormLabel>
                   <FormControl>
                     <Input
                       {...fieldProps}
@@ -323,8 +452,8 @@ export function ProductForm({
                 ))}
               </div>
             )}
-            <Button className="mt-4" type="submit">
-              {submitText}
+            <Button className="mt-4 border-2" type="submit">
+              {submitTitle}
             </Button>
           </form>
         </Form>

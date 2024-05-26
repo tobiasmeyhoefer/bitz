@@ -28,12 +28,26 @@
   },
   "MyShop": {
     "title": "My Shop",
-    "addProducts": "add Product",
-    "updateProducts": "update Product"
+    "addProducts": "add Bit",
+    "updateProducts": "update Bit",
+    "deleteProduct": "delete Bit"
   },
   "addProductPage": {
+    "title": "Title",
+    "description": "Description",
+    "price": "Price",
+    "quantity": "Quantity",
+    "category": "Category",
+    "categoryPlaceholder": "choose Category",
+    "images": "Images",
+    "toastTitle": "Success",
+    "toastDescription": "added Product",
     "submitTitle": "submit"
   },
+  "popAlert": {
+    "submitTitle": "löschen",
+    "yousure": "This will permanently delete your product from the database and remove your data from our servers. This action cannot be undone. "
+    },
   "Settings": {
     "title": "Settings",
     "city": "city",
@@ -52,7 +66,10 @@
   "LoginForm": {
     "loginButton": "login",
     "loginMessage": "with Email or Google",
-    "loginGoogleMessage": "login with Google"
+    "loginOAuthMessage": "with Google or Github",
+    "loginPasskeyTip": "register a passkey in the settings",
+    "loginOrPasskey": "or",
+    "loginPasskeyButton": "with Passkey"
   },
   "LocaleSwitcher": {
     "label": "change language",

@@ -10,7 +10,6 @@ import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import crypto from 'crypto'
 import { ProductType } from './types'
 import { revalidatePath } from 'next/cache'
-import { getCurrentUserId } from './action'
 
 export async function getProductsBrowse() {
   const session = await auth()
@@ -23,19 +22,36 @@ export async function getProductsBrowse() {
   }
 }
 
-export async function addProduct(values: ProductType, imageUrls: string[]) {
-  let { title, description, price, quantity } = values
-  const id = await getCurrentUserId()
+export async function getProductsOwned(userId: string) {
+  /* const session = await auth()
+  const id = session?.user?.id */
+  let id = userId
+  let response
   if (id) {
-    const user = await getUserById()
+    response = await db.select().from(products).where(eq(products.sellerId, id)) //muss 'eq' sein und nicht 'ne'
+    if (response) {
+      return response
+    }
+  }
+}
+
+export async function addProduct(values: ProductType, imageUrls: string[]) {
+  let { title, description, price, quantity, category } = values
+  const session = await auth()
+  const id = session?.user?.id
+  const created = new Date(Date.now())
+  created.setHours(created.getHours() + 2)
+  if (id) {
+    const user = await getUserById(id)
     await db.insert(products).values({
       title: title,
       description: description,
       price: price,
       quantity: quantity,
+      category: category,
       sellerId: id,
-      location: user![0].location ?? null,
-      createdAt: new Date(),
+      location: user[0].location ?? null,
+      createdAt: created,
       imageUrl1: imageUrls[0],
       imageUrl2: imageUrls[1],
       imageUrl3: imageUrls[2],
@@ -57,7 +73,7 @@ export async function updateProduct(productId: string, values: ProductType) {
   if (id) {
     const existingProduct = await getProductById(productId)
     if (existingProduct && existingProduct[0].sellerId === id) {
-      const { title, description, price, quantity } = values
+      const { title, description, price, quantity, category } = values
       await db
         .update(products)
         .set({
@@ -65,6 +81,7 @@ export async function updateProduct(productId: string, values: ProductType) {
           description: description || existingProduct[0].description,
           price: price || existingProduct[0].price,
           quantity: quantity || existingProduct[0].quantity,
+          category: category || existingProduct[0].category,
         })
         .where(eq(products.id, productId))
     } else {
@@ -195,9 +212,9 @@ export async function deleteImageNeon(imageIndex: number, productId: string) {
 }
 
 export async function deleteImageOnAws(imageUrl: string) {
-  console.log("test")
+  // console.log('test')
   const key = imageUrl.split('/').slice(-1)[0]
-  console.log(key)
+  // console.log(key)
   const deleteParams = {
     Bucket: process.env.AWS_BUCKET_NAME!,
     Key: key,

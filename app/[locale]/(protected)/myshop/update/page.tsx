@@ -13,7 +13,7 @@ const UpdateProductPage = async () => {
   return (
     <div className="absolute inset-x-1/2 top-24 flex flex-col items-center">
       <h2>Todo Update... geht gerade nicht...</h2>
-      {/* <ProductForm submitText={t('submitTitle')} action={updateProductWrapper} userLocation="" whichFunction='update'/> */}
+      {/* <ProductForm submitText={t('submitTitle')} action={updateProductWrapper} whichFunction='update'/> */}
     </div>
   )
 }
