@@ -5,7 +5,7 @@ import { Dialog, DialogTrigger, DialogContent } from '../ui/dialog'
 import { BrowseContentProps, SearchBarProps, RevealOnScrollProps, ProductType } from '@/lib/types'
 import { CardWithImage } from '../ui/cardWithImage'
 import { SlClose } from 'react-icons/sl'
-import { getProductsBrowse } from '@/lib/productaction'
+import { getProductsBrowse, getProductsByCategory } from '@/lib/productaction'
 import RevealOnScroll from '../navigation/revealOnScroll'
 
 const BrowseContent = (props: BrowseContentProps) => {
@@ -42,6 +42,35 @@ const BrowseContent = (props: BrowseContentProps) => {
     getProducts()
   }, [])
 
+  const loadProductsByCategory = async (category: string) => {
+    try {
+      setLoading(true)
+      const result = await getProductsByCategory(category)
+      if (result) {
+        const checkedResults: ProductType[] = result.map((item) => ({
+          id: item.id,
+          title: item.title,
+          description: item.description ?? '',
+          price: item.price,
+          quantity: item.quantity,
+          category: item.category ?? '',
+          sellerId: item.sellerId,
+          createdAt: item.createdAt,
+          imageUrl1: item.imageUrl1,
+          imageUrl2: item.imageUrl2,
+          imageUrl3: item.imageUrl3,
+          imageUrl4: item.imageUrl4,
+          imageUrl5: item.imageUrl5,
+        }))
+        setProducts(checkedResults)
+      }
+    } catch (error) {
+      console.error('Fehler beim Laden der Daten:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   const suggestions = [
     'Receiver', 'Monitor', 'Audio', 'Laptop', 'Headphone', 'Smartphone', 'Tablet', 'Smartwatch', 'Printer', 'Camera',
     'Speaker', 'Projector', 'Game Console', 'Drone', 'Router', 'Hard Drive', 'SSD', 'Keyboard', 'Mouse', 'Graphics Card', 'Motherboard',
@@ -61,6 +90,7 @@ const BrowseContent = (props: BrowseContentProps) => {
         setSearchValue={setSearchValue}
         suggestions={suggestions}
         suggestionsTitle={props.searchTranslations.suggestions}
+        loadProductsByCategory={loadProductsByCategory}
       />
       {!loading ? (
         <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
@@ -88,7 +118,7 @@ const BrowseContent = (props: BrowseContentProps) => {
   )
 }
 
-const SearchDialog = (props: SearchBarProps) => {
+const SearchDialog = (props: SearchBarProps & { loadProductsByCategory: (category: string) => void }) => {
   const [open, setOpen] = useState(false)
   const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([])
   const [selectedIndex, setSelectedIndex] = useState(-1) // Index für ausgesuchten Vorschlag
@@ -105,6 +135,13 @@ const SearchDialog = (props: SearchBarProps) => {
     } else {
       setFilteredSuggestions([])
     }
+  }
+
+  // Funktion für die Suhce mit Klick auf einem Vorschlag
+  const handleSuggestionClick = (suggestion: string) => {
+    setOpen(false)
+    props.setSearchValue(suggestion)
+    props.loadProductsByCategory(suggestion)
   }
 
   // Funktion zum Handhaben der Tastaturereignisse
@@ -126,6 +163,7 @@ const SearchDialog = (props: SearchBarProps) => {
         props.setSearchValue(filteredSuggestions[selectedIndex])
         setFilteredSuggestions([])
         setOpen(false)
+        props.loadProductsByCategory(props.searchValue)
       }
     }
   }
@@ -146,10 +184,9 @@ const SearchDialog = (props: SearchBarProps) => {
             className="rounded-t-l m-0 h-14 rounded-b-none px-4"
             type="input"
             placeholder={props.placeholder}
-            onChange={handleSearchChange} // {(e) => props.setSearchValue(e.target.value)}
+            onChange={handleSearchChange}
             value={props.searchValue ? props.searchValue : ''}
             onKeyDown={handleKeyDown}
-            //onKeyDown={(e) => e.key === 'Enter' && setOpen(false)} // Data fetching trigger
           />
           {props.searchValue.length > 0 && (
             <SlClose
@@ -179,10 +216,7 @@ const SearchDialog = (props: SearchBarProps) => {
             {filteredSuggestions.length > 0 ? (
               filteredSuggestions.map((suggestion, index) => (
                 <div
-                  onClick={() => {
-                    setOpen(false)
-                    props.setSearchValue(suggestion)
-                  }}
+                  onClick={ () => handleSuggestionClick(suggestion) }
                   className="rounded- px-8 py-2 text-black hover:rounded-b-lg hover:bg-gray-100"
                   key={`fs-${index}`}
                 >

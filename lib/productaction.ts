@@ -90,10 +90,24 @@ export async function updateProduct(productId: string, values: ProductType) {
   }
 }
 
-// getter for a Product with id as param
+// getter for a product with id as param
 export async function getProductById(productId: string) {
   const response = await db.select().from(products).where(eq(products.id, productId))
   return response
+}
+
+// getter for products with Category as param
+export const getProductsByCategory = async (category: string) => {
+  try {
+    const result = await db
+      .select()
+      .from(products)
+      .where(eq(products.category, category))
+    return result
+  } catch (error) {
+    console.error('Fehler beim Laden der Daten:', error)
+    throw error
+  }
 }
 
 export async function addToFavorites(productId: string) {
