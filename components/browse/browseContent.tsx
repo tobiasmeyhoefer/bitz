@@ -12,6 +12,8 @@ const BrowseContent = (props: BrowseContentProps) => {
   const [searchValue, setSearchValue] = useState('')
   const [loading, setLoading] = useState(false)
   const [products, setProducts] = useState<ProductType[]>([])
+  const [noSearchResults, setNoSearchResults] = useState(false);
+
   useEffect(() => {
     const getProducts = async () => {
       try {
@@ -34,6 +36,9 @@ const BrowseContent = (props: BrowseContentProps) => {
             imageUrl5: item.imageUrl5,
           }))
           setProducts(checkedResults)
+          if (checkedResults.length === 0) {
+            setNoSearchResults(true)
+          }
         }
       } catch (error) {
         console.error('Fehler beim Laden der Daten:', error)
@@ -63,6 +68,11 @@ const BrowseContent = (props: BrowseContentProps) => {
           imageUrl5: item.imageUrl5,
         }))
         setProducts(checkedResults)
+        if (checkedResults.length === 0) {
+          setNoSearchResults(true);
+        } else {
+          setNoSearchResults(false);
+        }
       }
     } catch (error) {
       console.error('Fehler beim Laden der Daten:', error)
@@ -108,6 +118,7 @@ const BrowseContent = (props: BrowseContentProps) => {
               />
             </RevealOnScroll>
           ))}
+          {noSearchResults && <div className="text-black px-4">Keine Suchergebnisse gefunden</div>} 
         </div>
       ) : (
         <div className="flex h-full items-center justify-center">
