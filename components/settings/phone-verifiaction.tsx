@@ -21,17 +21,17 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
 import { Input } from '../ui/input'
+import { useToast } from '../ui/use-toast'
+import { formatPhoneNumber } from '@/lib/utils'
 
 const PhoneVerification = () => {
-  //check if user is already verifcated, if yes just show that
-  // const isVerified = await checkIfUserIsPhoneVerified()
-
   const [isVerified, setIsVerified] = useState<boolean>(false)
-  //   const [inVerifactionProcess, setInVerifactionProcess] = useState<boolean>(false)
+  //wird genutzt als eine session
+  const [inVerifactionProcess, setInVerifactionProcess] = useState<boolean>(false)
   const [isTypeInNumberState, setIsTypeInNumberState] = useState<boolean>(true)
   const [userTypedCode, setUserTypedCode] = useState('')
   const [userNumber, setUserNumber] = useState('')
-  //   const [isTypeInCodeState, setisTypeInCodeState] = useState<boolean>(false)
+  const { toast } = useToast()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,9 +41,27 @@ const PhoneVerification = () => {
     fetchData()
   }, [])
 
+
+  // useEffect(() => {
+  //   const logic = async () => {
+  //     if(inVerifactionProcess) {
+  //       setTimeout(handleCancel, 60000)
+  //     } else {
+  //       if(!isVerified) {
+  //         await handleCancel()
+  //       }
+  //     }
+  //   }
+  //   logic()
+  // }, [inVerifactionProcess])
+
   const sendNumberToUser = async () => {
     setIsTypeInNumberState(false)
-    await sendSmsToUser(userNumber)
+    const formattedNumber = formatPhoneNumber(userNumber)
+    await sendSmsToUser(formattedNumber)
+    toast({
+      title: 'SMS sent to: ' + formattedNumber,
+    })
   }
 
   const checkCode = async () => {
@@ -52,13 +70,24 @@ const PhoneVerification = () => {
       setIsVerified(true)
       await setVerifiedState()
       await deleteVerifactionNumber()
+      toast({
+        title: 'you are now verified!',
+      })
     } else {
       setIsVerified(false)
+      toast({
+        title: 'wrong number ❌',
+      })
     }
   }
 
   const handleCancel = async () => {
+    console.log("delete called")
     await deleteVerifactionNumber()
+    console.log("deletedNumber")
+    toast({
+      title: 'verification cancelled',
+    })
   }
 
   const handleInputChangeNumber = (e: any) => {
@@ -77,7 +106,7 @@ const PhoneVerification = () => {
     <div>
       <p className="mb-4">Dein Konto ist noch nicht verifiziert ❌</p>
       <AlertDialog>
-        <AlertDialogTrigger>Jetzt Verifizieren</AlertDialogTrigger>
+        <AlertDialogTrigger onClick={() => {setInVerifactionProcess(true)}}>Jetzt Verifizieren</AlertDialogTrigger>
         {isTypeInNumberState ? (
           <AlertDialogContent>
             <AlertDialogHeader>
@@ -126,3 +155,9 @@ const PhoneVerification = () => {
 }
 
 export default PhoneVerification
+
+/*
+LOGIK:
+
+Klick auf verifizieren, 
+*/
