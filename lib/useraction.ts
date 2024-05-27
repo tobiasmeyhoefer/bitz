@@ -4,6 +4,7 @@ import { db } from '../db'
 import { eq } from 'drizzle-orm'
 import { auth, signOut } from '@/auth'
 import { deleteImageOnAws, getProductsOwned } from './productaction'
+import { revalidatePath } from 'next/cache'
 
 export async function saveUserLocation(values: { postcode: string }) {
   const session = await auth()
@@ -53,5 +54,23 @@ export async function deleteAccount() {
     }
     await db.delete(users).where(eq(users.id, id))
     await signOut()
+  }
+}
+
+export async function changeUserImage(imageUrl: string) {
+  const session = await auth()
+  const id = session?.user?.id
+  if (id) {
+    const user = await getUser()
+    if (user?.[0].image) {
+      await deleteImageOnAws(user[0].image)
+    }
+    await db
+      .update(users)
+      .set({
+        image: imageUrl,
+      })
+      .where(eq(users.id, id))
+    revalidatePath('/settings')
   }
 }

@@ -219,8 +219,5 @@ export async function deleteImageOnAws(imageUrl: string) {
     Bucket: process.env.AWS_BUCKET_NAME!,
     Key: key,
   }
-  console.log(imageUrl)
-  console.log(process.env.AWS_BUCKET_NAME)
-  console.log(key)
   await s3Client.send(new DeleteObjectCommand(deleteParams))
 }

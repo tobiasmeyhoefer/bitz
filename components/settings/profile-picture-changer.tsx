@@ -1,6 +1,5 @@
 'use client'
 import { getSignedURL } from '@/lib/productaction'
-import { ProductType } from '@/lib/types'
 import { z } from 'zod'
 import Image from 'next/image'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -9,158 +8,125 @@ import { useState } from 'react'
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
+import { changeUserImage } from '@/lib/useraction'
 const MAX_FILE_SIZE = 8000000
 const formSchema = z.object({
-  images: z
-    .any()
-    .refine(
-      (files) => {
-        return files?.length >= 1 && files?.length <= 5
-      },
-      {
-        message: 'There are 1-5 Images allowed',
-      },
-    )
-    .refine(
-      (files) => {
-        // console.log(files)
-        if (files instanceof FileList) {
-          const filesArray = Array.from(files)
-          return filesArray.every((file) => file.size <= MAX_FILE_SIZE)
-        }
-
-        if (files instanceof File) {
-          return files.size <= MAX_FILE_SIZE
-        }
-      },
-      {
-        message: 'Each file must be no larger than 8MB',
-      },
-    ),
+  image: z.any(),
+  // .refine((file) => file instanceof File && file.size <= MAX_FILE_SIZE, {
+  //   message: 'File must be no larger than 8MB',
+  // }),
 })
 
 export default function ProfilePictureChanger() {
-  const [files, setFiles] = useState<FileList | null>(null)
-  const [compressedFiles, setCompressedFiles] = useState<File[] | null>(null)
-  const [previewUrls, setPreviewUrls] = useState<string[] | null>(null)
+  const [file, setFile] = useState<File | null>(null)
+  const [compressedFile, setCompressedFile] = useState<File | null>(null)
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null)
   const form = useForm({
     resolver: zodResolver(formSchema),
-    mode: 'onChange',
   })
 
   async function onSubmit(values: any) {
-    let imageUrls = []
-    if (compressedFiles) {
-      for (let i = 0; i < compressedFiles.length; i++) {
-        if (compressedFiles[i]) {
-          const computeSHA256 = async (file: File) => {
-            const buffer = await file.arrayBuffer()
-            const hashBuffer = await crypto.subtle.digest('SHA-256', buffer)
-            const hashArray = Array.from(new Uint8Array(hashBuffer))
-            const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('')
-            return hashHex
-          }
-          const signedURLResult = await getSignedURL({
-            fileSize: compressedFiles[i].size,
-            fileType: compressedFiles[i].type,
-            checksum: await computeSHA256(compressedFiles[i]),
-          })
-          if (signedURLResult.failure !== undefined) {
-            console.error(signedURLResult.failure)
-            return
-          }
-
-          const { url } = signedURLResult.success
-          const response = await fetch(url, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': compressedFiles[i].type,
-            },
-            body: compressedFiles[i],
-          })
-          imageUrls.push(url.split('?')[0])
-        }
+    let imageUrl = ''
+    if (compressedFile) {
+      const computeSHA256 = async (file: File) => {
+        const buffer = await file.arrayBuffer()
+        const hashBuffer = await crypto.subtle.digest('SHA-256', buffer)
+        const hashArray = Array.from(new Uint8Array(hashBuffer))
+        const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('')
+        return hashHex
       }
+      const signedURLResult = await getSignedURL({
+        fileSize: compressedFile.size,
+        fileType: compressedFile.type,
+        checksum: await computeSHA256(compressedFile),
+      })
+      if (signedURLResult.failure !== undefined) {
+        console.error(signedURLResult.failure)
+        return
+      }
+
+      const { url } = signedURLResult.success
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': compressedFile.type,
+        },
+        body: compressedFile,
+      })
+      imageUrl = url.split('?')[0]
     }
+    await changeUserImage(imageUrl)
+    form.reset({ imageUrl: null })
   }
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files ?? null
-    setFiles(files)
-    if (previewUrls) {
-      previewUrls.map((url) => URL.revokeObjectURL(url))
+    const file = e.target.files?.[0] ?? null
+    setFile(file)
+    if (previewUrl) {
+      URL.revokeObjectURL(previewUrl)
     }
-    if (files) {
-      // const urls = Array.from(files).map((file) => URL.createObjectURL(file))
-      // setPreviewUrls(urls)
-      const compFiles = await compressImages(Array.from(files))
-      const urls2 = compFiles.map((file) => URL.createObjectURL(file))
-      setPreviewUrls(urls2)
-      setCompressedFiles(compFiles)
-      // console.log(compFiles[0].size)
-      // console.log(files[0].size)
+    if (file) {
+      const compFile = await compressImage(file)
+      const url = URL.createObjectURL(compFile)
+      setPreviewUrl(url)
+      setCompressedFile(compFile)
     } else {
-      setPreviewUrls(null)
+      setPreviewUrl(null)
     }
   }
 
   // Funktion zur Bildkomprimierung
-  async function compressImages(files: File[]): Promise<File[]> {
-    const compressedFiles = await Promise.all(
-      files.map(async (file) => {
-        const imageBitmap = await createImageBitmap(file)
-        const canvas = document.createElement('canvas')
-        const ctx = canvas.getContext('2d')
+  async function compressImage(file: File): Promise<File> {
+    const imageBitmap = await createImageBitmap(file)
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
 
-        // Setze die gewünschte Breite und Höhe für das quadratische Format
-        const MAX_DIMENSION = 800
-        canvas.width = MAX_DIMENSION
-        canvas.height = MAX_DIMENSION
+    // Setze die gewünschte Breite und Höhe für das quadratische Format
+    const MAX_DIMENSION = 800
+    canvas.width = MAX_DIMENSION
+    canvas.height = MAX_DIMENSION
 
-        // Berechne die neue Größe und Position für das 1:1-Format
-        const aspectRatio = imageBitmap.width / imageBitmap.height
-        let sourceX = 0
-        let sourceY = 0
-        let sourceWidth = imageBitmap.width
-        let sourceHeight = imageBitmap.height
+    // Berechne die neue Größe und Position für das 1:1-Format
+    const aspectRatio = imageBitmap.width / imageBitmap.height
+    let sourceX = 0
+    let sourceY = 0
+    let sourceWidth = imageBitmap.width
+    let sourceHeight = imageBitmap.height
 
-        if (aspectRatio > 1) {
-          // Landscape
-          sourceX = (imageBitmap.width - imageBitmap.height) / 2
-          sourceWidth = imageBitmap.height
-        } else if (aspectRatio < 1) {
-          // Portrait
-          sourceY = (imageBitmap.height - imageBitmap.width) / 2
-          sourceHeight = imageBitmap.width
-        }
+    if (aspectRatio > 1) {
+      // Landscape
+      sourceX = (imageBitmap.width - imageBitmap.height) / 2
+      sourceWidth = imageBitmap.height
+    } else if (aspectRatio < 1) {
+      // Portrait
+      sourceY = (imageBitmap.height - imageBitmap.width) / 2
+      sourceHeight = imageBitmap.width
+    }
 
-        ctx!.drawImage(
-          imageBitmap,
-          sourceX,
-          sourceY,
-          sourceWidth,
-          sourceHeight,
-          0,
-          0,
-          MAX_DIMENSION,
-          MAX_DIMENSION,
-        )
-
-        // Konvertiere das Canvas-Bild in einen Blob
-        return new Promise<File>((resolve) => {
-          canvas.toBlob(
-            (blob) => {
-              if (blob) {
-                resolve(new File([blob], file.name, { type: file.type }))
-              }
-            },
-            file.type,
-            0.8,
-          ) // 0.8 ist die Qualitätsstufe, 0.8 bedeutet 80% Qualität
-        })
-      }),
+    ctx!.drawImage(
+      imageBitmap,
+      sourceX,
+      sourceY,
+      sourceWidth,
+      sourceHeight,
+      0,
+      0,
+      MAX_DIMENSION,
+      MAX_DIMENSION,
     )
-    return compressedFiles
+
+    // Konvertiere das Canvas-Bild in einen Blob
+    return new Promise<File>((resolve) => {
+      canvas.toBlob(
+        (blob) => {
+          if (blob) {
+            resolve(new File([blob], file.name, { type: file.type }))
+          }
+        },
+        file.type,
+        0.8,
+      ) // 0.8 ist die Qualitätsstufe, 0.8 bedeutet 80% Qualität
+    })
   }
 
   return (
@@ -169,7 +135,7 @@ export default function ProfilePictureChanger() {
         <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
             control={form.control}
-            name="images"
+            name="image"
             render={({ field: { value, onChange, ...fieldProps } }) => (
               <FormItem>
                 <FormLabel>Image</FormLabel>
@@ -181,7 +147,6 @@ export default function ProfilePictureChanger() {
                     accept="image/jpeg,image/png,image/webp"
                     onChange={(event) => {
                       onChange(event.target.files)
-                      // onChange(event.target.files && event.target.files[0])
                       handleFileChange(event)
                     }}
                   />
@@ -189,22 +154,20 @@ export default function ProfilePictureChanger() {
               </FormItem>
             )}
           />
-          {previewUrls && files && (
+          {previewUrl && file && (
             <div className="flex flex-wrap">
-              {previewUrls.map((url) => (
-                <Image
-                  src={url}
-                  key={url}
-                  alt="Selected files"
-                  width={150}
-                  height={150}
-                  className="border"
-                />
-              ))}
+              <Image
+                src={previewUrl}
+                key={previewUrl}
+                alt="Selected files"
+                width={150}
+                height={150}
+                className="border"
+              />
             </div>
           )}
           <Button className="mt-4 border-2" type="submit">
-            submit
+            Submit
           </Button>
         </form>
       </Form>
