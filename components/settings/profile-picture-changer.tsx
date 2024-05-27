@@ -12,9 +12,16 @@ import { changeUserImage } from '@/lib/useraction'
 const MAX_FILE_SIZE = 8000000
 const formSchema = z.object({
   image: z.any(),
-  // .refine((file) => file instanceof File && file.size <= MAX_FILE_SIZE, {
-  //   message: 'File must be no larger than 8MB',
-  // }),
+  // .refine(
+  //   (file) => {
+  //     if (file instanceof File) {
+  //       return file.size <= MAX_FILE_SIZE
+  //     }
+  //   },
+  //   {
+  //     message: 'Each file must be no larger than 8MB',
+  //   },
+  // ),
 })
 
 export default function ProfilePictureChanger() {
@@ -56,7 +63,7 @@ export default function ProfilePictureChanger() {
       imageUrl = url.split('?')[0]
     }
     await changeUserImage(imageUrl)
-    form.reset({ imageUrl: null })
+    setPreviewUrl(null)
   }
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -138,7 +145,7 @@ export default function ProfilePictureChanger() {
             name="image"
             render={({ field: { value, onChange, ...fieldProps } }) => (
               <FormItem>
-                <FormLabel>Image</FormLabel>
+                <FormLabel>change Profile-Picture</FormLabel>
                 <FormControl>
                   <Input
                     {...fieldProps}
