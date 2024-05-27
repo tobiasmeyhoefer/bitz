@@ -12,19 +12,21 @@ import { changeUserImage } from '@/lib/useraction'
 const MAX_FILE_SIZE = 8000000
 const formSchema = z.object({
   image: z.any(),
-  // .refine(
-  //   (file) => {
-  //     if (file instanceof File) {
-  //       return file.size <= MAX_FILE_SIZE
-  //     }
-  //   },
-  //   {
-  //     message: 'Each file must be no larger than 8MB',
-  //   },
-  // ),
+  // .refine((file) => file instanceof File, {
+  //   message: 'Must be a file',
+  // }),
+  // .refine((file) => file.size <= MAX_FILE_SIZE, {
+  //   message: 'File must be smaller than 8MB',
+  // }),
 })
 
-export default function ProfilePictureChanger() {
+export default function ProfilePictureChanger({
+  title,
+  submitTitle,
+}: {
+  title: string
+  submitTitle: string
+}) {
   const [file, setFile] = useState<File | null>(null)
   const [compressedFile, setCompressedFile] = useState<File | null>(null)
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
@@ -145,7 +147,7 @@ export default function ProfilePictureChanger() {
             name="image"
             render={({ field: { value, onChange, ...fieldProps } }) => (
               <FormItem>
-                <FormLabel>change Profile-Picture</FormLabel>
+                <FormLabel>{title}</FormLabel>
                 <FormControl>
                   <Input
                     {...fieldProps}
@@ -174,7 +176,7 @@ export default function ProfilePictureChanger() {
             </div>
           )}
           <Button className="mt-4 border-2" type="submit">
-            Submit
+            {submitTitle}
           </Button>
         </form>
       </Form>

@@ -34,6 +34,7 @@ export async function deleteAccount() {
   const id = session?.user?.id
   if (id) {
     const products = await getProductsOwned(id)
+    const user = await getUser()
     // imageUrls wenn gesetzt aus AWS löschen
     if (products) {
       for (const product of products) {
@@ -46,11 +47,13 @@ export async function deleteAccount() {
         ]
         for (const imageUrl of imageUrls) {
           if (imageUrl) {
-            console.log('---------------_DSJHIAHSIDS')
             await deleteImageOnAws(imageUrl)
           }
         }
       }
+    }
+    if (user?.[0].image) {
+      await deleteImageOnAws(user[0].image)
     }
     await db.delete(users).where(eq(users.id, id))
     await signOut()

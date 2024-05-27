@@ -23,9 +23,15 @@ const Settings = () => {
         <hr />
         <PhoneVerification />
         <hr />
-        <DeleteAccountButton />
+        <DeleteAccountButton
+          header={t('deleteAccount')}
+          title={t('deleteAccountTitle')}
+          description={t('deleteAccountDescription')}
+          cancel={t('deleteAccountCancel')}
+          action={t('deleteAccountAction')}
+        />
         <hr />
-        <ProfilePictureChanger />
+        <ProfilePictureChanger title={t('imageChangeTitle')} submitTitle={t('submitTitle')} />
       </div>
     </div>
   )
