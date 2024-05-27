@@ -1,13 +1,12 @@
 'use client'
 import { addToFavorites, checkFavorite, deleteFavorite } from '@/lib/productaction'
 import { useEffect, useState } from 'react'
+import { FaHeart, FaRegHeart } from 'react-icons/fa'
 import { Button } from '../ui/button'
-import filled from '@/public/icons/filledheart.svg'
-import heart from '@/public/icons/heart.svg'
-import Image from 'next/image'
 
 const FavoriteLike = ({ productId }: { productId: string }) => {
   const [isFavorite, setIsFavorite] = useState(false)
+
   useEffect(() => {
     async function fetchFavorite() {
       const isFav = await checkFavorite(productId)
@@ -15,6 +14,7 @@ const FavoriteLike = ({ productId }: { productId: string }) => {
     }
     fetchFavorite()
   }, [productId])
+
   return (
     <>
       <form onSubmit={(e) => e.preventDefault()}>
@@ -28,13 +28,7 @@ const FavoriteLike = ({ productId }: { productId: string }) => {
             setIsFavorite(!isFavorite)
           }}
         >
-          <Image
-            width={30}
-            height={30}
-            src={isFavorite ? filled : heart}
-            className={isFavorite ? '' : 'white-filter'}
-            alt="LikeIcon"
-          />
+          {isFavorite ? <FaHeart color="red" size={20} /> : <FaRegHeart size={20} />}
         </Button>
       </form>
     </>
