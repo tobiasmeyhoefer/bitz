@@ -1,3 +1,5 @@
+import { Button } from '@/components/ui/button'
+import { createConversation } from '@/lib/conversations-actions'
 import { ProductType } from '@/lib/types'
 
 export default function Page({
@@ -12,6 +14,12 @@ export default function Page({
     <div>
       Some Product ID: {params.id}
       <div>Title: {product.title}</div>
+      <form action={async () => {
+        'use server'
+        await createConversation(params.id)
+      }}>
+      <Button type='submit' className='absolute bottom-6 right-6'>Test</Button>
+      </form>
     </div>
   )
 }
