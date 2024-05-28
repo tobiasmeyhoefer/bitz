@@ -19,7 +19,7 @@ export const users = pgTable('user', {
   emailVerified: timestamp('emailVerified', { mode: 'date' }),
   image: text('image'),
   location: text('location'),
-  phoneVerified: boolean("phoneVerified").default(false)
+  phoneVerified: boolean('phoneVerified').default(false),
 })
 
 export const products = pgTable('product', {
@@ -81,12 +81,21 @@ export const sessions = pgTable('session', {
   expires: timestamp('expires', { mode: 'date' }).notNull(),
 })
 
-export const verificationNumberSessions = pgTable('verificationNumberSessions', {
-  verificationNumber: text('verificationNumber').notNull(),
-  userId: text('userId')
-    .notNull()
-    .references(() => users.id, { onDelete: 'cascade' })
-})
+export const verificationNumberSessions = pgTable(
+  'verificationNumberSessions',
+  {
+    verificationNumber: text('verificationNumber').notNull(),
+    userId: text('userId')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    createdAt: timestamp('createdAt', { mode: 'date' }).notNull().defaultNow(),
+  },
+  (table) => {
+    return {
+      pk: primaryKey({ columns: [table.userId, table.createdAt] }),
+    }
+  },
+)
 
 export const verificationTokens = pgTable(
   'verificationToken',
