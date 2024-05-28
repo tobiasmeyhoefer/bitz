@@ -73,7 +73,14 @@
   "Settings": {
     "title": "Settings",
     "city": "city",
-    "postcode": "postcode"
+    "postcode": "postcode",
+    "imageChangeTitle": "change Profilepicture",
+    "submitTitle": "submit",
+    "deleteAccount": "delete Account",
+    "deleteAccountTitle": "Are you absolutely sure?",
+    "deleteAccountDescription": "This action cannot be undone. This will permanently delete your account and remove your data from our servers.",
+    "deleteAccountCancel": "Cancel",
+    "deleteAccountAction": "delete Account"
   },
   "Navbar": {
     "loginButton": "login",

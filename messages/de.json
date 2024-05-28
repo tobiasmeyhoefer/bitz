@@ -73,7 +73,14 @@
   "Settings": {
     "title": "Einstellungen",
     "city": "Stadt",
-    "postcode": "Postleitzahl"
+    "postcode": "Postleitzahl",
+    "imageChangeTitle": "Profilbild ändern",
+    "submitTitle": "absenden",
+    "deleteAccount": "Account löschen",
+    "deleteAccountTitle": "Bist du dir sicher?",
+    "deleteAccountDescription": "Diese Aktion kann nicht rückgängig gemacht werden. Dadurch wird Ihr Konto dauerhaft gelöscht und Ihre Daten werden von unseren Servern entfernt.",
+    "deleteAccountCancel": "Abbrechen",
+    "deleteAccountAction": "Account löschen"
   },
   "Navbar": {
     "loginButton": "anmelden",
