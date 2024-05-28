@@ -7,6 +7,7 @@ import {
   uniqueIndex,
   boolean,
   pgEnum,
+  serial,
 } from 'drizzle-orm/pg-core'
 import type { AdapterAccount } from 'next-auth/adapters'
 import { genId } from './lib/utils'
@@ -155,11 +156,12 @@ Der Käufer klickt den Kaunfe Button, es wird ein Eintrag gemacht und der Verkä
 Es gibt eine Seite für Konversation, auf button click eröffnet man eine Konversation die hat erstmal diese Felder: Käufer, Verkäufer, Produkt, Status
 */
 
-export const statusEnum = pgEnum('status', ['verkauft', 'offen', 'deal'])
+export const statusEnum = pgEnum('status', ['verkauft', 'offen', 'accepted', 'declined'])
 
 export const conversations = pgTable(
   'conversations',
   {
+    id: serial('id'),
     buyerId: text('buyerId')
       .notNull()
       .references(() => users.id, { onDelete: 'cascade' }),
@@ -170,6 +172,7 @@ export const conversations = pgTable(
       .notNull()
       .references(() => products.id, { onDelete: 'cascade' }),
     status: statusEnum('status').default('offen'),
+    createdAt: timestamp('createdAt', { mode: 'date' }).notNull().defaultNow(),
   },
   (table) => {
     return {
@@ -180,3 +183,4 @@ export const conversations = pgTable(
 
 // export type ProductType = typeof products.$inferSelect
 export type UserType = typeof users.$inferSelect
+export type ConversationType = typeof conversations.$inferSelect
