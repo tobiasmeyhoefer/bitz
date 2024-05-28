@@ -5,19 +5,28 @@ import Image from 'next/image'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
-import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import { changeUserImage } from '@/lib/useraction'
 const MAX_FILE_SIZE = 8000000
 const formSchema = z.object({
-  image: z.any(),
-  // .refine((file) => file instanceof File, {
-  //   message: 'Must be a file',
-  // }),
-  // .refine((file) => file.size <= MAX_FILE_SIZE, {
-  //   message: 'File must be smaller than 8MB',
-  // }),
+  image: z.any().refine(
+    (file) => {
+      console.log(file)
+      return file.size <= MAX_FILE_SIZE
+    },
+    {
+      message: 'File must be smaller than 8MB',
+    },
+  ),
 })
 
 export default function ProfilePictureChanger({
@@ -32,6 +41,9 @@ export default function ProfilePictureChanger({
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
   const form = useForm({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      image: null,
+    },
   })
 
   async function onSubmit(values: any) {
@@ -151,15 +163,15 @@ export default function ProfilePictureChanger({
                 <FormControl>
                   <Input
                     {...fieldProps}
-                    multiple
                     type="file"
                     accept="image/jpeg,image/png,image/webp"
                     onChange={(event) => {
-                      onChange(event.target.files)
+                      onChange(event.target.files![0])
                       handleFileChange(event)
                     }}
                   />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />
