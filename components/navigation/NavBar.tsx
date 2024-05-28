@@ -4,9 +4,13 @@ import { getTranslations } from 'next-intl/server'
 import dynamic from 'next/dynamic'
 import { SignOut } from '../auth/sign-out'
 import { NavItemLink, NavLoginLink, NavMenuDrawer, NavbarItemDropdown } from './navbarItem'
+import { getUser } from '@/lib/useraction'
+
 const NavBar = async () => {
   const t = await getTranslations('Navbar')
   const session = await auth()
+  const users = await getUser()
+  const user = users?.[0]
   const isLoggedIn = !!session?.user
   const CubeSceneNav = dynamic(() => import('@/components/explosion/cubeSceneNav'), {
     ssr: false,
@@ -58,6 +62,7 @@ const NavBar = async () => {
         <>
           <div className="hidden sm:flex">
             <NavbarItemDropdown
+              userImgSrc={user?.image}
               signOut={
                 <SignOut text={t('logoutButton')} typeText={false} className="mr-3 text-inherit" />
               }

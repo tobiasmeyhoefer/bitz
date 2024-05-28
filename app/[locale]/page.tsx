@@ -74,7 +74,6 @@ export default async function Home() {
           </div>
           <div className="flex flex-col items-center">
             <LuPaintbrush title="A thick Paintbrush" className="h-20 w-20" />
-
             <p className="mt-2 text-4xl">{t('design')}</p>
           </div>
         </div>
@@ -95,7 +94,6 @@ export default async function Home() {
           </div>
           <div className="col-start-3 row-start-2 flex flex-col items-center justify-center text-center">
             <LuShoppingCart title="Simple Shopping Card in Sideview" className="h-20 w-20" />
-
             <p className="mt-2 text-3xl">{t('buy')}</p>
           </div>
           <div className="col-start-1 row-start-2 flex flex-col items-center justify-center text-center">
@@ -103,7 +101,6 @@ export default async function Home() {
               title="A simple Depiction of a Person inside a Circle"
               className="h-20 w-20"
             />
-
             <p className="mt-2 text-3xl">{t('createAccount')}</p>
           </div>
         </div>
