@@ -24,11 +24,7 @@ type MyShopProps = {
 }
 
 type SearchBarProps = {
-  placeholder: string
-  searchValue: string
-  setSearchValue: React.Dispatch<React.SetStateAction<string>>
-  suggestions: string[]
-  suggestionsTitle: string
+  translations: SearchTranslations
 }
 
 type SearchTranslations = {
@@ -47,10 +43,6 @@ type FormTranslations = {
   toastTitle: string
   toastDescription: string
   submitTitle: string
-}
-
-type BrowseContentProps = {
-  searchTranslations: SearchTranslations
 }
 
 type ProductType = {
@@ -88,7 +80,6 @@ export type {
   CardWithImageProps,
   SearchBarProps,
   SearchTranslations,
-  BrowseContentProps,
   RevealOnScrollProps,
   ProductType,
   FormTranslations,
