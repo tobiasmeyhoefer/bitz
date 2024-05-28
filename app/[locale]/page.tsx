@@ -62,15 +62,15 @@ export default async function Home() {
         <h2 className="mb-8 text-center text-4xl font-bold">{t('secondSectionTitle')}</h2>
         <div className="mt-4 flex flex-col items-center space-y-8 md:flex-row md:space-x-16 md:space-y-0">
           <div className="flex flex-col items-center">
-            <LuShieldCheck className="h-20 w-20" stroke-width="1.5" />
+            <LuShieldCheck className="h-20 w-20" strokeWidth="1.5" />
             <p className="mt-2 text-4xl">{t('security')}</p>
           </div>
           <div className="color flex flex-col items-center">
-            <LuCpu className="h-20 w-20" stroke-width="1.5" />
+            <LuCpu className="h-20 w-20" strokeWidth="1.5" />
             <p className="mt-2 text-center text-4xl">{t('focus')}</p>
           </div>
           <div className="flex flex-col items-center">
-            <LuPaintbrush className="h-20 w-20" stroke-width="1.5" />
+            <LuPaintbrush className="h-20 w-20" strokeWidth="1.5" />
 
             <p className="mt-2 text-4xl">{t('design')}</p>
           </div>
@@ -83,7 +83,7 @@ export default async function Home() {
         <h2 className="mb-8 text-4xl font-bold">{t('thirdSectionTitle')}</h2>
         <div className="relative grid w-11/12 grid-cols-3 grid-rows-3 items-center justify-center">
           <div className="col-start-2 row-start-1 flex flex-col items-center justify-center text-center">
-            <LuStore className="h-20 w-20" stroke-width="1.5" />
+            <LuStore className="h-20 w-20" strokeWidth="1.5" />
             <p className="mt-2 text-3xl">{t('createShop')}</p>
           </div>
           <div className="col-start-2 row-start-3 flex flex-col items-center justify-center text-center">
@@ -91,12 +91,12 @@ export default async function Home() {
             <p className="mt-2 text-3xl">{t('sell')}</p>
           </div>
           <div className="col-start-3 row-start-2 flex flex-col items-center justify-center text-center">
-            <LuShoppingCart className="h-20 w-20" stroke-width="1.5" />
+            <LuShoppingCart className="h-20 w-20" strokeWidth="1.5" />
 
             <p className="mt-2 text-3xl">{t('buy')}</p>
           </div>
           <div className="col-start-1 row-start-2 flex flex-col items-center justify-center text-center">
-            <LuUserCircle className="h-20 w-20" stroke-width="1.5" />
+            <LuUserCircle className="h-20 w-20" strokeWidth="1.5" />
 
             <p className="mt-2 text-3xl">{t('createAccount')}</p>
           </div>
