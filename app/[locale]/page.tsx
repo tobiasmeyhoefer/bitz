@@ -28,15 +28,18 @@ export default async function Home() {
     <main className="static h-screen snap-y snap-mandatory overflow-y-scroll">
       <section
         id="first-section"
-        className="mt-20 flex h-screen snap-start flex-col font-space_grotesk lg:flex-row"
+        className="mt-20 flex h-screen snap-start flex-col font-space_grotesk xl:flex-row"
       >
-        <LuChevronUp className="absolute bottom-8 left-1/2 h-6 w-6 -translate-x-1/2 transform animate-bounce" />
+        <LuChevronUp
+          title="Arrow up that indecates scollablity"
+          className="absolute bottom-8 left-1/2 h-6 w-6 -translate-x-1/2 transform animate-bounce"
+        />
 
-        <div className="flex w-screen flex-col justify-center p-4 lg:mr-12 lg:w-1/2 lg:p-24">
-          <h1 className="text-4xl font-bold lg:text-5xl">Bitz</h1>
-          <h2 className="mt-16 text-xl lg:mt-4 lg:text-2xl">{t('subtitle')}</h2>
-          <p className="mt-4 text-sm lg:text-xl">{t('description')}</p>
-          <p className="mt-4 text-lg lg:text-xl">{t('call')}</p>
+        <div className="flex w-screen flex-col justify-center p-4 xl:mr-12 xl:w-1/2 xl:p-24">
+          <h1 className="text-4xl font-bold xl:text-5xl">Bitz</h1>
+          <h2 className="mt-16 text-xl xl:mt-4 xl:text-2xl">{t('subtitle')}</h2>
+          <p className="mt-4 text-sm xl:text-xl">{t('description')}</p>
+          <p className="mt-4 text-lg xl:text-xl">{t('call')}</p>
           <div className="mt-8 flex space-x-4">
             <Link href="/auth/login">
               <Button variant="callToAction" size={'lg'}>
@@ -50,7 +53,7 @@ export default async function Home() {
             </Link>
           </div>
         </div>
-        <div className="flex h-1/2 w-screen items-center justify-center rounded-full lg:mt-12 lg:h-screen lg:w-screen lg:justify-center">
+        <div className="flex h-1/2 w-screen items-center justify-center rounded-full xl:mt-12 xl:h-screen xl:w-screen xl:justify-center">
           <CubeScene />
         </div>
       </section>
@@ -62,15 +65,15 @@ export default async function Home() {
         <h2 className="mb-8 text-center text-4xl font-bold">{t('secondSectionTitle')}</h2>
         <div className="mt-4 flex flex-col items-center space-y-8 md:flex-row md:space-x-16 md:space-y-0">
           <div className="flex flex-col items-center">
-            <LuShieldCheck className="h-20 w-20" stroke-width="1.5" />
+            <LuShieldCheck title="Shield Icon with a check Symbol inside" className="h-20 w-20" />
             <p className="mt-2 text-4xl">{t('security')}</p>
           </div>
           <div className="color flex flex-col items-center">
-            <LuCpu className="h-20 w-20" stroke-width="1.5" />
+            <LuCpu title="A simplified CPU picture" className="h-20 w-20" />
             <p className="mt-2 text-center text-4xl">{t('focus')}</p>
           </div>
           <div className="flex flex-col items-center">
-            <LuPaintbrush className="h-20 w-20" stroke-width="1.5" />
+            <LuPaintbrush title="A thick Paintbrush" className="h-20 w-20" />
 
             <p className="mt-2 text-4xl">{t('design')}</p>
           </div>
@@ -83,20 +86,23 @@ export default async function Home() {
         <h2 className="mb-8 text-4xl font-bold">{t('thirdSectionTitle')}</h2>
         <div className="relative grid w-11/12 grid-cols-3 grid-rows-3 items-center justify-center">
           <div className="col-start-2 row-start-1 flex flex-col items-center justify-center text-center">
-            <LuStore className="h-20 w-20" stroke-width="1.5" />
+            <LuStore title="A simplified Icon of a Store" className="h-20 w-20" />
             <p className="mt-2 text-3xl">{t('createShop')}</p>
           </div>
           <div className="col-start-2 row-start-3 flex flex-col items-center justify-center text-center">
-            <FaRegHandshake className="h-20 w-20" />
+            <FaRegHandshake title="Two hands in a Line forming a handshake" className="h-20 w-20" />
             <p className="mt-2 text-3xl">{t('sell')}</p>
           </div>
           <div className="col-start-3 row-start-2 flex flex-col items-center justify-center text-center">
-            <LuShoppingCart className="h-20 w-20" stroke-width="1.5" />
+            <LuShoppingCart title="Simple Shopping Card in Sideview" className="h-20 w-20" />
 
             <p className="mt-2 text-3xl">{t('buy')}</p>
           </div>
           <div className="col-start-1 row-start-2 flex flex-col items-center justify-center text-center">
-            <LuUserCircle className="h-20 w-20" stroke-width="1.5" />
+            <LuUserCircle
+              title="A simple Depiction of a Person inside a Circle"
+              className="h-20 w-20"
+            />
 
             <p className="mt-2 text-3xl">{t('createAccount')}</p>
           </div>
