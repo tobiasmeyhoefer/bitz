@@ -11,7 +11,7 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
   ({ className, ...props }, ref) => {
     const cardWidth = 300 //props.previewType === 'product' ? 300 : 600
 
-    props.product.isOwner = props.isOwner
+    props.product.isOwner = props.editable
 
     const getImgBorder = (index: number, arraylength: number) => {
       switch (index) {

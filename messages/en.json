@@ -62,6 +62,7 @@
     "toastTitle": "Success",
     "toastDescription": "added Product",
     "submitTitle": "submit",
+    "save": "Save",
     "cancel": "Cancel",
     "edit": "Edit"
   },

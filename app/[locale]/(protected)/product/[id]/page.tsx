@@ -1,4 +1,3 @@
-import { ProductType } from '@/lib/types'
 import { ProductImageCarousel } from '../productImgCarousel'
 import ProductInfoCard from '../productInfoCard'
 import { useTranslations } from 'next-intl'
@@ -11,10 +10,9 @@ export default function Page({
   searchParams: { p: string }
 }) {
   const t = useTranslations('Product')
-  const userId = atob(params.id)
+  // const userId = atob(params.id)
 
   const productInfo: any = JSON.parse(atob(searchParams.p))
-  console.log(productInfo.isOwner)
 
   const unfilteredImgs = [
     productInfo.imageUrl1,

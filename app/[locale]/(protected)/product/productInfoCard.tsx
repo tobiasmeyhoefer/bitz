@@ -3,6 +3,7 @@ import { Separator } from '@/components/ui/separator'
 import { useTranslations, useLocale } from 'next-intl'
 import ProductInfoCardEditable from './productInfoCardEditable'
 import { ProductType } from '@/lib/types'
+import { cn } from '@/lib/utils'
 
 type ProductInfoType = {
   productInfo: ProductType & { isOwner: boolean }
@@ -21,13 +22,18 @@ export default function ProductInfoCard(props: ProductInfoType) {
     price: tProductForm('price'),
     description: tProductForm('description'),
     cancel: tProductForm('cancel'),
-    submitTitle: tProductForm('submitTitle'),
+    save: tProductForm('save'),
     edit: tProductForm('edit'),
   }
 
-  const getDate = (timestamp: any) => {
+  const getDate = (
+    timestamp: any,
+    dateFirst: boolean,
+    className?: string,
+  ): JSX.Element | undefined => {
     const date = new Date(timestamp)
     let month = ''
+    let dateEl
 
     switch (date.getUTCMonth() + 1) {
       case 1:
@@ -62,19 +68,35 @@ export default function ProductInfoCard(props: ProductInfoType) {
       } else {
         time = `${date.getUTCHours()}:${date.getUTCMinutes()}  a.m.`
       }
-      return (
-        <div className="text-right text-xs">
+      dateFirst ? (
+        (dateEl = (
+          <div className={cn('text-xs', className)}>
+            {date.getUTCDate()} {month} {date.getUTCFullYear()}
+            <br /> {time}
+          </div>
+        ))
+      ) : (
+        <div className={cn('text-xs', className)}>
+          {time} <br />
           {date.getUTCDate()} {month} {date.getUTCFullYear()}
-          <br /> {time}
         </div>
       )
+      return dateEl
     } else if (locale === 'de') {
-      return (
-        <div className="text-right text-xs">
-          {date.getUTCDate()}.{month} {date.getUTCFullYear()}
-          <br /> {date.getUTCHours()}:{date.getUTCMinutes()} Uhr
-        </div>
-      )
+      dateFirst
+        ? (dateEl = (
+            <div className={cn('text-xs', className)}>
+              {date.getUTCDate()}.{month} {date.getUTCFullYear()}
+              <br /> {date.getUTCHours()}:{date.getUTCMinutes()} Uhr
+            </div>
+          ))
+        : (dateEl = (
+            <div className={cn('text-xs', className)}>
+              {date.getUTCHours()}:{date.getUTCMinutes()} Uhr <br />
+              {date.getUTCDate()}.{month} {date.getUTCFullYear()}
+            </div>
+          ))
+      return dateEl
     }
   }
 
@@ -84,7 +106,7 @@ export default function ProductInfoCard(props: ProductInfoType) {
         <ProductInfoCardEditable
           productInfo={product}
           translations={editableCardTranslations}
-          date={getDate(product.createdAt)}
+          date={getDate(product.createdAt, false, 'text-right')}
           locale={locale}
         />
       ) : (
@@ -103,7 +125,7 @@ export default function ProductInfoCard(props: ProductInfoType) {
                 {tProduct('quantity')}: {product.quantity}
               </div>
             </div>
-            <div>{getDate(product.createdAt)}</div>
+            <div>{getDate(product.createdAt, true, 'text-right')}</div>
           </CardContent>
         </Card>
       )}

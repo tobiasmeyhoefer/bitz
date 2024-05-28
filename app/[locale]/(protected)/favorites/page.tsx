@@ -19,6 +19,7 @@ const Favorites = async () => {
               className="mx-[5px] my-[0.5rem]"
               productID={p.id}
               favIcon
+              editable={false}
             />
           ))}
         </div>

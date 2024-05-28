@@ -8,7 +8,7 @@ type CardWithImageProps = {
   shopID?: string
   productID?: string
   product?: any
-  isOwner: boolean
+  editable: boolean
 }
 type User = {
   userId: string

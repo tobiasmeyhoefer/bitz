@@ -14,6 +14,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  FormDescription,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { toast } from '@/components/ui/use-toast'
@@ -142,64 +143,50 @@ export default function ProductInfoCardEditable(props: any) {
                         {...field}
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
+                        maxLength={850}
+                        aria-label="max"
                       />
                     </FormControl>
+                    <FormDescription className="!mt-0 text-right">max. 850</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
               <div className="flex justify-between">
-                <Button type="submit">{translations.submitTitle}</Button>
-                <Button onClick={handleCancel}>{translations.cancel}</Button>
+                <Button type="submit">{translations.save}</Button>
+                <Button variant="secondary" onClick={handleCancel}>
+                  {translations.cancel}
+                </Button>
               </div>
             </form>
           </Form>
         </div>
       ) : (
-        <>
-          {/* <Card className="my-3 h-full w-[90vw] lg:my-0 lg:h-[60vh] lg:min-h-[60vh] lg:w-[40vw]">
-            <CardHeader className="flex h-[20%] flex-row items-center justify-between">
-              <CardTitle className="text-center">{title}</CardTitle>
-              <CardTitle className="text-3xl">
-                {price} {props.locale === 'en' ? '$' : '€'}
-              </CardTitle>
-            </CardHeader>
-            <Separator />
-            <CardContent className="flex h-[40vh] min-h-[80%] flex-col justify-between p-6">
-              <div className="flex justify-between text-wrap pb-6">
-                <div className="h-fit w-9/12 break-words">{description}</div>
-                {`${translations.quantity}: ${quantity}`}
+        <div className="h-[50vh] w-[90vw] lg:h-[60vh] lg:w-[40vw] 2xl:w-[60vh]">
+          <Card className="mt-2 flex h-full flex-col justify-between lg:mt-0 lg:h-[60vh]">
+            <div>
+              <CardHeader className="flex h-[10vh] flex-row items-center justify-between">
+                <CardTitle className="text-center">{title}</CardTitle>
+                <CardTitle className="text-3xl">{price}€</CardTitle>
+              </CardHeader>
+              <Separator />
+              <CardContent className="flex min-h-[30vh] flex-col justify-between p-6 pb-0">
+                <div className="h-fit break-words text-sm">{description}</div>
+              </CardContent>
+            </div>
+            <div className="flex h-[15vh] items-end justify-between px-6 pb-6">
+              <div className="flex w-1/2 flex-col justify-between whitespace-nowrap text-sm">
+                {translations.quantity}: {quantity}
               </div>
-              <div className="flex flex-col justify-end">
-                {date}
-                <Button className="ml-auto mt-2 w-1/2" size={'lg'} onClick={handleEditClick}>
-                  {translations.edit}
-                </Button>
-              </div>
-            </CardContent>
-          </Card> */}
-          <Card className="my-3 h-full w-[90vw] lg:my-0 lg:h-[60vh] lg:min-h-[60vh] lg:w-[40vw]">
-            <CardHeader className="flex h-[20%] flex-row items-center justify-between">
-              <CardTitle className="text-center">{title}</CardTitle>
-              <CardTitle className="text-3xl">{price}</CardTitle>
-            </CardHeader>
-            <Separator />
-            <CardContent className="flex min-h-[80%] flex-col justify-between p-6">
-              <div className="flex justify-between text-wrap pb-6">
-                <div className="h-fit w-9/12 break-words">{description}</div>
-                <div className="whitespace-nowrap text-right lg:w-[20vw]">
-                  {translations.quantity}: {quantity}
-                </div>
-              </div>
-              <div className="flex flex-col justify-end">
-                {date}
-                <Button className="ml-auto mt-2 w-1/2" size={'lg'} onClick={handleEditClick}>
-                  {translations.edit}
-                </Button>
-              </div>
-            </CardContent>
+              {date}
+            </div>
           </Card>
-        </>
+          <div className="flex justify-end">
+            <Button className="my-2 !ml-auto w-1/3 lg:mb-0" size={'lg'} onClick={handleEditClick}>
+              {translations.edit}
+            </Button>
+          </div>
+        </div>
       )}
     </>
   )

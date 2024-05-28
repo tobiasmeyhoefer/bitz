@@ -32,7 +32,7 @@ export function ProductImageCarousel(props: any) {
         opts={{
           loop: true,
         }}
-        className="h-[50vh] w-[90vw] lg:h-[60vh] lg:w-[50vw] xl:w-[60vh] 2xl:w-[70vh]"
+        className="h-full w-[90vw] lg:h-[60vh] lg:w-[50vw] xl:w-[60vh] 2xl:w-[70vh]"
       >
         <CarouselContent>
           {props.images.map((img: string, index: number) => (

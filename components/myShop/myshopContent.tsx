@@ -56,7 +56,7 @@ const MyShopContent = (props: MyShopProps) => {
               productID={p.id}
               product={products[index]}
               favIcon
-              isOwner
+              editable
             />
           ))}
         </div>
