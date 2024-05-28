@@ -53,14 +53,14 @@ export default async function Home() {
             </Link>
           </div>
         </div>
-        <div className="flex h-1/2 w-screen items-center justify-center rounded-full xl:mt-12 xl:h-screen xl:w-screen xl:justify-center">
+        <div className="flex h-1/2 w-screen items-center justify-center rounded-full xl:h-screen xl:w-screen xl:justify-center">
           <CubeScene />
         </div>
       </section>
 
       <section
         id="next-section"
-        className="relative flex h-screen snap-start flex-col items-center justify-center bg-blue-400 pb-[10vh] font-space_grotesk text-white"
+        className="relative z-20 flex h-screen snap-start flex-col items-center justify-center bg-blue-400 pb-[10vh] font-space_grotesk text-white"
       >
         <h2 className="mb-8 text-center text-4xl font-bold">{t('secondSectionTitle')}</h2>
         <div className="mt-4 flex flex-col items-center space-y-8 md:flex-row md:space-x-16 md:space-y-0">
@@ -81,7 +81,7 @@ export default async function Home() {
       </section>
       <section
         id="circle-section"
-        className="relative flex h-screen snap-start flex-col items-center justify-center bg-blue-950 pb-[10vh] font-space_grotesk text-white"
+        className="relative z-20 flex h-screen snap-start flex-col items-center justify-center bg-blue-950 pb-[10vh] font-space_grotesk text-white"
       >
         <h2 className="mb-8 text-4xl font-bold">{t('thirdSectionTitle')}</h2>
         <div className="relative grid w-11/12 grid-cols-3 grid-rows-3 items-center justify-center">
