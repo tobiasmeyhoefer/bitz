@@ -11,9 +11,6 @@ type CardWithImageProps = {
 }
 type User = {
   userId: string
-  //  email: string
-  //  name: string
-  //  avatar: string
 }
 
 type UserId = {
@@ -55,17 +52,6 @@ type BrowseContentProps = {
   searchTranslations: SearchTranslations
 }
 
-// type Product = {
-//   title: string
-//   description: string
-//   price: number
-//   currency: string
-//   quantity: number
-//   location: string
-//   status: string
-//   image?: string
-// }
-
 type ProductType = {
   id?: string
   title: string
@@ -80,17 +66,6 @@ type ProductType = {
   imageUrl3?: string | null
   imageUrl4?: string | null
   imageUrl5?: string | null
-
-  // title: string;
-  // description: string;
-  // price: number;
-  // currency: string;
-  // quantity: number;
-  // location: string;
-  // status: string;
-  // sellerId: string;
-  // createdAt: Date;
-  // image: string;
 }
 
 type Shop = {

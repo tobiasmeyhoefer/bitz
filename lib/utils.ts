@@ -16,3 +16,13 @@ export function generateRandomSixDigitNumber(): string {
   const randomSixDigitStr = randomNum.toString().padStart(6, '0');
   return randomSixDigitStr;
 }
+
+export function formatPhoneNumber(phoneNumber: string): string {
+  // Entferne alle Leerzeichen
+  const cleanedNumber = phoneNumber.replace(/\s+/g, '');
+  
+  // Ersetze führende 0 durch +49
+  const formattedNumber = cleanedNumber.replace(/^0/, '+49');
+  
+  return formattedNumber;
+}
