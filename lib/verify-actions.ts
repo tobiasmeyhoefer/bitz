@@ -4,7 +4,7 @@ import { users, verificationNumberSessions } from '@/schema'
 import { getUser } from './useraction'
 import { db } from '@/db'
 import { generateRandomSixDigitNumber } from './utils'
-import { eq } from 'drizzle-orm'
+import { desc, eq } from 'drizzle-orm'
 import twilio from 'twilio'
 
 async function saveVerifactionNumber(number: string) {
@@ -39,6 +39,7 @@ export async function getVerificationNumber() {
       .select()
       .from(verificationNumberSessions)
       .where(eq(verificationNumberSessions.userId, user![0].id))
+      .orderBy(desc(verificationNumberSessions.createdAt)) 
     return response[0].verificationNumber
   } catch (error) {
     return { error: "Something wen't wrong on the server" }
@@ -53,7 +54,7 @@ export async function sendSmsToUser(number: string) {
     const client = twilio(process.env.TWILIO_ACCOUNT_SID!, process.env.TWILIO_AUTH_TOKEN!)
     client.messages
       .create({
-        body: verificationNumber,
+        body: verificationNumber + " is your verification code for bitztech.de",
         from: '+14179323791',
         to: number,
       })

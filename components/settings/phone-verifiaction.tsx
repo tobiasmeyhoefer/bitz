@@ -35,25 +35,14 @@ const PhoneVerification = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await checkIfUserIsPhoneVerified()
-      setIsVerified(response)
+      const isVerified = await checkIfUserIsPhoneVerified()
+      if(!isVerified) {
+        await deleteVerifactionNumber()
+      }
+      setIsVerified(isVerified)
     }
     fetchData()
   }, [])
-
-
-  // useEffect(() => {
-  //   const logic = async () => {
-  //     if(inVerifactionProcess) {
-  //       setTimeout(handleCancel, 60000)
-  //     } else {
-  //       if(!isVerified) {
-  //         await handleCancel()
-  //       }
-  //     }
-  //   }
-  //   logic()
-  // }, [inVerifactionProcess])
 
   const sendNumberToUser = async () => {
     setIsTypeInNumberState(false)
