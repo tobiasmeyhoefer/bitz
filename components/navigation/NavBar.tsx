@@ -44,7 +44,7 @@ const NavBar = async () => {
   ]
 
   return (
-    <nav className="absolute left-0 right-0 z-10 flex h-[80px] items-center justify-between px-4 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]">
+    <nav className="left-0 right-0 z-10 flex h-[80px] items-center justify-between px-4 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]">
       <div className="flex items-center">
         {isLoggedIn && (
           <>

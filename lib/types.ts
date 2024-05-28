@@ -8,6 +8,7 @@ type CardWithImageProps = {
   shopID?: string
   productID?: string
   product?: any
+  editable: boolean
 }
 type User = {
   userId: string

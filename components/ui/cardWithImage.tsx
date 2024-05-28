@@ -10,6 +10,9 @@ import FavoriteLike from '../favorites/favoriteLike'
 const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
   ({ className, ...props }, ref) => {
     const cardWidth = 300 //props.previewType === 'product' ? 300 : 600
+
+    props.product.isOwner = props.editable
+
     const getImgBorder = (index: number, arraylength: number) => {
       switch (index) {
         case 0:
@@ -25,7 +28,9 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
       <>
         {props ? (
           <Card className={cn(`w-[${cardWidth}px]`, className)} ref={ref}>
-            <Link href={`/product/${props.productID}?p=${JSON.stringify(props.product)}`}>
+            <Link
+              href={`/product/${btoa(props.productID!)}?p=${btoa(JSON.stringify(props.product))}`}
+            >
               {props.imgUrl1 !== undefined ? (
                 <Image
                   src={props.imgUrl1 as string}
@@ -51,7 +56,7 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                 </CardTitle>
                 {props.favIcon && <FavoriteLike productId={props.productID!} />}
               </div>
-              <CardDescription className="text-xl ">{props.desc}</CardDescription>
+              <CardDescription className="truncate text-xl">{props.desc}</CardDescription>
             </CardHeader>
           </Card>
         ) : (
@@ -91,7 +96,7 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
           //           <FaRegHeart />
           //         </Button>
           //       </div>
-          //       <CardDescription className="text-xl text-black">{props.desc}</CardDescription>
+          //       <CardDescription className="text-xl truncate text-black">{props.desc}</CardDescription>
           //     </CardHeader>
           //   </Card>
           // </Link>
