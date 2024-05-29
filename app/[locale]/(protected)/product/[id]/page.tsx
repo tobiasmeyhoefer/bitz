@@ -1,3 +1,8 @@
+import { Button } from '@/components/ui/button'
+import { createConversation } from '@/lib/conversations-actions'
+import { ProductType } from '@/lib/types'
+import { redirect } from '@/navigation'
+import { revalidatePath } from 'next/cache'
 import { ProductImageCarousel } from '../productImgCarousel'
 import ProductInfoCard from '../productInfoCard'
 import { useTranslations } from 'next-intl'
@@ -31,6 +36,7 @@ export default function Page({
   }
 
   return (
+    <>
     <div
       id="product-info-container"
       className="flex min-h-[calc(100vh-80px)] w-screen flex-col items-center lg:flex-row lg:justify-around"
@@ -42,5 +48,14 @@ export default function Page({
       />
       <ProductInfoCard productInfo={productInfo} />
     </div>
+    <form action={async () => {
+        'use server'
+        await createConversation(params.id)
+        revalidatePath("/conversations")
+        redirect("/conversations")
+      }}>
+        <Button type='submit' className='absolute bottom-6 right-6'>Kaufen</Button>
+      </form>
+     </>
   )
 }
