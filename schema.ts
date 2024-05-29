@@ -156,7 +156,7 @@ Der Käufer klickt den Kaunfe Button, es wird ein Eintrag gemacht und der Verkä
 Es gibt eine Seite für Konversation, auf button click eröffnet man eine Konversation die hat erstmal diese Felder: Käufer, Verkäufer, Produkt, Status
 */
 
-export const statusEnum = pgEnum('status', ['verkauft', 'offen', 'accepted', 'declined'])
+export const statusEnum = pgEnum('status', ['offen', 'accepted', 'declined', 'deal', 'verkauft'])
 
 export const conversations = pgTable(
   'conversations',
@@ -173,6 +173,9 @@ export const conversations = pgTable(
       .references(() => products.id, { onDelete: 'cascade' }),
     status: statusEnum('status').default('offen'),
     createdAt: timestamp('createdAt', { mode: 'date' }).notNull().defaultNow(),
+    message1: text('message1'),
+    message2: text('message2'),
+    delay: text('delay'),
   },
   (table) => {
     return {

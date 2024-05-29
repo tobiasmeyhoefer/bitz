@@ -8,9 +8,11 @@ import {
 } from '@/components/ui/card'
 import { getProductById } from '@/lib/productaction'
 import { getUser, getUserById } from '@/lib/useraction'
-import { Button } from '../ui/button'
-import { acceptOffer, declineOffer } from '@/lib/conversations-actions'
 import { ConversationType } from '@/schema'
+import { formatDate } from '@/lib/utils'
+import { ConversationForm } from './conversation-form1'
+import { ConversationForm2 } from './conversation-form2'
+import ConversationCardDropwdown from './conversation-card-dropdown'
 
 export const ConversationCard = async ({ conv }: { conv: ConversationType }) => {
   const currentUser = await getUser()
@@ -22,63 +24,80 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
 
   if (cardType === 'sellerCard') {
     return (
-      <Card>
+      <Card className="relative">
+        <ConversationCardDropwdown conv={conv} showDelay={true} />
         <CardHeader>
           <CardTitle>Du bist an dem Bit {product[0].title} interessiert</CardTitle>
           <CardDescription>
             {conv.status === 'accepted' ? (
-              <span>Der Käufer hat dein Angebot  akzeptiert </span>
+              <span>Der Käufer hat dein Angebot akzeptiert </span>
             ) : (
               <span>Aktuell wird auf eine Antwort gewartet </span>
             )}
           </CardDescription>
+          {conv.status === 'accepted' ? (
+            <CardContent className="p-0">
+              <p>{conv.message1}</p>
+              <ConversationForm2 convId={conv.id} />
+            </CardContent>
+          ) : conv.status === 'deal' ? (
+            <p>Ihr habt jetzt einen Deal ✅</p>
+          ) : (
+            <span></span>
+          )}
         </CardHeader>
-        {/* <CardContent>
-                <Button>Annehmen</Button>
-                <Button variant={"destructive"}>Ablehnen</Button>
-              </CardContent> */}
-        <CardFooter>
-          <p>{conv.createdAt.toDateString()}</p>
-          <p>Status: {conv.status}</p>
+        <CardFooter className="flex flex-col items-start text-neutral-400">
+          <p className="font-ligh text-neutral-400">{formatDate(conv.createdAt)}</p>
+          {conv.delay !== null ? (
+            <p className="text-red-600">
+              Du verspätest sich um {conv.delay} Minuten
+            </p>
+          ) : (
+            <span></span>
+          )}
         </CardFooter>
       </Card>
     )
   } else if (cardType === 'buyerCard') {
     return (
-      <Card>
-        <CardHeader>
-          <CardTitle>
-            Der User {user[0].name} ist an dem Bit {product[0].title} interessiert
-          </CardTitle>
-          <CardDescription>
-            Du kannst dieses Angebot nun ablehnen oder annehmen, wenn du es annimst wird dein in den
-            Einstellungen festgelegt abholort übermittelt und du wirst aufgefordert ein Zeitfenster
-            anzugeben
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="flex gap-2">
-          <form
-            action={async () => {
-              'use server'
-              await acceptOffer(conv.id)
-            }}
-          >
-            <Button>Annehmen</Button>
-          </form>
-          <form
-            action={async () => {
-              'use server'
-              await declineOffer(conv.id)
-            }}
-          >
-            <Button variant={'destructive'}>Ablehnen</Button>
-          </form>
-        </CardContent>
-        <CardFooter>
-          <p>{conv.createdAt.toLocaleDateString()}</p>
-          <p>Status: {conv.status}</p>
-        </CardFooter>
-      </Card>
+      <>
+        {conv.status === 'declined' ? (
+          <span></span>
+        ) : (
+          <Card className="relative">
+            <ConversationCardDropwdown conv={conv} showDelay={false} />
+            <CardHeader>
+              <CardTitle>
+                Der User {user[0].name} ist an deinem Bit {product[0].title} interessiert
+              </CardTitle>
+              <CardDescription>
+                Du kannst dieses Angebot nun ablehnen oder annehmen. Wenn du es annimmst, wird dein
+                in den Einstellungen festgelegter Abholort übermittelt und du wirst aufgefordert,
+                ein Zeitfenster anzugeben.
+              </CardDescription>
+            </CardHeader>
+            {conv.status === 'accepted' ? (
+              <CardContent>Du hast das Angebot akzeptiert ✅</CardContent>
+            ) : conv.status === 'deal' ? (
+              <CardContent>{conv.message2}</CardContent>
+            ) : (
+              <CardContent>
+                <ConversationForm convId={conv.id} />
+              </CardContent>
+            )}
+            <CardFooter className="flex flex-col items-start text-neutral-400">
+              <p>{formatDate(conv.createdAt)}</p>
+              {conv.delay !== null ? (
+                <p className="text-red-600">
+                  {user[0].name} verspätet sich um {conv.delay} Minuten
+                </p>
+              ) : (
+                <span></span>
+              )}
+            </CardFooter>
+          </Card>
+        )}
+      </>
     )
   }
 }

@@ -30,7 +30,26 @@ export async function declineOffer(id: number) {
   revalidatePath('/conversations')
 }
 
-export async function acceptOffer(id: number) {
-  await db.update(conversations).set({ status: 'accepted' }).where(eq(conversations.id, id))
+export async function acceptOffer(id: number, message: string) {
+  await db
+    .update(conversations)
+    .set({ status: 'accepted', message1: message })
+    .where(eq(conversations.id, id))
+  revalidatePath('/conversations')
+}
+
+export async function acceptDealTime(id: number, message: string) {
+  await db
+    .update(conversations)
+    .set({ message2: message, status: "deal"})
+    .where(eq(conversations.id, id))
+  revalidatePath('/conversations')
+}
+
+export async function addConversationDelay(id: number, delay: string) {
+  await db
+    .update(conversations)
+    .set({ delay: delay})
+    .where(eq(conversations.id, id))
   revalidatePath('/conversations')
 }

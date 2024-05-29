@@ -54,6 +54,7 @@ const NavBar = async () => {
             <div className="hidden sm:flex">
               <NavItemLink className="mr-14" linkTo="/browse" text={t('discover')} />
               <NavItemLink className="mr-14" linkTo="/myshop" text={t('myBitz')} />
+              <NavItemLink className="mr-14" linkTo="/conversations" text={t('conversations')} />
             </div>
           </>
         )}
