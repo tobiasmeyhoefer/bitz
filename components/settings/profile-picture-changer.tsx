@@ -31,9 +31,11 @@ const formSchema = z.object({
 export default function ProfilePictureChanger({
   title,
   submitTitle,
+  action,
 }: {
   title: string
   submitTitle: string
+  action: (url: string) => Promise<void>
 }) {
   const [file, setFile] = useState<File | null>(null)
   const [compressedFile, setCompressedFile] = useState<File | null>(null)
@@ -75,7 +77,7 @@ export default function ProfilePictureChanger({
       })
       imageUrl = url.split('?')[0]
     }
-    await changeUserImage(imageUrl)
+    await action(imageUrl)
     setPreviewUrl(null)
   }
 

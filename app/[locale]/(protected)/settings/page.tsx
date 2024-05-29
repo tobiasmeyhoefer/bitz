@@ -6,6 +6,7 @@ import { DarkmodeToggler } from '@/components/settings/DarkmodeToggler'
 import PhoneVerification from '@/components/settings/phone-verifiaction'
 import { DeleteAccountButton } from '@/components/settings/delete-account-button'
 import ProfilePictureChanger from '@/components/settings/profile-picture-changer'
+import { changeUserImage } from '@/lib/useraction'
 
 const Settings = () => {
   const t = useTranslations('Settings')
@@ -31,7 +32,11 @@ const Settings = () => {
           action={t('deleteAccountAction')}
         />
         <hr />
-        <ProfilePictureChanger title={t('imageChangeTitle')} submitTitle={t('submitTitle')} />
+        <ProfilePictureChanger
+          title={t('imageChangeTitle')}
+          submitTitle={t('submitTitle')}
+          action={changeUserImage}
+        />
       </div>
     </div>
   )

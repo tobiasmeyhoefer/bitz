@@ -1,6 +1,6 @@
 'use client'
 import * as React from 'react'
-import { Card, CardContent } from '@/components/ui/card'
+import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import {
   Carousel,
   CarouselContent,
@@ -10,6 +10,8 @@ import {
   type CarouselApi,
 } from '@/components/ui/carousel'
 import Image from 'next/image'
+import { Button } from '@/components/ui/button'
+import { UpdateImage } from '@/components/myShop/update-image'
 
 export function ProductImageCarousel(props: any) {
   const [api, setApi] = React.useState<CarouselApi>()
@@ -38,7 +40,7 @@ export function ProductImageCarousel(props: any) {
           {props.images.map((img: string, index: number) => (
             <CarouselItem key={`ci-${index}`}>
               <Card className="h-fit w-fit">
-                <CardContent className="p-0">
+                <CardContent className=" p-0">
                   {img ? (
                     <Image
                       width={500}
@@ -67,8 +69,14 @@ export function ProductImageCarousel(props: any) {
           </>
         )}
       </Carousel>
-      <div className="hidden py-2 text-sm text-muted-foreground lg:block">
+      {/* lg: block zu lg:flex gemacht */}
+      <div className=" hidden flex-row justify-between p-2 text-sm text-muted-foreground lg:flex">
         {props.translations.image} {current} {props.translations.of} {props.images.length}
+        {/* <Button>
+          edit Picture
+          <FaPencilAlt className="ml-2" />
+        </Button> */}
+        <UpdateImage existingImageUrl={props.images[current - 1]} />
       </div>
     </div>
   )
