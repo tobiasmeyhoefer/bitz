@@ -1,6 +1,5 @@
 import { Button } from '@/components/ui/button'
 import { createConversation } from '@/lib/conversations-actions'
-import { ProductType } from '@/lib/types'
 import { redirect } from '@/navigation'
 import { revalidatePath } from 'next/cache'
 import { ProductImageCarousel } from '../productImgCarousel'
@@ -37,25 +36,29 @@ export default function Page({
 
   return (
     <>
-    <div
-      id="product-info-container"
-      className="flex min-h-[calc(100vh-80px)] w-screen flex-col items-center lg:flex-row lg:justify-around"
-    >
-      <ProductImageCarousel
-        translations={carouselTranslations}
-        images={images}
-        className="h-[50vh] lg:h-[60vh]"
-      />
-      <ProductInfoCard productInfo={productInfo} />
-    </div>
-    <form action={async () => {
-        'use server'
-        await createConversation(params.id)
-        revalidatePath("/conversations")
-        redirect("/conversations")
-      }}>
-        <Button type='submit' className='absolute bottom-6 right-6'>Kaufen</Button>
+      <div
+        id="product-info-container"
+        className="flex min-h-[calc(100vh-80px)] w-screen flex-col items-center lg:flex-row lg:justify-around"
+      >
+        <ProductImageCarousel
+          translations={carouselTranslations}
+          images={images}
+          className="h-[50vh] lg:h-[60vh]"
+        />
+        <ProductInfoCard productInfo={productInfo} />
+      </div>
+      <form
+        action={async () => {
+          'use server'
+          await createConversation(productInfo.id)
+          revalidatePath('/conversations')
+          redirect('/conversations')
+        }}
+      >
+        <Button type="submit" className="absolute bottom-6 right-6">
+          Kaufen
+        </Button>
       </form>
-     </>
+    </>
   )
 }
