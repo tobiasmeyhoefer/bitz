@@ -19,6 +19,8 @@ import {
 import { Input } from '@/components/ui/input'
 import { toast } from '@/components/ui/use-toast'
 import { Textarea } from '@/components/ui/textarea'
+import { ProductType } from '@/lib/types'
+import { updateProduct } from '@/lib/productaction'
 
 type ProductInfoEditType = {
   productInfo: any
@@ -40,10 +42,11 @@ const FormSchema = z.object({
 })
 
 export default function ProductInfoCardEditable(props: any) {
-  const product = props.productInfo
+  const initialProduct: ProductType = props.productInfo
   const translations = props.translations
   const date = props.date
   const [isEditing, setIsEditing] = useState(false)
+  const [product, setProduct] = useState(initialProduct)
   // const [title, setTitle] = useState<string>(product.title)
   // const [price, setPrice] = useState(product.price)
   // const [quantity, setQuantity] = useState(product.quantity)
@@ -55,11 +58,17 @@ export default function ProductInfoCardEditable(props: any) {
 
   const handleCancel = () => {
     setIsEditing(false)
+    console.log(product)
     // setTitle(product.title)
     // setPrice(product.price)
     // setQuantity(product.quantity)
     // setDescription(product.description)
-    form.reset()
+    form.reset({
+      title: product.title,
+      price: product.price,
+      quantity: product.quantity,
+      description: product.description,
+    })
   }
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -72,8 +81,10 @@ export default function ProductInfoCardEditable(props: any) {
     },
   })
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data)
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    setProduct(data)
+    // form.reset()
+    updateProduct(product.id!, data)
     toast({
       title: 'Some Toast',
     })

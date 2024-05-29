@@ -68,25 +68,21 @@ export async function deleteProduct(productId: string) {
 
 // Update function requiring productData as
 export async function updateProduct(productId: string, values: ProductType) {
-  const session = await auth()
-  const id = session?.user?.id
-  if (id) {
-    const existingProduct = await getProductById(productId)
-    if (existingProduct && existingProduct[0].sellerId === id) {
-      const { title, description, price, quantity, category } = values
-      await db
-        .update(products)
-        .set({
-          title: title || existingProduct[0].title,
-          description: description || existingProduct[0].description,
-          price: price || existingProduct[0].price,
-          quantity: quantity || existingProduct[0].quantity,
-          category: category || existingProduct[0].category,
-        })
-        .where(eq(products.id, productId))
-    } else {
-      throw new Error('Product not found or unauthorized to update.')
-    }
+  const existingProduct = await getProductById(productId)
+  if (existingProduct) {
+    const { title, description, price, quantity, category } = values
+    await db
+      .update(products)
+      .set({
+        title: title || existingProduct[0].title,
+        description: description || existingProduct[0].description,
+        price: price || existingProduct[0].price,
+        quantity: quantity || existingProduct[0].quantity,
+        category: category || existingProduct[0].category,
+      })
+      .where(eq(products.id, productId))
+  } else {
+    throw new Error('Product not found or unauthorized to update.')
   }
 }
 
