@@ -256,51 +256,60 @@ export function ProductForm({
   async function compressImages(files: File[]): Promise<File[]> {
     const compressedFiles = await Promise.all(
       files.map(async (file) => {
-        const imageBitmap = await createImageBitmap(file);
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-  
+        const imageBitmap = await createImageBitmap(file)
+        const canvas = document.createElement('canvas')
+        const ctx = canvas.getContext('2d')
+
         // Setze die gewünschte Breite und Höhe für das quadratische Format
-        const MAX_DIMENSION = 800;
-        canvas.width = MAX_DIMENSION;
-        canvas.height = MAX_DIMENSION;
-  
+        const MAX_DIMENSION = 800
+        canvas.width = MAX_DIMENSION
+        canvas.height = MAX_DIMENSION
+
         // Berechne die neue Größe und Position für das 1:1-Format
-        const aspectRatio = imageBitmap.width / imageBitmap.height;
-        let sourceX = 0;
-        let sourceY = 0;
-        let sourceWidth = imageBitmap.width;
-        let sourceHeight = imageBitmap.height;
-  
+        const aspectRatio = imageBitmap.width / imageBitmap.height
+        let sourceX = 0
+        let sourceY = 0
+        let sourceWidth = imageBitmap.width
+        let sourceHeight = imageBitmap.height
+
         if (aspectRatio > 1) {
           // Landscape
-          sourceX = (imageBitmap.width - imageBitmap.height) / 2;
-          sourceWidth = imageBitmap.height;
+          sourceX = (imageBitmap.width - imageBitmap.height) / 2
+          sourceWidth = imageBitmap.height
         } else if (aspectRatio < 1) {
           // Portrait
-          sourceY = (imageBitmap.height - imageBitmap.width) / 2;
-          sourceHeight = imageBitmap.width;
+          sourceY = (imageBitmap.height - imageBitmap.width) / 2
+          sourceHeight = imageBitmap.width
         }
-  
-        ctx!.drawImage(imageBitmap, sourceX, sourceY, sourceWidth, sourceHeight, 0, 0, MAX_DIMENSION, MAX_DIMENSION);
-  
+
+        ctx!.drawImage(
+          imageBitmap,
+          sourceX,
+          sourceY,
+          sourceWidth,
+          sourceHeight,
+          0,
+          0,
+          MAX_DIMENSION,
+          MAX_DIMENSION,
+        )
+
         // Konvertiere das Canvas-Bild in einen Blob
         return new Promise<File>((resolve) => {
           canvas.toBlob(
             (blob) => {
               if (blob) {
-                resolve(new File([blob], file.name, { type: file.type }));
+                resolve(new File([blob], file.name, { type: file.type }))
               }
             },
             file.type,
             0.8,
-          ); // 0.8 ist die Qualitätsstufe, 0.8 bedeutet 80% Qualität
-        });
+          ) // 0.8 ist die Qualitätsstufe, 0.8 bedeutet 80% Qualität
+        })
       }),
-    );
-    return compressedFiles;
+    )
+    return compressedFiles
   }
-  
 
   return (
     <>

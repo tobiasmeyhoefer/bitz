@@ -20,7 +20,6 @@ const MAX_FILE_SIZE = 8000000
 const formSchema = z.object({
   image: z.any().refine(
     (file) => {
-      console.log(file)
       return file.size <= MAX_FILE_SIZE
     },
     {
