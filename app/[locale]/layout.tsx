@@ -42,7 +42,8 @@ export default async function LocaleLayout({
           <header>
             <NavBar />
           </header>
-          <main className="h-fit min-h-screen">{children}</main> {/* bg-white rausgenommen*/}
+          <main className="h-fit min-h-[calc(100vh-80px)]">{children}</main>{' '}
+          {/* bg-white rausgenommen*/}
           <Toaster />
         </ThemeProvider>
       </body>

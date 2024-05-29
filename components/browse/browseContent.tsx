@@ -44,10 +44,9 @@ const BrowseContent = (props: BrowseContentProps) => {
 
   const suggestions = ['Receiver', 'Monitor', 'Audio', 'Laptop', 'Headphone']
 
-  const imgArr = ['/test_img.jpg', '/test_img.jpg', '/test_img.jpg']
   return (
     <div
-      className={`${loading && `h-full`} flex w-full flex-col items-center justify-center  px-4 py-20 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
+      className={`${loading && `h-full`} flex w-full flex-col items-center justify-center  px-4 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
     >
       <SearchDialog
         placeholder={
@@ -61,7 +60,8 @@ const BrowseContent = (props: BrowseContentProps) => {
       {!loading ? (
         <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
           {products.map((p, index) => (
-            <RevealOnScroll key={`prx-${index}`}>
+            <div key={`kp-${index}`}>
+              {/* <RevealOnScroll key={`prx-${index}`}> */}
               <CardWithImage
                 key={`pr-${index}`}
                 title={p.title}
@@ -71,8 +71,10 @@ const BrowseContent = (props: BrowseContentProps) => {
                 productID={p.id}
                 product={products[index]}
                 favIcon
+                editable={false}
               />
-            </RevealOnScroll>
+              {/* </RevealOnScroll> */}
+            </div>
           ))}
         </div>
       ) : (

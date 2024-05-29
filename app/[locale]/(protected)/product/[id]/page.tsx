@@ -3,6 +3,9 @@ import { createConversation } from '@/lib/conversations-actions'
 import { ProductType } from '@/lib/types'
 import { redirect } from '@/navigation'
 import { revalidatePath } from 'next/cache'
+import { ProductImageCarousel } from '../productImgCarousel'
+import ProductInfoCard from '../productInfoCard'
+import { useTranslations } from 'next-intl'
 
 export default function Page({
   params,
@@ -11,12 +14,41 @@ export default function Page({
   params: { id: string }
   searchParams: { p: string }
 }) {
-  const product: ProductType = JSON.parse(searchParams.p)
+  const t = useTranslations('Product')
+  // const userId = atob(params.id)
+
+  const productInfo: any = JSON.parse(atob(searchParams.p))
+
+  const unfilteredImgs = [
+    productInfo.imageUrl1,
+    productInfo.imageUrl2,
+    productInfo.imageUrl3,
+    productInfo.imageUrl4,
+    productInfo.imageUrl5,
+  ]
+
+  let images = unfilteredImgs.filter((image) => image)
+  //let images = ['/test_img.jpg', '/test_img.jpg', '/test_img.jpg']
+
+  const carouselTranslations = {
+    image: t('image'),
+    of: t('of'),
+  }
+
   return (
-    <div>
-      Some Product ID: {params.id}
-      <div>Title: {product.title}</div>
-      <form action={async () => {
+    <>
+    <div
+      id="product-info-container"
+      className="flex min-h-[calc(100vh-80px)] w-screen flex-col items-center lg:flex-row lg:justify-around"
+    >
+      <ProductImageCarousel
+        translations={carouselTranslations}
+        images={images}
+        className="h-[50vh] lg:h-[60vh]"
+      />
+      <ProductInfoCard productInfo={productInfo} />
+    </div>
+    <form action={async () => {
         'use server'
         await createConversation(params.id)
         revalidatePath("/conversations")
@@ -24,6 +56,6 @@ export default function Page({
       }}>
         <Button type='submit' className='absolute bottom-6 right-6'>Kaufen</Button>
       </form>
-    </div>
+     </>
   )
 }

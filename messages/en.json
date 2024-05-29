@@ -2,6 +2,20 @@
   "Index": {
     "title": "Hello World"
   },
+  "Date": {
+    "january": "January",
+    "february": "February",
+    "march": "March",
+    "april": "April",
+    "may": "May",
+    "june": "June",
+    "july": "July",
+    "august": "August",
+    "september": "September",
+    "october": "October",
+    "november": "November",
+    "december": "December"
+  },
   "Landingpage": {
     "subtitle": "Supplying you with technology from today to tomorrow",
     "description": "Discover the latest tech gadgets at Bitz at unbeatable prices! Buy, sell, and trade your favorite gadgets in a secure environment. Join our vibrant community and find your next tech highlight today.",
@@ -32,6 +46,11 @@
     "updateProducts": "update Bit",
     "deleteProduct": "delete Bit"
   },
+  "Product": {
+    "quantity": "Quantity",
+    "image": "Image",
+    "of": "of"
+  },
   "addProductPage": {
     "title": "Title",
     "description": "Description",
@@ -42,7 +61,10 @@
     "images": "Images",
     "toastTitle": "Success",
     "toastDescription": "added Product",
-    "submitTitle": "submit"
+    "submitTitle": "submit",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit"
   },
   "popAlert": {
     "submitTitle": "löschen",

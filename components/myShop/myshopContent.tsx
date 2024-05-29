@@ -15,6 +15,7 @@ const MyShopContent = (props: MyShopProps) => {
         const result = await getProductsOwned(props.userId)
         if (result) {
           const checkedResults: ProductType[] = result.map((item) => ({
+            id: item.id,
             title: item.title,
             description: item.description ?? '',
             price: item.price,
@@ -25,7 +26,7 @@ const MyShopContent = (props: MyShopProps) => {
             imageUrl2: item.imageUrl2,
             imageUrl3: item.imageUrl3,
             imageUrl4: item.imageUrl4,
-            imageUrl5: item.imageUrl5
+            imageUrl5: item.imageUrl5,
           }))
           setProducts(checkedResults)
         }
@@ -40,23 +41,26 @@ const MyShopContent = (props: MyShopProps) => {
   let isProduct = (item: any) => item.price !== undefined
 
   return (
-    <div className={`h-full flex flex-col items-center justify-center px-4 py-20 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}>
-      { (
+    <div
+      className={`flex h-full flex-col items-center justify-center px-4 py-20 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
+    >
+      {
         <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
           {products.map((p, index) => (
-              <CardWithImage
-                key={`pr-${index}`}
-                title={p.title}
-                desc={p.description}
-                imgUrl1={p.imageUrl1}
-                className="mx-[5px] my-[0.5rem]"
-                productID={p.id}
-                product={products[index]}
-                favIcon
-              />
+            <CardWithImage
+              key={`pr-${index}`}
+              title={p.title}
+              desc={p.description}
+              imgUrl1={p.imageUrl1}
+              className="mx-[5px] my-[0.5rem]"
+              productID={p.id}
+              product={products[index]}
+              favIcon
+              editable
+            />
           ))}
         </div>
-      ) }
+      }
     </div>
   )
 }

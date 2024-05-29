@@ -13,9 +13,8 @@ import {
 } from '../ui/dropdown-menu'
 import { Drawer, DrawerContent, DrawerTrigger } from '../ui/drawer'
 import Image from 'next/image'
-import { SlSettings, SlHeart } from 'react-icons/sl'
 import { TbMenu } from 'react-icons/tb'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { HiUserCircle } from 'react-icons/hi2'
 import { FaUserCircle } from 'react-icons/fa'
 import { Separator } from '@/components/ui/separator'
@@ -86,25 +85,25 @@ const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
         )}
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>Menu</DropdownMenuLabel>
+        <DropdownMenuLabel className="text-right">Menu</DropdownMenuLabel>
         <DropdownMenuItem>
           <NavItemLink
+            className="ml-auto text-sm no-underline hover:no-underline"
+            text={props.favoritesLinkText}
             linkTo="/favorites"
-            icon={<SlHeart className="mr-3 h-[20px] w-[20px]" />}
           ></NavItemLink>
-          <div>{props.favoritesLinkText}</div>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <NavItemLink
+            className="ml-auto text-sm no-underline hover:no-underline"
+            text={props.settingsLinkText}
             linkTo="/settings"
-            icon={<SlSettings className="mr-3 h-[20px] w-[20px]" />}
           ></NavItemLink>
-          <div>{props.settingsLinkText}</div>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem className="pl-[40px] font-normal">
-          <div className=" mr-3 h-[20px] w-[20px]">{props.signOut}</div>
+        <DropdownMenuItem className="font-normal">
+          <div className="ml-auto mr-[-12px]">{props.signOut}</div>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
@@ -114,6 +113,10 @@ const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
 const NavMenuDrawer = (props: any) => {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const pathname = usePathname()
+
+  useEffect(() => {
+    setDrawerOpen(false)
+  }, [pathname])
 
   return (
     <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
