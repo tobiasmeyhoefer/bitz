@@ -79,6 +79,7 @@ export async function deleteProduct(productId: string) {
     }
   }
   await db.delete(products).where(eq(products.id, productId))
+  redirect('/myShop')
 }
 
 // Update function requiring productData as
