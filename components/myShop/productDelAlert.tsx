@@ -11,11 +11,11 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { FaTrash } from 'react-icons/fa';
-import { useTranslations } from "next-intl";
+// import { useTranslations } from "next-intl";
 
 
-export function PopAlert() {
-  const t = useTranslations();
+export function ProdDelAlert({ productId }: { productId: string })  {
+  //const t = useTranslations();
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
