@@ -56,7 +56,8 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                 <CardTitle className="align-middle text-2xl" style={{ lineHeight: 'unset' }}>
                   {props.title}
                 </CardTitle>
-                <ProdDelAlert productId={props.productID!}/>             
+                {props.product.isOwner && props.favIcon && <ProdDelAlert productId={props.productID!} />}
+                {!props.product.isOwner && props.favIcon && <FavoriteLike productId={props.productID!} />}
               </div>
               <CardDescription className="truncate text-xl">{props.desc}</CardDescription>
             </CardHeader>
