@@ -32,7 +32,8 @@ const BrowseContent = (props: BrowseContentProps) => {
             imageUrl3: item.imageUrl3,
             imageUrl4: item.imageUrl4,
             imageUrl5: item.imageUrl5,
-            stripeId: item.stripeId ?? ""
+            stripeId: item.stripeId ?? "",
+            paymentUrl: item.paymentLink ?? ""
           }))
           setProducts(checkedResults)
         }

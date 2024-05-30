@@ -62,7 +62,7 @@ export default function Page({
           Kaufen
         </Button>
       </form>
-      <Link className='fixed bottom-6 right-6' href={`https://buy.stripe.com/${productInfo.stripeId}`}><Button>Direkt Kaufen Test</Button></Link>
+      <Link className='fixed bottom-6 right-6' target="_blank" href={productInfo.paymentUrl}><Button>Direkt Kaufen Test</Button></Link>
     </>
   )
 }
