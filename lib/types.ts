@@ -20,7 +20,7 @@ type UserId = {
 
 type MyShopProps = {
   userId: string
-  location: any
+  location: string
 }
 
 type SearchBarProps = {
