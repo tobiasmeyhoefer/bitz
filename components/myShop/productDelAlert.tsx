@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { FaTrash } from 'react-icons/fa';
+import { deleteProduct } from "@/lib/productaction";
 // import { useTranslations } from "next-intl";
 
 
@@ -31,7 +32,7 @@ GANZ SICHER?! Produkt Löschen ?
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Continue</AlertDialogAction>
+          <AlertDialogAction onClick={() => deleteProduct(productId)}>Continue</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
