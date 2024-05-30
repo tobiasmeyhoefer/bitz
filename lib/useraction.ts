@@ -22,6 +22,14 @@ export async function saveUserLocation(values: { postcode: string }) {
   }
 }
 
+export async function saveUserAdress(adress: string) {
+  const session = await auth()
+  const id = session?.user?.id
+  if (id) {
+    await db.update(users).set({ adress: adress }).where(eq(users.id, id))
+  }
+}
+
 export async function getUserById(userId: string) {
   const response = await db.select().from(users).where(eq(users.id, userId))
   return response

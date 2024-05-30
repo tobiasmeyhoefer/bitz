@@ -21,6 +21,7 @@ export const users = pgTable('user', {
   emailVerified: timestamp('emailVerified', { mode: 'date' }),
   image: text('image'),
   location: text('location'),
+  adress: text('adress'),
   phoneVerified: boolean('phoneVerified').default(false),
 })
 
@@ -49,6 +50,10 @@ export const products = pgTable('product', {
   imageUrl3: text('imageUrl3'),
   imageUrl4: text('imageUrl4'),
   imageUrl5: text('imageUrl5'),
+  stripeId: text('stripeId'),
+  paymentLink: text('paymentLink'),
+  isDirectlyBuyable: boolean('isDirectlyBuyable'),
+  isSold: boolean('isSold'),
 })
 
 export const accounts = pgTable(

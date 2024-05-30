@@ -12,24 +12,24 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { getUser, saveUserName } from '@/lib/useraction'
+import { getUser, saveUserAdress } from '@/lib/useraction'
 import { useEffect, useState } from 'react'
 
 const formSchema = z.object({
-  name: z
+  adress: z
     .string()
     .regex(/^[a-zA-Z0-9äöüÄÖÜß\s]+$/, { message: 'No special characters allowed' })
     .min(4)
     .max(60),
 })
 
-export default function NameChanger() {
-  const [name, setName] = useState<string>('')
+export default function AdressChanger() {
+  const [adress, setAdress] = useState<string>('')
   useEffect(() => {
     const getProduct = async () => {
       const result = await getUser()
       const r = result![0]
-      setName(r.name ?? '')
+      setAdress(r.adress ?? '')
     }
     getProduct()
   }, [])
@@ -38,22 +38,22 @@ export default function NameChanger() {
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    await saveUserName(values.name)
+    await saveUserAdress(values.adress)
   }
 
   return (
     <>
       <Form {...form}>
-        <FormLabel>change Name</FormLabel>
+        <FormLabel>change Adress</FormLabel>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-row items-end gap-1">
           <FormField
             control={form.control}
-            name={'name'}
+            name={'adress'}
             render={({ field }) => (
               <FormItem>
                 <FormMessage />
                 <FormControl>
-                  <Input {...field} defaultValue={name} />
+                  <Input {...field} defaultValue={adress} />
                 </FormControl>
               </FormItem>
             )}
