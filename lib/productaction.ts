@@ -10,6 +10,7 @@ import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import crypto from 'crypto'
 import { ProductType } from './types'
 import { revalidatePath } from 'next/cache'
+import { redirect } from '@/navigation'
 
 export async function getProductsBrowse() {
   const session = await auth()
@@ -70,7 +71,7 @@ export async function deleteProduct(productId: string) {
 export async function updateProduct(productId: string, values: ProductType) {
   const existingProduct = await getProductById(productId)
   if (existingProduct) {
-    const { title, description, price, quantity, category } = values
+    const { title, description, price, quantity } = values
     await db
       .update(products)
       .set({
@@ -78,7 +79,6 @@ export async function updateProduct(productId: string, values: ProductType) {
         description: description || existingProduct[0].description,
         price: price || existingProduct[0].price,
         quantity: quantity || existingProduct[0].quantity,
-        category: category || existingProduct[0].category,
       })
       .where(eq(products.id, productId))
   } else {
@@ -241,7 +241,7 @@ export async function updateProductImage(existingImageUrl: string, newImageUrl: 
             imageUrl1: newImageUrl,
           })
           .where(eq(products.id, p.id))
-        deleteImageOnAws(existingImageUrl)
+        await deleteImageOnAws(existingImageUrl)
         break
       case p.imageUrl2:
         await db
@@ -250,7 +250,7 @@ export async function updateProductImage(existingImageUrl: string, newImageUrl: 
             imageUrl2: newImageUrl,
           })
           .where(eq(products.id, p.id))
-        deleteImageOnAws(existingImageUrl)
+        await deleteImageOnAws(existingImageUrl)
         break
       case p.imageUrl3:
         await db
@@ -259,7 +259,7 @@ export async function updateProductImage(existingImageUrl: string, newImageUrl: 
             imageUrl3: newImageUrl,
           })
           .where(eq(products.id, p.id))
-        deleteImageOnAws(existingImageUrl)
+        await deleteImageOnAws(existingImageUrl)
         break
       case p.imageUrl4:
         await db
@@ -268,7 +268,7 @@ export async function updateProductImage(existingImageUrl: string, newImageUrl: 
             imageUrl4: newImageUrl,
           })
           .where(eq(products.id, p.id))
-        deleteImageOnAws(existingImageUrl)
+        await deleteImageOnAws(existingImageUrl)
         break
       case p.imageUrl5:
         await db
@@ -277,10 +277,11 @@ export async function updateProductImage(existingImageUrl: string, newImageUrl: 
             imageUrl5: newImageUrl,
           })
           .where(eq(products.id, p.id))
-        deleteImageOnAws(existingImageUrl)
+        await deleteImageOnAws(existingImageUrl)
         break
       default:
         return
     }
+    redirect('/myshop')
   }
 }

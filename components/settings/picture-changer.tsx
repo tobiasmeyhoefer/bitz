@@ -28,7 +28,7 @@ const formSchema = z.object({
   ),
 })
 
-export default function ProfilePictureChanger({
+export default function PictureChanger({
   title,
   submitTitle,
   action,

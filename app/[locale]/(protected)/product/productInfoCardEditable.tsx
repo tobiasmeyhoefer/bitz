@@ -22,9 +22,9 @@ import { Textarea } from '@/components/ui/textarea'
 import { ProductType } from '@/lib/types'
 import { updateProduct } from '@/lib/productaction'
 
-type ProductInfoEditType = {
-  productInfo: any
-}
+// type ProductInfoEditType = {
+//   productInfo: any
+// }
 const minError = 'Eingabe erfordert'
 const FormSchema = z.object({
   title: z
@@ -47,10 +47,6 @@ export default function ProductInfoCardEditable(props: any) {
   const date = props.date
   const [isEditing, setIsEditing] = useState(false)
   const [product, setProduct] = useState(initialProduct)
-  // const [title, setTitle] = useState<string>(product.title)
-  // const [price, setPrice] = useState(product.price)
-  // const [quantity, setQuantity] = useState(product.quantity)
-  // const [description, setDescription] = useState(product.description)
 
   const handleEditClick = () => {
     setIsEditing(!isEditing)
@@ -58,11 +54,6 @@ export default function ProductInfoCardEditable(props: any) {
 
   const handleCancel = () => {
     setIsEditing(false)
-    console.log(product)
-    // setTitle(product.title)
-    // setPrice(product.price)
-    // setQuantity(product.quantity)
-    // setDescription(product.description)
     form.reset({
       title: product.title,
       price: product.price,
@@ -83,10 +74,9 @@ export default function ProductInfoCardEditable(props: any) {
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     setProduct(data)
-    // form.reset()
     updateProduct(product.id!, data)
     toast({
-      title: 'Some Toast',
+      title: 'Changes applied',
     })
     setIsEditing(false)
   }

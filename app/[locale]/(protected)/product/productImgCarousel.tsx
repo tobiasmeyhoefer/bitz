@@ -10,13 +10,11 @@ import {
   type CarouselApi,
 } from '@/components/ui/carousel'
 import Image from 'next/image'
-import { Button } from '@/components/ui/button'
 import { UpdateImage } from '@/components/myShop/update-image'
 
 export function ProductImageCarousel(props: any) {
   const [api, setApi] = React.useState<CarouselApi>()
   const [current, setCurrent] = React.useState(0)
-
   React.useEffect(() => {
     if (!api) {
       return
@@ -72,10 +70,6 @@ export function ProductImageCarousel(props: any) {
       {/* lg: block zu lg:flex gemacht */}
       <div className=" hidden flex-row justify-between p-2 text-sm text-muted-foreground lg:flex">
         {props.translations.image} {current} {props.translations.of} {props.images.length}
-        {/* <Button>
-          edit Picture
-          <FaPencilAlt className="ml-2" />
-        </Button> */}
         <UpdateImage existingImageUrl={props.images[current - 1]} />
       </div>
     </div>
