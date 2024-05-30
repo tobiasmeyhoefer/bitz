@@ -27,6 +27,7 @@ const MyShopContent = (props: MyShopProps) => {
             imageUrl3: item.imageUrl3,
             imageUrl4: item.imageUrl4,
             imageUrl5: item.imageUrl5,
+            stripeId: item.stripeId ?? ""
           }))
           setProducts(checkedResults)
         }

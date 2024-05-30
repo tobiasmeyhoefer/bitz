@@ -49,6 +49,9 @@ export const products = pgTable('product', {
   imageUrl3: text('imageUrl3'),
   imageUrl4: text('imageUrl4'),
   imageUrl5: text('imageUrl5'),
+  stripeId: text("stripeId"),
+  isDirectlyBuyable: boolean("isDirectlyBuyable"),
+  isSold: boolean("isSold"),
 })
 
 export const accounts = pgTable(

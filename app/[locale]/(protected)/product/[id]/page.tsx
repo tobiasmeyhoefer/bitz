@@ -5,6 +5,7 @@ import { revalidatePath } from 'next/cache'
 import { ProductImageCarousel } from '../productImgCarousel'
 import ProductInfoCard from '../productInfoCard'
 import { useTranslations } from 'next-intl'
+import Link from 'next/link'
 
 export default function Page({
   params,
@@ -17,6 +18,8 @@ export default function Page({
   // const userId = atob(params.id)
 
   const productInfo: any = JSON.parse(atob(searchParams.p))
+
+  // console.log(productInfo)
 
   const unfilteredImgs = [
     productInfo.imageUrl1,
@@ -55,10 +58,11 @@ export default function Page({
           redirect('/conversations')
         }}
       >
-        <Button type="submit" className="absolute bottom-6 right-6">
+        <Button type="submit" className="fixed bottom-6 right-48">
           Kaufen
         </Button>
       </form>
+      <Link className='fixed bottom-6 right-6' href={`https://buy.stripe.com/${productInfo.stripeId}`}><Button>Direkt Kaufen Test</Button></Link>
     </>
   )
 }

@@ -2,7 +2,7 @@
 
 import { products, favorites } from '@/schema'
 import { db } from '../db'
-import { eq, ne } from 'drizzle-orm'
+import { desc, eq, ne } from 'drizzle-orm'
 import { auth } from '@/auth'
 import { getUserById } from './useraction'
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3'
@@ -10,6 +10,9 @@ import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import crypto from 'crypto'
 import { ProductType } from './types'
 import { revalidatePath } from 'next/cache'
+import Stripe from 'stripe'
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 
 export async function getProductsBrowse() {
   const session = await auth()
@@ -41,6 +44,9 @@ export async function addProduct(values: ProductType, imageUrls: string[]) {
   const id = session?.user?.id
   const created = new Date(Date.now())
   created.setHours(created.getHours() + 2)
+
+  const stripeId = await addProductStripe(title, description ?? '', price, imageUrls)
+
   if (id) {
     const user = await getUserById(id)
     await db.insert(products).values({
@@ -57,8 +63,50 @@ export async function addProduct(values: ProductType, imageUrls: string[]) {
       imageUrl3: imageUrls[2],
       imageUrl4: imageUrls[3],
       imageUrl5: imageUrls[4],
+      stripeId: stripeId,
     })
   }
+}
+
+async function addProductStripe(
+  title: string,
+  description: string,
+  price: number,
+  images: string[],
+): Promise<string> {
+  const product = await stripe.products.create({
+    name: title,
+    description: description,
+    images: images,
+    default_price_data: {
+      unit_amount: price * 100,
+      currency: 'eur',
+    },
+    expand: ['default_price'],
+  })
+
+  return product.id
+}
+
+async function deleteProductStripe(id: string) {
+  const deleted = await stripe.products.del(id)
+}
+
+// experimental
+async function updateProductStripe(productId: string, values: ProductType) {
+
+  const product = await stripe.products.retrieve(productId);
+  
+  const price = await stripe.prices.create({
+    currency: 'eur',
+    unit_amount: values.price,
+  })
+
+  const updatedProduct = await stripe.products.update(productId, {
+    name: values.title,
+    description: values.description,
+    default_price: price.id
+  })
 }
 
 // Delete function requiring productId as string
