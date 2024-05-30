@@ -4,7 +4,7 @@ import { products, favorites } from '@/schema'
 import { db } from '../db'
 import { eq, ne, or } from 'drizzle-orm'
 import { auth } from '@/auth'
-import { getUserById } from './useraction'
+import { getUser, getUserById } from './useraction'
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import crypto from 'crypto'
@@ -64,6 +64,20 @@ export async function addProduct(values: ProductType, imageUrls: string[]) {
 
 // Delete function requiring productId as string
 export async function deleteProduct(productId: string) {
+  const product = await getProductById(productId)
+  const rightproduct = product[0]
+  const imageUrls = [
+    rightproduct.imageUrl1,
+    rightproduct.imageUrl2,
+    rightproduct.imageUrl3,
+    rightproduct.imageUrl4,
+    rightproduct.imageUrl5,
+  ]
+  for (const imageUrl of imageUrls) {
+    if (imageUrl) {
+      await deleteImageOnAws(imageUrl)
+    }
+  }
   await db.delete(products).where(eq(products.id, productId))
 }
 
