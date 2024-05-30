@@ -6,6 +6,8 @@ import {
   integer,
   uniqueIndex,
   boolean,
+  pgEnum,
+  serial,
 } from 'drizzle-orm/pg-core'
 import type { AdapterAccount } from 'next-auth/adapters'
 import { genId } from './lib/utils'
@@ -149,5 +151,39 @@ export const favorites = pgTable(
   },
 )
 
+/*
+Der Käufer klickt den Kaunfe Button, es wird ein Eintrag gemacht und der Verkäufer erhält in seinem Posteingang eine Nachricht dafür...
+Es gibt eine Seite für Konversation, auf button click eröffnet man eine Konversation die hat erstmal diese Felder: Käufer, Verkäufer, Produkt, Status
+*/
+
+export const statusEnum = pgEnum('status', ['offen', 'accepted', 'declined', 'deal', 'verkauft'])
+
+export const conversations = pgTable(
+  'conversations',
+  {
+    id: serial('id'),
+    buyerId: text('buyerId')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    sellerId: text('sellerId')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    productId: text('productId')
+      .notNull()
+      .references(() => products.id, { onDelete: 'cascade' }),
+    status: statusEnum('status').default('offen'),
+    createdAt: timestamp('createdAt', { mode: 'date' }).notNull().defaultNow(),
+    message1: text('message1'),
+    message2: text('message2'),
+    delay: text('delay'),
+  },
+  (table) => {
+    return {
+      pk: primaryKey({ columns: [table.buyerId, table.productId] }),
+    }
+  },
+)
+
 // export type ProductType = typeof products.$inferSelect
 export type UserType = typeof users.$inferSelect
+export type ConversationType = typeof conversations.$inferSelect
