@@ -30,7 +30,7 @@ export async function addProductStripe(
 async function deleteProductStripe(id: string) {
   const deleted = await stripe.products.del(id)
 }
-
+ 
 // experimental
 async function updateProductStripe(productId: string, values: ProductType) {
   const product = await stripe.products.retrieve(productId)
