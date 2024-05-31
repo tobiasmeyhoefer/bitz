@@ -11,11 +11,12 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { FaTrash } from 'react-icons/fa';
-import { useTranslations } from "next-intl";
+import { deleteProduct } from "@/lib/productaction";
+// import { useTranslations } from "next-intl";
 
 
-export function PopAlert() {
-  const t = useTranslations();
+export function ProdDelAlert({ productId }: { productId: string })  {
+  //const t = useTranslations();  
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -31,7 +32,7 @@ GANZ SICHER?! Produkt Löschen ?
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Continue</AlertDialogAction>
+          <AlertDialogAction onClick={() => deleteProduct(productId)}>Continue</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

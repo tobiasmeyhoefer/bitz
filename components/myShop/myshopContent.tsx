@@ -6,7 +6,6 @@ import { getProductsOwned } from '@/lib/productaction'
 import { ProductType, MyShopProps } from '@/lib/types'
 
 const MyShopContent = (props: MyShopProps) => {
-  //const [loading] = useState(false)
   const [products, setProducts] = useState<ProductType[]>([])
   useEffect(() => {
     const getProducts = async () => {
@@ -36,8 +35,7 @@ const MyShopContent = (props: MyShopProps) => {
 
     getProducts()
   }, [props.userId])
-
-  let isProduct = (item: any) => item.price !== undefined
+  },[])
 
   return (
     <div
