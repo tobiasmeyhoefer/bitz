@@ -35,7 +35,7 @@ const MyShopContent = (props: MyShopProps) => {
     }
 
     getProducts()
-  })
+  },[])
 
 //   let isProduct = (item: any) => item.price !== undefined
 
