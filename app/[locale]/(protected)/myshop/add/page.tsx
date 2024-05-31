@@ -1,11 +1,8 @@
 import { ProductForm } from '@/components/myShop/product-form'
-import { getUser } from '@/lib/useraction'
 import { getTranslations } from 'next-intl/server'
 
 const AddProductPage = async () => {
   const t = await getTranslations('addProductPage')
-  const users = await getUser()
-  const user = users?.[0]
   const translations = {
     title: t('title'),
     description: t('description'),
