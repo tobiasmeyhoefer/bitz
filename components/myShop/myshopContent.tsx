@@ -35,7 +35,6 @@ const MyShopContent = (props: MyShopProps) => {
 
     getProducts()
   }, [props.userId])
-  },[])
 
   return (
     <div
