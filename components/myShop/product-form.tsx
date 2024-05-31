@@ -31,7 +31,6 @@ import Image from 'next/image'
 import { getSignedURL } from '@/lib/productaction'
 import { FormTranslations, ProductType } from '@/lib/types'
 import { useToast } from '@/components/ui/use-toast'
-import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import { getUser } from '@/lib/useraction'
 import { FaPencilAlt } from 'react-icons/fa'
@@ -126,7 +125,7 @@ export function ProductForm({
   const { toast } = useToast()
   const [open, setOpen] = React.useState(false)
   const [categoryValue, setcategoryValue] = React.useState('')
-  const [locationError, setLoacationError] = React.useState(false)
+  const [locationError, setLocationError] = React.useState(false)
 
   const {
     title,
@@ -153,7 +152,7 @@ export function ProductForm({
       const result = await getUser()
       const user = result?.[0]
       if (!user?.location) {
-        setLoacationError(true)
+        setLocationError(true)
       }
     }
     getProduct()
@@ -172,14 +171,8 @@ export function ProductForm({
     },
   })
 
-  // useEffect(() => {
-  //   if (data && whichFunction == 'update') {
-  //     form.reset(data)
-  //   }
-  // }, [data, form, whichFunction])
-
   async function onSubmit(values: ProductType) {
-    if (!locationError) {
+    if (locationError) {
       setcategoryValue('')
       setPreviewUrls(null)
       setFiles(null)
@@ -188,10 +181,11 @@ export function ProductForm({
       toast({
         title: 'Error',
         description: 'set Account Location in Settings',
-        // action: {
-        //   title: "Undo",
-        //   onClick: () => console.log("Undo"),
-        // },
+        action: (
+          <Button>
+            <Link href="/settings">set Location</Link>
+          </Button>
+        ),
         duration: 2200,
       })
     } else {
@@ -325,11 +319,11 @@ export function ProductForm({
   return (
     <>
       <Card className=" p-10">
-        {!locationError && (
+        {locationError && (
           <div className="flex flex-row items-center gap-2">
             <p className="font-medium text-red-500">Error: Location gotta be set.</p>
             <Button className="h-6 w-12">
-              <Link href="settings">
+              <Link href="/settings">
                 <FaPencilAlt />
               </Link>
             </Button>

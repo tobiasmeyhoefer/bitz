@@ -3,7 +3,6 @@ import { getUser, getUserById } from '@/lib/useraction'
 import { Button } from '@/components/ui/button'
 import { Link } from '@/navigation'
 import MyShopContent from '@/components/myShop/myshopContent'
-import { auth } from '@/auth'
 import { MyShopProps } from '@/lib/types'
 
 const MyShop = async () => {
