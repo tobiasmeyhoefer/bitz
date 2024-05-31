@@ -21,8 +21,10 @@ export const users = pgTable('user', {
   emailVerified: timestamp('emailVerified', { mode: 'date' }),
   image: text('image'),
   location: text('location'),
+  adress: text('adress'),
   phoneVerified: boolean('phoneVerified').default(false),
 })
+
 
 export const products = pgTable('product', {
   id: text('id')
@@ -171,6 +173,19 @@ export const sales = pgTable(
       id: primaryKey({ columns: [table.userId, table.productId] }),
     }
   },
+)
+
+export const checkoutSession = pgTable(
+  'checkoutSession',
+  {
+    buyerId: text('buyerId')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    productId: text('productId')
+      .notNull()
+      .references(() => products.id, { onDelete: 'cascade' })
+      .primaryKey(),
+  }
 )
 
 /*

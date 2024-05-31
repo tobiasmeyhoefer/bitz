@@ -6,6 +6,8 @@ import { ProductImageCarousel } from '../productImgCarousel'
 import ProductInfoCard from '../productInfoCard'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
+import { getUser } from '@/lib/useraction'
+import { createCheckoutSession, productHasCheckoutSessionOpened } from '@/lib/stripe-actions'
 
 export default function Page({
   params,
@@ -62,7 +64,23 @@ export default function Page({
           Kaufen
         </Button>
       </form>
-      <Link className='fixed bottom-6 right-6' target="_blank" href={productInfo.paymentUrl}><Button>Direkt Kaufen Test</Button></Link>
+      <form
+        action={async () => {
+          'use server'
+          // await createConversation(productInfo.id)
+          const openedCheckoutSession = await productHasCheckoutSessionOpened(productInfo.id)
+          if(!openedCheckoutSession) {
+            const user = await getUser()
+            await createCheckoutSession(user![0].id, productInfo.id)
+            revalidatePath('/sales')
+            redirect(productInfo.paymentUrl)
+          }
+        }}
+      >
+        <Button className="fixed bottom-6 right-6" type="submit">
+          Direkt Kaufen
+        </Button>
+      </form>
     </>
   )
 }

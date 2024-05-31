@@ -2,7 +2,9 @@
 
 import Stripe from 'stripe'
 import { ProductType } from './types'
-import { getUser } from './useraction'
+import { db } from '@/db';
+import { checkoutSession, sales } from '@/schema';
+import { eq } from 'drizzle-orm';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 
@@ -60,10 +62,12 @@ async function createPaymentLink(priceId: string): Promise<string> {
 }
 
 // TODO: add productSold bool on product and create an entry in sales table
-export async function savePayment(stripeProductId: string) {}
+export async function savePayment(stripeProductId: string) {
+  const buyerId = await getUserFromCheckoutSession(stripeProductId)
+  await db.insert(sales).values({userId: buyerId, productId: stripeProductId})
+}
 
 export async function handleCompletedCheckoutSession(event: Stripe.CheckoutSessionCompletedEvent) {
-  console.log('test')
   try {
     const sessionWithLineItems = await stripe.checkout.sessions.retrieve(
       (event.data.object as any).id,
@@ -75,5 +79,29 @@ export async function handleCompletedCheckoutSession(event: Stripe.CheckoutSessi
     console.log('-----')
     console.log(lineItems.data[0].price)
     await savePayment(lineItems.data[0].price?.product as string)
+    await deleteCheckoutSession(lineItems.data[0].price?.product as string)
+
   } catch (error) {}
+}
+
+export async function createCheckoutSession(userId: string, productId: string) {
+  await db.insert(checkoutSession).values({buyerId: userId, productId: productId})
+}
+
+export async function productHasCheckoutSessionOpened(productId: string) {
+  const result = await db.select().from(checkoutSession).where(eq(checkoutSession.productId, productId))
+  if(result.length > 0) {
+    return true
+  }
+
+  return false
+}
+
+export async function deleteCheckoutSession(productId: string) {
+  await db.delete(checkoutSession).where(eq(checkoutSession.productId, productId))
+}
+
+async function getUserFromCheckoutSession(productId: string) {
+  const result = await db.select({id: checkoutSession.buyerId}).from(checkoutSession).where(eq(checkoutSession.productId, productId))
+  return result[0].id
 }

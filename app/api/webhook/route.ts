@@ -27,21 +27,6 @@ export async function POST(req: NextRequest) {
         const savedSession = await handleCompletedCheckoutSession(event)
         break;
     }
-    
-    // console.log(
-    //   res?.data?.object?.lines?.data[0]?.id?
-      // res?.data?.object?.billing_details?.email, // email
-      // res?.data?.object?.amount, // amount
-    //   JSON.stringify(res), // payment info
-      // res?.type, // type
-      // String(timeString), // time
-      // String(dateTime), // date
-      // res?.data?.object?.receipt_email, // email
-      // res?.data?.object?.receipt_url, // url
-      // JSON.stringify(res?.data?.object?.payment_method_details), // Payment method details
-      // JSON.stringify(res?.data?.object?.billing_details), // Billing details
-      // res?.data?.object?.currency // Currency
-    // );
 
     return NextResponse.json({ status: "success", event: event.type, response: res });
   } catch (error) {
