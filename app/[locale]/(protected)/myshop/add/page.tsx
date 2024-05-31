@@ -1,4 +1,3 @@
-import { LocationAlert } from '@/components/myShop/location-alert'
 import { ProductForm } from '@/components/myShop/product-form'
 import { getUser } from '@/lib/useraction'
 import { getTranslations } from 'next-intl/server'
