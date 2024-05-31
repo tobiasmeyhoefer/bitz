@@ -7,6 +7,8 @@ import PhoneVerification from '@/components/settings/phone-verifiaction'
 import { DeleteAccountButton } from '@/components/settings/delete-account-button'
 import PictureChanger from '@/components/settings/picture-changer'
 import { changeUserImage } from '@/lib/useraction'
+import NameChanger from '@/components/settings/name-changer'
+import AdressChanger from '@/components/settings/adress-changer'
 
 const Settings = () => {
   const t = useTranslations('Settings')
@@ -19,6 +21,10 @@ const Settings = () => {
         <RegisterPasskey />
         <hr />
         <LocationChooser postcode={t('postcode')} />
+        <hr />
+        <NameChanger />
+        <hr />
+        <AdressChanger />
         <hr />
         <DarkmodeToggler />
         <hr />

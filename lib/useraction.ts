@@ -6,11 +6,27 @@ import { auth, signOut } from '@/auth'
 import { deleteImageOnAws, getProductsOwned } from './productaction'
 import { revalidatePath } from 'next/cache'
 
+export async function saveUserName(name: string) {
+  const session = await auth()
+  const id = session?.user?.id
+  if (id) {
+    await db.update(users).set({ name: name }).where(eq(users.id, id))
+  }
+}
+
 export async function saveUserLocation(values: { postcode: string }) {
   const session = await auth()
   const id = session?.user?.id
   if (id) {
     await db.update(users).set({ location: values.postcode }).where(eq(users.id, id))
+  }
+}
+
+export async function saveUserAdress(adress: string) {
+  const session = await auth()
+  const id = session?.user?.id
+  if (id) {
+    await db.update(users).set({ adress: adress }).where(eq(users.id, id))
   }
 }
 
