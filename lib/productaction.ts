@@ -2,15 +2,16 @@
 
 import { products, favorites } from '@/schema'
 import { db } from '../db'
-import { desc, eq, ne } from 'drizzle-orm'
+import { desc, eq, ne, or } from 'drizzle-orm'
 import { auth } from '@/auth'
-import { getUserById } from './useraction'
+import { getUser, getUserById } from './useraction'
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import crypto from 'crypto'
 import { ProductType } from './types'
 import { revalidatePath } from 'next/cache'
 import { addProductStripe } from './stripe-actions'
+import { redirect } from '@/navigation'
 
 export async function getProductsBrowse() {
   const session = await auth()
@@ -76,30 +77,40 @@ export async function addProduct(values: ProductType, imageUrls: string[]) {
 
 // Delete function requiring productId as string
 export async function deleteProduct(productId: string) {
+  const product = await getProductById(productId)
+  const rightproduct = product[0]
+  const imageUrls = [
+    rightproduct.imageUrl1,
+    rightproduct.imageUrl2,
+    rightproduct.imageUrl3,
+    rightproduct.imageUrl4,
+    rightproduct.imageUrl5,
+  ]
+  for (const imageUrl of imageUrls) {
+    if (imageUrl) {
+      await deleteImageOnAws(imageUrl)
+    }
+  }
   await db.delete(products).where(eq(products.id, productId))
+  redirect('/myShop')
 }
 
 // Update function requiring productData as
 export async function updateProduct(productId: string, values: ProductType) {
-  const session = await auth()
-  const id = session?.user?.id
-  if (id) {
-    const existingProduct = await getProductById(productId)
-    if (existingProduct && existingProduct[0].sellerId === id) {
-      const { title, description, price, quantity, category } = values
-      await db
-        .update(products)
-        .set({
-          title: title || existingProduct[0].title,
-          description: description || existingProduct[0].description,
-          price: price || existingProduct[0].price,
-          quantity: quantity || existingProduct[0].quantity,
-          category: category || existingProduct[0].category,
-        })
-        .where(eq(products.id, productId))
-    } else {
-      throw new Error('Product not found or unauthorized to update.')
-    }
+  const existingProduct = await getProductById(productId)
+  if (existingProduct) {
+    const { title, description, price, quantity } = values
+    await db
+      .update(products)
+      .set({
+        title: title || existingProduct[0].title,
+        description: description || existingProduct[0].description,
+        price: price || existingProduct[0].price,
+        quantity: quantity || existingProduct[0].quantity,
+      })
+      .where(eq(products.id, productId))
+  } else {
+    throw new Error('Product not found or unauthorized to update.')
   }
 }
 
@@ -233,4 +244,72 @@ export async function deleteImageOnAws(imageUrl: string) {
     Key: key,
   }
   await s3Client.send(new DeleteObjectCommand(deleteParams))
+}
+
+export async function updateProductImage(existingImageUrl: string, newImageUrl: string) {
+  const product = await db
+    .select()
+    .from(products)
+    .where(
+      or(
+        eq(products.imageUrl1, existingImageUrl),
+        eq(products.imageUrl2, existingImageUrl),
+        eq(products.imageUrl3, existingImageUrl),
+        eq(products.imageUrl4, existingImageUrl),
+        eq(products.imageUrl5, existingImageUrl),
+      ),
+    )
+  const p = product[0]
+  if (p) {
+    switch (existingImageUrl) {
+      case p.imageUrl1:
+        await db
+          .update(products)
+          .set({
+            imageUrl1: newImageUrl,
+          })
+          .where(eq(products.id, p.id))
+        await deleteImageOnAws(existingImageUrl)
+        break
+      case p.imageUrl2:
+        await db
+          .update(products)
+          .set({
+            imageUrl2: newImageUrl,
+          })
+          .where(eq(products.id, p.id))
+        await deleteImageOnAws(existingImageUrl)
+        break
+      case p.imageUrl3:
+        await db
+          .update(products)
+          .set({
+            imageUrl3: newImageUrl,
+          })
+          .where(eq(products.id, p.id))
+        await deleteImageOnAws(existingImageUrl)
+        break
+      case p.imageUrl4:
+        await db
+          .update(products)
+          .set({
+            imageUrl4: newImageUrl,
+          })
+          .where(eq(products.id, p.id))
+        await deleteImageOnAws(existingImageUrl)
+        break
+      case p.imageUrl5:
+        await db
+          .update(products)
+          .set({
+            imageUrl5: newImageUrl,
+          })
+          .where(eq(products.id, p.id))
+        await deleteImageOnAws(existingImageUrl)
+        break
+      default:
+        return
+    }
+    redirect('/myshop')
+  }
 }

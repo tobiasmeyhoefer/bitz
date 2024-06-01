@@ -66,7 +66,7 @@
     "cancel": "Abbrechen",
     "edit": "Bearbeiten"
   },
-  "popAlert": {
+  "ProdDelAlert": {
     "submitTitle": "löschen",
     "yousure": "Bist du sicher, dass du diese Ware löschen möchtest?"
   },

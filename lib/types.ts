@@ -5,6 +5,7 @@ type CardWithImageProps = {
   imgUrl1?: string | null | string[]
   className?: React.HTMLAttributes<HTMLDivElement> | string
   favIcon?: boolean
+  delIcon?: boolean
   shopID?: string
   productID?: string
   product?: any
@@ -20,7 +21,7 @@ type UserId = {
 
 type MyShopProps = {
   userId: string
-  location: any
+  location: string
 }
 
 type SearchBarProps = {
@@ -71,6 +72,10 @@ type ProductType = {
   paymentUrl?: string
 }
 
+type ProdDelAlert = {
+  productId: string
+  }
+
 type Shop = {
   id: string
   title: string
@@ -97,5 +102,6 @@ export type {
   User,
   UserId,
   MyShopProps,
+  ProdDelAlert,
   Shop,
 }

@@ -26,13 +26,15 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Card } from '@/components/ui/card'
 import { Button } from '../ui/button'
-import { useRouter } from '@/navigation'
+import { Link, useRouter } from '@/navigation'
 import Image from 'next/image'
 import { getSignedURL } from '@/lib/productaction'
 import { FormTranslations, ProductType } from '@/lib/types'
 import { useToast } from '@/components/ui/use-toast'
 import { cn } from '@/lib/utils'
 import { Checkbox } from '../ui/checkbox'
+import { getUser } from '@/lib/useraction'
+import { FaPencilAlt } from 'react-icons/fa'
 
 const suggestions = [
   { value: 'Reciever' },
@@ -124,6 +126,7 @@ export function ProductForm({
   const { toast } = useToast()
   const [open, setOpen] = React.useState(false)
   const [categoryValue, setcategoryValue] = React.useState('')
+  const [locationError, setLocationError] = React.useState(false)
 
   const {
     title,
@@ -145,26 +148,16 @@ export function ProductForm({
   //   quantity: 0,
   // })
 
-  // useEffect(() => {
-  //   const getProduct = async () => {
-  //     try {
-  //       if (whichFunction == 'update') {
-  //         const result = await getProductById('3f4cb90e-6819-4c65-925b-9e563fdf9aae')
-  //         const r = result[0]
-  //         const updatedData: ProductType = {
-  //           title: r.title,
-  //           description: r.description || '',
-  //           price: r.price,
-  //           quantity: r.quantity,
-  //         }
-  //         setData(updatedData)
-  //       }
-  //     } catch (error) {
-  //       console.error('Fehler beim Laden der Daten:', error)
-  //     }
-  //   }
-  //   getProduct()
-  // }, [whichFunction])
+  useEffect(() => {
+    const getProduct = async () => {
+      const result = await getUser()
+      const user = result?.[0]
+      if (!user?.location) {
+        setLocationError(true)
+      }
+    }
+    getProduct()
+  }, [])
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -179,54 +172,66 @@ export function ProductForm({
     },
   })
 
-  // useEffect(() => {
-  //   if (data && whichFunction == 'update') {
-  //     form.reset(data)
-  //   }
-  // }, [data, form, whichFunction])
-
   async function onSubmit(values: ProductType) {
-    let imageUrls = []
-    if (compressedFiles) {
-      for (let i = 0; i < compressedFiles.length; i++) {
-        if (compressedFiles[i]) {
-          const computeSHA256 = async (file: File) => {
-            const buffer = await file.arrayBuffer()
-            const hashBuffer = await crypto.subtle.digest('SHA-256', buffer)
-            const hashArray = Array.from(new Uint8Array(hashBuffer))
-            const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('')
-            return hashHex
-          }
-          const signedURLResult = await getSignedURL({
-            fileSize: compressedFiles[i].size,
-            fileType: compressedFiles[i].type,
-            checksum: await computeSHA256(compressedFiles[i]),
-          })
-          if (signedURLResult.failure !== undefined) {
-            console.error(signedURLResult.failure)
-            return
-          }
+    if (locationError) {
+      setcategoryValue('')
+      setPreviewUrls(null)
+      setFiles(null)
+      setCompressedFiles(null)
+      form.reset()
+      toast({
+        title: 'Error',
+        description: 'set Account Location in Settings',
+        action: (
+          <Button>
+            <Link href="/settings">set Location</Link>
+          </Button>
+        ),
+        duration: 2200,
+      })
+    } else {
+      let imageUrls = []
+      if (compressedFiles) {
+        for (let i = 0; i < compressedFiles.length; i++) {
+          if (compressedFiles[i]) {
+            const computeSHA256 = async (file: File) => {
+              const buffer = await file.arrayBuffer()
+              const hashBuffer = await crypto.subtle.digest('SHA-256', buffer)
+              const hashArray = Array.from(new Uint8Array(hashBuffer))
+              const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('')
+              return hashHex
+            }
+            const signedURLResult = await getSignedURL({
+              fileSize: compressedFiles[i].size,
+              fileType: compressedFiles[i].type,
+              checksum: await computeSHA256(compressedFiles[i]),
+            })
+            if (signedURLResult.failure !== undefined) {
+              console.error(signedURLResult.failure)
+              return
+            }
 
-          const { url } = signedURLResult.success
-          const response = await fetch(url, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': compressedFiles[i].type,
-            },
-            body: compressedFiles[i],
-          })
-          imageUrls.push(url.split('?')[0])
+            const { url } = signedURLResult.success
+            const response = await fetch(url, {
+              method: 'PUT',
+              headers: {
+                'Content-Type': compressedFiles[i].type,
+              },
+              body: compressedFiles[i],
+            })
+            imageUrls.push(url.split('?')[0])
+          }
         }
       }
+      // console.log(JSON.parse(JSON.stringify(values)))
+      await addProduct(JSON.parse(JSON.stringify(values)), imageUrls)
+      router.push('/myshop')
+      toast({
+        title: toastTitle,
+        description: toastDescription,
+        duration: 2200,
+      })
     }
-    // console.log(JSON.parse(JSON.stringify(values)))
-    await addProduct(JSON.parse(JSON.stringify(values)), imageUrls)
-    router.push('/myshop')
-    toast({
-      title: toastTitle,
-      description: toastDescription,
-      duration: 2200,
-    })
   }
 
   const [files, setFiles] = useState<FileList | null>(null)
@@ -315,6 +320,16 @@ export function ProductForm({
   return (
     <>
       <Card className=" p-10">
+        {locationError && (
+          <div className="flex flex-row items-center gap-2">
+            <p className="font-medium text-red-500">Error: Location gotta be set.</p>
+            <Button className="h-6 w-12">
+              <Link href="/settings">
+                <FaPencilAlt />
+              </Link>
+            </Button>
+          </div>
+        )}
         <Form {...form}>
           <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
@@ -406,7 +421,7 @@ export function ProductForm({
                         {categoryValue
                           ? suggestions.find((framework) => framework.value === categoryValue)
                               ?.value
-                          : 'Select framework...'}
+                          : categoryPlaceholder}
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className=" w-[15em]">

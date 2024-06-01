@@ -6,6 +6,8 @@ import { cn } from '@/lib/utils'
 import { Link } from '@/navigation'
 import { Card, CardHeader, CardTitle, CardDescription } from './card'
 import FavoriteLike from '../favorites/favoriteLike'
+import { ProdDelAlert } from '../myShop/productDelAlert'
+
 
 const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
   ({ className, ...props }, ref) => {
@@ -54,7 +56,8 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                 <CardTitle className="align-middle text-2xl" style={{ lineHeight: 'unset' }}>
                   {props.title}
                 </CardTitle>
-                {props.favIcon && <FavoriteLike productId={props.productID!} />}
+                {props.product.isOwner && props.favIcon && <ProdDelAlert productId={props.productID!} />}
+                {!props.product.isOwner && props.favIcon && <FavoriteLike productId={props.productID!} />}
               </div>
               <CardDescription className="truncate text-xl">{props.desc}</CardDescription>
             </CardHeader>
