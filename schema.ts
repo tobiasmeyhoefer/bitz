@@ -166,6 +166,7 @@ export const transactions = pgTable('transactions', {
     .references(() => products.id, { onDelete: 'cascade' })
     .primaryKey(),
   price: integer('price'),
+  createdAt: timestamp('createdAt', { mode: 'date' }).notNull().defaultNow(),
 })
 
 export const checkoutSession = pgTable('checkoutSession', {
@@ -213,3 +214,4 @@ export const conversations = pgTable(
 
 export type UserType = typeof users.$inferSelect
 export type ConversationType = typeof conversations.$inferSelect
+export type TransactionType = typeof transactions.$inferSelect

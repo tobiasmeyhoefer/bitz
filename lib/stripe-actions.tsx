@@ -4,9 +4,10 @@ import Stripe from 'stripe'
 import { ProductType } from './types'
 import { db } from '@/db';
 import { checkoutSession, products, transactions, users } from '@/schema';
-import { eq, or } from 'drizzle-orm';
+import { desc, eq, or } from 'drizzle-orm';
 import { cookies } from 'next/headers';
 import { getUser } from './useraction';
+import { revalidatePath } from 'next/cache';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 
@@ -78,7 +79,13 @@ export async function savePayment(productId: string) {
   const buyerId = await getUserFromCheckoutSession(productId)
   const result = await db.select({sellerId: products.sellerId, price: products.price}).from(products).where(eq(products.id, productId))
   const {sellerId, price} = result[0]
+  await createTransaction(buyerId, productId, sellerId, price)
+  // await db.insert(transactions).values({buyerId: buyerId, productId: productId, sellerId: sellerId, price: price})
+}
+
+export async function createTransaction(buyerId: string, productId: string, sellerId: string, price: number) {
   await db.insert(transactions).values({buyerId: buyerId, productId: productId, sellerId: sellerId, price: price})
+  revalidatePath("/conversations")
 }
 
 export async function handleCompletedCheckoutSession(event: Stripe.CheckoutSessionCompletedEvent) {
@@ -89,18 +96,22 @@ export async function handleCompletedCheckoutSession(event: Stripe.CheckoutSessi
     )
     const lineItems = sessionWithLineItems.line_items
     if (!lineItems) return false
-    console.log(lineItems)
-    console.log('-----')
-    console.log(lineItems.data[0].price)
+    // console.log(lineItems)
+    // console.log('-----')
+    // console.log(lineItems.data[0].price)
     
 
     const product = await stripe.products.retrieve(lineItems.data[0].price?.product as string);
-    console.log(product)
+    // console.log(product)
 
+    changeProductStateToSold(product.metadata.productId)
     await savePayment(product.metadata.productId)
     await deleteCheckoutSession(product.metadata.productId)
 
   } catch (error) {}
+}
+export async function changeProductStateToSold(productId: string) {
+  await db.update(products).set({isSold: true}).where(eq(products.id, productId)) //set isSold true on product
 }
 
 export async function createCheckoutSession(userId: string, productId: string) {
@@ -127,5 +138,5 @@ async function getUserFromCheckoutSession(productId: string) {
 
 export async function getUserTransactions() {
   const user = await getUser()
-  return await db.select().from(transactions).where(or(eq(transactions.buyerId, user![0].id), eq(transactions.sellerId, user![0].id)))
+  return await db.select().from(transactions).where(or(eq(transactions.buyerId, user![0].id), eq(transactions.sellerId, user![0].id))).orderBy(desc(transactions.createdAt))
 } 

@@ -16,16 +16,32 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { addConversationDelay } from '@/lib/conversations-actions'
+import { addConversationDelay, deleteConversation } from '@/lib/conversations-actions'
 import { ConversationType } from '@/schema'
+import { changeProductStateToSold, createTransaction } from '@/lib/stripe-actions'
+import { getProductById } from '@/lib/productaction'
+import { useRouter } from '@/navigation'
 
 export const ConversationCardDropwdown = ({
   conv,
   showDelay,
+  showSold,
 }: {
   conv: ConversationType
   showDelay: boolean
+  showSold: boolean
 }) => {
+
+  const router = useRouter()
+
+  const changeProdStateToSold = async () => {
+    await changeProductStateToSold(conv.productId)
+    await deleteConversation(conv.productId, conv.buyerId)
+    const product = await getProductById(conv.productId)
+    await createTransaction(conv.buyerId, conv.productId, conv.sellerId, product[0].price)
+    router.push("/transactions")
+  }
+
   return (
     <div className="absolute right-4 top-4">
       <DropdownMenu>
@@ -45,25 +61,26 @@ export const ConversationCardDropwdown = ({
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem className="cursor-pointer" value="5">
-                    5
+                    5min
                   </SelectItem>
                   <SelectItem className="cursor-pointer" value="10">
-                    10
+                    10min
                   </SelectItem>
                   <SelectItem className="cursor-pointer" value="15">
-                    15
+                    15min
                   </SelectItem>
                   <SelectItem className="cursor-pointer" value="30">
-                    30
+                    30min
                   </SelectItem>
                 </SelectContent>
               </Select>
             </DropdownMenuItem>
           ) : null}
-          <DropdownMenuItem className="cursor-pointer">Test2</DropdownMenuItem>
-          <DropdownMenuItem className="cursor-pointer">Test3</DropdownMenuItem>
-          {/* TODO */}
-          {/* <DropdownMenuItem className="cursor-pointer">Konversation löschen</DropdownMenuItem> */}
+          {showSold === true ? (
+            <DropdownMenuItem onClick={changeProdStateToSold} className="cursor-pointer">
+              verkauft
+            </DropdownMenuItem>
+          ) : null}
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

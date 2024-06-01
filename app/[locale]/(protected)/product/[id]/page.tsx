@@ -60,7 +60,7 @@ export default function Page({
           redirect('/conversations')
         }}
       >
-        <Button type="submit" className="fixed bottom-6 right-48">
+        <Button type="submit" className="fixed bottom-6 right-40">
           Kaufen
         </Button>
       </form>
