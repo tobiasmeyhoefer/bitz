@@ -156,6 +156,29 @@ export const favorites = pgTable(
   },
 )
 
+export const transactions = pgTable('transactions', {
+  buyerId: text('buyerId')
+    .notNull()
+    .references(() => users.id, { onDelete: 'cascade' }),
+  sellerId: text('sellerId').references(() => users.id, { onDelete: 'cascade' }),
+  productId: text('productId')
+    .notNull()
+    .references(() => products.id, { onDelete: 'cascade' })
+    .primaryKey(),
+  price: integer('price'),
+  createdAt: timestamp('createdAt', { mode: 'date' }).notNull().defaultNow(),
+})
+
+export const checkoutSession = pgTable('checkoutSession', {
+  buyerId: text('buyerId')
+    .notNull()
+    .references(() => users.id, { onDelete: 'cascade' }),
+  productId: text('productId')
+    .notNull()
+    .references(() => products.id, { onDelete: 'cascade' })
+    .primaryKey(),
+})
+
 /*
 Der Käufer klickt den Kaunfe Button, es wird ein Eintrag gemacht und der Verkäufer erhält in seinem Posteingang eine Nachricht dafür...
 Es gibt eine Seite für Konversation, auf button click eröffnet man eine Konversation die hat erstmal diese Felder: Käufer, Verkäufer, Produkt, Status
@@ -189,6 +212,6 @@ export const conversations = pgTable(
   },
 )
 
-// export type ProductType = typeof products.$inferSelect
 export type UserType = typeof users.$inferSelect
 export type ConversationType = typeof conversations.$inferSelect
+export type TransactionType = typeof transactions.$inferSelect

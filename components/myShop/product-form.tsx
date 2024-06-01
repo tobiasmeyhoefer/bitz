@@ -32,6 +32,7 @@ import { getSignedURL } from '@/lib/productaction'
 import { FormTranslations, ProductType } from '@/lib/types'
 import { useToast } from '@/components/ui/use-toast'
 import { cn } from '@/lib/utils'
+import { Checkbox } from '../ui/checkbox'
 import { getUser } from '@/lib/useraction'
 import { FaPencilAlt } from 'react-icons/fa'
 
@@ -383,6 +384,26 @@ export function ProductForm({
                 </FormItem>
               )}
             />
+            {/* <FormField
+              control={form.control}
+              name={'isDirectlyBuyable'}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{quantity}</FormLabel>
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value?.includes(item.id)}
+                      onCheckedChange={(checked) => {
+                        return checked
+                          ? field.onChange([...field.value, item.id])
+                          : field.onChange(field.value?.filter((value) => value !== item.id))
+                      }}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            /> */}
             <FormField
               control={form.control}
               name="category"

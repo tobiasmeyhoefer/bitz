@@ -100,6 +100,13 @@ const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
             linkTo="/settings"
           ></NavItemLink>
         </DropdownMenuItem>
+        <DropdownMenuItem>
+          <NavItemLink
+            className="ml-auto text-sm no-underline hover:no-underline"
+            text="Transaktionen"
+            linkTo="/transactions"
+          ></NavItemLink>
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
 
         <DropdownMenuItem className="font-normal">
