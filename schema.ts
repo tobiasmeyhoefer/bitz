@@ -25,7 +25,6 @@ export const users = pgTable('user', {
   phoneVerified: boolean('phoneVerified').default(false),
 })
 
-
 export const products = pgTable('product', {
   id: text('id')
     .primaryKey()
@@ -51,10 +50,10 @@ export const products = pgTable('product', {
   imageUrl3: text('imageUrl3'),
   imageUrl4: text('imageUrl4'),
   imageUrl5: text('imageUrl5'),
-  stripeId: text("stripeId"),
-  paymentLink: text("paymentLink"),
-  isDirectlyBuyable: boolean("isDirectlyBuyable"),
-  isSold: boolean("isSold"),
+  stripeId: text('stripeId'),
+  paymentLink: text('paymentLink'),
+  isDirectlyBuyable: boolean('isDirectlyBuyable'),
+  isSold: boolean('isSold'),
 })
 
 export const accounts = pgTable(
@@ -157,36 +156,27 @@ export const favorites = pgTable(
   },
 )
 
-export const sales = pgTable(
-  'sales',
-  {
-    userId: text('userId')
-      .notNull()
-      .references(() => users.id, { onDelete: 'cascade' }),
-    productId: text('productId')
-      .notNull()
-      .references(() => products.id, { onDelete: 'cascade' }),
-    price: integer("price")
-  },
-  (table) => {
-    return {
-      id: primaryKey({ columns: [table.userId, table.productId] }),
-    }
-  },
-)
+export const transactions = pgTable('transactions', {
+  buyerId: text('buyerId')
+    .notNull()
+    .references(() => users.id, { onDelete: 'cascade' }),
+  sellerId: text('sellerId').references(() => users.id, { onDelete: 'cascade' }),
+  productId: text('productId')
+    .notNull()
+    .references(() => products.id, { onDelete: 'cascade' })
+    .primaryKey(),
+  price: integer('price'),
+})
 
-export const checkoutSession = pgTable(
-  'checkoutSession',
-  {
-    buyerId: text('buyerId')
-      .notNull()
-      .references(() => users.id, { onDelete: 'cascade' }),
-    productId: text('productId')
-      .notNull()
-      .references(() => products.id, { onDelete: 'cascade' })
-      .primaryKey(),
-  }
-)
+export const checkoutSession = pgTable('checkoutSession', {
+  buyerId: text('buyerId')
+    .notNull()
+    .references(() => users.id, { onDelete: 'cascade' }),
+  productId: text('productId')
+    .notNull()
+    .references(() => products.id, { onDelete: 'cascade' })
+    .primaryKey(),
+})
 
 /*
 Der Käufer klickt den Kaunfe Button, es wird ein Eintrag gemacht und der Verkäufer erhält in seinem Posteingang eine Nachricht dafür...

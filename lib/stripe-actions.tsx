@@ -3,8 +3,10 @@
 import Stripe from 'stripe'
 import { ProductType } from './types'
 import { db } from '@/db';
-import { checkoutSession, sales } from '@/schema';
-import { eq } from 'drizzle-orm';
+import { checkoutSession, products, transactions, users } from '@/schema';
+import { eq, or } from 'drizzle-orm';
+import { cookies } from 'next/headers';
+import { getUser } from './useraction';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 
@@ -13,6 +15,7 @@ export async function addProductStripe(
   description: string,
   price: number,
   images: string[],
+  productId: string
 ): Promise<{ stripeId: string; paymentLink: string }> {
   const product = await stripe.products.create({
     name: title,
@@ -23,6 +26,7 @@ export async function addProductStripe(
       currency: 'eur',
     },
     expand: ['default_price'],
+    metadata: {productId: productId}
   })
   const priceId = (product.default_price as Stripe.Price).id
   const paymentLink = await createPaymentLink(priceId)
@@ -50,6 +54,8 @@ async function updateProductStripe(productId: string, values: ProductType) {
 }
 
 async function createPaymentLink(priceId: string): Promise<string> {
+  const cookieStore = cookies()
+  const locale = cookieStore.get('NEXT_LOCALE')
   const paymentLink = await stripe.paymentLinks.create({
     line_items: [
       {
@@ -57,14 +63,22 @@ async function createPaymentLink(priceId: string): Promise<string> {
         quantity: 1,
       },
     ],
+    after_completion: {
+      type: "redirect",
+      redirect: {
+        url: process.env.NODE_ENV === "development" ? `http://localhost:3000/${locale?.value}/transactions` : `https://bitztech.de/${locale?.value}/transactions`
+      }
+    }
   })
   return paymentLink.url
 }
 
-// TODO: add productSold bool on product and create an entry in sales table
-export async function savePayment(stripeProductId: string) {
-  const buyerId = await getUserFromCheckoutSession(stripeProductId)
-  await db.insert(sales).values({userId: buyerId, productId: stripeProductId})
+// TODO: add productSold bool on product and create an entry in transactions table
+export async function savePayment(productId: string) {
+  const buyerId = await getUserFromCheckoutSession(productId)
+  const result = await db.select({sellerId: products.sellerId, price: products.price}).from(products).where(eq(products.id, productId))
+  const {sellerId, price} = result[0]
+  await db.insert(transactions).values({buyerId: buyerId, productId: productId, sellerId: sellerId, price: price})
 }
 
 export async function handleCompletedCheckoutSession(event: Stripe.CheckoutSessionCompletedEvent) {
@@ -78,8 +92,13 @@ export async function handleCompletedCheckoutSession(event: Stripe.CheckoutSessi
     console.log(lineItems)
     console.log('-----')
     console.log(lineItems.data[0].price)
-    await savePayment(lineItems.data[0].price?.product as string)
-    await deleteCheckoutSession(lineItems.data[0].price?.product as string)
+    
+
+    const product = await stripe.products.retrieve(lineItems.data[0].price?.product as string);
+    console.log(product)
+
+    await savePayment(product.metadata.productId)
+    await deleteCheckoutSession(product.metadata.productId)
 
   } catch (error) {}
 }
@@ -105,3 +124,8 @@ async function getUserFromCheckoutSession(productId: string) {
   const result = await db.select({id: checkoutSession.buyerId}).from(checkoutSession).where(eq(checkoutSession.productId, productId))
   return result[0].id
 }
+
+export async function getUserTransactions() {
+  const user = await getUser()
+  return await db.select().from(transactions).where(or(eq(transactions.buyerId, user![0].id), eq(transactions.sellerId, user![0].id)))
+} 

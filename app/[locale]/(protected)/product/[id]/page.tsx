@@ -1,13 +1,13 @@
 import { Button } from '@/components/ui/button'
 import { createConversation } from '@/lib/conversations-actions'
-import { redirect } from '@/navigation'
 import { revalidatePath } from 'next/cache'
 import { ProductImageCarousel } from '../productImgCarousel'
 import ProductInfoCard from '../productInfoCard'
 import { useTranslations } from 'next-intl'
-import Link from 'next/link'
 import { getUser } from '@/lib/useraction'
 import { createCheckoutSession, productHasCheckoutSessionOpened } from '@/lib/stripe-actions'
+import { redirect } from '@/navigation'
+import { redirect as red } from 'next/navigation'
 
 export default function Page({
   params,
@@ -67,13 +67,13 @@ export default function Page({
       <form
         action={async () => {
           'use server'
-          // await createConversation(productInfo.id)
           const openedCheckoutSession = await productHasCheckoutSessionOpened(productInfo.id)
           if(!openedCheckoutSession) {
             const user = await getUser()
             await createCheckoutSession(user![0].id, productInfo.id)
-            revalidatePath('/sales')
-            redirect(productInfo.paymentUrl)
+            revalidatePath('/transactions')
+            console.log(productInfo.paymentUrl)
+            red(productInfo.paymentUrl)
           }
         }}
       >

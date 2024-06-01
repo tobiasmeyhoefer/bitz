@@ -44,11 +44,11 @@ export async function addProduct(values: ProductType, imageUrls: string[]) {
   created.setHours(created.getHours() + 2)
 
   //nicht jeder User will das
-  const {stripeId, paymentLink} = await addProductStripe(title, description ?? '', price, imageUrls)
+  // const {stripeId, paymentLink} = await addProductStripe(title, description ?? '', price, imageUrls)
 
   if (id) {
     const user = await getUserById(id)
-    await db.insert(products).values({
+    const product = await db.insert(products).values({
       title: title,
       description: description,
       price: price,
@@ -62,10 +62,16 @@ export async function addProduct(values: ProductType, imageUrls: string[]) {
       imageUrl3: imageUrls[2],
       imageUrl4: imageUrls[3],
       imageUrl5: imageUrls[4],
-      stripeId: stripeId,
-      paymentLink: paymentLink
-    })
+      // stripeId: stripeId,
+      // paymentLink: paymentLink
+    }).returning()
+    // product[0].id
+    const {stripeId, paymentLink} = await addProductStripe(title, description ?? '', price, imageUrls, product[0].id)
+    await db.update(products).set({paymentLink: paymentLink, stripeId: stripeId}).where(eq(products.id, product[0].id))
   }
+
+  // const {stripeId, paymentLink} = await addProductStripe(title, description ?? '', price, imageUrls)
+
 }
 
 // Delete function requiring productId as string
