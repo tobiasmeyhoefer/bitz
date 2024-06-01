@@ -20,7 +20,6 @@ export default function Page({
   // const userId = atob(params.id)
 
   const productInfo: any = JSON.parse(atob(searchParams.p))
-
   // console.log(productInfo)
 
   const unfilteredImgs = [
@@ -49,6 +48,7 @@ export default function Page({
           translations={carouselTranslations}
           images={images}
           className="h-[50vh] lg:h-[60vh]"
+          sellerId={productInfo.sellerId}
         />
         <ProductInfoCard productInfo={productInfo} />
       </div>
@@ -68,7 +68,7 @@ export default function Page({
         action={async () => {
           'use server'
           const openedCheckoutSession = await productHasCheckoutSessionOpened(productInfo.id)
-          if(!openedCheckoutSession) {
+          if (!openedCheckoutSession) {
             const user = await getUser()
             await createCheckoutSession(user![0].id, productInfo.id)
             revalidatePath('/transactions')

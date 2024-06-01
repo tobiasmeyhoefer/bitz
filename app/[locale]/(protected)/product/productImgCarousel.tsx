@@ -11,11 +11,15 @@ import {
 } from '@/components/ui/carousel'
 import Image from 'next/image'
 import { UpdateImage } from '@/components/myShop/update-image'
+import { useEffect, useState } from 'react'
+import { getUser } from '@/lib/useraction'
+import { auth } from '@/auth'
 
 export function ProductImageCarousel(props: any) {
-  const [api, setApi] = React.useState<CarouselApi>()
-  const [current, setCurrent] = React.useState(0)
-  React.useEffect(() => {
+  const [api, setApi] = useState<CarouselApi>()
+  const [current, setCurrent] = useState(0)
+  const [isOwner, setIsOwner] = useState(false)
+  useEffect(() => {
     if (!api) {
       return
     }
@@ -24,6 +28,17 @@ export function ProductImageCarousel(props: any) {
       setCurrent(api.selectedScrollSnap() + 1)
     })
   }, [api])
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const result = await getUser()
+      const user = result?.[0]
+      if (user?.id == props.sellerId) {
+        setIsOwner(true)
+      }
+    }
+    checkUser()
+  }, [props.sellerId])
 
   return (
     <div className={props.className}>
@@ -70,7 +85,7 @@ export function ProductImageCarousel(props: any) {
       {/* lg: block zu lg:flex gemacht */}
       <div className=" hidden flex-row justify-between p-2 text-sm text-muted-foreground lg:flex">
         {props.translations.image} {current} {props.translations.of} {props.images.length}
-        <UpdateImage existingImageUrl={props.images[current - 1]} />
+        {isOwner && <UpdateImage existingImageUrl={props.images[current - 1]} />}
       </div>
     </div>
   )
