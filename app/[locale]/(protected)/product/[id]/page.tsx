@@ -47,7 +47,7 @@ export default function Page({
         />
         <ProductInfoCard productInfo={productInfo} />
       </div>
-      <form
+      {/* <form
         action={async () => {
           'use server'
           await createConversation(productInfo.id)
@@ -58,7 +58,7 @@ export default function Page({
         <Button type="submit" className="absolute bottom-6 right-6">
           Kaufen
         </Button>
-      </form>
+      </form> */}
     </>
   )
 }

@@ -67,7 +67,6 @@ export function ProductImageCarousel(props: any) {
           </>
         )}
       </Carousel>
-      {/* lg: block zu lg:flex gemacht */}
       <div className=" hidden flex-row justify-between p-2 text-sm text-muted-foreground lg:flex">
         {props.translations.image} {current} {props.translations.of} {props.images.length}
         <UpdateImage existingImageUrl={props.images[current - 1]} />
