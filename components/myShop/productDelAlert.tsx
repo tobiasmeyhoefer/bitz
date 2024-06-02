@@ -20,7 +20,7 @@ export function ProdDelAlert({ productId }: { productId: string }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="outline">
+        <Button variant="ghost">
           <FaTrash />
         </Button>
       </AlertDialogTrigger>

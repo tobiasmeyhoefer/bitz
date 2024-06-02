@@ -21,6 +21,7 @@ import { toast } from '@/components/ui/use-toast'
 import { Textarea } from '@/components/ui/textarea'
 import { ProductType } from '@/lib/types'
 import { updateProduct } from '@/lib/productaction'
+import { Link } from '@/navigation'
 
 // type ProductInfoEditType = {
 //   productInfo: any
@@ -157,6 +158,9 @@ export default function ProductInfoCardEditable(props: any) {
         </div>
       ) : (
         <div className="h-[50vh] w-[90vw] lg:h-[60vh] lg:w-[40vw] 2xl:w-[60vh]">
+          <Button variant="outline" className="absolute left-20 top-36">
+            <Link href="/myshop"> ⏎ </Link>
+          </Button>
           <Card className="mt-2 flex h-full flex-col justify-between lg:mt-0 lg:h-[60vh]">
             <div>
               <CardHeader className="flex h-[10vh] flex-row items-center justify-between">

@@ -60,6 +60,7 @@ export async function addProduct(values: ProductType, imageUrls: string[]) {
       imageUrl5: imageUrls[4],
     })
   }
+  revalidatePath('/myshop')
 }
 
 // Delete function requiring productId as string

@@ -4,7 +4,14 @@ import { Button } from '../ui/button'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form'
 import { getUser, saveUserLocation } from '@/lib/useraction'
 import { useEffect, useState } from 'react'
 
@@ -33,6 +40,7 @@ export default function LocationChooser({ postcode }: { postcode: string }) {
   return (
     <>
       <Form {...form}>
+        <FormLabel>change Location</FormLabel>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-row items-end gap-1">
           <FormField
             control={form.control}

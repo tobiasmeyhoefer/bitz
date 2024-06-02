@@ -6,7 +6,7 @@ import { ProductType } from '@/lib/types'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { createConversation } from '@/lib/conversations-actions'
-import { redirect } from '@/navigation'
+import { Link, redirect } from '@/navigation'
 import { revalidatePath } from 'next/cache'
 
 type ProductInfoType = {
@@ -115,6 +115,9 @@ export default function ProductInfoCard(props: ProductInfoType) {
         />
       ) : (
         <div className="flex flex-col">
+          <Button variant="outline" className="absolute left-20 top-36">
+            <Link href="/browse"> ⏎ </Link>
+          </Button>
           <Card className="my-3 h-full w-[90vw] lg:my-0 lg:h-[60vh] lg:w-[40vw]">
             <CardHeader className="flex h-[20%] flex-row items-center justify-between">
               <CardTitle className="text-center">{product.title}</CardTitle>
