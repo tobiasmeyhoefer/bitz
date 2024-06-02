@@ -6,32 +6,40 @@ import { auth, signOut } from '@/auth'
 import { deleteImageOnAws, getProductsOwned } from './productaction'
 import { revalidatePath } from 'next/cache'
 
+export async function saveUserNameLogin(name: string, email: string) {
+  const response = await db.select().from(users).where(eq(users.email, email))
+  await db
+    .update(users)
+    .set({ name: name })
+    .where(eq(users.id, response[0].id))
+    .catch((error) => console.log(error))
+}
+
 export async function saveUserName(name: string) {
   const session = await auth()
   const id = session?.user?.id
-  if (id) {
-    await db.update(users).set({ name: name }).where(eq(users.id, id))
-  }
+  await db.update(users).set({ name: name }).where(eq(users.id, id!))
 }
 
 export async function saveUserLocation(values: { postcode: string }) {
   const session = await auth()
   const id = session?.user?.id
-  if (id) {
-    await db.update(users).set({ location: values.postcode }).where(eq(users.id, id))
-  }
+  await db.update(users).set({ location: values.postcode }).where(eq(users.id, id!))
 }
 
 export async function saveUserAdress(adress: string) {
   const session = await auth()
   const id = session?.user?.id
-  if (id) {
-    await db.update(users).set({ adress: adress }).where(eq(users.id, id))
-  }
+  await db.update(users).set({ adress: adress }).where(eq(users.id, id!))
 }
 
 export async function getUserById(userId: string) {
   const response = await db.select().from(users).where(eq(users.id, userId))
+  return response
+}
+
+export async function getUserByEmail(email: string) {
+  const response = await db.select().from(users).where(eq(users.email, email))
   return response
 }
 

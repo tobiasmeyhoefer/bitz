@@ -2,7 +2,7 @@ import { signIn } from '@/auth'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 import { useTranslations } from 'next-intl'
-import { saveUserName } from '@/lib/useraction'
+import { cookies } from 'next/headers'
 
 export function SignInResend() {
   const t = useTranslations('LoginForm')
@@ -11,13 +11,11 @@ export function SignInResend() {
       className="flex flex-col items-center gap-4"
       action={async (formData) => {
         'use server'
-        const r = await signIn('resend', formData)
-        console.log('WWWWWWWWWWWWWWWWW ' + r)
-
-        // const name = formData.get('name')
-        // if (typeof name === 'string') {
-        //   await saveUserName(name)
-        // }
+        const email = formData.get('email')
+        const name = formData.get('name')
+        cookies().set('email', email?.toString()!)
+        cookies().set('name', name?.toString()!)
+        await signIn('resend', formData)
       }}
     >
       <Input className="h-[60px] w-full p-4" type="email" name="email" placeholder="john@doe.com" />
