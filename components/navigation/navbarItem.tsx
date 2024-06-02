@@ -36,7 +36,7 @@ const NavItemLink = (props: NavbarItemLinkProps) => {
   return (
     <Link
       className={cn(
-        `bg-none text-lg font-normal ${pathname === props.linkTo ? 'cursor-default text-inherit underline underline-offset-8' : ' hover:underline hover:underline-offset-8'} hover:bg-none`,
+        `bg-none text-center text-lg font-normal ${pathname === props.linkTo ? 'cursor-default text-inherit underline underline-offset-8' : ' hover:underline hover:underline-offset-8'} hover:bg-none`,
         props.className,
       )}
       href={props.linkTo}
@@ -85,17 +85,17 @@ const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
         )}
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel className="text-right">Menu</DropdownMenuLabel>
+        <DropdownMenuLabel className="text-center">Menu</DropdownMenuLabel>
         <DropdownMenuItem>
           <NavItemLink
-            className="ml-auto text-sm no-underline hover:no-underline"
+            className="w-full text-sm no-underline hover:no-underline"
             text={props.favoritesLinkText}
             linkTo="/favorites"
           ></NavItemLink>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <NavItemLink
-            className="ml-auto text-sm no-underline hover:no-underline"
+            className="w-full text-sm no-underline hover:no-underline"
             text={props.settingsLinkText}
             linkTo="/settings"
           ></NavItemLink>
@@ -103,7 +103,7 @@ const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
         <DropdownMenuSeparator />
 
         <DropdownMenuItem className="font-normal">
-          <div className="ml-auto mr-[-12px]">{props.signOut}</div>
+          <div className="w-full">{props.signOut}</div>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

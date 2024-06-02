@@ -12,10 +12,10 @@ export function SignInResend() {
       action={async (formData) => {
         'use server'
         const name = formData.get('name')
-        await signIn('resend', formData)
         if (typeof name === 'string') {
           await saveUserName(name)
         }
+        await signIn('resend', formData)
       }}
     >
       <Input className="h-[60px] w-full p-4" type="email" name="email" placeholder="john@doe.com" />

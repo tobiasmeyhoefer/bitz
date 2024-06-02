@@ -38,7 +38,7 @@ export default function Page({
     <>
       <div
         id="product-info-container"
-        className="flex min-h-[calc(100vh-80px)] w-screen flex-col items-center lg:flex-row lg:justify-around"
+        className="flex min-h-[calc(100vh-80px)] w-screen flex-col items-center  lg:flex-row lg:justify-around"
       >
         <ProductImageCarousel
           translations={carouselTranslations}
