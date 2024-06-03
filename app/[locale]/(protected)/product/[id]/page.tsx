@@ -42,7 +42,7 @@ export default function Page({
     <>
       <div
         id="product-info-container"
-        className="flex min-h-[calc(100vh-80px)] w-screen flex-col items-center lg:flex-row lg:justify-around"
+        className="flex min-h-[calc(100vh-80px)] w-screen flex-col items-center  lg:flex-row lg:justify-around"
       >
         <ProductImageCarousel
           translations={carouselTranslations}
@@ -52,7 +52,7 @@ export default function Page({
         />
         <ProductInfoCard productInfo={productInfo} />
       </div>
-      <form
+      {/* <form
         action={async () => {
           'use server'
           await createConversation(productInfo.id)
@@ -63,24 +63,7 @@ export default function Page({
         <Button type="submit" className="fixed bottom-6 right-40">
           Kaufen
         </Button>
-      </form>
-      <form
-        action={async () => {
-          'use server'
-          const openedCheckoutSession = await productHasCheckoutSessionOpened(productInfo.id)
-          if (!openedCheckoutSession) {
-            const user = await getUser()
-            await createCheckoutSession(user![0].id, productInfo.id)
-            revalidatePath('/transactions')
-            console.log(productInfo.paymentUrl)
-            red(productInfo.paymentUrl)
-          }
-        }}
-      >
-        <Button className="fixed bottom-6 right-6" type="submit">
-          Direkt Kaufen
-        </Button>
-      </form>
+      </form> */}
     </>
   )
 }
