@@ -28,7 +28,7 @@ export function DeleteAccountButton({
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="outline">{header}</Button>
+        <Button variant="destructive">{header}</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

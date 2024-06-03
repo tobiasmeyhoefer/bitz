@@ -18,6 +18,15 @@ import { useState, useEffect } from 'react'
 import { HiUserCircle } from 'react-icons/hi2'
 import { FaUserCircle } from 'react-icons/fa'
 import { Separator } from '@/components/ui/separator'
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet'
+
 
 type NavbarItemLinkProps = {
   linkTo: string
@@ -36,7 +45,7 @@ const NavItemLink = (props: NavbarItemLinkProps) => {
   return (
     <Link
       className={cn(
-        `bg-none text-center text-lg font-normal ${pathname === props.linkTo ? 'cursor-default text-inherit underline underline-offset-8' : ' hover:underline hover:underline-offset-8'} hover:bg-none`,
+        `bg-none text-left text-lg font-normal ${pathname === props.linkTo ? 'cursor-default text-inherit underline underline-offset-8' : ' hover:underline hover:underline-offset-8'} hover:bg-none`,
         props.className,
       )}
       href={props.linkTo}
@@ -85,24 +94,24 @@ const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
         )}
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel className="text-center">Menu</DropdownMenuLabel>
+        <DropdownMenuLabel className="text-left">Menu</DropdownMenuLabel>
         <DropdownMenuItem>
           <NavItemLink
-            className="w-full text-sm no-underline hover:no-underline"
+            className="w-full text-left text-sm no-underline hover:no-underline"
             text={props.favoritesLinkText}
             linkTo="/favorites"
           ></NavItemLink>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <NavItemLink
-            className="w-full text-sm no-underline hover:no-underline"
+            className="w-full text-left text-sm no-underline hover:no-underline"
             text={props.settingsLinkText}
             linkTo="/settings"
           ></NavItemLink>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <NavItemLink
-            className="ml-auto text-sm no-underline hover:no-underline"
+            className="ml-auto text-left text-sm no-underline hover:no-underline"
             text="Transaktionen"
             linkTo="/transactions"
           ></NavItemLink>
@@ -142,7 +151,11 @@ const NavMenuDrawer = (props: any) => {
           return (
             <div
               className={`flex justify-center hover:bg-slate-100 ${index === 0 && `rounded-t-xl`} ${pathname === item.props.linkTo && 'cursor-default bg-slate-100 text-primary no-underline'}`}
-              onClick={() => setDrawerOpen(false)}
+              onClick={() => {
+                if(index !== 0) {
+                  setDrawerOpen(false)
+                }
+              }}
               key={item.key}
             >
               {item}
