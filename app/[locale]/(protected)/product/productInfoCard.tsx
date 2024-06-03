@@ -115,7 +115,10 @@ export default function ProductInfoCard(props: ProductInfoType) {
         />
       ) : (
         <div className="flex flex-col">
-          <Button variant="outline" className="absolute left-20 top-36">
+          <Button
+            variant="outline"
+            className="  absolute bottom-6 left-12 lg:left-8 lg:top-40  xl:left-20"
+          >
             <Link href="/browse"> ⏎ </Link>
           </Button>
           <Card className="my-3 h-full w-[90vw] lg:my-0 lg:h-[60vh] lg:w-[40vw]">
