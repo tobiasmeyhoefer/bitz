@@ -8,6 +8,9 @@ import { Button } from '@/components/ui/button'
 import { createConversation } from '@/lib/conversations-actions'
 import { Link, redirect } from '@/navigation'
 import { revalidatePath } from 'next/cache'
+import { createCheckoutSession, productHasCheckoutSessionOpened } from '@/lib/stripe-actions'
+import { getUser } from '@/lib/useraction'
+import { redirect as red } from 'next/navigation'
 
 type ProductInfoType = {
   productInfo: ProductType & { isOwner: boolean }
@@ -147,8 +150,25 @@ export default function ProductInfoCard(props: ProductInfoType) {
               redirect('/conversations')
             }}
           >
-            <Button type="submit" className="absolute bottom-6 right-6">
+            <Button type="submit" className="fixed bottom-6 right-40">
               Kaufen
+            </Button>
+          </form>
+          <form
+            action={async () => {
+              'use server'
+              const openedCheckoutSession = await productHasCheckoutSessionOpened(product.id!)
+              if (!openedCheckoutSession) {
+                const user = await getUser()
+                await createCheckoutSession(user![0].id, product.id!)
+                revalidatePath('/transactions')
+                console.log(product.paymentUrl)
+                red(product.paymentUrl!)
+              }
+            }}
+          >
+            <Button className="fixed bottom-6 right-6" type="submit">
+              Direkt Kaufen
             </Button>
           </form>
         </div>
