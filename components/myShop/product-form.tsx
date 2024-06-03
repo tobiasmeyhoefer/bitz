@@ -76,7 +76,7 @@ const formSchema = z.object({
     .max(50)
     .refine((value) => !/#/.test(value)),
   price: z.coerce.number().safe().positive(),
-  quantity: z.coerce.number().safe().positive(),
+  isDirectlyBuyable: z.boolean().default(false).optional(),
   description: z
     .string()
     .min(1, { message: minError })
@@ -161,13 +161,13 @@ export function ProductForm({
       price: 0,
       quantity: 1,
       category: '',
+      isDirectlyBuyable: true,
       images: null,
     },
   })
 
   async function onSubmit(values: ProductType) {
-
-    if(compressedFiles?.length === 0){
+    if (compressedFiles?.length === 0) {
       toast({
         title: 'Error',
         description: 'at least one image pls',
@@ -246,7 +246,7 @@ export function ProductForm({
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files ?? null
     setFiles(files)
-    console.log("test")
+    console.log('test')
     console.log(files)
     if (previewUrls) {
       previewUrls.map((url) => URL.revokeObjectURL(url))
@@ -283,8 +283,7 @@ export function ProductForm({
     setCompressedFiles(compFiles)
 
     // @ts-ignore
-    form.setValue("images", dataTransfer!.files!)
-
+    form.setValue('images', dataTransfer!.files!)
 
     // console.log(dataTransfer.files)
     // setFiles(dataTransfer.files)
@@ -418,26 +417,6 @@ export function ProductForm({
                 </FormItem>
               )}
             /> */}
-            {/* <FormField
-              control={form.control}
-              name={'isDirectlyBuyable'}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{quantity}</FormLabel>
-                  <FormControl>
-                    <Checkbox
-                      checked={field.value?.includes(item.id)}
-                      onCheckedChange={(checked) => {
-                        return checked
-                          ? field.onChange([...field.value, item.id])
-                          : field.onChange(field.value?.filter((value) => value !== item.id))
-                      }}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            /> */}
             <FormField
               control={form.control}
               name="category"
@@ -496,6 +475,22 @@ export function ProductForm({
             />
             <FormField
               control={form.control}
+              name={'isDirectlyBuyable'}
+              render={({ field }) => (
+                <FormItem className='flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4'>
+                  <FormLabel>is directly buyable</FormLabel>
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
               name="images"
               render={({ field: { value, onChange, ...fieldProps } }) => (
                 <FormItem>
@@ -520,7 +515,7 @@ export function ProductForm({
             {previewUrls && files && (
               <div className="flex flex-wrap">
                 {previewUrls.map((url, index) => (
-                  <div className='relative' key={url}>
+                  <div className="relative" key={url}>
                     <Image
                       src={url}
                       key={url}
@@ -529,7 +524,12 @@ export function ProductForm({
                       height={150}
                       className="border"
                     />
-                    <Button className='absolute bottom-1 right-1' onClick={() => handleDelete(index)}>Delete</Button>
+                    <Button
+                      className="absolute bottom-1 right-1"
+                      onClick={() => handleDelete(index)}
+                    >
+                      Delete
+                    </Button>
                   </div>
                 ))}
               </div>

@@ -38,7 +38,7 @@ export async function getProductsOwned(userId: string) {
 }
 
 export async function addProduct(values: ProductType, imageUrls: string[]) {
-  let { title, description, price, quantity, category } = values
+  let { title, description, price, category, isDirectlyBuyable } = values
   const session = await auth()
   const id = session?.user?.id
   const created = new Date(Date.now())
@@ -55,7 +55,6 @@ export async function addProduct(values: ProductType, imageUrls: string[]) {
         title: title,
         description: description,
         price: price,
-        quantity: quantity,
         category: category,
         sellerId: id,
         location: user[0].location ?? null,
@@ -65,6 +64,8 @@ export async function addProduct(values: ProductType, imageUrls: string[]) {
         imageUrl3: imageUrls[2],
         imageUrl4: imageUrls[3],
         imageUrl5: imageUrls[4],
+        isDirectlyBuyable: isDirectlyBuyable,
+        isSold: false
         // stripeId: stripeId,
         // paymentLink: paymentLink
       })
