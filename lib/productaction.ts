@@ -2,7 +2,7 @@
 
 import { products, favorites } from '@/schema'
 import { db } from '../db'
-import { eq, ne, or } from 'drizzle-orm'
+import { desc, eq, ne, or } from 'drizzle-orm'
 import { auth } from '@/auth'
 import { getUser, getUserById } from './useraction'
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3'
@@ -10,6 +10,7 @@ import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import crypto from 'crypto'
 import { ProductType } from './types'
 import { revalidatePath } from 'next/cache'
+import { addProductStripe } from './stripe-actions'
 import { redirect } from '@/navigation'
 
 export async function getProductsBrowse() {
@@ -42,25 +43,47 @@ export async function addProduct(values: ProductType, imageUrls: string[]) {
   const id = session?.user?.id
   const created = new Date(Date.now())
   created.setHours(created.getHours() + 2)
+
+  //nicht jeder User will das
+  // const {stripeId, paymentLink} = await addProductStripe(title, description ?? '', price, imageUrls)
+
   if (id) {
     const user = await getUserById(id)
-    await db.insert(products).values({
-      title: title,
-      description: description,
-      price: price,
-      quantity: quantity,
-      category: category,
-      sellerId: id,
-      location: user[0].location ?? null,
-      createdAt: created,
-      imageUrl1: imageUrls[0],
-      imageUrl2: imageUrls[1],
-      imageUrl3: imageUrls[2],
-      imageUrl4: imageUrls[3],
-      imageUrl5: imageUrls[4],
-    })
+    const product = await db
+      .insert(products)
+      .values({
+        title: title,
+        description: description,
+        price: price,
+        quantity: quantity,
+        category: category,
+        sellerId: id,
+        location: user[0].location ?? null,
+        createdAt: created,
+        imageUrl1: imageUrls[0],
+        imageUrl2: imageUrls[1],
+        imageUrl3: imageUrls[2],
+        imageUrl4: imageUrls[3],
+        imageUrl5: imageUrls[4],
+        // stripeId: stripeId,
+        // paymentLink: paymentLink
+      })
+      .returning()
+    // product[0].id
+    const { stripeId, paymentLink } = await addProductStripe(
+      title,
+      description ?? '',
+      price,
+      imageUrls,
+      product[0].id,
+    )
+    await db
+      .update(products)
+      .set({ paymentLink: paymentLink, stripeId: stripeId })
+      .where(eq(products.id, product[0].id))
   }
   revalidatePath('/myshop')
+  // const {stripeId, paymentLink} = await addProductStripe(title, description ?? '', price, imageUrls)
 }
 
 // Delete function requiring productId as string

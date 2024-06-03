@@ -25,7 +25,7 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
   if (cardType === 'sellerCard') {
     return (
       <Card className="relative">
-        <ConversationCardDropwdown conv={conv} showDelay={true} />
+        <ConversationCardDropwdown conv={conv} showDelay={true} showSold={false}/>
         <CardHeader>
           <CardTitle>Du bist an dem Bit {product[0].title} interessiert</CardTitle>
           <CardDescription>
@@ -65,15 +65,14 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
           <span></span>
         ) : (
           <Card className="relative">
-            <ConversationCardDropwdown conv={conv} showDelay={false} />
+            <ConversationCardDropwdown conv={conv} showDelay={false} showSold={true} />
             <CardHeader>
               <CardTitle>
                 Der User {user[0].name} ist an deinem Bit {product[0].title} interessiert
               </CardTitle>
               <CardDescription>
                 Du kannst dieses Angebot nun ablehnen oder annehmen. Wenn du es annimmst, wird dein
-                in den Einstellungen festgelegter Abholort übermittelt und du wirst aufgefordert,
-                ein Zeitfenster anzugeben.
+                in den Einstellungen festgelegter Abholort übermittelt bitte trage im vorgesehenen Feld ein wann du Zeit hast
               </CardDescription>
             </CardHeader>
             {conv.status === 'accepted' ? (

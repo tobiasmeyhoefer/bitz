@@ -3,7 +3,7 @@
 import { db } from '@/db'
 import { conversations, products } from '@/schema'
 import { getUser } from './useraction'
-import { eq, or } from 'drizzle-orm'
+import { desc, eq, or } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
 
 export async function getAllConversations() {
@@ -12,6 +12,7 @@ export async function getAllConversations() {
     .select()
     .from(conversations)
     .where(or(eq(conversations.buyerId, user![0].id), eq(conversations.sellerId, user![0].id)))
+    .orderBy(desc(conversations.createdAt))
 }
 
 export async function createConversation(productId: string) {
@@ -23,6 +24,10 @@ export async function createConversation(productId: string) {
     productId: productId,
     sellerId: seller[0].sellerId,
   })
+}
+
+export async function deleteConversation(productId: string, buyerId: string) {
+  await db.delete(conversations).where(or(eq(conversations.productId, productId), eq(conversations.buyerId, buyerId)))
 }
 
 export async function declineOffer(id: number) {
@@ -53,3 +58,4 @@ export async function addConversationDelay(id: number, delay: string) {
     .where(eq(conversations.id, id))
   revalidatePath('/conversations')
 }
+
