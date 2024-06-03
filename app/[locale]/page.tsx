@@ -105,9 +105,9 @@ export default async function Home() {
           </div>
         </div>
       </section>
-      <Link href="#first-section">
+      {/* <Link href="#first-section"> */}
         <ScrollToTopButton />
-      </Link>
+      {/* </Link> */}
     </main>
   )
 }
