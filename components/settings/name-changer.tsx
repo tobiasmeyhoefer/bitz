@@ -42,10 +42,10 @@ export default function NameChanger() {
   }
 
   return (
-    <>
+    <div className='mb-6'>
       <Form {...form}>
         <FormLabel>change Name</FormLabel>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-row items-end gap-1">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="">
           <FormField
             control={form.control}
             name={'name'}
@@ -58,11 +58,11 @@ export default function NameChanger() {
               </FormItem>
             )}
           />
-          <Button className="mt-4" type="submit">
-            submit
+          <Button className="mt-4" type="submit" variant={"secondary"}>
+            change
           </Button>
         </form>
       </Form>
-    </>
+    </div>
   )
 }

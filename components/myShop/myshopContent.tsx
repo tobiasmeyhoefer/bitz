@@ -1,42 +1,11 @@
-'use client'
-
-import { useEffect, useState } from 'react'
 import { CardWithImage } from '@/components/ui/cardWithImage'
 import { getProductsOwned } from '@/lib/productaction'
-import { ProductType, MyShopProps } from '@/lib/types'
+import { getUser } from '@/lib/useraction'
 
-const MyShopContent = (props: MyShopProps) => {
-  const [products, setProducts] = useState<ProductType[]>([])
-  useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const result = await getProductsOwned(props.userId)
-        if (result) {
-          const checkedResults: ProductType[] = result.map((item) => ({
-            id: item.id,
-            title: item.title,
-            description: item.description ?? '',
-            price: item.price,
-            quantity: item.quantity,
-            sellerId: item.sellerId,
-            createdAt: item.createdAt,
-            imageUrl1: item.imageUrl1,
-            imageUrl2: item.imageUrl2,
-            imageUrl3: item.imageUrl3,
-            imageUrl4: item.imageUrl4,
-            imageUrl5: item.imageUrl5,
-            stripeId: item.stripeId ?? "",
-            paymentUrl: item.paymentLink ?? ""
-          }))
-          setProducts(checkedResults)
-        }
-      } catch (error) {
-        console.error('Fehler beim Laden der Daten:', error)
-      }
-    }
-
-    getProducts()
-  }, [props.userId])
+const MyShopContent = async () => {
+  const users = await getUser()
+  const user = users?.[0]
+  const products = await getProductsOwned(user!.id)
 
   return (
     <div
@@ -44,11 +13,11 @@ const MyShopContent = (props: MyShopProps) => {
     >
       {
         <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
-          {products.map((p, index) => (
+          {products?.map((p, index) => (
             <CardWithImage
               key={`pr-${index}`}
               title={p.title}
-              desc={p.description}
+              desc={p.description!}
               imgUrl1={p.imageUrl1}
               className="mx-[5px] my-[0.5rem]"
               productID={p.id}

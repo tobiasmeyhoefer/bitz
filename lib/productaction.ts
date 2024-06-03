@@ -38,7 +38,7 @@ export async function getProductsOwned(userId: string) {
 }
 
 export async function addProduct(values: ProductType, imageUrls: string[]) {
-  let { title, description, price, quantity, category } = values
+  let { title, description, price, category, isDirectlyBuyable } = values
   const session = await auth()
   const id = session?.user?.id
   const created = new Date(Date.now())
@@ -49,30 +49,42 @@ export async function addProduct(values: ProductType, imageUrls: string[]) {
 
   if (id) {
     const user = await getUserById(id)
-    const product = await db.insert(products).values({
-      title: title,
-      description: description,
-      price: price,
-      quantity: quantity,
-      category: category,
-      sellerId: id,
-      location: user[0].location ?? null,
-      createdAt: created,
-      imageUrl1: imageUrls[0],
-      imageUrl2: imageUrls[1],
-      imageUrl3: imageUrls[2],
-      imageUrl4: imageUrls[3],
-      imageUrl5: imageUrls[4],
-      // stripeId: stripeId,
-      // paymentLink: paymentLink
-    }).returning()
+    const product = await db
+      .insert(products)
+      .values({
+        title: title,
+        description: description,
+        price: price,
+        category: category,
+        sellerId: id,
+        location: user[0].location ?? null,
+        createdAt: created,
+        imageUrl1: imageUrls[0],
+        imageUrl2: imageUrls[1],
+        imageUrl3: imageUrls[2],
+        imageUrl4: imageUrls[3],
+        imageUrl5: imageUrls[4],
+        isDirectlyBuyable: isDirectlyBuyable,
+        isSold: false
+        // stripeId: stripeId,
+        // paymentLink: paymentLink
+      })
+      .returning()
     // product[0].id
-    const {stripeId, paymentLink} = await addProductStripe(title, description ?? '', price, imageUrls, product[0].id)
-    await db.update(products).set({paymentLink: paymentLink, stripeId: stripeId}).where(eq(products.id, product[0].id))
+    const { stripeId, paymentLink } = await addProductStripe(
+      title,
+      description ?? '',
+      price,
+      imageUrls,
+      product[0].id,
+    )
+    await db
+      .update(products)
+      .set({ paymentLink: paymentLink, stripeId: stripeId })
+      .where(eq(products.id, product[0].id))
   }
-
+  revalidatePath('/myshop')
   // const {stripeId, paymentLink} = await addProductStripe(title, description ?? '', price, imageUrls)
-
 }
 
 // Delete function requiring productId as string
@@ -92,7 +104,7 @@ export async function deleteProduct(productId: string) {
     }
   }
   await db.delete(products).where(eq(products.id, productId))
-  redirect('/myShop')
+  revalidatePath('/myShop')
 }
 
 // Update function requiring productData as

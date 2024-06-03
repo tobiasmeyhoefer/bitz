@@ -152,7 +152,7 @@ export default function PictureChanger({
   }
 
   return (
-    <>
+    <div className='mt-6'>
       <Form {...form}>
         <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
@@ -188,11 +188,11 @@ export default function PictureChanger({
               />
             </div>
           )}
-          <Button className="mt-4 border-2" type="submit">
+          <Button className="mt-4" type="submit" variant={"secondary"}>
             {submitTitle}
           </Button>
         </form>
       </Form>
-    </>
+    </div>
   )
 }

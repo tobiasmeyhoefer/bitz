@@ -20,7 +20,7 @@ export function SignOut(props: SignOutProps) {
     >
       <Button
         className={cn(
-          'h-fit bg-transparent p-0 text-black shadow-none hover:bg-transparent hover:text-black ',
+          'h-fit w-full bg-transparent p-0 text-black shadow-none hover:bg-transparent',
           props.className,
         )}
         type="submit"
