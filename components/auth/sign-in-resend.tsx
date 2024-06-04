@@ -19,6 +19,7 @@ export function SignInResend() {
       }}
     >
       <Input className="h-[60px] w-full p-4" type="email" name="email" placeholder="john@doe.com" />
+      <p className="h-2 w-full px-2 text-start"> Enter your Name</p>
       <Input
         className="h-[60px] w-full p-4"
         type="text"

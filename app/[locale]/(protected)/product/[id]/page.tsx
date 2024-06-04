@@ -44,7 +44,11 @@ export default function Page({
       <div className="flex flex-col ">
         <Button
           variant="outline"
-          className=" fixed bottom-6 left-8 md:left-14 lg:left-8 lg:top-36 xl:left-24 2xl:left-28 2xl:top-40"
+          className={
+            productInfo.isOwner
+              ? 'fixed bottom-6 left-8 md:left-14 lg:left-8 lg:top-36 xl:left-24 2xl:left-28 2xl:top-40'
+              : 'md: fixed bottom-6 left-8 block md:left-14 lg:left-8 lg:top-36 xl:left-24 2xl:left-28 2xl:top-40'
+          }
         >
           <Link href={backButtonHref}> ⏎ </Link>
         </Button>
