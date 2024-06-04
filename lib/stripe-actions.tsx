@@ -110,7 +110,7 @@ export async function createTransaction(
   revalidatePath('/conversations')
 }
 
-export async function handleCompletedCheckoutSession(event: Stripe.CheckoutSessionCompletedEvent) {
+export async function handleCompletedCheckoutSession(event: Stripe.ChargeSucceededEvent) {
   try {
     const sessionWithLineItems = await stripe.checkout.sessions.retrieve(
       (event.data.object as any).id,
