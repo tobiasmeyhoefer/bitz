@@ -6,7 +6,7 @@ import ProductInfoCard from '../productInfoCard'
 import { useTranslations } from 'next-intl'
 import { getUser } from '@/lib/useraction'
 import { createCheckoutSession, productHasCheckoutSessionOpened } from '@/lib/stripe-actions'
-import { redirect } from '@/navigation'
+import { Link, redirect } from '@/navigation'
 import { redirect as red } from 'next/navigation'
 
 export default function Page({
@@ -37,20 +37,29 @@ export default function Page({
     image: t('image'),
     of: t('of'),
   }
+  const backButtonHref = productInfo.isOwner ? `/myshop` : '/browse'
 
   return (
     <>
-      <div
-        id="product-info-container"
-        className="flex min-h-[calc(100vh-80px)] w-screen flex-col items-center  lg:flex-row lg:justify-around"
-      >
-        <ProductImageCarousel
-          translations={carouselTranslations}
-          images={images}
-          className="h-[50vh] lg:h-[60vh]"
-          sellerId={productInfo.sellerId}
-        />
-        <ProductInfoCard productInfo={productInfo} />
+      <div className="flex flex-col ">
+        <Button
+          variant="outline"
+          className=" fixed bottom-6 left-8 md:left-14 lg:left-8 lg:top-36 xl:left-24 2xl:left-28 2xl:top-40"
+        >
+          <Link href={backButtonHref}> ⏎ </Link>
+        </Button>
+        <div
+          id="product-info-container"
+          className="flex min-h-[calc(100vh-80px)] w-screen flex-col items-center  lg:flex-row lg:justify-around"
+        >
+          <ProductImageCarousel
+            translations={carouselTranslations}
+            images={images}
+            className="h-[50vh] lg:h-[60vh]"
+            sellerId={productInfo.sellerId}
+          />
+          <ProductInfoCard productInfo={productInfo} />
+        </div>
       </div>
       {/* <form
         action={async () => {
