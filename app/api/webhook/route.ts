@@ -21,8 +21,10 @@ export async function POST(req: NextRequest) {
   try {
     let event = stripe.webhooks.constructEvent(payload, sig!, secret!)
 
+    console.log(event)
+
     switch (event.type) {
-      case 'checkout.session.completed':
+      case 'charge.succeeded':
         console.log('checkout.session.completed')
         const savedSession = await handleCompletedCheckoutSession(event)
         break
