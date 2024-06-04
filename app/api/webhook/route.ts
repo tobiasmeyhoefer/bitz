@@ -10,8 +10,8 @@ export async function POST(req: NextRequest) {
 
   const sig = req.headers.get("Stripe-Signature");
 
-  const dateTime = new Date(res?.created * 1000).toLocaleDateString();
-  const timeString = new Date(res?.created * 1000).toLocaleDateString();
+  // const dateTime = new Date(res?.created * 1000).toLocaleDateString();
+  // const timeString = new Date(res?.created * 1000).toLocaleDateString();
 
   const secret = process.env.NODE_ENV === "production" ? process.env.STRIPE_WEBHOOK_SECRET : process.env.STRIPE_WEBHOOK_SECRET_LOCAL
 

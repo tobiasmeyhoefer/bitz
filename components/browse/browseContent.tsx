@@ -6,7 +6,6 @@ import { BrowseContentProps, SearchBarProps, RevealOnScrollProps, ProductType } 
 import { CardWithImage } from '../ui/cardWithImage'
 import { SlClose } from 'react-icons/sl'
 import { getProductsBrowse } from '@/lib/productaction'
-import RevealOnScroll from '../navigation/revealOnScroll'
 
 const BrowseContent = (props: BrowseContentProps) => {
   const [searchValue, setSearchValue] = useState('')
@@ -33,7 +32,9 @@ const BrowseContent = (props: BrowseContentProps) => {
             imageUrl4: item.imageUrl4,
             imageUrl5: item.imageUrl5,
             stripeId: item.stripeId ?? "",
-            paymentUrl: item.paymentLink ?? ""
+            paymentUrl: item.paymentLink ?? "",
+            isDirectlyBuyable: item.isDirectlyBuyable ?? false,
+            isSold: item.isSold ?? false
           }))
           setProducts(checkedResults)
         }
