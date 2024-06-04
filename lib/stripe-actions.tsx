@@ -116,6 +116,8 @@ export async function handleCompletedCheckoutSession(event: Stripe.CheckoutSessi
       (event.data.object as any).id,
       { expand: ['line_items'] },
     )
+    console.log('skr')
+    console.log(sessionWithLineItems)
     const lineItems = sessionWithLineItems.line_items
     if (!lineItems) return false
     // console.log(lineItems)
@@ -125,9 +127,9 @@ export async function handleCompletedCheckoutSession(event: Stripe.CheckoutSessi
     const product = await stripe.products.retrieve(lineItems.data[0].price?.product as string)
     // console.log(product)
 
-    console.log("-----------")
+    console.log('-----------')
     console.log(product.metadata.productId)
-    console.log("-----------")
+    console.log('-----------')
 
     changeProductStateToSold(product.metadata.productId)
     await savePayment(product.metadata.productId)
