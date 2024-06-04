@@ -71,7 +71,7 @@
     "yousure": "This will permanently delete your product from the database and remove your data from our servers. This action cannot be undone. "
   },
   "Settings": {
-    "title": "Settings",
+    "title": "SETTINGS",
     "city": "city",
     "postcode": "postcode",
     "imageChangeTitle": "change Profilepicture",

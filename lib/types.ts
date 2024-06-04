@@ -68,6 +68,8 @@ type ProductType = {
   imageUrl3?: string | null
   imageUrl4?: string | null
   imageUrl5?: string | null
+  isDirectlyBuyable?: boolean
+  isSold?: boolean
   stripeId?: string,
   paymentUrl?: string
 }

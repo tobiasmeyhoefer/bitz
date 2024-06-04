@@ -31,8 +31,10 @@ const BrowseContent = (props: BrowseContentProps) => {
             imageUrl3: item.imageUrl3,
             imageUrl4: item.imageUrl4,
             imageUrl5: item.imageUrl5,
-            stripeId: item.stripeId ?? '',
-            paymentUrl: item.paymentLink ?? '',
+            stripeId: item.stripeId ?? "",
+            paymentUrl: item.paymentLink ?? "",
+            isDirectlyBuyable: item.isDirectlyBuyable ?? false,
+            isSold: item.isSold ?? false
           }))
           setProducts(checkedResults)
         }

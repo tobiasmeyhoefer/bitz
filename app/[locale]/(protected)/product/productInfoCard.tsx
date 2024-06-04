@@ -154,23 +154,25 @@ export default function ProductInfoCard(props: ProductInfoType) {
               Kaufen
             </Button>
           </form>
-          <form
-            action={async () => {
-              'use server'
-              const openedCheckoutSession = await productHasCheckoutSessionOpened(product.id!)
-              if (!openedCheckoutSession) {
-                const user = await getUser()
-                await createCheckoutSession(user![0].id, product.id!)
-                revalidatePath('/transactions')
-                console.log(product.paymentUrl)
-                red(product.paymentUrl!)
-              }
-            }}
-          >
-            <Button className="fixed bottom-6 right-6" type="submit">
-              Direkt Kaufen
-            </Button>
-          </form>
+          {product.isDirectlyBuyable ? (
+            <form
+              action={async () => {
+                'use server'
+                const openedCheckoutSession = await productHasCheckoutSessionOpened(product.id!)
+                if (!openedCheckoutSession) {
+                  const user = await getUser()
+                  await createCheckoutSession(user![0].id, product.id!)
+                  revalidatePath('/transactions')
+                  console.log(product.paymentUrl)
+                  red(product.paymentUrl!)
+                }
+              }}
+            >
+              <Button className="fixed bottom-6 right-6" type="submit">
+                Direkt Kaufen
+              </Button>
+            </form>
+          ) : null}
         </div>
       )}
     </>

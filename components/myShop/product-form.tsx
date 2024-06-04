@@ -76,7 +76,7 @@ const formSchema = z.object({
     .max(50)
     .refine((value) => !/#/.test(value)),
   price: z.coerce.number().safe().positive(),
-  quantity: z.coerce.number().safe().positive(),
+  isDirectlyBuyable: z.boolean().default(false).optional(),
   description: z
     .string()
     .min(1, { message: minError })
@@ -140,13 +140,6 @@ export function ProductForm({
     toastDescription,
     submitTitle,
   } = translations
-  //muss eventuell um Image url oder so ersetzt werden
-  // const [data, setData] = useState<ProductType>({
-  //   title: '',
-  //   description: '',
-  //   price: 0,
-  //   quantity: 0,
-  // })
 
   useEffect(() => {
     const getProduct = async () => {
@@ -168,11 +161,23 @@ export function ProductForm({
       price: 0,
       quantity: 1,
       category: '',
+      isDirectlyBuyable: true,
       images: null,
     },
   })
 
   async function onSubmit(values: ProductType) {
+    if (compressedFiles?.length === 0) {
+      toast({
+        title: 'Error',
+        description: 'at least one image pls',
+      })
+      setPreviewUrls(null)
+      setFiles(null)
+      setCompressedFiles(null)
+      return
+    }
+
     if (locationError) {
       setcategoryValue('')
       setPreviewUrls(null)
@@ -241,6 +246,8 @@ export function ProductForm({
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files ?? null
     setFiles(files)
+    console.log('test')
+    console.log(files)
     if (previewUrls) {
       previewUrls.map((url) => URL.revokeObjectURL(url))
     }
@@ -256,6 +263,32 @@ export function ProductForm({
     } else {
       setPreviewUrls(null)
     }
+  }
+
+  const handleDelete = async (index: number) => {
+    const newPreviewUrls = previewUrls!.filter((_, i) => i !== index)
+    setPreviewUrls(newPreviewUrls)
+
+    const filesArray = Array.from(files!)
+    // console.log(files)
+    filesArray.splice(index, 1)
+    const dataTransfer = new DataTransfer()
+    filesArray.forEach((file) => dataTransfer.items.add(file))
+
+    const compFiles = await compressImages(Array.from(dataTransfer.files))
+    const urlos = compFiles.map((file) => URL.createObjectURL(file))
+
+    setFiles(dataTransfer.files)
+    setPreviewUrls(urlos)
+    setCompressedFiles(compFiles)
+
+    // @ts-ignore
+    form.setValue('images', dataTransfer!.files!)
+
+    // console.log(dataTransfer.files)
+    // setFiles(dataTransfer.files)
+    // const newFiles = files.filter((_, i) => i !== index)
+    // setFiles(newFiles)
   }
 
   // Funktion zur Bildkomprimierung
@@ -319,7 +352,7 @@ export function ProductForm({
 
   return (
     <>
-      <Card className=" p-10">
+      <Card className="w-full max-w-[800px] p-10">
         {locationError && (
           <div className="flex flex-row items-center gap-2">
             <p className="font-medium text-red-500">Error: Location gotta be set.</p>
@@ -352,7 +385,7 @@ export function ProductForm({
                 <FormItem>
                   <FormLabel> {description}</FormLabel>
                   <FormControl>
-                    <Textarea placeholder={description} {...field} />
+                    <Textarea className="h-24" placeholder={description} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -363,7 +396,7 @@ export function ProductForm({
               name={'price'}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{price}</FormLabel>
+                  <FormLabel className="leading-0">{price}</FormLabel>
                   <FormControl>
                     <Input type="number" placeholder="price" {...field} />
                   </FormControl>
@@ -371,7 +404,7 @@ export function ProductForm({
                 </FormItem>
               )}
             />
-            <FormField
+            {/* <FormField
               control={form.control}
               name={'quantity'}
               render={({ field }) => (
@@ -383,33 +416,13 @@ export function ProductForm({
                   <FormMessage />
                 </FormItem>
               )}
-            />
-            {/* <FormField
-              control={form.control}
-              name={'isDirectlyBuyable'}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{quantity}</FormLabel>
-                  <FormControl>
-                    <Checkbox
-                      checked={field.value?.includes(item.id)}
-                      onCheckedChange={(checked) => {
-                        return checked
-                          ? field.onChange([...field.value, item.id])
-                          : field.onChange(field.value?.filter((value) => value !== item.id))
-                      }}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
             /> */}
             <FormField
               control={form.control}
               name="category"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
-                  <FormLabel>{category}</FormLabel>
+                  <FormLabel className="leading-0">{category}</FormLabel>
                   <Popover open={open} onOpenChange={setOpen}>
                     <PopoverTrigger asChild>
                       <Button
@@ -462,6 +475,22 @@ export function ProductForm({
             />
             <FormField
               control={form.control}
+              name={'isDirectlyBuyable'}
+              render={({ field }) => (
+                <FormItem className='flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4'>
+                  <FormLabel>is directly buyable</FormLabel>
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
               name="images"
               render={({ field: { value, onChange, ...fieldProps } }) => (
                 <FormItem>
@@ -485,15 +514,23 @@ export function ProductForm({
             />
             {previewUrls && files && (
               <div className="flex flex-wrap">
-                {previewUrls.map((url) => (
-                  <Image
-                    src={url}
-                    key={url}
-                    alt="Selected files"
-                    width={150}
-                    height={150}
-                    className="border"
-                  />
+                {previewUrls.map((url, index) => (
+                  <div className="relative" key={url}>
+                    <Image
+                      src={url}
+                      key={url}
+                      alt="Selected files"
+                      width={150}
+                      height={150}
+                      className="border"
+                    />
+                    <Button
+                      className="absolute bottom-1 right-1"
+                      onClick={() => handleDelete(index)}
+                    >
+                      Delete
+                    </Button>
+                  </div>
                 ))}
               </div>
             )}
