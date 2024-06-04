@@ -104,5 +104,9 @@
   "LocaleSwitcher": {
     "label": "change language",
     "locale": "{locale, select, de {🇩🇪 Deutsch} en {🇺🇸 English} other {Unbekannt}}"
+  },
+  "Conversations": {  
+    "title": "Conversations",
+    "empty": "There are no opened conversations"
   }
 }
