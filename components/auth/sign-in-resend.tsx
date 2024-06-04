@@ -28,7 +28,7 @@ export function SignInResend() {
         pattern="^[a-zA-ZäöüÄÖÜß\s]*$"
         required
       />
-      <Button className=" h-[60px] w-full" variant={'default'} type="submit">
+      <Button className="bg-card-button h-[60px] w-full" type="submit">
         {t('loginButton')}
       </Button>
     </form>
