@@ -5,25 +5,24 @@ import { Button } from './button'
 
 export default function ScrollToTopButton() {
   const [showButton, setShowButton] = useState(false)
+  const [scrollY, setScrollY] = useState(0)
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 100) {
-        setShowButton(true)
-        console.log("show")
-      } else {
-        setShowButton(false)
-        console.log("hide")
-      }
-    }
-
     window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll) 
+  }, [])
 
-    // Cleanup function to remove the event listener
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
+  const handleScroll = () => {
+    setScrollY(window.scrollY)
+    // console.log(window.scrollY)
+    if (window.scrollY > 10) { 
+      setShowButton(true)
+      console.log("show")
+    } else {
+      setShowButton(false)
+      console.log("hide")
     }
-  }, []) // Empty dependency array to ensure this runs only once on mount
+  }
 
   const scrollUp = () => {
     window.scrollTo({
@@ -33,7 +32,7 @@ export default function ScrollToTopButton() {
   }
 
   return (
-    // showButton && 
+    showButton && 
     (
       <Button
         onClick={scrollUp}

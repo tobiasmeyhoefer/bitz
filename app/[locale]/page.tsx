@@ -65,15 +65,21 @@ export default async function Home() {
         <h2 className="mb-8 text-center text-4xl font-bold">{t('secondSectionTitle')}</h2>
         <div className="mt-4 flex flex-col items-center space-y-8 md:flex-row md:space-x-16 md:space-y-0">
           <div className="flex flex-col items-center">
-            <LuShieldCheck title="Shield Icon with a check Symbol inside" className="h-20 w-20" />
+            <LuShieldCheck 
+              title="Shield Icon with a check Symbol inside" 
+              className="h-20 w-20" />
             <p className="mt-2 text-4xl">{t('security')}</p>
           </div>
           <div className="color flex flex-col items-center">
-            <LuCpu title="A simplified CPU picture" className="h-20 w-20" />
+            <LuCpu 
+              title="A simplified CPU picture" 
+              className="h-20 w-20" />
             <p className="mt-2 text-center text-4xl">{t('focus')}</p>
           </div>
           <div className="flex flex-col items-center">
-            <LuPaintbrush title="A thick Paintbrush" className="h-20 w-20" />
+            <LuPaintbrush 
+              title="A thick Paintbrush" 
+              className="h-20 w-20" />
             <p className="mt-2 text-4xl">{t('design')}</p>
           </div>
         </div>
@@ -85,15 +91,21 @@ export default async function Home() {
         <h2 className="mb-8 text-4xl font-bold">{t('thirdSectionTitle')}</h2>
         <div className="relative grid w-11/12 grid-cols-3 grid-rows-3 items-center justify-center">
           <div className="col-start-2 row-start-1 flex flex-col items-center justify-center text-center">
-            <LuStore title="A simplified Icon of a Store" className="h-20 w-20" />
+            <LuStore 
+              title="A simplified Icon of a Store" 
+              className="h-20 w-20" />
             <p className="mt-2 text-3xl">{t('createShop')}</p>
           </div>
           <div className="col-start-2 row-start-3 flex flex-col items-center justify-center text-center">
-            <FaRegHandshake title="Two hands in a Line forming a handshake" className="h-20 w-20" />
+            <FaRegHandshake 
+              title="Two hands in a Line forming a handshake" 
+              className="h-20 w-20" />
             <p className="mt-2 text-3xl">{t('sell')}</p>
           </div>
           <div className="col-start-3 row-start-2 flex flex-col items-center justify-center text-center">
-            <LuShoppingCart title="Simple Shopping Card in Sideview" className="h-20 w-20" />
+            <LuShoppingCart 
+              title="Simple Shopping Card in Sideview" 
+              className="h-20 w-20" />
             <p className="mt-2 text-3xl">{t('buy')}</p>
           </div>
           <div className="col-start-1 row-start-2 flex flex-col items-center justify-center text-center">
