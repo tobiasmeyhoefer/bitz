@@ -125,6 +125,10 @@ export async function handleCompletedCheckoutSession(event: Stripe.CheckoutSessi
     const product = await stripe.products.retrieve(lineItems.data[0].price?.product as string)
     // console.log(product)
 
+    console.log("-----------")
+    console.log(product.metadata.productId)
+    console.log("-----------")
+
     changeProductStateToSold(product.metadata.productId)
     await savePayment(product.metadata.productId)
     await deleteCheckoutSession(product.metadata.productId)
