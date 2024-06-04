@@ -46,16 +46,7 @@
   }
 
   .dark {
-    /* --background: 0, 0%, 10%;
-    --foreground: 60 9.1% 97.8%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 20 14.3% 4.1%;
-
-    --primary: 60 9.1% 97.8%;
-    --primary-foreground: 24 9.8% 10%; */
-
-    --background: 0 0% 10%;
+    --background: 0 0% 7%;
     --foreground: 0 0% 90%;
 
     --card: 0 0% 20%;

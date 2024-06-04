@@ -477,13 +477,10 @@ export function ProductForm({
               control={form.control}
               name={'isDirectlyBuyable'}
               render={({ field }) => (
-                <FormItem className='flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4'>
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-3">
                   <FormLabel>is directly buyable</FormLabel>
                   <FormControl>
-                    <Checkbox
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
+                    <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

@@ -65,7 +65,7 @@ export async function addProduct(values: ProductType, imageUrls: string[]) {
         imageUrl4: imageUrls[3],
         imageUrl5: imageUrls[4],
         isDirectlyBuyable: isDirectlyBuyable,
-        isSold: false
+        isSold: false,
         // stripeId: stripeId,
         // paymentLink: paymentLink
       })
@@ -84,6 +84,7 @@ export async function addProduct(values: ProductType, imageUrls: string[]) {
       .where(eq(products.id, product[0].id))
   }
   revalidatePath('/myshop')
+  redirect('/myshop')
   // const {stripeId, paymentLink} = await addProductStripe(title, description ?? '', price, imageUrls)
 }
 
