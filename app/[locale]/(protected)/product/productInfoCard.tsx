@@ -34,7 +34,7 @@ export default function ProductInfoCard(props: ProductInfoType) {
   }
 
   const getDate = (
-    timestamp: any,
+    timestamp: Date | string,
     dateFirst: boolean,
     className?: string,
   ): JSX.Element | undefined => {
@@ -113,7 +113,7 @@ export default function ProductInfoCard(props: ProductInfoType) {
         <ProductInfoCardEditable
           productInfo={product}
           translations={editableCardTranslations}
-          date={getDate(product.createdAt, false, 'text-right')}
+          date={getDate(product.createdAt!, false, 'text-right')}
           locale={locale}
         />
       ) : (
@@ -139,7 +139,7 @@ export default function ProductInfoCard(props: ProductInfoType) {
                   {tProduct('quantity')}: {product.quantity}
                 </div>
               </div>
-              <div>{getDate(product.createdAt, true, 'text-right')}</div>
+              <div>{getDate(product.createdAt!, true, 'text-right')}</div>
             </CardContent>
           </Card>
           <form

@@ -26,14 +26,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet'
-
-
-type NavbarItemLinkProps = {
-  linkTo: string
-  text?: string
-  icon?: any
-  className?: string
-}
+import { NavbarItemDropdownProps, NavbarItemLinkProps, NavMenuDrawerProps } from '@/lib/types'
 
 type NavLoginProps = {
   text: string
@@ -66,14 +59,6 @@ const NavLoginLink = ({ text }: NavLoginProps) => {
       </Button>
     )
   )
-}
-
-type NavbarItemDropdownProps = {
-  userImgSrc?: string | null
-  signOut?: any
-  signOutLinkText?: string
-  settingsLinkText?: string
-  favoritesLinkText?: string
 }
 
 const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
@@ -126,7 +111,7 @@ const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
   )
 }
 
-const NavMenuDrawer = (props: any) => {
+const NavMenuDrawer = (props: NavMenuDrawerProps) => {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const pathname = usePathname()
 
@@ -145,14 +130,14 @@ const NavMenuDrawer = (props: any) => {
         </Button>
       </DrawerTrigger>
       <DrawerContent className="max-w-smd mx-auto w-full border-0 bg-primary-foreground text-primary">
-        {props.menuItems.map((item: any, index: number) => {
+        {props.menuItems.map((item: JSX.Element, index: number) => {
           if (pathname === item.props.linkTo)
             item.props.className = cn(item.props.className, ' no-underline')
           return (
             <div
               className={`flex justify-center hover:bg-slate-100 ${index === 0 && `rounded-t-xl`} ${pathname === item.props.linkTo && 'cursor-default bg-slate-100 text-primary no-underline'}`}
               onClick={() => {
-                if(index !== 0) {
+                if (index !== 0) {
                   setDrawerOpen(false)
                 }
               }}

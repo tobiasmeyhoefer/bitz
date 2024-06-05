@@ -13,9 +13,9 @@ import Image from 'next/image'
 import { UpdateImage } from '@/components/myShop/update-image'
 import { useEffect, useState } from 'react'
 import { getUser } from '@/lib/useraction'
-import { auth } from '@/auth'
+import { ProductImageCarouselProps } from '@/lib/types'
 
-export function ProductImageCarousel(props: any) {
+export function ProductImageCarousel(props: ProductImageCarouselProps) {
   const [api, setApi] = useState<CarouselApi>()
   const [current, setCurrent] = useState(0)
   const [isOwner, setIsOwner] = useState(false)

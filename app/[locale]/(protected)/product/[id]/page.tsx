@@ -19,8 +19,8 @@ export default function Page({
   const t = useTranslations('Product')
   // const userId = atob(params.id)
 
+  // TODO:add type after fetching product
   const productInfo: any = JSON.parse(atob(searchParams.p))
-  // console.log(productInfo)
 
   const unfilteredImgs = [
     productInfo.imageUrl1,
@@ -31,7 +31,6 @@ export default function Page({
   ]
 
   let images = unfilteredImgs.filter((image) => image)
-  //let images = ['/test_img.jpg', '/test_img.jpg', '/test_img.jpg']
 
   const carouselTranslations = {
     image: t('image'),

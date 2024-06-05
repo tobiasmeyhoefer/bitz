@@ -23,9 +23,6 @@ import { ProductType } from '@/lib/types'
 import { updateProduct } from '@/lib/productaction'
 import { Link } from '@/navigation'
 
-// type ProductInfoEditType = {
-//   productInfo: any
-// }
 const minError = 'Eingabe erfordert'
 const FormSchema = z.object({
   title: z
