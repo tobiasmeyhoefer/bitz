@@ -1,13 +1,8 @@
 import { Button } from '@/components/ui/button'
-import { createConversation } from '@/lib/conversations-actions'
-import { revalidatePath } from 'next/cache'
 import { ProductImageCarousel } from '../productImgCarousel'
 import ProductInfoCard from '../productInfoCard'
 import { useTranslations } from 'next-intl'
-import { getUser } from '@/lib/useraction'
-import { createCheckoutSession, productHasCheckoutSessionOpened } from '@/lib/stripe-actions'
-import { Link, redirect } from '@/navigation'
-import { redirect as red } from 'next/navigation'
+import { Link } from '@/navigation'
 
 export default function Page({
   params,
