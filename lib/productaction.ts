@@ -10,7 +10,7 @@ import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import crypto from 'crypto'
 import { ProductType } from './types'
 import { revalidatePath } from 'next/cache'
-import { addProductStripe } from './stripe-actions'
+import { addProductStripe, setProductNotActive, updateProductStripe } from './stripe-actions'
 import { redirect } from '@/navigation'
 
 export async function getProductsBrowse() {
@@ -105,13 +105,15 @@ export async function deleteProduct(productId: string) {
     }
   }
   await db.delete(products).where(eq(products.id, productId))
+  await setProductNotActive(product![0].stripeId!)
   revalidatePath('/myShop')
 }
 
 // Update function requiring productData as
-export async function updateProduct(productId: string, values: ProductType) {
+export async function updateProduct(productId: string, values: ProductType) {//#endregion
   const existingProduct = await getProductById(productId)
   if (existingProduct) {
+    console.log("-----------")
     const { title, description, price, quantity } = values
     await db
       .update(products)
@@ -122,6 +124,7 @@ export async function updateProduct(productId: string, values: ProductType) {
         quantity: quantity || existingProduct[0].quantity,
       })
       .where(eq(products.id, productId))
+    await updateProductStripe(existingProduct[0].stripeId!, values)
   } else {
     throw new Error('Product not found or unauthorized to update.')
   }

@@ -6,7 +6,7 @@ import Cube from './cube'
 
 export default function Scene() {
   return (
-    <Canvas id="myCanvas" dpr={[1, 2]} camera={{ fov: 120 }}>
+    <Canvas id="myCanvas" dpr={[1, 2]} camera={{ fov: 130 }}>
       {/* <directionalLight position={[-5, -5, -5]} intensity={2000} /> */}
       <OrbitControls enableZoom={false} />
       <ambientLight position={[-5, -5, -5]} intensity={5} />

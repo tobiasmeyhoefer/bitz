@@ -75,7 +75,7 @@ export default function ProductInfoCardEditable(props: any) {
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     setProduct(data)
-    updateProduct(product.id!, data)
+    updateProduct(initialProduct.id!, data)
     toast({
       title: 'Changes applied',
     })
