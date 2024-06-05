@@ -3,31 +3,22 @@ import { createConversation } from '@/lib/conversations-actions'
 import { revalidatePath } from 'next/cache'
 import { ProductImageCarousel } from '../productImgCarousel'
 import ProductInfoCard from '../productInfoCard'
-import { useTranslations } from 'next-intl'
-import { getUser } from '@/lib/useraction'
-import { createCheckoutSession, productHasCheckoutSessionOpened } from '@/lib/stripe-actions'
-import { redirect } from '@/navigation'
-import { redirect as red } from 'next/navigation'
+import { getTranslations } from 'next-intl/server'
+import { getProductById } from '@/lib/productaction'
 
-export default function Page({
-  params,
-  searchParams,
-}: {
-  params: { id: string }
-  searchParams: { p: string }
-}) {
-  const t = useTranslations('Product')
-  // const userId = atob(params.id)
+export default async function Page({ params }: { params: { id: string } }) {
+  const t = await getTranslations('Product')
+  const productId = params.id
 
-  // TODO:add type after fetching product
-  const productInfo: any = JSON.parse(atob(searchParams.p))
+  const fetchedProduct: any = await getProductById(productId)
+  const product = fetchedProduct[0]
 
   const unfilteredImgs = [
-    productInfo.imageUrl1,
-    productInfo.imageUrl2,
-    productInfo.imageUrl3,
-    productInfo.imageUrl4,
-    productInfo.imageUrl5,
+    product.imageUrl1,
+    product.imageUrl2,
+    product.imageUrl3,
+    product.imageUrl4,
+    product.imageUrl5,
   ]
 
   let images = unfilteredImgs.filter((image) => image)
@@ -47,9 +38,9 @@ export default function Page({
           translations={carouselTranslations}
           images={images}
           className="h-[50vh] lg:h-[60vh]"
-          sellerId={productInfo.sellerId}
+          sellerId={product.sellerId}
         />
-        <ProductInfoCard productInfo={productInfo} />
+        <ProductInfoCard productInfo={product} />
       </div>
       {/* <form
         action={async () => {

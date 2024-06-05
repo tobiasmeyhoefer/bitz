@@ -110,7 +110,7 @@ export async function createTransaction(
   revalidatePath('/conversations')
 }
 
-export async function handleCompletedCheckoutSession(event: Stripe.ChargeSucceededEvent) {
+export async function handleCompletedCheckoutSession(event: Stripe.CheckoutSessionCompletedEvent) {
   try {
     const sessionWithLineItems = await stripe.checkout.sessions.retrieve(
       (event.data.object as any).id,
@@ -120,12 +120,8 @@ export async function handleCompletedCheckoutSession(event: Stripe.ChargeSucceed
     console.log(sessionWithLineItems)
     const lineItems = sessionWithLineItems.line_items
     if (!lineItems) return false
-    // console.log(lineItems)
-    // console.log('-----')
-    // console.log(lineItems.data[0].price)
 
     const product = await stripe.products.retrieve(lineItems.data[0].price?.product as string)
-    // console.log(product)
 
     console.log('-----------')
     console.log(product.metadata.productId)
