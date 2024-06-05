@@ -42,16 +42,6 @@ export default function Page({
   return (
     <>
       <div className="flex flex-col ">
-        <Button
-          variant="outline"
-          className={
-            productInfo.isOwner
-              ? 'fixed bottom-6 left-8 md:left-14 lg:left-8 lg:top-36 xl:left-24 2xl:left-28 2xl:top-40'
-              : 'md: fixed bottom-6 left-8 block md:left-14 lg:left-8 lg:top-36 xl:left-24 2xl:left-28 2xl:top-40'
-          }
-        >
-          <Link href={backButtonHref}> ⏎ </Link>
-        </Button>
         <div
           id="product-info-container"
           className="flex min-h-[calc(100vh-80px)] w-screen flex-col items-center  lg:flex-row lg:justify-around"
@@ -64,6 +54,17 @@ export default function Page({
           />
           <ProductInfoCard productInfo={productInfo} />
         </div>
+        <Button
+          variant="outline"
+          className={
+            productInfo.isOwner
+              ? // ? 'fixed bottom-6 left-8 md:left-14 lg:left-8 lg:top-36 xl:left-24 2xl:left-28 2xl:top-40'
+                'ml-12 mt-4 w-16 lg:absolute lg:top-36 xl:left-10 2xl:left-28 2xl:top-40'
+              : 'md: fixed bottom-6 left-8  md:left-14 lg:left-8 lg:top-36 xl:left-24 2xl:left-28 2xl:top-40'
+          }
+        >
+          <Link href={backButtonHref}> ⏎ </Link>
+        </Button>
       </div>
       {/* <form
         action={async () => {
