@@ -54,7 +54,7 @@ export default function Page({
           className={
             productInfo.isOwner
               ? // ? 'fixed bottom-6 left-8 md:left-14 lg:left-8 lg:top-36 xl:left-24 2xl:left-28 2xl:top-40'
-                'ml-12 mt-4 w-16 lg:absolute lg:top-36 xl:left-10 2xl:left-28 2xl:top-40'
+                '2xl:left-26 xl:left-18 l ml-12 mt-4 w-16 lg:absolute lg:top-36 xl:left-12  xl:top-36 2xl:left-24 2xl:top-36'
               : 'md: fixed bottom-6 left-8  md:left-14 lg:left-8 lg:top-36 xl:left-24 2xl:left-28 2xl:top-40'
           }
         >
