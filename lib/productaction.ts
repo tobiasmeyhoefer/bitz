@@ -2,7 +2,7 @@
 
 import { products, favorites } from '@/schema'
 import { db } from '../db'
-import { eq, ne } from 'drizzle-orm'
+import { eq, ne, sql } from 'drizzle-orm'
 import { auth } from '@/auth'
 import { getUserById } from './useraction'
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3'
@@ -102,7 +102,21 @@ export const getProductsByCategory = async (category: string) => {
     const result = await db
       .select()
       .from(products)
-      .where(eq(products.category, category))
+      .where(eq(products.category, category)) //ilike(products.category, `%${category}%`)   eq(products.category, category)    sql`LOWER(${products.category}) LIKE LOWER('%${category}%')`
+    return result
+  } catch (error) {
+    console.error('Fehler beim Laden der Daten:', error)
+    throw error
+  }
+}
+
+// getter for products with title as param
+export const searchProductsByTitle = async (title: string) => {
+  try {
+    const result = await db
+      .select()
+      .from(products)
+      .where(sql`LOWER(${products.title}) LIKE LOWER(${title})`) // eq(products.title, title)
     return result
   } catch (error) {
     console.error('Fehler beim Laden der Daten:', error)
