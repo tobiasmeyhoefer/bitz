@@ -38,11 +38,7 @@ const BrowseContent = (props: BrowseContentProps) => {
             imageUrl4: item.imageUrl4,
             imageUrl5: item.imageUrl5,
             stripeId: item.stripeId ?? '',
-<<<<<<< HEAD
             paymentLink: item.paymentLink ?? '',
-=======
-            paymentUrl: item.paymentLink ?? '',
->>>>>>> main
             isDirectlyBuyable: item.isDirectlyBuyable ?? false,
             isSold: item.isSold ?? false,
           }))
@@ -100,7 +96,8 @@ const BrowseContent = (props: BrowseContentProps) => {
       } else {
         result = await searchProductsByTitle(title)
       }
-      const checkedResults: ProductType[] = result!.map((item: any) => ({   // ! sollte weg
+      const checkedResults: ProductType[] = result!.map((item: any) => ({
+        // ! sollte weg
         id: item.id,
         title: item.title,
         description: item.description ?? '',
@@ -193,11 +190,7 @@ const BrowseContent = (props: BrowseContentProps) => {
               {/* </RevealOnScroll> */}
             </div>
           ))}
-<<<<<<< HEAD
-          {noSearchResults && <div className="px-4 text-black">Keine Suchergebnisse gefunden</div>}
-=======
           {noSearchResults && <div className=" px-4">Keine Suchergebnisse gefunden</div>}
->>>>>>> main
         </div>
       ) : (
         <div className="flex h-full items-center justify-center">
@@ -319,13 +312,9 @@ const SearchDialog = (
           <>
             <h1 className="px-4 pt-2 text-lg font-medium ">{props.suggestionsTitle}</h1>
             <div className="max-h-[200px] overflow-y-auto">
-<<<<<<< HEAD
               {props.suggestions.map((suggestion, index) => (
                 <div
-                  onClick={() => {
-                    setOpen(false)
-                    props.setSearchValue(suggestion)
-                  }}
+                  onClick={() => handleSuggestionClick(suggestion)}
                   className="rounded- px-8 py-2 hover:rounded-b-lg hover:bg-input"
                   key={`s-${index}`}
                 >
@@ -334,42 +323,20 @@ const SearchDialog = (
               ))}
             </div>
           </>
-=======
-            {props.suggestions.map((suggestion, index) => (
-               <div
-               onClick={() => handleSuggestionClick(suggestion)}
-               className="rounded- px-8 py-2 hover:rounded-b-lg hover:bg-input"
-               key={`s-${index}`}
-             >
-               {suggestion}
-             </div>
-           ))}
-           </div>
-         </>
-
->>>>>>> main
         ) : (
           <div className="max-h-[200px] overflow-y-auto px-4 py-2">
             {filteredSuggestions.length > 0 ? (
               filteredSuggestions.slice(0, 5).map((suggestion, index) => (
                 <div
                   onClick={() => handleSuggestionClick(suggestion)}
-<<<<<<< HEAD
-                  className="rounded- px-8 py-2 text-black hover:rounded-b-lg hover:bg-gray-100"
-=======
                   className="rounded- px-8 py-2  hover:rounded-b-lg hover:bg-gray-100"
->>>>>>> main
                   key={`fs-${index}`}
                 >
                   {suggestion}
                 </div>
               ))
             ) : (
-<<<<<<< HEAD
-              <div className="px-4 text-black">Keine Vorschläge gefunden</div>
-=======
               <div className="px-4 ">Keine Vorschläge gefunden</div>
->>>>>>> main
             )}
           </div>
         )}

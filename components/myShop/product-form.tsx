@@ -128,17 +128,11 @@ export function ProductForm({
 }) {
   const router = useRouter()
   const { toast } = useToast()
-<<<<<<< HEAD
   const [open, setOpen] = React.useState(false)
   const [categoryValue, setcategoryValue] = React.useState('')
   const [locationError, setLocationError] = React.useState(false)
   const [locationErrorMessage, setLocationErrorMessage] = React.useState('')
-=======
-  const [open, setOpen] = useState(false)
-  const [categoryValue, setcategoryValue] = useState('')
-  const [locationError, setLocationError] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
->>>>>>> main
 
   const {
     title,
@@ -260,7 +254,6 @@ export function ProductForm({
         duration: 2200,
       })
     }
-  
   }
 
   const [files, setFiles] = useState<FileList | null>(null)
@@ -366,19 +359,10 @@ export function ProductForm({
     <>
       <Card className="w-full max-w-[800px] p-10">
         {locationError && (
-<<<<<<< HEAD
-          <div className="flex flex-row items-center gap-2">
-            <p className="font-medium text-red-500">Error: {locationErrorMessage}</p>
-            <Link href="/settings">
-              <Button className="h-6 w-12 bg-card-button">
-                <FaPencilAlt />
-              </Button>
-=======
           <div className="mb-2 flex flex-row items-center gap-2">
             <p className="font-medium text-red-400">Error: Location not set</p>
             <Link href="/settings">
               <Button className="h-6 w-12">edit</Button>
->>>>>>> main
             </Link>
           </div>
         )}
@@ -540,15 +524,15 @@ export function ProductForm({
                 ))}
               </div>
             )}
-<<<<<<< HEAD
-            <Button className="mt-4 border-2 bg-card-button" type="submit">
-=======
-            {isLoading ? <Button disabled className="mt-4 border-2" type="submit">
->>>>>>> main
-              {submitTitle}
-            </Button> : <Button className="mt-4 border-2" type="submit">
-              {submitTitle}
-            </Button>}
+            {isLoading ? (
+              <Button disabled className="mt-4 border-2" type="submit">
+                {submitTitle}
+              </Button>
+            ) : (
+              <Button className="mt-4 border-2" type="submit">
+                {submitTitle}
+              </Button>
+            )}
           </form>
         </Form>
       </Card>
