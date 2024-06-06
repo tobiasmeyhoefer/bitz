@@ -40,14 +40,14 @@ export default async function Page({ params }: { params: { id: string } }) {
             translations={carouselTranslations}
             images={images}
             className="h-[50vh] lg:h-[60vh]"
-            sellerId={productInfo.sellerId}
+            sellerId={product.sellerId}
           />
           <ProductInfoCard productInfo={product} />
         </div>
         <Button
           variant="outline"
           className={
-            productInfo.isOwner
+            product.isOwner
               ? // ? 'fixed bottom-6 left-8 md:left-14 lg:left-8 lg:top-36 xl:left-24 2xl:left-28 2xl:top-40'
                 '2xl:left-26 xl:left-18 l ml-12 mt-4 w-16 lg:absolute lg:top-36 xl:left-12  xl:top-36 2xl:left-24 2xl:top-36'
               : 'md: fixed bottom-6 left-8  md:left-14 lg:left-8 lg:top-36 xl:left-24 2xl:left-28 2xl:top-40'
@@ -59,7 +59,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       {/* <form
         action={async () => {
           'use server'
-          await createConversation(productInfo.id)
+          await createConversation(product.id)
           revalidatePath('/conversations')
           redirect('/conversations')
         }}
