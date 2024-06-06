@@ -1,28 +1,23 @@
 import { Button } from '@/components/ui/button'
 import { ProductImageCarousel } from '../productImgCarousel'
 import ProductInfoCard from '../productInfoCard'
-import { useTranslations } from 'next-intl'
 import { Link } from '@/navigation'
+import { getTranslations } from 'next-intl/server'
+import { getProductById } from '@/lib/productaction'
 
-export default function Page({
-  params,
-  searchParams,
-}: {
-  params: { id: string }
-  searchParams: { p: string }
-}) {
-  const t = useTranslations('Product')
-  // const userId = atob(params.id)
+export default async function Page({ params }: { params: { id: string } }) {
+  const t = await getTranslations('Product')
+  const productId = params.id
 
-  const productInfo: any = JSON.parse(atob(searchParams.p))
-  // console.log(productInfo)
+  const fetchedProduct: any = await getProductById(productId)
+  const product = fetchedProduct[0]
 
   const unfilteredImgs = [
-    productInfo.imageUrl1,
-    productInfo.imageUrl2,
-    productInfo.imageUrl3,
-    productInfo.imageUrl4,
-    productInfo.imageUrl5,
+    product.imageUrl1,
+    product.imageUrl2,
+    product.imageUrl3,
+    product.imageUrl4,
+    product.imageUrl5,
   ]
 
   let images = unfilteredImgs.filter((image) => image)
