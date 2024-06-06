@@ -1,4 +1,5 @@
 import { Radar } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface SponsorProps {
   icon: JSX.Element;
@@ -33,13 +34,14 @@ const sponsors: SponsorProps[] = [
 ];
 
 export const Sponsors = () => {
+  const t = useTranslations('Landingpage.Sponsors');
   return (
     <section
       id="sponsors"
       className="container pt-24 sm:py-32"
     >
       <h2 className="text-center text-md lg:text-xl font-bold mb-8 text-primary">
-        special thanks to
+        {t('thanks')}
       </h2>
 
       <div className="flex flex-wrap justify-center items-center gap-4 md:gap-8">

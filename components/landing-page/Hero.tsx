@@ -5,15 +5,15 @@ import { GitHubLogoIcon } from '@radix-ui/react-icons'
 import { Link } from '@/navigation'
 import dynamic from 'next/dynamic'
 import { Suspense } from 'react'
-import { getTranslations } from 'next-intl/server'
+import { useTranslations } from 'next-intl'
 
 const CubeScene = dynamic(() => import('@/components/explosion/cubeScene'), {
   ssr: false,
 })
 
-const t = getTranslations('Landingpage')
 
 export const Hero = () => {
+const t = useTranslations('Landingpage')
   return (
     <section className="container grid place-items-center gap-10 py-20 md:py-32 lg:grid-cols-2">
       <div className="space-y-6 text-center lg:text-start">
@@ -25,22 +25,22 @@ export const Hero = () => {
           </div>
           {/* <CubeScene /> */}
           <h1 className="inline">
-            VON{' '}
+            {t('sub01')}{' '}
             <span className="inline bg-gradient-to-r from-indigo-700  to-indigo-800 bg-clip-text text-transparent">
-              GESTERN
+              {t('sub02')}
             </span>{' '}
-            FÜR
+            {t('sub03')}
           </h1>{' '}
           <h2 className="inline">
             <span className="inline bg-gradient-to-r from-indigo-700  to-indigo-800 bg-clip-text text-transparent">
-              MORGEN
+              {t('sub04')}
             </span>{' '}
-            <span className="text-xl">MIT TECHNIK VERSORGEN</span>
+            <span className="text-xl">{t('sub05')}</span>
           </h2>
         </main>
 
         <p className="mx-auto text-xl text-muted-foreground md:w-10/12 lg:mx-0">
-          Entdecke die neue Kauf- und Verkaufsplattform
+          {t("discoverBitz")}
         </p>
 
         <div className="space-y-4 md:space-x-4 md:space-y-0">

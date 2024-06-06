@@ -30,8 +30,20 @@
     "createShop": "Shop erstellen",
     "buy": "Produkte kaufen",
     "sell": "Technik-Produkte verkaufen",
-    "createAccount": "Account erstellen"
+    "createAccount": "Account erstellen",
+    
+    "sub01": "VON",
+    "sub02": "GESTERN",
+    "sub03": "FÜR",
+    "sub04": "MORGEN",
+    "sub05": "MIT TECHNIK VERSORGEN",
+    "discoverBitz": "Entdecke die neue Kauf- und Verkaufsplattform",
+
+    "Sponsors": {
+      "thanks": "Besonderen Dank an"
+    }
   },
+
   "Browse": {
     "title": "Entdecken",
     "searchPlaceholder": "Wonach suchst du?",
@@ -121,8 +133,10 @@
   },
     "Hero": {
     "title": "Bitz",
-    "sub01": 
-    "sub02":"von heute für morgen mit Technik versorgen",
+    "sub01": "VON",
+    "sub02": "GESTERN",
+    "sub03":"von heute für morgen mit Technik versorgen",
+    
     "description":"Entdecke bei Bitz die neuesten Technikgeräte zu unschlagbaren Preisen! Kaufe, verkaufe und tausche deine Lieblingsgadgets in einer sicheren Umgebung. Trete unserer lebendigen Community bei und finde noch heute dein nächstes Technik-Highlight.",
     "call": "Jetzt anmelden und durchstarten!",
     "callButton":"Loslegen"

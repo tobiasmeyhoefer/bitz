@@ -30,7 +30,16 @@
     "createShop": "Create Shop",
     "buy": "Buy Products",
     "sell": "Sell Tech-Products",
-    "createAccount": "Create Account"
+    "createAccount": "Create Account",
+    "sub01": "FROM",
+    "sub02": "YESTERDAY",
+    "sub03": "FOR",
+    "sub04": "TOMORROW",
+    "sub05": "SUPPLYING TECHNOLOGY",
+    "discoverBitz": "Discover the new buying and selling platform",
+     "Sponsors": {
+      "thanks": "Special thanks to"
+     }
   },
   "Browse": {
     "title": "Browse",
