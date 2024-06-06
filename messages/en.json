@@ -37,10 +37,39 @@
     "sub04": "TOMORROW",
     "sub05": "SUPPLYING TECHNOLOGY",
     "discoverBitz": "Discover the new buying and selling platform",
-     "Sponsors": {
+    "Sponsors": {
       "thanks": "Special thanks to"
-     }
+     },
+    "About": {
+      "title": "What is",
+      "WhatIsBitz": "Bitz is a buying and selling platform similar to classified ads or Vinted, only much better. Bitz is all about the joy of browsing, discovering and trading. Our application serves as a marketplace for selling your own goods or buying those of others. Our focus here is on trading in technical goods, increased security and a good user experience. Customizable user profiles allow you to create your own small stores to market Bitz (your items) in an ideal way. With Bitz, you can save money, create space and also protect the environment.",
+      "Users": "Benutzer" 
+    },
+    "HowItWorks": {
+      "title01": "How It",
+      "title02": "Works: ",
+      "title03": "Step-by-Step Guide",
+      "sub": "Bitz is child's play. Here is a brief explanation:",
+      "step01": "Create an account",
+      "step11": "Create an account... we don't have passwords this increases security",
+      "step02": "Browse the products",
+      "step22": "Go to the Discover page and find products you like... you can also search for them",
+      "step03": "Buy",
+      "step33": "You can buy a product or buy direct, buy is for meeting in person and negotiating and buy direct is for parcel shipping",
+      "step04": "Use",
+      "step44": "Use your purchased bit and put it back on our platform when you have enough of it"
+
+    }
   },
+
+  "Statistics":{
+    "users": "Users",
+    "devs": "Developers",
+    "downloads": {
+      "soon": "soon"
+    }
+  },
+
   "Browse": {
     "title": "Browse",
     "searchPlaceholder": "What are you searching for?",

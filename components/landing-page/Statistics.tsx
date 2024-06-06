@@ -1,7 +1,11 @@
 import { getAllProductsCount } from "@/lib/productaction";
 import { getAllUsersCount } from "@/lib/useraction";
+import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
 export const Statistics = async () => {
+
+  const t = await getTranslations("Statistics");
   interface statsProps {
     quantity: string;
     description: string;
@@ -13,19 +17,19 @@ export const Statistics = async () => {
   const stats: statsProps[] = [
     {
       quantity: `${usersCount}`,
-      description: "Users",
+      description: t("users"),
     },
     {
       quantity: `${productsCount}`,
-      description: "Products",
+      description: "Bitz",
     },
     {
-      quantity: "soon",
+      quantity: t('downloads.soon'),
       description: "Downloads",
     },
     {
       quantity: "6",
-      description: "Entwickler",
+      description: t('devs'),
     },
   ];
 

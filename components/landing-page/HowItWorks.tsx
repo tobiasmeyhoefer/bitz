@@ -1,54 +1,61 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MedalIcon, MapIcon, PlaneIcon, GiftIcon } from "@/components/landing-page/Icons";
-
+import {
+  useTranslations
+  
+ } from "next-intl";
 interface FeatureProps {
   icon: JSX.Element;
   title: string;
   description: string;
 }
 
+export const HowItWorks = () => {
+
+const t = useTranslations('Landingpage.HowItWorks');
+  
 const features: FeatureProps[] = [
   {
     icon: <MedalIcon />,
-    title: "Account erstellen",
+    title: t('step01'),
     description:
-      "Erstelle dir einen Account... bei uns gibt es keine Passwörter das erhöht die Sicherheit",
+      t('step11'),
   },
   {
     icon: <MapIcon />,
-    title: "Durchstöber die Produkte",
+    title: t('step02'),
     description:
-      "Gehe auf die Entdecken Seite und finde Produkte die dir gefallen... du kannst auch nach ihnen suchen",
+      t('step22')
   },
   {
     icon: <PlaneIcon />,
-    title: "Kaufen",
+    title: t('step03'),
     description:
-      "Du kannst ein Produkt Kaufen oder Direkt Kaufen, Kaufen ist für das persönliche Treffen und verhandeln und Direkt kaufen ist für Paketversand",
+      t('step33')
   },
   {
     icon: <GiftIcon />,
-    title: "Benutzen",
+    title: t('step04'),
     description:
-      "Nutze dein erworbenes Bit und stelle es wieder auf unserer Plattform wenn du genug davon hast",
+      t('step44'),
   },
 ];
 
-export const HowItWorks = () => {
+
   return (
     <section
       id="howItWorks"
       className="container text-center py-24 sm:py-32"
     >
       <h2 className="text-3xl md:text-4xl font-bold ">
-        How It{" "}
+        {t('title01')}{" "}
         <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">
-          Works{" "}
+           {t('title02')}{" "}
         </span>
-        Step-by-Step Guide
+         {t('title03')}
       </h2>
       <p className="md:w-3/4 mx-auto mt-4 mb-8 text-xl text-muted-foreground">
-        Bitz ist kinderleicht, hier eine kurze Erklärung
+         {t('sub')}
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">

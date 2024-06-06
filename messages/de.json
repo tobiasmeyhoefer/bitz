@@ -41,6 +41,34 @@
 
     "Sponsors": {
       "thanks": "Besonderen Dank an"
+    },
+    "About": {
+      "title": "Was ist",
+      "WhatIsBitz": "Bitz ist eine Kauf und Verkaufsplattform ähnlich wie Kleinanzeigen oder Vinted nur sehr viel besser. Bei Bitz dreht sich alles um die Freude am Stöbern, Entdecken und Handeln. Unsere Anwendung dient als Marktplatz zum Verkauf eigener Ware oder zum Kauf von Waren anderer. Unser Augenmerk liegt hierbei auf dem Handel mit technischer Ware, eine erhöhte Sicherheit und eine gute Benutzererfahrung. Durch individualisierbare Nutzerprofile lassen sich eigene kleine Shops erstellen, um die Bitz (deine Artikel) somit ideal zu vermarkten. Mit Bitz lässt sich somit Geld sparen, Platz schaffen und zudem die Umwelt schonen.",
+      "Users": "Benutzer"
+    },
+    "HowItWorks": {
+      "title01": "Wie Es",
+      "title02": "Funktioniert: ",
+      "title03": "Schritt-für-Schritt-Anleitung",
+      "sub": "Bitz ist kinderleicht; hier eine kurze Erklärung:",
+      "step01": "Account erstellen",
+      "step11": "Erstelle dir einen Account... bei uns gibt es keine Passwörter das erhöht die Sicherheit",
+      "step02": "Durchstöber die Produkte",
+      "step22": "Gehe auf die Entdecken Seite und finde Produkte die dir gefallen... du kannst auch nach ihnen suchen",
+      "step03": "Kaufen",
+      "step33": "Du kannst ein Produkt Kaufen oder Direkt Kaufen, Kaufen ist für das persönliche Treffen und verhandeln und Direkt kaufen ist für Paketversand",
+      "step04": "Benutzen",
+      "step44": "Nutze dein erworbenes Bit und stelle es wieder auf unserer Plattform wenn du genug davon hast"
+    }
+
+  },
+
+  "Statistics":{
+    "users": "Nutzer",
+    "devs": "Entwickler",
+    "downloads": {
+      "soon": "demnächst"
     }
   },
 
