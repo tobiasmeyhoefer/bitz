@@ -9,6 +9,8 @@ import {
 } from '@/components/ui/card'
 import { Facebook, Instagram, Linkedin } from 'lucide-react'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
+
 
 interface TeamProps {
   imageUrl: string
@@ -70,7 +72,7 @@ const teamList: TeamProps[] = [
   },
   {
     imageUrl: 'https://avatars.githubusercontent.com/u/52629335?v=4',
-    name: 'Lukas',
+    name: 'Lucas',
     position: 'Frontend Developer',
     socialNetworks: [
       // { name: 'Linkedin', url: 'http://linkedin.com' },
@@ -103,6 +105,7 @@ const teamList: TeamProps[] = [
 ]
 
 export const Team = () => {
+  const t = useTranslations('Landingpage.OurTeam')
   const socialIcon = (iconName: string) => {
     switch (iconName) {
       case 'Linkedin':
@@ -120,13 +123,13 @@ export const Team = () => {
     <section id="team" className="container py-24 sm:py-32">
       <h2 className="text-3xl font-bold md:text-4xl">
         <span className="bg-gradient-to-b from-primary/60 to-primary bg-clip-text text-transparent">
-          Our Dedicated{' '}
+          {t('title')}{' '}
         </span>
         Team
       </h2>
 
       <p className="mb-10 mt-4 text-xl text-muted-foreground">
-        bestehend aus Frontend und Backend spezialisten
+        {t('sub')}
       </p>
 
       <div className="grid gap-8 gap-y-10 md:grid-cols-2 lg:grid-cols-4">

@@ -41,7 +41,7 @@
       "thanks": "Special thanks to"
      },
     "About": {
-      "title": "What is",
+      "title": "What Is",
       "WhatIsBitz": "Bitz is a buying and selling platform similar to classified ads or Vinted, only much better. Bitz is all about the joy of browsing, discovering and trading. Our application serves as a marketplace for selling your own goods or buying those of others. Our focus here is on trading in technical goods, increased security and a good user experience. Customizable user profiles allow you to create your own small stores to market Bitz (your items) in an ideal way. With Bitz, you can save money, create space and also protect the environment.",
       "Users": "Benutzer" 
     },
@@ -51,15 +51,30 @@
       "title03": "Step-by-Step Guide",
       "sub": "Bitz is child's play. Here is a brief explanation:",
       "step01": "Create an account",
-      "step11": "Create an account... we don't have passwords this increases security",
+      "step11": "Create an account... we don't have passwords for increased security",
       "step02": "Browse the products",
       "step22": "Go to the Discover page and find products you like... you can also search for them",
       "step03": "Buy",
       "step33": "You can buy a product or buy direct, buy is for meeting in person and negotiating and buy direct is for parcel shipping",
       "step04": "Use",
-      "step44": "Use your purchased bit and put it back on our platform when you have enough of it"
-
-    }
+      "step44": "Use your purchased bit and put it back on our platform when you hade enough of it"
+    },
+     "Testimonials": {
+      "title01": "Discover Why",
+      "title02": "People Love",
+      "title03": "Bitz",
+      "sub": "Our clients are always happy to tell us about their experience with Bitz.",
+      "anna": "I love Bitz! I always find exactly what I need here and at great prices. The community is super helpful and I've already found lots of great deals.",
+      "markus": "For me, Bitz is the best platform to sell my old devices. The sales process is simple and I reach many potential buyers.",
+      "katrin": "Bitz is simply fantastic! I've already made many great deals and the quality of the products is always top-notch. It's my go-to place for electronics.",
+      "lisa": "Thanks to Bitz, I was able to sell my old smartphone quickly and securely. The user interface is intuitive and communication with buyers was smooth.",
+      "thomas": "The platform offers a great opportunity to try out new tech products without spending a lot of money right away.",
+      "nina": "I'm thrilled with Bitz's modern and cool design. The user interface is super intuitive and looks simply great. It's really fun to browse through the offers!"
+     },
+     "OurTeam": {
+      "title": "Our Dedicated",
+      "sub": "consisting of frontend and backend specialists"
+     }
   },
 
   "Statistics":{

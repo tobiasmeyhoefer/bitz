@@ -17,7 +17,7 @@ export const About = () => {
                 {' '}
                 <span className="bg-gradient-to-b from-primary/60 to-primary bg-clip-text text-transparent">
                   Bitz
-                </span>
+                </span>?
               </h2>
               <p className="mt-4 text-xl text-muted-foreground">
                 {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
