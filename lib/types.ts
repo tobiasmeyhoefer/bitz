@@ -41,7 +41,7 @@ type FormTranslations = {
   title: string
   description: string
   price: string
-  quantity: string
+  // quantity: string
   category: string
   categoryPlaceholder: string
   images: string
@@ -59,7 +59,7 @@ type ProductType = {
   title: string
   description?: string
   price: number
-  quantity: number
+  // quantity: number
   category?: string
   createdAt?: Date
   sellerId?: string

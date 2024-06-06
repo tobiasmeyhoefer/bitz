@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Space_Grotesk, Montserrat } from 'next/font/google'
 import './globals.css'
 import NavBar from '@/components/navigation/NavBar'
@@ -16,6 +16,10 @@ export const metadata: Metadata = {
   title: 'BITZ',
   description: 'Kauf- und Verkaufsplattform',
 }
+
+export const viewport: Viewport = {
+  maximumScale: 1,
+};
 
 export default async function LocaleLayout({
   children,

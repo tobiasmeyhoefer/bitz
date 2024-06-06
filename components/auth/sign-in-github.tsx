@@ -13,7 +13,7 @@ export function SignInGithub() {
         await signIn('github')
       }}
     >
-      <Button className="h-[60px] w-full bg-inherit" variant="outline" type="submit">
+      <Button className="md:h-[60px] h-[50px] w-full bg-inherit" variant="outline" type="submit">
         {' '}
         <FaGithub />
       </Button>

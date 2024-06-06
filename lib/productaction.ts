@@ -2,7 +2,7 @@
 
 import { products, favorites } from '@/schema'
 import { db } from '../db'
-import { count, desc, eq, ne, or } from 'drizzle-orm'
+import { count, desc, eq, ne, or, sql } from 'drizzle-orm'
 import { auth } from '@/auth'
 import { getUser, getUserById } from './useraction'
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3'
@@ -115,14 +115,14 @@ export async function updateProduct(productId: string, values: ProductType) {
   const existingProduct = await getProductById(productId)
   if (existingProduct) {
     console.log('-----------')
-    const { title, description, price, quantity } = values
+    const { title, description, price } = values
     await db
       .update(products)
       .set({
         title: title || existingProduct[0].title,
         description: description || existingProduct[0].description,
         price: price || existingProduct[0].price,
-        quantity: quantity || existingProduct[0].quantity,
+        // quantity: quantity || existingProduct[0].quantity,
       })
       .where(eq(products.id, productId))
     await updateProductStripe(existingProduct[0].stripeId!, values)
@@ -131,10 +131,40 @@ export async function updateProduct(productId: string, values: ProductType) {
   }
 }
 
-// getter for a Product with id as param
+// getter for a product with id as param
 export async function getProductById(productId: string) {
   const response = await db.select().from(products).where(eq(products.id, productId))
   return response
+}
+
+// getter for products with Category as param
+export const getProductsByCategory = async (category: string) => {
+  try {
+    const result = await db
+      .select()
+      .from(products)
+      .where(eq(products.category, category)) //ilike(products.category, `%${category}%`)   eq(products.category, category)    sql`LOWER(${products.category}) LIKE LOWER('%${category}%')`
+    return result
+  } catch (error) {
+    console.error('Fehler beim Laden der Daten:', error)
+    throw error
+  }
+}
+
+// getter for products with title as param
+export const searchProductsByTitle = async (title: string) => {
+  try {
+    const searchQuery = db
+    .select()
+    .from(products)
+    .where(sql`lower(${products.title}) = lower(${sql.placeholder('title')})`)
+    .prepare("searchProductsByTitle");
+    const result = await searchQuery.execute({ title });
+    return result
+  } catch (error) {
+    console.error('Fehler beim Laden der Daten:', error)
+    throw error
+  }
 }
 
 export async function addToFavorites(productId: string) {

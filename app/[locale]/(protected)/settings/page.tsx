@@ -15,7 +15,7 @@ const Settings = () => {
   const t = useTranslations('Settings')
   return (
     <div className='pt-10 mb-10'>
-      <h1 className="mb-10 font-montserrat text-center text-5xl font-bold">{t('title')}</h1>
+      <h1 className="mb-10 font-montserrat text-center text-3xl font-bold">{t('title')}</h1>
       <div className="flex lg:flex-row flex-col px-10 gap-10 h-full justify-center pt-10">
         <div >
           <ProfileSettings />

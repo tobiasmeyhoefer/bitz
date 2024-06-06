@@ -90,10 +90,7 @@ const NavBar = async () => {
           </div>
         </>
       ) : (
-        <>
-          <p className='text-neutral-400'>Ein Projekt im Rahmen des Studiengangs Medieninformatik Sommersemester 2024</p>
-          <NavLoginLink text={t('loginButton')} />
-        </>
+        <NavLoginLink text={t('loginButton')} />
       )}
     </nav>
   )

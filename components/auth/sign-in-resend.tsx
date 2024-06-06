@@ -18,17 +18,17 @@ export function SignInResend() {
         await signIn('resend', formData)
       }}
     >
-      <Input className="h-[60px] w-full p-4" type="email" name="email" placeholder="john@doe.com" />
-      <p className="h-2 w-full px-2 text-start"> Enter your Name</p>
+      <Input className="md:h-[60px] h-[50px] w-full p-4" type="email" name="email" placeholder="john@doe.com" />
+      <p className="h-2 w-full text-start text-neutral-500 text-sm"> Enter your Name</p>
       <Input
-        className="h-[60px] w-full p-4"
+        className="md:h-[60px] h-[50px] w-full p-4"
         type="text"
         name="name"
         placeholder="John Doe"
         pattern="^[a-zA-ZäöüÄÖÜß\s]*$"
         required
       />
-      <Button className="bg-card-button h-[60px] w-full" type="submit">
+      <Button className="bg-card-button md:h-[60px] h-[50px] w-full" type="submit">
         {t('loginButton')}
       </Button>
     </form>

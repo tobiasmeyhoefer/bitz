@@ -13,7 +13,7 @@ export function SignInGoogle() {
         await signIn('google')
       }}
     >
-      <Button className="h-[60px] w-full bg-inherit" variant="outline" type="submit">
+      <Button className="md:h-[60px] h-[50px] w-full bg-inherit" variant="outline" type="submit">
         {' '}
         <FcGoogle />
       </Button>
