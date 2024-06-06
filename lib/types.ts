@@ -1,6 +1,8 @@
 type CardWithImageProps = {
   title: string
   desc: string | undefined
+  price?: number
+  timestamp?: Date
   content?: string
   imgUrl1?: string | null | string[]
   className?: React.HTMLAttributes<HTMLDivElement> | string
@@ -70,13 +72,13 @@ type ProductType = {
   imageUrl5?: string | null
   isDirectlyBuyable?: boolean
   isSold?: boolean
-  stripeId?: string,
+  stripeId?: string
   paymentUrl?: string
 }
 
 type ProdDelAlert = {
   productId: string
-  }
+}
 
 type Shop = {
   id: string

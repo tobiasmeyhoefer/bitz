@@ -178,6 +178,8 @@ const BrowseContent = (props: BrowseContentProps) => {
                 key={`pr-${index}`}
                 title={p.title}
                 desc={p.description!}
+                price={p.price}
+                timestamp={p.createdAt}
                 imgUrl1={p.imageUrl1}
                 className="mx-[5px] my-[0.5rem]"
                 productID={p.id}
