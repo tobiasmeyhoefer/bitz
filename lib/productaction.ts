@@ -143,7 +143,7 @@ export const getProductsByCategory = async (category: string) => {
     const result = await db
       .select()
       .from(products)
-      .where(eq(products.category, category)) //ilike(products.category, `%${category}%`)   eq(products.category, category)    sql`LOWER(${products.category}) LIKE LOWER('%${category}%')`
+      .where(eq(products.category, category))
     return result
   } catch (error) {
     console.error('Fehler beim Laden der Daten:', error)
@@ -154,14 +154,6 @@ export const getProductsByCategory = async (category: string) => {
 // getter for products with title as param
 export const searchProductsByTitle = async (title: string) => {
   try {
-    //const searchQuery = db
-    //.select()
-    //.from(products)
-    //.where(sql`lower(${products.title}) LIKE lower(${sql.placeholder('title')})`)  //=
-    //.prepare("searchProductsByTitle");
-    //const result = await searchQuery.execute({ title });
-    //return result
-    
     const sanitizedTitle = `%${title.replace(/%/g, '\\%').replace(/_/g, '\\_')}%`
     const res = db
     .select()
