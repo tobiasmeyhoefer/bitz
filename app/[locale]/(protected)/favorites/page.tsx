@@ -8,7 +8,9 @@ const Favorites = async () => {
     <>
       <h1 className="mt-10 text-center font-montserrat text-3xl font-bold">FAVORITEN</h1>
       {products?.length === 0 ? (
-        <p className='text-center mt-6'>Du hast noch keine Favoriten. Du kannst welche hinzufügen indem du den like button drückst</p>
+        <p className="mt-6 text-center">
+          Du hast noch keine Favoriten. Du kannst welche hinzufügen indem du den like button drückst
+        </p>
       ) : (
         <div
           className={`${`h-full`} flex w-full flex-col items-center justify-center px-10 py-20 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
@@ -18,6 +20,8 @@ const Favorites = async () => {
               <CardWithImage
                 key={`pr-${index}`}
                 title={p.title}
+                price={p.price}
+                timestamp={p.createdAt}
                 desc={p.description!}
                 imgUrl1={p.imageUrl1}
                 className="mx-[5px] my-[0.5rem]"
