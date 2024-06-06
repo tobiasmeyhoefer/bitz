@@ -2,7 +2,7 @@
 
 import { products, favorites } from '@/schema'
 import { db } from '../db'
-import { count, desc, eq, ne, or, sql } from 'drizzle-orm'
+import { and, count, desc, eq, ne, or, sql } from 'drizzle-orm'
 import { auth } from '@/auth'
 import { getUser, getUserById } from './useraction'
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3'
@@ -17,7 +17,7 @@ export async function getProductsBrowse() {
   const session = await auth()
   const id = session?.user?.id
   if (id) {
-    const response = await db.select().from(products).where(ne(products.sellerId, id))
+    const response = await db.select().from(products).where(and(ne(products.sellerId, id), ne(products.isSold, true)))
     if (response) {
       return response
     }
@@ -25,8 +25,6 @@ export async function getProductsBrowse() {
 }
 
 export async function getProductsOwned(userId: string) {
-  /* const session = await auth()
-  const id = session?.user?.id */
   let id = userId
   let response
   if (id) {

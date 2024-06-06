@@ -1,14 +1,9 @@
 import RegisterPasskey from '@/components/auth/register-passkey'
 import LocaleSwitcher from '@/components/settings/LocaleSwitcher'
-import LocationChooser from '@/components/settings/LocationChooser'
 import { useTranslations } from 'next-intl'
 import { DarkmodeToggler } from '@/components/settings/DarkmodeToggler'
 import PhoneVerification from '@/components/settings/phone-verifiaction'
 import { DeleteAccountButton } from '@/components/settings/delete-account-button'
-import PictureChanger from '@/components/settings/picture-changer'
-import { changeUserImage } from '@/lib/useraction'
-import NameChanger from '@/components/settings/name-changer'
-import AdressChanger from '@/components/settings/adress-changer'
 import ProfileSettings from '@/components/settings/profile-settings'
 
 const Settings = () => {
@@ -26,7 +21,6 @@ const Settings = () => {
           <LocaleSwitcher />
           <DarkmodeToggler />
           <hr />
-
           <h3 className="text-2xl font-bold">Safety</h3>
           <PhoneVerification />
           <RegisterPasskey />
