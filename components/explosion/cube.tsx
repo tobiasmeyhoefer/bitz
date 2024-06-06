@@ -17,6 +17,9 @@ export default function Cube() {
   let mixer = new AnimationMixer(scene)
 
   const handleClick = () => {
+    // const wrapper = document.getElementById("clickEventWrapper")
+    // wrapper?.classList.add("absolute", "inset-0", "-z-50")
+
     animations.forEach((clip) => {
       const action = mixer.clipAction(clip)
       action.reset().play()

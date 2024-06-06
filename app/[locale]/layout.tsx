@@ -28,7 +28,7 @@ export default async function LocaleLayout({
     <html lang={locale}>
       <body
         className={cn(
-          'min-h-screen bg-background antialiased font-space_grotesk',
+          'min-h-screen bg-background antialiased font-space_grotesk overflow-x-hidden',
           space_grotesk.variable,
           montserrat.variable,
         )}

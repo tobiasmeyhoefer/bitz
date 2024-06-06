@@ -2,7 +2,7 @@
 
 import { products, favorites } from '@/schema'
 import { db } from '../db'
-import { desc, eq, ne, or } from 'drizzle-orm'
+import { count, desc, eq, ne, or } from 'drizzle-orm'
 import { auth } from '@/auth'
 import { getUser, getUserById } from './useraction'
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3'
@@ -110,10 +110,11 @@ export async function deleteProduct(productId: string) {
 }
 
 // Update function requiring productData as
-export async function updateProduct(productId: string, values: ProductType) {//#endregion
+export async function updateProduct(productId: string, values: ProductType) {
+  //#endregion
   const existingProduct = await getProductById(productId)
   if (existingProduct) {
-    console.log("-----------")
+    console.log('-----------')
     const { title, description, price, quantity } = values
     await db
       .update(products)
@@ -328,4 +329,9 @@ export async function updateProductImage(existingImageUrl: string, newImageUrl: 
     }
     redirect('/myshop')
   }
+}
+
+export async function getAllProductsCount() {
+  const result = await db.select({ count: count() }).from(products)
+  return result[0].count
 }
