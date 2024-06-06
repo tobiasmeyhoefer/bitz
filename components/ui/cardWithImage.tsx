@@ -49,10 +49,10 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                   <FavoriteLike productId={props.productID!} />
                 )}
               </div>
-              <CardDescription className="truncate text-xl text-black">
+              <CardDescription className="truncate text-xl">
                 <div className="text-right">{props.price}€</div>
                 <div className="text-right text-xs">{formatDate(props.timestamp!)}</div>
-                {props.product.isSold && <p className='text-green-500'>verkauft</p>}
+                {props.product.isSold && <p className="text-green-500">verkauft</p>}
               </CardDescription>
             </CardHeader>
           </Card>
