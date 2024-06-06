@@ -61,7 +61,6 @@ const teamList: TeamProps[] = [
     position: 'Backend Developer',
     socialNetworks: [
       // { name: 'Linkedin', url: 'http://linkedin.com' },
-
       // {
       //   name: 'Instagram',
       //   url: 'https://www.instagram.com/',
@@ -84,9 +83,7 @@ const teamList: TeamProps[] = [
     imageUrl: 'https://avatars.githubusercontent.com/u/167678060?v=4',
     name: 'Niko',
     position: 'Backend Developer',
-    socialNetworks: [
-      
-    ],
+    socialNetworks: [],
   },
   {
     imageUrl: 'https://avatars.githubusercontent.com/u/104424520?v=4',
@@ -144,7 +141,9 @@ export const Team = () => {
                 className="absolute -top-12 aspect-square h-24 w-24 rounded-full object-cover"
               />
               <CardTitle className="text-center">{name}</CardTitle>
-              <CardDescription className="text-primary text-center">{position}</CardDescription>
+              <CardDescription className="text-center text-card-foreground">
+                {position}
+              </CardDescription>
             </CardHeader>
 
             <CardContent className="pb-2 text-center">
