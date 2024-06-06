@@ -1,6 +1,10 @@
 'use client'
 import { Input } from '@/components/ui/input'
-import { getProductsBrowse, getProductsByCategory, searchProductsByTitle  } from '@/lib/productaction'
+import {
+  getProductsBrowse,
+  getProductsByCategory,
+  searchProductsByTitle,
+} from '@/lib/productaction'
 import { BrowseContentProps, ProductType, SearchBarProps, RevealOnScrollProps } from '@/lib/types'
 import { useEffect, useState, useRef } from 'react'
 import { SlClose } from 'react-icons/sl'
@@ -11,7 +15,7 @@ const BrowseContent = (props: BrowseContentProps) => {
   const [searchValue, setSearchValue] = useState('')
   const [loading, setLoading] = useState(false)
   const [products, setProducts] = useState<ProductType[]>([])
-  const [noSearchResults, setNoSearchResults] = useState(false);
+  const [noSearchResults, setNoSearchResults] = useState(false)
 
   useEffect(() => {
     const getProducts = async () => {
@@ -33,10 +37,10 @@ const BrowseContent = (props: BrowseContentProps) => {
             imageUrl3: item.imageUrl3,
             imageUrl4: item.imageUrl4,
             imageUrl5: item.imageUrl5,
-            stripeId: item.stripeId ?? "",
-            paymentUrl: item.paymentLink ?? "",
+            stripeId: item.stripeId ?? '',
+            paymentUrl: item.paymentLink ?? '',
             isDirectlyBuyable: item.isDirectlyBuyable ?? false,
-            isSold: item.isSold ?? false
+            isSold: item.isSold ?? false,
           }))
           setProducts(checkedResults)
           if (checkedResults.length === 0) {
@@ -71,9 +75,9 @@ const BrowseContent = (props: BrowseContentProps) => {
         }))
         setProducts(checkedResults)
         if (checkedResults.length === 0) {
-          setNoSearchResults(true);
+          setNoSearchResults(true)
         } else {
-          setNoSearchResults(false);
+          setNoSearchResults(false)
         }
       }
     } catch (error) {
@@ -88,9 +92,9 @@ const BrowseContent = (props: BrowseContentProps) => {
       setLoading(true)
       let result
       if (title === '') {
-        result = await getProductsBrowse();
+        result = await getProductsBrowse()
       } else {
-        result = await searchProductsByTitle(title);
+        result = await searchProductsByTitle(title)
       }
       const checkedResults: ProductType[] = result!.map((item: any) => ({
         id: item.id,
@@ -108,9 +112,9 @@ const BrowseContent = (props: BrowseContentProps) => {
       }))
       setProducts(checkedResults)
       if (checkedResults.length === 0) {
-        setNoSearchResults(true);
+        setNoSearchResults(true)
       } else {
-        setNoSearchResults(false);
+        setNoSearchResults(false)
       }
     } catch (error) {
       console.error('Fehler bei der Suche:', error)
@@ -120,9 +124,34 @@ const BrowseContent = (props: BrowseContentProps) => {
   }
 
   const suggestions = [
-    'Reciever', 'Monitor', 'Audio', 'Laptop', 'Headphone', 'Smartphone', 'Tablet', 'Smartwatch', 'Printer', 'Camera',
-    'Speaker', 'Projector', 'Game Console', 'Drone', 'Router', 'Hard Drive', 'SSD', 'Keyboard', 'Mouse', 'Graphics Card', 'Motherboard',
-    'Power Supply', 'RAM', 'Cooling System', 'VR Headset', 'E-Reader', 'Fitness Tracker', 'Charger'
+    'Reciever',
+    'Monitor',
+    'Audio',
+    'Laptop',
+    'Headphone',
+    'Smartphone',
+    'Tablet',
+    'Smartwatch',
+    'Printer',
+    'Camera',
+    'Speaker',
+    'Projector',
+    'Game Console',
+    'Drone',
+    'Router',
+    'Hard Drive',
+    'SSD',
+    'Keyboard',
+    'Mouse',
+    'Graphics Card',
+    'Motherboard',
+    'Power Supply',
+    'RAM',
+    'Cooling System',
+    'VR Headset',
+    'E-Reader',
+    'Fitness Tracker',
+    'Charger',
   ]
 
   return (
@@ -159,7 +188,7 @@ const BrowseContent = (props: BrowseContentProps) => {
               {/* </RevealOnScroll> */}
             </div>
           ))}
-          {noSearchResults && <div className="text-black px-4">Keine Suchergebnisse gefunden</div>} 
+          {noSearchResults && <div className=" px-4">Keine Suchergebnisse gefunden</div>}
         </div>
       ) : (
         <div className="flex h-full items-center justify-center">
@@ -170,19 +199,24 @@ const BrowseContent = (props: BrowseContentProps) => {
   )
 }
 
-const SearchDialog = (props: SearchBarProps & { loadProductsByCategory: (category: string) => void, loadProductsByTitle: (title: string) => void }) => {
+const SearchDialog = (
+  props: SearchBarProps & {
+    loadProductsByCategory: (category: string) => void
+    loadProductsByTitle: (title: string) => void
+  },
+) => {
   const [open, setOpen] = useState(false)
   const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([])
   const [selectedIndex, setSelectedIndex] = useState(-1) // Index für ausgesuchten Vorschlag
 
-  // Funktion zum Filtern der Ergebnisse auf Basis der aktuellen Eingabe 
-  const searchValueRef = useRef<string>('');
+  // Funktion zum Filtern der Ergebnisse auf Basis der aktuellen Eingabe
+  const searchValueRef = useRef<string>('')
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     props.setSearchValue(value)
     if (value.length > 0) {
-      const filtered = props.suggestions.filter(suggestion =>
-        suggestion.toLowerCase().includes(value.toLowerCase())
+      const filtered = props.suggestions.filter((suggestion) =>
+        suggestion.toLowerCase().includes(value.toLowerCase()),
       )
       setFilteredSuggestions(filtered)
     } else {
@@ -194,17 +228,16 @@ const SearchDialog = (props: SearchBarProps & { loadProductsByCategory: (categor
     setOpen(false)
     if (props.searchValue === '') {
       props.loadProductsByTitle('')
-      return;
+      return
     }
 
-    const titleResults = await searchProductsByTitle(props.searchValue);
+    const titleResults = await searchProductsByTitle(props.searchValue)
     if (titleResults.length > 0) {
-      props.loadProductsByTitle(props.searchValue);
+      props.loadProductsByTitle(props.searchValue)
     } else {
-      props.loadProductsByCategory(props.searchValue);
+      props.loadProductsByCategory(props.searchValue)
     }
   }
-
 
   // Funktion für die Suhce mit Klick auf einem Vorschlag
   const handleSuggestionClick = (suggestion: string) => {
@@ -218,17 +251,19 @@ const SearchDialog = (props: SearchBarProps & { loadProductsByCategory: (categor
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'ArrowDown') {
       setSelectedIndex((prevIndex) => {
-        const suggestionsList = filteredSuggestions.length > 0 ? filteredSuggestions : props.suggestions;
-        const newIndex = (prevIndex + 1) % suggestionsList.length;
-        props.setSearchValue(suggestionsList[newIndex]);
-        return newIndex;
+        const suggestionsList =
+          filteredSuggestions.length > 0 ? filteredSuggestions : props.suggestions
+        const newIndex = (prevIndex + 1) % suggestionsList.length
+        props.setSearchValue(suggestionsList[newIndex])
+        return newIndex
       })
     } else if (e.key === 'ArrowUp') {
       setSelectedIndex((prevIndex) => {
-      const suggestionsList = filteredSuggestions.length > 0 ? filteredSuggestions : props.suggestions;
-      const newIndex = (prevIndex - 1 + suggestionsList.length) % suggestionsList.length;
-      props.setSearchValue(suggestionsList[newIndex]);
-      return newIndex;
+        const suggestionsList =
+          filteredSuggestions.length > 0 ? filteredSuggestions : props.suggestions
+        const newIndex = (prevIndex - 1 + suggestionsList.length) % suggestionsList.length
+        props.setSearchValue(suggestionsList[newIndex])
+        return newIndex
       })
     } else if (e.key === 'Enter') {
       if (selectedIndex >= 0 && selectedIndex < filteredSuggestions.length) {
@@ -239,7 +274,7 @@ const SearchDialog = (props: SearchBarProps & { loadProductsByCategory: (categor
         props.loadProductsByCategory(filteredSuggestions[selectedIndex])
       } else {
         // Wenn kein Vorschlag ausgewählt ist, führen Sie eine Standardsuche aus
-        handleSearch();
+        handleSearch()
       }
     }
   }
@@ -275,18 +310,18 @@ const SearchDialog = (props: SearchBarProps & { loadProductsByCategory: (categor
           <>
             <h1 className="px-4 pt-2 text-lg font-medium ">{props.suggestionsTitle}</h1>
             <div className="max-h-[200px] overflow-y-auto">
-            {props.suggestions.map((suggestion, index) => (
-              <div
-                onClick={() => {
-                  setOpen(false)
-                  props.setSearchValue(suggestion)
-                }}
-                className="rounded- px-8 py-2 hover:rounded-b-lg hover:bg-input"
-                key={`s-${index}`}
-              >
-                {suggestion}
-              </div>
-            ))}
+              {props.suggestions.map((suggestion, index) => (
+                <div
+                  onClick={() => {
+                    setOpen(false)
+                    props.setSearchValue(suggestion)
+                  }}
+                  className="rounded- px-8 py-2 hover:rounded-b-lg hover:bg-input"
+                  key={`s-${index}`}
+                >
+                  {suggestion}
+                </div>
+              ))}
             </div>
           </>
         ) : (
@@ -294,15 +329,15 @@ const SearchDialog = (props: SearchBarProps & { loadProductsByCategory: (categor
             {filteredSuggestions.length > 0 ? (
               filteredSuggestions.slice(0, 5).map((suggestion, index) => (
                 <div
-                  onClick={ () => handleSuggestionClick(suggestion) }
-                  className="rounded- px-8 py-2 text-black hover:rounded-b-lg hover:bg-gray-100"
+                  onClick={() => handleSuggestionClick(suggestion)}
+                  className="rounded- px-8 py-2  hover:rounded-b-lg hover:bg-gray-100"
                   key={`fs-${index}`}
                 >
                   {suggestion}
                 </div>
               ))
             ) : (
-              <div className="text-black px-4">Keine Vorschläge gefunden</div>
+              <div className="px-4 ">Keine Vorschläge gefunden</div>
             )}
           </div>
         )}
