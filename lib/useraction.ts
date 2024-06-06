@@ -1,7 +1,7 @@
 'use server'
 import { users } from '@/schema'
 import { db } from '../db'
-import { eq } from 'drizzle-orm'
+import { count, eq } from 'drizzle-orm'
 import { auth, signOut } from '@/auth'
 import { deleteImageOnAws, getProductsOwned } from './productaction'
 import { revalidatePath } from 'next/cache'
@@ -100,4 +100,9 @@ export async function changeUserImage(imageUrl: string) {
       .where(eq(users.id, id))
     revalidatePath('/settings')
   }
+}
+
+export async function getAllUsersCount() {
+  const result = await db.select({ count: count() }).from(users)
+  return result[0].count
 }
