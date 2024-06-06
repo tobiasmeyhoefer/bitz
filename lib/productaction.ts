@@ -113,10 +113,12 @@ export const getProductsByCategory = async (category: string) => {
 // getter for products with title as param
 export const searchProductsByTitle = async (title: string) => {
   try {
-    const result = await db
-      .select()
-      .from(products)
-      .where(sql`LOWER(${products.title}) LIKE LOWER(${title})`) // eq(products.title, title)
+    const searchQuery = db
+    .select()
+    .from(products)
+    .where(sql`lower(${products.title}) = lower(${sql.placeholder('title')})`)
+    .prepare("searchProductsByTitle");
+    const result = await searchQuery.execute({ title });
     return result
   } catch (error) {
     console.error('Fehler beim Laden der Daten:', error)
