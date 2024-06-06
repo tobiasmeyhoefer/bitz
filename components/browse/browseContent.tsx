@@ -1,12 +1,11 @@
 'use client'
 import { Input } from '@/components/ui/input'
-import { useEffect, useRef, useState } from 'react'
-import { Dialog, DialogTrigger, DialogContent } from '../ui/dialog'
-import { BrowseContentProps, SearchBarProps, RevealOnScrollProps, ProductType } from '@/lib/types'
-import { CardWithImage } from '../ui/cardWithImage'
-import { SlClose } from 'react-icons/sl'
 import { getProductsBrowse } from '@/lib/productaction'
-import RevealOnScroll from '../navigation/revealOnScroll'
+import { BrowseContentProps, ProductType, SearchBarProps } from '@/lib/types'
+import { useEffect, useState } from 'react'
+import { SlClose } from 'react-icons/sl'
+import { CardWithImage } from '../ui/cardWithImage'
+import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog'
 
 const BrowseContent = (props: BrowseContentProps) => {
   const [searchValue, setSearchValue] = useState('')
@@ -33,7 +32,9 @@ const BrowseContent = (props: BrowseContentProps) => {
             imageUrl4: item.imageUrl4,
             imageUrl5: item.imageUrl5,
             stripeId: item.stripeId ?? "",
-            paymentUrl: item.paymentLink ?? ""
+            paymentUrl: item.paymentLink ?? "",
+            isDirectlyBuyable: item.isDirectlyBuyable ?? false,
+            isSold: item.isSold ?? false
           }))
           setProducts(checkedResults)
         }
@@ -94,7 +95,7 @@ const SearchDialog = (props: SearchBarProps) => {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Input
-          className="sticky top-[20px] h-14 w-full bg-background  sm:w-2/3 md:w-1/2"
+          className="sticky top-[20px] h-14 w-full bg-background md:w-2/3"
           type="search"
           placeholder={props.searchValue ? props.searchValue : props.placeholder}
           readOnly

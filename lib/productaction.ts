@@ -2,7 +2,7 @@
 
 import { products, favorites } from '@/schema'
 import { db } from '../db'
-import { desc, eq, ne, or } from 'drizzle-orm'
+import { count, desc, eq, ne, or } from 'drizzle-orm'
 import { auth } from '@/auth'
 import { getUser, getUserById } from './useraction'
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3'
@@ -10,7 +10,7 @@ import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import crypto from 'crypto'
 import { ProductType } from './types'
 import { revalidatePath } from 'next/cache'
-import { addProductStripe } from './stripe-actions'
+import { addProductStripe, setProductNotActive, updateProductStripe } from './stripe-actions'
 import { redirect } from '@/navigation'
 
 export async function getProductsBrowse() {
@@ -65,7 +65,7 @@ export async function addProduct(values: ProductType, imageUrls: string[]) {
         imageUrl4: imageUrls[3],
         imageUrl5: imageUrls[4],
         isDirectlyBuyable: isDirectlyBuyable,
-        isSold: false
+        isSold: false,
         // stripeId: stripeId,
         // paymentLink: paymentLink
       })
@@ -84,6 +84,7 @@ export async function addProduct(values: ProductType, imageUrls: string[]) {
       .where(eq(products.id, product[0].id))
   }
   revalidatePath('/myshop')
+  redirect('/myshop')
   // const {stripeId, paymentLink} = await addProductStripe(title, description ?? '', price, imageUrls)
 }
 
@@ -104,13 +105,16 @@ export async function deleteProduct(productId: string) {
     }
   }
   await db.delete(products).where(eq(products.id, productId))
+  await setProductNotActive(product![0].stripeId!)
   revalidatePath('/myShop')
 }
 
 // Update function requiring productData as
 export async function updateProduct(productId: string, values: ProductType) {
+  //#endregion
   const existingProduct = await getProductById(productId)
   if (existingProduct) {
+    console.log('-----------')
     const { title, description, price, quantity } = values
     await db
       .update(products)
@@ -121,6 +125,7 @@ export async function updateProduct(productId: string, values: ProductType) {
         quantity: quantity || existingProduct[0].quantity,
       })
       .where(eq(products.id, productId))
+    await updateProductStripe(existingProduct[0].stripeId!, values)
   } else {
     throw new Error('Product not found or unauthorized to update.')
   }
@@ -324,4 +329,9 @@ export async function updateProductImage(existingImageUrl: string, newImageUrl: 
     }
     redirect('/myshop')
   }
+}
+
+export async function getAllProductsCount() {
+  const result = await db.select({ count: count() }).from(products)
+  return result[0].count
 }

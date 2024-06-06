@@ -1,10 +1,10 @@
 import { auth } from '@/auth'
+import { getUser } from '@/lib/useraction'
 import { Link } from '@/navigation'
 import { getTranslations } from 'next-intl/server'
 import dynamic from 'next/dynamic'
 import { SignOut } from '../auth/sign-out'
 import { NavItemLink, NavLoginLink, NavMenuDrawer, NavbarItemDropdown } from './navbarItem'
-import { getUser } from '@/lib/useraction'
 
 const NavBar = async () => {
   const t = await getTranslations('Navbar')
@@ -51,7 +51,7 @@ const NavBar = async () => {
             <Link href="/" className="static mr-4 h-[80px] w-[100px] sm:mr-10">
               <CubeSceneNav />
             </Link>
-            <div className="hidden sm:flex">
+            <div className="hidden md:flex">
               <NavItemLink className="mr-14" linkTo="/browse" text={t('discover')} />
               <NavItemLink className="mr-14" linkTo="/myshop" text={t('myBitz')} />
               <NavItemLink className="mr-14" linkTo="/conversations" text={t('conversations')} />
@@ -61,7 +61,7 @@ const NavBar = async () => {
       </div>
       {isLoggedIn ? (
         <>
-          <div className="hidden sm:flex">
+          <div className="hidden md:flex">
             <NavbarItemDropdown
               userImgSrc={user?.image}
               signOut={
@@ -71,7 +71,7 @@ const NavBar = async () => {
               favoritesLinkText={t('favorites')}
             />
           </div>
-          <div className="block sm:hidden">
+          <div className="block md:hidden">
             <NavMenuDrawer
               menuItems={drawerItems}
               signOut={
@@ -90,7 +90,10 @@ const NavBar = async () => {
           </div>
         </>
       ) : (
-        <NavLoginLink text={t('loginButton')} />
+        <>
+          <p className='text-neutral-400'>Ein Projekt im Rahmen des Studiengangs Medieninformatik Sommersemester 2024</p>
+          <NavLoginLink text={t('loginButton')} />
+        </>
       )}
     </nav>
   )

@@ -70,9 +70,13 @@ export function ConversationForm({ convId }: { convId: number }) {
           )}
         />
         <div className="flex gap-4">
-          <Button type="submit">Annehmen</Button>
+          <Button className="bg-border hover:bg-input " type="submit">
+            Annehmen
+          </Button>
           <AlertDialog>
-            <AlertDialogTrigger>Ablehnen</AlertDialogTrigger>
+            <AlertDialogTrigger className="w-28 rounded-md bg-border text-sm font-medium hover:bg-[#593f44]">
+              Ablehnen
+            </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
                 <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
