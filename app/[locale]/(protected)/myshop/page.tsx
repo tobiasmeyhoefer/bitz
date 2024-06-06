@@ -8,7 +8,7 @@ const MyShop = async () => {
   return (
     <div className="inset-x-1/2 top-24 flex flex-col items-center">
       <div className="w-full max-w-max rounded-lg border-2 border-gray-300 px-20 py-10 shadow-lg">
-        <h1 className="mb-4 text-left text-3xl font-bold">Meine Bitz</h1>
+        <h1 className="mb-4 text-left text-3xl font-bold">{t('title')}</h1>
         <div className="">
           <MyShopContent />
         </div>

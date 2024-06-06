@@ -1,4 +1,14 @@
 {
   "i18n-ally.localesPaths": ["messages"],
-  "i18n-ally.keystyle": "nested"
+  "i18n-ally.keystyle": "nested",
+  "favorites.resources": [
+    {
+      "filePath": "messages",
+      "group": "Default"
+    },
+    {
+      "filePath": "README.md",
+      "group": "Default"
+    }
+  ]
 }

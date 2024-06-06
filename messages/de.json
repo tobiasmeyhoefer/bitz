@@ -41,7 +41,7 @@
     "title": "Suchen"
   },
   "MyShop": {
-    "title": "Mein Shop",
+    "title": "Meine Bitz",
     "addProducts": "Bit hinzufügen",
     "updateProducts": "Bit aktualisieren",
     "deleteProduct": "Bit löschen"
@@ -67,8 +67,11 @@
     "edit": "Bearbeiten"
   },
   "ProdDelAlert": {
-    "submitTitle": "löschen",
-    "yousure": "Bist du sicher, dass du diese Ware löschen möchtest?"
+    "title": "Achtung!",
+    "yousure": "Bist du sicher, dass du dieses Bit löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.",
+    "confirm": "Bestätigen",
+    "cancel" : "Abbrechen"
+
   },
   "Settings": {
     "title": "EINSTELLUNGEN",
@@ -80,7 +83,14 @@
     "deleteAccountTitle": "Bist du dir sicher?",
     "deleteAccountDescription": "Diese Aktion kann nicht rückgängig gemacht werden. Dadurch wird Ihr Konto dauerhaft gelöscht und Ihre Daten werden von unseren Servern entfernt.",
     "deleteAccountCancel": "Abbrechen",
-    "deleteAccountAction": "Account löschen"
+    "deleteAccountAction": "Account löschen",
+    "app": "Anwendung",
+    "safety": "Sicherheit",
+    "username": "Benutzer",
+    "change Name": "change name",
+    "change Location": "change location",
+    "change Adress": "change adress",
+    "theme": "change colortheme"
   },
   "Navbar": {
     "loginButton": "anmelden",
@@ -108,5 +118,13 @@
     "Conversations": {  
     "title": "Konversationen",
     "empty" : "Es gibt keine offenen Konversationen"
+  },
+    "Hero": {
+    "title": "Bitz",
+    "sub01": 
+    "sub02":"von heute für morgen mit Technik versorgen",
+    "description":"Entdecke bei Bitz die neuesten Technikgeräte zu unschlagbaren Preisen! Kaufe, verkaufe und tausche deine Lieblingsgadgets in einer sicheren Umgebung. Trete unserer lebendigen Community bei und finde noch heute dein nächstes Technik-Highlight.",
+    "call": "Jetzt anmelden und durchstarten!",
+    "callButton":"Loslegen"
   }
 }

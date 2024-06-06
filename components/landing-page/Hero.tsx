@@ -5,10 +5,13 @@ import { GitHubLogoIcon } from '@radix-ui/react-icons'
 import { Link } from '@/navigation'
 import dynamic from 'next/dynamic'
 import { Suspense } from 'react'
+import { getTranslations } from 'next-intl/server'
 
 const CubeScene = dynamic(() => import('@/components/explosion/cubeScene'), {
   ssr: false,
 })
+
+const t = getTranslations('Landingpage')
 
 export const Hero = () => {
   return (

@@ -41,7 +41,7 @@
     "title": "Search"
   },
   "MyShop": {
-    "title": "My Shop",
+    "title": "My Bitz",
     "addProducts": "add Bit",
     "updateProducts": "update Bit",
     "deleteProduct": "delete Bit"
@@ -66,9 +66,11 @@
     "cancel": "Cancel",
     "edit": "Edit"
   },
-  "ProdDelAlert": {
-    "submitTitle": "löschen",
-    "yousure": "This will permanently delete your product from the database and remove your data from our servers. This action cannot be undone. "
+   "ProdDelAlert": {
+    "title": "Attention!",
+    "yousure": "This will permanently delete this Bit from the database. This action cannot be undone. ",
+    "confirm": "Confirm",
+    "cancel" : "Cancel"
   },
   "Settings": {
     "title": "SETTINGS",
@@ -80,7 +82,14 @@
     "deleteAccountTitle": "Are you absolutely sure?",
     "deleteAccountDescription": "This action cannot be undone. This will permanently delete your account and remove your data from our servers.",
     "deleteAccountCancel": "Cancel",
-    "deleteAccountAction": "delete Account"
+    "deleteAccountAction": "delete Account",
+    "app": "Application",
+    "safety": "Safety",
+    "username": "User",
+    "change Name": "Name ändern",
+    "change Location": "Postleitzahl ändern",
+    "change Adress": "Adresse ändern",
+    "theme": "Farbschema ändern"
   },
   "Navbar": {
     "loginButton": "login",
@@ -108,5 +117,12 @@
   "Conversations": {  
     "title": "Conversations",
     "empty": "There are no opened conversations"
+  },
+  "Hero": {
+    "title": "Bitz",
+    "subtitle": "Supplying you with technology from today to tomorrow",
+    "description": "Discover the latest tech gadgets at Bitz at unbeatable prices! Buy, sell, and trade your favorite gadgets in a secure environment. Join our vibrant community and find your next tech highlight today.",
+    "call": "Sign up now and get started!",
+    "callButton": "Get Started"
   }
 }
