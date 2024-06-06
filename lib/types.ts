@@ -1,6 +1,8 @@
 type CardWithImageProps = {
   title: string
   desc: string | undefined
+  price?: number
+  timestamp?: Date
   content?: string
   imgUrl1?: string | null | string[]
   className?: React.HTMLAttributes<HTMLDivElement> | string

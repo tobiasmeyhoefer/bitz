@@ -19,7 +19,7 @@ export const HeroCards = () => {
   return (
     <div className="relative hidden h-[500px] w-[700px] flex-row flex-wrap gap-8 lg:flex">
       {/* Testimonial */}
-      <Card className="absolute -top-[15px] w-[240px] right-[370px] shadow-black/10 drop-shadow-xl dark:shadow-white/10">
+      <Card className="absolute -top-[15px] right-[370px] w-[240px] shadow-black/10 drop-shadow-xl dark:shadow-white/10">
         <CardHeader className="flex flex-row items-center gap-4 pb-2">
           {/* <Avatar>
             <AvatarImage
@@ -126,7 +126,7 @@ export const HeroCards = () => {
 
         <CardContent>
           <Link href={'/auth/login'}>
-            <Button className="w-full">Start Now</Button>
+            <Button className="w-full bg-card-button">Start Now</Button>
           </Link>
         </CardContent>
 
@@ -144,7 +144,7 @@ export const HeroCards = () => {
       </Card>
 
       {/* Service */}
-      <Card className="absolute right-[80px] bottom-[35px] w-[250px]  shadow-black/10 drop-shadow-xl dark:shadow-white/10">
+      <Card className="absolute bottom-[35px] right-[80px] w-[250px]  shadow-black/10 drop-shadow-xl dark:shadow-white/10">
         <CardHeader className="flex items-start justify-start gap-4 space-y-1 md:flex-row">
           <div className="mt-1 rounded-2xl bg-primary/20 p-1">
             <LightBulbIcon />

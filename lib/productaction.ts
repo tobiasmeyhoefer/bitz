@@ -2,7 +2,7 @@
 
 import { products, favorites } from '@/schema'
 import { db } from '../db'
-import { count, desc, eq, ne, or, sql } from 'drizzle-orm'
+import { count, desc, eq, ne, or, sql, ilike, and } from 'drizzle-orm'
 import { auth } from '@/auth'
 import { getUser, getUserById } from './useraction'
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3'
@@ -17,7 +17,7 @@ export async function getProductsBrowse() {
   const session = await auth()
   const id = session?.user?.id
   if (id) {
-    const response = await db.select().from(products).where(ne(products.sellerId, id))
+    const response = await db.select().from(products).where(and(ne(products.sellerId, id), ne(products.isSold, true)))
     if (response) {
       return response
     }
@@ -25,8 +25,6 @@ export async function getProductsBrowse() {
 }
 
 export async function getProductsOwned(userId: string) {
-  /* const session = await auth()
-  const id = session?.user?.id */
   let id = userId
   let response
   if (id) {
@@ -143,7 +141,7 @@ export const getProductsByCategory = async (category: string) => {
     const result = await db
       .select()
       .from(products)
-      .where(eq(products.category, category)) //ilike(products.category, `%${category}%`)   eq(products.category, category)    sql`LOWER(${products.category}) LIKE LOWER('%${category}%')`
+      .where(eq(products.category, category))
     return result
   } catch (error) {
     console.error('Fehler beim Laden der Daten:', error)
@@ -154,13 +152,13 @@ export const getProductsByCategory = async (category: string) => {
 // getter for products with title as param
 export const searchProductsByTitle = async (title: string) => {
   try {
-    const searchQuery = db
+    const sanitizedTitle = `%${title.replace(/%/g, '\\%').replace(/_/g, '\\_')}%`
+    const res = db
     .select()
     .from(products)
-    .where(sql`lower(${products.title}) = lower(${sql.placeholder('title')})`)
-    .prepare("searchProductsByTitle");
-    const result = await searchQuery.execute({ title });
-    return result
+    //.where(ilike(products.title, `%${title}%`)) // title
+    .where(ilike(products.title, sanitizedTitle))
+    return res
   } catch (error) {
     console.error('Fehler beim Laden der Daten:', error)
     throw error

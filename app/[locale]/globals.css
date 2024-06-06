@@ -98,6 +98,6 @@
   }
   body {
     @apply bg-background text-foreground;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
   }
 }
