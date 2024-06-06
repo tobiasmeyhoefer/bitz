@@ -2,7 +2,7 @@
 
 import { products, favorites } from '@/schema'
 import { db } from '../db'
-import { count, desc, eq, ne, or, sql } from 'drizzle-orm'
+import { count, desc, eq, ne, or, sql, ilike } from 'drizzle-orm'
 import { auth } from '@/auth'
 import { getUser, getUserById } from './useraction'
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3'
@@ -154,13 +154,21 @@ export const getProductsByCategory = async (category: string) => {
 // getter for products with title as param
 export const searchProductsByTitle = async (title: string) => {
   try {
-    const searchQuery = db
+    //const searchQuery = db
+    //.select()
+    //.from(products)
+    //.where(sql`lower(${products.title}) LIKE lower(${sql.placeholder('title')})`)  //=
+    //.prepare("searchProductsByTitle");
+    //const result = await searchQuery.execute({ title });
+    //return result
+    
+    const sanitizedTitle = `%${title.replace(/%/g, '\\%').replace(/_/g, '\\_')}%`
+    const res = db
     .select()
     .from(products)
-    .where(sql`lower(${products.title}) = lower(${sql.placeholder('title')})`)
-    .prepare("searchProductsByTitle");
-    const result = await searchQuery.execute({ title });
-    return result
+    //.where(ilike(products.title, `%${title}%`)) // title
+    .where(ilike(products.title, sanitizedTitle))
+    return res
   } catch (error) {
     console.error('Fehler beim Laden der Daten:', error)
     throw error

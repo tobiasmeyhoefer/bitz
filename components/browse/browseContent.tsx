@@ -92,7 +92,7 @@ const BrowseContent = (props: BrowseContentProps) => {
       } else {
         result = await searchProductsByTitle(title);
       }
-      const checkedResults: ProductType[] = result!.map((item: any) => ({
+      const checkedResults: ProductType[] = result!.map((item: any) => ({   // ! sollte weg
         id: item.id,
         title: item.title,
         description: item.description ?? '',
@@ -210,7 +210,7 @@ const SearchDialog = (props: SearchBarProps & { loadProductsByCategory: (categor
   const handleSuggestionClick = (suggestion: string) => {
     setOpen(false)
     props.setSearchValue(suggestion)
-    props.loadProductsByTitle(suggestion)
+    //props.loadProductsByTitle(suggestion)
     props.loadProductsByCategory(suggestion)
   }
 
@@ -276,19 +276,16 @@ const SearchDialog = (props: SearchBarProps & { loadProductsByCategory: (categor
             <h1 className="px-4 pt-2 text-lg font-medium ">{props.suggestionsTitle}</h1>
             <div className="max-h-[200px] overflow-y-auto">
             {props.suggestions.map((suggestion, index) => (
-              <div
-                onClick={() => {
-                  setOpen(false)
-                  props.setSearchValue(suggestion)
-                }}
-                className="rounded- px-8 py-2 hover:rounded-b-lg hover:bg-input"
-                key={`s-${index}`}
-              >
-                {suggestion}
-              </div>
-            ))}
-            </div>
-          </>
+               <div
+               onClick={() => handleSuggestionClick(suggestion)}
+               className="rounded- px-8 py-2 hover:rounded-b-lg hover:bg-input"
+               key={`s-${index}`}
+             >
+               {suggestion}
+             </div>
+           ))}
+           </div>
+         </>
         ) : (
           <div className="max-h-[200px] overflow-y-auto px-4 py-2">
             {filteredSuggestions.length > 0 ? (
