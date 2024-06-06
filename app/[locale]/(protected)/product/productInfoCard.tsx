@@ -4,18 +4,10 @@ import { useTranslations, useLocale } from 'next-intl'
 import ProductInfoCardEditable from './productInfoCardEditable'
 import { ProductType } from '@/lib/types'
 import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
-import { createConversation } from '@/lib/conversations-actions'
-import { redirect } from '@/navigation'
-import { revalidatePath } from 'next/cache'
-import { createCheckoutSession, productHasCheckoutSessionOpened } from '@/lib/stripe-actions'
-import { getUser } from '@/lib/useraction'
-import { redirect as red } from 'next/navigation'
+import { BuyButtons } from '@/components/products/buy-buttons'
 type ProductInfoType = {
   productInfo: ProductType
   isOwner: boolean
-  locationInfo: string | undefined | null
-  addressInfo: string | undefined | null
 }
 
 export default function ProductInfoCard(props: ProductInfoType) {
@@ -25,18 +17,7 @@ export default function ProductInfoCard(props: ProductInfoType) {
   const tProduct = useTranslations('Product')
   const tProductForm = useTranslations('addProductPage')
   const locale = useLocale()
-  let locationError = false
-  let errorMessage
-  if (!props.locationInfo && !props.addressInfo) {
-    locationError = true
-    errorMessage = 'location & address gotta be set'
-  } else if (!props.locationInfo) {
-    locationError = true
-    errorMessage = 'location gotta be set'
-  } else if (!props.addressInfo) {
-    locationError = true
-    errorMessage = 'address gotta be set'
-  }
+
   const editableCardTranslations = {
     quantity: tProduct('quantity'),
     title: tProductForm('title'),
@@ -46,7 +27,6 @@ export default function ProductInfoCard(props: ProductInfoType) {
     save: tProductForm('save'),
     edit: tProductForm('edit'),
   }
-
   const getDate = (
     timestamp: any,
     dateFirst: boolean,
@@ -149,7 +129,7 @@ export default function ProductInfoCard(props: ProductInfoType) {
               <div>{getDate(product.createdAt, true, 'text-right')}</div>
             </CardContent>
           </Card>
-          {locationError && (
+          {/* {locationError && (
             <p className="fixed bottom-16 right-6 text-xs text-red-600">
               can&apos;t buy: {errorMessage}
             </p>
@@ -187,7 +167,8 @@ export default function ProductInfoCard(props: ProductInfoType) {
                 Direkt Kaufen
               </Button>
             </form>
-          ) : null}
+          ) : null} */}
+          <BuyButtons product={product} />
         </div>
       )}
     </>
