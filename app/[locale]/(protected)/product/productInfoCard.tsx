@@ -13,11 +13,13 @@ import { getUser } from '@/lib/useraction'
 import { redirect as red } from 'next/navigation'
 
 type ProductInfoType = {
-  productInfo: ProductType & { isOwner: boolean }
+  productInfo: ProductType
+  isOwner: boolean
 }
 
 export default function ProductInfoCard(props: ProductInfoType) {
   const product = props.productInfo
+  const isOwner = props.isOwner
   const tDate = useTranslations('Date')
   const tProduct = useTranslations('Product')
   const tProductForm = useTranslations('addProductPage')
@@ -106,10 +108,9 @@ export default function ProductInfoCard(props: ProductInfoType) {
       return dateEl
     }
   }
-
   return (
     <>
-      {product.isOwner ? (
+      {isOwner ? (
         <ProductInfoCardEditable
           productInfo={product}
           translations={editableCardTranslations}
