@@ -6,15 +6,16 @@ import { ProductType } from '@/lib/types'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { createConversation } from '@/lib/conversations-actions'
-import { Link, redirect } from '@/navigation'
+import { redirect } from '@/navigation'
 import { revalidatePath } from 'next/cache'
 import { createCheckoutSession, productHasCheckoutSessionOpened } from '@/lib/stripe-actions'
 import { getUser } from '@/lib/useraction'
 import { redirect as red } from 'next/navigation'
-
 type ProductInfoType = {
   productInfo: ProductType
   isOwner: boolean
+  locationInfo: string | undefined | null
+  addressInfo: string | undefined | null
 }
 
 export default function ProductInfoCard(props: ProductInfoType) {
@@ -24,7 +25,18 @@ export default function ProductInfoCard(props: ProductInfoType) {
   const tProduct = useTranslations('Product')
   const tProductForm = useTranslations('addProductPage')
   const locale = useLocale()
-
+  let locationError = false
+  let errorMessage
+  if (!props.locationInfo && !props.addressInfo) {
+    locationError = true
+    errorMessage = 'location & address gotta be set'
+  } else if (!props.locationInfo) {
+    locationError = true
+    errorMessage = 'location gotta be set'
+  } else if (!props.addressInfo) {
+    locationError = true
+    errorMessage = 'address gotta be set'
+  }
   const editableCardTranslations = {
     quantity: tProduct('quantity'),
     title: tProductForm('title'),
@@ -137,12 +149,19 @@ export default function ProductInfoCard(props: ProductInfoType) {
               <div>{getDate(product.createdAt, true, 'text-right')}</div>
             </CardContent>
           </Card>
+          {locationError && (
+            <p className="fixed bottom-16 right-6 text-xs text-red-600">
+              can&apos;t buy: {errorMessage}
+            </p>
+          )}
           <form
             action={async () => {
               'use server'
-              await createConversation(product.id!)
-              revalidatePath('/conversations')
-              redirect('/conversations')
+              if (!locationError) {
+                await createConversation(product.id!)
+                revalidatePath('/conversations')
+                redirect('/conversations')
+              }
             }}
           >
             <Button type="submit" className="fixed bottom-6 right-40">
@@ -153,12 +172,14 @@ export default function ProductInfoCard(props: ProductInfoType) {
             <form
               action={async () => {
                 'use server'
-                const openedCheckoutSession = await productHasCheckoutSessionOpened(product.id!)
-                if (!openedCheckoutSession) {
-                  const user = await getUser()
-                  await createCheckoutSession(user![0].id, product.id!)
-                  revalidatePath('/transactions')
-                  red(product.paymentLink!)
+                if (!locationError) {
+                  const openedCheckoutSession = await productHasCheckoutSessionOpened(product.id!)
+                  if (!openedCheckoutSession) {
+                    const user = await getUser()
+                    await createCheckoutSession(user![0].id, product.id!)
+                    revalidatePath('/transactions')
+                    red(product.paymentLink!)
+                  }
                 }
               }}
             >

@@ -49,7 +49,12 @@ export default async function Page({ params }: { params: { id: string } }) {
             className="h-[50vh] lg:h-[60vh]"
             sellerId={product.sellerId}
           />
-          <ProductInfoCard productInfo={product} isOwner={isOwner} />
+          <ProductInfoCard
+            productInfo={product}
+            isOwner={isOwner}
+            locationInfo={user?.location}
+            addressInfo={user?.adress}
+          />
         </div>
         <Link href={backButtonHref}>
           <Button
