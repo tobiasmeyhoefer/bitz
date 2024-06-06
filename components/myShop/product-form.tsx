@@ -128,9 +128,10 @@ export function ProductForm({
 }) {
   const router = useRouter()
   const { toast } = useToast()
-  const [open, setOpen] = React.useState(false)
-  const [categoryValue, setcategoryValue] = React.useState('')
-  const [locationError, setLocationError] = React.useState(false)
+  const [open, setOpen] = useState(false)
+  const [categoryValue, setcategoryValue] = useState('')
+  const [locationError, setLocationError] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const {
     title,
@@ -171,6 +172,7 @@ export function ProductForm({
   })
 
   async function onSubmit(values: ProductType) {
+    setIsLoading(true)
     if (compressedFiles?.length === 0) {
       toast({
         title: 'Error',
@@ -179,6 +181,7 @@ export function ProductForm({
       setPreviewUrls(null)
       setFiles(null)
       setCompressedFiles(null)
+      setIsLoading(false)
       return
     }
 
@@ -217,6 +220,7 @@ export function ProductForm({
             })
             if (signedURLResult.failure !== undefined) {
               console.error(signedURLResult.failure)
+              setIsLoading(false)
               return
             }
 
@@ -234,6 +238,7 @@ export function ProductForm({
       }
       // console.log(JSON.parse(JSON.stringify(values)))
       await addProduct(JSON.parse(JSON.stringify(values)), imageUrls)
+      setIsLoading(false)
       router.push('/myshop')
       toast({
         title: toastTitle,
@@ -241,6 +246,7 @@ export function ProductForm({
         duration: 2200,
       })
     }
+  
   }
 
   const [files, setFiles] = useState<FileList | null>(null)
@@ -250,20 +256,14 @@ export function ProductForm({
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files ?? null
     setFiles(files)
-    console.log('test')
-    console.log(files)
     if (previewUrls) {
       previewUrls.map((url) => URL.revokeObjectURL(url))
     }
     if (files) {
-      // const urls = Array.from(files).map((file) => URL.createObjectURL(file))
-      // setPreviewUrls(urls)
       const compFiles = await compressImages(Array.from(files))
       const urls2 = compFiles.map((file) => URL.createObjectURL(file))
       setPreviewUrls(urls2)
       setCompressedFiles(compFiles)
-      // console.log(compFiles[0].size)
-      // console.log(files[0].size)
     } else {
       setPreviewUrls(null)
     }
@@ -274,7 +274,6 @@ export function ProductForm({
     setPreviewUrls(newPreviewUrls)
 
     const filesArray = Array.from(files!)
-    // console.log(files)
     filesArray.splice(index, 1)
     const dataTransfer = new DataTransfer()
     filesArray.forEach((file) => dataTransfer.items.add(file))
@@ -353,7 +352,7 @@ export function ProductForm({
     <>
       <Card className="w-full max-w-[800px] p-10">
         {locationError && (
-          <div className="flex flex-row items-center gap-2 mb-2">
+          <div className="mb-2 flex flex-row items-center gap-2">
             <p className="font-medium text-red-400">Error: Location not set</p>
             <Link href="/settings">
               <Button className="h-6 w-12">edit</Button>
@@ -518,9 +517,11 @@ export function ProductForm({
                 ))}
               </div>
             )}
-            <Button className="mt-4 border-2" type="submit">
+            {isLoading ? <Button disabled className="mt-4 border-2" type="submit">
               {submitTitle}
-            </Button>
+            </Button> : <Button className="mt-4 border-2" type="submit">
+              {submitTitle}
+            </Button>}
           </form>
         </Form>
       </Card>
