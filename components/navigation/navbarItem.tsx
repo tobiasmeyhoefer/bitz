@@ -83,11 +83,11 @@ const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
         {props.userImgSrc ? (
           <Image
             src={props.userImgSrc!} // TODO: {props?.userImgSrc as string}
-            width={50}
-            height={50}
+            width={40}
+            height={40}
             className="rounded-full"
             alt="User Image"
-            style={{ objectFit: 'cover', height: '50px' }}
+            style={{ objectFit: 'cover', height: '40px' }}
           />
         ) : (
           <FaUserCircle className="h-[45px] w-[45px]" color="gray" />

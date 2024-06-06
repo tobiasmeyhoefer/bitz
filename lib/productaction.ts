@@ -17,7 +17,7 @@ export async function getProductsBrowse() {
   const session = await auth()
   const id = session?.user?.id
   if (id) {
-    const response = await db.select().from(products).where(ne(products.sellerId, id))
+    const response = await db.select().from(products).where(and(ne(products.sellerId, id), ne(products.isSold, true)))
     if (response) {
       return response
     }
@@ -25,8 +25,6 @@ export async function getProductsBrowse() {
 }
 
 export async function getProductsOwned(userId: string) {
-  /* const session = await auth()
-  const id = session?.user?.id */
   let id = userId
   let response
   if (id) {

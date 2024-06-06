@@ -61,6 +61,7 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                 )}
               </div>
               <CardDescription className="truncate text-xl">{props.desc}</CardDescription>
+              {props.product.isSold && <p className='text-green-500'>verkauft</p>}
             </CardHeader>
           </Card>
         ) : (

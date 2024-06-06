@@ -34,7 +34,8 @@ const FAQList: FAQProps[] = [
   },
   {
     question: 'Wie kann ich ein Produkt verkaufen?',
-    answer: 'Um ein Produkt zu verkaufen, erstelle einfach ein neues Bit, füge Fotos und eine Beschreibung hinzu, und bestimme deinen Preis. Sobald ein Käufer Interesse zeigt, könnt ihr die Details des Verkaufs besprechen oder wenn du bereit bist zu verschicken kannst du auch eine „Direkt Kaufen“ Funktion anbieten.',
+    answer:
+      'Um ein Produkt zu verkaufen, erstelle einfach ein neues Bit, füge Fotos und eine Beschreibung hinzu, und bestimme deinen Preis. Sobald ein Käufer Interesse zeigt, könnt ihr die Details des Verkaufs besprechen oder wenn du bereit bist zu verschicken kannst du auch eine „Direkt Kaufen“ Funktion anbieten.',
     value: 'item-4',
   },
   {
@@ -42,7 +43,8 @@ const FAQList: FAQProps[] = [
     answer:
       'Um dein Konto zu löschen, gehe zu den Kontoeinstellungen und wähle die Option "Account löschen". Folge den Anweisungen, des Pop-ups und bestätige deine Entscheidung.',
     value: 'item-5',
-  },{
+  },
+  {
     question: 'Welche Zahlungsmethoden werden bei Bitz akzeptiert?',
     answer:
       'Bitz akzeptiert aktuell die Zahlung mit Kreditkarte. Sonst kannst du auch mit dem Verkäufer einen Termin ausmachen und direkt Bar bezahlen.',
@@ -75,7 +77,7 @@ export const FAQ = () => {
         <a
           rel="noreferrer noopener"
           href="#"
-          className="border-primary text-primary transition-all hover:border-b-2"
+          className="border-primary transition-all hover:border-b-2"
         >
           Contact us
         </a>

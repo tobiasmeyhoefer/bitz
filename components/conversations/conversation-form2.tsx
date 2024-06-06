@@ -31,8 +31,8 @@ import { Textarea } from '../ui/textarea'
 const formSchema = z.object({
   message: z
     .string()
-    .min(20, { message: 'Der Käufer braucht einen Zeitraum zur Abholung' })
-    .max(200, {
+    .min(14, { message: 'Der Käufer braucht einen Zeitraum zur Abholung' })
+    .max(100, {
       message: 'Es sind maximal 200 Zeichen erlaubt',
     }),
 })

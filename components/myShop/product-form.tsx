@@ -75,7 +75,11 @@ const formSchema = z.object({
     .min(1, { message: minError })
     .max(50)
     .refine((value) => !/#/.test(value)),
-  price: z.coerce.number().safe().positive().multipleOf(1, {message: "Dezimalstellen sind nicht erwünscht"}),
+  price: z.coerce
+    .number()
+    .safe()
+    .positive()
+    .multipleOf(1, { message: 'Dezimalstellen sind nicht erwünscht' }),
   isDirectlyBuyable: z.boolean().default(false).optional(),
   description: z
     .string()
@@ -349,13 +353,11 @@ export function ProductForm({
     <>
       <Card className="w-full max-w-[800px] p-10">
         {locationError && (
-          <div className="flex flex-row items-center gap-2">
-            <p className="font-medium text-red-500">Error: Location gotta be set.</p>
-            <Button className="h-6 w-12">
-              <Link href="/settings">
-                <FaPencilAlt />
-              </Link>
-            </Button>
+          <div className="flex flex-row items-center gap-2 mb-2">
+            <p className="font-medium text-red-400">Error: Location not set</p>
+            <Link href="/settings">
+              <Button className="h-6 w-12">edit</Button>
+            </Link>
           </div>
         )}
         <Form {...form}>
