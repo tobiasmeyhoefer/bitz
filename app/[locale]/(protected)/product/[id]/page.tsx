@@ -27,7 +27,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     image: t('image'),
     of: t('of'),
   }
-  const backButtonHref = productInfo.isOwner ? `/myshop` : '/browse'
+  const backButtonHref = product.isOwner ? `/myshop` : '/browse'
 
   return (
     <>
@@ -42,7 +42,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             className="h-[50vh] lg:h-[60vh]"
             sellerId={productInfo.sellerId}
           />
-          <ProductInfoCard productInfo={productInfo} />
+          <ProductInfoCard productInfo={product} />
         </div>
         <Button
           variant="outline"
