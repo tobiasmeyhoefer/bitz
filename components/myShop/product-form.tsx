@@ -75,7 +75,11 @@ const formSchema = z.object({
     .min(1, { message: minError })
     .max(50)
     .refine((value) => !/#/.test(value)),
-  price: z.coerce.number().safe().positive().multipleOf(1, {message: "Dezimalstellen sind nicht erwünscht"}),
+  price: z.coerce
+    .number()
+    .safe()
+    .positive()
+    .multipleOf(1, { message: 'Dezimalstellen sind nicht erwünscht' }),
   isDirectlyBuyable: z.boolean().default(false).optional(),
   description: z
     .string()
@@ -127,6 +131,7 @@ export function ProductForm({
   const [open, setOpen] = React.useState(false)
   const [categoryValue, setcategoryValue] = React.useState('')
   const [locationError, setLocationError] = React.useState(false)
+  const [locationErrorMessage, setLocationErrorMessage] = React.useState('')
 
   const {
     title,
@@ -145,8 +150,15 @@ export function ProductForm({
     const getProduct = async () => {
       const result = await getUser()
       const user = result?.[0]
-      if (!user?.location) {
+      if (!user?.location && !user?.adress) {
         setLocationError(true)
+        setLocationErrorMessage('Location & Adress gotta be set.')
+      } else if (!user?.location) {
+        setLocationError(true)
+        setLocationErrorMessage('Location gotta be set.')
+      } else if (!user?.adress) {
+        setLocationError(true)
+        setLocationErrorMessage('Adress gotta be set.')
       }
     }
     getProduct()
@@ -186,13 +198,13 @@ export function ProductForm({
       form.reset()
       toast({
         title: 'Error',
-        description: 'set Account Location in Settings',
+        description: locationErrorMessage,
         action: (
-          <Button>
-            <Link href="/settings">set Location</Link>
-          </Button>
+          <Link href="/settings">
+            <Button>go to Settings</Button>
+          </Link>
         ),
-        duration: 2200,
+        duration: 2600,
       })
     } else {
       let imageUrls = []
@@ -350,12 +362,12 @@ export function ProductForm({
       <Card className="w-full max-w-[800px] p-10">
         {locationError && (
           <div className="flex flex-row items-center gap-2">
-            <p className="font-medium text-red-500">Error: Location gotta be set.</p>
-            <Button className="h-6 w-12">
-              <Link href="/settings">
+            <p className="font-medium text-red-500">Error: {locationErrorMessage}</p>
+            <Link href="/settings">
+              <Button className="h-6 w-12 bg-card-button">
                 <FaPencilAlt />
-              </Link>
-            </Button>
+              </Button>
+            </Link>
           </div>
         )}
         <Form {...form}>
@@ -516,7 +528,7 @@ export function ProductForm({
                 ))}
               </div>
             )}
-            <Button className="mt-4 border-2" type="submit">
+            <Button className="mt-4 border-2 bg-card-button" type="submit">
               {submitTitle}
             </Button>
           </form>

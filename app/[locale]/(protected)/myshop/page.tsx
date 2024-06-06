@@ -13,9 +13,9 @@ const MyShop = async () => {
           <MyShopContent />
         </div>
         <div className="fixed bottom-0 right-0 mt-8 flex justify-end space-x-4 px-10 py-5">
-          <Button>
-            <Link href="myshop/add">{t('addProducts')}</Link>
-          </Button>
+          <Link href="myshop/add">
+            <Button> {t('addProducts')}</Button>
+          </Link>
         </div>
       </div>
     </div>
