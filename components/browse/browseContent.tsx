@@ -1,7 +1,7 @@
 'use client'
 import { Input } from '@/components/ui/input'
 import { getProductsBrowse, getProductsByCategory, searchProductsByTitle  } from '@/lib/productaction'
-import { BrowseContentProps, ProductType, SearchBarProps, RevealOnScrollProps, ProductType } from '@/lib/types'
+import { BrowseContentProps, ProductType, SearchBarProps, RevealOnScrollProps } from '@/lib/types'
 import { useEffect, useState, useRef } from 'react'
 import { SlClose } from 'react-icons/sl'
 import { CardWithImage } from '../ui/cardWithImage'
