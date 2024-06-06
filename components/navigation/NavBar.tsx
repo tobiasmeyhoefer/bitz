@@ -1,12 +1,16 @@
 import { auth } from '@/auth'
-import { SignOut } from '../auth/sign-out'
+import { getUser } from '@/lib/useraction'
 import { Link } from '@/navigation'
 import { getTranslations } from 'next-intl/server'
-import { NavLoginLink, NavItemLink, NavbarItemDropdown, NavMenuDrawer } from './navbarItem'
 import dynamic from 'next/dynamic'
+import { SignOut } from '../auth/sign-out'
+import { NavItemLink, NavLoginLink, NavMenuDrawer, NavbarItemDropdown } from './navbarItem'
+
 const NavBar = async () => {
   const t = await getTranslations('Navbar')
   const session = await auth()
+  const users = await getUser()
+  const user = users?.[0]
   const isLoggedIn = !!session?.user
   const CubeSceneNav = dynamic(() => import('@/components/explosion/cubeSceneNav'), {
     ssr: false,
@@ -40,24 +44,26 @@ const NavBar = async () => {
   ]
 
   return (
-    <nav className="absolute left-0 right-0 flex h-[80px] items-center justify-between px-4 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]">
+    <nav className="left-0 right-0 z-10 flex h-[80px] items-center justify-between px-4 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]">
       <div className="flex items-center">
         {isLoggedIn && (
           <>
             <Link href="/" className="static mr-4 h-[80px] w-[100px] sm:mr-10">
               <CubeSceneNav />
             </Link>
-            <div className="hidden sm:flex">
+            <div className="hidden md:flex">
               <NavItemLink className="mr-14" linkTo="/browse" text={t('discover')} />
               <NavItemLink className="mr-14" linkTo="/myshop" text={t('myBitz')} />
+              <NavItemLink className="mr-14" linkTo="/conversations" text={t('conversations')} />
             </div>
           </>
         )}
       </div>
       {isLoggedIn ? (
         <>
-          <div className="hidden sm:flex">
+          <div className="hidden md:flex">
             <NavbarItemDropdown
+              userImgSrc={user?.image}
               signOut={
                 <SignOut text={t('logoutButton')} typeText={false} className="mr-3 text-inherit" />
               }
@@ -65,7 +71,7 @@ const NavBar = async () => {
               favoritesLinkText={t('favorites')}
             />
           </div>
-          <div className="block sm:hidden">
+          <div className="block md:hidden">
             <NavMenuDrawer
               menuItems={drawerItems}
               signOut={
@@ -84,7 +90,10 @@ const NavBar = async () => {
           </div>
         </>
       ) : (
-        <NavLoginLink text={t('loginButton')} />
+        <>
+          <p className='text-neutral-400'>Ein Projekt im Rahmen des Studiengangs Medieninformatik Sommersemester 2024</p>
+          <NavLoginLink text={t('loginButton')} />
+        </>
       )}
     </nav>
   )

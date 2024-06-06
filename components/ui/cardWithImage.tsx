@@ -6,10 +6,14 @@ import { cn } from '@/lib/utils'
 import { Link } from '@/navigation'
 import { Card, CardHeader, CardTitle, CardDescription } from './card'
 import FavoriteLike from '../favorites/favoriteLike'
+import { ProdDelAlert } from '../myShop/productDelAlert'
 
 const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
   ({ className, ...props }, ref) => {
     const cardWidth = 300 //props.previewType === 'product' ? 300 : 600
+
+    props.product.isOwner = props.editable
+
     const getImgBorder = (index: number, arraylength: number) => {
       switch (index) {
         case 0:
@@ -25,7 +29,7 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
       <>
         {props ? (
           <Card className={cn(`w-[${cardWidth}px]`, className)} ref={ref}>
-            <Link href={`/product/${props.productID}?p=${JSON.stringify(props.product)}`}>
+            <Link href={`/product/${props.productID}`}>
               {props.imgUrl1 !== undefined ? (
                 <Image
                   src={props.imgUrl1 as string}
@@ -49,9 +53,14 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                 <CardTitle className="align-middle text-2xl" style={{ lineHeight: 'unset' }}>
                   {props.title}
                 </CardTitle>
-                {props.favIcon && <FavoriteLike productId={props.productID!} />}
+                {props.product.isOwner && props.favIcon && (
+                  <ProdDelAlert productId={props.productID!} />
+                )}
+                {!props.product.isOwner && props.favIcon && (
+                  <FavoriteLike productId={props.productID!} />
+                )}
               </div>
-              <CardDescription className="text-xl ">{props.desc}</CardDescription>
+              <CardDescription className="truncate text-xl">{props.desc}</CardDescription>
             </CardHeader>
           </Card>
         ) : (
@@ -91,7 +100,7 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
           //           <FaRegHeart />
           //         </Button>
           //       </div>
-          //       <CardDescription className="text-xl text-black">{props.desc}</CardDescription>
+          //       <CardDescription className="text-xl truncate text-black">{props.desc}</CardDescription>
           //     </CardHeader>
           //   </Card>
           // </Link>

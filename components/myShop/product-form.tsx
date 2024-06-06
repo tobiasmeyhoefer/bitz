@@ -26,12 +26,15 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Card } from '@/components/ui/card'
 import { Button } from '../ui/button'
-import { useRouter } from '@/navigation'
+import { Link, useRouter } from '@/navigation'
 import Image from 'next/image'
 import { getSignedURL } from '@/lib/productaction'
 import { FormTranslations, ProductType } from '@/lib/types'
 import { useToast } from '@/components/ui/use-toast'
 import { cn } from '@/lib/utils'
+import { Checkbox } from '../ui/checkbox'
+import { getUser } from '@/lib/useraction'
+import { FaPencilAlt } from 'react-icons/fa'
 
 const suggestions = [
   { value: 'Reciever' },
@@ -73,7 +76,7 @@ const formSchema = z.object({
     .max(50)
     .refine((value) => !/#/.test(value)),
   price: z.coerce.number().safe().positive(),
-  quantity: z.coerce.number().safe().positive(),
+  isDirectlyBuyable: z.boolean().default(false).optional(),
   description: z
     .string()
     .min(1, { message: minError })
@@ -123,6 +126,7 @@ export function ProductForm({
   const { toast } = useToast()
   const [open, setOpen] = React.useState(false)
   const [categoryValue, setcategoryValue] = React.useState('')
+  const [locationError, setLocationError] = React.useState(false)
 
   const {
     title,
@@ -136,34 +140,17 @@ export function ProductForm({
     toastDescription,
     submitTitle,
   } = translations
-  //muss eventuell um Image url oder so ersetzt werden
-  // const [data, setData] = useState<ProductType>({
-  //   title: '',
-  //   description: '',
-  //   price: 0,
-  //   quantity: 0,
-  // })
 
-  // useEffect(() => {
-  //   const getProduct = async () => {
-  //     try {
-  //       if (whichFunction == 'update') {
-  //         const result = await getProductById('3f4cb90e-6819-4c65-925b-9e563fdf9aae')
-  //         const r = result[0]
-  //         const updatedData: ProductType = {
-  //           title: r.title,
-  //           description: r.description || '',
-  //           price: r.price,
-  //           quantity: r.quantity,
-  //         }
-  //         setData(updatedData)
-  //       }
-  //     } catch (error) {
-  //       console.error('Fehler beim Laden der Daten:', error)
-  //     }
-  //   }
-  //   getProduct()
-  // }, [whichFunction])
+  useEffect(() => {
+    const getProduct = async () => {
+      const result = await getUser()
+      const user = result?.[0]
+      if (!user?.location) {
+        setLocationError(true)
+      }
+    }
+    getProduct()
+  }, [])
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -174,58 +161,82 @@ export function ProductForm({
       price: 0,
       quantity: 1,
       category: '',
+      isDirectlyBuyable: true,
       images: null,
     },
   })
 
-  // useEffect(() => {
-  //   if (data && whichFunction == 'update') {
-  //     form.reset(data)
-  //   }
-  // }, [data, form, whichFunction])
-
   async function onSubmit(values: ProductType) {
-    let imageUrls = []
-    if (compressedFiles) {
-      for (let i = 0; i < compressedFiles.length; i++) {
-        if (compressedFiles[i]) {
-          const computeSHA256 = async (file: File) => {
-            const buffer = await file.arrayBuffer()
-            const hashBuffer = await crypto.subtle.digest('SHA-256', buffer)
-            const hashArray = Array.from(new Uint8Array(hashBuffer))
-            const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('')
-            return hashHex
-          }
-          const signedURLResult = await getSignedURL({
-            fileSize: compressedFiles[i].size,
-            fileType: compressedFiles[i].type,
-            checksum: await computeSHA256(compressedFiles[i]),
-          })
-          if (signedURLResult.failure !== undefined) {
-            console.error(signedURLResult.failure)
-            return
-          }
+    if (compressedFiles?.length === 0) {
+      toast({
+        title: 'Error',
+        description: 'at least one image pls',
+      })
+      setPreviewUrls(null)
+      setFiles(null)
+      setCompressedFiles(null)
+      return
+    }
 
-          const { url } = signedURLResult.success
-          const response = await fetch(url, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': compressedFiles[i].type,
-            },
-            body: compressedFiles[i],
-          })
-          imageUrls.push(url.split('?')[0])
+    if (locationError) {
+      setcategoryValue('')
+      setPreviewUrls(null)
+      setFiles(null)
+      setCompressedFiles(null)
+      form.reset()
+      toast({
+        title: 'Error',
+        description: 'set Account Location in Settings',
+        action: (
+          <Button>
+            <Link href="/settings">set Location</Link>
+          </Button>
+        ),
+        duration: 2200,
+      })
+    } else {
+      let imageUrls = []
+      if (compressedFiles) {
+        for (let i = 0; i < compressedFiles.length; i++) {
+          if (compressedFiles[i]) {
+            const computeSHA256 = async (file: File) => {
+              const buffer = await file.arrayBuffer()
+              const hashBuffer = await crypto.subtle.digest('SHA-256', buffer)
+              const hashArray = Array.from(new Uint8Array(hashBuffer))
+              const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('')
+              return hashHex
+            }
+            const signedURLResult = await getSignedURL({
+              fileSize: compressedFiles[i].size,
+              fileType: compressedFiles[i].type,
+              checksum: await computeSHA256(compressedFiles[i]),
+            })
+            if (signedURLResult.failure !== undefined) {
+              console.error(signedURLResult.failure)
+              return
+            }
+
+            const { url } = signedURLResult.success
+            const response = await fetch(url, {
+              method: 'PUT',
+              headers: {
+                'Content-Type': compressedFiles[i].type,
+              },
+              body: compressedFiles[i],
+            })
+            imageUrls.push(url.split('?')[0])
+          }
         }
       }
+      // console.log(JSON.parse(JSON.stringify(values)))
+      await addProduct(JSON.parse(JSON.stringify(values)), imageUrls)
+      router.push('/myshop')
+      toast({
+        title: toastTitle,
+        description: toastDescription,
+        duration: 2200,
+      })
     }
-    // console.log(JSON.parse(JSON.stringify(values)))
-    await addProduct(JSON.parse(JSON.stringify(values)), imageUrls)
-    router.push('/myshop')
-    toast({
-      title: toastTitle,
-      description: toastDescription,
-      duration: 2200,
-    })
   }
 
   const [files, setFiles] = useState<FileList | null>(null)
@@ -235,6 +246,8 @@ export function ProductForm({
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files ?? null
     setFiles(files)
+    console.log('test')
+    console.log(files)
     if (previewUrls) {
       previewUrls.map((url) => URL.revokeObjectURL(url))
     }
@@ -252,59 +265,104 @@ export function ProductForm({
     }
   }
 
+  const handleDelete = async (index: number) => {
+    const newPreviewUrls = previewUrls!.filter((_, i) => i !== index)
+    setPreviewUrls(newPreviewUrls)
+
+    const filesArray = Array.from(files!)
+    // console.log(files)
+    filesArray.splice(index, 1)
+    const dataTransfer = new DataTransfer()
+    filesArray.forEach((file) => dataTransfer.items.add(file))
+
+    const compFiles = await compressImages(Array.from(dataTransfer.files))
+    const urlos = compFiles.map((file) => URL.createObjectURL(file))
+
+    setFiles(dataTransfer.files)
+    setPreviewUrls(urlos)
+    setCompressedFiles(compFiles)
+
+    // @ts-ignore
+    form.setValue('images', dataTransfer!.files!)
+
+    // console.log(dataTransfer.files)
+    // setFiles(dataTransfer.files)
+    // const newFiles = files.filter((_, i) => i !== index)
+    // setFiles(newFiles)
+  }
+
   // Funktion zur Bildkomprimierung
   async function compressImages(files: File[]): Promise<File[]> {
     const compressedFiles = await Promise.all(
       files.map(async (file) => {
-        const imageBitmap = await createImageBitmap(file);
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-  
+        const imageBitmap = await createImageBitmap(file)
+        const canvas = document.createElement('canvas')
+        const ctx = canvas.getContext('2d')
+
         // Setze die gewünschte Breite und Höhe für das quadratische Format
-        const MAX_DIMENSION = 800;
-        canvas.width = MAX_DIMENSION;
-        canvas.height = MAX_DIMENSION;
-  
+        const MAX_DIMENSION = 800
+        canvas.width = MAX_DIMENSION
+        canvas.height = MAX_DIMENSION
+
         // Berechne die neue Größe und Position für das 1:1-Format
-        const aspectRatio = imageBitmap.width / imageBitmap.height;
-        let sourceX = 0;
-        let sourceY = 0;
-        let sourceWidth = imageBitmap.width;
-        let sourceHeight = imageBitmap.height;
-  
+        const aspectRatio = imageBitmap.width / imageBitmap.height
+        let sourceX = 0
+        let sourceY = 0
+        let sourceWidth = imageBitmap.width
+        let sourceHeight = imageBitmap.height
+
         if (aspectRatio > 1) {
           // Landscape
-          sourceX = (imageBitmap.width - imageBitmap.height) / 2;
-          sourceWidth = imageBitmap.height;
+          sourceX = (imageBitmap.width - imageBitmap.height) / 2
+          sourceWidth = imageBitmap.height
         } else if (aspectRatio < 1) {
           // Portrait
-          sourceY = (imageBitmap.height - imageBitmap.width) / 2;
-          sourceHeight = imageBitmap.width;
+          sourceY = (imageBitmap.height - imageBitmap.width) / 2
+          sourceHeight = imageBitmap.width
         }
-  
-        ctx!.drawImage(imageBitmap, sourceX, sourceY, sourceWidth, sourceHeight, 0, 0, MAX_DIMENSION, MAX_DIMENSION);
-  
+
+        ctx!.drawImage(
+          imageBitmap,
+          sourceX,
+          sourceY,
+          sourceWidth,
+          sourceHeight,
+          0,
+          0,
+          MAX_DIMENSION,
+          MAX_DIMENSION,
+        )
+
         // Konvertiere das Canvas-Bild in einen Blob
         return new Promise<File>((resolve) => {
           canvas.toBlob(
             (blob) => {
               if (blob) {
-                resolve(new File([blob], file.name, { type: file.type }));
+                resolve(new File([blob], file.name, { type: file.type }))
               }
             },
             file.type,
             0.8,
-          ); // 0.8 ist die Qualitätsstufe, 0.8 bedeutet 80% Qualität
-        });
+          ) // 0.8 ist die Qualitätsstufe, 0.8 bedeutet 80% Qualität
+        })
       }),
-    );
-    return compressedFiles;
+    )
+    return compressedFiles
   }
-  
 
   return (
     <>
-      <Card className=" p-10">
+      <Card className="w-full max-w-[800px] p-10">
+        {locationError && (
+          <div className="flex flex-row items-center gap-2">
+            <p className="font-medium text-red-500">Error: Location gotta be set.</p>
+            <Button className="h-6 w-12">
+              <Link href="/settings">
+                <FaPencilAlt />
+              </Link>
+            </Button>
+          </div>
+        )}
         <Form {...form}>
           <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
@@ -327,7 +385,7 @@ export function ProductForm({
                 <FormItem>
                   <FormLabel> {description}</FormLabel>
                   <FormControl>
-                    <Textarea placeholder={description} {...field} />
+                    <Textarea className="h-24" placeholder={description} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -338,7 +396,7 @@ export function ProductForm({
               name={'price'}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{price}</FormLabel>
+                  <FormLabel className="leading-0">{price}</FormLabel>
                   <FormControl>
                     <Input type="number" placeholder="price" {...field} />
                   </FormControl>
@@ -346,7 +404,7 @@ export function ProductForm({
                 </FormItem>
               )}
             />
-            <FormField
+            {/* <FormField
               control={form.control}
               name={'quantity'}
               render={({ field }) => (
@@ -358,13 +416,13 @@ export function ProductForm({
                   <FormMessage />
                 </FormItem>
               )}
-            />
+            /> */}
             <FormField
               control={form.control}
               name="category"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{category}</FormLabel>
+                <FormItem className="flex flex-col">
+                  <FormLabel className="leading-0">{category}</FormLabel>
                   <Popover open={open} onOpenChange={setOpen}>
                     <PopoverTrigger asChild>
                       <Button
@@ -376,7 +434,7 @@ export function ProductForm({
                         {categoryValue
                           ? suggestions.find((framework) => framework.value === categoryValue)
                               ?.value
-                          : 'Select framework...'}
+                          : categoryPlaceholder}
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className=" w-[15em]">
@@ -417,6 +475,19 @@ export function ProductForm({
             />
             <FormField
               control={form.control}
+              name={'isDirectlyBuyable'}
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-3">
+                  <FormLabel>is directly buyable</FormLabel>
+                  <FormControl>
+                    <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
               name="images"
               render={({ field: { value, onChange, ...fieldProps } }) => (
                 <FormItem>
@@ -440,15 +511,23 @@ export function ProductForm({
             />
             {previewUrls && files && (
               <div className="flex flex-wrap">
-                {previewUrls.map((url) => (
-                  <Image
-                    src={url}
-                    key={url}
-                    alt="Selected files"
-                    width={150}
-                    height={150}
-                    className="border"
-                  />
+                {previewUrls.map((url, index) => (
+                  <div className="relative" key={url}>
+                    <Image
+                      src={url}
+                      key={url}
+                      alt="Selected files"
+                      width={150}
+                      height={150}
+                      className="border"
+                    />
+                    <Button
+                      className="absolute bottom-1 right-1"
+                      onClick={() => handleDelete(index)}
+                    >
+                      Delete
+                    </Button>
+                  </div>
                 ))}
               </div>
             )}

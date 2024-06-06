@@ -1,12 +1,11 @@
 'use client'
 import { Input } from '@/components/ui/input'
-import { useEffect, useRef, useState } from 'react'
-import { Dialog, DialogTrigger, DialogContent } from '../ui/dialog'
-import { BrowseContentProps, SearchBarProps, RevealOnScrollProps, ProductType } from '@/lib/types'
-import { CardWithImage } from '../ui/cardWithImage'
+import { getProductsBrowse, getProductsByCategory, searchProductsByTitle  } from '@/lib/productaction'
+import { BrowseContentProps, ProductType, SearchBarProps, RevealOnScrollProps, ProductType } from '@/lib/types'
+import { useEffect, useState, useRef } from 'react'
 import { SlClose } from 'react-icons/sl'
-import { getProductsBrowse, getProductsByCategory, searchProductsByTitle } from '@/lib/productaction'
-import RevealOnScroll from '../navigation/revealOnScroll'
+import { CardWithImage } from '../ui/cardWithImage'
+import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog'
 
 const BrowseContent = (props: BrowseContentProps) => {
   const [searchValue, setSearchValue] = useState('')
@@ -34,6 +33,10 @@ const BrowseContent = (props: BrowseContentProps) => {
             imageUrl3: item.imageUrl3,
             imageUrl4: item.imageUrl4,
             imageUrl5: item.imageUrl5,
+            stripeId: item.stripeId ?? "",
+            paymentUrl: item.paymentLink ?? "",
+            isDirectlyBuyable: item.isDirectlyBuyable ?? false,
+            isSold: item.isSold ?? false
           }))
           setProducts(checkedResults)
           if (checkedResults.length === 0) {
@@ -124,10 +127,9 @@ const BrowseContent = (props: BrowseContentProps) => {
     'Power Supply', 'RAM', 'Cooling System', 'VR Headset', 'E-Reader', 'Fitness Tracker', 'Charger'
   ]
 
-  const imgArr = ['/test_img.jpg', '/test_img.jpg', '/test_img.jpg']
   return (
     <div
-      className={`${loading && `h-full`} flex w-full flex-col items-center justify-center  px-4 py-20 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
+      className={`${loading && `h-full`} flex w-full flex-col items-center justify-center  px-4 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
     >
       <SearchDialog
         placeholder={
@@ -143,7 +145,8 @@ const BrowseContent = (props: BrowseContentProps) => {
       {!loading ? (
         <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
           {products.map((p, index) => (
-            <RevealOnScroll key={`prx-${index}`}>
+            <div key={`kp-${index}`}>
+              {/* <RevealOnScroll key={`prx-${index}`}> */}
               <CardWithImage
                 key={`pr-${index}`}
                 title={p.title}
@@ -153,8 +156,10 @@ const BrowseContent = (props: BrowseContentProps) => {
                 productID={p.id}
                 product={products[index]}
                 favIcon
+                editable={false}
               />
-            </RevealOnScroll>
+              {/* </RevealOnScroll> */}
+            </div>
           ))}
           {noSearchResults && <div className="text-black px-4">Keine Suchergebnisse gefunden</div>} 
         </div>
@@ -245,7 +250,7 @@ const SearchDialog = (props: SearchBarProps & { loadProductsByCategory: (categor
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Input
-          className="sticky top-[20px] h-14 w-full bg-background  sm:w-2/3 md:w-1/2"
+          className="sticky top-[20px] h-14 w-full bg-background md:w-2/3"
           type="search"
           placeholder={props.searchValue ? props.searchValue : props.placeholder}
           readOnly

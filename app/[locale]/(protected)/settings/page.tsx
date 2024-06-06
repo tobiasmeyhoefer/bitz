@@ -4,22 +4,40 @@ import LocationChooser from '@/components/settings/LocationChooser'
 import { useTranslations } from 'next-intl'
 import { DarkmodeToggler } from '@/components/settings/DarkmodeToggler'
 import PhoneVerification from '@/components/settings/phone-verifiaction'
+import { DeleteAccountButton } from '@/components/settings/delete-account-button'
+import PictureChanger from '@/components/settings/picture-changer'
+import { changeUserImage } from '@/lib/useraction'
+import NameChanger from '@/components/settings/name-changer'
+import AdressChanger from '@/components/settings/adress-changer'
+import ProfileSettings from '@/components/settings/profile-settings'
 
 const Settings = () => {
   const t = useTranslations('Settings')
   return (
-    <div className="flex h-full flex-col items-center py-40">
-      <h1 className="mb-10 text-3xl">{t('title')}</h1>
-      <div className="flex flex-col gap-6">
-        <LocaleSwitcher />
-        <hr />
-        <RegisterPasskey />
-        <hr />
-        <LocationChooser postcode={t('postcode')} />
-        <hr />
-        <DarkmodeToggler />
-        <hr />
-        <PhoneVerification />
+    <div className='pt-10 mb-10'>
+      <h1 className="mb-10 font-montserrat text-center text-5xl font-bold">{t('title')}</h1>
+      <div className="flex lg:flex-row flex-col px-10 gap-10 h-full justify-center pt-10">
+        <div >
+          <ProfileSettings />
+          <hr />
+        </div>
+        <div className="flex w-[600px] h-full flex-col gap-6">
+          <h3 className="text-2xl font-bold">Application</h3>
+          <LocaleSwitcher />
+          <DarkmodeToggler />
+          <hr />
+
+          <h3 className="text-2xl font-bold">Safety</h3>
+          <PhoneVerification />
+          <RegisterPasskey />
+          <DeleteAccountButton
+            header={t('deleteAccount')}
+            title={t('deleteAccountTitle')}
+            description={t('deleteAccountDescription')}
+            cancel={t('deleteAccountCancel')}
+            action={t('deleteAccountAction')}
+          />
+        </div>
       </div>
     </div>
   )

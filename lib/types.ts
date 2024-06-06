@@ -5,15 +5,14 @@ type CardWithImageProps = {
   imgUrl1?: string | null | string[]
   className?: React.HTMLAttributes<HTMLDivElement> | string
   favIcon?: boolean
+  delIcon?: boolean
   shopID?: string
   productID?: string
   product?: any
+  editable: boolean
 }
 type User = {
   userId: string
-  //  email: string
-  //  name: string
-  //  avatar: string
 }
 
 type UserId = {
@@ -22,7 +21,7 @@ type UserId = {
 
 type MyShopProps = {
   userId: string
-  location: any
+  location: string
 }
 
 type SearchBarProps = {
@@ -55,17 +54,6 @@ type BrowseContentProps = {
   searchTranslations: SearchTranslations
 }
 
-// type Product = {
-//   title: string
-//   description: string
-//   price: number
-//   currency: string
-//   quantity: number
-//   location: string
-//   status: string
-//   image?: string
-// }
-
 type ProductType = {
   id?: string
   title: string
@@ -80,18 +68,15 @@ type ProductType = {
   imageUrl3?: string | null
   imageUrl4?: string | null
   imageUrl5?: string | null
-
-  // title: string;
-  // description: string;
-  // price: number;
-  // currency: string;
-  // quantity: number;
-  // location: string;
-  // status: string;
-  // sellerId: string;
-  // createdAt: Date;
-  // image: string;
+  isDirectlyBuyable?: boolean
+  isSold?: boolean
+  stripeId?: string,
+  paymentUrl?: string
 }
+
+type ProdDelAlert = {
+  productId: string
+  }
 
 type Shop = {
   id: string
@@ -119,5 +104,6 @@ export type {
   User,
   UserId,
   MyShopProps,
+  ProdDelAlert,
   Shop,
 }

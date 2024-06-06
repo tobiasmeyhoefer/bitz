@@ -6,6 +6,8 @@ import {
   integer,
   uniqueIndex,
   boolean,
+  pgEnum,
+  serial,
 } from 'drizzle-orm/pg-core'
 import type { AdapterAccount } from 'next-auth/adapters'
 import { genId } from './lib/utils'
@@ -19,7 +21,8 @@ export const users = pgTable('user', {
   emailVerified: timestamp('emailVerified', { mode: 'date' }),
   image: text('image'),
   location: text('location'),
-  phoneVerified: boolean("phoneVerified").default(false)
+  adress: text('adress'),
+  phoneVerified: boolean('phoneVerified').default(false),
 })
 
 export const products = pgTable('product', {
@@ -47,6 +50,10 @@ export const products = pgTable('product', {
   imageUrl3: text('imageUrl3'),
   imageUrl4: text('imageUrl4'),
   imageUrl5: text('imageUrl5'),
+  stripeId: text('stripeId'),
+  paymentLink: text('paymentLink'),
+  isDirectlyBuyable: boolean('isDirectlyBuyable'),
+  isSold: boolean('isSold'),
 })
 
 export const accounts = pgTable(
@@ -81,12 +88,21 @@ export const sessions = pgTable('session', {
   expires: timestamp('expires', { mode: 'date' }).notNull(),
 })
 
-export const verificationNumberSessions = pgTable('verificationNumberSessions', {
-  verificationNumber: text('verificationNumber').notNull(),
-  userId: text('userId')
-    .notNull()
-    .references(() => users.id, { onDelete: 'cascade' })
-})
+export const verificationNumberSessions = pgTable(
+  'verificationNumberSessions',
+  {
+    verificationNumber: text('verificationNumber').notNull(),
+    userId: text('userId')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    createdAt: timestamp('createdAt', { mode: 'date' }).notNull().defaultNow(),
+  },
+  (table) => {
+    return {
+      pk: primaryKey({ columns: [table.userId, table.createdAt] }),
+    }
+  },
+)
 
 export const verificationTokens = pgTable(
   'verificationToken',
@@ -140,5 +156,62 @@ export const favorites = pgTable(
   },
 )
 
-// export type ProductType = typeof products.$inferSelect
+export const transactions = pgTable('transactions', {
+  buyerId: text('buyerId')
+    .notNull()
+    .references(() => users.id, { onDelete: 'cascade' }),
+  sellerId: text('sellerId').references(() => users.id, { onDelete: 'cascade' }),
+  productId: text('productId')
+    .notNull()
+    .references(() => products.id, { onDelete: 'cascade' })
+    .primaryKey(),
+  price: integer('price'),
+  createdAt: timestamp('createdAt', { mode: 'date' }).notNull().defaultNow(),
+})
+
+export const checkoutSession = pgTable('checkoutSession', {
+  buyerId: text('buyerId')
+    .notNull()
+    .references(() => users.id, { onDelete: 'cascade' }),
+  productId: text('productId')
+    .notNull()
+    .references(() => products.id, { onDelete: 'cascade' })
+    .primaryKey(),
+})
+
+/*
+Der Käufer klickt den Kaunfe Button, es wird ein Eintrag gemacht und der Verkäufer erhält in seinem Posteingang eine Nachricht dafür...
+Es gibt eine Seite für Konversation, auf button click eröffnet man eine Konversation die hat erstmal diese Felder: Käufer, Verkäufer, Produkt, Status
+*/
+
+export const statusEnum = pgEnum('status', ['offen', 'accepted', 'declined', 'deal', 'verkauft'])
+
+export const conversations = pgTable(
+  'conversations',
+  {
+    id: serial('id'),
+    buyerId: text('buyerId')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    sellerId: text('sellerId')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    productId: text('productId')
+      .notNull()
+      .references(() => products.id, { onDelete: 'cascade' }),
+    status: statusEnum('status').default('offen'),
+    createdAt: timestamp('createdAt', { mode: 'date' }).notNull().defaultNow(),
+    message1: text('message1'),
+    message2: text('message2'),
+    delay: text('delay'),
+  },
+  (table) => {
+    return {
+      pk: primaryKey({ columns: [table.buyerId, table.productId] }),
+    }
+  },
+)
+
 export type UserType = typeof users.$inferSelect
+export type ConversationType = typeof conversations.$inferSelect
+export type TransactionType = typeof transactions.$inferSelect

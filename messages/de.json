@@ -2,6 +2,20 @@
   "Index": {
     "title": "Hallo Welt!"
   },
+  "Date": {
+    "january": "Januar",
+    "february": "Februar",
+    "march": "März",
+    "april": "April",
+    "may": "Mai",
+    "june": "Juni",
+    "july": "Juli",
+    "august": "August",
+    "september": "September",
+    "october": "Oktober",
+    "november": "November",
+    "december": "Dezember"
+  },
   "Landingpage": {
     "subtitle": "von heute für morgen mit Technik versorgen",
     "description": "Entdecke bei Bitz die neuesten Technikgeräte zu unschlagbaren Preisen! Kaufe, verkaufe und tausche deine Lieblingsgadgets in einer sicheren Umgebung. Trete unserer lebendigen Community bei und finde noch heute dein nächstes Technik-Highlight.",
@@ -32,6 +46,11 @@
     "updateProducts": "Bit aktualisieren",
     "deleteProduct": "Bit löschen"
   },
+  "Product": {
+    "quantity": "Häufigkeit",
+    "image": "Bild",
+    "of": "von"
+  },
   "addProductPage": {
     "title": "Titel",
     "description": "Beschreibung",
@@ -42,22 +61,33 @@
     "images": "Bilder",
     "toastTitle": "Erfolgreich",
     "toastDescription": "Produkt wurde hinzugefügt",
-    "submitTitle": "absenden"
-  }, 
-  "popAlert": {
+    "submitTitle": "Absenden",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "edit": "Bearbeiten"
+  },
+  "ProdDelAlert": {
     "submitTitle": "löschen",
     "yousure": "Bist du sicher, dass du diese Ware löschen möchtest?"
-    },
+  },
   "Settings": {
-    "title": "Einstellungen",
+    "title": "EINSTELLUNGEN",
     "city": "Stadt",
-    "postcode": "Postleitzahl"
+    "postcode": "Postleitzahl",
+    "imageChangeTitle": "Profilbild ändern",
+    "submitTitle": "absenden",
+    "deleteAccount": "Account löschen",
+    "deleteAccountTitle": "Bist du dir sicher?",
+    "deleteAccountDescription": "Diese Aktion kann nicht rückgängig gemacht werden. Dadurch wird Ihr Konto dauerhaft gelöscht und Ihre Daten werden von unseren Servern entfernt.",
+    "deleteAccountCancel": "Abbrechen",
+    "deleteAccountAction": "Account löschen"
   },
   "Navbar": {
     "loginButton": "anmelden",
     "logoutButton": "Abmelden",
     "discover": "Entdecken",
     "myBitz": "Meine Bitz",
+    "conversations": "Konversationen",
     "search": "Suchen",
     "profile": "Profil vewalten",
     "settings": "Einstellungen",
@@ -70,7 +100,6 @@
     "loginPasskeyTip": "registriere einen Passkey in den Einstellungen",
     "loginOrPasskey": "oder",
     "loginPasskeyButton": "mit Passkey"
-    
   },
   "LocaleSwitcher": {
     "label": "Sprache ändern",
