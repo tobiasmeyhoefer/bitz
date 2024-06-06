@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Space_Grotesk, Montserrat } from 'next/font/google'
 import './globals.css'
 import NavBar from '@/components/navigation/NavBar'
@@ -17,6 +17,10 @@ export const metadata: Metadata = {
   description: 'Kauf- und Verkaufsplattform',
 }
 
+export const viewport: Viewport = {
+  maximumScale: 1,
+};
+
 export default async function LocaleLayout({
   children,
   params: { locale },
@@ -25,7 +29,7 @@ export default async function LocaleLayout({
   params: { locale: string }
 }>) {
   return (
-    <html lang={locale}>
+    <html className='bg-background' lang={locale}>
       <body
         className={cn(
           'min-h-screen bg-background antialiased font-space_grotesk overflow-x-hidden',

@@ -115,14 +115,14 @@ export async function updateProduct(productId: string, values: ProductType) {
   const existingProduct = await getProductById(productId)
   if (existingProduct) {
     console.log('-----------')
-    const { title, description, price, quantity } = values
+    const { title, description, price } = values
     await db
       .update(products)
       .set({
         title: title || existingProduct[0].title,
         description: description || existingProduct[0].description,
         price: price || existingProduct[0].price,
-        quantity: quantity || existingProduct[0].quantity,
+        // quantity: quantity || existingProduct[0].quantity,
       })
       .where(eq(products.id, productId))
     await updateProductStripe(existingProduct[0].stripeId!, values)

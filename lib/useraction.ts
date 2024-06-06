@@ -106,3 +106,8 @@ export async function getAllUsersCount() {
   const result = await db.select({ count: count() }).from(users)
   return result[0].count
 }
+
+export async function getAddressByUserId(userId: string): Promise<string> {
+  const result = await db.select({address: users.adress}).from(users).where(eq(users.id, userId))
+  return result[0].address!
+}

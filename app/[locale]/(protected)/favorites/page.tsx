@@ -6,7 +6,7 @@ const Favorites = async () => {
 
   return (
     <>
-      <h1 className="mt-10 text-center font-montserrat text-5xl font-bold">FAVORITEN</h1>
+      <h1 className="mt-10 text-center font-montserrat text-3xl font-bold">FAVORITEN</h1>
       {products?.length === 0 ? (
         <p className='text-center mt-6'>Du hast noch keine Favoriten. Du kannst welche hinzufügen indem du den like button drückst</p>
       ) : (

@@ -129,9 +129,9 @@ export default function ProductInfoCard(props: ProductInfoType) {
             <CardContent className="flex min-h-[80%] flex-col justify-between p-6">
               <div className="flex justify-between text-wrap pb-6">
                 <div className="h-fit w-9/12 break-words">{product.description}</div>
-                <div className="whitespace-nowrap text-right lg:w-[20vw]">
+                {/* <div className="whitespace-nowrap text-right lg:w-[20vw]">
                   {tProduct('quantity')}: {product.quantity}
-                </div>
+                </div> */}
               </div>
               <div>{getDate(product.createdAt, true, 'text-right')}</div>
             </CardContent>

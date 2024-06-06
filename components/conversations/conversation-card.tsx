@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { getProductById } from '@/lib/productaction'
-import { getUser, getUserById } from '@/lib/useraction'
+import { getAddressByUserId, getUser, getUserById } from '@/lib/useraction'
 import { ConversationType } from '@/schema'
 import { formatDate } from '@/lib/utils'
 import { ConversationForm } from './conversation-form1'
@@ -25,12 +25,15 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
   if (cardType === 'sellerCard') {
     return (
       <Card className="relative">
-        <ConversationCardDropwdown conv={conv} showDelay={true} showSold={false}/>
+        <ConversationCardDropwdown conv={conv} showDelay={true} showSold={false} />
         <CardHeader>
           <CardTitle>Du bist an dem Bit {product[0].title} interessiert</CardTitle>
           <CardDescription>
             {conv.status === 'accepted' ? (
-              <span>Der Käufer hat dein Angebot akzeptiert </span>
+              <span>
+                Der Verkäufer hat dein Angebot akzeptiert, hier seine Adresse:{' '}
+                {await getAddressByUserId(conv.sellerId)}
+              </span>
             ) : (
               <span>Aktuell wird auf eine Antwort gewartet </span>
             )}
@@ -49,9 +52,7 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
         <CardFooter className="flex flex-col items-start text-neutral-400">
           <p className="font-ligh text-neutral-400">{formatDate(conv.createdAt)}</p>
           {conv.delay !== null ? (
-            <p className="text-red-600">
-              Du verspätest sich um {conv.delay} Minuten
-            </p>
+            <p className="text-red-600">Du verspätest sich um {conv.delay} Minuten</p>
           ) : (
             <span></span>
           )}
@@ -70,10 +71,13 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
               <CardTitle>
                 Der User {user[0].name} ist an deinem Bit {product[0].title} interessiert
               </CardTitle>
-              <CardDescription>
-                Du kannst dieses Angebot nun ablehnen oder annehmen. Wenn du es annimmst, wird dein
-                in den Einstellungen festgelegter Abholort übermittelt bitte trage im vorgesehenen Feld ein wann du Zeit hast
-              </CardDescription>
+              {conv.status === 'offen' ? (
+                <CardDescription>
+                  Du kannst dieses Angebot nun ablehnen oder annehmen. Wenn du es annimmst, wird
+                  dein in den Einstellungen festgelegter Ort übermittelt. Bitte trage im
+                  vorgesehenen Feld ein wann du Zeit hast
+                </CardDescription>
+              ) : null}
             </CardHeader>
             {conv.status === 'accepted' ? (
               <CardContent>Du hast das Angebot akzeptiert ✅</CardContent>
