@@ -158,8 +158,8 @@ export default function ProductInfoCard(props: ProductInfoType) {
                   const user = await getUser()
                   await createCheckoutSession(user![0].id, product.id!)
                   revalidatePath('/transactions')
-                  console.log(product.paymentUrl)
-                  red(product.paymentUrl!)
+                  console.log(product.paymentLink)
+                  red(product.paymentLink!)
                 }
               }}
             >

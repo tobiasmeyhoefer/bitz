@@ -64,18 +64,6 @@ export default async function Page({ params }: { params: { id: string } }) {
           </Button>
         </Link>
       </div>
-      {/* <form
-        action={async () => {
-          'use server'
-          await createConversation(product.id)
-          revalidatePath('/conversations')
-          redirect('/conversations')
-        }}
-      >
-        <Button type="submit" className="fixed bottom-6 right-40">
-          Kaufen
-        </Button>
-      </form> */}
     </>
   )
 }

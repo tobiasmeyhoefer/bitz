@@ -70,13 +70,13 @@ type ProductType = {
   imageUrl5?: string | null
   isDirectlyBuyable?: boolean
   isSold?: boolean
-  stripeId?: string,
-  paymentUrl?: string
+  stripeId?: string
+  paymentLink?: string
 }
 
 type ProdDelAlert = {
   productId: string
-  }
+}
 
 type Shop = {
   id: string
