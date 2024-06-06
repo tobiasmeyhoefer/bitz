@@ -23,12 +23,12 @@ const Login = () => {
     ssr: false,
   })
   return (
-    <div className="flex h-screen w-full items-center justify-center">
-      <Link href="/" className="absolute top-0 left-12 h-[100px] w-[150px] md:h-[180px] md:w-[220px] sm:mr-10">
-        {/* <CubeSceneNav /> */}
+    <div className="absolute inset-0 flex h-screen w-full items-center justify-center">
+      <Link href="/" className="absolute top-0 md:left-8 left-0 h-[80px] w-[120px] md:h-[150px] md:w-[180px] sm:mr-10">
+        <CubeSceneNav />
       </Link>
       <div className="relative mx-8 w-full rounded-xl p-[1px] md:w-[800px]">
-        <Card className="z-10 w-full p-4 md:p-10">
+        <Card className="z-10 w-full p-4 md:p-8">
           <CardHeader className="text-center">
             <CardTitle className="text-2xl">{t('loginButton')}</CardTitle>
             <CardDescription>{t('loginMessage')}</CardDescription>

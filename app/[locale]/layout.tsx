@@ -29,7 +29,7 @@ export default async function LocaleLayout({
   params: { locale: string }
 }>) {
   return (
-    <html className='bg-background' lang={locale}>
+    <html lang={locale}>
       <body
         className={cn(
           'min-h-screen bg-background antialiased font-space_grotesk overflow-x-hidden',
