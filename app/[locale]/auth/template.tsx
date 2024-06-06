@@ -3,6 +3,7 @@
 import { LazyMotion, domAnimation, m } from "framer-motion";
 
 export default function Template({ children }: { children: React.ReactNode }) {
+  console.log("tst")
   return (
     <LazyMotion features={domAnimation}>
       <m.div

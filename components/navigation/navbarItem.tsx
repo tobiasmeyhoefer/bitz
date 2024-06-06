@@ -111,7 +111,7 @@ const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
         </DropdownMenuItem>
         <DropdownMenuItem>
           <NavItemLink
-            className="ml-auto text-left text-sm no-underline hover:no-underline"
+            className="text-left text-sm no-underline hover:no-underline"
             text="Transaktionen"
             linkTo="/transactions"
           ></NavItemLink>
@@ -152,9 +152,7 @@ const NavMenuDrawer = (props: any) => {
             <div
               className={`flex justify-center hover:bg-slate-100 ${index === 0 && `rounded-t-xl`} ${pathname === item.props.linkTo && 'cursor-default bg-slate-100 text-primary no-underline'}`}
               onClick={() => {
-                if(index !== 0) {
-                  setDrawerOpen(false)
-                }
+                setDrawerOpen(false)
               }}
               key={item.key}
             >

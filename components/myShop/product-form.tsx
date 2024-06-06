@@ -75,7 +75,7 @@ const formSchema = z.object({
     .min(1, { message: minError })
     .max(50)
     .refine((value) => !/#/.test(value)),
-  price: z.coerce.number().safe().positive(),
+  price: z.coerce.number().safe().positive().multipleOf(1, {message: "Dezimalstellen sind nicht erwünscht"}),
   isDirectlyBuyable: z.boolean().default(false).optional(),
   description: z
     .string()
@@ -132,7 +132,7 @@ export function ProductForm({
     title,
     description,
     price,
-    quantity,
+    // quantity,
     category,
     categoryPlaceholder,
     images,
@@ -284,11 +284,6 @@ export function ProductForm({
 
     // @ts-ignore
     form.setValue('images', dataTransfer!.files!)
-
-    // console.log(dataTransfer.files)
-    // setFiles(dataTransfer.files)
-    // const newFiles = files.filter((_, i) => i !== index)
-    // setFiles(newFiles)
   }
 
   // Funktion zur Bildkomprimierung
@@ -398,25 +393,15 @@ export function ProductForm({
                 <FormItem>
                   <FormLabel className="leading-0">{price}</FormLabel>
                   <FormControl>
-                    <Input type="number" placeholder="price" {...field} />
+                    <div className="flex items-center gap-2">
+                      <Input type="number" placeholder="price" {...field} />
+                      <p className="text-lg">€</p>
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            {/* <FormField
-              control={form.control}
-              name={'quantity'}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{quantity}</FormLabel>
-                  <FormControl>
-                    <Input type="number" placeholder="quantity" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            /> */}
             <FormField
               control={form.control}
               name="category"
