@@ -65,7 +65,7 @@ export default function ProductInfoCardEditable(props: any) {
     defaultValues: {
       title: product.title,
       price: product.price,
-      quantity: product.quantity,
+      quantity: product.quantity!,
       description: product.description,
     },
   })

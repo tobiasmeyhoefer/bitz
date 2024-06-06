@@ -79,21 +79,22 @@ type BrowseContentProps = {
 type ProductType = {
   id?: string
   title: string
-  description?: string
+  description: string | null
+  location?: string | null
   price: number
-  quantity: number
-  category?: string
-  createdAt?: string
+  quantity: number | null
+  category?: string | null
+  createdAt?: string | Date
   sellerId?: string
   imageUrl1?: string | null
   imageUrl2?: string | null
   imageUrl3?: string | null
   imageUrl4?: string | null
   imageUrl5?: string | null
-  isDirectlyBuyable?: boolean
-  isSold?: boolean
+  isDirectlyBuyable?: boolean | null
+  isSold?: boolean | null
   stripeId?: string
-  paymentUrl?: string
+  paymentLink?: string
 }
 
 type ProductImageCarouselProps = {
@@ -101,9 +102,9 @@ type ProductImageCarouselProps = {
     image: string
     of: string
   }
-  images: string[]
+  images: (string | null | undefined)[]
   className: string
-  sellerId: string
+  sellerId: string | undefined
 }
 
 type ProdDelAlert = {

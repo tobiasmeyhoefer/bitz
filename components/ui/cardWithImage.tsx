@@ -12,8 +12,6 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
   ({ className, ...props }, ref) => {
     const cardWidth = 300 //props.previewType === 'product' ? 300 : 600
 
-    props.product.isOwner = props.editable
-
     const getImgBorder = (index: number, arraylength: number) => {
       switch (index) {
         case 0:
@@ -27,7 +25,7 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
 
     return (
       <>
-        {props ? (
+        {props && props.product ? (
           <Card className={cn(`w-[${cardWidth}px]`, className)} ref={ref}>
             <Link href={`/product/${props.productID}`}>
               {props.imgUrl1 !== undefined ? (
@@ -53,12 +51,8 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                 <CardTitle className="align-middle text-2xl" style={{ lineHeight: 'unset' }}>
                   {props.title}
                 </CardTitle>
-                {props.product.isOwner && props.favIcon && (
-                  <ProdDelAlert productId={props.productID!} />
-                )}
-                {!props.product.isOwner && props.favIcon && (
-                  <FavoriteLike productId={props.productID!} />
-                )}
+                {props.editable && props.favIcon && <ProdDelAlert productId={props.productID!} />}
+                {!props.editable && props.favIcon && <FavoriteLike productId={props.productID!} />}
               </div>
               <CardDescription className="truncate text-xl">{props.desc}</CardDescription>
             </CardHeader>

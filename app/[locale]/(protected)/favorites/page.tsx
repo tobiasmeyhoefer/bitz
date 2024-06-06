@@ -1,14 +1,17 @@
 import { CardWithImage } from '@/components/ui/cardWithImage'
 import { getFavoriteProducts } from '@/lib/productaction'
+import { ProductType } from '@/lib/types'
 
 const Favorites = async () => {
-  const products = await getFavoriteProducts()
+  const products: ProductType[] | undefined = await getFavoriteProducts()
 
   return (
     <>
       <h1 className="mt-10 text-center font-montserrat text-5xl font-bold">FAVORITEN</h1>
       {products?.length === 0 ? (
-        <p className='text-center mt-6'>Du hast noch keine Favoriten. Du kannst welche hinzufügen indem du den like button drückst</p>
+        <p className="mt-6 text-center">
+          Du hast noch keine Favoriten. Du kannst welche hinzufügen indem du den like button drückst
+        </p>
       ) : (
         <div
           className={`${`h-full`} flex w-full flex-col items-center justify-center px-10 py-20 md:px-[20px] lg:px-[30px] xl:px-[80px]`}

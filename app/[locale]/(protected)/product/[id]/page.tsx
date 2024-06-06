@@ -5,13 +5,15 @@ import { ProductImageCarousel } from '../productImgCarousel'
 import ProductInfoCard from '../productInfoCard'
 import { getTranslations } from 'next-intl/server'
 import { getProductById } from '@/lib/productaction'
+import { ProductType } from '@/lib/types'
 
 export default async function Page({ params }: { params: { id: string } }) {
   const t = await getTranslations('Product')
   const productId = params.id
 
-  const fetchedProduct: any = await getProductById(productId)
-  const product = fetchedProduct[0]
+  const fetchedProduct: ProductType[] = await getProductById(productId)
+  console.log(fetchedProduct)
+  const product: ProductType = fetchedProduct[0]
 
   const unfilteredImgs = [
     product.imageUrl1,
@@ -40,7 +42,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           className="h-[50vh] lg:h-[60vh]"
           sellerId={product.sellerId}
         />
-        <ProductInfoCard productInfo={product} />
+        <ProductInfoCard productInfo={product} isOwner />
       </div>
       {/* <form
         action={async () => {

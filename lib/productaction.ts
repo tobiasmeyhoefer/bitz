@@ -109,10 +109,11 @@ export async function deleteProduct(productId: string) {
 }
 
 // Update function requiring productData as
-export async function updateProduct(productId: string, values: ProductType) {//#endregion
+export async function updateProduct(productId: string, values: ProductType) {
+  //#endregion
   const existingProduct = await getProductById(productId)
   if (existingProduct) {
-    console.log("-----------")
+    console.log('-----------')
     const { title, description, price, quantity } = values
     await db
       .update(products)
@@ -161,7 +162,7 @@ export async function getUserFavorites() {
   }
 }
 
-export async function getFavoriteProducts() {
+export async function getFavoriteProducts(): Promise<ProductType[] | undefined> {
   const userFavorites = await getUserFavorites()
   if (userFavorites) {
     const favoriteProducts = userFavorites.map(async (product) => {
