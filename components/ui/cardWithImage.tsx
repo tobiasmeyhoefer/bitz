@@ -52,6 +52,7 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
               <CardDescription className="truncate text-xl text-black">
                 <div className="text-right">{props.price}€</div>
                 <div className="text-right text-xs">{formatDate(props.timestamp!)}</div>
+                {props.product.isSold && <p className='text-green-500'>verkauft</p>}
               </CardDescription>
             </CardHeader>
           </Card>
