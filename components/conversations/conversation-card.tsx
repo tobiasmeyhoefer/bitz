@@ -35,7 +35,7 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
           <CardDescription>
             {conv.status === 'accepted' ? (
               <span>
-                Der Verkäufer hat dein Angebot akzeptiert, hier seine Adresse:{' '}
+                { t('sellerAccepted') }
                 {await getAddressByUserId(conv.sellerId)}
               </span>
             ) : (

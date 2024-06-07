@@ -181,7 +181,10 @@
     "gotOffer": "Du kannst dieses Angebot nun ablehnen oder annehmen. Wenn du es annimmst, wird dein in den Einstellungen festgelegter Ort übermittelt. Bitte trage im vorgesehenen Feld ein wann du Zeit hast!",
     "waiting": "Aktuell wird auf eine Antwort gewartet...",
     "deal": "Ihr habt jetzt einen Deal!",
-    "accepted": "Du hast das Angebot akzeptiert",
+    "youAccepted": "Du hast das Angebot akzeptiert",
+    "sellerAccepted": "Der Verkäufer hat dein Angebot akzeptiert, hier seine Adresse:",
+    "youDeclined": "Du hast das Angebot abgelehnt",
+    "sellerDeclined": "Der Verkäufer hat dein Angebot abgelehnt",
     "delay00": "Du verspätest dich um",
     "delay01": "Minuten",
     "delay11": "verspätet sich um"
