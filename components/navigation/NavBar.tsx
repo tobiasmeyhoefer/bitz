@@ -38,6 +38,18 @@ const NavBar = async () => {
     <NavItemLink
       key={'dil-4'}
       className="py-4 text-center text-2xl hover:no-underline"
+      linkTo="/transactions"
+      text="Transaktionen"
+    ></NavItemLink>,
+    <NavItemLink
+      key={'dil-4'}
+      className="py-4 text-center text-2xl hover:no-underline"
+      linkTo="/conversations"
+      text="Konversationen"
+    ></NavItemLink>,
+    <NavItemLink
+      key={'dil-4'}
+      className="py-4 text-center text-2xl hover:no-underline"
       linkTo="/settings"
       text={t('settings')}
     ></NavItemLink>,
