@@ -96,7 +96,7 @@
     "title": "Suchen"
   },
   "MyShop": {
-    "title": "Meine Bitz",
+    "title": "MEINE BITZ",
     "addProducts": "Bit hinzufügen",
     "updateProducts": "Bit aktualisieren",
     "deleteProduct": "Bit löschen"
@@ -174,8 +174,10 @@
   "Conversations": {  
     "title": "KONVERSATIONEN",
     "empty" : "Es gibt keine offenen Konversationen",
-    "newbuyer00": "ist an deinem Bit",
-    "newbuyer01": "interessiert",
+    "newbuyer00": "ist an deinem Bit '",
+    "newbuyer01": "' interessiert.",
+    "wannabuy00": "Du bist an dem Bit '",
+    "wannabuy01": "' interessiert.",
     "gotOffer": "Du kannst dieses Angebot nun ablehnen oder annehmen. Wenn du es annimmst, wird dein in den Einstellungen festgelegter Ort übermittelt. Bitte trage im vorgesehenen Feld ein wann du Zeit hast!",
     "waiting": "Aktuell wird auf eine Antwort gewartet...",
     "deal": "Ihr habt jetzt einen Deal!",

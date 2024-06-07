@@ -170,8 +170,10 @@
   "Conversations": {  
     "title": "CONVERSATIONS",
     "empty": "There are no opened conversations",
-    "newbuyer00": "is interested in your Bitz",
-    "newbuyer01": " ",
+    "newbuyer00": "is interested in your Bitz '",
+    "newbuyer01": "'.",
+    "wannabuy00": "You are interested in the Bit '",
+    "wannabuy01": "'. ",
     "gotOffer": "You can now accept or decline this offer. If you accept it, the location you specified in the settings will be transmitted. Please enter \"when you have time\" in the field provided!",
     "accepted": "Du hast das Angebot akzeptiert",
     "waiting": "Waiting for a response...",

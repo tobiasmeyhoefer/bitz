@@ -31,7 +31,7 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
       <Card className="relative">
         <ConversationCardDropwdown conv={conv} showDelay={true} showSold={false} />
         <CardHeader>
-          <CardTitle>Du bist an dem Bit {product[0].title} interessiert</CardTitle>
+          <CardTitle>{t("wannabuy00")} {product[0].title} {t('wannabuy01')}</CardTitle>
           <CardDescription>
             {conv.status === 'accepted' ? (
               <span>

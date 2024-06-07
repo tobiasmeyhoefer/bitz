@@ -8,7 +8,7 @@ const Favorites = async () => {
     <>
       <h1 className="mt-10 text-center font-montserrat text-3xl font-bold">FAVORITEN</h1>
       {products?.length === 0 ? (
-        <p className='text-center mt-6'>Du hast noch keine Favoriten. Du kannst welche hinzufügen indem du den like button drückst</p>
+        <p className='text-center mt-6'></p>
       ) : (
         <div
           className={`${`h-full`} flex w-full flex-col items-center justify-center px-10 py-20 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
