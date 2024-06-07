@@ -9,7 +9,7 @@ export default function LocaleSwitcher() {
 
   return (
     <div className=''>
-      <h5 className='mb-2'>Sprache ändern</h5>
+      <h5 className='mb-2'>{t('label')}</h5>
       <LocaleSwitcherSelect defaultValue={t('locale', { locale: locale })} label={t('label')}>
         {locales.map((cur) => (
           <SelectItem key={cur} value={cur}>

@@ -36,7 +36,7 @@ export function ProdDelAlert({ productId }: { productId: string }) {
           <form action={() => deleteProduct(productId)}>
             <Button variant={'destructive'}>
               <AlertDialogAction className="bg-transparent hover:bg-transparent">
-                Continue
+                Delete
               </AlertDialogAction>
             </Button>
           </form>

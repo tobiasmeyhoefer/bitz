@@ -17,12 +17,11 @@ const Settings = () => {
           <hr />
         </div>
         <div className="flex w-[600px] h-full flex-col gap-6">
-          <h3 className="text-2xl font-bold">Application</h3>
+          <h3 className="text-2xl font-bold">{t('app')}</h3>
           <LocaleSwitcher />
           <DarkmodeToggler />
           <hr />
-          <h3 className="text-2xl font-bold">Safety</h3>
-          <PhoneVerification />
+          <h3 className="text-2xl font-bold">{t('safety')}</h3>
           <RegisterPasskey />
           <DeleteAccountButton
             header={t('deleteAccount')}

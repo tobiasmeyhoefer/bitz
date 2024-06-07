@@ -30,8 +30,63 @@
     "createShop": "Shop erstellen",
     "buy": "Produkte kaufen",
     "sell": "Technik-Produkte verkaufen",
-    "createAccount": "Account erstellen"
+    "createAccount": "Account erstellen",
+    
+    "sub01": "VON",
+    "sub02": "GESTERN",
+    "sub03": "FÜR",
+    "sub04": "MORGEN",
+    "sub05": "MIT TECHNIK VERSORGEN",
+    "discoverBitz": "Entdecke die neue Kauf- und Verkaufsplattform",
+
+    "Sponsors": {
+      "thanks": "Besonderen Dank an"
+    },
+    "About": {
+      "title": "Was Ist",
+      "WhatIsBitz": "Bitz ist eine Kauf- und Verkaufsplattform ähnlich wie Kleinanzeigen oder Vinted, nur sehr viel besser. Bei Bitz dreht sich alles um die Freude am Stöbern, Entdecken und Handeln. Unsere Anwendung dient als Marktplatz zum Verkauf eigener Ware, oder zum Kauf von Waren anderer. Unser Augenmerk liegt hierbei auf dem Handel mit technischer Ware, eine erhöhte Sicherheit und eine gute Benutzererfahrung. Durch individualisierbare Nutzerprofile lassen sich eigene kleine Shops erstellen, um die Bitz (deine Artikel) somit ideal zu vermarkten. Mit Bitz lässt sich somit Geld sparen, Platz schaffen und zudem die Umwelt schonen.",
+      "Users": "Benutzer"
+    },
+    "HowItWorks": {
+      "title01": "Wie Es",
+      "title02": "Funktioniert: ",
+      "title03": "Schritt-für-Schritt-Anleitung",
+      "sub": "Bitz ist kinderleicht; hier eine kurze Erklärung:",
+      "step01": "Account erstellen",
+      "step11": "Erstelle dir einen Account... bei uns gibt es keine Passwörter für erhöhte Sicherheit",
+      "step02": "Durchstöber die Produkte",
+      "step22": "Gehe auf die Entdecken Seite und finde Produkte die dir gefallen... du kannst auch nach ihnen suchen",
+      "step03": "Kaufen",
+      "step33": "Du kannst ein Produkt Kaufen oder Direkt Kaufen, Kaufen ist für das persönliche Treffen und verhandeln und Direkt kaufen ist für Paketversand",
+      "step04": "Benutzen",
+      "step44": "Nutze dein erworbenes Bit und stelle es wieder auf unserer Plattform wenn du genug davon hast"
+    },
+    "Testimonials": {
+      "title01": "Warum Unsere Benutzer",
+      "title02": "Bitz",
+      "title03": "Lieben",
+      "sub": "Unsere Kunden freuen sich immer, wenn sie uns von ihren Erfahrungen mit Bitz berichten können.",
+      "anna": "Ich liebe Bitz! Ich finde hier immer genau das, was ich brauche und das zu tollen Preisen. Die Community ist super hilfsbereit und ich habe schon viele tolle Schnäppchen gemacht.",
+      "markus": "Bitz ist für mich die beste Plattform, um meine alten Geräte zu verkaufen. Der Verkaufsprozess ist einfach und ich erreiche viele potenzielle Käufer.",
+      "katrin": "Bitz ist einfach fantastisch! Ich habe schon viele Schnäppchen gemacht und die Qualität der Produkte ist immer top. Es ist meine erste Anlaufstelle bei Elektronik Bedarf.",
+      "lisa": "Dank Bitz konnte ich mein altes Smartphone schnell und sicher verkaufen. Die Benutzeroberfläche ist intuitiv und die Kommunikation mit den Käufern lief reibungslos.",
+      "thomas": "Die Plattform bietet eine tolle Möglichkeit, neue Technik-Produkte auszuprobieren, ohne gleich viel Geld auszugeben.",
+      "nina": "Ich bin begeistert vom modernen und coolen Design von Bitz. Die Benutzeroberfläche ist super intuitiv und sieht einfach klasse aus. Es macht richtig Spaß, durch die Angebote zu stöbern!"
+    },
+     "OurTeam": {
+      "title": "Unser Motiviertes",
+      "sub": "consisting of frontend and backend specialists"
+     }  
   },
+
+  "Statistics":{
+    "users": "Nutzer",
+    "devs": "Entwickler",
+    "downloads": {
+      "soon": "demnächst"
+    }
+  },
+
   "Browse": {
     "title": "Entdecken",
     "searchPlaceholder": "Wonach suchst du?",
@@ -41,7 +96,7 @@
     "title": "Suchen"
   },
   "MyShop": {
-    "title": "Mein Shop",
+    "title": "MEINE BITZ",
     "addProducts": "Bit hinzufügen",
     "updateProducts": "Bit aktualisieren",
     "deleteProduct": "Bit löschen"
@@ -67,8 +122,11 @@
     "edit": "Bearbeiten"
   },
   "ProdDelAlert": {
-    "submitTitle": "löschen",
-    "yousure": "Bist du sicher, dass du diese Ware löschen möchtest?"
+    "title": "Achtung!",
+    "yousure": "Bist du sicher, dass du dieses Bit löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.",
+    "confirm": "Bestätigen",
+    "cancel" : "Abbrechen"
+
   },
   "Settings": {
     "title": "EINSTELLUNGEN",
@@ -80,7 +138,14 @@
     "deleteAccountTitle": "Bist du dir sicher?",
     "deleteAccountDescription": "Diese Aktion kann nicht rückgängig gemacht werden. Dadurch wird Ihr Konto dauerhaft gelöscht und Ihre Daten werden von unseren Servern entfernt.",
     "deleteAccountCancel": "Abbrechen",
-    "deleteAccountAction": "Account löschen"
+    "deleteAccountAction": "Account löschen",
+    "app": "Anwendung",
+    "safety": "Sicherheit",
+    "username": "Benutzer",
+    "change Name": "change name",
+    "change Location": "change location",
+    "change Adress": "change adress",
+    "theme": "change colortheme"
   },
   "Navbar": {
     "loginButton": "anmelden",
@@ -104,5 +169,27 @@
   "LocaleSwitcher": {
     "label": "Sprache ändern",
     "locale": "{locale, select, de {🇩🇪 Deutsch} en {🇺🇸 English} other {Unbekannt}}"
-  }
+  },
+
+  "Conversations": {  
+    "title": "KONVERSATIONEN",
+    "empty" : "Es gibt keine offenen Konversationen",
+    "newbuyer00": "ist an deinem Bit '",
+    "newbuyer01": "' interessiert.",
+    "wannabuy00": "Du bist an dem Bit '",
+    "wannabuy01": "' interessiert.",
+    "gotOffer": "Du kannst dieses Angebot nun ablehnen oder annehmen. Wenn du es annimmst, wird dein in den Einstellungen festgelegter Ort übermittelt. Bitte trage im vorgesehenen Feld ein wann du Zeit hast!",
+    "waiting": "Aktuell wird auf eine Antwort gewartet...",
+    "deal": "Ihr habt jetzt einen Deal!",
+    "youAccepted": "Du hast das Angebot akzeptiert",
+    "sellerAccepted": "Der Verkäufer hat dein Angebot akzeptiert, hier seine Adresse:",
+    "youDeclined": "Du hast das Angebot abgelehnt",
+    "sellerDeclined": "Der Verkäufer hat dein Angebot abgelehnt",
+    "delay00": "Du verspätest dich um",
+    "delay01": "Minuten",
+    "delay11": "verspätet sich um"
+  },
+  "Transactions": {
+      "title": "TRANSAKTIONEN"
+    }
 }
