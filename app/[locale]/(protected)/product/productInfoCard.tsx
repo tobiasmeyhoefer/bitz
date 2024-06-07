@@ -4,14 +4,7 @@ import { useTranslations, useLocale } from 'next-intl'
 import ProductInfoCardEditable from './productInfoCardEditable'
 import { ProductType } from '@/lib/types'
 import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
-import { createConversation } from '@/lib/conversations-actions'
-import { Link, redirect } from '@/navigation'
-import { revalidatePath } from 'next/cache'
-import { createCheckoutSession, productHasCheckoutSessionOpened } from '@/lib/stripe-actions'
-import { getUser } from '@/lib/useraction'
-import { redirect as red } from 'next/navigation'
-
+import { BuyButtons } from '@/components/products/buy-buttons'
 type ProductInfoType = {
   productInfo: ProductType
   isOwner: boolean
@@ -34,7 +27,6 @@ export default function ProductInfoCard(props: ProductInfoType) {
     save: tProductForm('save'),
     edit: tProductForm('edit'),
   }
-
   const getDate = (
     timestamp: any,
     dateFirst: boolean,
@@ -137,12 +129,19 @@ export default function ProductInfoCard(props: ProductInfoType) {
               <div>{getDate(product.createdAt, true, 'text-right')}</div>
             </CardContent>
           </Card>
+          {/* {locationError && (
+            <p className="fixed bottom-16 right-6 text-xs text-red-600">
+              can&apos;t buy: {errorMessage}
+            </p>
+          )}
           <form
             action={async () => {
               'use server'
-              await createConversation(product.id!)
-              revalidatePath('/conversations')
-              redirect('/conversations')
+              if (!locationError) {
+                await createConversation(product.id!)
+                revalidatePath('/conversations')
+                redirect('/conversations')
+              }
             }}
           >
             <Button type="submit" className="fixed bottom-6 right-40">
@@ -153,13 +152,14 @@ export default function ProductInfoCard(props: ProductInfoType) {
             <form
               action={async () => {
                 'use server'
-                const openedCheckoutSession = await productHasCheckoutSessionOpened(product.id!)
-                if (!openedCheckoutSession) {
-                  const user = await getUser()
-                  await createCheckoutSession(user![0].id, product.id!)
-                  revalidatePath('/transactions')
-                  console.log(product.paymentUrl)
-                  red(product.paymentUrl!)
+                if (!locationError) {
+                  const openedCheckoutSession = await productHasCheckoutSessionOpened(product.id!)
+                  if (!openedCheckoutSession) {
+                    const user = await getUser()
+                    await createCheckoutSession(user![0].id, product.id!)
+                    revalidatePath('/transactions')
+                    red(product.paymentLink!)
+                  }
                 }
               }}
             >
@@ -167,7 +167,8 @@ export default function ProductInfoCard(props: ProductInfoType) {
                 Direkt Kaufen
               </Button>
             </form>
-          ) : null}
+          ) : null} */}
+          <BuyButtons product={product} />
         </div>
       )}
     </>

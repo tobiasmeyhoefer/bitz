@@ -128,9 +128,10 @@ export function ProductForm({
 }) {
   const router = useRouter()
   const { toast } = useToast()
-  const [open, setOpen] = useState(false)
-  const [categoryValue, setcategoryValue] = useState('')
-  const [locationError, setLocationError] = useState(false)
+  const [open, setOpen] = React.useState(false)
+  const [categoryValue, setcategoryValue] = React.useState('')
+  const [locationError, setLocationError] = React.useState(false)
+  const [locationErrorMessage, setLocationErrorMessage] = React.useState('')
   const [isLoading, setIsLoading] = useState(false)
 
   const {
@@ -150,8 +151,15 @@ export function ProductForm({
     const getProduct = async () => {
       const result = await getUser()
       const user = result?.[0]
-      if (!user?.location) {
+      if (!user?.location && !user?.adress) {
         setLocationError(true)
+        setLocationErrorMessage('Location & Adress gotta be set.')
+      } else if (!user?.location) {
+        setLocationError(true)
+        setLocationErrorMessage('Location gotta be set.')
+      } else if (!user?.adress) {
+        setLocationError(true)
+        setLocationErrorMessage('Adress gotta be set.')
       }
     }
     getProduct()
@@ -193,13 +201,13 @@ export function ProductForm({
       form.reset()
       toast({
         title: 'Error',
-        description: 'set Account Location in Settings',
+        description: locationErrorMessage,
         action: (
-          <Button>
-            <Link href="/settings">set Location</Link>
-          </Button>
+          <Link href="/settings">
+            <Button>go to Settings</Button>
+          </Link>
         ),
-        duration: 2200,
+        duration: 2600,
       })
     } else {
       let imageUrls = []
@@ -246,7 +254,6 @@ export function ProductForm({
         duration: 2200,
       })
     }
-  
   }
 
   const [files, setFiles] = useState<FileList | null>(null)
@@ -517,11 +524,15 @@ export function ProductForm({
                 ))}
               </div>
             )}
-            {isLoading ? <Button disabled className="mt-4 border-2" type="submit">
-              {submitTitle}
-            </Button> : <Button className="mt-4 border-2" type="submit">
-              {submitTitle}
-            </Button>}
+            {isLoading ? (
+              <Button disabled className="mt-4 border-2" type="submit">
+                {submitTitle}
+              </Button>
+            ) : (
+              <Button className="mt-4 border-2" type="submit">
+                {submitTitle}
+              </Button>
+            )}
           </form>
         </Form>
       </Card>

@@ -46,10 +46,8 @@ export async function getUserByEmail(email: string) {
 export async function getUser() {
   const session = await auth()
   const id = session?.user?.id
-  if (id) {
-    const response = await db.select().from(users).where(eq(users.id, id))
-    return response
-  }
+  const response = await db.select().from(users).where(eq(users.id, id!))
+  return response
 }
 
 // kann man vlt noch schöner machen
@@ -108,6 +106,6 @@ export async function getAllUsersCount() {
 }
 
 export async function getAddressByUserId(userId: string): Promise<string> {
-  const result = await db.select({address: users.adress}).from(users).where(eq(users.id, userId))
+  const result = await db.select({ address: users.adress }).from(users).where(eq(users.id, userId))
   return result[0].address!
 }

@@ -19,7 +19,7 @@ export async function createConversation(productId: string) {
   const user = await getUser()
   const seller = await db.select().from(products).where(eq(products.id, productId))
 
-  return await db.insert(conversations).values({
+  await db.insert(conversations).values({
     buyerId: user![0].id,
     productId: productId,
     sellerId: seller[0].sellerId,
@@ -27,7 +27,9 @@ export async function createConversation(productId: string) {
 }
 
 export async function deleteConversation(productId: string, buyerId: string) {
-  await db.delete(conversations).where(or(eq(conversations.productId, productId), eq(conversations.buyerId, buyerId)))
+  await db
+    .delete(conversations)
+    .where(or(eq(conversations.productId, productId), eq(conversations.buyerId, buyerId)))
 }
 
 export async function declineOffer(id: number) {
@@ -46,16 +48,12 @@ export async function acceptOffer(id: number, message: string) {
 export async function acceptDealTime(id: number, message: string) {
   await db
     .update(conversations)
-    .set({ message2: message, status: "deal"})
+    .set({ message2: message, status: 'deal' })
     .where(eq(conversations.id, id))
   revalidatePath('/conversations')
 }
 
 export async function addConversationDelay(id: number, delay: string) {
-  await db
-    .update(conversations)
-    .set({ delay: delay})
-    .where(eq(conversations.id, id))
+  await db.update(conversations).set({ delay: delay }).where(eq(conversations.id, id))
   revalidatePath('/conversations')
 }
-

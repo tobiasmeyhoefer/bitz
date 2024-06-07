@@ -73,7 +73,7 @@ type ProductType = {
   isDirectlyBuyable?: boolean
   isSold?: boolean
   stripeId?: string
-  paymentUrl?: string
+  paymentLink?: string
 }
 
 type ProdDelAlert = {
