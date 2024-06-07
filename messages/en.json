@@ -94,7 +94,7 @@
     "title": "Search"
   },
   "MyShop": {
-    "title": "My Bitz",
+    "title": "MY BITZ",
     "addProducts": "add Bit",
     "updateProducts": "update Bit",
     "deleteProduct": "delete Bit"
@@ -168,14 +168,20 @@
     "locale": "{locale, select, de {🇩🇪 Deutsch} en {🇺🇸 English} other {Unbekannt}}"
   },
   "Conversations": {  
-    "title": "Conversations",
-    "empty": "There are no opened conversations"
-  },
-  "Hero": {
-    "title": "Bitz",
-    "subtitle": "Supplying you with technology from today to tomorrow",
-    "description": "Discover the latest tech gadgets at Bitz at unbeatable prices! Buy, sell, and trade your favorite gadgets in a secure environment. Join our vibrant community and find your next tech highlight today.",
-    "call": "Sign up now and get started!",
-    "callButton": "Get Started"
-  }
+    "title": "CONVERSATIONS",
+    "empty": "There are no opened conversations",
+    "newbuyer00": "is interested in your Bitz",
+    "newbuyer01": " ",
+    "gotOffer": "You can now accept or decline this offer. If you accept it, the location you specified in the settings will be transmitted. Please enter \"when you have time\" in the field provided!",
+    "accepted": "Du hast das Angebot akzeptiert",
+    "waiting": "Waiting for a response...",
+    "deal": "You have a deal!",
+    "delay00": "You have a delay of around",
+    "delay01": "minutes",
+    "delay11": "hase a delay of around"
+   },
+
+    "Transactions": {
+      "title": "TRANSACTIONS"
+    }
 }

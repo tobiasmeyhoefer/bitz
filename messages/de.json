@@ -170,18 +170,21 @@
     "label": "Sprache ändern",
     "locale": "{locale, select, de {🇩🇪 Deutsch} en {🇺🇸 English} other {Unbekannt}}"
   },
-    "Conversations": {  
-    "title": "Konversationen",
-    "empty" : "Es gibt keine offenen Konversationen"
+
+  "Conversations": {  
+    "title": "KONVERSATIONEN",
+    "empty" : "Es gibt keine offenen Konversationen",
+    "newbuyer00": "ist an deinem Bit",
+    "newbuyer01": "interessiert",
+    "gotOffer": "Du kannst dieses Angebot nun ablehnen oder annehmen. Wenn du es annimmst, wird dein in den Einstellungen festgelegter Ort übermittelt. Bitte trage im vorgesehenen Feld ein wann du Zeit hast!",
+    "waiting": "Aktuell wird auf eine Antwort gewartet...",
+    "deal": "Ihr habt jetzt einen Deal!",
+    "accepted": "Du hast das Angebot akzeptiert",
+    "delay00": "Du verspätest dich um",
+    "delay01": "Minuten",
+    "delay11": "verspätet sich um"
   },
-    "Hero": {
-    "title": "Bitz",
-    "sub01": "VON",
-    "sub02": "GESTERN",
-    "sub03":"von heute für morgen mit Technik versorgen",
-    
-    "description":"Entdecke bei Bitz die neuesten Technikgeräte zu unschlagbaren Preisen! Kaufe, verkaufe und tausche deine Lieblingsgadgets in einer sicheren Umgebung. Trete unserer lebendigen Community bei und finde noch heute dein nächstes Technik-Highlight.",
-    "call": "Jetzt anmelden und durchstarten!",
-    "callButton":"Loslegen"
-  }
+  "Transactions": {
+      "title": "TRANSAKTIONEN"
+    }
 }

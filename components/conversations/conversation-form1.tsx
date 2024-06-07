@@ -81,7 +81,7 @@ export function ConversationForm({ convId }: { convId: number }) {
               <AlertDialogHeader>
                 <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                 <AlertDialogDescription>
-                  This action cannot be undone. This will permanently decline this offer
+                  This action cannot be undone. This will permanently decline this offer.
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
