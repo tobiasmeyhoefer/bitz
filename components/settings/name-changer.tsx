@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/form'
 import { getUser, saveUserName } from '@/lib/useraction'
 import { useEffect, useState } from 'react'
+import { useToast } from '../ui/use-toast'
 
 const formSchema = z.object({
   name: z
@@ -25,6 +26,7 @@ const formSchema = z.object({
 
 export default function NameChanger() {
   const [name, setName] = useState<string>('')
+  const { toast } = useToast()
   useEffect(() => {
     const getProduct = async () => {
       const result = await getUser()
@@ -39,6 +41,9 @@ export default function NameChanger() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     await saveUserName(values.name)
+    toast({
+      title: "Username changed successfully ✅",
+    })
   }
 
   return (

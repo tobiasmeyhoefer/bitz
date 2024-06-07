@@ -17,6 +17,7 @@ const MyShopContent = async () => {
             <CardWithImage
               key={`pr-${index}`}
               title={p.title}
+              price={p.price}
               desc={p.description!}
               imgUrl1={p.imageUrl1}
               timestamp={p.createdAt}

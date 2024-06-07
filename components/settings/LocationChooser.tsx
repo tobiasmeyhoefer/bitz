@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/form'
 import { getUser, saveUserLocation } from '@/lib/useraction'
 import { useEffect, useState } from 'react'
+import { useToast } from '../ui/use-toast'
 
 const formSchema = z.object({
   postcode: z.string().regex(/^\d+$/, { message: 'only numbers are valid' }).length(5),
@@ -21,6 +22,7 @@ const formSchema = z.object({
 
 export default function LocationChooser({ postcode }: { postcode: string }) {
   const [location, setLocation] = useState<string>('')
+  const { toast } = useToast()
   useEffect(() => {
     const getProduct = async () => {
       const result = await getUser()
@@ -35,6 +37,9 @@ export default function LocationChooser({ postcode }: { postcode: string }) {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     await saveUserLocation(values)
+    toast({
+      title: "Postcode changed successfully ✅",
+    })
   }
 
   return (

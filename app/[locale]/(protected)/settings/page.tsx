@@ -22,6 +22,7 @@ const Settings = () => {
           <DarkmodeToggler />
           <hr />
           <h3 className="text-2xl font-bold">{t('safety')}</h3>
+          <PhoneVerification/>
           <RegisterPasskey />
           <DeleteAccountButton
             header={t('deleteAccount')}

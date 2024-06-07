@@ -26,9 +26,9 @@ export function ProdDelAlert({ productId }: { productId: string }) {
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Sicher?</AlertDialogTitle>
+          <AlertDialogTitle>Produkt löschen</AlertDialogTitle>
           <AlertDialogDescription>
-            GANZ SICHER?! Produkt Löschen ?{/* {t('submitTitle')} */}
+            Bist du dir sicher?{/* {t('submitTitle')} */}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

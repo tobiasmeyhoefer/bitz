@@ -124,6 +124,7 @@ export async function updateProduct(productId: string, values: ProductType) {
       })
       .where(eq(products.id, productId))
     await updateProductStripe(existingProduct[0].stripeId!, values)
+    revalidatePath("myshop")
   } else {
     throw new Error('Product not found or unauthorized to update.')
   }

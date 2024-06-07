@@ -1,7 +1,7 @@
 'use client'
 import { ProductType } from '@/lib/types'
 import { Button } from '@/components/ui/button'
-import { createConversation } from '@/lib/conversations-actions'
+import { checkIfConversationAlreadyExist, createConversation } from '@/lib/conversations-actions'
 import { Link, redirect, useRouter } from '@/navigation'
 import { revalidatePath } from 'next/cache'
 import { createCheckoutSession, productHasCheckoutSessionOpened } from '@/lib/stripe-actions'
@@ -15,12 +15,18 @@ import { getProductById } from '@/lib/productaction'
 export function BuyButtons(props: { product: ProductType }) {
   const [addressError, setAddressError] = useState(false)
   const [addressErrorMessage, setAddressErrorMesage] = useState('')
+  const [disabled, setDisabled] = useState(false)
   const { toast } = useToast()
   const router = useRouter()
   const routerNext = useRouterNext()
   const product = props.product
+
   useEffect(() => {
     const fetchUser = async () => {
+      const conversationAlreadyExists = await checkIfConversationAlreadyExist(product.id!)
+      if (conversationAlreadyExists) {
+        setDisabled(true)
+      }
       const result = await getUser()
       const user = result[0]
       if (!user.adress) {
@@ -61,9 +67,15 @@ export function BuyButtons(props: { product: ProductType }) {
 
   return (
     <>
-      <Button onClick={handleBuyClick} type="submit" className="fixed bottom-6 right-40">
-        Kaufen
-      </Button>
+      {disabled ? (
+        <Button disabled onClick={handleBuyClick} type="submit" className="fixed bottom-6 right-40">
+          Kaufen
+        </Button>
+      ) : (
+        <Button onClick={handleBuyClick} type="submit" className="fixed bottom-6 right-40">
+          Kaufen
+        </Button>
+      )}
       {product?.isDirectlyBuyable ? (
         <Button onClick={handleDirectBuyClick} className="fixed bottom-6 right-6" type="submit">
           Direkt Kaufen
