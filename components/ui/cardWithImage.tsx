@@ -2,7 +2,7 @@ import * as React from 'react'
 import Image from 'next/image'
 
 import { CardWithImageProps } from '@/lib/types'
-import { cn } from '@/lib/utils'
+import { cn, formatDate } from '@/lib/utils'
 import { Link } from '@/navigation'
 import { Card, CardHeader, CardTitle, CardDescription } from './card'
 import FavoriteLike from '../favorites/favoriteLike'
@@ -10,20 +10,9 @@ import { ProdDelAlert } from '../myShop/productDelAlert'
 
 const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
   ({ className, ...props }, ref) => {
-    const cardWidth = 300 //props.previewType === 'product' ? 300 : 600
+    const cardWidth = 300
 
     props.product.isOwner = props.editable
-
-    const getImgBorder = (index: number, arraylength: number) => {
-      switch (index) {
-        case 0:
-          return 'rounded-tl-xl'
-        case arraylength - 1:
-          return 'rounded-tr-xl'
-        default:
-          return ''
-      }
-    }
 
     return (
       <>
@@ -60,7 +49,11 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                   <FavoriteLike productId={props.productID!} />
                 )}
               </div>
-              <CardDescription className="truncate text-xl">{props.desc}</CardDescription>
+              <CardDescription className="truncate text-xl text-black">
+                <div className="text-right">{props.price}€</div>
+                <div className="text-right text-xs">{formatDate(props.timestamp!)}</div>
+                {props.product.isSold && <p className='text-green-500'>verkauft</p>}
+              </CardDescription>
             </CardHeader>
           </Card>
         ) : (

@@ -19,6 +19,7 @@ const MyShopContent = async () => {
               title={p.title}
               desc={p.description!}
               imgUrl1={p.imageUrl1}
+              timestamp={p.createdAt}
               className="mx-[5px] my-[0.5rem]"
               productID={p.id}
               product={products[index]}

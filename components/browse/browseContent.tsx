@@ -96,7 +96,7 @@ const BrowseContent = (props: BrowseContentProps) => {
       } else {
         result = await searchProductsByTitle(title)
       }
-      const checkedResults: ProductType[] = result!.map((item: any) => ({
+      const checkedResults: ProductType[] = result!.map((item: any) => ({   // ! sollte weg
         id: item.id,
         title: item.title,
         description: item.description ?? '',
@@ -178,6 +178,8 @@ const BrowseContent = (props: BrowseContentProps) => {
                 key={`pr-${index}`}
                 title={p.title}
                 desc={p.description!}
+                price={p.price}
+                timestamp={p.createdAt}
                 imgUrl1={p.imageUrl1}
                 className="mx-[5px] my-[0.5rem]"
                 productID={p.id}
@@ -243,7 +245,7 @@ const SearchDialog = (
   const handleSuggestionClick = (suggestion: string) => {
     setOpen(false)
     props.setSearchValue(suggestion)
-    props.loadProductsByTitle(suggestion)
+    //props.loadProductsByTitle(suggestion)
     props.loadProductsByCategory(suggestion)
   }
 
@@ -310,20 +312,18 @@ const SearchDialog = (
           <>
             <h1 className="px-4 pt-2 text-lg font-medium ">{props.suggestionsTitle}</h1>
             <div className="max-h-[200px] overflow-y-auto">
-              {props.suggestions.map((suggestion, index) => (
-                <div
-                  onClick={() => {
-                    setOpen(false)
-                    props.setSearchValue(suggestion)
-                  }}
-                  className="rounded- px-8 py-2 hover:rounded-b-lg hover:bg-input"
-                  key={`s-${index}`}
-                >
-                  {suggestion}
-                </div>
-              ))}
-            </div>
-          </>
+            {props.suggestions.map((suggestion, index) => (
+               <div
+               onClick={() => handleSuggestionClick(suggestion)}
+               className="rounded- px-8 py-2 hover:rounded-b-lg hover:bg-input"
+               key={`s-${index}`}
+             >
+               {suggestion}
+             </div>
+           ))}
+           </div>
+         </>
+
         ) : (
           <div className="max-h-[200px] overflow-y-auto px-4 py-2">
             {filteredSuggestions.length > 0 ? (
