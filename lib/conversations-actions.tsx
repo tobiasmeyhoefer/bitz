@@ -11,7 +11,7 @@ export async function getAllConversations() {
   return await db
     .select()
     .from(conversations)
-    .where(or(eq(conversations.buyerId, user![0].id), eq(conversations.sellerId, user![0].id)))
+    .where(or(eq(conversations.buyerId, user!.id), eq(conversations.sellerId, user!.id)))
     .orderBy(desc(conversations.createdAt))
 }
 
@@ -20,23 +20,26 @@ export async function createConversation(productId: string) {
   const seller = await db.select().from(products).where(eq(products.id, productId))
 
   await db.insert(conversations).values({
-    buyerId: user![0].id,
+    buyerId: user!.id,
     productId: productId,
     sellerId: seller[0].sellerId,
   })
 
-  revalidatePath("/conversations")
+  revalidatePath('/conversations')
 }
 
-export async function checkIfConversationAlreadyExist(productId: string): Promise<boolean>{
+export async function checkIfConversationAlreadyExist(productId: string): Promise<boolean> {
   const user = await getUser()
-  const result = await db.select().from(conversations).where(and(eq(conversations.productId, productId), eq(conversations.buyerId, user![0].id)))
-  if(result[0]) {
+  const result = await db
+    .select()
+    .from(conversations)
+    .where(and(eq(conversations.productId, productId), eq(conversations.buyerId, user!.id)))
+  if (result[0]) {
     return true
   }
   return false
 }
- 
+
 export async function deleteConversation(productId: string, buyerId: string) {
   await db
     .delete(conversations)

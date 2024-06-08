@@ -47,7 +47,7 @@ export async function getUser() {
   const session = await auth()
   const id = session?.user?.id
   const response = await db.select().from(users).where(eq(users.id, id!))
-  return response
+  return response[0]
 }
 
 // kann man vlt noch schöner machen
@@ -74,8 +74,8 @@ export async function deleteAccount() {
         }
       }
     }
-    if (user?.[0].image) {
-      await deleteImageOnAws(user[0].image)
+    if (user?.image) {
+      await deleteImageOnAws(user.image)
     }
     await db.delete(users).where(eq(users.id, id))
     await signOut()
@@ -87,8 +87,8 @@ export async function changeUserImage(imageUrl: string) {
   const id = session?.user?.id
   if (id) {
     const user = await getUser()
-    if (user?.[0].image) {
-      await deleteImageOnAws(user[0].image)
+    if (user?.image) {
+      await deleteImageOnAws(user.image)
     }
     await db
       .update(users)

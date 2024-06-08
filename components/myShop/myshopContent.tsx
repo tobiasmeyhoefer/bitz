@@ -3,8 +3,7 @@ import { getProductsOwned } from '@/lib/productaction'
 import { getUser } from '@/lib/useraction'
 
 const MyShopContent = async () => {
-  const users = await getUser()
-  const user = users?.[0]
+  const user = await getUser()
   const products = await getProductsOwned(user!.id)
 
   return (

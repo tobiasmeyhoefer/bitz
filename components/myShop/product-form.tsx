@@ -149,8 +149,7 @@ export function ProductForm({
 
   useEffect(() => {
     const getProduct = async () => {
-      const result = await getUser()
-      const user = result?.[0]
+      const user = await getUser()
       if (!user?.location && !user?.adress) {
         setLocationError(true)
         setLocationErrorMessage('Location & Adress gotta be set.')

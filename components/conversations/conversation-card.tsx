@@ -24,18 +24,20 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
   //let a = translations.title;
 
   const cardType: 'sellerCard' | 'buyerCard' =
-    currentUser![0].id === product[0].sellerId ? 'buyerCard' : 'sellerCard'
+    currentUser!.id === product[0].sellerId ? 'buyerCard' : 'sellerCard'
 
   if (cardType === 'sellerCard') {
     return (
       <Card className="relative">
         <ConversationCardDropwdown conv={conv} showDelay={true} showSold={false} />
         <CardHeader>
-          <CardTitle>{t("wannabuy00")} {product[0].title} {t('wannabuy01')}</CardTitle>
+          <CardTitle>
+            {t('wannabuy00')} {product[0].title} {t('wannabuy01')}
+          </CardTitle>
           <CardDescription>
             {conv.status === 'accepted' ? (
               <span>
-                { t('sellerAccepted') }
+                {t('sellerAccepted')}
                 {await getAddressByUserId(conv.sellerId)}
               </span>
             ) : (
@@ -56,7 +58,9 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
         <CardFooter className="flex flex-col items-start text-neutral-400">
           <p className="font-ligh text-neutral-400">{formatDate(conv.createdAt)}</p>
           {conv.delay !== null ? (
-            <p className="text-red-600">{t('delay00')} {conv.delay} {t('delay01')}</p>
+            <p className="text-red-600">
+              {t('delay00')} {conv.delay} {t('delay01')}
+            </p>
           ) : (
             <span></span>
           )}
@@ -73,13 +77,9 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
             <ConversationCardDropwdown conv={conv} showDelay={false} showSold={true} />
             <CardHeader>
               <CardTitle>
-                  {user[0].name} {t('newbuyer00')} {product[0].title} {t('newbuyer01')}
+                {user[0].name} {t('newbuyer00')} {product[0].title} {t('newbuyer01')}
               </CardTitle>
-              {conv.status === 'offen' ? (
-                <CardDescription>
-                  {t('gotOffer')}
-                </CardDescription>
-              ) : null}
+              {conv.status === 'offen' ? <CardDescription>{t('gotOffer')}</CardDescription> : null}
             </CardHeader>
             {conv.status === 'accepted' ? (
               <CardContent>{t('accepted')} ✅</CardContent>
@@ -87,8 +87,7 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
               <CardContent>{conv.message2}</CardContent>
             ) : (
               <CardContent>
-                <ConversationForm convId={conv.id}/>
-
+                <ConversationForm convId={conv.id} />
               </CardContent>
             )}
             <CardFooter className="flex flex-col items-start text-neutral-400">

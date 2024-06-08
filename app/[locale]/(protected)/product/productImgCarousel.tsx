@@ -31,8 +31,7 @@ export function ProductImageCarousel(props: any) {
 
   useEffect(() => {
     const checkUser = async () => {
-      const result = await getUser()
-      const user = result?.[0]
+      const user = await getUser()
       if (user?.id == props.sellerId) {
         setIsOwner(true)
       }

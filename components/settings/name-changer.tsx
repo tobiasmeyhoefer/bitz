@@ -29,9 +29,8 @@ export default function NameChanger() {
   const { toast } = useToast()
   useEffect(() => {
     const getProduct = async () => {
-      const result = await getUser()
-      const r = result![0]
-      setName(r.name ?? '')
+      const user = await getUser()
+      setName(user.name ?? '')
     }
     getProduct()
   }, [])
@@ -42,12 +41,12 @@ export default function NameChanger() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     await saveUserName(values.name)
     toast({
-      title: "Username changed successfully ✅",
+      title: 'Username changed successfully ✅',
     })
   }
 
   return (
-    <div className='mb-6'>
+    <div className="mb-6">
       <Form {...form}>
         <FormLabel>change Name</FormLabel>
         <form onSubmit={form.handleSubmit(onSubmit)} className="">
@@ -63,7 +62,7 @@ export default function NameChanger() {
               </FormItem>
             )}
           />
-          <Button className="mt-4" type="submit" variant={"secondary"}>
+          <Button className="mt-4" type="submit" variant={'secondary'}>
             change
           </Button>
         </form>

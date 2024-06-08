@@ -27,15 +27,14 @@ export function BuyButtons(props: { product: ProductType }) {
       if (conversationAlreadyExists) {
         setDisabled(true)
       }
-      const result = await getUser()
-      const user = result[0]
+      const user = await getUser()
       if (!user.adress) {
         setAddressError(true)
         setAddressErrorMesage('location & address gotta be set')
       }
     }
     fetchUser()
-  }, [])
+  }, [product.id])
 
   async function handleBuyClick() {
     await createConversation(product.id!)
@@ -47,7 +46,7 @@ export function BuyButtons(props: { product: ProductType }) {
       const openedCheckoutSession = await productHasCheckoutSessionOpened(product.id!)
       if (!openedCheckoutSession) {
         const user = await getUser()
-        await createCheckoutSession(user![0].id, product.id!)
+        await createCheckoutSession(user!.id, product.id!)
         console.log(product?.paymentLink!)
         routerNext.push(product?.paymentLink!)
       }

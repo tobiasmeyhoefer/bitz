@@ -9,8 +9,7 @@ import { NavItemLink, NavLoginLink, NavMenuDrawer, NavbarItemDropdown } from './
 const NavBar = async () => {
   const t = await getTranslations('Navbar')
   const session = await auth()
-  const users = await getUser()
-  const user = users?.[0]
+  const user = await getUser()
   const isLoggedIn = !!session?.user
   const CubeSceneNav = dynamic(() => import('@/components/explosion/cubeSceneNav'), {
     ssr: false,
@@ -56,7 +55,7 @@ const NavBar = async () => {
   ]
 
   return (
-    <nav className="w-screen left-0 right-0 z-10 flex h-[80px] items-center justify-between px-4 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]">
+    <nav className="left-0 right-0 z-10 flex h-[80px] w-screen items-center justify-between px-4 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]">
       <div className="flex items-center">
         {isLoggedIn && (
           <>
