@@ -4,7 +4,7 @@ import { products, favorites } from '@/schema'
 import { db } from '../db'
 import { count, desc, eq, ne, or, sql, ilike, and } from 'drizzle-orm'
 import { auth } from '@/auth'
-import { getUser, getUserById } from './useraction'
+import { getUserById } from './useraction'
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import crypto from 'crypto'
@@ -157,12 +157,10 @@ export const searchProductsByTitle = async (title: string) => {
 export async function addToFavorites(productId: string) {
   const session = await auth()
   const id = session?.user?.id
-  if (id) {
-    await db.insert(favorites).values({
-      userId: id,
-      productId: productId,
-    })
-  }
+  await db.insert(favorites).values({
+    userId: id!,
+    productId: productId,
+  })
   revalidatePath('/favorites')
 }
 
