@@ -45,8 +45,8 @@ export const TransactionCard = async ({ transaction }: { transaction: Transactio
           <CardDescription>verkauft für {transaction.price}</CardDescription>
         </CardHeader>
         <CardContent>
-          <p>Bitte schicke diesen Artikel nun an {buyer[0].name ?? 'den Verkäufer'}</p>
-          <p>Adresse: {buyer[0].adress}</p>
+          <p>Bitte schicke diesen Artikel nun an {buyer.name ?? 'den Verkäufer'}</p>
+          <p>Adresse: {buyer.adress}</p>
         </CardContent>
         <CardFooter>
           <p>{transaction.createdAt.toLocaleDateString()}</p>

@@ -77,7 +77,7 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
             <ConversationCardDropwdown conv={conv} showDelay={false} showSold={true} />
             <CardHeader>
               <CardTitle>
-                {user[0].name} {t('newbuyer00')} {product[0].title} {t('newbuyer01')}
+                {user.name} {t('newbuyer00')} {product[0].title} {t('newbuyer01')}
               </CardTitle>
               {conv.status === 'offen' ? <CardDescription>{t('gotOffer')}</CardDescription> : null}
             </CardHeader>
@@ -94,7 +94,7 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
               <p>{formatDate(conv.createdAt)}</p>
               {conv.delay !== null ? (
                 <p className="text-red-600">
-                  {user[0].name} {t('delay11')} {conv.delay} {t('delay01')}
+                  {user.name} {t('delay11')} {conv.delay} {t('delay01')}
                 </p>
               ) : (
                 <span></span>

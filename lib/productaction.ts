@@ -17,7 +17,10 @@ export async function getProductsBrowse() {
   const session = await auth()
   const id = session?.user?.id
   if (id) {
-    const response = await db.select().from(products).where(and(ne(products.sellerId, id), ne(products.isSold, true)))
+    const response = await db
+      .select()
+      .from(products)
+      .where(and(ne(products.sellerId, id), ne(products.isSold, true)))
     if (response) {
       return response
     }
@@ -55,7 +58,7 @@ export async function addProduct(values: ProductType, imageUrls: string[]) {
         price: price,
         category: category,
         sellerId: id,
-        location: user[0].location ?? null,
+        location: user.location ?? null,
         createdAt: created,
         imageUrl1: imageUrls[0],
         imageUrl2: imageUrls[1],
@@ -124,7 +127,7 @@ export async function updateProduct(productId: string, values: ProductType) {
       })
       .where(eq(products.id, productId))
     await updateProductStripe(existingProduct[0].stripeId!, values)
-    revalidatePath("myshop")
+    revalidatePath('myshop')
   } else {
     throw new Error('Product not found or unauthorized to update.')
   }
@@ -139,10 +142,7 @@ export async function getProductById(productId: string) {
 // getter for products with Category as param
 export const getProductsByCategory = async (category: string) => {
   try {
-    const result = await db
-      .select()
-      .from(products)
-      .where(eq(products.category, category))
+    const result = await db.select().from(products).where(eq(products.category, category))
     return result
   } catch (error) {
     console.error('Fehler beim Laden der Daten:', error)
@@ -155,10 +155,10 @@ export const searchProductsByTitle = async (title: string) => {
   try {
     const sanitizedTitle = `%${title.replace(/%/g, '\\%').replace(/_/g, '\\_')}%`
     const res = db
-    .select()
-    .from(products)
-    //.where(ilike(products.title, `%${title}%`)) // title
-    .where(ilike(products.title, sanitizedTitle))
+      .select()
+      .from(products)
+      //.where(ilike(products.title, `%${title}%`)) // title
+      .where(ilike(products.title, sanitizedTitle))
     return res
   } catch (error) {
     console.error('Fehler beim Laden der Daten:', error)

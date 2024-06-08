@@ -35,12 +35,12 @@ export async function saveUserAdress(adress: string) {
 
 export async function getUserById(userId: string) {
   const response = await db.select().from(users).where(eq(users.id, userId))
-  return response
+  return response[0]
 }
 
 export async function getUserByEmail(email: string) {
   const response = await db.select().from(users).where(eq(users.email, email))
-  return response
+  return response[0]
 }
 
 export async function getUser() {
