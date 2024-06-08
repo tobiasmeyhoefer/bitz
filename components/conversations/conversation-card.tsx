@@ -24,7 +24,7 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
   //let a = translations.title;
 
   const cardType: 'sellerCard' | 'buyerCard' =
-    currentUser!.id === product[0].sellerId ? 'buyerCard' : 'sellerCard'
+    currentUser!.id === product.sellerId ? 'buyerCard' : 'sellerCard'
 
   if (cardType === 'sellerCard') {
     return (
@@ -32,7 +32,7 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
         <ConversationCardDropwdown conv={conv} showDelay={true} showSold={false} />
         <CardHeader>
           <CardTitle>
-            {t('wannabuy00')} {product[0].title} {t('wannabuy01')}
+            {t('wannabuy00')} {product.title} {t('wannabuy01')}
           </CardTitle>
           <CardDescription>
             {conv.status === 'accepted' ? (
@@ -77,7 +77,7 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
             <ConversationCardDropwdown conv={conv} showDelay={false} showSold={true} />
             <CardHeader>
               <CardTitle>
-                {user.name} {t('newbuyer00')} {product[0].title} {t('newbuyer01')}
+                {user.name} {t('newbuyer00')} {product.title} {t('newbuyer01')}
               </CardTitle>
               {conv.status === 'offen' ? <CardDescription>{t('gotOffer')}</CardDescription> : null}
             </CardHeader>

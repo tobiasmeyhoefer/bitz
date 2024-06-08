@@ -20,7 +20,7 @@ export const TransactionCard = async ({ transaction }: { transaction: Transactio
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Du hast {product[0].title} gekauft</CardTitle>
+          <CardTitle>Du hast {product.title} gekauft</CardTitle>
           <CardDescription>gekauft für {transaction.price}</CardDescription>
         </CardHeader>
         <CardContent>
@@ -41,7 +41,7 @@ export const TransactionCard = async ({ transaction }: { transaction: Transactio
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Dein Bit {product[0].title} wurde gekauft</CardTitle>
+          <CardTitle>Dein Bit {product.title} wurde gekauft</CardTitle>
           <CardDescription>verkauft für {transaction.price}</CardDescription>
         </CardHeader>
         <CardContent>

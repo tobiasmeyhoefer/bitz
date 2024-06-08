@@ -2,15 +2,12 @@
 import { ProductType } from '@/lib/types'
 import { Button } from '@/components/ui/button'
 import { checkIfConversationAlreadyExist, createConversation } from '@/lib/conversations-actions'
-import { Link, redirect, useRouter } from '@/navigation'
-import { revalidatePath } from 'next/cache'
+import { Link, useRouter } from '@/navigation'
 import { createCheckoutSession, productHasCheckoutSessionOpened } from '@/lib/stripe-actions'
 import { getUser } from '@/lib/useraction'
-import { redirect as red } from 'next/navigation'
 import { useRouter as useRouterNext } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useToast } from '@/components/ui/use-toast'
-import { getProductById } from '@/lib/productaction'
 
 export function BuyButtons(props: { product: ProductType }) {
   const [addressError, setAddressError] = useState(false)

@@ -10,8 +10,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   const t = await getTranslations('Product')
   const productId = params.id
 
-  const fetchedProduct: any = await getProductById(productId)
-  const product = fetchedProduct[0]
+  const product: any = await getProductById(productId)
   const user = await getUser()
   let isOwner = false
   if (user?.id == product.sellerId) {
