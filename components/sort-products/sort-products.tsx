@@ -12,7 +12,7 @@ export const SortProducts = (params: { action: (value: string) => void }) => {
   return (
     <>
       <Select onValueChange={(value) => params.action(value)}>
-        <SelectTrigger className=" w-28 lg:fixed lg:right-14">
+        <SelectTrigger className="w-28 ">
           <SelectValue placeholder="filter" />
         </SelectTrigger>
         <SelectContent>
