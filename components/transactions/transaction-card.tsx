@@ -16,7 +16,7 @@ export const TransactionCard = async ({ transaction }: { transaction: Transactio
   const product = await getProductById(transaction.productId)
 
   //user is buyer
-  if (transaction.buyerId === user!.id) {
+  if (transaction.buyerId === user.id) {
     return (
       <Card>
         <CardHeader>
@@ -37,7 +37,7 @@ export const TransactionCard = async ({ transaction }: { transaction: Transactio
   }
 
   //user is seller
-  if (transaction.sellerId === user!.id) {
+  if (transaction.sellerId === user.id) {
     return (
       <Card>
         <CardHeader>

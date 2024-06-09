@@ -9,7 +9,10 @@ import { NavItemLink, NavLoginLink, NavMenuDrawer, NavbarItemDropdown } from './
 const NavBar = async () => {
   const t = await getTranslations('Navbar')
   const session = await auth()
-  const user = await getUser()
+  let user
+  if (session) {
+    user = await getUser()
+  }
   const isLoggedIn = !!session?.user
   const CubeSceneNav = dynamic(() => import('@/components/explosion/cubeSceneNav'), {
     ssr: false,

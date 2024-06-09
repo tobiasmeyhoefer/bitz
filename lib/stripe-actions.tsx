@@ -169,6 +169,6 @@ export async function getUserTransactions() {
   return await db
     .select()
     .from(transactions)
-    .where(or(eq(transactions.buyerId, user!.id), eq(transactions.sellerId, user!.id)))
+    .where(or(eq(transactions.buyerId, user.id), eq(transactions.sellerId, user.id)))
     .orderBy(desc(transactions.createdAt))
 }

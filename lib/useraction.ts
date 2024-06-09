@@ -35,11 +35,17 @@ export async function saveUserAdress(adress: string) {
 
 export async function getUserById(userId: string) {
   const response = await db.select().from(users).where(eq(users.id, userId))
+  if (response.length === 0) {
+    throw new Error('User not found in DB (getUserById)')
+  }
   return response[0]
 }
 
 export async function getUserByEmail(email: string) {
   const response = await db.select().from(users).where(eq(users.email, email))
+  if (response.length === 0) {
+    throw new Error('User not found in DB (getUserByEmail)')
+  }
   return response[0]
 }
 
@@ -47,6 +53,9 @@ export async function getUser() {
   const session = await auth()
   const id = session?.user?.id
   const response = await db.select().from(users).where(eq(users.id, id!))
+  if (response.length === 0) {
+    throw new Error('User not found in DB (getUser)')
+  }
   return response[0]
 }
 
@@ -74,7 +83,7 @@ export async function deleteAccount() {
         }
       }
     }
-    if (user?.image) {
+    if (user.image) {
       await deleteImageOnAws(user.image)
     }
     await db.delete(users).where(eq(users.id, id))
@@ -87,7 +96,7 @@ export async function changeUserImage(imageUrl: string) {
   const id = session?.user?.id
   if (id) {
     const user = await getUser()
-    if (user?.image) {
+    if (user.image) {
       await deleteImageOnAws(user.image)
     }
     await db

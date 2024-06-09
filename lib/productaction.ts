@@ -124,34 +124,27 @@ export async function updateProduct(productId: string, values: ProductType) {
 // getter for a product with id as param
 export async function getProductById(productId: string) {
   const response = await db.select().from(products).where(eq(products.id, productId))
+  if (response.length === 0) {
+    throw new Error('Product not found in DB (getProductById)')
+  }
   return response[0]
 }
 
 // getter for products with Category as param
 export const getProductsByCategory = async (category: string) => {
-  try {
-    const result = await db.select().from(products).where(eq(products.category, category))
-    return result
-  } catch (error) {
-    console.error('Fehler beim Laden der Daten:', error)
-    throw error
-  }
+  const result = await db.select().from(products).where(eq(products.category, category))
+  return result
 }
 
 // getter for products with title as param
 export const searchProductsByTitle = async (title: string) => {
-  try {
-    const sanitizedTitle = `%${title.replace(/%/g, '\\%').replace(/_/g, '\\_')}%`
-    const res = db
-      .select()
-      .from(products)
-      //.where(ilike(products.title, `%${title}%`)) // title
-      .where(ilike(products.title, sanitizedTitle))
-    return res
-  } catch (error) {
-    console.error('Fehler beim Laden der Daten:', error)
-    throw error
-  }
+  const sanitizedTitle = `%${title.replace(/%/g, '\\%').replace(/_/g, '\\_')}%`
+  const res = db
+    .select()
+    .from(products)
+    //.where(ilike(products.title, `%${title}%`)) // title
+    .where(ilike(products.title, sanitizedTitle))
+  return res
 }
 
 export async function addToFavorites(productId: string) {

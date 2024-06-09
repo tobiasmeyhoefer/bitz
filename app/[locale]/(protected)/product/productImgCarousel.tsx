@@ -32,7 +32,7 @@ export function ProductImageCarousel(props: any) {
   useEffect(() => {
     const checkUser = async () => {
       const user = await getUser()
-      if (user?.id == props.sellerId) {
+      if (user.id == props.sellerId) {
         setIsOwner(true)
       }
     }

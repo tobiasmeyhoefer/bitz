@@ -11,7 +11,7 @@ export async function getAllConversations() {
   return await db
     .select()
     .from(conversations)
-    .where(or(eq(conversations.buyerId, user!.id), eq(conversations.sellerId, user!.id)))
+    .where(or(eq(conversations.buyerId, user.id), eq(conversations.sellerId, user.id)))
     .orderBy(desc(conversations.createdAt))
 }
 
@@ -20,7 +20,7 @@ export async function createConversation(productId: string) {
   const seller = await db.select().from(products).where(eq(products.id, productId))
 
   await db.insert(conversations).values({
-    buyerId: user!.id,
+    buyerId: user.id,
     productId: productId,
     sellerId: seller[0].sellerId,
   })
@@ -33,7 +33,7 @@ export async function checkIfConversationAlreadyExist(productId: string): Promis
   const result = await db
     .select()
     .from(conversations)
-    .where(and(eq(conversations.productId, productId), eq(conversations.buyerId, user!.id)))
+    .where(and(eq(conversations.productId, productId), eq(conversations.buyerId, user.id)))
   if (result[0]) {
     return true
   }

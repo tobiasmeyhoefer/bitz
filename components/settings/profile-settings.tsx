@@ -14,7 +14,7 @@ const ProfileSettings = async () => {
   return (
     <div>
       <div className="mb-8 flex justify-center gap-4">
-        {user!.image ? (
+        {user.image ? (
           <Image
             className="w-40 rounded-full"
             width={200}

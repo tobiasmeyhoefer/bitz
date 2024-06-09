@@ -13,7 +13,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   const product: any = await getProductById(productId)
   const user = await getUser()
   let isOwner = false
-  if (user?.id == product.sellerId) {
+  if (user.id == product.sellerId) {
     isOwner = true
   }
 

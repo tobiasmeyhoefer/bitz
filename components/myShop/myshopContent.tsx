@@ -4,7 +4,7 @@ import { getUser } from '@/lib/useraction'
 
 const MyShopContent = async () => {
   const user = await getUser()
-  const products = await getProductsOwned(user!.id)
+  const products = await getProductsOwned(user.id)
 
   return (
     <div

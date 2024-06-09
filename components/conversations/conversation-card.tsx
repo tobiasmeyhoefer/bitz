@@ -24,7 +24,7 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
   //let a = translations.title;
 
   const cardType: 'sellerCard' | 'buyerCard' =
-    currentUser!.id === product.sellerId ? 'buyerCard' : 'sellerCard'
+    currentUser.id === product.sellerId ? 'buyerCard' : 'sellerCard'
 
   if (cardType === 'sellerCard') {
     return (

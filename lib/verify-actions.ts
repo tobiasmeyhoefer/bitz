@@ -25,7 +25,7 @@ export async function deleteVerifactionNumber() {
     const user = await getUser()
     await db
       .delete(verificationNumberSessions)
-      .where(eq(verificationNumberSessions.userId, user!.id))
+      .where(eq(verificationNumberSessions.userId, user.id))
   } catch (error) {
     return { error: "Something wen't wrong on the server" }
   }
@@ -38,7 +38,7 @@ export async function getVerificationNumber() {
     const response = await db
       .select()
       .from(verificationNumberSessions)
-      .where(eq(verificationNumberSessions.userId, user!.id))
+      .where(eq(verificationNumberSessions.userId, user.id))
       .orderBy(desc(verificationNumberSessions.createdAt))
     return response[0].verificationNumber
   } catch (error) {
@@ -77,7 +77,7 @@ export async function checkIfUserIsPhoneVerified() {
 export async function setVerifiedState() {
   try {
     const user = await getUser()
-    await db.update(users).set({ phoneVerified: true }).where(eq(users.id, user!.id))
+    await db.update(users).set({ phoneVerified: true }).where(eq(users.id, user.id))
   } catch (error) {
     return { error: "Something wen't wrong on the server" }
   }
