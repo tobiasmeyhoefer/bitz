@@ -1,4 +1,5 @@
 'use client'
+import { sortBy } from 'sort-by-typescript'
 import { Input } from '@/components/ui/input'
 import {
   getProductsBrowse,
@@ -10,6 +11,7 @@ import { useEffect, useState, useRef } from 'react'
 import { SlClose } from 'react-icons/sl'
 import { CardWithImage } from '../ui/cardWithImage'
 import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog'
+import { SortProducts } from '../sort-products/sort-products'
 const suggestions = [
   'Reciever',
   'Monitor',
@@ -44,8 +46,8 @@ const suggestions = [
 const BrowseContent = (props: BrowseContentProps) => {
   const [searchValue, setSearchValue] = useState('')
   const [loading, setLoading] = useState(false)
-  const [products, setProducts] = useState<ProductType[]>([])
   const [noSearchResults, setNoSearchResults] = useState(false)
+  const [products, setProducts] = useState<ProductType[]>([])
 
   useEffect(() => {
     const getProducts = async () => {
@@ -111,21 +113,30 @@ const BrowseContent = (props: BrowseContentProps) => {
     setLoading(false)
   }
 
+  function sortProducts(value: string) {
+    console.log('sdsdsdsdsdsdsd')
+    const result = [...products].sort(sortBy(value))
+    setProducts(result)
+  }
+
   return (
     <div
       className={`${loading && `h-full`} flex w-full flex-col items-center justify-center  px-4 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
     >
-      <SearchDialog
-        placeholder={
-          searchValue.length > 0 ? searchValue : props.searchTranslations.searchPlaceholder
-        }
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
-        suggestions={suggestions}
-        suggestionsTitle={props.searchTranslations.suggestions}
-        loadProductsByCategory={loadProductsByCategory}
-        loadProductsByTitle={loadProductsByTitle}
-      />
+      <div className="flex w-full flex-col items-center justify-center gap-2 lg:flex-row">
+        <SearchDialog
+          placeholder={
+            searchValue.length > 0 ? searchValue : props.searchTranslations.searchPlaceholder
+          }
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+          suggestions={suggestions}
+          suggestionsTitle={props.searchTranslations.suggestions}
+          loadProductsByCategory={loadProductsByCategory}
+          loadProductsByTitle={loadProductsByTitle}
+        />
+        <SortProducts action={sortProducts} />
+      </div>
       {!loading ? (
         <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
           {products.map((p, index) => (
