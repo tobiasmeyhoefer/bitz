@@ -35,17 +35,17 @@ const ExperimentalAi: React.FC = () => {
       <div
         ref={containerRef}
         className={cn(
-          'fixed bottom-20 p-2 right-20 z-10 flex h-[500px] w-[400px] flex-col justify-between rounded-lg border border-neutral-400 bg-white shadow-2xl',
+          'fixed bottom-20 right-20 z-10 flex h-[500px] w-[400px] flex-col justify-between rounded-lg border border-neutral-400 bg-white p-2 shadow-2xl',
           { hidden: !isOpened },
         )}
       >
-        <div className='overflow-y-scroll'>
+        <div className="overflow-y-scroll">
           {messages.map((m) => (
             <div
               key={m.id}
               className={cn(
-                'm-2 w-2/3 whitespace-pre-wrap rounded-lg border border-solid border-neutral-400 bg-neutral-900 text-white p-2 shadow-lg',
-                { "float-left bg-indigo-900": m.role === "user", "float-right": m.role !== "user" }
+                'm-2 w-2/3 whitespace-pre-wrap rounded-lg border border-solid border-neutral-400 bg-neutral-900 p-2 text-white shadow-lg',
+                { 'float-left bg-indigo-900': m.role === 'user', 'float-right': m.role !== 'user' },
               )}
             >
               {m.content}
@@ -56,9 +56,9 @@ const ExperimentalAi: React.FC = () => {
           <form className="flex gap-2" onSubmit={handleSubmit}>
             <Input
               onChange={handleInputChange}
+              className="h-[40px] rounded-xl text-primary"
               placeholder="ask something..."
               value={input}
-              className="h-[40px] rounded-xl"
               type="text"
             />
             <Button type="submit" className="h-[40px] rounded-xl">

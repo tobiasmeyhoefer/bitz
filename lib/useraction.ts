@@ -35,19 +35,28 @@ export async function saveUserAdress(adress: string) {
 
 export async function getUserById(userId: string) {
   const response = await db.select().from(users).where(eq(users.id, userId))
-  return response
+  if (response.length === 0) {
+    throw new Error('User not found in DB (getUserById)')
+  }
+  return response[0]
 }
 
 export async function getUserByEmail(email: string) {
   const response = await db.select().from(users).where(eq(users.email, email))
-  return response
+  if (response.length === 0) {
+    throw new Error('User not found in DB (getUserByEmail)')
+  }
+  return response[0]
 }
 
 export async function getUser() {
   const session = await auth()
   const id = session?.user?.id
   const response = await db.select().from(users).where(eq(users.id, id!))
-  return response
+  if (response.length === 0) {
+    throw new Error('User not found in DB (getUser)')
+  }
+  return response[0]
 }
 
 // kann man vlt noch schöner machen
@@ -74,8 +83,8 @@ export async function deleteAccount() {
         }
       }
     }
-    if (user?.[0].image) {
-      await deleteImageOnAws(user[0].image)
+    if (user.image) {
+      await deleteImageOnAws(user.image)
     }
     await db.delete(users).where(eq(users.id, id))
     await signOut()
@@ -87,8 +96,8 @@ export async function changeUserImage(imageUrl: string) {
   const id = session?.user?.id
   if (id) {
     const user = await getUser()
-    if (user?.[0].image) {
-      await deleteImageOnAws(user[0].image)
+    if (user.image) {
+      await deleteImageOnAws(user.image)
     }
     await db
       .update(users)
