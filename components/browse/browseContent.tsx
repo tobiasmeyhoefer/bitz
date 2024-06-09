@@ -10,6 +10,36 @@ import { useEffect, useState, useRef } from 'react'
 import { SlClose } from 'react-icons/sl'
 import { CardWithImage } from '../ui/cardWithImage'
 import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog'
+const suggestions = [
+  'Reciever',
+  'Monitor',
+  'Audio',
+  'Laptop',
+  'Headphone',
+  'Smartphone',
+  'Tablet',
+  'Smartwatch',
+  'Printer',
+  'Camera',
+  'Speaker',
+  'Projector',
+  'Game Console',
+  'Drone',
+  'Router',
+  'Hard Drive',
+  'SSD',
+  'Keyboard',
+  'Mouse',
+  'Graphics Card',
+  'Motherboard',
+  'Power Supply',
+  'RAM',
+  'Cooling System',
+  'VR Headset',
+  'E-Reader',
+  'Fitness Tracker',
+  'Charger',
+]
 
 const BrowseContent = (props: BrowseContentProps) => {
   const [searchValue, setSearchValue] = useState('')
@@ -19,141 +49,68 @@ const BrowseContent = (props: BrowseContentProps) => {
 
   useEffect(() => {
     const getProducts = async () => {
-      try {
-        const result = await getProductsBrowse()
-        if (result) {
-          // weil einige werte nicht notNull sind und dann fehler kommen weil sie null  ein könnten
-          const checkedResults: ProductType[] = result.map((item) => ({
-            id: item.id,
-            title: item.title,
-            description: item.description ?? '',
-            price: item.price,
-            // quantity: item.quantity,
-            category: item.category ?? '',
-            sellerId: item.sellerId,
-            createdAt: item.createdAt,
-            imageUrl1: item.imageUrl1,
-            imageUrl2: item.imageUrl2,
-            imageUrl3: item.imageUrl3,
-            imageUrl4: item.imageUrl4,
-            imageUrl5: item.imageUrl5,
-            stripeId: item.stripeId ?? '',
-            paymentLink: item.paymentLink ?? '',
-            isDirectlyBuyable: item.isDirectlyBuyable ?? false,
-            isSold: item.isSold ?? false,
-          }))
-          setProducts(checkedResults)
-          if (checkedResults.length === 0) {
-            setNoSearchResults(true)
-          }
-        }
-      } catch (error) {
-        console.error('Fehler beim Laden der Daten:', error)
+      const result = await getProductsBrowse()
+      // weil einige werte nicht notNull sind und dann fehler kommen weil sie null  ein könnten
+      const checkedResults: ProductType[] = result.map((item) => ({
+        ...item,
+        description: item.description ?? '',
+        category: item.category ?? '',
+        stripeId: item.stripeId ?? '',
+        paymentLink: item.paymentLink ?? '',
+        isDirectlyBuyable: item.isDirectlyBuyable ?? false,
+        isSold: item.isSold ?? false,
+      }))
+      setProducts(checkedResults)
+      if (checkedResults.length === 0) {
+        setNoSearchResults(true)
       }
     }
     getProducts()
   }, [])
 
   const loadProductsByCategory = async (category: string) => {
-    try {
-      setLoading(true)
-      const result = await getProductsByCategory(category)
-      if (result) {
-        const checkedResults: ProductType[] = result.map((item) => ({
-          id: item.id,
-          title: item.title,
-          description: item.description ?? '',
-          price: item.price,
-          category: item.category ?? '',
-          sellerId: item.sellerId,
-          createdAt: item.createdAt,
-          imageUrl1: item.imageUrl1,
-          imageUrl2: item.imageUrl2,
-          imageUrl3: item.imageUrl3,
-          imageUrl4: item.imageUrl4,
-          imageUrl5: item.imageUrl5,
-        }))
-        setProducts(checkedResults)
-        if (checkedResults.length === 0) {
-          setNoSearchResults(true)
-        } else {
-          setNoSearchResults(false)
-        }
-      }
-    } catch (error) {
-      console.error('Fehler beim Laden der Daten:', error)
-    } finally {
-      setLoading(false)
+    setLoading(true)
+    const result = await getProductsByCategory(category)
+    const checkedResults: ProductType[] = result.map((item) => ({
+      ...item,
+      description: item.description ?? '',
+      category: item.category ?? '',
+      stripeId: item.stripeId ?? '',
+      paymentLink: item.paymentLink ?? '',
+      isDirectlyBuyable: item.isDirectlyBuyable ?? false,
+      isSold: item.isSold ?? false,
+    }))
+    setProducts(checkedResults)
+    if (checkedResults.length === 0) {
+      setNoSearchResults(true)
+    } else {
+      setNoSearchResults(false)
     }
+    setLoading(false)
   }
 
   const loadProductsByTitle = async (title: string) => {
-    try {
-      setLoading(true)
-      let result
-      if (title === '') {
-        result = await getProductsBrowse()
-      } else {
-        result = await searchProductsByTitle(title)
-      }
-      const checkedResults: ProductType[] = result!.map((item: any) => ({
-        // ! sollte weg
-        id: item.id,
-        title: item.title,
-        description: item.description ?? '',
-        price: item.price,
-        category: item.category ?? '',
-        sellerId: item.sellerId,
-        createdAt: item.createdAt,
-        imageUrl1: item.imageUrl1,
-        imageUrl2: item.imageUrl2,
-        imageUrl3: item.imageUrl3,
-        imageUrl4: item.imageUrl4,
-        imageUrl5: item.imageUrl5,
-      }))
-      setProducts(checkedResults)
-      if (checkedResults.length === 0) {
-        setNoSearchResults(true)
-      } else {
-        setNoSearchResults(false)
-      }
-    } catch (error) {
-      console.error('Fehler bei der Suche:', error)
-    } finally {
-      setLoading(false)
+    setLoading(true)
+    let result
+    if (title === '') {
+      result = await getProductsBrowse()
+    } else {
+      result = await searchProductsByTitle(title)
     }
+    const checkedResults: ProductType[] = result!.map((item: any) => ({
+      ...item,
+      description: item.description ?? '',
+      category: item.category ?? '',
+    }))
+    setProducts(checkedResults)
+    if (checkedResults.length === 0) {
+      setNoSearchResults(true)
+    } else {
+      setNoSearchResults(false)
+    }
+    setLoading(false)
   }
 
-  const suggestions = [
-    'Reciever',
-    'Monitor',
-    'Audio',
-    'Laptop',
-    'Headphone',
-    'Smartphone',
-    'Tablet',
-    'Smartwatch',
-    'Printer',
-    'Camera',
-    'Speaker',
-    'Projector',
-    'Game Console',
-    'Drone',
-    'Router',
-    'Hard Drive',
-    'SSD',
-    'Keyboard',
-    'Mouse',
-    'Graphics Card',
-    'Motherboard',
-    'Power Supply',
-    'RAM',
-    'Cooling System',
-    'VR Headset',
-    'E-Reader',
-    'Fitness Tracker',
-    'Charger',
-  ]
   return (
     <div
       className={`${loading && `h-full`} flex w-full flex-col items-center justify-center  px-4 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
