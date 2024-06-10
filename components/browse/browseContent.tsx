@@ -132,7 +132,7 @@ const BrowseContent = (props: BrowseContentProps) => {
           loadProductsByCategory={loadProductsByCategory}
           loadProductsByTitle={loadProductsByTitle}
         />
-        <SortProducts action={sortProducts} />
+        <SortProducts action={sortProducts} translations={props.sortTranslations} />
       </div>
       {!loading ? (
         <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">

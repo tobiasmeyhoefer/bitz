@@ -34,6 +34,12 @@ type SearchBarProps = {
   suggestionsTitle: string
 }
 
+type SortProductsProps = {
+  sortBy: string
+  date: string
+  price: string
+}
+
 type SearchTranslations = {
   searchPlaceholder: string
   suggestions: string
@@ -54,6 +60,7 @@ type FormTranslations = {
 
 type BrowseContentProps = {
   searchTranslations: SearchTranslations
+  sortTranslations: SortProductsProps
 }
 
 type ProductType = {
@@ -98,6 +105,7 @@ type RevealOnScrollProps = {
 export type {
   CardWithImageProps,
   SearchBarProps,
+  SortProductsProps,
   SearchTranslations,
   BrowseContentProps,
   RevealOnScrollProps,
