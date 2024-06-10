@@ -10,7 +10,7 @@ import { useEffect, useState, useRef } from 'react'
 import { SlClose } from 'react-icons/sl'
 import { CardWithImage } from '../ui/cardWithImage'
 import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog'
-import OnboardingCard from '../onboarding/onboarding-card'
+import OnboardingBrowseCard from '../onboarding/onboarding-browse-card'
 
 const BrowseContent = (props: BrowseContentProps) => {
   const [searchValue, setSearchValue] = useState('')
@@ -156,53 +156,54 @@ const BrowseContent = (props: BrowseContentProps) => {
     'Charger',
   ]
   return (
-    <div
-      className={`${loading && `h-full`} flex w-full flex-col items-center justify-center  px-4 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
-    >
-      <SearchDialog
-        placeholder={
-          searchValue.length > 0 ? searchValue : props.searchTranslations.searchPlaceholder
-        }
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
-        suggestions={suggestions}
-        suggestionsTitle={props.searchTranslations.suggestions}
-        loadProductsByCategory={loadProductsByCategory}
-        loadProductsByTitle={loadProductsByTitle}
-      />
-      {!loading ? (
-        <>
-          <div className="relative -mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
-            {/* <div className='bg-green-200 h-full w-full'></div> */}
-            <OnboardingCard />
-            {products.map((p, index) => (
-              <div key={`kp-${index}`}>
-                {/* <RevealOnScroll key={`prx-${index}`}> */}
-                <CardWithImage
-                  key={`pr-${index}`}
-                  title={p.title}
-                  desc={p.description!}
-                  price={p.price}
-                  timestamp={p.createdAt}
-                  imgUrl1={p.imageUrl1}
-                  className="mx-[5px] my-[0.5rem]"
-                  productID={p.id}
-                  product={products[index]}
-                  favIcon
-                  editable={false}
-                />
-                {/* </RevealOnScroll> */}
-              </div>
-            ))}
-            {noSearchResults && <div className=" px-4">Keine Suchergebnisse gefunden</div>}
+    <>
+      <OnboardingBrowseCard />
+      <div
+        className={`${loading && `h-full`} flex w-full flex-col items-center justify-center  px-4 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
+      >
+        <SearchDialog
+          placeholder={
+            searchValue.length > 0 ? searchValue : props.searchTranslations.searchPlaceholder
+          }
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+          suggestions={suggestions}
+          suggestionsTitle={props.searchTranslations.suggestions}
+          loadProductsByCategory={loadProductsByCategory}
+          loadProductsByTitle={loadProductsByTitle}
+        />
+        {!loading ? (
+          <>
+            <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
+              {products.map((p, index) => (
+                <div key={`kp-${index}`}>
+                  {/* <RevealOnScroll key={`prx-${index}`}> */}
+                  <CardWithImage
+                    key={`pr-${index}`}
+                    title={p.title}
+                    desc={p.description!}
+                    price={p.price}
+                    timestamp={p.createdAt}
+                    imgUrl1={p.imageUrl1}
+                    className="mx-[5px] my-[0.5rem]"
+                    productID={p.id}
+                    product={products[index]}
+                    favIcon
+                    editable={false}
+                  />
+                  {/* </RevealOnScroll> */}
+                </div>
+              ))}
+              {noSearchResults && <div className=" px-4">Keine Suchergebnisse gefunden</div>}
+            </div>
+          </>
+        ) : (
+          <div className="flex h-full items-center justify-center">
+            <div className="h-20 w-20 animate-ping rounded-[30px] bg-black"></div>
           </div>
-        </>
-      ) : (
-        <div className="flex h-full items-center justify-center">
-          <div className="h-20 w-20 animate-ping rounded-[30px] bg-black"></div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </>
   )
 }
 
@@ -313,6 +314,7 @@ const SearchDialog = (
             />
           )}
         </div>
+        <OnboardingBrowseCard className="left-10 top-10" />
         {!props.searchValue ? (
           <>
             <h1 className="px-4 pt-2 text-lg font-medium ">{props.suggestionsTitle}</h1>

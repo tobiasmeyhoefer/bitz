@@ -1,6 +1,7 @@
 import { useTranslations } from 'next-intl'
 import BrowseContent from '@/components/browse/browseContent'
 import { SearchTranslations } from '@/lib/types'
+import Onboarding from '@/components/onboarding/onboarding'
 
 const Browse = () => {
   const t = useTranslations('Browse')

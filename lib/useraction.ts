@@ -109,3 +109,16 @@ export async function getAddressByUserId(userId: string): Promise<string> {
   const result = await db.select({ address: users.adress }).from(users).where(eq(users.id, userId))
   return result[0].address!
 }
+
+export async function getOnboardingState() {
+  const user = await getUser()
+  const result = await db.select().from(users).where(eq(users.id, user[0].id))
+  return result[0].onboardingCompleted
+}
+
+export async function setOnboardingState(state: boolean) {
+  const user = await getUser();
+  await db.update(users)
+    .set({ onboardingCompleted: state })
+    .where(eq(users.id, user[0].id));
+}
