@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { sortProducts } from '@/lib/productaction'
+import { sortProducts } from '@/lib/product-actions'
 import { ProductType, SortProductsProps } from '@/lib/types'
 import { SetStateAction } from 'react'
 

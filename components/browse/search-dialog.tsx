@@ -3,7 +3,7 @@ import { Input } from '@/components/ui/input'
 import { SlClose } from 'react-icons/sl'
 import { useState } from 'react'
 import { SearchBarProps } from '@/lib/types'
-import { searchProductsByTitle } from '@/lib/productaction'
+import { searchProductsByTitle } from '@/lib/product-actions'
 
 export const SearchDialog = (
   props: SearchBarProps & {
