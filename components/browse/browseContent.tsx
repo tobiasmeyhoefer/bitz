@@ -110,17 +110,6 @@ const BrowseContent = (props: BrowseContentProps) => {
     setLoading(false)
   }
 
-  // const sort = async (value: string) => {
-  //   let result
-  //   result = await sortProducts(value)
-  //   const checkedResults: ProductType[] = result!.map((item: any) => ({
-  //     ...item,
-  //     description: item.description ?? '',
-  //     category: item.category ?? '',
-  //   }))
-  //   setProducts(checkedResults)
-  // }
-
   return (
     <div
       className={`${loading && `h-full`} flex w-full flex-col items-center justify-center  px-4 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
