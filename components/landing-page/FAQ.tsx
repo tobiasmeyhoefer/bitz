@@ -48,7 +48,7 @@ const FAQList: FAQProps[] = [
     question: 'Welche Zahlungsmethoden werden bei Bitz akzeptiert?',
     answer:
       'Bitz akzeptiert aktuell die Zahlung mit Kreditkarte. Sonst kannst du auch mit dem Verkäufer einen Termin ausmachen und direkt Bar bezahlen.',
-    value: 'item-5',
+    value: 'item-6',
   },
 ]
 

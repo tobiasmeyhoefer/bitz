@@ -5,6 +5,7 @@ import { DarkmodeToggler } from '@/components/settings/DarkmodeToggler'
 import PhoneVerification from '@/components/settings/phone-verifiaction'
 import { DeleteAccountButton } from '@/components/settings/delete-account-button'
 import ProfileSettings from '@/components/settings/profile-settings'
+import RestartOnboarding from '@/components/settings/restart-onboarding'
 
 const Settings = () => {
   const t = useTranslations('Settings')
@@ -22,6 +23,8 @@ const Settings = () => {
           <DarkmodeToggler />
           <hr />
           <h3 className="text-2xl font-bold">{t('safety')}</h3>
+          <PhoneVerification/>
+          <RestartOnboarding/>
           <RegisterPasskey />
           <DeleteAccountButton
             header={t('deleteAccount')}

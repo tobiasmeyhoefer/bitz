@@ -13,13 +13,13 @@ type CardWithImageProps = {
   product?: any
   editable: boolean
 }
-type User = {
-  userId: string
-}
+// type User = {
+//   userId: string
+// }
 
-type UserId = {
-  id: string
-}
+// type UserId = {
+//   id: string
+// }
 
 type MyShopProps = {
   userId: string
@@ -34,6 +34,12 @@ type SearchBarProps = {
   suggestionsTitle: string
 }
 
+type SortProductsProps = {
+  sortBy: string
+  date: string
+  price: string
+}
+
 type SearchTranslations = {
   searchPlaceholder: string
   suggestions: string
@@ -43,7 +49,6 @@ type FormTranslations = {
   title: string
   description: string
   price: string
-  // quantity: string
   category: string
   categoryPlaceholder: string
   images: string
@@ -54,6 +59,7 @@ type FormTranslations = {
 
 type BrowseContentProps = {
   searchTranslations: SearchTranslations
+  sortTranslations: SortProductsProps
 }
 
 type ProductType = {
@@ -61,7 +67,6 @@ type ProductType = {
   title: string
   description?: string
   price: number
-  // quantity: number
   category?: string
   createdAt?: Date
   sellerId?: string
@@ -73,7 +78,7 @@ type ProductType = {
   isDirectlyBuyable?: boolean
   isSold?: boolean
   stripeId?: string
-  paymentUrl?: string
+  paymentLink?: string
 }
 
 type ProdDelAlert = {
@@ -98,13 +103,14 @@ type RevealOnScrollProps = {
 export type {
   CardWithImageProps,
   SearchBarProps,
+  SortProductsProps,
   SearchTranslations,
   BrowseContentProps,
   RevealOnScrollProps,
   ProductType,
   FormTranslations,
-  User,
-  UserId,
+  // User,
+  // UserId,
   MyShopProps,
   ProdDelAlert,
   Shop,

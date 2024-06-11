@@ -1,5 +1,5 @@
 'use client'
-import { getSignedURL } from '@/lib/productaction'
+import { getSignedURL } from '@/lib/product-actions'
 import { z } from 'zod'
 import Image from 'next/image'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -15,7 +15,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
-import { changeUserImage } from '@/lib/useraction'
+import { changeUserImage } from '@/lib/user-actions'
 const MAX_FILE_SIZE = 8000000
 const formSchema = z.object({
   image: z.any().refine(

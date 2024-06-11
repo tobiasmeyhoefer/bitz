@@ -10,7 +10,7 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
-import { deleteAccount } from '@/lib/useraction'
+import { deleteAccount } from '@/lib/user-actions'
 
 export function DeleteAccountButton({
   header,

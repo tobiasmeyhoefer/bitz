@@ -71,9 +71,7 @@ const PhoneVerification = () => {
   }
 
   const handleCancel = async () => {
-    console.log("delete called")
     await deleteVerifactionNumber()
-    console.log("deletedNumber")
     toast({
       title: 'verification cancelled',
     })
@@ -95,7 +93,7 @@ const PhoneVerification = () => {
     <div>
       <p className="mb-4">Dein Konto ist noch nicht verifiziert ❌</p>
       <AlertDialog>
-        <AlertDialogTrigger onClick={() => {setInVerifactionProcess(true)}}>Jetzt Verifizieren</AlertDialogTrigger>
+        <AlertDialogTrigger onClick={() => {setInVerifactionProcess(true)}}><Button>Jetzt Verifizieren</Button></AlertDialogTrigger>
         {isTypeInNumberState ? (
           <AlertDialogContent>
             <AlertDialogHeader>

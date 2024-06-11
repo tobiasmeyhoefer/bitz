@@ -1,5 +1,5 @@
 import { CardWithImage } from '@/components/ui/cardWithImage'
-import { getFavoriteProducts } from '@/lib/productaction'
+import { getFavoriteProducts } from '@/lib/product-actions'
 
 const Favorites = async () => {
   const products = await getFavoriteProducts()

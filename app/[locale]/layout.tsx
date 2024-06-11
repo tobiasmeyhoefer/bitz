@@ -5,6 +5,7 @@ import NavBar from '@/components/navigation/NavBar'
 import { cn } from '@/lib/utils'
 import { Toaster } from '@/components/ui/toaster'
 import { ThemeProvider } from '@/components/darkmode/themeProvider'
+import ExperimentalAi from '@/components/ai/experimental-ai'
 
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   maximumScale: 1,
-};
+}
 
 export default async function LocaleLayout({
   children,
@@ -32,7 +33,7 @@ export default async function LocaleLayout({
     <html lang={locale}>
       <body
         className={cn(
-          'min-h-screen bg-background antialiased font-space_grotesk overflow-x-hidden',
+          'min-h-screen overflow-x-hidden bg-background font-space_grotesk antialiased',
           space_grotesk.variable,
           montserrat.variable,
         )}
@@ -46,7 +47,9 @@ export default async function LocaleLayout({
           <header>
             <NavBar />
           </header>
-          <main className="h-fit min-h-[calc(100vh-80px)]">{children}</main>{' '}
+          <main className="h-fit min-h-[calc(100vh-80px)]">
+            {children}
+          </main>{' '}
           {/* bg-white rausgenommen*/}
           <Toaster />
         </ThemeProvider>

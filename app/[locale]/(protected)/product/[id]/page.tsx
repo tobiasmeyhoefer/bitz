@@ -3,19 +3,17 @@ import { ProductImageCarousel } from '../productImgCarousel'
 import ProductInfoCard from '../productInfoCard'
 import { Link } from '@/navigation'
 import { getTranslations } from 'next-intl/server'
-import { getProductById } from '@/lib/productaction'
-import { getUser } from '@/lib/useraction'
+import { getProductById } from '@/lib/product-actions'
+import { getUser } from '@/lib/user-actions'
 
 export default async function Page({ params }: { params: { id: string } }) {
   const t = await getTranslations('Product')
   const productId = params.id
 
-  const fetchedProduct: any = await getProductById(productId)
-  const product = fetchedProduct[0]
-  const fetchedUser = await getUser()
-  const user = fetchedUser?.[0]
+  const product: any = await getProductById(productId)
+  const user = await getUser()
   let isOwner = false
-  if (user?.id == product.sellerId) {
+  if (user.id == product.sellerId) {
     isOwner = true
   }
 
@@ -64,18 +62,6 @@ export default async function Page({ params }: { params: { id: string } }) {
           </Button>
         </Link>
       </div>
-      {/* <form
-        action={async () => {
-          'use server'
-          await createConversation(product.id)
-          revalidatePath('/conversations')
-          redirect('/conversations')
-        }}
-      >
-        <Button type="submit" className="fixed bottom-6 right-40">
-          Kaufen
-        </Button>
-      </form> */}
     </>
   )
 }

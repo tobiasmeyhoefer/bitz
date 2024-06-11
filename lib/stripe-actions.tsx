@@ -6,7 +6,7 @@ import { db } from '@/db'
 import { checkoutSession, products, transactions, users } from '@/schema'
 import { desc, eq, or } from 'drizzle-orm'
 import { cookies } from 'next/headers'
-import { getUser } from './useraction'
+import { getUser } from './user-actions'
 import { revalidatePath } from 'next/cache'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
@@ -116,16 +116,10 @@ export async function handleCompletedCheckoutSession(event: Stripe.CheckoutSessi
       (event.data.object as any).id,
       { expand: ['line_items'] },
     )
-    console.log('skr')
-    console.log(sessionWithLineItems)
     const lineItems = sessionWithLineItems.line_items
     if (!lineItems) return false
 
     const product = await stripe.products.retrieve(lineItems.data[0].price?.product as string)
-
-    console.log('-----------')
-    console.log(product.metadata.productId)
-    console.log('-----------')
 
     changeProductStateToSold(product.metadata.productId)
     await savePayment(product.metadata.productId)
@@ -169,6 +163,6 @@ export async function getUserTransactions() {
   return await db
     .select()
     .from(transactions)
-    .where(or(eq(transactions.buyerId, user![0].id), eq(transactions.sellerId, user![0].id)))
+    .where(or(eq(transactions.buyerId, user.id), eq(transactions.sellerId, user.id)))
     .orderBy(desc(transactions.createdAt))
 }
