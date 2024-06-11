@@ -4,11 +4,9 @@ import google from 'next-auth/providers/google'
 import github from 'next-auth/providers/github'
 import passkey from 'next-auth/providers/passkey'
 import { drizzleAdapter } from './adapter'
-import { html, text } from './lib/authSendRequest'
-import { saveUserNameLogin } from './lib/useraction'
+import { html, text } from './lib/auth-send-request'
+import { saveUserNameLogin } from './lib/user-actions'
 import { cookies } from 'next/headers'
-
-// const locale = useLocale();
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: drizzleAdapter,
@@ -16,11 +14,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     google,
     github,
     resend({
-      // server: "bitztech.de",
       apiKey: process.env.AUTH_RESEND_KEY!,
       from: 'auth@bitztech.de',
       async sendVerificationRequest({ identifier: email, url, provider: { from } }) {
-        // Custom function to send verification email
         const res = await fetch('https://api.resend.com/emails', {
           method: 'POST',
           headers: {

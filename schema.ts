@@ -33,18 +33,11 @@ export const products = pgTable('product', {
   title: text('title').notNull(),
   description: text('description'),
   price: integer('price').notNull(),
-  // currency: text('currency').notNull(),
-  // quantity: integer('quantity')
-  //   .notNull()
-  //   .$default(() => 1),
   location: text('location'),
   category: text('category'),
   sellerId: text('sellerId')
     .notNull()
     .references(() => users.id, { onDelete: 'cascade' }),
-  // status: text('status')
-  //   .notNull()
-  //   .$default(() => 'available'),
   createdAt: timestamp('createdAt', { mode: 'date' }).notNull(),
   imageUrl1: text('imageUrl1'),
   imageUrl2: text('imageUrl2'),
@@ -214,5 +207,6 @@ export const conversations = pgTable(
 )
 
 export type UserType = typeof users.$inferSelect
+export type ProductTypeTest = typeof products.$inferSelect
 export type ConversationType = typeof conversations.$inferSelect
 export type TransactionType = typeof transactions.$inferSelect

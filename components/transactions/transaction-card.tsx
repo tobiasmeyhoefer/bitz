@@ -6,8 +6,8 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { getProductById } from '@/lib/productaction'
-import { getUser, getUserById } from '@/lib/useraction'
+import { getProductById } from '@/lib/product-actions'
+import { getUser, getUserById } from '@/lib/user-actions'
 import { TransactionType } from '@/schema'
 
 export const TransactionCard = async ({ transaction }: { transaction: TransactionType }) => {

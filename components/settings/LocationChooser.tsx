@@ -12,7 +12,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { getUser, saveUserLocation } from '@/lib/useraction'
+import { getUser, saveUserLocation } from '@/lib/user-actions'
 import { useEffect, useState } from 'react'
 import { useToast } from '../ui/use-toast'
 

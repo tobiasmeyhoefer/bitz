@@ -8,23 +8,19 @@ export async function POST(req: NextRequest) {
   const res = JSON.parse(payload)
 
   const sig = req.headers.get('stripe-signature')
-  console.log("Signature: " + sig)
 
   const secret =
     process.env.NODE_ENV === 'production'
       ? process.env.STRIPE_WEBHOOK_SECRET!
       : process.env.STRIPE_WEBHOOK_SECRET_LOCAL!
 
-  console.log("secret: " + secret)
 
   try {
     let event = stripe.webhooks.constructEvent(payload, sig!, secret!)
 
-    console.log(event)
 
     switch (event.type) {
       case 'checkout.session.completed':
-        console.log('checkout.session.completed')
         const savedSession = await handleCompletedCheckoutSession(event)
         break
     }

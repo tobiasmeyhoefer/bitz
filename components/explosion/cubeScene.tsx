@@ -1,16 +1,13 @@
 'use client'
 import { Center, OrbitControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
-import { Suspense } from 'react'
 import Cube from './cube'
-import ThreeSkeleton from '../ui/skeletons/three-skeleton'
 
 export default function Scene() {
 
   // const handleClick = () => {
   //   const wrapper = document.getElementById("clickEventWrapper")
   //   wrapper?.classList.add("hidden")
-  //   console.log(wrapper)
   // }
 
   return (

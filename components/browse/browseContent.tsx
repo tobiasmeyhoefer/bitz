@@ -3,7 +3,7 @@ import {
   getProductsBrowse,
   getProductsByCategory,
   searchProductsByTitle,
-} from '@/lib/productaction'
+} from '@/lib/product-actions'
 import { BrowseContentProps, ProductType } from '@/lib/types'
 import { useEffect, useState } from 'react'
 import { CardWithImage } from '../ui/cardWithImage'
@@ -136,7 +136,6 @@ const BrowseContent = (props: BrowseContentProps) => {
             <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
               {products.map((p, index) => (
                 <div key={`kp-${index}`}>
-                  {/* <RevealOnScroll key={`prx-${index}`}> */}
                   <CardWithImage
                     key={`pr-${index}`}
                     title={p.title}
@@ -150,7 +149,6 @@ const BrowseContent = (props: BrowseContentProps) => {
                     favIcon
                     editable={false}
                   />
-                  {/* </RevealOnScroll> */}
                 </div>
               ))}
               {noSearchResults && <div className=" px-4">Keine Suchergebnisse gefunden</div>}

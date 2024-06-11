@@ -71,9 +71,7 @@ const PhoneVerification = () => {
   }
 
   const handleCancel = async () => {
-    console.log("delete called")
     await deleteVerifactionNumber()
-    console.log("deletedNumber")
     toast({
       title: 'verification cancelled',
     })

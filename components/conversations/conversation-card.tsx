@@ -6,8 +6,8 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { getProductById } from '@/lib/productaction'
-import { getAddressByUserId, getUser, getUserById } from '@/lib/useraction'
+import { getProductById } from '@/lib/product-actions'
+import { getAddressByUserId, getUser, getUserById } from '@/lib/user-actions'
 import { ConversationType } from '@/schema'
 import { formatDate } from '@/lib/utils'
 import { ConversationForm } from './conversation-form1'

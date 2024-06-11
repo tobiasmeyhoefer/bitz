@@ -19,7 +19,7 @@ import {
 import { addConversationDelay, deleteConversation } from '@/lib/conversations-actions'
 import { ConversationType } from '@/schema'
 import { changeProductStateToSold, createTransaction } from '@/lib/stripe-actions'
-import { getProductById } from '@/lib/productaction'
+import { getProductById } from '@/lib/product-actions'
 import { useRouter } from '@/navigation'
 
 export const ConversationCardDropwdown = ({

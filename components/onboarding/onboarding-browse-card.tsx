@@ -11,7 +11,7 @@ import {
 import { Button } from '../ui/button'
 import { BorderBeam } from '../magicui/border-beam'
 import { useOnboardingStore } from '@/stores/onboarding-store'
-import { getOnboardingState, setOnboardingState } from '@/lib/useraction'
+import { getOnboardingState, setOnboardingState } from '@/lib/user-actions'
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
 

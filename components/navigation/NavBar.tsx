@@ -1,5 +1,5 @@
 import { auth } from '@/auth'
-import { getUser } from '@/lib/useraction'
+import { getUser } from '@/lib/user-actions'
 import { Link } from '@/navigation'
 import { getTranslations } from 'next-intl/server'
 import dynamic from 'next/dynamic'

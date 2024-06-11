@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { checkIfConversationAlreadyExist, createConversation } from '@/lib/conversations-actions'
 import { Link, useRouter } from '@/navigation'
 import { createCheckoutSession, productHasCheckoutSessionOpened } from '@/lib/stripe-actions'
-import { getUser } from '@/lib/useraction'
+import { getUser } from '@/lib/user-actions'
 import { useRouter as useRouterNext } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useToast } from '@/components/ui/use-toast'
@@ -44,7 +44,6 @@ export function BuyButtons(props: { product: ProductType }) {
       if (!openedCheckoutSession) {
         const user = await getUser()
         await createCheckoutSession(user.id, product.id!)
-        console.log(product?.paymentLink!)
         routerNext.push(product?.paymentLink!)
       }
     } else {

@@ -1,4 +1,4 @@
-import { setOnboardingState } from '@/lib/useraction'
+import { setOnboardingState } from '@/lib/user-actions'
 import { Button } from '../ui/button'
 import { redirect } from '@/navigation'
 

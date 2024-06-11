@@ -3,8 +3,8 @@ import { ProductImageCarousel } from '../productImgCarousel'
 import ProductInfoCard from '../productInfoCard'
 import { Link } from '@/navigation'
 import { getTranslations } from 'next-intl/server'
-import { getProductById } from '@/lib/productaction'
-import { getUser } from '@/lib/useraction'
+import { getProductById } from '@/lib/product-actions'
+import { getUser } from '@/lib/user-actions'
 
 export default async function Page({ params }: { params: { id: string } }) {
   const t = await getTranslations('Product')
