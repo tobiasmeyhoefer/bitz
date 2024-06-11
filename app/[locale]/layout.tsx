@@ -49,7 +49,6 @@ export default async function LocaleLayout({
           </header>
           <main className="h-fit min-h-[calc(100vh-80px)]">
             {children}
-            <ExperimentalAi />
           </main>{' '}
           {/* bg-white rausgenommen*/}
           <Toaster />

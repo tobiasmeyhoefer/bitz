@@ -5,37 +5,54 @@ import { FormEvent, useState, useEffect, useRef } from 'react'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import { useChat } from 'ai/react'
+import supportPerson from '@/public/images/support-person.svg'
+import Image from 'next/image'
 
 const ExperimentalAi: React.FC = () => {
   const [isOpened, setIsOpened] = useState(false)
   const { messages, input, handleInputChange, handleSubmit } = useChat()
   const containerRef = useRef<HTMLDivElement>(null)
+  const buttonRef = useRef<HTMLDivElement>(null)
 
   const handleClickOutside = (event: MouseEvent) => {
-    if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+    if (
+      containerRef.current &&
+      !containerRef.current.contains(event.target as Node) &&
+      buttonRef.current &&
+      !buttonRef.current.contains(event.target as Node)
+    ) {
       setIsOpened(false)
     }
   }
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside)
+    if (messages.length === 0) {
+      messages.push({
+        content: 'Hallo mein Name ist Byte, Wie kann ich dir weiterhelfen?',
+        role: 'assistant',
+        createdAt: new Date(),
+        id: 'AAAAAA',
+      })
+    }
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [])
+  }, [messages])
 
   return (
     <div className="fixed">
       <div
+        ref={buttonRef}
         onClick={() => setIsOpened(!isOpened)}
-        className="fixed bottom-4 right-4 flex h-[60px] w-[60px] cursor-pointer items-center justify-center rounded-full bg-neutral-900 hover:bg-neutral-800"
+        className="fixed bottom-6 right-6 flex h-[60px] w-[60px] cursor-pointer items-center justify-center rounded-full bg-neutral-900 hover:bg-neutral-800"
       >
         <p className="text-xl font-bold text-white">AI</p>
       </div>
       <div
         ref={containerRef}
         className={cn(
-          'fixed bottom-20 right-20 z-10 flex h-[500px] w-[400px] flex-col justify-between rounded-lg border border-neutral-400 bg-white p-2 shadow-2xl',
+          'fixed bottom-20 right-20 z-10 flex md:h-[500px] md:w-[400px] h-[400px] w-[300px] flex-col justify-between rounded-lg border border-neutral-400 bg-white p-2 shadow-2xl',
           { hidden: !isOpened },
         )}
       >
@@ -51,6 +68,15 @@ const ExperimentalAi: React.FC = () => {
               {m.content}
             </div>
           ))}
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center -z-10">
+            <Image
+              src={supportPerson}
+              className="pointer-events-none fixed md:h-80 md:w-80 h-60 w-60 blur-[2px]"
+              alt="a support person"
+              width={100}
+              height={100}
+            />
+          </div>
         </div>
         <div className="p-2">
           <form className="flex gap-2" onSubmit={handleSubmit}>

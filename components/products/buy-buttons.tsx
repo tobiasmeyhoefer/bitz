@@ -64,16 +64,16 @@ export function BuyButtons(props: { product: ProductType }) {
   return (
     <>
       {disabled ? (
-        <Button disabled onClick={handleBuyClick} type="submit" className="fixed bottom-6 right-40">
+        <Button disabled onClick={handleBuyClick} type="submit" className="fixed bottom-8 right-28">
           Kaufen
         </Button>
       ) : (
-        <Button onClick={handleBuyClick} type="submit" className="fixed bottom-6 right-40">
+        <Button onClick={handleBuyClick} type="submit" className="fixed bottom-8 right-28">
           Kaufen
         </Button>
       )}
       {product?.isDirectlyBuyable ? (
-        <Button onClick={handleDirectBuyClick} className="fixed bottom-6 right-6" type="submit">
+        <Button onClick={handleDirectBuyClick} className="fixed bottom-8 right-52" type="submit">
           Direkt Kaufen
         </Button>
       ) : null}
