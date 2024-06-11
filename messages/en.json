@@ -120,7 +120,9 @@
     "submitTitle": "submit",
     "save": "Save",
     "cancel": "Cancel",
-    "edit": "Edit"
+    "edit": "Edit",
+    "isDirectlyBuyable": "Is directly buyable",
+    "deletePicture": "delete Picture"
   },
   "ProdDelAlert": {
     "title": "Attention!",

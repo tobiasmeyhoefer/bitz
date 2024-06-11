@@ -140,6 +140,8 @@ export function ProductForm({
     toastTitle,
     toastDescription,
     submitTitle,
+    isDirectlyBuyable,
+    deletePicture
   } = translations
 
   useEffect(() => {
@@ -464,7 +466,7 @@ export function ProductForm({
               name={'isDirectlyBuyable'}
               render={({ field }) => (
                 <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-3">
-                  <FormLabel>is directly buyable</FormLabel>
+                  <FormLabel>{isDirectlyBuyable}</FormLabel>
                   <FormControl>
                     <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                   </FormControl>
@@ -511,7 +513,7 @@ export function ProductForm({
                       className="absolute bottom-1 right-1"
                       onClick={() => handleDelete(index)}
                     >
-                      Delete
+                      {deletePicture}
                     </Button>
                   </div>
                 ))}

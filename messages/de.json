@@ -122,7 +122,9 @@
     "submitTitle": "Absenden",
     "save": "Speichern",
     "cancel": "Abbrechen",
-    "edit": "Bearbeiten"
+    "edit": "Bearbeiten",
+    "isDirectlyBuyable": "Ist direkt kaufbar",
+    "deletePicture": "Bild löschen"
   },
   "ProdDelAlert": {
     "title": "Achtung!",
