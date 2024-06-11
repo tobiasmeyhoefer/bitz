@@ -5,10 +5,12 @@ import {
   searchProductsByTitle,
 } from '@/lib/productaction'
 import { BrowseContentProps, ProductType } from '@/lib/types'
-import { useEffect, useState } from 'react'
+import { SetStateAction, useEffect, useState } from 'react'
 import { CardWithImage } from '../ui/cardWithImage'
 import { SortProducts } from '../sort-products/sort-products'
 import { SearchDialog } from './search-dialog'
+import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog'
+import OnboardingBrowseCard from '../onboarding/onboarding-browse-card'
 const suggestions = [
   'Reciever',
   'Monitor',
@@ -111,10 +113,11 @@ const BrowseContent = (props: BrowseContentProps) => {
   }
 
   return (
-    <div
-      className={`${loading && `h-full`} flex w-full flex-col items-center justify-center  px-4 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
-    >
-      <div className="flex w-full flex-col items-center justify-center gap-6 lg:flex-row">
+    <>
+      <OnboardingBrowseCard />
+      <div
+        className={`${loading && `h-full`} flex w-full flex-col items-center justify-center  px-4 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
+      >
         <SearchDialog
           placeholder={
             searchValue.length > 0 ? searchValue : props.searchTranslations.searchPlaceholder
@@ -127,36 +130,38 @@ const BrowseContent = (props: BrowseContentProps) => {
           loadProductsByTitle={loadProductsByTitle}
         />
         <SortProducts setProducts={setProducts} translations={props.sortTranslations} />
-      </div>
-      {!loading ? (
-        <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
-          {products.map((p, index) => (
-            <div key={`kp-${index}`}>
-              {/* <RevealOnScroll key={`prx-${index}`}> */}
-              <CardWithImage
-                key={`pr-${index}`}
-                title={p.title}
-                desc={p.description!}
-                price={p.price}
-                timestamp={p.createdAt}
-                imgUrl1={p.imageUrl1}
-                className="mx-[5px] my-[0.5rem]"
-                productID={p.id}
-                product={products[index]}
-                favIcon
-                editable={false}
-              />
-              {/* </RevealOnScroll> */}
+        {!loading ? (
+          <>
+            <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
+              {products.map((p, index) => (
+                <div key={`kp-${index}`}>
+                  {/* <RevealOnScroll key={`prx-${index}`}> */}
+                  <CardWithImage
+                    key={`pr-${index}`}
+                    title={p.title}
+                    desc={p.description!}
+                    price={p.price}
+                    timestamp={p.createdAt}
+                    imgUrl1={p.imageUrl1}
+                    className="mx-[5px] my-[0.5rem]"
+                    productID={p.id}
+                    product={products[index]}
+                    favIcon
+                    editable={false}
+                  />
+                  {/* </RevealOnScroll> */}
+                </div>
+              ))}
+              {noSearchResults && <div className=" px-4">Keine Suchergebnisse gefunden</div>}
             </div>
-          ))}
-          {noSearchResults && <div className=" px-4">Keine Suchergebnisse gefunden</div>}
-        </div>
-      ) : (
-        <div className="flex h-full items-center justify-center">
-          <div className="h-20 w-20 animate-ping rounded-[30px] bg-black"></div>
-        </div>
-      )}
-    </div>
+          </>
+        ) : (
+          <div className="flex h-full items-center justify-center">
+            <div className="h-20 w-20 animate-ping rounded-[30px] bg-black"></div>
+          </div>
+        )}
+      </div>
+    </>
   )
 }
 

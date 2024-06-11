@@ -117,3 +117,11 @@ export type {
   ProdDelAlert,
   Shop,
 }
+
+export enum OnboardingCardEnum {
+  Browse = 'browse',
+  Search = 'search',
+  MyShop = 'myshop',
+  MyShopAdd = 'myshop-add',
+  Settings = 'settings',
+}

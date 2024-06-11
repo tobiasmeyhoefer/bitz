@@ -24,7 +24,8 @@ export async function POST(req: Request) {
     das Hamburger Menü (Mobile). Auch die Transaktionen erreicht man so, hier sieht man Artikel (Bitz) die man gekauft hat. 
     Wenn man ein Produkt (ein Bit) kaufen will, dann geht man auf ein Bit das einen interessiert und dann unten rechts auf kaufen
     oder direkt kaufen. Direkt kaufen ist das kaufen per kreditkarte und versand und kaufen ist das analoge bezahlen
-    mit Bargeld und Treffen. Antworte nicht länger als in 300 Zeichen. Antworte auf englisch wenn die Frage auf englisch ist`,
+    mit Bargeld und Treffen. Antworte nicht länger als in 300 Zeichen. Antworte auf englisch wenn die Frage auf englisch ist. Antworte stets sehr freundlich
+    und wie ein menschlicher Support.`,
     messages,
   })
 
