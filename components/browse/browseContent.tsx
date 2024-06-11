@@ -1,5 +1,4 @@
 'use client'
-import { sortBy } from 'sort-by-typescript'
 import {
   getProductsBrowse,
   getProductsByCategory,
@@ -111,10 +110,16 @@ const BrowseContent = (props: BrowseContentProps) => {
     setLoading(false)
   }
 
-  function sortProducts(value: string) {
-    const result = [...products].sort(sortBy(value))
-    setProducts(result)
-  }
+  // const sort = async (value: string) => {
+  //   let result
+  //   result = await sortProducts(value)
+  //   const checkedResults: ProductType[] = result!.map((item: any) => ({
+  //     ...item,
+  //     description: item.description ?? '',
+  //     category: item.category ?? '',
+  //   }))
+  //   setProducts(checkedResults)
+  // }
 
   return (
     <div
@@ -132,7 +137,7 @@ const BrowseContent = (props: BrowseContentProps) => {
           loadProductsByCategory={loadProductsByCategory}
           loadProductsByTitle={loadProductsByTitle}
         />
-        <SortProducts action={sortProducts} translations={props.sortTranslations} />
+        <SortProducts setProducts={setProducts} translations={props.sortTranslations} />
       </div>
       {!loading ? (
         <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
