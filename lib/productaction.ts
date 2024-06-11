@@ -4,7 +4,7 @@ import { products, favorites } from '@/schema'
 import { db } from '../db'
 import { count, desc, eq, ne, or, sql, ilike, and } from 'drizzle-orm'
 import { auth } from '@/auth'
-import { getUser, getUserById } from './useraction'
+import { getUserById } from './useraction'
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import crypto from 'crypto'
@@ -16,23 +16,16 @@ import { redirect } from '@/navigation'
 export async function getProductsBrowse() {
   const session = await auth()
   const id = session?.user?.id
-  if (id) {
-    const response = await db.select().from(products).where(and(ne(products.sellerId, id), ne(products.isSold, true)))
-    if (response) {
-      return response
-    }
-  }
+  const response = await db
+    .select()
+    .from(products)
+    .where(and(ne(products.sellerId, id!), ne(products.isSold, true)))
+  return response
 }
 
 export async function getProductsOwned(userId: string) {
-  let id = userId
-  let response
-  if (id) {
-    response = await db.select().from(products).where(eq(products.sellerId, id)) //muss 'eq' sein und nicht 'ne'
-    if (response) {
-      return response
-    }
-  }
+  const response = await db.select().from(products).where(eq(products.sellerId, userId)) //muss 'eq' sein und nicht 'ne'
+  return response
 }
 
 export async function addProduct(values: ProductType, imageUrls: string[]) {
@@ -55,7 +48,7 @@ export async function addProduct(values: ProductType, imageUrls: string[]) {
         price: price,
         category: category,
         sellerId: id,
-        location: user[0].location ?? null,
+        location: user.location ?? null,
         createdAt: created,
         imageUrl1: imageUrls[0],
         imageUrl2: imageUrls[1],
@@ -89,13 +82,12 @@ export async function addProduct(values: ProductType, imageUrls: string[]) {
 // Delete function requiring productId as string
 export async function deleteProduct(productId: string) {
   const product = await getProductById(productId)
-  const rightproduct = product[0]
   const imageUrls = [
-    rightproduct.imageUrl1,
-    rightproduct.imageUrl2,
-    rightproduct.imageUrl3,
-    rightproduct.imageUrl4,
-    rightproduct.imageUrl5,
+    product.imageUrl1,
+    product.imageUrl2,
+    product.imageUrl3,
+    product.imageUrl4,
+    product.imageUrl5,
   ]
   for (const imageUrl of imageUrls) {
     if (imageUrl) {
@@ -103,7 +95,7 @@ export async function deleteProduct(productId: string) {
     }
   }
   await db.delete(products).where(eq(products.id, productId))
-  await setProductNotActive(product![0].stripeId!)
+  await setProductNotActive(product!.stripeId!)
   revalidatePath('/myShop')
 }
 
@@ -112,19 +104,18 @@ export async function updateProduct(productId: string, values: ProductType) {
   //#endregion
   const existingProduct = await getProductById(productId)
   if (existingProduct) {
-    console.log('-----------')
     const { title, description, price } = values
     await db
       .update(products)
       .set({
-        title: title || existingProduct[0].title,
-        description: description || existingProduct[0].description,
-        price: price || existingProduct[0].price,
+        title: title || existingProduct.title,
+        description: description || existingProduct.description,
+        price: price || existingProduct.price,
         // quantity: quantity || existingProduct[0].quantity,
       })
       .where(eq(products.id, productId))
-    await updateProductStripe(existingProduct[0].stripeId!, values)
-    revalidatePath("myshop")
+    await updateProductStripe(existingProduct.stripeId!, values)
+    revalidatePath('myshop')
   } else {
     throw new Error('Product not found or unauthorized to update.')
   }
@@ -133,48 +124,36 @@ export async function updateProduct(productId: string, values: ProductType) {
 // getter for a product with id as param
 export async function getProductById(productId: string) {
   const response = await db.select().from(products).where(eq(products.id, productId))
-  return response
+  if (response.length === 0) {
+    throw new Error('Product not found in DB (getProductById)')
+  }
+  return response[0]
 }
 
 // getter for products with Category as param
 export const getProductsByCategory = async (category: string) => {
-  try {
-    const result = await db
-      .select()
-      .from(products)
-      .where(eq(products.category, category))
-    return result
-  } catch (error) {
-    console.error('Fehler beim Laden der Daten:', error)
-    throw error
-  }
+  const result = await db.select().from(products).where(eq(products.category, category))
+  return result
 }
 
 // getter for products with title as param
 export const searchProductsByTitle = async (title: string) => {
-  try {
-    const sanitizedTitle = `%${title.replace(/%/g, '\\%').replace(/_/g, '\\_')}%`
-    const res = db
+  const sanitizedTitle = `%${title.replace(/%/g, '\\%').replace(/_/g, '\\_')}%`
+  const res = db
     .select()
     .from(products)
     //.where(ilike(products.title, `%${title}%`)) // title
     .where(ilike(products.title, sanitizedTitle))
-    return res
-  } catch (error) {
-    console.error('Fehler beim Laden der Daten:', error)
-    throw error
-  }
+  return res
 }
 
 export async function addToFavorites(productId: string) {
   const session = await auth()
   const id = session?.user?.id
-  if (id) {
-    await db.insert(favorites).values({
-      userId: id,
-      productId: productId,
-    })
-  }
+  await db.insert(favorites).values({
+    userId: id!,
+    productId: productId,
+  })
   revalidatePath('/favorites')
 }
 
@@ -186,10 +165,8 @@ export async function deleteFavorite(productId: string) {
 export async function getUserFavorites() {
   const session = await auth()
   const id = session?.user?.id
-  if (id) {
-    const response = await db.select().from(favorites).where(eq(favorites.userId, id))
-    return response
-  }
+  const response = await db.select().from(favorites).where(eq(favorites.userId, id!))
+  return response
 }
 
 export async function getFavoriteProducts() {

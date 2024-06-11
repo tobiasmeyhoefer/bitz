@@ -31,15 +31,14 @@ export const ConversationCardDropwdown = ({
   showDelay: boolean
   showSold: boolean
 }) => {
-
   const router = useRouter()
 
   const changeProdStateToSold = async () => {
     await changeProductStateToSold(conv.productId)
     await deleteConversation(conv.productId, conv.buyerId)
     const product = await getProductById(conv.productId)
-    await createTransaction(conv.buyerId, conv.productId, conv.sellerId, product[0].price)
-    router.push("/transactions")
+    await createTransaction(conv.buyerId, conv.productId, conv.sellerId, product.price)
+    router.push('/transactions')
   }
 
   return (

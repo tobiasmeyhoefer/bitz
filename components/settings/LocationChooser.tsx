@@ -25,9 +25,8 @@ export default function LocationChooser({ postcode }: { postcode: string }) {
   const { toast } = useToast()
   useEffect(() => {
     const getProduct = async () => {
-      const result = await getUser()
-      const r = result![0]
-      setLocation(r.location ?? '')
+      const user = await getUser()
+      setLocation(user.location ?? '')
     }
     getProduct()
   }, [])
@@ -38,14 +37,14 @@ export default function LocationChooser({ postcode }: { postcode: string }) {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     await saveUserLocation(values)
     toast({
-      title: "Postcode changed successfully ✅",
+      title: 'Postcode changed successfully ✅',
     })
   }
 
   return (
-    <div className='mb-6'>
+    <div className="mb-6">
       <Form {...form}>
-        <FormLabel className='mb-2'>change Location</FormLabel>
+        <FormLabel className="mb-2">change Location</FormLabel>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
             control={form.control}
@@ -59,7 +58,7 @@ export default function LocationChooser({ postcode }: { postcode: string }) {
               </FormItem>
             )}
           />
-          <Button className="mt-4" type="submit" variant={"secondary"}>
+          <Button className="mt-4" type="submit" variant={'secondary'}>
             change
           </Button>
         </form>

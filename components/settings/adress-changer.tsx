@@ -29,9 +29,8 @@ export default function AdressChanger() {
   const { toast } = useToast()
   useEffect(() => {
     const getProduct = async () => {
-      const result = await getUser()
-      const r = result![0]
-      setAdress(r.adress ?? '')
+      const user = await getUser()
+      setAdress(user.adress ?? '')
     }
     getProduct()
   }, [])
@@ -42,12 +41,12 @@ export default function AdressChanger() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     await saveUserAdress(values.adress)
     toast({
-      title: "Address changed successfully ✅",
+      title: 'Address changed successfully ✅',
     })
   }
 
   return (
-    <div className='mb-6'>
+    <div className="mb-6">
       <Form {...form}>
         <FormLabel>change Adress</FormLabel>
         <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -63,7 +62,7 @@ export default function AdressChanger() {
               </FormItem>
             )}
           />
-          <Button className="mt-4" type="submit" variant={"secondary"}>
+          <Button className="mt-4" type="submit" variant={'secondary'}>
             change
           </Button>
         </form>
