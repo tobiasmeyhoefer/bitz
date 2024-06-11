@@ -12,7 +12,7 @@ export async function saveUserNameLogin(name: string, email: string) {
     .update(users)
     .set({ name: name })
     .where(eq(users.id, response[0].id))
-    .catch((error) => console.log(error))
+    .catch((error) => console.log(error)) 
 }
 
 export async function saveUserName(name: string) {
@@ -121,7 +121,7 @@ export async function getAddressByUserId(userId: string): Promise<string> {
 
 export async function getOnboardingState() {
   const user = await getUser()
-  const result = await db.select().from(users).where(eq(users.id, user[0].id))
+  const result = await db.select().from(users).where(eq(users.id, user.id))
   return result[0].onboardingCompleted
 }
 
@@ -129,5 +129,5 @@ export async function setOnboardingState(state: boolean) {
   const user = await getUser();
   await db.update(users)
     .set({ onboardingCompleted: state })
-    .where(eq(users.id, user[0].id));
+    .where(eq(users.id, user.id));
 }
