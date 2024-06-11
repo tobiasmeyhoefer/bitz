@@ -39,11 +39,11 @@
     "discoverBitz": "Discover the new buying and selling platform",
     "Sponsors": {
       "thanks": "Special thanks to"
-     },
+    },
     "About": {
       "title": "What Is",
       "WhatIsBitz": "Bitz is a buying and selling platform similar to classified ads or Vinted, only much better. Bitz is all about the joy of browsing, discovering and trading. Our application serves as a marketplace for selling your own goods or buying those of others. Our focus here is on trading in technical goods, increased security and a good user experience. Customizable user profiles allow you to create your own small stores to market Bitz (your items) in an ideal way. With Bitz, you can save money, create space and also protect the environment.",
-      "Users": "Benutzer" 
+      "Users": "Benutzer"
     },
     "HowItWorks": {
       "title01": "How It",
@@ -59,7 +59,7 @@
       "step04": "Use",
       "step44": "Use your purchased bit and put it back on our platform when you hade enough of it"
     },
-     "Testimonials": {
+    "Testimonials": {
       "title01": "Discover Why",
       "title02": "People Love",
       "title03": "Bitz",
@@ -70,14 +70,14 @@
       "lisa": "Thanks to Bitz, I was able to sell my old smartphone quickly and securely. The user interface is intuitive and communication with buyers was smooth.",
       "thomas": "The platform offers a great opportunity to try out new tech products without spending a lot of money right away.",
       "nina": "I'm thrilled with Bitz's modern and cool design. The user interface is super intuitive and looks simply great. It's really fun to browse through the offers!"
-     },
-     "OurTeam": {
+    },
+    "OurTeam": {
       "title": "Our Dedicated",
       "sub": "consisting of frontend and backend specialists"
-     }
+    }
   },
 
-  "Statistics":{
+  "Statistics": {
     "users": "Users",
     "devs": "Developers",
     "downloads": {
@@ -88,7 +88,10 @@
   "Browse": {
     "title": "Browse",
     "searchPlaceholder": "What are you searching for?",
-    "suggestions": "Suggestions"
+    "suggestions": "Suggestions",
+    "sortby": "sort by:",
+    "date": "date",
+    "price": "price"
   },
   "Search": {
     "title": "Search"
@@ -119,11 +122,11 @@
     "cancel": "Cancel",
     "edit": "Edit"
   },
-   "ProdDelAlert": {
+  "ProdDelAlert": {
     "title": "Attention!",
     "yousure": "This will permanently delete this Bit from the database. This action cannot be undone. ",
     "confirm": "Confirm",
-    "cancel" : "Cancel"
+    "cancel": "Cancel"
   },
   "Settings": {
     "title": "SETTINGS",
@@ -167,7 +170,7 @@
     "label": "change language",
     "locale": "{locale, select, de {🇩🇪 Deutsch} en {🇺🇸 English} other {Unbekannt}}"
   },
-  "Conversations": {  
+  "Conversations": {
     "title": "CONVERSATIONS",
     "empty": "There are no opened conversations",
     "newbuyer00": "is interested in your Bitz '",
@@ -185,9 +188,9 @@
     "delay00": "You have a delay of around",
     "delay01": "minutes",
     "delay11": "has a delay of around"
-   },
+  },
 
-    "Transactions": {
-      "title": "TRANSACTIONS"
-    }
+  "Transactions": {
+    "title": "TRANSACTIONS"
+  }
 }

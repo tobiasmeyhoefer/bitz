@@ -12,6 +12,7 @@ import { ProductType } from './types'
 import { revalidatePath } from 'next/cache'
 import { addProductStripe, setProductNotActive, updateProductStripe } from './stripe-actions'
 import { redirect } from '@/navigation'
+import { sortBy } from 'sort-by-typescript'
 
 export async function getProductsBrowse() {
   const session = await auth()
@@ -337,4 +338,15 @@ export async function updateProductImage(existingImageUrl: string, newImageUrl: 
 export async function getAllProductsCount() {
   const result = await db.select({ count: count() }).from(products)
   return result[0].count
+}
+
+export async function sortProducts(value: string) {
+  const session = await auth()
+  const id = session?.user?.id
+  const response = await db
+    .select()
+    .from(products)
+    .where(and(ne(products.sellerId, id!), ne(products.isSold, true)))
+  const result = response.sort(sortBy(value))
+  return result
 }

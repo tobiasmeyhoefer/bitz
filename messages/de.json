@@ -31,7 +31,7 @@
     "buy": "Produkte kaufen",
     "sell": "Technik-Produkte verkaufen",
     "createAccount": "Account erstellen",
-    
+
     "sub01": "VON",
     "sub02": "GESTERN",
     "sub03": "FÜR",
@@ -73,13 +73,13 @@
       "thomas": "Die Plattform bietet eine tolle Möglichkeit, neue Technik-Produkte auszuprobieren, ohne gleich viel Geld auszugeben.",
       "nina": "Ich bin begeistert vom modernen und coolen Design von Bitz. Die Benutzeroberfläche ist super intuitiv und sieht einfach klasse aus. Es macht richtig Spaß, durch die Angebote zu stöbern!"
     },
-     "OurTeam": {
+    "OurTeam": {
       "title": "Unser Motiviertes",
       "sub": "consisting of frontend and backend specialists"
-     }  
+    }
   },
 
-  "Statistics":{
+  "Statistics": {
     "users": "Nutzer",
     "devs": "Entwickler",
     "downloads": {
@@ -90,7 +90,10 @@
   "Browse": {
     "title": "Entdecken",
     "searchPlaceholder": "Wonach suchst du?",
-    "suggestions": "Vorschläge"
+    "suggestions": "Vorschläge",
+    "sortby": "Sortieren nach:",
+    "date": "Datum",
+    "price": "Preis"
   },
   "Search": {
     "title": "Suchen"
@@ -125,8 +128,7 @@
     "title": "Achtung!",
     "yousure": "Bist du sicher, dass du dieses Bit löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.",
     "confirm": "Bestätigen",
-    "cancel" : "Abbrechen"
-
+    "cancel": "Abbrechen"
   },
   "Settings": {
     "title": "EINSTELLUNGEN",
@@ -171,9 +173,9 @@
     "locale": "{locale, select, de {🇩🇪 Deutsch} en {🇺🇸 English} other {Unbekannt}}"
   },
 
-  "Conversations": {  
+  "Conversations": {
     "title": "KONVERSATIONEN",
-    "empty" : "Es gibt keine offenen Konversationen",
+    "empty": "Es gibt keine offenen Konversationen",
     "newbuyer00": "ist an deinem Bit '",
     "newbuyer01": "' interessiert.",
     "wannabuy00": "Du bist an dem Bit '",
@@ -190,6 +192,6 @@
     "delay11": "verspätet sich um"
   },
   "Transactions": {
-      "title": "TRANSAKTIONEN"
-    }
+    "title": "TRANSAKTIONEN"
+  }
 }
