@@ -23,6 +23,7 @@ export const users = pgTable('user', {
   location: text('location'),
   adress: text('adress'),
   phoneVerified: boolean('phoneVerified').default(false),
+  onboardingCompleted: boolean('onboardingCompleted').default(false),
 })
 
 export const products = pgTable('product', {
