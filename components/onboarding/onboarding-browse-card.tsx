@@ -21,7 +21,7 @@ interface OnboardingCardProps {
 
 const OnboardingBrowseCard: React.FC<OnboardingCardProps> = ({ className }) => {
   const { onboardingIndexBrowse, updateOnboardingIndexBrowse } = useOnboardingStore()
-  const [onboardingFinished, setOnboardingFinished] = useState(false)
+  const [onboardingFinished, setOnboardingFinished] = useState(true)
 
   useEffect(() => {
     const fetch = async () => {
@@ -88,7 +88,7 @@ const OnboardingBrowseCard: React.FC<OnboardingCardProps> = ({ className }) => {
           <CardTitle>{title}</CardTitle>
           <CardDescription>{description}</CardDescription>
         </CardHeader>
-        <CardFooter>
+        <CardFooter className='flex gap-4'>
           {onboardingIndexBrowse === 6 ? (
             <Button
               onClick={async () => {
