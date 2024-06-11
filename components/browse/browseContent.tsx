@@ -1,4 +1,5 @@
-'use client'
+"use client"
+
 import {
   getProductsBrowse,
   getProductsByCategory,
@@ -10,6 +11,7 @@ import { CardWithImage } from '../ui/cardWithImage'
 import { SortProducts } from '../sort-products/sort-products'
 import { SearchDialog } from './search-dialog'
 import OnboardingBrowseCard from '../onboarding/onboarding-browse-card'
+import { ProductTypeTest } from '@/schema'
 const suggestions = [
   'Reciever',
   'Monitor',
@@ -45,23 +47,13 @@ const BrowseContent = (props: BrowseContentProps) => {
   const [searchValue, setSearchValue] = useState('')
   const [loading, setLoading] = useState(false)
   const [noSearchResults, setNoSearchResults] = useState(false)
-  const [products, setProducts] = useState<ProductType[]>([])
+  const [products, setProducts] = useState<ProductTypeTest[]>([])
 
   useEffect(() => {
     const getProducts = async () => {
       const result = await getProductsBrowse()
-      // weil einige werte nicht notNull sind und dann fehler kommen weil sie null  ein könnten
-      const checkedResults: ProductType[] = result.map((item) => ({
-        ...item,
-        description: item.description ?? '',
-        category: item.category ?? '',
-        stripeId: item.stripeId ?? '',
-        paymentLink: item.paymentLink ?? '',
-        isDirectlyBuyable: item.isDirectlyBuyable ?? false,
-        isSold: item.isSold ?? false,
-      }))
-      setProducts(checkedResults)
-      if (checkedResults.length === 0) {
+      setProducts(result)
+      if (result.length === 0) {
         setNoSearchResults(true)
       }
     }
@@ -71,17 +63,8 @@ const BrowseContent = (props: BrowseContentProps) => {
   const loadProductsByCategory = async (category: string) => {
     setLoading(true)
     const result = await getProductsByCategory(category)
-    const checkedResults: ProductType[] = result.map((item) => ({
-      ...item,
-      description: item.description ?? '',
-      category: item.category ?? '',
-      stripeId: item.stripeId ?? '',
-      paymentLink: item.paymentLink ?? '',
-      isDirectlyBuyable: item.isDirectlyBuyable ?? false,
-      isSold: item.isSold ?? false,
-    }))
-    setProducts(checkedResults)
-    if (checkedResults.length === 0) {
+    setProducts(result)
+    if (result.length === 0) {
       setNoSearchResults(true)
     } else {
       setNoSearchResults(false)
@@ -97,13 +80,9 @@ const BrowseContent = (props: BrowseContentProps) => {
     } else {
       result = await searchProductsByTitle(title)
     }
-    const checkedResults: ProductType[] = result!.map((item: any) => ({
-      ...item,
-      description: item.description ?? '',
-      category: item.category ?? '',
-    }))
-    setProducts(checkedResults)
-    if (checkedResults.length === 0) {
+
+    setProducts(result)
+    if (result.length === 0) {
       setNoSearchResults(true)
     } else {
       setNoSearchResults(false)
