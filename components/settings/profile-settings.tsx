@@ -1,4 +1,4 @@
-import { getUser } from '@/lib/useraction'
+import { getUser } from '@/lib/user-actions'
 import Image from 'next/image'
 import { FaUserCircle } from 'react-icons/fa'
 import NameChanger from './name-changer'
@@ -6,7 +6,7 @@ import LocationChooser from './LocationChooser'
 import AdressChanger from './adress-changer'
 import PictureChanger from './picture-changer'
 import { getTranslations } from 'next-intl/server'
-import { changeUserImage } from '@/lib/useraction'
+import { changeUserImage } from '@/lib/user-actions'
 
 const ProfileSettings = async () => {
   const user = await getUser()

@@ -1,6 +1,6 @@
 import { CardWithImage } from '@/components/ui/cardWithImage'
-import { getProductsOwned } from '@/lib/productaction'
-import { getUser } from '@/lib/useraction'
+import { getProductsOwned } from '@/lib/product-actions'
+import { getUser } from '@/lib/user-actions'
 
 const MyShopContent = async () => {
   const user = await getUser()

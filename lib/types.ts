@@ -13,13 +13,13 @@ type CardWithImageProps = {
   product?: any
   editable: boolean
 }
-type User = {
-  userId: string
-}
+// type User = {
+//   userId: string
+// }
 
-type UserId = {
-  id: string
-}
+// type UserId = {
+//   id: string
+// }
 
 type MyShopProps = {
   userId: string
@@ -43,7 +43,6 @@ type FormTranslations = {
   title: string
   description: string
   price: string
-  // quantity: string
   category: string
   categoryPlaceholder: string
   images: string
@@ -61,7 +60,6 @@ type ProductType = {
   title: string
   description?: string
   price: number
-  // quantity: number
   category?: string
   createdAt?: Date
   sellerId?: string
@@ -103,17 +101,9 @@ export type {
   RevealOnScrollProps,
   ProductType,
   FormTranslations,
-  User,
-  UserId,
+  // User,
+  // UserId,
   MyShopProps,
   ProdDelAlert,
   Shop,
-}
-
-export enum OnboardingCardEnum {
-  Browse = 'browse',
-  Search = 'search',
-  MyShop = 'myshop',
-  MyShopAdd = 'myshop-add',
-  Settings = 'settings',
 }

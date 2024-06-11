@@ -14,12 +14,10 @@ export default function ProductInfoCard(props: ProductInfoType) {
   const product = props.productInfo
   const isOwner = props.isOwner
   const tDate = useTranslations('Date')
-  const tProduct = useTranslations('Product')
   const tProductForm = useTranslations('addProductPage')
   const locale = useLocale()
 
   const editableCardTranslations = {
-    quantity: tProduct('quantity'),
     title: tProductForm('title'),
     price: tProductForm('price'),
     description: tProductForm('description'),
@@ -122,52 +120,10 @@ export default function ProductInfoCard(props: ProductInfoType) {
             <CardContent className="flex min-h-[80%] flex-col justify-between p-6">
               <div className="flex justify-between text-wrap pb-6">
                 <div className="h-fit w-9/12 break-words">{product.description}</div>
-                {/* <div className="whitespace-nowrap text-right lg:w-[20vw]">
-                  {tProduct('quantity')}: {product.quantity}
-                </div> */}
               </div>
               <div>{getDate(product.createdAt, true, 'text-right')}</div>
             </CardContent>
           </Card>
-          {/* {locationError && (
-            <p className="fixed bottom-16 right-6 text-xs text-red-600">
-              can&apos;t buy: {errorMessage}
-            </p>
-          )}
-          <form
-            action={async () => {
-              'use server'
-              if (!locationError) {
-                await createConversation(product.id!)
-                revalidatePath('/conversations')
-                redirect('/conversations')
-              }
-            }}
-          >
-            <Button type="submit" className="fixed bottom-6 right-40">
-              Kaufen
-            </Button>
-          </form>
-          {product.isDirectlyBuyable ? (
-            <form
-              action={async () => {
-                'use server'
-                if (!locationError) {
-                  const openedCheckoutSession = await productHasCheckoutSessionOpened(product.id!)
-                  if (!openedCheckoutSession) {
-                    const user = await getUser()
-                    await createCheckoutSession(user![0].id, product.id!)
-                    revalidatePath('/transactions')
-                    red(product.paymentLink!)
-                  }
-                }
-              }}
-            >
-              <Button className="fixed bottom-6 right-6" type="submit">
-                Direkt Kaufen
-              </Button>
-            </form>
-          ) : null} */}
           <BuyButtons product={product} />
         </div>
       )}

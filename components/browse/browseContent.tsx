@@ -4,7 +4,7 @@ import {
   getProductsBrowse,
   getProductsByCategory,
   searchProductsByTitle,
-} from '@/lib/productaction'
+} from '@/lib/product-actions'
 import { BrowseContentProps, ProductType, SearchBarProps, RevealOnScrollProps } from '@/lib/types'
 import { useEffect, useState, useRef } from 'react'
 import { SlClose } from 'react-icons/sl'
@@ -23,13 +23,11 @@ const BrowseContent = (props: BrowseContentProps) => {
       try {
         const result = await getProductsBrowse()
         if (result) {
-          // weil einige werte nicht notNull sind und dann fehler kommen weil sie null  ein könnten
           const checkedResults: ProductType[] = result.map((item) => ({
             id: item.id,
             title: item.title,
             description: item.description ?? '',
             price: item.price,
-            // quantity: item.quantity,
             category: item.category ?? '',
             sellerId: item.sellerId,
             createdAt: item.createdAt,
@@ -177,7 +175,6 @@ const BrowseContent = (props: BrowseContentProps) => {
             <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
               {products.map((p, index) => (
                 <div key={`kp-${index}`}>
-                  {/* <RevealOnScroll key={`prx-${index}`}> */}
                   <CardWithImage
                     key={`pr-${index}`}
                     title={p.title}
@@ -191,7 +188,6 @@ const BrowseContent = (props: BrowseContentProps) => {
                     favIcon
                     editable={false}
                   />
-                  {/* </RevealOnScroll> */}
                 </div>
               ))}
               {noSearchResults && <div className=" px-4">Keine Suchergebnisse gefunden</div>}
@@ -217,8 +213,7 @@ const SearchDialog = (
   const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([])
   const [selectedIndex, setSelectedIndex] = useState(-1) // Index für ausgesuchten Vorschlag
 
-  // Funktion zum Filtern der Ergebnisse auf Basis der aktuellen Eingabe
-  const searchValueRef = useRef<string>('')
+  // const searchValueRef = useRef<string>('')
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     props.setSearchValue(value)
@@ -247,15 +242,12 @@ const SearchDialog = (
     }
   }
 
-  // Funktion für die Suhce mit Klick auf einem Vorschlag
   const handleSuggestionClick = (suggestion: string) => {
     setOpen(false)
     props.setSearchValue(suggestion)
-    //props.loadProductsByTitle(suggestion)
     props.loadProductsByCategory(suggestion)
   }
 
-  // Funktion zum Handhaben der Tastaturereignisse
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'ArrowDown') {
       setSelectedIndex((prevIndex) => {
@@ -281,7 +273,6 @@ const SearchDialog = (
         props.loadProductsByTitle(filteredSuggestions[selectedIndex])
         props.loadProductsByCategory(filteredSuggestions[selectedIndex])
       } else {
-        // Wenn kein Vorschlag ausgewählt ist, führen Sie eine Standardsuche aus
         handleSearch()
       }
     }

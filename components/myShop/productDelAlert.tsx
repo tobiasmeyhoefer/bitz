@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
 import { FaTrash } from 'react-icons/fa'
-import { deleteProduct } from '@/lib/productaction'
+import { deleteProduct } from '@/lib/product-actions'
 // import { useTranslations } from "next-intl";
 
 export function ProdDelAlert({ productId }: { productId: string }) {

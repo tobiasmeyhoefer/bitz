@@ -1,5 +1,5 @@
 import 'server-only'
-import { getUserById } from '@/lib/useraction'
+import { getUserById } from '@/lib/user-actions'
 import { auth } from '@/auth'
 import { getTranslations } from 'next-intl/server'
 import { useSession } from 'next-auth/react'

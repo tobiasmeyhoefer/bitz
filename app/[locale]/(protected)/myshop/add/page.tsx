@@ -7,7 +7,6 @@ const AddProductPage = async () => {
     title: t('title'),
     description: t('description'),
     price: t('price'),
-    quantity: t('quantity'),
     category: t('category'),
     categoryPlaceholder: t('categoryPlaceholder'),
     images: t('images'),

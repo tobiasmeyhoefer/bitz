@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { Input } from '../ui/input'
-import { addProduct } from '@/lib/productaction'
+import { addProduct } from '@/lib/product-actions'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -28,13 +28,12 @@ import { Card } from '@/components/ui/card'
 import { Button } from '../ui/button'
 import { Link, useRouter } from '@/navigation'
 import Image from 'next/image'
-import { getSignedURL } from '@/lib/productaction'
+import { getSignedURL } from '@/lib/product-actions'
 import { FormTranslations, ProductType } from '@/lib/types'
 import { useToast } from '@/components/ui/use-toast'
 import { cn } from '@/lib/utils'
 import { Checkbox } from '../ui/checkbox'
-import { getUser } from '@/lib/useraction'
-import { FaPencilAlt } from 'react-icons/fa'
+import { getUser } from '@/lib/user-actions'
 
 const suggestions = [
   { value: 'Reciever' },
@@ -99,7 +98,6 @@ const formSchema = z.object({
     )
     .refine(
       (files) => {
-        // console.log(files)
         if (files instanceof FileList) {
           const filesArray = Array.from(files)
           return filesArray.every((file) => file.size <= MAX_FILE_SIZE)
@@ -117,12 +115,10 @@ const formSchema = z.object({
 
 export function ProductForm({
   submitText,
-  // action,
   whichFunction,
   translations,
 }: {
   submitText: string
-  // action: (values: ProductType) => Promise<void>
   whichFunction: string
   translations: FormTranslations
 }) {
@@ -138,7 +134,6 @@ export function ProductForm({
     title,
     description,
     price,
-    // quantity,
     category,
     categoryPlaceholder,
     images,
@@ -243,7 +238,6 @@ export function ProductForm({
           }
         }
       }
-      // console.log(JSON.parse(JSON.stringify(values)))
       await addProduct(JSON.parse(JSON.stringify(values)), imageUrls)
       setIsLoading(false)
       router.push('/myshop')

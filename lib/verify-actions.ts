@@ -1,7 +1,7 @@
 'use server'
 
 import { users, verificationNumberSessions } from '@/schema'
-import { getUser } from './useraction'
+import { getUser } from './user-actions'
 import { db } from '@/db'
 import { generateRandomSixDigitNumber } from './utils'
 import { desc, eq } from 'drizzle-orm'
@@ -14,9 +14,7 @@ async function saveVerifactionNumber(number: string) {
       verificationNumber: number,
       userId: user!.id,
     })
-  } catch (error) {
-    console.log(error)
-  }
+  } catch (error) {}
 }
 
 //deletes the temporary db entry
@@ -58,9 +56,7 @@ export async function sendSmsToUser(number: string) {
         from: '+14179323791',
         to: number,
       })
-      .catch((error) => {
-        console.log(error)
-      })
+      .catch((error) => {})
     await saveVerifactionNumber(verificationNumber)
   } catch (error) {
     return { error: "Something wen't wrong on the server" }

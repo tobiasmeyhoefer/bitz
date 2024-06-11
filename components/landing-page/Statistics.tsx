@@ -1,5 +1,5 @@
-import { getAllProductsCount } from "@/lib/productaction";
-import { getAllUsersCount } from "@/lib/useraction";
+import { getAllProductsCount } from "@/lib/product-actions";
+import { getAllUsersCount } from "@/lib/user-actions";
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 

@@ -12,7 +12,7 @@ import {
 import Image from 'next/image'
 import { UpdateImage } from '@/components/myShop/update-image'
 import { useEffect, useState } from 'react'
-import { getUser } from '@/lib/useraction'
+import { getUser } from '@/lib/user-actions'
 import { auth } from '@/auth'
 
 export function ProductImageCarousel(props: any) {

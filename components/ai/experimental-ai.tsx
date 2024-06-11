@@ -62,7 +62,7 @@ const ExperimentalAi: React.FC = () => {
               key={m.id}
               className={cn(
                 'm-2 w-2/3 whitespace-pre-wrap rounded-lg border border-solid border-neutral-400 bg-neutral-900 p-2 text-white shadow-lg',
-                { 'float-left bg-indigo-900': m.role === 'user', 'float-right': m.role !== 'user' },
+                { 'float-right bg-indigo-900': m.role === 'user', 'float-left': m.role !== 'user' },
               )}
             >
               {m.content}
@@ -71,7 +71,7 @@ const ExperimentalAi: React.FC = () => {
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center -z-10">
             <Image
               src={supportPerson}
-              className="pointer-events-none fixed md:h-80 md:w-80 h-60 w-60 blur-[2px]"
+              className="pointer-events-none fixed md:h-52 md:w-52 h-32 w-32"
               alt="a support person"
               width={100}
               height={100}

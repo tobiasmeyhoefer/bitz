@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/dialog'
 import { FaPencilAlt } from 'react-icons/fa'
 import PictureChanger from '../settings/picture-changer'
-import { updateProductImage } from '@/lib/productaction'
+import { updateProductImage } from '@/lib/product-actions'
 import Image from 'next/image'
 import { useToast } from '@/components/ui/use-toast'
 

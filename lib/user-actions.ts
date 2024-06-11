@@ -3,7 +3,7 @@ import { users } from '@/schema'
 import { db } from '../db'
 import { count, eq } from 'drizzle-orm'
 import { auth, signOut } from '@/auth'
-import { deleteImageOnAws, getProductsOwned } from './productaction'
+import { deleteImageOnAws, getProductsOwned } from './product-actions'
 import { revalidatePath } from 'next/cache'
 
 export async function saveUserNameLogin(name: string, email: string) {
@@ -11,8 +11,7 @@ export async function saveUserNameLogin(name: string, email: string) {
   await db
     .update(users)
     .set({ name: name })
-    .where(eq(users.id, response[0].id))
-    .catch((error) => console.log(error)) 
+    .where(eq(users.id, response[0].id)) 
 }
 
 export async function saveUserName(name: string) {

@@ -2,7 +2,7 @@
 
 import { db } from '@/db'
 import { conversations, products } from '@/schema'
-import { getUser } from './useraction'
+import { getUser } from './user-actions'
 import { desc, eq, or, and } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
 

@@ -4,7 +4,7 @@ import { products, favorites } from '@/schema'
 import { db } from '../db'
 import { count, desc, eq, ne, or, sql, ilike, and } from 'drizzle-orm'
 import { auth } from '@/auth'
-import { getUserById } from './useraction'
+import { getUserById } from './user-actions'
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import crypto from 'crypto'
@@ -111,7 +111,6 @@ export async function updateProduct(productId: string, values: ProductType) {
         title: title || existingProduct.title,
         description: description || existingProduct.description,
         price: price || existingProduct.price,
-        // quantity: quantity || existingProduct[0].quantity,
       })
       .where(eq(products.id, productId))
     await updateProductStripe(existingProduct.stripeId!, values)
@@ -259,9 +258,7 @@ export async function deleteImageNeon(imageIndex: number, productId: string) {
 }
 
 export async function deleteImageOnAws(imageUrl: string) {
-  // console.log('test')
   const key = imageUrl.split('/').slice(-1)[0]
-  // console.log(key)
   const deleteParams = {
     Bucket: process.env.AWS_BUCKET_NAME!,
     Key: key,
