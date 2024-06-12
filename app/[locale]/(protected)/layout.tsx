@@ -1,14 +1,14 @@
-import { auth } from '@/auth'
-import { redirect } from '@/navigation'
+import ExperimentalAi from '@/components/ai/experimental-ai'
 
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  // const session = await auth()
-  // if (!session?.user) {
-  //   redirect('/')
-  // }
-  return <>{children}</>
+  return (
+    <>
+      {children}
+      <ExperimentalAi />
+    </>
+  )
 }

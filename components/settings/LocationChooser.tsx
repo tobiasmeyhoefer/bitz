@@ -4,9 +4,17 @@ import { Button } from '../ui/button'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
-import { getUser, saveUserLocation } from '@/lib/useraction'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form'
+import { getUser, saveUserLocation } from '@/lib/user-actions'
 import { useEffect, useState } from 'react'
+import { useToast } from '../ui/use-toast'
 
 const formSchema = z.object({
   postcode: z.string().regex(/^\d+$/, { message: 'only numbers are valid' }).length(5),
@@ -14,11 +22,11 @@ const formSchema = z.object({
 
 export default function LocationChooser({ postcode }: { postcode: string }) {
   const [location, setLocation] = useState<string>('')
+  const { toast } = useToast()
   useEffect(() => {
     const getProduct = async () => {
-      const result = await getUser()
-      const r = result![0]
-      setLocation(r.location ?? '')
+      const user = await getUser()
+      setLocation(user.location ?? '')
     }
     getProduct()
   }, [])
@@ -28,12 +36,16 @@ export default function LocationChooser({ postcode }: { postcode: string }) {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     await saveUserLocation(values)
+    toast({
+      title: 'Postcode changed successfully ✅',
+    })
   }
 
   return (
-    <>
+    <div className="mb-6">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-row items-end gap-1">
+        <FormLabel className="mb-2">change Location</FormLabel>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
             control={form.control}
             name={'postcode'}
@@ -46,11 +58,11 @@ export default function LocationChooser({ postcode }: { postcode: string }) {
               </FormItem>
             )}
           />
-          <Button className="mt-4" type="submit">
-            submit
+          <Button className="mt-4" type="submit" variant={'secondary'}>
+            change
           </Button>
         </form>
       </Form>
-    </>
+    </div>
   )
 }

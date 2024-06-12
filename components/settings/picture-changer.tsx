@@ -1,5 +1,5 @@
 'use client'
-import { getSignedURL } from '@/lib/productaction'
+import { getSignedURL } from '@/lib/product-actions'
 import { z } from 'zod'
 import Image from 'next/image'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -15,12 +15,11 @@ import {
 } from '@/components/ui/form'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
-import { changeUserImage } from '@/lib/useraction'
+import { changeUserImage } from '@/lib/user-actions'
 const MAX_FILE_SIZE = 8000000
 const formSchema = z.object({
   image: z.any().refine(
     (file) => {
-      console.log(file)
       return file.size <= MAX_FILE_SIZE
     },
     {
@@ -29,12 +28,14 @@ const formSchema = z.object({
   ),
 })
 
-export default function ProfilePictureChanger({
+export default function PictureChanger({
   title,
   submitTitle,
+  action,
 }: {
   title: string
   submitTitle: string
+  action: (url: string) => Promise<void>
 }) {
   const [file, setFile] = useState<File | null>(null)
   const [compressedFile, setCompressedFile] = useState<File | null>(null)
@@ -46,7 +47,7 @@ export default function ProfilePictureChanger({
     },
   })
 
-  async function onSubmit(values: any) {
+  async function onSubmit() {
     let imageUrl = ''
     if (compressedFile) {
       const computeSHA256 = async (file: File) => {
@@ -76,7 +77,7 @@ export default function ProfilePictureChanger({
       })
       imageUrl = url.split('?')[0]
     }
-    await changeUserImage(imageUrl)
+    await action(imageUrl)
     setPreviewUrl(null)
   }
 
@@ -151,7 +152,7 @@ export default function ProfilePictureChanger({
   }
 
   return (
-    <>
+    <div className="mt-6">
       <Form {...form}>
         <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
@@ -187,11 +188,11 @@ export default function ProfilePictureChanger({
               />
             </div>
           )}
-          <Button className="mt-4 border-2" type="submit">
+          <Button className="mt-4" type="submit" variant={'secondary'}>
             {submitTitle}
           </Button>
         </form>
       </Form>
-    </>
+    </div>
   )
 }

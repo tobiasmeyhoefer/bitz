@@ -1,5 +1,5 @@
 'use client'
-import { addToFavorites, checkFavorite, deleteFavorite } from '@/lib/productaction'
+import { addToFavorites, checkFavorite, deleteFavorite } from '@/lib/product-actions'
 import { useEffect, useState } from 'react'
 import { FaHeart, FaRegHeart } from 'react-icons/fa'
 import { Button } from '../ui/button'
@@ -23,6 +23,7 @@ const FavoriteLike = ({ productId }: { productId: string }) => {
           size="icon"
           type="submit"
           aria-label="like product"
+          className="flex justify-end"
           onClick={() => {
             isFavorite ? deleteFavorite(productId) : addToFavorites(productId)
             setIsFavorite(!isFavorite)

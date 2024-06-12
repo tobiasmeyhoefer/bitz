@@ -1,30 +1,59 @@
-type CardWithImageProps = {
-  title: string
-  desc: string | undefined
-  content?: string
-  imgUrl1?: string | null | string[]
-  className?: React.HTMLAttributes<HTMLDivElement> | string
-  favIcon?: boolean
-  shopID?: string
-  productID?: string
-  product?: any
-  editable: boolean
-}
-type User = {
-  userId: string
+import { ProductType } from '@/schema'
+import React from 'react'
+
+type NavbarItemLinkProps = {
+  linkTo: string
+  text?: string
+  icon?: React.ReactNode
+  className?: string
 }
 
-type UserId = {
-  id: string
+type NavbarItemDropdownProps = {
+  userImgSrc?: string | null
+  signOut?: JSX.Element
+  signOutLinkText?: string
+  settingsLinkText?: string
+  favoritesLinkText?: string
 }
+
+type NavMenuDrawerProps = {
+  menuItems: JSX.Element[]
+  signOut: JSX.Element
+}
+
+type CardWithImageProps = {
+  className?: React.HTMLAttributes<HTMLDivElement> | string
+  favIcon?: boolean
+  delIcon?: boolean
+  shopID?: string
+  product: ProductType
+  editable: boolean
+}
+// type User = {
+//   userId: string
+// }
+
+// type UserId = {
+//   id: string
+// }
 
 type MyShopProps = {
   userId: string
-  location: any
+  location: string
 }
 
 type SearchBarProps = {
-  translations: SearchTranslations
+  placeholder: string
+  searchValue: string
+  setSearchValue: React.Dispatch<React.SetStateAction<string>>
+  suggestions: string[]
+  suggestionsTitle: string
+}
+
+type SortProductsProps = {
+  sortBy: string
+  date: string
+  price: string
 }
 
 type SearchTranslations = {
@@ -36,7 +65,6 @@ type FormTranslations = {
   title: string
   description: string
   price: string
-  quantity: string
   category: string
   categoryPlaceholder: string
   images: string
@@ -45,20 +73,33 @@ type FormTranslations = {
   submitTitle: string
 }
 
-type ProductType = {
-  id?: string
-  title: string
-  description?: string
-  price: number
-  quantity: number
-  category?: string
-  createdAt?: Date
-  sellerId?: string
-  imageUrl1?: string | null
-  imageUrl2?: string | null
-  imageUrl3?: string | null
-  imageUrl4?: string | null
-  imageUrl5?: string | null
+type BrowseContentProps = {
+  searchTranslations: SearchTranslations
+  sortTranslations: SortProductsProps
+}
+
+// type ProductType = {
+//   id?: string
+//   title: string
+//   description: string | null
+//   location?: string | null
+//   price: number
+//   category?: string
+//   createdAt?: Date
+//   sellerId?: string
+//   imageUrl1?: string | null
+//   imageUrl2?: string | null
+//   imageUrl3?: string | null
+//   imageUrl4?: string | null
+//   imageUrl5?: string | null
+//   isDirectlyBuyable?: boolean
+//   isSold?: boolean
+//   stripeId?: string
+//   paymentLink?: string
+// }
+
+type ProdDelAlert = {
+  productId: string
 }
 
 type Shop = {
@@ -77,14 +118,19 @@ type RevealOnScrollProps = {
 }
 
 export type {
+  NavbarItemLinkProps,
+  NavbarItemDropdownProps,
+  NavMenuDrawerProps,
   CardWithImageProps,
   SearchBarProps,
+  SortProductsProps,
   SearchTranslations,
   RevealOnScrollProps,
-  ProductType,
+  // ProductType,
   FormTranslations,
-  User,
-  UserId,
+  // User,
+  // UserId,
   MyShopProps,
+  ProdDelAlert,
   Shop,
 }

@@ -8,7 +8,7 @@ import type {
   AdapterAuthenticator,
 } from 'next-auth/adapters'
 
-// Dieser Code ist mit Hilfe eines Discord Users Julius uas Schweden entstanden
+// Dieser Code ist mit Hilfe eines Discord Users Julius aus Schweden entstanden
 
 export const drizzleAdapter = {
   ...DrizzleAdapter(db, {

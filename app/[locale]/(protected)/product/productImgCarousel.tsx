@@ -1,6 +1,6 @@
 'use client'
 import * as React from 'react'
-import { Card, CardContent } from '@/components/ui/card'
+import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import {
   Carousel,
   CarouselContent,
@@ -10,12 +10,24 @@ import {
   type CarouselApi,
 } from '@/components/ui/carousel'
 import Image from 'next/image'
+import { UpdateImage } from '@/components/myShop/update-image'
+import { useEffect, useState } from 'react'
+import { getUser } from '@/lib/user-actions'
+import { auth } from '@/auth'
 
-export function ProductImageCarousel(props: any) {
-  const [api, setApi] = React.useState<CarouselApi>()
-  const [current, setCurrent] = React.useState(0)
-
-  React.useEffect(() => {
+export function ProductImageCarousel(props: {
+  translations: {
+    image: string
+    of: string
+  }
+  images: (string | null)[]
+  className: string
+  sellerId: string
+}) {
+  const [api, setApi] = useState<CarouselApi>()
+  const [current, setCurrent] = useState(0)
+  const [isOwner, setIsOwner] = useState(false)
+  useEffect(() => {
     if (!api) {
       return
     }
@@ -24,6 +36,16 @@ export function ProductImageCarousel(props: any) {
       setCurrent(api.selectedScrollSnap() + 1)
     })
   }, [api])
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const user = await getUser()
+      if (user.id == props.sellerId) {
+        setIsOwner(true)
+      }
+    }
+    checkUser()
+  }, [props.sellerId])
 
   return (
     <div className={props.className}>
@@ -35,10 +57,10 @@ export function ProductImageCarousel(props: any) {
         className="h-full w-[90vw] lg:h-[60vh] lg:w-[50vw] xl:w-[60vh] 2xl:w-[70vh]"
       >
         <CarouselContent>
-          {props.images.map((img: string, index: number) => (
+          {props.images.map((img: string | null, index: number) => (
             <CarouselItem key={`ci-${index}`}>
               <Card className="h-fit w-fit">
-                <CardContent className="p-0">
+                <CardContent className=" p-0">
                   {img ? (
                     <Image
                       width={500}
@@ -67,8 +89,11 @@ export function ProductImageCarousel(props: any) {
           </>
         )}
       </Carousel>
-      <div className="hidden py-2 text-sm text-muted-foreground lg:block">
+      <div className=" hidden flex-row justify-between p-2 text-sm text-muted-foreground lg:flex">
         {props.translations.image} {current} {props.translations.of} {props.images.length}
+        {isOwner && props.images[current - 1] && (
+          <UpdateImage existingImageUrl={props.images[current - 1]!} />
+        )}
       </div>
     </div>
   )

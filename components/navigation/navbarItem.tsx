@@ -18,13 +18,15 @@ import { useState, useEffect } from 'react'
 import { HiUserCircle } from 'react-icons/hi2'
 import { FaUserCircle } from 'react-icons/fa'
 import { Separator } from '@/components/ui/separator'
-
-type NavbarItemLinkProps = {
-  linkTo: string
-  text?: string
-  icon?: any
-  className?: string
-}
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet'
+import { NavbarItemDropdownProps, NavbarItemLinkProps, NavMenuDrawerProps } from '@/lib/types'
 
 type NavLoginProps = {
   text: string
@@ -36,7 +38,7 @@ const NavItemLink = (props: NavbarItemLinkProps) => {
   return (
     <Link
       className={cn(
-        `bg-none text-lg font-normal ${pathname === props.linkTo ? 'cursor-default text-inherit underline underline-offset-8' : ' hover:underline hover:underline-offset-8'} hover:bg-none`,
+        `bg-none text-left text-lg font-normal ${pathname === props.linkTo ? 'cursor-default text-inherit underline underline-offset-8' : ' hover:underline hover:underline-offset-8'} hover:bg-none`,
         props.className,
       )}
       href={props.linkTo}
@@ -52,19 +54,11 @@ const NavLoginLink = ({ text }: NavLoginProps) => {
   return (
     pathname !== '/auth/login' && (
       // hover:bg-gray-700 hover:text-white
-      <Button className="">
+      <Button className="bg-primary-hover">
         <Link href="/auth/login">{text}</Link>
       </Button>
     )
   )
-}
-
-type NavbarItemDropdownProps = {
-  userImgSrc?: string | null
-  signOut?: any
-  signOutLinkText?: string
-  settingsLinkText?: string
-  favoritesLinkText?: string
 }
 
 const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
@@ -74,43 +68,50 @@ const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
         {props.userImgSrc ? (
           <Image
             src={props.userImgSrc!} // TODO: {props?.userImgSrc as string}
-            width={50}
-            height={50}
+            width={40}
+            height={40}
             className="rounded-full"
             alt="User Image"
-            style={{ objectFit: 'cover', height: '50px' }}
+            style={{ objectFit: 'cover', height: '40px' }}
           />
         ) : (
           <FaUserCircle className="h-[45px] w-[45px]" color="gray" />
         )}
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel className="text-right">Menu</DropdownMenuLabel>
+        <DropdownMenuLabel className="text-left">Menu</DropdownMenuLabel>
         <DropdownMenuItem>
           <NavItemLink
-            className="ml-auto text-sm no-underline hover:no-underline"
+            className="w-full text-left text-sm no-underline hover:no-underline"
             text={props.favoritesLinkText}
             linkTo="/favorites"
           ></NavItemLink>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <NavItemLink
-            className="ml-auto text-sm no-underline hover:no-underline"
+            className="w-full text-left text-sm no-underline hover:no-underline"
             text={props.settingsLinkText}
             linkTo="/settings"
+          ></NavItemLink>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <NavItemLink
+            className="text-left text-sm no-underline hover:no-underline"
+            text="Transaktionen"
+            linkTo="/transactions"
           ></NavItemLink>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
 
         <DropdownMenuItem className="font-normal">
-          <div className="ml-auto mr-[-12px]">{props.signOut}</div>
+          <div className="w-full">{props.signOut}</div>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )
 }
 
-const NavMenuDrawer = (props: any) => {
+const NavMenuDrawer = (props: NavMenuDrawerProps) => {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const pathname = usePathname()
 
@@ -129,13 +130,15 @@ const NavMenuDrawer = (props: any) => {
         </Button>
       </DrawerTrigger>
       <DrawerContent className="max-w-smd mx-auto w-full border-0 bg-primary-foreground text-primary">
-        {props.menuItems.map((item: any, index: number) => {
+        {props.menuItems.map((item: JSX.Element, index: number) => {
           if (pathname === item.props.linkTo)
             item.props.className = cn(item.props.className, ' no-underline')
           return (
             <div
               className={`flex justify-center hover:bg-slate-100 ${index === 0 && `rounded-t-xl`} ${pathname === item.props.linkTo && 'cursor-default bg-slate-100 text-primary no-underline'}`}
-              onClick={() => setDrawerOpen(false)}
+              onClick={() => {
+                setDrawerOpen(false)
+              }}
               key={item.key}
             >
               {item}

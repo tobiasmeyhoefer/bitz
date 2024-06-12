@@ -2,22 +2,23 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { useTranslations, useLocale } from 'next-intl'
 import ProductInfoCardEditable from './productInfoCardEditable'
-import { ProductType } from '@/lib/types'
 import { cn } from '@/lib/utils'
+import { BuyButtons } from '@/components/products/buy-buttons'
+import { ProductType } from '@/schema'
 
 type ProductInfoType = {
-  productInfo: ProductType & { isOwner: boolean }
+  productInfo: ProductType
+  isOwner: boolean
 }
 
 export default function ProductInfoCard(props: ProductInfoType) {
   const product = props.productInfo
+  const isOwner = props.isOwner
   const tDate = useTranslations('Date')
-  const tProduct = useTranslations('Product')
   const tProductForm = useTranslations('addProductPage')
   const locale = useLocale()
 
   const editableCardTranslations = {
-    quantity: tProduct('quantity'),
     title: tProductForm('title'),
     price: tProductForm('price'),
     description: tProductForm('description'),
@@ -25,9 +26,8 @@ export default function ProductInfoCard(props: ProductInfoType) {
     save: tProductForm('save'),
     edit: tProductForm('edit'),
   }
-
   const getDate = (
-    timestamp: any,
+    timestamp: Date | string,
     dateFirst: boolean,
     className?: string,
   ): JSX.Element | undefined => {
@@ -99,35 +99,33 @@ export default function ProductInfoCard(props: ProductInfoType) {
       return dateEl
     }
   }
-
   return (
     <>
-      {product.isOwner ? (
+      {isOwner ? (
         <ProductInfoCardEditable
           productInfo={product}
           translations={editableCardTranslations}
-          date={getDate(product.createdAt, false, 'text-right')}
           locale={locale}
         />
       ) : (
-        <Card className="my-3 h-full w-[90vw] lg:my-0 lg:h-[60vh] lg:w-[40vw]">
-          <CardHeader className="flex h-[20%] flex-row items-center justify-between">
-            <CardTitle className="text-center">{product.title}</CardTitle>
-            <CardTitle className="text-3xl">
-              {product.price} {locale === 'en' ? '$' : '€'}
-            </CardTitle>
-          </CardHeader>
-          <Separator />
-          <CardContent className="flex min-h-[80%] flex-col justify-between p-6">
-            <div className="flex justify-between text-wrap pb-6">
-              <div className="h-fit w-9/12 break-words">{product.description}</div>
-              <div className="whitespace-nowrap text-right lg:w-[20vw]">
-                {tProduct('quantity')}: {product.quantity}
+        <div className="flex flex-col">
+          <Card className="my-3 h-full w-[90vw] lg:my-0 lg:h-[60vh] lg:w-[40vw]">
+            <CardHeader className="flex h-[20%] flex-row items-center justify-between">
+              <CardTitle className="text-center">{product.title}</CardTitle>
+              <CardTitle className="text-3xl">
+                {product.price} {locale === 'en' ? '$' : '€'}
+              </CardTitle>
+            </CardHeader>
+            <Separator />
+            <CardContent className="flex min-h-[80%] flex-col justify-between p-6">
+              <div className="flex justify-between text-wrap pb-6">
+                <div className="h-fit w-9/12 break-words">{product.description}</div>
               </div>
-            </div>
-            <div>{getDate(product.createdAt, true, 'text-right')}</div>
-          </CardContent>
-        </Card>
+              <div>{getDate(product.createdAt!, true, 'text-right')}</div>
+            </CardContent>
+          </Card>
+          <BuyButtons product={product} />
+        </div>
       )}
     </>
   )

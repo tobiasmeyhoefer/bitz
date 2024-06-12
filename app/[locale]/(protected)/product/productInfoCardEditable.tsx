@@ -19,34 +19,40 @@ import {
 import { Input } from '@/components/ui/input'
 import { toast } from '@/components/ui/use-toast'
 import { Textarea } from '@/components/ui/textarea'
+import { updateProduct } from '@/lib/product-actions'
+import { ProductType } from '@/schema'
 
-type ProductInfoEditType = {
-  productInfo: any
-}
+const minError = 'Eingabe erfordert'
 const FormSchema = z.object({
-  title: z.string().min(2, {
-    message: 'Username must be at least 2 characters.',
-  }),
-  price: z.string().min(2, {
-    message: 'Username must be at least 2 characters.',
-  }),
-  quantity: z.string().min(2, {
-    message: 'Username must be at least 2 characters.',
-  }),
-  description: z.string().min(2, {
-    message: 'Username must be at least 2 characters.',
-  }),
+  title: z
+    .string()
+    .min(1, { message: minError })
+    .max(50)
+    .refine((value) => !/#/.test(value)),
+  price: z.coerce.number().safe().positive(),
+  description: z
+    .string()
+    .min(1, { message: minError })
+    .max(250)
+    .refine((value) => !/#/.test(value)),
 })
 
-export default function ProductInfoCardEditable(props: any) {
-  const product = props.productInfo
+export default function ProductInfoCardEditable(props: {
+  productInfo: ProductType
+  translations: {
+    title: string
+    price: string
+    description: string
+    cancel: string
+    save: string
+    edit: string
+  }
+  locale: string
+}) {
+  const initialProduct: ProductType = props.productInfo
   const translations = props.translations
-  const date = props.date
   const [isEditing, setIsEditing] = useState(false)
-  const [title, setTitle] = useState(product.title)
-  const [price, setPrice] = useState(product.price)
-  const [quantity, setQuantity] = useState(product.quantity)
-  const [description, setDescription] = useState(product.description)
+  const [product, setProduct] = useState(initialProduct)
 
   const handleEditClick = () => {
     setIsEditing(!isEditing)
@@ -54,22 +60,31 @@ export default function ProductInfoCardEditable(props: any) {
 
   const handleCancel = () => {
     setIsEditing(false)
-    setTitle(product.title)
-    setPrice(product.price)
-    setQuantity(product.quantity)
-    setDescription(product.description)
+    form.reset({
+      title: product.title,
+      price: product.price,
+      description: product.description!,
+    })
   }
 
   const form = useForm<z.infer<typeof FormSchema>>({
-    //     resolver: zodResolver(FormSchema),
-    //     defaultValues: {
-    //       username: '',
-    //     },
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      title: product.title,
+      price: product.price,
+      description: product.description!,
+    },
   })
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    const updatedProduct = {
+      ...product,
+      ...data,
+    }
+    setProduct(updatedProduct)
+    updateProduct(initialProduct.id!, updatedProduct)
     toast({
-      title: 'Some Toast',
+      title: 'Changes applied',
     })
     setIsEditing(false)
   }
@@ -87,7 +102,7 @@ export default function ProductInfoCardEditable(props: any) {
                   <FormItem>
                     <FormLabel>{translations.title}</FormLabel>
                     <FormControl>
-                      <Input {...field} value={title} onChange={(e) => setTitle(e.target.value)} />
+                      <Input {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -100,31 +115,7 @@ export default function ProductInfoCardEditable(props: any) {
                   <FormItem>
                     <FormLabel>{translations.price}</FormLabel>
                     <FormControl>
-                      <Input
-                        {...field}
-                        value={price}
-                        onChange={(e) => setPrice(e.target.value)}
-                        type="number"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />{' '}
-              <FormField
-                control={form.control}
-                name="quantity"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{translations.quantity}</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="How many?"
-                        {...field}
-                        value={quantity}
-                        onChange={(e) => setQuantity(e.target.value)}
-                        type="number"
-                      />
+                      <Input {...field} type="number" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -141,8 +132,6 @@ export default function ProductInfoCardEditable(props: any) {
                         className="h-[100px] resize-none"
                         placeholder="What is your product like?"
                         {...field}
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
                         maxLength={850}
                         aria-label="max"
                       />
@@ -166,19 +155,13 @@ export default function ProductInfoCardEditable(props: any) {
           <Card className="mt-2 flex h-full flex-col justify-between lg:mt-0 lg:h-[60vh]">
             <div>
               <CardHeader className="flex h-[10vh] flex-row items-center justify-between">
-                <CardTitle className="text-center">{title}</CardTitle>
-                <CardTitle className="text-3xl">{price}€</CardTitle>
+                <CardTitle className="text-center">{product.title}</CardTitle>
+                <CardTitle className="text-3xl">{product.price}€</CardTitle>
               </CardHeader>
               <Separator />
               <CardContent className="flex min-h-[30vh] flex-col justify-between p-6 pb-0">
-                <div className="h-fit break-words text-sm">{description}</div>
+                <div className="h-fit break-words text-sm">{product.description}</div>
               </CardContent>
-            </div>
-            <div className="flex h-[15vh] items-end justify-between px-6 pb-6">
-              <div className="flex w-1/2 flex-col justify-between whitespace-nowrap text-sm">
-                {translations.quantity}: {quantity}
-              </div>
-              {date}
             </div>
           </Card>
           <div className="flex justify-end">

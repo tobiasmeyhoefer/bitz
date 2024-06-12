@@ -1,60 +1,139 @@
 'use client'
-import { useEffect, useState } from 'react'
-import { ProductType } from '@/lib/types'
-import { CardWithImage } from '../ui/cardWithImage'
-import { getProductsBrowse } from '@/lib/productaction'
 
-const BrowseContent = () => {
+import {
+  getProductsBrowse,
+  getProductsByCategory,
+  searchProductsByTitle,
+} from '@/lib/product-actions'
+import { BrowseContentProps } from '@/lib/types'
+import { useEffect, useState } from 'react'
+import { CardWithImage } from '../ui/cardWithImage'
+import { SortProducts } from '../sort-products/sort-products'
+import { SearchDialog } from './search-dialog'
+import OnboardingBrowseCard from '../onboarding/onboarding-browse-card'
+import { ProductType } from '@/schema'
+const suggestions = [
+  'Reciever',
+  'Monitor',
+  'Audio',
+  'Laptop',
+  'Headphone',
+  'Smartphone',
+  'Tablet',
+  'Smartwatch',
+  'Printer',
+  'Camera',
+  'Speaker',
+  'Projector',
+  'Game Console',
+  'Drone',
+  'Router',
+  'Hard Drive',
+  'SSD',
+  'Keyboard',
+  'Mouse',
+  'Graphics Card',
+  'Motherboard',
+  'Power Supply',
+  'RAM',
+  'Cooling System',
+  'VR Headset',
+  'E-Reader',
+  'Fitness Tracker',
+  'Charger',
+]
+
+const BrowseContent = (props: BrowseContentProps) => {
+  const [searchValue, setSearchValue] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [noSearchResults, setNoSearchResults] = useState(false)
   const [products, setProducts] = useState<ProductType[]>([])
 
   useEffect(() => {
     const getProducts = async () => {
-      try {
-        const result = await getProductsBrowse()
-        if (result) {
-          // weil einige werte nicht notNull sind und dann fehler kommen weil sie null  ein könnten
-          const checkedResults: ProductType[] = result.map((item) => ({
-            id: item.id,
-            title: item.title,
-            description: item.description ?? '',
-            price: item.price,
-            quantity: item.quantity,
-            category: item.category ?? '',
-            sellerId: item.sellerId,
-            createdAt: item.createdAt,
-            imageUrl1: item.imageUrl1,
-            imageUrl2: item.imageUrl2,
-            imageUrl3: item.imageUrl3,
-            imageUrl4: item.imageUrl4,
-            imageUrl5: item.imageUrl5,
-          }))
-          setProducts(checkedResults)
-        }
-      } catch (error) {
-        console.error('Fehler beim Laden der Daten:', error)
+      const result = await getProductsBrowse()
+      setProducts(result)
+      if (result.length === 0) {
+        setNoSearchResults(true)
       }
     }
     getProducts()
   }, [])
 
+  const loadProductsByCategory = async (category: string) => {
+    setLoading(true)
+    const result = await getProductsByCategory(category)
+    setProducts(result)
+    if (result.length === 0) {
+      setNoSearchResults(true)
+    } else {
+      setNoSearchResults(false)
+    }
+    setLoading(false)
+  }
+
+  const loadProductsByTitle = async (title: string) => {
+    setLoading(true)
+    let result
+    if (title === '') {
+      result = await getProductsBrowse()
+    } else {
+      result = await searchProductsByTitle(title)
+    }
+
+    setProducts(result)
+    if (result.length === 0) {
+      setNoSearchResults(true)
+    } else {
+      setNoSearchResults(false)
+    }
+    setLoading(false)
+  }
+
   return (
-    <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
-      {products.map((p, index) => (
-        <div key={`kp-${index}`}>
-          <CardWithImage
-            key={`pr-${index}`}
-            title={p.title}
-            desc={p.description!}
-            imgUrl1={p.imageUrl1}
-            className="mx-[5px] my-[0.5rem]"
-            productID={p.id}
-            product={products[index]}
-            favIcon
-            editable={false}
+    <>
+      <OnboardingBrowseCard />
+      <div
+        className={`${loading && `h-full`} flex w-full flex-col items-center justify-center  px-4 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
+      >
+        <div className="flex w-full flex-col items-center justify-center gap-6 lg:flex-row">
+          <SearchDialog
+            placeholder={
+              searchValue.length > 0 ? searchValue : props.searchTranslations.searchPlaceholder
+            }
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
+            suggestions={suggestions}
+            suggestionsTitle={props.searchTranslations.suggestions}
+            loadProductsByCategory={loadProductsByCategory}
+            loadProductsByTitle={loadProductsByTitle}
           />
+          <SortProducts setProducts={setProducts} translations={props.sortTranslations} />
         </div>
-      ))}
-    </div>
+        {!loading ? (
+          <>
+            <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
+              {products.map((p, index) => (
+                <div key={`kp-${index}`}>
+                  <CardWithImage
+                    key={`pr-${index}`}
+                    className="mx-[5px] my-[0.5rem]"
+                    product={products[index]}
+                    favIcon
+                    editable={false}
+                  />
+                </div>
+              ))}
+              {noSearchResults && <div className=" px-4">Keine Suchergebnisse gefunden</div>}
+            </div>
+          </>
+        ) : (
+          <div className="flex h-full items-center justify-center">
+            <div className="h-20 w-20 animate-ping rounded-[30px] bg-black"></div>
+          </div>
+        )}
+      </div>
+    </>
   )
 }
 
