@@ -9,6 +9,7 @@ import FavoriteLike from '../favorites/favoriteLike'
 import { ProdDelAlert } from '../myShop/productDelAlert'
 import { Badge } from './badge'
 import { FaLocationDot } from 'react-icons/fa6'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 
 const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
   ({ className, ...props }, ref) => {
@@ -39,13 +40,23 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
             </Link>
 
             <CardHeader className="p-3">
-              <div className="flex justify-between">
-                <CardTitle
-                  className="truncate align-middle text-2xl"
-                  style={{ lineHeight: 'unset' }}
-                >
-                  {product.title}
-                </CardTitle>
+              <div className="flex max-w-full justify-between">
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger className="max-w-[calc(100%-36px)]">
+                      <CardTitle
+                        className="truncate align-middle text-2xl"
+                        style={{ lineHeight: 'unset' }}
+                      >
+                        {product.title}
+                      </CardTitle>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>{product.title}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+
                 {props.editable && props.favIcon && <ProdDelAlert productId={product.id} />}
                 {!props.editable && props.favIcon && <FavoriteLike productId={product.id} />}
               </div>
