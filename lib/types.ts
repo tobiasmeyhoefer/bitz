@@ -1,3 +1,4 @@
+import { ProductType } from '@/schema'
 import React from 'react'
 
 type NavbarItemLinkProps = {
@@ -84,25 +85,25 @@ type BrowseContentProps = {
   sortTranslations: SortProductsProps
 }
 
-type ProductType = {
-  id?: string
-  title: string
-  description: string | null
-  location?: string | null
-  price: number
-  category?: string
-  createdAt?: Date
-  sellerId?: string
-  imageUrl1?: string | null
-  imageUrl2?: string | null
-  imageUrl3?: string | null
-  imageUrl4?: string | null
-  imageUrl5?: string | null
-  isDirectlyBuyable?: boolean
-  isSold?: boolean
-  stripeId?: string
-  paymentLink?: string
-}
+// type ProductType = {
+//   id?: string
+//   title: string
+//   description: string | null
+//   location?: string | null
+//   price: number
+//   category?: string
+//   createdAt?: Date
+//   sellerId?: string
+//   imageUrl1?: string | null
+//   imageUrl2?: string | null
+//   imageUrl3?: string | null
+//   imageUrl4?: string | null
+//   imageUrl5?: string | null
+//   isDirectlyBuyable?: boolean
+//   isSold?: boolean
+//   stripeId?: string
+//   paymentLink?: string
+// }
 
 type ProdDelAlert = {
   productId: string
@@ -133,8 +134,7 @@ export type {
   SearchTranslations,
   BrowseContentProps,
   RevealOnScrollProps,
-  ProductType,
-  ProductImageCarouselProps,
+  // ProductType,
   FormTranslations,
   // User,
   // UserId,

@@ -1,5 +1,6 @@
 import { CardWithImage } from '@/components/ui/cardWithImage'
 import { getFavoriteProducts } from '@/lib/product-actions'
+import { ProductType } from '@/schema'
 
 const Favorites = async () => {
   const products: ProductType[] | undefined = await getFavoriteProducts()
@@ -16,7 +17,7 @@ const Favorites = async () => {
           className={`${`h-full`} flex w-full flex-col items-center justify-center px-10 py-20 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
         >
           <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
-            {products?.map((p, index) => (
+            {products?.map((p: ProductType, index: number) => (
               <CardWithImage
                 key={`pr-${index}`}
                 title={p.title}

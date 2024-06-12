@@ -12,8 +12,6 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
   ({ className, ...props }, ref) => {
     const cardWidth = 300
 
-    props.product.isOwner = props.editable
-
     return (
       <>
         {props && props.product ? (

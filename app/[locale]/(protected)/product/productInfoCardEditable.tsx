@@ -19,8 +19,8 @@ import {
 import { Input } from '@/components/ui/input'
 import { toast } from '@/components/ui/use-toast'
 import { Textarea } from '@/components/ui/textarea'
-import { ProductType } from '@/lib/types'
 import { updateProduct } from '@/lib/product-actions'
+import { ProductType } from '@/schema'
 
 const minError = 'Eingabe erfordert'
 const FormSchema = z.object({
@@ -37,7 +37,19 @@ const FormSchema = z.object({
     .refine((value) => !/#/.test(value)),
 })
 
-export default function ProductInfoCardEditable(props: any) {
+export default function ProductInfoCardEditable(props: {
+  productInfo: ProductType
+  translations: {
+    title: string
+    price: string
+    description: string
+    cancel: string
+    save: string
+    edit: string
+  }
+  date: JSX.Element | undefined
+  locale: string
+}) {
   const initialProduct: ProductType = props.productInfo
   const translations = props.translations
   const date = props.date
@@ -53,7 +65,7 @@ export default function ProductInfoCardEditable(props: any) {
     form.reset({
       title: product.title,
       price: product.price,
-      description: product.description,
+      description: product.description!, // ? product.description : undefined,
     })
   }
 
@@ -62,13 +74,17 @@ export default function ProductInfoCardEditable(props: any) {
     defaultValues: {
       title: product.title,
       price: product.price,
-      description: product.description,
+      description: product.description!, // ? product.description : undefined,
     },
   })
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    setProduct(data)
-    updateProduct(initialProduct.id!, data)
+    const updatedProduct = {
+      ...product,
+      ...data,
+    }
+    setProduct(updatedProduct)
+    updateProduct(initialProduct.id!, updatedProduct)
     toast({
       title: 'Changes applied',
     })
@@ -106,7 +122,7 @@ export default function ProductInfoCardEditable(props: any) {
                     <FormMessage />
                   </FormItem>
                 )}
-              />{' '}
+              />
               <FormField
                 control={form.control}
                 name="description"

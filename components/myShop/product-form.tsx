@@ -29,11 +29,12 @@ import { Button } from '../ui/button'
 import { Link, useRouter } from '@/navigation'
 import Image from 'next/image'
 import { getSignedURL } from '@/lib/product-actions'
-import { FormTranslations, ProductType } from '@/lib/types'
+import { FormTranslations } from '@/lib/types'
 import { useToast } from '@/components/ui/use-toast'
 import { cn } from '@/lib/utils'
 import { Checkbox } from '../ui/checkbox'
 import { getUser } from '@/lib/user-actions'
+import { ProductType } from '@/schema'
 
 const suggestions = [
   { value: 'Reciever' },
@@ -173,7 +174,7 @@ export function ProductForm({
     },
   })
 
-  async function onSubmit(values: ProductType) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true)
     if (compressedFiles?.length === 0) {
       toast({
