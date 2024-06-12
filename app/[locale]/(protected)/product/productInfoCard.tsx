@@ -105,7 +105,6 @@ export default function ProductInfoCard(props: ProductInfoType) {
         <ProductInfoCardEditable
           productInfo={product}
           translations={editableCardTranslations}
-          date={getDate(product.createdAt!, false, 'text-right')}
           locale={locale}
         />
       ) : (

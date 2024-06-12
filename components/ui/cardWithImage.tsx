@@ -7,19 +7,22 @@ import { Link } from '@/navigation'
 import { Card, CardHeader, CardTitle, CardDescription } from './card'
 import FavoriteLike from '../favorites/favoriteLike'
 import { ProdDelAlert } from '../myShop/productDelAlert'
+import { Badge } from './badge'
+import { FaLocationDot } from 'react-icons/fa6'
 
 const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
   ({ className, ...props }, ref) => {
     const cardWidth = 300
+    const product = props.product
 
     return (
       <>
-        {props && props.product ? (
+        {props && product ? (
           <Card className={cn(`w-[${cardWidth}px]`, className)} ref={ref}>
-            <Link href={`/product/${props.productID}`}>
-              {props.imgUrl1 !== undefined ? (
+            <Link href={`/product/${product.id}`}>
+              {product.imageUrl1 !== undefined ? (
                 <Image
-                  src={props.imgUrl1 as string}
+                  src={product.imageUrl1 as string}
                   width={cardWidth}
                   height={300}
                   className="rounded-t-xl"
@@ -37,15 +40,31 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
 
             <CardHeader className="p-3">
               <div className="flex justify-between">
-                <CardTitle className="align-middle text-2xl" style={{ lineHeight: 'unset' }}>
-                  {props.title}
+                <CardTitle
+                  className="truncate align-middle text-2xl"
+                  style={{ lineHeight: 'unset' }}
+                >
+                  {product.title}
                 </CardTitle>
-                {props.editable && props.favIcon && <ProdDelAlert productId={props.productID!} />}
-                {!props.editable && props.favIcon && <FavoriteLike productId={props.productID!} />}
+                {props.editable && props.favIcon && <ProdDelAlert productId={product.id} />}
+                {!props.editable && props.favIcon && <FavoriteLike productId={product.id} />}
               </div>
-              <CardDescription className="truncate text-xl">
-                <div className="text-right">{props.price}€</div>
-                <div className="text-right text-xs">{formatDate(props.timestamp!)}</div>
+              <CardDescription className="text-sm text-black">
+                <div className="flex justify-between">
+                  <Badge className="text-md m-0" variant="secondary">
+                    {props.product.category}
+                  </Badge>
+                  <div className="text-left text-xl">{props.product.price}€</div>
+                </div>
+
+                <div className="mt-2 flex justify-between">
+                  <div className="flex flex-nowrap items-center text-right">
+                    <FaLocationDot className="mx-1 size-3" />
+                    {props.product.location}
+                  </div>
+                  <div className="flex items-end text-right">{formatDate(product.createdAt)}</div>
+                </div>
+
                 {props.product.isSold && <p className="text-green-500">verkauft</p>}
               </CardDescription>
             </CardHeader>

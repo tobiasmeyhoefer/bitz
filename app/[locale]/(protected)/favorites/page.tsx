@@ -20,13 +20,7 @@ const Favorites = async () => {
             {products?.map((p: ProductType, index: number) => (
               <CardWithImage
                 key={`pr-${index}`}
-                title={p.title}
-                price={p.price}
-                timestamp={p.createdAt}
-                desc={p.description!}
-                imgUrl1={p.imageUrl1}
                 className="mx-[5px] my-[0.5rem]"
-                productID={p.id}
                 product={products[index]}
                 favIcon
                 editable={false}

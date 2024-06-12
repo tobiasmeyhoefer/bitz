@@ -117,13 +117,7 @@ const BrowseContent = (props: BrowseContentProps) => {
                 <div key={`kp-${index}`}>
                   <CardWithImage
                     key={`pr-${index}`}
-                    title={p.title}
-                    desc={p.description!}
-                    price={p.price}
-                    timestamp={p.createdAt}
-                    imgUrl1={p.imageUrl1}
                     className="mx-[5px] my-[0.5rem]"
-                    productID={p.id}
                     product={products[index]}
                     favIcon
                     editable={false}

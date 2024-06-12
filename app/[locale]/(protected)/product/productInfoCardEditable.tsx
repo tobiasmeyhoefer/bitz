@@ -47,12 +47,10 @@ export default function ProductInfoCardEditable(props: {
     save: string
     edit: string
   }
-  date: JSX.Element | undefined
   locale: string
 }) {
   const initialProduct: ProductType = props.productInfo
   const translations = props.translations
-  const date = props.date
   const [isEditing, setIsEditing] = useState(false)
   const [product, setProduct] = useState(initialProduct)
 
@@ -65,7 +63,7 @@ export default function ProductInfoCardEditable(props: {
     form.reset({
       title: product.title,
       price: product.price,
-      description: product.description!, // ? product.description : undefined,
+      description: product.description!,
     })
   }
 
@@ -74,7 +72,7 @@ export default function ProductInfoCardEditable(props: {
     defaultValues: {
       title: product.title,
       price: product.price,
-      description: product.description!, // ? product.description : undefined,
+      description: product.description!,
     },
   })
 
