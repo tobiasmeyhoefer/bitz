@@ -12,8 +12,8 @@ import {
 import Image from 'next/image'
 import { UpdateImage } from '@/components/myShop/update-image'
 import { useEffect, useState } from 'react'
-import { getUser } from '@/lib/useraction'
-import { ProductImageCarouselProps } from '@/lib/types'
+import { getUser } from '@/lib/user-actions'
+import { auth } from '@/auth'
 
 export function ProductImageCarousel(props: ProductImageCarouselProps) {
   const [api, setApi] = useState<CarouselApi>()
@@ -31,9 +31,8 @@ export function ProductImageCarousel(props: ProductImageCarouselProps) {
 
   useEffect(() => {
     const checkUser = async () => {
-      const result = await getUser()
-      const user = result?.[0]
-      if (user?.id == props.sellerId) {
+      const user = await getUser()
+      if (user.id == props.sellerId) {
         setIsOwner(true)
       }
     }

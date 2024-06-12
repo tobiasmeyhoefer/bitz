@@ -1,11 +1,10 @@
 import { CardWithImage } from '@/components/ui/cardWithImage'
-import { getProductsOwned } from '@/lib/productaction'
-import { getUser } from '@/lib/useraction'
+import { getProductsOwned } from '@/lib/product-actions'
+import { getUser } from '@/lib/user-actions'
 
 const MyShopContent = async () => {
-  const users = await getUser()
-  const user = users?.[0]
-  const products = await getProductsOwned(user!.id)
+  const user = await getUser()
+  const products = await getProductsOwned(user.id)
 
   return (
     <div
@@ -17,8 +16,10 @@ const MyShopContent = async () => {
             <CardWithImage
               key={`pr-${index}`}
               title={p.title}
+              price={p.price}
               desc={p.description!}
               imgUrl1={p.imageUrl1}
+              timestamp={p.createdAt}
               className="mx-[5px] my-[0.5rem]"
               productID={p.id}
               product={products[index]}

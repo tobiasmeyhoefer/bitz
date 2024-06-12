@@ -9,7 +9,14 @@ const Browse = () => {
     searchPlaceholder: t('searchPlaceholder'),
     suggestions: t('suggestions'),
   }
-  return <BrowseContent searchTranslations={searchTranslations} />
+  const sortTranslations = {
+    sortBy: t('sortby'),
+    date: t('date'),
+    price: t('price'),
+  }
+  return (
+    <BrowseContent searchTranslations={searchTranslations} sortTranslations={sortTranslations} />
+  )
 }
 
 export default Browse

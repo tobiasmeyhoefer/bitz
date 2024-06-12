@@ -6,33 +6,42 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { getProductById } from '@/lib/productaction'
-import { getUser, getUserById } from '@/lib/useraction'
+import { getProductById } from '@/lib/product-actions'
+import { getAddressByUserId, getUser, getUserById } from '@/lib/user-actions'
 import { ConversationType } from '@/schema'
 import { formatDate } from '@/lib/utils'
 import { ConversationForm } from './conversation-form1'
 import { ConversationForm2 } from './conversation-form2'
 import ConversationCardDropwdown from './conversation-card-dropdown'
+import { getTranslations } from 'next-intl/server'
 
 export const ConversationCard = async ({ conv }: { conv: ConversationType }) => {
   const currentUser = await getUser()
   const user = await getUserById(conv.buyerId)
   const product = await getProductById(conv.productId)
+  const t = await getTranslations('Conversations')
+  const translations = await getTranslations('Conversations')
+  //let a = translations.title;
 
   const cardType: 'sellerCard' | 'buyerCard' =
-    currentUser![0].id === product[0].sellerId ? 'buyerCard' : 'sellerCard'
+    currentUser.id === product.sellerId ? 'buyerCard' : 'sellerCard'
 
   if (cardType === 'sellerCard') {
     return (
       <Card className="relative">
-        <ConversationCardDropwdown conv={conv} showDelay={true} showSold={false}/>
+        <ConversationCardDropwdown conv={conv} showDelay={true} showSold={false} />
         <CardHeader>
-          <CardTitle>Du bist an dem Bit {product[0].title} interessiert</CardTitle>
+          <CardTitle>
+            {t('wannabuy00')} {product.title} {t('wannabuy01')}
+          </CardTitle>
           <CardDescription>
             {conv.status === 'accepted' ? (
-              <span>Der Käufer hat dein Angebot akzeptiert </span>
+              <span>
+                {t('sellerAccepted')}
+                {await getAddressByUserId(conv.sellerId)}
+              </span>
             ) : (
-              <span>Aktuell wird auf eine Antwort gewartet </span>
+              <span>{t('waiting')} </span>
             )}
           </CardDescription>
           {conv.status === 'accepted' ? (
@@ -41,7 +50,7 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
               <ConversationForm2 convId={conv.id} />
             </CardContent>
           ) : conv.status === 'deal' ? (
-            <p>Ihr habt jetzt einen Deal ✅</p>
+            <p>{t('deal')} ✅</p>
           ) : (
             <span></span>
           )}
@@ -50,7 +59,7 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
           <p className="font-ligh text-neutral-400">{formatDate(conv.createdAt)}</p>
           {conv.delay !== null ? (
             <p className="text-red-600">
-              Du verspätest sich um {conv.delay} Minuten
+              {t('delay00')} {conv.delay} {t('delay01')}
             </p>
           ) : (
             <span></span>
@@ -68,15 +77,12 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
             <ConversationCardDropwdown conv={conv} showDelay={false} showSold={true} />
             <CardHeader>
               <CardTitle>
-                Der User {user[0].name} ist an deinem Bit {product[0].title} interessiert
+                {user.name} {t('newbuyer00')} {product.title} {t('newbuyer01')}
               </CardTitle>
-              <CardDescription>
-                Du kannst dieses Angebot nun ablehnen oder annehmen. Wenn du es annimmst, wird dein
-                in den Einstellungen festgelegter Abholort übermittelt bitte trage im vorgesehenen Feld ein wann du Zeit hast
-              </CardDescription>
+              {conv.status === 'offen' ? <CardDescription>{t('gotOffer')}</CardDescription> : null}
             </CardHeader>
             {conv.status === 'accepted' ? (
-              <CardContent>Du hast das Angebot akzeptiert ✅</CardContent>
+              <CardContent>{t('accepted')} ✅</CardContent>
             ) : conv.status === 'deal' ? (
               <CardContent>{conv.message2}</CardContent>
             ) : (
@@ -88,7 +94,7 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
               <p>{formatDate(conv.createdAt)}</p>
               {conv.delay !== null ? (
                 <p className="text-red-600">
-                  {user[0].name} verspätet sich um {conv.delay} Minuten
+                  {user.name} {t('delay11')} {conv.delay} {t('delay01')}
                 </p>
               ) : (
                 <span></span>

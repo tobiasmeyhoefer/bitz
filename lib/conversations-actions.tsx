@@ -2,8 +2,8 @@
 
 import { db } from '@/db'
 import { conversations, products } from '@/schema'
-import { getUser } from './useraction'
-import { desc, eq, or } from 'drizzle-orm'
+import { getUser } from './user-actions'
+import { desc, eq, or, and } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
 
 export async function getAllConversations() {
@@ -11,7 +11,7 @@ export async function getAllConversations() {
   return await db
     .select()
     .from(conversations)
-    .where(or(eq(conversations.buyerId, user![0].id), eq(conversations.sellerId, user![0].id)))
+    .where(or(eq(conversations.buyerId, user.id), eq(conversations.sellerId, user.id)))
     .orderBy(desc(conversations.createdAt))
 }
 
@@ -19,15 +19,31 @@ export async function createConversation(productId: string) {
   const user = await getUser()
   const seller = await db.select().from(products).where(eq(products.id, productId))
 
-  return await db.insert(conversations).values({
-    buyerId: user![0].id,
+  await db.insert(conversations).values({
+    buyerId: user.id,
     productId: productId,
     sellerId: seller[0].sellerId,
   })
+
+  revalidatePath('/conversations')
+}
+
+export async function checkIfConversationAlreadyExist(productId: string): Promise<boolean> {
+  const user = await getUser()
+  const result = await db
+    .select()
+    .from(conversations)
+    .where(and(eq(conversations.productId, productId), eq(conversations.buyerId, user.id)))
+  if (result[0]) {
+    return true
+  }
+  return false
 }
 
 export async function deleteConversation(productId: string, buyerId: string) {
-  await db.delete(conversations).where(or(eq(conversations.productId, productId), eq(conversations.buyerId, buyerId)))
+  await db
+    .delete(conversations)
+    .where(or(eq(conversations.productId, productId), eq(conversations.buyerId, buyerId)))
 }
 
 export async function declineOffer(id: number) {
@@ -46,16 +62,12 @@ export async function acceptOffer(id: number, message: string) {
 export async function acceptDealTime(id: number, message: string) {
   await db
     .update(conversations)
-    .set({ message2: message, status: "deal"})
+    .set({ message2: message, status: 'deal' })
     .where(eq(conversations.id, id))
   revalidatePath('/conversations')
 }
 
 export async function addConversationDelay(id: number, delay: string) {
-  await db
-    .update(conversations)
-    .set({ delay: delay})
-    .where(eq(conversations.id, id))
+  await db.update(conversations).set({ delay: delay }).where(eq(conversations.id, id))
   revalidatePath('/conversations')
 }
-

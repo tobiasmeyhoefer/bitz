@@ -1,144 +1,145 @@
-'use client'
-import { Input } from '@/components/ui/input'
-import { getProductsBrowse } from '@/lib/productaction'
-import { BrowseContentProps, ProductType, SearchBarProps } from '@/lib/types'
+"use client"
+
+import {
+  getProductsBrowse,
+  getProductsByCategory,
+  searchProductsByTitle,
+} from '@/lib/product-actions'
+import { BrowseContentProps, ProductType } from '@/lib/types'
 import { useEffect, useState } from 'react'
-import { SlClose } from 'react-icons/sl'
 import { CardWithImage } from '../ui/cardWithImage'
-import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog'
+import { SortProducts } from '../sort-products/sort-products'
+import { SearchDialog } from './search-dialog'
+import OnboardingBrowseCard from '../onboarding/onboarding-browse-card'
+import { ProductTypeTest } from '@/schema'
+const suggestions = [
+  'Reciever',
+  'Monitor',
+  'Audio',
+  'Laptop',
+  'Headphone',
+  'Smartphone',
+  'Tablet',
+  'Smartwatch',
+  'Printer',
+  'Camera',
+  'Speaker',
+  'Projector',
+  'Game Console',
+  'Drone',
+  'Router',
+  'Hard Drive',
+  'SSD',
+  'Keyboard',
+  'Mouse',
+  'Graphics Card',
+  'Motherboard',
+  'Power Supply',
+  'RAM',
+  'Cooling System',
+  'VR Headset',
+  'E-Reader',
+  'Fitness Tracker',
+  'Charger',
+]
 
 const BrowseContent = (props: BrowseContentProps) => {
   const [searchValue, setSearchValue] = useState('')
   const [loading, setLoading] = useState(false)
-  const [products, setProducts] = useState<ProductType[]>([])
+  const [noSearchResults, setNoSearchResults] = useState(false)
+  const [products, setProducts] = useState<ProductTypeTest[]>([])
+
   useEffect(() => {
     const getProducts = async () => {
-      try {
-        const result = await getProductsBrowse()
-        if (result) {
-          // weil einige werte nicht notNull sind und dann fehler kommen weil sie null  ein könnten
-          const checkedResults: ProductType[] = result.map((item) => ({
-            id: item.id,
-            title: item.title,
-            description: item.description ?? '',
-            price: item.price,
-            quantity: item.quantity,
-            category: item.category ?? '',
-            sellerId: item.sellerId,
-            createdAt: item.createdAt,
-            imageUrl1: item.imageUrl1,
-            imageUrl2: item.imageUrl2,
-            imageUrl3: item.imageUrl3,
-            imageUrl4: item.imageUrl4,
-            imageUrl5: item.imageUrl5,
-            stripeId: item.stripeId ?? "",
-            paymentUrl: item.paymentLink ?? "",
-            isDirectlyBuyable: item.isDirectlyBuyable ?? false,
-            isSold: item.isSold ?? false
-          }))
-          setProducts(checkedResults)
-        }
-      } catch (error) {
-        console.error('Fehler beim Laden der Daten:', error)
+      const result = await getProductsBrowse()
+      setProducts(result)
+      if (result.length === 0) {
+        setNoSearchResults(true)
       }
     }
     getProducts()
   }, [])
 
-  const suggestions = ['Receiver', 'Monitor', 'Audio', 'Laptop', 'Headphone']
+  const loadProductsByCategory = async (category: string) => {
+    setLoading(true)
+    const result = await getProductsByCategory(category)
+    setProducts(result)
+    if (result.length === 0) {
+      setNoSearchResults(true)
+    } else {
+      setNoSearchResults(false)
+    }
+    setLoading(false)
+  }
+
+  const loadProductsByTitle = async (title: string) => {
+    setLoading(true)
+    let result
+    if (title === '') {
+      result = await getProductsBrowse()
+    } else {
+      result = await searchProductsByTitle(title)
+    }
+
+    setProducts(result)
+    if (result.length === 0) {
+      setNoSearchResults(true)
+    } else {
+      setNoSearchResults(false)
+    }
+    setLoading(false)
+  }
 
   return (
-    <div
-      className={`${loading && `h-full`} flex w-full flex-col items-center justify-center  px-4 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
-    >
-      <SearchDialog
-        placeholder={
-          searchValue.length > 0 ? searchValue : props.searchTranslations.searchPlaceholder
-        }
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
-        suggestions={suggestions}
-        suggestionsTitle={props.searchTranslations.suggestions}
-      />
-      {!loading ? (
-        <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
-          {products.map((p, index) => (
-            <div key={`kp-${index}`}>
-              {/* <RevealOnScroll key={`prx-${index}`}> */}
-              <CardWithImage
-                key={`pr-${index}`}
-                title={p.title}
-                desc={p.description!}
-                imgUrl1={p.imageUrl1}
-                className="mx-[5px] my-[0.5rem]"
-                productID={p.id}
-                product={products[index]}
-                favIcon
-                editable={false}
-              />
-              {/* </RevealOnScroll> */}
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div className="flex h-full items-center justify-center">
-          <div className="h-20 w-20 animate-ping rounded-[30px] bg-black"></div>
-        </div>
-      )}
-    </div>
-  )
-}
-
-const SearchDialog = (props: SearchBarProps) => {
-  const [open, setOpen] = useState(false)
-  return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Input
-          className="sticky top-[20px] h-14 w-full bg-background md:w-2/3"
-          type="search"
-          placeholder={props.searchValue ? props.searchValue : props.placeholder}
-          readOnly
-        />
-      </DialogTrigger>
-      <DialogContent className="gap-0 border-0  p-0">
-        <div className="flex">
-          <Input
-            className="rounded-t-l m-0 h-14 rounded-b-none px-4"
-            type="input"
-            placeholder={props.placeholder}
-            onChange={(e) => props.setSearchValue(e.target.value)}
-            value={props.searchValue ? props.searchValue : ''}
-            onKeyDown={(e) => e.key === 'Enter' && setOpen(false)} // Data fetching trigger
+    <>
+      <OnboardingBrowseCard />
+      <div
+        className={`${loading && `h-full`} flex w-full flex-col items-center justify-center  px-4 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
+      >
+        <div className="flex w-full flex-col items-center justify-center gap-6 lg:flex-row">
+          <SearchDialog
+            placeholder={
+              searchValue.length > 0 ? searchValue : props.searchTranslations.searchPlaceholder
+            }
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
+            suggestions={suggestions}
+            suggestionsTitle={props.searchTranslations.suggestions}
+            loadProductsByCategory={loadProductsByCategory}
+            loadProductsByTitle={loadProductsByTitle}
           />
-          {props.searchValue.length > 0 && (
-            <SlClose
-              onClick={() => props.setSearchValue('')}
-              className="absolute right-[20px] top-[20%] h-[20px] w-[20px]"
-            />
-          )}
+          <SortProducts setProducts={setProducts} translations={props.sortTranslations} />
         </div>
-        {!props.searchValue ? (
+        {!loading ? (
           <>
-            <h1 className="px-4 pt-2 text-lg font-medium ">{props.suggestionsTitle}</h1>
-            {props.suggestions.map((suggestion, index) => (
-              <div
-                onClick={() => {
-                  setOpen(false)
-                  props.setSearchValue(suggestion)
-                }}
-                className="rounded- px-8 py-2 hover:rounded-b-lg hover:bg-input"
-                key={`s-${index}`}
-              >
-                {suggestion}
-              </div>
-            ))}
+            <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
+              {products.map((p, index) => (
+                <div key={`kp-${index}`}>
+                  <CardWithImage
+                    key={`pr-${index}`}
+                    title={p.title}
+                    desc={p.description!}
+                    price={p.price}
+                    timestamp={p.createdAt}
+                    imgUrl1={p.imageUrl1}
+                    className="mx-[5px] my-[0.5rem]"
+                    productID={p.id}
+                    product={products[index]}
+                    favIcon
+                    editable={false}
+                  />
+                </div>
+              ))}
+              {noSearchResults && <div className=" px-4">Keine Suchergebnisse gefunden</div>}
+            </div>
           </>
         ) : (
-          <div className="px-4 py-2">{props.searchValue}</div>
+          <div className="flex h-full items-center justify-center">
+            <div className="h-20 w-20 animate-ping rounded-[30px] bg-black"></div>
+          </div>
         )}
-      </DialogContent>
-    </Dialog>
+      </div>
+    </>
   )
 }
 

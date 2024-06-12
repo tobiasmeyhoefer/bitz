@@ -6,24 +6,28 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { getProductById } from '@/lib/productaction'
-import { getUser } from '@/lib/useraction'
+import { getProductById } from '@/lib/product-actions'
+import { getUser, getUserById } from '@/lib/user-actions'
 import { TransactionType } from '@/schema'
 
 export const TransactionCard = async ({ transaction }: { transaction: TransactionType }) => {
   const user = await getUser()
+  const buyer = await getUserById(transaction.buyerId)
   const product = await getProductById(transaction.productId)
 
   //user is buyer
-  if (transaction.buyerId === user![0].id) {
+  if (transaction.buyerId === user.id) {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Du hast {product[0].title} gekauft</CardTitle>
+          <CardTitle>Du hast {product.title} gekauft</CardTitle>
           <CardDescription>gekauft für {transaction.price}</CardDescription>
         </CardHeader>
         <CardContent>
-          <p>Dein Paket wird jetzt verpackt</p>
+          <p>
+            Dein Paket wird jetzt verpackt und an den festgelegten Ort in deinen Einstellungen
+            versendet
+          </p>
         </CardContent>
         <CardFooter>
           <p>{transaction.createdAt.toLocaleDateString()}</p>
@@ -33,15 +37,16 @@ export const TransactionCard = async ({ transaction }: { transaction: Transactio
   }
 
   //user is seller
-  if (transaction.sellerId === user![0].id) {
+  if (transaction.sellerId === user.id) {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Dein Bit {product[0].title} wurde gekauft</CardTitle>
+          <CardTitle>Dein Bit {product.title} wurde gekauft</CardTitle>
           <CardDescription>verkauft für {transaction.price}</CardDescription>
         </CardHeader>
         <CardContent>
-          <p>Bitte schicke diesen Artikel nun an ...</p>
+          <p>Bitte schicke diesen Artikel nun an {buyer.name ?? 'den Verkäufer'}</p>
+          <p>Adresse: {buyer.adress}</p>
         </CardContent>
         <CardFooter>
           <p>{transaction.createdAt.toLocaleDateString()}</p>

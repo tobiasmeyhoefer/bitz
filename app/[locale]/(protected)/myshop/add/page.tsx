@@ -7,7 +7,6 @@ const AddProductPage = async () => {
     title: t('title'),
     description: t('description'),
     price: t('price'),
-    quantity: t('quantity'),
     category: t('category'),
     categoryPlaceholder: t('categoryPlaceholder'),
     images: t('images'),
@@ -17,7 +16,7 @@ const AddProductPage = async () => {
   }
   return (
     <>
-      <h1 className="text-center font-montserrat text-5xl font-bold mt-10">BIT HINZUFÜGEN</h1>
+      <h1 className="text-center font-montserrat text-3xl font-bold mt-10">BIT HINZUFÜGEN</h1>
       <div className="flex justify-center mt-10">
         <ProductForm
           submitText={t('submitTitle')}

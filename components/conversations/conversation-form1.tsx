@@ -32,8 +32,8 @@ import { Textarea } from '../ui/textarea'
 const formSchema = z.object({
   message: z
     .string()
-    .min(20, { message: 'Der Käufer braucht einen Zeitraum zur Abholung' })
-    .max(200, {
+    .min(14, { message: 'Der Käufer braucht einen Zeitraum zur Abholung' })
+    .max(100, {
       message: 'Es sind maximal 200 Zeichen erlaubt',
     }),
 })
@@ -70,14 +70,18 @@ export function ConversationForm({ convId }: { convId: number }) {
           )}
         />
         <div className="flex gap-4">
-          <Button type="submit">Annehmen</Button>
+          <Button className="" type="submit">
+            Annehmen
+          </Button>
           <AlertDialog>
-            <AlertDialogTrigger>Ablehnen</AlertDialogTrigger>
+            <AlertDialogTrigger className="w-28 rounded-md bg-border text-sm font-medium hover:bg-[#c2c2c2]">
+              Ablehnen
+            </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
                 <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                 <AlertDialogDescription>
-                  This action cannot be undone. This will permanently decline this offer
+                  This action cannot be undone. This will permanently decline this offer.
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>

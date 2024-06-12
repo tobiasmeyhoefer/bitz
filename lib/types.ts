@@ -23,6 +23,8 @@ type NavMenuDrawerProps = {
 type CardWithImageProps = {
   title: string
   desc: string | undefined
+  price?: number
+  timestamp?: Date
   content?: string
   imgUrl1?: string | null | string[]
   className?: React.HTMLAttributes<HTMLDivElement> | string
@@ -33,13 +35,13 @@ type CardWithImageProps = {
   product?: ProductType
   editable: boolean
 }
-type User = {
-  userId: string
-}
+// type User = {
+//   userId: string
+// }
 
-type UserId = {
-  id: string
-}
+// type UserId = {
+//   id: string
+// }
 
 type MyShopProps = {
   userId: string
@@ -54,6 +56,12 @@ type SearchBarProps = {
   suggestionsTitle: string
 }
 
+type SortProductsProps = {
+  sortBy: string
+  date: string
+  price: string
+}
+
 type SearchTranslations = {
   searchPlaceholder: string
   suggestions: string
@@ -63,7 +71,6 @@ type FormTranslations = {
   title: string
   description: string
   price: string
-  quantity: string
   category: string
   categoryPlaceholder: string
   images: string
@@ -74,6 +81,7 @@ type FormTranslations = {
 
 type BrowseContentProps = {
   searchTranslations: SearchTranslations
+  sortTranslations: SortProductsProps
 }
 
 type ProductType = {
@@ -82,29 +90,18 @@ type ProductType = {
   description: string | null
   location?: string | null
   price: number
-  quantity: number | null
-  category?: string | null
-  createdAt?: string | Date
+  category?: string
+  createdAt?: Date
   sellerId?: string
   imageUrl1?: string | null
   imageUrl2?: string | null
   imageUrl3?: string | null
   imageUrl4?: string | null
   imageUrl5?: string | null
-  isDirectlyBuyable?: boolean | null
-  isSold?: boolean | null
+  isDirectlyBuyable?: boolean
+  isSold?: boolean
   stripeId?: string
   paymentLink?: string
-}
-
-type ProductImageCarouselProps = {
-  translations: {
-    image: string
-    of: string
-  }
-  images: (string | null | undefined)[]
-  className: string
-  sellerId: string | undefined
 }
 
 type ProdDelAlert = {
@@ -132,14 +129,15 @@ export type {
   NavMenuDrawerProps,
   CardWithImageProps,
   SearchBarProps,
+  SortProductsProps,
   SearchTranslations,
   BrowseContentProps,
   RevealOnScrollProps,
   ProductType,
   ProductImageCarouselProps,
   FormTranslations,
-  User,
-  UserId,
+  // User,
+  // UserId,
   MyShopProps,
   ProdDelAlert,
   Shop,

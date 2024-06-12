@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { Input } from '../ui/input'
-import { addProduct } from '@/lib/productaction'
+import { addProduct } from '@/lib/product-actions'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -28,13 +28,12 @@ import { Card } from '@/components/ui/card'
 import { Button } from '../ui/button'
 import { Link, useRouter } from '@/navigation'
 import Image from 'next/image'
-import { getSignedURL } from '@/lib/productaction'
+import { getSignedURL } from '@/lib/product-actions'
 import { FormTranslations, ProductType } from '@/lib/types'
 import { useToast } from '@/components/ui/use-toast'
 import { cn } from '@/lib/utils'
 import { Checkbox } from '../ui/checkbox'
-import { getUser } from '@/lib/useraction'
-import { FaPencilAlt } from 'react-icons/fa'
+import { getUser } from '@/lib/user-actions'
 
 const suggestions = [
   { value: 'Reciever' },
@@ -75,7 +74,11 @@ const formSchema = z.object({
     .min(1, { message: minError })
     .max(50)
     .refine((value) => !/#/.test(value)),
-  price: z.coerce.number().safe().positive(),
+  price: z.coerce
+    .number()
+    .safe()
+    .positive()
+    .multipleOf(1, { message: 'Dezimalstellen sind nicht erwünscht' }),
   isDirectlyBuyable: z.boolean().default(false).optional(),
   description: z
     .string()
@@ -95,7 +98,6 @@ const formSchema = z.object({
     )
     .refine(
       (files) => {
-        // console.log(files)
         if (files instanceof FileList) {
           const filesArray = Array.from(files)
           return filesArray.every((file) => file.size <= MAX_FILE_SIZE)
@@ -113,12 +115,10 @@ const formSchema = z.object({
 
 export function ProductForm({
   submitText,
-  // action,
   whichFunction,
   translations,
 }: {
   submitText: string
-  // action: (values: ProductType) => Promise<void>
   whichFunction: string
   translations: FormTranslations
 }) {
@@ -127,12 +127,13 @@ export function ProductForm({
   const [open, setOpen] = React.useState(false)
   const [categoryValue, setcategoryValue] = React.useState('')
   const [locationError, setLocationError] = React.useState(false)
+  const [locationErrorMessage, setLocationErrorMessage] = React.useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   const {
     title,
     description,
     price,
-    quantity,
     category,
     categoryPlaceholder,
     images,
@@ -143,10 +144,16 @@ export function ProductForm({
 
   useEffect(() => {
     const getProduct = async () => {
-      const result = await getUser()
-      const user = result?.[0]
-      if (!user?.location) {
+      const user = await getUser()
+      if (!user.location && !user.adress) {
         setLocationError(true)
+        setLocationErrorMessage('Location & Adress gotta be set.')
+      } else if (!user.location) {
+        setLocationError(true)
+        setLocationErrorMessage('Location gotta be set.')
+      } else if (!user.adress) {
+        setLocationError(true)
+        setLocationErrorMessage('Adress gotta be set.')
       }
     }
     getProduct()
@@ -167,6 +174,7 @@ export function ProductForm({
   })
 
   async function onSubmit(values: ProductType) {
+    setIsLoading(true)
     if (compressedFiles?.length === 0) {
       toast({
         title: 'Error',
@@ -175,6 +183,7 @@ export function ProductForm({
       setPreviewUrls(null)
       setFiles(null)
       setCompressedFiles(null)
+      setIsLoading(false)
       return
     }
 
@@ -186,13 +195,13 @@ export function ProductForm({
       form.reset()
       toast({
         title: 'Error',
-        description: 'set Account Location in Settings',
+        description: locationErrorMessage,
         action: (
-          <Button>
-            <Link href="/settings">set Location</Link>
-          </Button>
+          <Link href="/settings">
+            <Button>go to Settings</Button>
+          </Link>
         ),
-        duration: 2200,
+        duration: 2600,
       })
     } else {
       let imageUrls = []
@@ -213,6 +222,7 @@ export function ProductForm({
             })
             if (signedURLResult.failure !== undefined) {
               console.error(signedURLResult.failure)
+              setIsLoading(false)
               return
             }
 
@@ -228,8 +238,8 @@ export function ProductForm({
           }
         }
       }
-      // console.log(JSON.parse(JSON.stringify(values)))
       await addProduct(JSON.parse(JSON.stringify(values)), imageUrls)
+      setIsLoading(false)
       router.push('/myshop')
       toast({
         title: toastTitle,
@@ -246,20 +256,14 @@ export function ProductForm({
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files ?? null
     setFiles(files)
-    console.log('test')
-    console.log(files)
     if (previewUrls) {
       previewUrls.map((url) => URL.revokeObjectURL(url))
     }
     if (files) {
-      // const urls = Array.from(files).map((file) => URL.createObjectURL(file))
-      // setPreviewUrls(urls)
       const compFiles = await compressImages(Array.from(files))
       const urls2 = compFiles.map((file) => URL.createObjectURL(file))
       setPreviewUrls(urls2)
       setCompressedFiles(compFiles)
-      // console.log(compFiles[0].size)
-      // console.log(files[0].size)
     } else {
       setPreviewUrls(null)
     }
@@ -270,7 +274,6 @@ export function ProductForm({
     setPreviewUrls(newPreviewUrls)
 
     const filesArray = Array.from(files!)
-    // console.log(files)
     filesArray.splice(index, 1)
     const dataTransfer = new DataTransfer()
     filesArray.forEach((file) => dataTransfer.items.add(file))
@@ -284,11 +287,6 @@ export function ProductForm({
 
     // @ts-ignore
     form.setValue('images', dataTransfer!.files!)
-
-    // console.log(dataTransfer.files)
-    // setFiles(dataTransfer.files)
-    // const newFiles = files.filter((_, i) => i !== index)
-    // setFiles(newFiles)
   }
 
   // Funktion zur Bildkomprimierung
@@ -354,13 +352,11 @@ export function ProductForm({
     <>
       <Card className="w-full max-w-[800px] p-10">
         {locationError && (
-          <div className="flex flex-row items-center gap-2">
-            <p className="font-medium text-red-500">Error: Location gotta be set.</p>
-            <Button className="h-6 w-12">
-              <Link href="/settings">
-                <FaPencilAlt />
-              </Link>
-            </Button>
+          <div className="mb-2 flex flex-row items-center gap-2">
+            <p className="font-medium text-red-400">Error: Location not set</p>
+            <Link href="/settings">
+              <Button className="h-6 w-12">edit</Button>
+            </Link>
           </div>
         )}
         <Form {...form}>
@@ -398,25 +394,15 @@ export function ProductForm({
                 <FormItem>
                   <FormLabel className="leading-0">{price}</FormLabel>
                   <FormControl>
-                    <Input type="number" placeholder="price" {...field} />
+                    <div className="flex items-center gap-2">
+                      <Input type="number" placeholder="price" {...field} />
+                      <p className="text-lg">€</p>
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            {/* <FormField
-              control={form.control}
-              name={'quantity'}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{quantity}</FormLabel>
-                  <FormControl>
-                    <Input type="number" placeholder="quantity" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            /> */}
             <FormField
               control={form.control}
               name="category"
@@ -477,13 +463,10 @@ export function ProductForm({
               control={form.control}
               name={'isDirectlyBuyable'}
               render={({ field }) => (
-                <FormItem className='flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4'>
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-3">
                   <FormLabel>is directly buyable</FormLabel>
                   <FormControl>
-                    <Checkbox
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
+                    <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -534,9 +517,15 @@ export function ProductForm({
                 ))}
               </div>
             )}
-            <Button className="mt-4 border-2" type="submit">
-              {submitTitle}
-            </Button>
+            {isLoading ? (
+              <Button disabled className="mt-4 border-2" type="submit">
+                {submitTitle}
+              </Button>
+            ) : (
+              <Button className="mt-4 border-2" type="submit">
+                {submitTitle}
+              </Button>
+            )}
           </form>
         </Form>
       </Card>

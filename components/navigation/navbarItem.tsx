@@ -68,11 +68,11 @@ const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
         {props.userImgSrc ? (
           <Image
             src={props.userImgSrc!} // TODO: {props?.userImgSrc as string}
-            width={50}
-            height={50}
+            width={40}
+            height={40}
             className="rounded-full"
             alt="User Image"
-            style={{ objectFit: 'cover', height: '50px' }}
+            style={{ objectFit: 'cover', height: '40px' }}
           />
         ) : (
           <FaUserCircle className="h-[45px] w-[45px]" color="gray" />
@@ -96,7 +96,7 @@ const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
         </DropdownMenuItem>
         <DropdownMenuItem>
           <NavItemLink
-            className="ml-auto text-left text-sm no-underline hover:no-underline"
+            className="text-left text-sm no-underline hover:no-underline"
             text="Transaktionen"
             linkTo="/transactions"
           ></NavItemLink>
@@ -137,9 +137,7 @@ const NavMenuDrawer = (props: NavMenuDrawerProps) => {
             <div
               className={`flex justify-center hover:bg-slate-100 ${index === 0 && `rounded-t-xl`} ${pathname === item.props.linkTo && 'cursor-default bg-slate-100 text-primary no-underline'}`}
               onClick={() => {
-                if (index !== 0) {
-                  setDrawerOpen(false)
-                }
+                setDrawerOpen(false)
               }}
               key={item.key}
             >

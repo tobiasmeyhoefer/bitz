@@ -20,8 +20,7 @@ import { Input } from '@/components/ui/input'
 import { toast } from '@/components/ui/use-toast'
 import { Textarea } from '@/components/ui/textarea'
 import { ProductType } from '@/lib/types'
-import { updateProduct } from '@/lib/productaction'
-import { Link } from '@/navigation'
+import { updateProduct } from '@/lib/product-actions'
 
 const minError = 'Eingabe erfordert'
 const FormSchema = z.object({
@@ -31,7 +30,6 @@ const FormSchema = z.object({
     .max(50)
     .refine((value) => !/#/.test(value)),
   price: z.coerce.number().safe().positive(),
-  quantity: z.coerce.number().safe().positive(),
   description: z
     .string()
     .min(1, { message: minError })
@@ -55,7 +53,6 @@ export default function ProductInfoCardEditable(props: any) {
     form.reset({
       title: product.title,
       price: product.price,
-      quantity: product.quantity,
       description: product.description,
     })
   }
@@ -65,7 +62,6 @@ export default function ProductInfoCardEditable(props: any) {
     defaultValues: {
       title: product.title,
       price: product.price,
-      quantity: product.quantity!,
       description: product.description,
     },
   })
@@ -113,19 +109,6 @@ export default function ProductInfoCardEditable(props: any) {
               />{' '}
               <FormField
                 control={form.control}
-                name="quantity"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{translations.quantity}</FormLabel>
-                    <FormControl>
-                      <Input placeholder="How many?" {...field} type="number" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
                 name="description"
                 render={({ field }) => (
                   <FormItem>
@@ -155,9 +138,6 @@ export default function ProductInfoCardEditable(props: any) {
         </div>
       ) : (
         <div className="h-[50vh] w-[90vw] lg:h-[60vh] lg:w-[40vw] 2xl:w-[60vh]">
-          <Button variant="outline" className="absolute left-20 top-36">
-            <Link href="/myshop"> ⏎ </Link>
-          </Button>
           <Card className="mt-2 flex h-full flex-col justify-between lg:mt-0 lg:h-[60vh]">
             <div>
               <CardHeader className="flex h-[10vh] flex-row items-center justify-between">
@@ -168,12 +148,6 @@ export default function ProductInfoCardEditable(props: any) {
               <CardContent className="flex min-h-[30vh] flex-col justify-between p-6 pb-0">
                 <div className="h-fit break-words text-sm">{product.description}</div>
               </CardContent>
-            </div>
-            <div className="flex h-[15vh] items-end justify-between px-6 pb-6">
-              <div className="flex w-1/2 flex-col justify-between whitespace-nowrap text-sm">
-                {translations.quantity}: {product.quantity}
-              </div>
-              {date}
             </div>
           </Card>
           <div className="flex justify-end">

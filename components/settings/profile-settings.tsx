@@ -1,4 +1,4 @@
-import { getUser } from '@/lib/useraction'
+import { getUser } from '@/lib/user-actions'
 import Image from 'next/image'
 import { FaUserCircle } from 'react-icons/fa'
 import NameChanger from './name-changer'
@@ -6,7 +6,7 @@ import LocationChooser from './LocationChooser'
 import AdressChanger from './adress-changer'
 import PictureChanger from './picture-changer'
 import { getTranslations } from 'next-intl/server'
-import { changeUserImage } from '@/lib/useraction'
+import { changeUserImage } from '@/lib/user-actions'
 
 const ProfileSettings = async () => {
   const user = await getUser()
@@ -14,12 +14,12 @@ const ProfileSettings = async () => {
   return (
     <div>
       <div className="mb-8 flex justify-center gap-4">
-        {user![0].image ? (
+        {user.image ? (
           <Image
             className="w-40 rounded-full"
             width={200}
             height={200}
-            src={user![0].image!}
+            src={user!.image!}
             alt="user image"
           />
         ) : (
@@ -31,7 +31,7 @@ const ProfileSettings = async () => {
           action={changeUserImage}
         />
       </div>
-      <h3 className="mb-4 text-2xl font-bold">User</h3>
+      <h3 className="mb-4 text-2xl font-bold">{t('username')}</h3>
       <div className="flex flex-col">
         <NameChanger />
         <LocationChooser postcode={t('postcode')} />
