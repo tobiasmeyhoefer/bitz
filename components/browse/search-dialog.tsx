@@ -8,7 +8,8 @@ import { searchProductsByTitle } from '@/lib/product-actions'
 export const SearchDialog = (
   props: SearchBarProps & {
     loadProductsByCategory: (category: string) => void
-    loadProductsByTitle: (title: string) => void
+    loadProductsByTitle: (title: string) => void,
+    userId: string
   },
 ) => {
   const [open, setOpen] = useState(false)
@@ -36,7 +37,7 @@ export const SearchDialog = (
       return
     }
 
-    const titleResults = await searchProductsByTitle(props.searchValue)
+    const titleResults = await searchProductsByTitle(props.searchValue, props.userId)
     if (titleResults.length > 0) {
       props.loadProductsByTitle(props.searchValue)
     } else {
