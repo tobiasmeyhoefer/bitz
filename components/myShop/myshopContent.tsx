@@ -6,6 +6,10 @@ const MyShopContent = async () => {
   const user = await getUser()
   const products = await getProductsOwned(user.id)
 
+  if(products.length === 0) {
+    return <p>Du hast noch keine Bitz veröffentlicht</p>
+  }
+
   return (
     <div
       className={`flex h-full flex-col items-center justify-center px-4 py-20 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
@@ -15,13 +19,7 @@ const MyShopContent = async () => {
           {products?.map((p, index) => (
             <CardWithImage
               key={`pr-${index}`}
-              title={p.title}
-              price={p.price}
-              desc={p.description!}
-              imgUrl1={p.imageUrl1}
-              timestamp={p.createdAt}
               className="mx-[5px] my-[0.5rem]"
-              productID={p.id}
               product={products[index]}
               favIcon
               editable

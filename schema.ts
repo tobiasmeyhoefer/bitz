@@ -183,7 +183,8 @@ export const statusEnum = pgEnum('status', ['offen', 'accepted', 'declined', 'de
 export const conversations = pgTable(
   'conversations',
   {
-    id: serial('id'),
+    id: text('id')
+    .$defaultFn(() => crypto.randomUUID()).notNull(),
     buyerId: text('buyerId')
       .notNull()
       .references(() => users.id, { onDelete: 'cascade' }),
@@ -207,6 +208,6 @@ export const conversations = pgTable(
 )
 
 export type UserType = typeof users.$inferSelect
-export type ProductTypeTest = typeof products.$inferSelect
+export type ProductType = typeof products.$inferSelect
 export type ConversationType = typeof conversations.$inferSelect
 export type TransactionType = typeof transactions.$inferSelect

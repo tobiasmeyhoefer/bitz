@@ -8,7 +8,8 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { sortProducts } from '@/lib/product-actions'
-import { ProductType, SortProductsProps } from '@/lib/types'
+import { SortProductsProps } from '@/lib/types'
+import { ProductType } from '@/schema'
 import { SetStateAction } from 'react'
 
 export const SortProducts = (params: {
@@ -17,12 +18,7 @@ export const SortProducts = (params: {
 }) => {
   const sort = async (value: string) => {
     const result = await sortProducts(value)
-    const checkedResults: ProductType[] = result!.map((item: any) => ({
-      ...item,
-      description: item.description ?? '',
-      category: item.category ?? '',
-    }))
-    params.setProducts(checkedResults)
+    params.setProducts(result)
   }
 
   return (

@@ -1,15 +1,17 @@
 'use client'
+
 import {
   getProductsBrowse,
   getProductsByCategory,
   searchProductsByTitle,
 } from '@/lib/product-actions'
-import { BrowseContentProps, ProductType } from '@/lib/types'
+import { BrowseContentProps } from '@/lib/types'
 import { useEffect, useState } from 'react'
 import { CardWithImage } from '../ui/cardWithImage'
 import { SortProducts } from '../sort-products/sort-products'
 import { SearchDialog } from './search-dialog'
 import OnboardingBrowseCard from '../onboarding/onboarding-browse-card'
+import { ProductType } from '@/schema'
 const suggestions = [
   'Reciever',
   'Monitor',
@@ -50,18 +52,8 @@ const BrowseContent = (props: BrowseContentProps) => {
   useEffect(() => {
     const getProducts = async () => {
       const result = await getProductsBrowse()
-      // weil einige werte nicht notNull sind und dann fehler kommen weil sie null  ein könnten
-      const checkedResults: ProductType[] = result.map((item) => ({
-        ...item,
-        description: item.description ?? '',
-        category: item.category ?? '',
-        stripeId: item.stripeId ?? '',
-        paymentLink: item.paymentLink ?? '',
-        isDirectlyBuyable: item.isDirectlyBuyable ?? false,
-        isSold: item.isSold ?? false,
-      }))
-      setProducts(checkedResults)
-      if (checkedResults.length === 0) {
+      setProducts(result)
+      if (result.length === 0) {
         setNoSearchResults(true)
       }
     }
@@ -71,17 +63,8 @@ const BrowseContent = (props: BrowseContentProps) => {
   const loadProductsByCategory = async (category: string) => {
     setLoading(true)
     const result = await getProductsByCategory(category)
-    const checkedResults: ProductType[] = result.map((item) => ({
-      ...item,
-      description: item.description ?? '',
-      category: item.category ?? '',
-      stripeId: item.stripeId ?? '',
-      paymentLink: item.paymentLink ?? '',
-      isDirectlyBuyable: item.isDirectlyBuyable ?? false,
-      isSold: item.isSold ?? false,
-    }))
-    setProducts(checkedResults)
-    if (checkedResults.length === 0) {
+    setProducts(result)
+    if (result.length === 0) {
       setNoSearchResults(true)
     } else {
       setNoSearchResults(false)
@@ -97,13 +80,9 @@ const BrowseContent = (props: BrowseContentProps) => {
     } else {
       result = await searchProductsByTitle(title)
     }
-    const checkedResults: ProductType[] = result!.map((item: any) => ({
-      ...item,
-      description: item.description ?? '',
-      category: item.category ?? '',
-    }))
-    setProducts(checkedResults)
-    if (checkedResults.length === 0) {
+
+    setProducts(result)
+    if (result.length === 0) {
       setNoSearchResults(true)
     } else {
       setNoSearchResults(false)
@@ -138,13 +117,7 @@ const BrowseContent = (props: BrowseContentProps) => {
                 <div key={`kp-${index}`}>
                   <CardWithImage
                     key={`pr-${index}`}
-                    title={p.title}
-                    desc={p.description!}
-                    price={p.price}
-                    timestamp={p.createdAt}
-                    imgUrl1={p.imageUrl1}
                     className="mx-[5px] my-[0.5rem]"
-                    productID={p.id}
                     product={products[index]}
                     favIcon
                     editable={false}

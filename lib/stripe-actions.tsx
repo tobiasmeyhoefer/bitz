@@ -1,9 +1,8 @@
 'use server'
 
 import Stripe from 'stripe'
-import { ProductType } from './types'
 import { db } from '@/db'
-import { checkoutSession, products, transactions, users } from '@/schema'
+import { checkoutSession, products, transactions, ProductType } from '@/schema'
 import { desc, eq, or } from 'drizzle-orm'
 import { cookies } from 'next/headers'
 import { getUser } from './user-actions'
@@ -113,7 +112,7 @@ export async function createTransaction(
 export async function handleCompletedCheckoutSession(event: Stripe.CheckoutSessionCompletedEvent) {
   try {
     const sessionWithLineItems = await stripe.checkout.sessions.retrieve(
-      (event.data.object as any).id,
+      (event.data.object as Stripe.Checkout.Session).id,
       { expand: ['line_items'] },
     )
     const lineItems = sessionWithLineItems.line_items

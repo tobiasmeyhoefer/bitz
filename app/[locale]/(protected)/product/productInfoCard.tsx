@@ -2,9 +2,10 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { useTranslations, useLocale } from 'next-intl'
 import ProductInfoCardEditable from './productInfoCardEditable'
-import { ProductType } from '@/lib/types'
 import { cn } from '@/lib/utils'
 import { BuyButtons } from '@/components/products/buy-buttons'
+import { ProductType } from '@/schema'
+
 type ProductInfoType = {
   productInfo: ProductType
   isOwner: boolean
@@ -26,7 +27,7 @@ export default function ProductInfoCard(props: ProductInfoType) {
     edit: tProductForm('edit'),
   }
   const getDate = (
-    timestamp: any,
+    timestamp: Date | string,
     dateFirst: boolean,
     className?: string,
   ): JSX.Element | undefined => {
@@ -104,7 +105,6 @@ export default function ProductInfoCard(props: ProductInfoType) {
         <ProductInfoCardEditable
           productInfo={product}
           translations={editableCardTranslations}
-          date={getDate(product.createdAt, false, 'text-right')}
           locale={locale}
         />
       ) : (
@@ -121,7 +121,7 @@ export default function ProductInfoCard(props: ProductInfoType) {
               <div className="flex justify-between text-wrap pb-6">
                 <div className="h-fit w-9/12 break-words">{product.description}</div>
               </div>
-              <div>{getDate(product.createdAt, true, 'text-right')}</div>
+              <div>{getDate(product.createdAt!, true, 'text-right')}</div>
             </CardContent>
           </Card>
           <BuyButtons product={product} />

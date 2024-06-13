@@ -38,7 +38,7 @@ const formSchema = z.object({
     }),
 })
 
-export function ConversationForm({ convId }: { convId: number }) {
+export function ConversationForm({ convId }: { convId: string }) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {

@@ -36,7 +36,7 @@ const PhoneVerification = () => {
   useEffect(() => {
     const fetchData = async () => {
       const isVerified = await checkIfUserIsPhoneVerified()
-      if(!isVerified) {
+      if (!isVerified) {
         await deleteVerifactionNumber()
       }
       setIsVerified(isVerified)
@@ -77,11 +77,11 @@ const PhoneVerification = () => {
     })
   }
 
-  const handleInputChangeNumber = (e: any) => {
+  const handleInputChangeNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserNumber(e.target.value)
   }
 
-  const handleInputChangeCode = (e: any) => {
+  const handleInputChangeCode = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserTypedCode(e.target.value)
   }
 
@@ -93,7 +93,13 @@ const PhoneVerification = () => {
     <div>
       <p className="mb-4">Dein Konto ist noch nicht verifiziert ❌</p>
       <AlertDialog>
-        <AlertDialogTrigger onClick={() => {setInVerifactionProcess(true)}}><Button>Jetzt Verifizieren</Button></AlertDialogTrigger>
+        <AlertDialogTrigger
+          onClick={() => {
+            setInVerifactionProcess(true)
+          }}
+        >
+          <Button>Jetzt Verifizieren</Button>
+        </AlertDialogTrigger>
         {isTypeInNumberState ? (
           <AlertDialogContent>
             <AlertDialogHeader>

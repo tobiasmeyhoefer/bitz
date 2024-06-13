@@ -47,7 +47,7 @@ export default function PictureChanger({
     },
   })
 
-  async function onSubmit(values: any) {
+  async function onSubmit() {
     let imageUrl = ''
     if (compressedFile) {
       const computeSHA256 = async (file: File) => {
@@ -152,7 +152,7 @@ export default function PictureChanger({
   }
 
   return (
-    <div className='mt-6'>
+    <div className="mt-6">
       <Form {...form}>
         <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
@@ -188,7 +188,7 @@ export default function PictureChanger({
               />
             </div>
           )}
-          <Button className="mt-4" type="submit" variant={"secondary"}>
+          <Button className="mt-4" type="submit" variant={'secondary'}>
             {submitTitle}
           </Button>
         </form>
