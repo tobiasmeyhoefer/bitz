@@ -15,7 +15,15 @@ import { useEffect, useState } from 'react'
 import { getUser } from '@/lib/user-actions'
 import { auth } from '@/auth'
 
-export function ProductImageCarousel(props: any) {
+export function ProductImageCarousel(props: {
+  translations: {
+    image: string
+    of: string
+  }
+  images: (string | null)[]
+  className: string
+  sellerId: string
+}) {
   const [api, setApi] = useState<CarouselApi>()
   const [current, setCurrent] = useState(0)
   const [isOwner, setIsOwner] = useState(false)
@@ -49,7 +57,7 @@ export function ProductImageCarousel(props: any) {
         className="h-full w-[90vw] lg:h-[60vh] lg:w-[50vw] xl:w-[60vh] 2xl:w-[70vh]"
       >
         <CarouselContent>
-          {props.images.map((img: string, index: number) => (
+          {props.images.map((img: string | null, index: number) => (
             <CarouselItem key={`ci-${index}`}>
               <Card className="h-fit w-fit">
                 <CardContent className=" p-0">
@@ -83,7 +91,9 @@ export function ProductImageCarousel(props: any) {
       </Carousel>
       <div className=" hidden flex-row justify-between p-2 text-sm text-muted-foreground lg:flex">
         {props.translations.image} {current} {props.translations.of} {props.images.length}
-        {isOwner && <UpdateImage existingImageUrl={props.images[current - 1]} />}
+        {isOwner && props.images[current - 1] && (
+          <UpdateImage existingImageUrl={props.images[current - 1]!} />
+        )}
       </div>
     </div>
   )

@@ -207,6 +207,6 @@ export const conversations = pgTable(
 )
 
 export type UserType = typeof users.$inferSelect
-export type ProductTypeTest = typeof products.$inferSelect
+export type ProductType = typeof products.$inferSelect
 export type ConversationType = typeof conversations.$inferSelect
 export type TransactionType = typeof transactions.$inferSelect

@@ -5,12 +5,13 @@ import { Link } from '@/navigation'
 import { getTranslations } from 'next-intl/server'
 import { getProductById } from '@/lib/product-actions'
 import { getUser } from '@/lib/user-actions'
+import { ProductType } from '@/schema'
 
 export default async function Page({ params }: { params: { id: string } }) {
   const t = await getTranslations('Product')
   const productId = params.id
 
-  const product: any = await getProductById(productId)
+  const product: ProductType = await getProductById(productId)
   const user = await getUser()
   let isOwner = false
   if (user.id == product.sellerId) {
@@ -26,7 +27,6 @@ export default async function Page({ params }: { params: { id: string } }) {
   ]
 
   let images = unfilteredImgs.filter((image) => image)
-  //let images = ['/test_img.jpg', '/test_img.jpg', '/test_img.jpg']
 
   const carouselTranslations = {
     image: t('image'),

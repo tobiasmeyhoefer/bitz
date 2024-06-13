@@ -1,5 +1,4 @@
 'use client'
-import { ProductType } from '@/lib/types'
 import { Button } from '@/components/ui/button'
 import { checkIfConversationAlreadyExist, createConversation } from '@/lib/conversations-actions'
 import { Link, useRouter } from '@/navigation'
@@ -8,6 +7,7 @@ import { getUser } from '@/lib/user-actions'
 import { useRouter as useRouterNext } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useToast } from '@/components/ui/use-toast'
+import { ProductType } from '@/schema'
 
 export function BuyButtons(props: { product: ProductType }) {
   const [addressError, setAddressError] = useState(false)

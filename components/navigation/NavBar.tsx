@@ -21,37 +21,37 @@ const NavBar = async () => {
   const drawerItems = [
     <NavItemLink
       key={'dil-1'}
-      className="py-4 text-center text-2xl hover:no-underline"
+      className="w-full py-4 text-center text-2xl hover:no-underline"
       linkTo="/browse"
       text={t('discover')}
     />,
     <NavItemLink
       key={'dil-2'}
-      className="py-4 text-center text-2xl hover:no-underline"
+      className="w-full py-4 text-center text-2xl hover:no-underline"
       linkTo="/myshop"
       text={t('myBitz')}
     />,
     <NavItemLink
       key={'dil-3'}
-      className="py-4 text-center text-2xl hover:no-underline"
+      className="w-full py-4 text-center text-2xl hover:no-underline"
       linkTo="/favorites"
       text={t('favorites')}
     />,
     <NavItemLink
       key={'dil-4'}
-      className="py-4 text-center text-2xl hover:no-underline"
+      className="w-full py-4 text-center text-2xl hover:no-underline"
       linkTo="/transactions"
       text="Transaktionen"
     ></NavItemLink>,
     <NavItemLink
       key={'dil-4'}
-      className="py-4 text-center text-2xl hover:no-underline"
+      className="w-full py-4 text-center text-2xl hover:no-underline"
       linkTo="/conversations"
       text="Konversationen"
     ></NavItemLink>,
     <NavItemLink
       key={'dil-4'}
-      className="py-4 text-center text-2xl hover:no-underline"
+      className="w-full py-4 text-center text-2xl hover:no-underline"
       linkTo="/settings"
       text={t('settings')}
     ></NavItemLink>,

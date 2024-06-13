@@ -1,17 +1,17 @@
-"use client"
+'use client'
 
 import {
   getProductsBrowse,
   getProductsByCategory,
   searchProductsByTitle,
 } from '@/lib/product-actions'
-import { BrowseContentProps, ProductType } from '@/lib/types'
+import { BrowseContentProps } from '@/lib/types'
 import { useEffect, useState } from 'react'
 import { CardWithImage } from '../ui/cardWithImage'
 import { SortProducts } from '../sort-products/sort-products'
 import { SearchDialog } from './search-dialog'
 import OnboardingBrowseCard from '../onboarding/onboarding-browse-card'
-import { ProductTypeTest } from '@/schema'
+import { ProductType } from '@/schema'
 const suggestions = [
   'Reciever',
   'Monitor',
@@ -47,7 +47,7 @@ const BrowseContent = (props: BrowseContentProps) => {
   const [searchValue, setSearchValue] = useState('')
   const [loading, setLoading] = useState(false)
   const [noSearchResults, setNoSearchResults] = useState(false)
-  const [products, setProducts] = useState<ProductTypeTest[]>([])
+  const [products, setProducts] = useState<ProductType[]>([])
 
   useEffect(() => {
     const getProducts = async () => {
@@ -117,13 +117,7 @@ const BrowseContent = (props: BrowseContentProps) => {
                 <div key={`kp-${index}`}>
                   <CardWithImage
                     key={`pr-${index}`}
-                    title={p.title}
-                    desc={p.description!}
-                    price={p.price}
-                    timestamp={p.createdAt}
-                    imgUrl1={p.imageUrl1}
                     className="mx-[5px] my-[0.5rem]"
-                    productID={p.id}
                     product={products[index]}
                     favIcon
                     editable={false}
