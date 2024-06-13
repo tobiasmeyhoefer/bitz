@@ -89,7 +89,7 @@ export function ProductImageCarousel(props: {
           </>
         )}
       </Carousel>
-      <div className=" hidden flex-row justify-between p-2 text-sm text-muted-foreground lg:flex">
+      <div className="z-50 flex flex-row justify-between p-2 text-sm text-muted-foreground">
         {props.translations.image} {current} {props.translations.of} {props.images.length}
         {isOwner && props.images[current - 1] && (
           <UpdateImage existingImageUrl={props.images[current - 1]!} />

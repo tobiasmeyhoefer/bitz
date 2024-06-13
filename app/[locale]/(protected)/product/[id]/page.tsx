@@ -39,7 +39,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       <div className="flex flex-col ">
         <div
           id="product-info-container"
-          className="flex min-h-[calc(100vh-80px)] w-screen flex-col items-center  lg:flex-row lg:justify-around"
+          className="flex min-h-[calc(100vh-80px)] w-screen flex-col items-center gap-10 lg:flex-row lg:justify-around"
         >
           <ProductImageCarousel
             translations={carouselTranslations}
@@ -49,12 +49,12 @@ export default async function Page({ params }: { params: { id: string } }) {
           />
           <ProductInfoCard productInfo={product} isOwner={isOwner} />
         </div>
-        <Link href={backButtonHref}>
+        <Link href={backButtonHref} className="w-2">
           <Button
             variant="outline"
             className={
               isOwner
-                ? '2xl:left-26 xl:left-18 ml-12 mt-4 w-16 lg:absolute lg:top-32 xl:left-12  xl:top-36 2xl:left-24 2xl:top-36'
+                ? ' xl:left-18 ml-12 mt-4 lg:absolute lg:top-32 xl:left-12  xl:top-36 2xl:left-24 2xl:top-36'
                 : 'md: fixed bottom-6 left-8  md:left-14 lg:left-8 lg:top-36 xl:left-24 2xl:left-28 2xl:top-40'
             }
           >

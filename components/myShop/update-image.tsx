@@ -35,7 +35,7 @@ export function UpdateImage(props: { existingImageUrl: string }) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>
+        <Button className="h-7 p-1 md:h-9 md:w-36 md:p-4">
           edit Picture
           <FaPencilAlt className="ml-2" />
         </Button>
