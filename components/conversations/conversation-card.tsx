@@ -14,6 +14,8 @@ import { ConversationForm } from './conversation-form1'
 import { ConversationForm2 } from './conversation-form2'
 import ConversationCardDropwdown from './conversation-card-dropdown'
 import { getTranslations } from 'next-intl/server'
+import { Link } from '@/navigation'
+import { Button } from '../ui/button'
 
 export const ConversationCard = async ({ conv }: { conv: ConversationType }) => {
   const currentUser = await getUser()
@@ -56,7 +58,7 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
           )}
         </CardHeader>
         <CardFooter className="flex flex-col items-start text-neutral-400">
-          <p className="font-ligh text-neutral-400">{formatDate(conv.createdAt)}</p>
+          <p className="font-light text-neutral-400">{formatDate(conv.createdAt)}</p>
           {conv.delay !== null ? (
             <p className="text-red-600">
               {t('delay00')} {conv.delay} {t('delay01')}
@@ -64,6 +66,7 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
           ) : (
             <span></span>
           )}
+          <Link href={`/conversations/${conv.id}`}><Button>Exp. Chat</Button></Link>
         </CardFooter>
       </Card>
     )

@@ -183,7 +183,8 @@ export const statusEnum = pgEnum('status', ['offen', 'accepted', 'declined', 'de
 export const conversations = pgTable(
   'conversations',
   {
-    id: serial('id'),
+    id: text('id')
+    .$defaultFn(() => crypto.randomUUID()).notNull(),
     buyerId: text('buyerId')
       .notNull()
       .references(() => users.id, { onDelete: 'cascade' }),
