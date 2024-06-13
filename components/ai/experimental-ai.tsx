@@ -52,7 +52,7 @@ const ExperimentalAi: React.FC = () => {
       <div
         ref={containerRef}
         className={cn(
-          'fixed bottom-20 right-20 z-10 flex md:h-[500px] md:w-[400px] h-[400px] w-[300px] flex-col justify-between rounded-lg border border-neutral-400 bg-white p-2 shadow-2xl',
+          'fixed bottom-20 right-20 z-10 flex md:h-[500px] md:w-[400px] h-[400px] w-[300px] flex-col justify-between rounded-lg border border-neutral-400 bg-white/80 p-2 shadow-2xl',
           { hidden: !isOpened },
         )}
       >
@@ -69,20 +69,21 @@ const ExperimentalAi: React.FC = () => {
             </div>
           ))}
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center -z-10">
-            <Image
+            {/* <Image
+
               src={supportPerson}
-              className="pointer-events-none fixed md:h-52 md:w-52 h-32 w-32"
+              className="fill-white pointer-events-none fixed md:h-52 md:w-52 h-32 w-32"
               alt="a support person"
               width={100}
               height={100}
-            />
+            /> */}
           </div>
         </div>
         <div className="p-2">
           <form className="flex gap-2" onSubmit={handleSubmit}>
             <Input
               onChange={handleInputChange}
-              className="h-[40px] rounded-xl text-primary"
+              className="h-[40px] rounded-xl text-primary bg-white"
               placeholder="ask something..."
               value={input}
               type="text"
