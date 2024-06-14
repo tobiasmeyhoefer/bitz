@@ -15,7 +15,8 @@ import {
 import { getUser, saveUserAdress, saveUserLocation } from '@/lib/user-actions'
 import { useEffect, useState } from 'react'
 import { useToast } from '../ui/use-toast'
-import '@geoapify/geocoder-autocomplete/styles/round-borders.css'
+// import '@geoapify/geocoder-autocomplete/styles/round-borders.css'
+import './address.css'
 import {
   GeoapifyContext,
   GeoapifyGeocoderAutocomplete,
