@@ -60,7 +60,7 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                 {props.editable && props.favIcon && <ProdDelAlert productId={product.id} />}
                 {!props.editable && props.favIcon && <FavoriteLike productId={product.id} />}
               </div>
-              <CardDescription className="text-sm text-black">
+              <CardDescription className="text-sm">
                 <div className="flex justify-between">
                   <Badge className="text-md m-0" variant="secondary">
                     {props.product.category}

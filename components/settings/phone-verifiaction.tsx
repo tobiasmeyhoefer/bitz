@@ -94,6 +94,7 @@ const PhoneVerification = () => {
       <p className="mb-4">Dein Konto ist noch nicht verifiziert ❌</p>
       <AlertDialog>
         <AlertDialogTrigger
+          asChild
           onClick={() => {
             setInVerifactionProcess(true)
           }}
