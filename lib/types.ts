@@ -121,6 +121,7 @@ type AddressResult = {
   properties: {
     address_line1: string
     housenumber: string
+    postcode: string
   }
 }
 

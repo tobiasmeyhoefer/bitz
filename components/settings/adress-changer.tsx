@@ -12,7 +12,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { getUser, saveUserAdress } from '@/lib/user-actions'
+import { getUser, saveUserAdress, saveUserLocation } from '@/lib/user-actions'
 import { useEffect, useState } from 'react'
 import { useToast } from '../ui/use-toast'
 import '@geoapify/geocoder-autocomplete/styles/round-borders.css'
@@ -56,6 +56,7 @@ export default function AdressChanger() {
         })
       } else {
         await saveUserAdress(result.properties.address_line1)
+        await saveUserLocation(result.properties.postcode)
         toast({
           title: 'Address changed successfully ✅',
         })
@@ -88,18 +89,18 @@ export default function AdressChanger() {
               <FormItem>
                 <FormMessage />
                 <FormControl>
-                  <Card>
-                    <GeoapifyContext apiKey={process.env.NEXT_PUBLIC_ADDRESS_KEY}>
-                      <GeoapifyGeocoderAutocomplete
-                        value={adress}
-                        filterByCountryCode={['de']}
-                        sendGeocoderRequestFunc={sendGeocoderRequest}
-                        addDetails={true}
-                        sendPlaceDetailsRequestFunc={sendPlaceDetailsRequest}
-                        allowNonVerifiedStreet={false}
-                      />
-                    </GeoapifyContext>
-                  </Card>
+                  {/* <Card> */}
+                  <GeoapifyContext apiKey={process.env.NEXT_PUBLIC_ADDRESS_KEY}>
+                    <GeoapifyGeocoderAutocomplete
+                      value={adress}
+                      filterByCountryCode={['de']}
+                      sendGeocoderRequestFunc={sendGeocoderRequest}
+                      addDetails={true}
+                      sendPlaceDetailsRequestFunc={sendPlaceDetailsRequest}
+                      allowNonVerifiedStreet={false}
+                    />
+                  </GeoapifyContext>
+                  {/* </Card> */}
                   {/* <Input {...field} defaultValue={adress} /> */}
                 </FormControl>
               </FormItem>

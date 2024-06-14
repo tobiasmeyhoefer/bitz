@@ -8,10 +8,7 @@ import { revalidatePath } from 'next/cache'
 
 export async function saveUserNameLogin(name: string, email: string) {
   const response = await db.select().from(users).where(eq(users.email, email))
-  await db
-    .update(users)
-    .set({ name: name })
-    .where(eq(users.id, response[0].id)) 
+  await db.update(users).set({ name: name }).where(eq(users.id, response[0].id))
 }
 
 export async function saveUserName(name: string) {
@@ -20,10 +17,10 @@ export async function saveUserName(name: string) {
   await db.update(users).set({ name: name }).where(eq(users.id, id!))
 }
 
-export async function saveUserLocation(values: { postcode: string }) {
+export async function saveUserLocation(postcode: string) {
   const session = await auth()
   const id = session?.user?.id
-  await db.update(users).set({ location: values.postcode }).where(eq(users.id, id!))
+  await db.update(users).set({ location: postcode }).where(eq(users.id, id!))
 }
 
 export async function saveUserAdress(adress: string) {
@@ -125,8 +122,6 @@ export async function getOnboardingState() {
 }
 
 export async function setOnboardingState(state: boolean) {
-  const user = await getUser();
-  await db.update(users)
-    .set({ onboardingCompleted: state })
-    .where(eq(users.id, user.id));
+  const user = await getUser()
+  await db.update(users).set({ onboardingCompleted: state }).where(eq(users.id, user.id))
 }

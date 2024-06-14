@@ -35,7 +35,7 @@ export default function LocationChooser({ postcode }: { postcode: string }) {
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    await saveUserLocation(values)
+    // await saveUserLocation(values)
     toast({
       title: 'Postcode changed successfully ✅',
     })
