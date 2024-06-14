@@ -1,49 +1,21 @@
-"use client"
 
-import { useEffect } from 'react'
-import { motion, useAnimation } from 'framer-motion'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Badge } from '@/components/ui/badge'
-import { Button, buttonVariants } from '@/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-  CardFooter,
-} from '@/components/ui/card'
-import { Check, Linkedin } from 'lucide-react'
-import { LightBulbIcon } from './Icons'
-import { GitHubLogoIcon } from '@radix-ui/react-icons'
-import Image from 'next/image'
-import { Link } from '@/navigation'
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0 }
-}
+import React from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
+import { Check, Linkedin } from 'lucide-react';
+import { LightBulbIcon } from './Icons';
+import { GitHubLogoIcon } from '@radix-ui/react-icons';
+import Image from 'next/image';
+import { Link } from '@/navigation';
+import AnimatedCard from './HeroCardAnimation';
 
 export const HeroCards = () => {
-  const controls = useAnimation()
-
-  useEffect(() => {
-    const sequence = async () => {
-      await controls.start('visible')
-    }
-    sequence()
-  }, [controls])
-
   return (
     <div className="relative hidden h-[500px] w-[700px] flex-row flex-wrap gap-8 lg:flex">
       {/* Testimonial */}
-      <motion.div
-        className="absolute -top-[15px] right-[370px] w-[240px] shadow-black/10 drop-shadow-xl dark:shadow-white/10"
-        initial="hidden"
-        animate={controls}
-        variants={cardVariants}
-        transition={{ delay: 0.1, duration: 0.5 }}
-      >
+      <AnimatedCard className="absolute -top-[15px] right-[370px] w-[240px] shadow-black/10 drop-shadow-xl dark:shadow-white/10" delay={0.1}>
         <Card>
           <CardHeader className="flex flex-row items-center gap-4 pb-2">
             <div className="flex flex-col">
@@ -53,16 +25,10 @@ export const HeroCards = () => {
           </CardHeader>
           <CardContent>Bitz is awesome!</CardContent>
         </Card>
-      </motion.div>
+      </AnimatedCard>
 
       {/* Team */}
-      <motion.div
-        className="absolute right-[80px] top-4 flex w-64 flex-col items-center justify-center shadow-black/10 drop-shadow-xl dark:shadow-white/10"
-        initial="hidden"
-        animate={controls}
-        variants={cardVariants}
-        transition={{ delay: 0.3, duration: 0.5 }}
-      >
+      <AnimatedCard className="absolute right-[80px] top-4 flex w-64 flex-col items-center justify-center shadow-black/10 drop-shadow-xl dark:shadow-white/10" delay={0.3}>
         <Card>
           <CardHeader className="mt-8 flex items-center justify-center pb-2">
             <Image
@@ -128,16 +94,10 @@ export const HeroCards = () => {
             </div>
           </CardFooter>
         </Card>
-      </motion.div>
+      </AnimatedCard>
 
       {/* Pricing */}
-      <motion.div
-        className="absolute left-[80px] top-[150px] w-64 shadow-black/10 drop-shadow-xl dark:shadow-white/10"
-        initial="hidden"
-        animate={controls}
-        variants={cardVariants}
-        transition={{ delay: 0.5, duration: 0.5 }}
-      >
+      <AnimatedCard className="absolute left-[80px] top-[150px] w-64 shadow-black/10 drop-shadow-xl dark:shadow-white/10" delay={0.5}>
         <Card>
           <CardHeader>
             <CardTitle className="item-center flex justify-between">
@@ -158,7 +118,7 @@ export const HeroCards = () => {
           <hr className="m-auto mb-4 w-4/5" />
           <CardFooter className="flex">
             <div className="space-y-4">
-              {['Unlimited Tech', 'Customize your Shop', 'Safety first'].map((benefit: string) => (
+              {['Unlimited Tech', 'Customize your Shop', 'Safety first'].map((benefit) => (
                 <span key={benefit} className="flex">
                   <Check className="text-green-500" /> <h3 className="ml-2">{benefit}</h3>
                 </span>
@@ -166,16 +126,10 @@ export const HeroCards = () => {
             </div>
           </CardFooter>
         </Card>
-      </motion.div>
+      </AnimatedCard>
 
       {/* Service */}
-      <motion.div
-        className="absolute bottom-[35px] right-[80px] w-[250px] shadow-black/10 drop-shadow-xl dark:shadow-white/10"
-        initial="hidden"
-        animate={controls}
-        variants={cardVariants}
-        transition={{ delay: 0.7, duration: 0.5 }}
-      >
+      <AnimatedCard className="absolute bottom-[35px] right-[80px] w-[250px] shadow-black/10 drop-shadow-xl dark:shadow-white/10" delay={0.7}>
         <Card>
           <CardHeader className="flex items-start justify-start gap-4 space-y-1 md:flex-row">
             <div className="mt-1 rounded-2xl bg-primary/20 p-1">
@@ -187,7 +141,7 @@ export const HeroCards = () => {
             </div>
           </CardHeader>
         </Card>
-      </motion.div>
+      </AnimatedCard>
     </div>
-  )
-}
+  );
+};
