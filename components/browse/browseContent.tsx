@@ -12,6 +12,7 @@ import { SortProducts } from '../sort-products/sort-products'
 import { SearchDialog } from './search-dialog'
 import OnboardingBrowseCard from '../onboarding/onboarding-browse-card'
 import { ProductType } from '@/schema'
+import { FilterProducts } from '../filter-products/filter-products'
 const suggestions = [
   'Reciever',
   'Monitor',
@@ -109,6 +110,7 @@ const BrowseContent = (props: BrowseContentProps) => {
             loadProductsByTitle={loadProductsByTitle}
           />
           <SortProducts setProducts={setProducts} translations={props.sortTranslations} />
+          <FilterProducts />
         </div>
         {!loading ? (
           <>

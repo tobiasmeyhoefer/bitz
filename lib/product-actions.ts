@@ -349,3 +349,18 @@ export async function sortProducts(value: string) {
   const result = response.sort(sortBy(value))
   return result
 }
+
+export async function getMostExpensiveProduct() {
+  const session = await auth()
+  const id = session?.user?.id
+  const response = await db
+    .select()
+    .from(products)
+    .where(and(eq(products.isSold, false), ne(products.sellerId, id!)))
+    .orderBy(desc(products.price))
+  if (response.length === 0) {
+    throw new Error('No Products found in DB (getMostExpensiveProduct)')
+  }
+  console.log(response[0])
+  return response[0]
+}
