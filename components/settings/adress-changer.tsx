@@ -1,8 +1,5 @@
 'use client'
-import { Input } from '../ui/input'
 import { Button } from '../ui/button'
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import {
   Form,
@@ -21,8 +18,8 @@ import {
   GeoapifyContext,
   GeoapifyGeocoderAutocomplete,
 } from '@geoapify/react-geocoder-autocomplete'
-import { Card } from '@/components/ui/card'
 import { AddressResult } from '@/lib/types'
+
 // const formSchema = z.object({
 //   adress: z
 //     .string()
@@ -57,7 +54,7 @@ export default function AdressChanger() {
         })
       } else {
         await saveUserAdress(result.properties.address_line1)
-        await saveUserLocation(result.properties.postcode)
+        await saveUserLocation(result.properties.postcode, result.properties.city)
         toast({
           title: 'Address changed successfully ✅',
         })
@@ -90,7 +87,6 @@ export default function AdressChanger() {
               <FormItem>
                 <FormMessage />
                 <FormControl>
-                  {/* <Card> */}
                   <GeoapifyContext apiKey={process.env.NEXT_PUBLIC_ADDRESS_KEY}>
                     <GeoapifyGeocoderAutocomplete
                       value={adress}
@@ -99,9 +95,10 @@ export default function AdressChanger() {
                       addDetails={true}
                       sendPlaceDetailsRequestFunc={sendPlaceDetailsRequest}
                       allowNonVerifiedStreet={false}
+                      debounceDelay={10}
+                      // type={'street'}
                     />
                   </GeoapifyContext>
-                  {/* </Card> */}
                   {/* <Input {...field} defaultValue={adress} /> */}
                 </FormControl>
               </FormItem>

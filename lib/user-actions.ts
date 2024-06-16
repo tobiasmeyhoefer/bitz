@@ -17,10 +17,11 @@ export async function saveUserName(name: string) {
   await db.update(users).set({ name: name }).where(eq(users.id, id!))
 }
 
-export async function saveUserLocation(postcode: string) {
+export async function saveUserLocation(postcode: string, city: string) {
   const session = await auth()
   const id = session?.user?.id
-  await db.update(users).set({ location: postcode }).where(eq(users.id, id!))
+  const location = postcode + ' ' + city
+  await db.update(users).set({ location: location }).where(eq(users.id, id!))
 }
 
 export async function saveUserAdress(adress: string) {
