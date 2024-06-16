@@ -110,7 +110,7 @@ const BrowseContent = (props: BrowseContentProps) => {
             loadProductsByTitle={loadProductsByTitle}
           />
           <SortProducts setProducts={setProducts} translations={props.sortTranslations} />
-          <FilterProducts />
+          <FilterProducts setProducts={setProducts} />
         </div>
         {!loading ? (
           <>

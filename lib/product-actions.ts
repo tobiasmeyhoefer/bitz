@@ -356,7 +356,7 @@ export async function getMostExpensiveProduct() {
   const response = await db
     .select()
     .from(products)
-    .where(and(eq(products.isSold, false), ne(products.sellerId, id!)))
+    .where(and(ne(products.isSold, true), ne(products.sellerId, id!)))
     .orderBy(desc(products.price))
   if (response.length === 0) {
     throw new Error('No Products found in DB (getMostExpensiveProduct)')
@@ -369,4 +369,25 @@ export async function filterProducts(values: {
   location: string
   isDirectlyBuyable: boolean
   price: number
-}) {}
+}) {
+  const session = await auth()
+  const id = session?.user?.id
+  const { category, location, isDirectlyBuyable, price } = values
+  let response = await db
+    .select()
+    .from(products)
+    .where(and(ne(products.sellerId, id!), ne(products.isSold, true)))
+  if (category) {
+    response = response.filter((item) => item.category == 'Audio')
+  }
+  if (location) {
+    response = response.filter((item) => item.location === location)
+  }
+  if (isDirectlyBuyable) {
+    response = response.filter((item) => item.isDirectlyBuyable === isDirectlyBuyable)
+  }
+  if (price) {
+    response = response.filter((item) => item.price <= price)
+  }
+  return response
+}

@@ -1,17 +1,5 @@
 'use client'
 import { Button } from '@/components/ui/button'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Separator } from '../ui/separator'
 import { useForm } from 'react-hook-form'
 import {
   Form,
@@ -29,13 +17,14 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
 import { Slider } from '@/components/ui/slider'
-import { getMostExpensiveProduct } from '@/lib/product-actions'
+import { filterProducts, getMostExpensiveProduct, getProductsBrowse } from '@/lib/product-actions'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { SetStateAction } from 'react'
+import { ProductType } from '@/schema'
 const suggestions = [
   'Reciever',
   'Monitor',
@@ -67,12 +56,11 @@ const suggestions = [
   'Charger',
 ]
 
-export const FilterProducts = () => {
-  const [open, setOpen] = useState(false)
+export const FilterProducts = (props: {
+  setProducts: (value: SetStateAction<ProductType[]>) => void
+}) => {
   const [highestPrice, sethighestPrice] = useState(0)
-  const [value, setValue] = useState([highestPrice])
   const form = useForm({})
-  const { toast } = useToast()
 
   useEffect(() => {
     const getHighestPrice = async () => {
@@ -83,16 +71,17 @@ export const FilterProducts = () => {
     getHighestPrice()
   }, [form])
 
-  function close() {
-    setOpen(false)
+  async function onSubmit(values: any) {
+    values.price = values.price[0]
+    const result = await filterProducts(values)
+    props.setProducts(result)
   }
 
-  async function onSubmit(values: any) {
-    console.log(values)
-    toast({
-      title: highestPrice.toString(),
-    })
+  async function onFilterDelete() {
+    const result = await getProductsBrowse()
+    props.setProducts(result)
   }
+
   return (
     <>
       <Popover>
@@ -118,7 +107,7 @@ export const FilterProducts = () => {
                         <SelectContent>
                           <SelectGroup>
                             {suggestions.map((item) => (
-                              <SelectItem key={item} value={item.toLowerCase()}>
+                              <SelectItem key={item} value={item}>
                                 {item}
                               </SelectItem>
                             ))}
@@ -198,9 +187,12 @@ export const FilterProducts = () => {
                   </FormItem>
                 )}
               />
-              <div className="flex flex-row ">
-                <Button className="mt-4 w-4/12" type="submit">
+              <div className="flex flex-row justify-between">
+                <Button className="mt-4 h-8 w-4/12" type="submit">
                   filter
+                </Button>
+                <Button className="mt-4 h-8 w-4/12" onClick={onFilterDelete}>
+                  delete filter
                 </Button>
               </div>
             </form>
