@@ -361,6 +361,12 @@ export async function getMostExpensiveProduct() {
   if (response.length === 0) {
     throw new Error('No Products found in DB (getMostExpensiveProduct)')
   }
-  console.log(response[0])
   return response[0]
 }
+
+export async function filterProducts(values: {
+  category: string
+  location: string
+  isDirectlyBuyable: boolean
+  price: number
+}) {}
