@@ -9,13 +9,13 @@ import { LightBulbIcon } from './Icons';
 import { GitHubLogoIcon } from '@radix-ui/react-icons';
 import Image from 'next/image';
 import { Link } from '@/navigation';
-import AnimatedCard from './HeroCardAnimation';
+import HeroCardAnimation from './HeroCardAnimation';
 
 export const HeroCards = () => {
   return (
     <div className="relative hidden h-[500px] w-[700px] flex-row flex-wrap gap-8 lg:flex">
       {/* Testimonial */}
-      <AnimatedCard className="absolute -top-[15px] right-[370px] w-[240px] shadow-black/10 drop-shadow-xl dark:shadow-white/10" delay={0.1}>
+      <HeroCardAnimation className="absolute -top-[15px] right-[370px] w-[240px] shadow-black/10 drop-shadow-xl dark:shadow-white/10" delay={0.1}>
         <Card>
           <CardHeader className="flex flex-row items-center gap-4 pb-2">
             <div className="flex flex-col">
@@ -25,10 +25,10 @@ export const HeroCards = () => {
           </CardHeader>
           <CardContent>Bitz is awesome!</CardContent>
         </Card>
-      </AnimatedCard>
+      </HeroCardAnimation>
 
       {/* Team */}
-      <AnimatedCard className="absolute right-[80px] top-4 flex w-64 flex-col items-center justify-center shadow-black/10 drop-shadow-xl dark:shadow-white/10" delay={0.3}>
+      <HeroCardAnimation className="absolute right-[80px] top-4 flex w-64 flex-col items-center justify-center shadow-black/10 drop-shadow-xl dark:shadow-white/10" delay={0.3}>
         <Card>
           <CardHeader className="mt-8 flex items-center justify-center pb-2">
             <Image
@@ -94,10 +94,10 @@ export const HeroCards = () => {
             </div>
           </CardFooter>
         </Card>
-      </AnimatedCard>
+      </HeroCardAnimation>
 
       {/* Pricing */}
-      <AnimatedCard className="absolute left-[80px] top-[150px] w-64 shadow-black/10 drop-shadow-xl dark:shadow-white/10" delay={0.5}>
+      <HeroCardAnimation className="absolute left-[80px] top-[150px] w-64 shadow-black/10 drop-shadow-xl dark:shadow-white/10" delay={0.5}>
         <Card>
           <CardHeader>
             <CardTitle className="item-center flex justify-between">
@@ -126,10 +126,10 @@ export const HeroCards = () => {
             </div>
           </CardFooter>
         </Card>
-      </AnimatedCard>
+      </HeroCardAnimation>
 
       {/* Service */}
-      <AnimatedCard className="absolute bottom-[35px] right-[80px] w-[250px] shadow-black/10 drop-shadow-xl dark:shadow-white/10" delay={0.7}>
+      <HeroCardAnimation className="absolute bottom-[35px] right-[80px] w-[250px] shadow-black/10 drop-shadow-xl dark:shadow-white/10" delay={0.7}>
         <Card>
           <CardHeader className="flex items-start justify-start gap-4 space-y-1 md:flex-row">
             <div className="mt-1 rounded-2xl bg-primary/20 p-1">
@@ -141,7 +141,7 @@ export const HeroCards = () => {
             </div>
           </CardHeader>
         </Card>
-      </AnimatedCard>
+      </HeroCardAnimation>
     </div>
   );
 };
