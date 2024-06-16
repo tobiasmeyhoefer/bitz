@@ -378,7 +378,7 @@ export async function filterProducts(values: {
     .from(products)
     .where(and(ne(products.sellerId, id!), ne(products.isSold, true)))
   if (category) {
-    response = response.filter((item) => item.category == 'Audio')
+    response = response.filter((item) => item.category == category)
   }
   if (location) {
     response = response.filter((item) => item.location?.includes(location))

@@ -24,43 +24,21 @@ import { filterProducts, getMostExpensiveProduct, getProductsBrowse } from '@/li
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { SetStateAction } from 'react'
 import { ProductType } from '@/schema'
-import { largestGermanCities } from '@/lib/utils'
+import { largestGermanCities, suggestions } from '@/lib/utils'
 
-export const suggestions = [
-  'Reciever',
-  'Monitor',
-  'Audio',
-  'Laptop',
-  'Headphone',
-  'Smartphone',
-  'Tablet',
-  'Smartwatch',
-  'Printer',
-  'Camera',
-  'Speaker',
-  'Projector',
-  'Game Console',
-  'Drone',
-  'Router',
-  'Hard Drive',
-  'SSD',
-  'Keyboard',
-  'Mouse',
-  'Graphics Card',
-  'Motherboard',
-  'Power Supply',
-  'RAM',
-  'Cooling System',
-  'VR Headset',
-  'E-Reader',
-  'Fitness Tracker',
-  'Charger',
-]
 export const FilterProducts = (props: {
   setProducts: (value: SetStateAction<ProductType[]>) => void
 }) => {
   const [highestPrice, sethighestPrice] = useState(0)
-  const form = useForm({})
+  const [open, setOpen] = useState(false)
+  const form = useForm({
+    defaultValues: {
+      category: '',
+      location: '',
+      isDirectlyBuyable: false,
+      price: [highestPrice],
+    },
+  })
 
   useEffect(() => {
     const getHighestPrice = async () => {
@@ -78,14 +56,15 @@ export const FilterProducts = (props: {
   }
 
   async function onFilterDelete() {
-    form.reset()
+    form.reset({ category: '', location: '', isDirectlyBuyable: false, price: [highestPrice] })
     const result = await getProductsBrowse()
     props.setProducts(result)
+    setOpen(false)
   }
 
   return (
     <>
-      <Popover>
+      <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button variant="outline">filter</Button>
         </PopoverTrigger>
