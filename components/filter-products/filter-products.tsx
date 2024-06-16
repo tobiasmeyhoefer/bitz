@@ -11,7 +11,6 @@ import {
 } from '@/components/ui/form'
 import { Checkbox } from '../ui/checkbox'
 import { useEffect, useState } from 'react'
-import { useToast } from '../ui/use-toast'
 import {
   Select,
   SelectContent,
@@ -25,7 +24,9 @@ import { filterProducts, getMostExpensiveProduct, getProductsBrowse } from '@/li
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { SetStateAction } from 'react'
 import { ProductType } from '@/schema'
-const suggestions = [
+import { largestGermanCities } from '@/lib/utils'
+
+export const suggestions = [
   'Reciever',
   'Monitor',
   'Audio',
@@ -55,7 +56,6 @@ const suggestions = [
   'Fitness Tracker',
   'Charger',
 ]
-
 export const FilterProducts = (props: {
   setProducts: (value: SetStateAction<ProductType[]>) => void
 }) => {
@@ -78,6 +78,7 @@ export const FilterProducts = (props: {
   }
 
   async function onFilterDelete() {
+    form.reset()
     const result = await getProductsBrowse()
     props.setProducts(result)
   }
@@ -129,12 +130,12 @@ export const FilterProducts = (props: {
                     <FormControl>
                       <Select onValueChange={field.onChange}>
                         <SelectTrigger className="w-48 rounded-2xl py-5">
-                          <SelectValue placeholder="choose Category" />
+                          <SelectValue placeholder="choose Location" />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectGroup>
-                            {suggestions.map((item) => (
-                              <SelectItem key={item} value={item.toLowerCase()}>
+                            {largestGermanCities.map((item) => (
+                              <SelectItem key={item} value={item}>
                                 {item}
                               </SelectItem>
                             ))}

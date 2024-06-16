@@ -381,7 +381,7 @@ export async function filterProducts(values: {
     response = response.filter((item) => item.category == 'Audio')
   }
   if (location) {
-    response = response.filter((item) => item.location === location)
+    response = response.filter((item) => item.location?.includes(location))
   }
   if (isDirectlyBuyable) {
     response = response.filter((item) => item.isDirectlyBuyable === isDirectlyBuyable)
