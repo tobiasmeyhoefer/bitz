@@ -35,8 +35,15 @@ export function BuyButtons(props: { product: ProductType }) {
 
   async function handleBuyClick() {
     await createConversation(product.id!)
+    // await createChat()
     router.push('/conversations')
   }
+
+  //   const createChat = async () => {
+  //     const res = await fetch("/api/chats/create")
+  // const chatId: string = await res.text()
+  // router.push(`/chat/${chatId}`)
+  // }
 
   async function handleDirectBuyClick() {
     if (!addressError) {
