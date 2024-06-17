@@ -10,7 +10,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest"
+    "test": "vitest",
+    "node": "node server.js"
   },
   "dependencies": {
     "@ai-sdk/openai": "^0.0.24",
@@ -42,6 +43,7 @@
     "@types/three": "^0.163.0",
     "@types/twilio": "^3.19.3",
     "ai": "^3.1.30",
+    "axios": "^1.7.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
@@ -56,10 +58,14 @@
     "next-auth": "^5.0.0-beta.17",
     "next-intl": "^3.12.2",
     "next-themes": "^0.3.0",
+    "pusher": "^5.2.0",
+    "pusher-js": "^8.4.0-rc2",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.51.4",
     "react-icons": "^5.1.0",
+    "socket.io": "^4.7.5",
+    "socket.io-client": "^4.7.5",
     "sonner": "^1.4.41",
     "sort-by-typescript": "^1.2.5",
     "stripe": "^15.8.0",
