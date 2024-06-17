@@ -206,17 +206,14 @@ export const FilterProducts = (props: {
                 )}
               />
               <div className="flex flex-row justify-between">
-                <Button
-                  className="mt-4 h-8 w-4/12 bg-card-button"
-                  type="submit"
-                  variant={'default'}
-                >
+                <Button className="mt-4 h-8 w-4/12 " type="submit" variant={'default'}>
                   filter
                 </Button>
                 <Button
-                  className="mt-4 h-8 w-4/12 bg-card-button"
+                  className="mt-4 h-8 w-4/12 hover:bg-input"
                   onClick={onFilterDelete}
                   type="button"
+                  variant={'secondary'}
                 >
                   delete filter
                 </Button>
