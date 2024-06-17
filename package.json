@@ -17,6 +17,8 @@
     "@auth/drizzle-adapter": "^1.0.1",
     "@aws-sdk/client-s3": "^3.575.0",
     "@aws-sdk/s3-request-presigner": "^3.575.0",
+    "@geoapify/geocoder-autocomplete": "^2.0.1",
+    "@geoapify/react-geocoder-autocomplete": "^2.0.0",
     "@hookform/resolvers": "^3.3.4",
     "@neondatabase/serverless": "^0.9.1",
     "@radix-ui/react-accordion": "^1.1.2",
