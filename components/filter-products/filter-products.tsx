@@ -31,6 +31,12 @@ export const FilterProducts = (props: {
 }) => {
   const [highestPrice, sethighestPrice] = useState(0)
   const [open, setOpen] = useState(false)
+  const [isEdited, setisEdited] = useState(false)
+  const [selectedValue, setSelectedValue] = useState(0)
+  const [selectedCategory, setSelectedCategory] = useState('')
+  const [selectedLocation, setSelectedLocation] = useState('')
+  const [selectedDirectlyBuyable, setSelectedDirectlyBuyable] = useState(false)
+
   const form = useForm({
     defaultValues: {
       category: '',
@@ -53,6 +59,11 @@ export const FilterProducts = (props: {
     values.price = values.price[0]
     const result = await filterProducts(values)
     props.setProducts(result)
+    setSelectedCategory(values.category)
+    setSelectedLocation(values.location)
+    setSelectedDirectlyBuyable(values.isDirectlyBuyable)
+    setSelectedValue(values.price)
+    setisEdited(true)
   }
 
   async function onFilterDelete() {
@@ -60,15 +71,24 @@ export const FilterProducts = (props: {
     const result = await getProductsBrowse()
     props.setProducts(result)
     setOpen(false)
+    setisEdited(false)
+    setSelectedDirectlyBuyable(false)
   }
 
+  function close() {
+    setOpen(!open)
+    form.setValue('price', [selectedValue])
+    if (!isEdited) {
+      form.reset({ category: '', location: '', isDirectlyBuyable: false, price: [highestPrice] })
+    }
+  }
   return (
     <>
-      <Popover open={open} onOpenChange={setOpen}>
+      <Popover open={open} onOpenChange={close}>
         <PopoverTrigger asChild>
           <Button variant="outline">filter</Button>
         </PopoverTrigger>
-        <PopoverContent className="w-[23.5rem]">
+        <PopoverContent className="w-[23.5rem] bg-card">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6">
               <FormLabel className=" text-base font-semibold">Category</FormLabel>
@@ -80,7 +100,10 @@ export const FilterProducts = (props: {
                   <FormItem>
                     <FormMessage />
                     <FormControl>
-                      <Select onValueChange={field.onChange}>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={isEdited ? selectedCategory : undefined}
+                      >
                         <SelectTrigger className="w-48 rounded-2xl py-5">
                           <SelectValue placeholder="choose Category" />
                         </SelectTrigger>
@@ -107,7 +130,10 @@ export const FilterProducts = (props: {
                   <FormItem>
                     <FormMessage />
                     <FormControl>
-                      <Select onValueChange={field.onChange}>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={isEdited ? selectedLocation : undefined}
+                      >
                         <SelectTrigger className="w-48 rounded-2xl py-5">
                           <SelectValue placeholder="choose Location" />
                         </SelectTrigger>
@@ -135,7 +161,8 @@ export const FilterProducts = (props: {
                     <FormControl>
                       <Checkbox
                         className="rounded-md"
-                        checked={field.value}
+                        defaultChecked={selectedDirectlyBuyable}
+                        // checked={field.value}
                         onCheckedChange={field.onChange}
                       />
                     </FormControl>
@@ -152,15 +179,26 @@ export const FilterProducts = (props: {
                 name="price"
                 render={({ field: { value, onChange } }) => (
                   <FormItem>
-                    <FormLabel>Max. Price: {value}</FormLabel>
+                    <FormLabel>{'Max. Price: ' + value}</FormLabel>
                     <FormControl>
-                      <Slider
-                        min={0}
-                        max={highestPrice}
-                        step={1}
-                        defaultValue={[highestPrice]}
-                        onValueChange={onChange}
-                      />
+                      {isEdited ? (
+                        <Slider
+                          min={0}
+                          max={highestPrice}
+                          step={1}
+                          defaultValue={[selectedValue]}
+                          // value={value}
+                          onValueChange={onChange}
+                        />
+                      ) : (
+                        <Slider
+                          min={0}
+                          max={highestPrice}
+                          step={1}
+                          defaultValue={[highestPrice]}
+                          onValueChange={onChange}
+                        />
+                      )}
                     </FormControl>
 
                     <FormMessage />
@@ -168,10 +206,18 @@ export const FilterProducts = (props: {
                 )}
               />
               <div className="flex flex-row justify-between">
-                <Button className="mt-4 h-8 w-4/12" type="submit">
+                <Button
+                  className="mt-4 h-8 w-4/12 bg-card-button"
+                  type="submit"
+                  variant={'default'}
+                >
                   filter
                 </Button>
-                <Button className="mt-4 h-8 w-4/12" onClick={onFilterDelete}>
+                <Button
+                  className="mt-4 h-8 w-4/12 bg-card-button"
+                  onClick={onFilterDelete}
+                  type="button"
+                >
                   delete filter
                 </Button>
               </div>
