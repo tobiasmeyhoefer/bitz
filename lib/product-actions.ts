@@ -130,19 +130,19 @@ export async function getProductById(productId: string) {
 }
 
 // getter for products with Category as param
-export const getProductsByCategory = async (category: string) => {
-  const result = await db.select().from(products).where(eq(products.category, category))
+export const getProductsByCategory = async (category: string, sellerId: string) => {
+  const result = await db.select().from(products).where(and(eq(products.category, category), ne(products.sellerId, sellerId)))
   return result
 }
 
 // getter for products with title as param
-export const searchProductsByTitle = async (title: string) => {
+export const searchProductsByTitle = async (title: string, sellerId: string) => {
   const sanitizedTitle = `%${title.replace(/%/g, '\\%').replace(/_/g, '\\_')}%`
   const res = db
     .select()
     .from(products)
     //.where(ilike(products.title, `%${title}%`)) // title
-    .where(ilike(products.title, sanitizedTitle))
+    .where(and(ilike(products.title, sanitizedTitle), ne(products.sellerId, sellerId)))
   return res
 }
 
