@@ -104,6 +104,12 @@
     "updateProducts": "Bit aktualisieren",
     "deleteProduct": "Bit löschen"
   },
+  "updateImage": {
+    "title": "Produktbild",
+    "description": "Bearbeite dieses Bild",
+    "submit": "Absenden",
+    "close": "Schließen"
+  },
   "Product": {
     "quantity": "Häufigkeit",
     "image": "Bild",

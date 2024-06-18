@@ -107,6 +107,12 @@
     "image": "Image",
     "of": "of"
   },
+  "updateImage": {
+    "title": "Product Picture",
+    "description": "Edit this picture",
+    "submit": "Submit",
+    "close": "Close"
+  },
   "addProductPage": {
     "title": "Title",
     "description": "Description",
