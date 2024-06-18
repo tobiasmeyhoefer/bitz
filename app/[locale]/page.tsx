@@ -16,27 +16,27 @@ export default function Home() {
   return (
     <>
       <Hero />
-      {/* <AnimatedCard delay={0.3}> */}
+      <AnimatedCard delay={0.3}>
         <Sponsors />
-      {/* </AnimatedCard> */}
-      {/* <AnimatedCard delay={0.3}> */}
+      </AnimatedCard>
+      <AnimatedCard delay={0.3}>
         <About />
-      {/* </AnimatedCard> */}
-      {/* <AnimatedCard delay={0.3}> */}
+      </AnimatedCard>
+      <AnimatedCard delay={0.3}>
         <HowItWorks />
-      {/* </AnimatedCard> */}
-      {/* <AnimatedCard delay={0.3}> */}
+      </AnimatedCard>
+      <AnimatedCard delay={0.3}>
         <Testimonials />
-      {/* </AnimatedCard> */}
-      {/* <AnimatedCard delay={0.3}> */}
+      </AnimatedCard>
+      <AnimatedCard delay={0.3}>
         <Team />
-      {/* </AnimatedCard> */}
-      {/* <AnimatedCard delay={0.3}> */}
+      </AnimatedCard>
+      <AnimatedCard delay={0.3}>
         <Newsletter />
-      {/* </AnimatedCard> */}
-      {/* <AnimatedCard delay={0.3}> */}
+      </AnimatedCard>
+      <AnimatedCard delay={0.3}>
         <FAQ />
-      {/* </AnimatedCard> */}
+      </AnimatedCard>
       <ScrollToTop />
     </>
   )
