@@ -34,7 +34,6 @@ const ProfileSettings = async () => {
       <h3 className="mb-4 text-2xl font-bold">{t('username')}</h3>
       <div className="flex flex-col">
         <NameChanger />
-        <LocationChooser postcode={t('postcode')} />
         <AdressChanger />
       </div>
     </div>

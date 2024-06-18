@@ -184,7 +184,8 @@ export const conversations = pgTable(
   'conversations',
   {
     id: text('id')
-    .$defaultFn(() => crypto.randomUUID()).notNull(),
+      .$defaultFn(() => crypto.randomUUID())
+      .notNull().unique(),
     buyerId: text('buyerId')
       .notNull()
       .references(() => users.id, { onDelete: 'cascade' }),
@@ -207,7 +208,19 @@ export const conversations = pgTable(
   },
 )
 
+export const messages = pgTable('messages', {
+  id: text('id')
+    .$defaultFn(() => crypto.randomUUID())
+    .notNull()
+    .primaryKey(),
+  content: text('content').notNull(),
+  senderId: text("senderId").references(() => users.id).notNull(),
+  conversationId: text("conversationId").references(() => conversations.id).notNull(),
+  timestamp: timestamp('timestamp', { mode: 'date' }).notNull().defaultNow(),
+})
+
 export type UserType = typeof users.$inferSelect
+export type MessageType = typeof messages.$inferSelect
 export type ProductType = typeof products.$inferSelect
 export type ConversationType = typeof conversations.$inferSelect
 export type TransactionType = typeof transactions.$inferSelect

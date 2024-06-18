@@ -64,6 +64,7 @@ const suggestions = [
   { value: 'E-Reader' },
   { value: 'Fitness Tracker' },
   { value: 'Charger' },
+  { value: 'Other' },
 ]
 
 const MAX_FILE_SIZE = 8000000
@@ -86,7 +87,7 @@ const formSchema = z.object({
     .min(1, { message: minError })
     .max(250)
     .refine((value) => !/#/.test(value)),
-  category: z.string().min(1, { message: minError }).max(250),
+  category: z.string().min(1, { message: minError }).max(250).optional().default('Other'),
   images: z
     .any()
     .refine(
@@ -170,7 +171,7 @@ export function ProductForm({
       description: '',
       price: 0,
       quantity: 1,
-      category: '',
+      category: 'Other',
       isDirectlyBuyable: true,
       images: null,
     },
@@ -178,6 +179,10 @@ export function ProductForm({
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true)
+    if (!values.category) {
+      values.category = 'Other';
+    }
+
     if (compressedFiles?.length === 0) {
       toast({
         title: 'Error',
