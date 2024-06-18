@@ -116,7 +116,7 @@ const BrowseContent = (props: BrowseContentProps) => {
             <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
               {products.map((p, index) => (
                 <div key={`kp-${index}`}>
-                  {/* <AnimatedCard delay={0.3} > */}
+                  <AnimatedCard delay={0.3} >
                     <CardWithImage
                       key={`pr-${index}`}
                       className="mx-[5px] my-[0.5rem]"
@@ -124,7 +124,7 @@ const BrowseContent = (props: BrowseContentProps) => {
                       favIcon
                       editable={false}
                     />
-                  {/* </AnimatedCard> */}
+                  </AnimatedCard>
                 </div>
               ))}
               {noSearchResults && <div className=" px-4">Keine Suchergebnisse gefunden</div>}
