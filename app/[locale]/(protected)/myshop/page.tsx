@@ -8,7 +8,7 @@ const MyShop = async () => {
   const t = await getTranslations('MyShop')
   return (
     <div className="inset-x-1/2 top-24 flex flex-col items-center">
-      <Banner defaultBannerUrl={'/hello'} />
+      <Banner defaultBannerUrl={''} />
       <h1 className="mb-4 mt-20 text-left font-montserrat text-3xl font-bold">{t('title')}</h1>
       <div>
         <MyShopContent />

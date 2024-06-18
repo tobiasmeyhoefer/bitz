@@ -11,7 +11,7 @@ const Banner: React.FC<BannerProps> = ({ customBannerUrl, defaultBannerUrl }) =>
   return (
     <div
       className="h-32 w-full bg-cover bg-center"
-      style={{ backgroundImage: `url(${bannerUrl})` }}
+      style={{ backgroundImage: './images/test_banner.jpg' }}
     >
       {/* Optional: weitere Inhalte des Banners */}
     </div>
