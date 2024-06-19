@@ -13,6 +13,9 @@ import { SearchDialog } from './search-dialog'
 import OnboardingBrowseCard from '../onboarding/onboarding-browse-card'
 import { ProductType } from '@/schema'
 import AnimatedCard from '../ui/animated-card'
+import { FilterProducts } from '../filter-products/filter-products'
+import { getUser } from '@/lib/user-actions'
+
 const suggestions = [
   'Reciever',
   'Monitor',
@@ -49,21 +52,24 @@ const BrowseContent = (props: BrowseContentProps) => {
   const [loading, setLoading] = useState(false)
   const [noSearchResults, setNoSearchResults] = useState(false)
   const [products, setProducts] = useState<ProductType[]>([])
+  const [userId, setUserId] = useState<string>(``)
 
   useEffect(() => {
-    const getProducts = async () => {
+    const fetchData = async () => {
+      const user = await getUser()
+      setUserId(user.id)
       const result = await getProductsBrowse()
       setProducts(result)
       if (result.length === 0) {
         setNoSearchResults(true)
       }
     }
-    getProducts()
+    fetchData()
   }, [])
 
   const loadProductsByCategory = async (category: string) => {
     setLoading(true)
-    const result = await getProductsByCategory(category)
+    const result = await getProductsByCategory(category, userId) // eklig
     setProducts(result)
     if (result.length === 0) {
       setNoSearchResults(true)
@@ -79,7 +85,7 @@ const BrowseContent = (props: BrowseContentProps) => {
     if (title === '') {
       result = await getProductsBrowse()
     } else {
-      result = await searchProductsByTitle(title)
+      result = await searchProductsByTitle(title, userId)
     }
 
     setProducts(result)
@@ -108,8 +114,10 @@ const BrowseContent = (props: BrowseContentProps) => {
             suggestionsTitle={props.searchTranslations.suggestions}
             loadProductsByCategory={loadProductsByCategory}
             loadProductsByTitle={loadProductsByTitle}
+            userId={userId}
           />
           <SortProducts setProducts={setProducts} translations={props.sortTranslations} />
+          <FilterProducts setProducts={setProducts} />
         </div>
         {!loading ? (
           <>

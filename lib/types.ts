@@ -117,6 +117,15 @@ type RevealOnScrollProps = {
   children: React.ReactNode
 }
 
+type AddressResult = {
+  properties: {
+    address_line1: string
+    housenumber: string
+    postcode: string
+    city: string
+  }
+}
+
 export type {
   NavbarItemLinkProps,
   NavbarItemDropdownProps,
@@ -134,4 +143,5 @@ export type {
   MyShopProps,
   ProdDelAlert,
   Shop,
+  AddressResult,
 }

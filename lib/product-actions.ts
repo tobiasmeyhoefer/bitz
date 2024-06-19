@@ -130,19 +130,19 @@ export async function getProductById(productId: string) {
 }
 
 // getter for products with Category as param
-export const getProductsByCategory = async (category: string) => {
-  const result = await db.select().from(products).where(eq(products.category, category))
+export const getProductsByCategory = async (category: string, sellerId: string) => {
+  const result = await db.select().from(products).where(and(eq(products.category, category), ne(products.sellerId, sellerId)))
   return result
 }
 
 // getter for products with title as param
-export const searchProductsByTitle = async (title: string) => {
+export const searchProductsByTitle = async (title: string, sellerId: string) => {
   const sanitizedTitle = `%${title.replace(/%/g, '\\%').replace(/_/g, '\\_')}%`
   const res = db
     .select()
     .from(products)
     //.where(ilike(products.title, `%${title}%`)) // title
-    .where(ilike(products.title, sanitizedTitle))
+    .where(and(ilike(products.title, sanitizedTitle), ne(products.sellerId, sellerId)))
   return res
 }
 
@@ -348,4 +348,46 @@ export async function sortProducts(value: string) {
     .where(and(ne(products.sellerId, id!), ne(products.isSold, true)))
   const result = response.sort(sortBy(value))
   return result
+}
+
+export async function getMostExpensiveProduct() {
+  const session = await auth()
+  const id = session?.user?.id
+  const response = await db
+    .select()
+    .from(products)
+    .where(and(ne(products.isSold, true), ne(products.sellerId, id!)))
+    .orderBy(desc(products.price))
+  if (response.length === 0) {
+    throw new Error('No Products found in DB (getMostExpensiveProduct)')
+  }
+  return response[0]
+}
+
+export async function filterProducts(values: {
+  category: string
+  location: string
+  isDirectlyBuyable: boolean
+  price: number
+}) {
+  const session = await auth()
+  const id = session?.user?.id
+  const { category, location, isDirectlyBuyable, price } = values
+  let response = await db
+    .select()
+    .from(products)
+    .where(and(ne(products.sellerId, id!), ne(products.isSold, true)))
+  if (category) {
+    response = response.filter((item) => item.category == category)
+  }
+  if (location) {
+    response = response.filter((item) => item.location?.includes(location))
+  }
+  if (isDirectlyBuyable) {
+    response = response.filter((item) => item.isDirectlyBuyable === isDirectlyBuyable)
+  }
+  if (price) {
+    response = response.filter((item) => item.price <= price)
+  }
+  return response
 }

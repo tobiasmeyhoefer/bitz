@@ -16,6 +16,7 @@ import ConversationCardDropwdown from './conversation-card-dropdown'
 import { getTranslations } from 'next-intl/server'
 import { Link } from '@/navigation'
 import { Button } from '../ui/button'
+import ExperimentalChatButton from './exp-chat-button'
 
 export const ConversationCard = async ({ conv }: { conv: ConversationType }) => {
   const currentUser = await getUser()
@@ -67,6 +68,7 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
             <span></span>
           )}
           <Link href={`/conversations/${conv.id}`}><Button>Exp. Chat</Button></Link>
+          {/* <ExperimentalChatButton/> */}
         </CardFooter>
       </Card>
     )
