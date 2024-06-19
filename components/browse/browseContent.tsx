@@ -12,8 +12,10 @@ import { SortProducts } from '../sort-products/sort-products'
 import { SearchDialog } from './search-dialog'
 import OnboardingBrowseCard from '../onboarding/onboarding-browse-card'
 import { ProductType } from '@/schema'
+import AnimatedCard from '../ui/animated-card'
 import { FilterProducts } from '../filter-products/filter-products'
 import { getUser } from '@/lib/user-actions'
+
 const suggestions = [
   'Reciever',
   'Monitor',
@@ -122,13 +124,15 @@ const BrowseContent = (props: BrowseContentProps) => {
             <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
               {products.map((p, index) => (
                 <div key={`kp-${index}`}>
-                  <CardWithImage
-                    key={`pr-${index}`}
-                    className="mx-[5px] my-[0.5rem]"
-                    product={products[index]}
-                    favIcon
-                    editable={false}
-                  />
+                  <AnimatedCard delay={0.3} >
+                    <CardWithImage
+                      key={`pr-${index}`}
+                      className="mx-[5px] my-[0.5rem]"
+                      product={products[index]}
+                      favIcon
+                      editable={false}
+                    />
+                  </AnimatedCard>
                 </div>
               ))}
               {noSearchResults && <div className=" px-4">Keine Suchergebnisse gefunden</div>}
