@@ -12,6 +12,7 @@ import { SortProducts } from '../sort-products/sort-products'
 import { SearchDialog } from './search-dialog'
 import OnboardingBrowseCard from '../onboarding/onboarding-browse-card'
 import { ProductType } from '@/schema'
+import { FilterProducts } from '../filter-products/filter-products'
 import { getUser } from '@/lib/user-actions'
 const suggestions = [
   'Reciever',
@@ -66,7 +67,7 @@ const BrowseContent = (props: BrowseContentProps) => {
 
   const loadProductsByCategory = async (category: string) => {
     setLoading(true)
-    const result = await getProductsByCategory(category, userId)  // eklig 
+    const result = await getProductsByCategory(category, userId) // eklig
     setProducts(result)
     if (result.length === 0) {
       setNoSearchResults(true)
@@ -114,6 +115,7 @@ const BrowseContent = (props: BrowseContentProps) => {
             userId={userId}
           />
           <SortProducts setProducts={setProducts} translations={props.sortTranslations} />
+          <FilterProducts setProducts={setProducts} />
         </div>
         {!loading ? (
           <>

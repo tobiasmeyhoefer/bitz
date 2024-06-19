@@ -10,21 +10,21 @@ import RestartOnboarding from '@/components/settings/restart-onboarding'
 const Settings = () => {
   const t = useTranslations('Settings')
   return (
-    <div className='pt-10 mb-10'>
-      <h1 className="mb-10 font-montserrat text-center text-3xl font-bold">{t('title')}</h1>
-      <div className="flex lg:flex-row flex-col px-10 gap-10 h-full justify-center pt-10">
-        <div >
+    <div className="mb-10 pt-10">
+      <h1 className="mb-10 text-center font-montserrat text-3xl font-bold">{t('title')}</h1>
+      <div className="flex h-full flex-col justify-center gap-10 px-10 pt-10 lg:flex-row">
+        <div>
           <ProfileSettings />
           <hr />
         </div>
-        <div className="flex w-[600px] h-full flex-col gap-6">
+        <div className="flex h-full w-[600px] flex-col gap-6">
           <h3 className="text-2xl font-bold">{t('app')}</h3>
           <LocaleSwitcher />
           <DarkmodeToggler />
           <hr />
           <h3 className="text-2xl font-bold">{t('safety')}</h3>
-          <PhoneVerification/>
-          <RestartOnboarding/>
+          <PhoneVerification />
+          <RestartOnboarding />
           <RegisterPasskey />
           <DeleteAccountButton
             header={t('deleteAccount')}
