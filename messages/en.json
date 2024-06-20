@@ -139,27 +139,27 @@
   },
   "Settings": {
     "title": "SETTINGS",
-    "city": "city",
-    "postcode": "postcode",
-    "address": "address", 
-    "imageChangeTitle": "change Profilepicture",
+    "city": "City",
+    "postcode": "Postcode",
+    "address": "Address", 
+    "imageChangeTitle": "Change Profilepicture",
     "submitTitle": "submit",
-    "deleteAccount": "delete Account",
+    "deleteAccount": "Delete Account",
     "deleteAccountTitle": "Are you absolutely sure?",
     "deleteAccountDescription": "This action cannot be undone. This will permanently delete your account and remove your data from our servers.",
     "deleteAccountCancel": "Cancel",
-    "deleteAccountAction": "delete Account",
+    "deleteAccountAction": "Delete Account",
     "app": "Application",
     "safety": "Safety",
     "username": "Username & Address",
-    "changeName": "new username",
+    "changeName": "New Username",
     "changeLocation": "Postleitzahl ändern",
-    "changeAdress": "new adress",
+    "changeAddress": "new address",
     "theme": "Theme",
     "changeNow": "apply now"
   },
   "Navbar": {
-    "loginButton": "login",
+    "loginButton": "Login",
     "logoutButton": "Logout",
     "discover": "Discover",
     "myBitz": "My Bitz",
@@ -178,7 +178,7 @@
     "loginPasskeyButton": "with Passkey"
   },
   "LocaleSwitcher": {
-    "label": "change language",
+    "label": "Language",
     "locale": "{locale, select, de {🇩🇪 Deutsch} en {🇺🇸 English} other {Unbekannt}}"
   },
   "Conversations": {

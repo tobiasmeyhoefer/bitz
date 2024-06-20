@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { FaUserCircle } from 'react-icons/fa'
 import NameChanger from './name-changer'
 import LocationChooser from './LocationChooser'
-import AdressChanger from './adress-changer'
+import AddressChanger from './address-changer'
 import PictureChanger from './picture-changer'
 import { getTranslations } from 'next-intl/server'
 import { changeUserImage } from '@/lib/user-actions'
@@ -40,10 +40,10 @@ const ProfileSettings = async () => {
             changeNow: t('changeNow'),
           }}
         />
-        <AdressChanger
+        <AddressChanger
           translations={{
             address: t('address'),
-            changeAdress: t('changeAdress'),
+            changeAddress: t('changeAddress'),
             changeNow: t('changeNow'),
           }}/>
       </div>

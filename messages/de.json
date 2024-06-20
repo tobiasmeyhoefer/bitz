@@ -148,7 +148,7 @@
     "title": "EINSTELLUNGEN",
     "city": "Stadt",
     "postcode": "Postleitzahl",
-    "address": "Adresse",
+    "address": "neue Adresse",
     "imageChangeTitle": "Profilbild ändern",
     "submitTitle": "absenden",
     "deleteAccount": "Account löschen",
@@ -161,7 +161,7 @@
     "username": "Benutzername & Adresse",
     "changeName": "neuer Benutzername",
     "changeLocation": "change location",
-    "changeAdress": "Adresse ändern",
+    "changeAddress": "Adresse ändern",
     "theme": "Farbschema",
     "changeNow": "annehmen"
   },
@@ -185,7 +185,7 @@
     "loginPasskeyButton": "mit Passkey"
   },
   "LocaleSwitcher": {
-    "label": "Sprache ändern",
+    "label": "Sprache",
     "locale": "{locale, select, de {🇩🇪 Deutsch} en {🇺🇸 English} other {Unbekannt}}"
   },
 
