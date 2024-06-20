@@ -7,9 +7,9 @@ import Banner from '@/components/myShop/banner'
 const MyShop = async () => {
   const t = await getTranslations('MyShop')
   return (
-    <div className="inset-x-1/2 top-24 flex flex-col items-center">
+    <div className="inset-x-1/2 flex flex-col items-center bg-slate-400">
       <Banner defaultBannerUrl={''} />
-      <h1 className="mb-4 mt-20 text-left font-montserrat text-3xl font-bold">{t('title')}</h1>
+      <h1 className="mt-4 text-left font-montserrat text-3xl font-bold">{t('title')}</h1>
       <div>
         <MyShopContent />
       </div>

@@ -75,7 +75,6 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                   </div>
                   <div className="flex items-end text-right">{formatDate(product.createdAt)}</div>
                 </div>
-
                 {props.product.isSold && <p className="text-green-500">verkauft</p>}
               </CardDescription>
             </CardHeader>
