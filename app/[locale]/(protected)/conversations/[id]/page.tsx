@@ -15,7 +15,8 @@ export default async function Page({ params }: { params: { id: string } }) {
     content: message.content,
     id: message.id,
     isSender: message.senderId === user.id,
-    timeStamp: message.timestamp
+    timeStamp: message.timestamp,
+    isSystemMessage: message.isSystemMessage
   }))
 
   return (

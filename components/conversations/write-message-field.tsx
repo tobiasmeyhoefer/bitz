@@ -6,10 +6,10 @@ import { Input } from '../ui/input'
 import { useState } from 'react'
 import { createMessage } from '@/lib/message-actions'
 import { ConversationType, UserType } from '@/schema'
-import { Label } from '@/components/ui/label'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { PopoverClose } from '@radix-ui/react-popover'
 import { Textarea } from '../ui/textarea'
+import confetti from "canvas-confetti";
 
 const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserType }) => {
   const [input, setInput] = useState('')
@@ -24,26 +24,69 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
     element!.scrollTop = element!.scrollHeight
   }
 
+  const handleFireworkClick = () => {
+    const duration = 5 * 1000;
+    const animationEnd = Date.now() + duration;
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+ 
+    const randomInRange = (min: number, max: number) =>
+      Math.random() * (max - min) + min;
+ 
+    const interval = window.setInterval(() => {
+      const timeLeft = animationEnd - Date.now();
+ 
+      if (timeLeft <= 0) {
+        return clearInterval(interval);
+      }
+ 
+      const particleCount = 50 * (timeLeft / duration);
+      confetti({
+        ...defaults,
+        particleCount,
+        origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+      });
+      confetti({
+        ...defaults,
+        particleCount,
+        origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+      });
+    }, 250);
+  };
+
   const sendMessage = async () => {
     setIsLoading(true)
     if (input.trim() === '') return
-    await createMessage(input, user.id, conv.id)
-    await axios.post('/api/message', { content: input, convId: conv.id, senderId: user.id })
+
+    if (input === 'Wir haben einen Deal ✅') {
+      await createMessage('Juhu es gibt einen Deal!!!', user.id, conv.id, true)
+      await axios.post('/api/message', {
+        content: input,
+        convId: conv.id,
+        senderId: user.id,
+        isSystemMessage: true,
+      })
+      handleFireworkClick()
+
+    } else {
+      await createMessage(input, user.id, conv.id)
+      await axios.post('/api/message', { content: input, convId: conv.id, senderId: user.id })
+    }
+
     setInput('')
     setTimeout(() => scrollToBottom(), 200)
     setIsLoading(false)
   }
 
   return (
-    <div>
-      <div className="flex gap-2">
+    <div className="z-10 bg-white">
+      <div>
         {conv.sellerId === user.id ? (
-          <>
+          <div className="flex gap-2 max-sm:overflow-x-scroll">
             <Popover>
               <PopoverTrigger asChild>
                 <Button variant="outline">Ort?</Button>
               </PopoverTrigger>
-              <PopoverContent className="w-80 flex flex-col gap-2">
+              <PopoverContent className="flex w-80 flex-col gap-2">
                 <h4 className="font-medium leading-none">Ort?</h4>
                 <PopoverClose>
                   <Button
@@ -79,7 +122,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
               <PopoverTrigger asChild>
                 <Button variant="outline">Zeit?</Button>
               </PopoverTrigger>
-              <PopoverContent className="w-80 flex flex-col gap-2">
+              <PopoverContent className="flex w-80 flex-col gap-2">
                 <h4 className="font-medium leading-none">Zeit?</h4>
                 <label id="place">Schreibe hier wann du Zeit hast:</label>
                 <Textarea
@@ -87,7 +130,8 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
                   onChange={({ target }) => setTimeInput(target.value)}
                   defaultValue=""
                   placeholder="Morgen bis 12 oder Donnerstag von 14-16Uhr "
-                  className="col-span-2 h-8"/>
+                  className="col-span-2 h-8"
+                />
                 <PopoverClose>
                   <Button
                     className="w-full"
@@ -101,14 +145,16 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
             </Popover>
 
             <Button
-              onClick={() => setInput('Wir haben einen Deal ✅')}
+              onClick={async () => {
+                setInput('Wir haben einen Deal ✅')
+              }}
               variant={'outline'}
             >
               Deal!
             </Button>
-          </>
+          </div>
         ) : (
-          <>
+          <div className="flex gap-2 max-sm:overflow-x-scroll">
             <Popover>
               <PopoverTrigger asChild>
                 <Button variant="outline">Verhandlung</Button>
@@ -194,23 +240,27 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
             >
               Abbruch
             </Button>
-          </>
+          </div>
         )}
       </div>
-      <div className="mr-20 flex gap-2 p-2">
+      <div className="mt-2 flex gap-2">
         <Input
-          className="h-[64px] rounded-xl bg-white text-primary"
+          className="h-[50px] rounded-xl bg-white text-primary md:h-[64px]"
           placeholder="type a message..."
           value={input}
           onChange={({ target }) => setInput(target.value)}
           type="text"
         />
 
-        {isLoading ? <Button disabled onClick={sendMessage} className="h-[64px] rounded-xl px-6">
-          senden
-        </Button> : <Button onClick={sendMessage} className="h-[64px] rounded-xl px-6">
-          senden
-        </Button>}
+        {isLoading ? (
+          <Button disabled onClick={sendMessage} className="h-[50px] rounded-xl px-6 md:h-[64px]">
+            senden
+          </Button>
+        ) : (
+          <Button onClick={sendMessage} className="h-[50px] rounded-xl px-6 md:h-[64px]">
+            senden
+          </Button>
+        )}
       </div>
     </div>
   )

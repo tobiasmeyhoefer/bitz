@@ -45,6 +45,7 @@
     "@types/twilio": "^3.19.3",
     "ai": "^3.1.30",
     "axios": "^1.7.2",
+    "canvas-confetti": "^1.9.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
@@ -79,6 +80,7 @@
   },
   "devDependencies": {
     "@testing-library/react": "^15.0.7",
+    "@types/canvas-confetti": "^1.6.4",
     "@types/imagemin": "^8.0.5",
     "@types/node": "^20",
     "@types/react": "^18",

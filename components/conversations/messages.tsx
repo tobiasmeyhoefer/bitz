@@ -22,6 +22,7 @@ interface MessageProps {
     id: string
     isSender: boolean
     timeStamp: Date
+    isSystemMessage: boolean
   }[]
   userId: string
 }
@@ -42,6 +43,7 @@ const Messages = ({ convId, initialMessages, userId }: MessageProps) => {
       content: string
       senderId: string
       timeStamp: Date
+      isSystemMessage: boolean
     }) => {
       const isSender = data.senderId === userId
       setMessages((prev) => [
@@ -50,7 +52,8 @@ const Messages = ({ convId, initialMessages, userId }: MessageProps) => {
           content: data.content,
           id: `${prev.length}-${Date.now()}`,
           isSender,
-          timeStamp: data.timeStamp,
+          timeStamp: data.timeStamp ?? new Date(),
+          isSystemMessage: data.isSystemMessage,
         },
       ])
       scrollToBottom()
@@ -73,29 +76,47 @@ const Messages = ({ convId, initialMessages, userId }: MessageProps) => {
   return (
     <div id="testo" className="overflow-y-scroll">
       {messages.map((m, i) => (
-        <div
-          key={m.id}
-          className={cn(
-            'm-2 w-2/3 whitespace-pre-wrap rounded-lg border border-solid border-neutral-400 p-2 text-white',
-            { 'float-right bg-indigo-900': m.isSender, 'float-left bg-neutral-900': !m.isSender },
-          )}
-        >
-          <div className="flex justify-between">
-            <div>
-              <p>{m.content}</p>
-              <p className='text-neutral-500 text-sm'>{formatDate(m.timeStamp)}</p>
-            </div>
+        <>
+          <div
+            key={m.id}
+            className={cn(
+              'm-2 w-2/3 whitespace-pre-wrap rounded-lg border border-solid border-neutral-400 p-2 text-white',
+              {
+                'float-right bg-indigo-900': m.isSender,
+                'float-left bg-neutral-900': !m.isSender,
+                'flex items-center justify-center bg-emerald-800': m.isSystemMessage,
+              },
+            )}
+          >
+            {m.isSystemMessage ? (
+              <div className='text-center'>
+                <p className='text-xl'>Juhu ihr habt eine Deal</p>
+                <p className='text-sm'>
+                  Sofern noch nicht geschehen solltet ihr noch Ort und Zeitpunkt des Treffs
+                  ausmachen
+                </p>
+              </div>
+            ) : (
+              <div className="flex justify-between">
+                <div>
+                  <p>{m.content}</p>
+                  <p className="text-sm text-neutral-500">{formatDate(m.timeStamp)}</p>
+                </div>
 
-            <DropdownMenu>
-              <DropdownMenuTrigger>
-                <HiDotsVertical />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem onClick={() => deleteMessage(m.id, i)}>Delete</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+                <DropdownMenu>
+                  <DropdownMenuTrigger>
+                    <HiDotsVertical />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuItem onClick={() => deleteMessage(m.id, i)}>
+                      Delete
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            )}
           </div>
-        </div>
+        </>
       ))}
     </div>
   )
