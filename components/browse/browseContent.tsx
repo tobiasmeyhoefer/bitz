@@ -73,7 +73,7 @@ const BrowseContent = (props: BrowseContentProps) => {
   const loadMoreProducts = async () => {
     setIsLoadingMore(true);
     const result = await getProductsBrowse(4, page * 4);
-    if (result.length < 4) { // Wert muss angepasst werden je nach dem wie viele Produkte man mehr Laden moechte 
+    if (result.length < 4) { // Wert muss angepasst werden, je nach dem wie viele Produkte man mehr Laden moechte 
       setHasMoreProducts(false);
     }
 
@@ -158,7 +158,7 @@ const BrowseContent = (props: BrowseContentProps) => {
               {noSearchResults && <div className=" px-4">Keine Suchergebnisse gefunden</div>}
             </div>
             {hasMoreProducts && (
-              <button onClick={loadMoreProducts} disabled={isLoadingMore} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
+              <button onClick={loadMoreProducts} disabled={isLoadingMore} className="mt-3 mb-4 px-4 py-2 bg-blue-500 text-white rounded">
                 {isLoadingMore ? 'Loading...' : 'Load More'}
               </button>
             )}
