@@ -37,11 +37,15 @@ const ProfileSettings = async () => {
           translations={{
             username: t('username'),
             changeName: t('changeName'),
-            changeAdress: t('changeAdress'),
             changeNow: t('changeNow'),
           }}
         />
-        <AdressChanger />
+        <AdressChanger
+          translations={{
+            address: t('address'),
+            changeAdress: t('changeAdress'),
+            changeNow: t('changeNow'),
+          }}/>
       </div>
     </div>
   )

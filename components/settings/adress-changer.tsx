@@ -28,7 +28,14 @@ import { AddressResult } from '@/lib/types'
 //     .max(60),
 // })
 
-export default function AdressChanger() {
+interface AdressChangerProps {
+  translations: {
+    address: string
+    changeAdress: string
+    changeNow: string
+  }
+}
+export default function AdressChanger({ translations }: AdressChangerProps) {
   const [adress, setAdress] = useState<string>('')
   const [value, setValue] = useState('')
   const [result, setResult] = useState<AddressResult | null>(null)
@@ -78,7 +85,7 @@ export default function AdressChanger() {
   return (
     <div className="mb-6">
       <Form {...form}>
-        <FormLabel>change Adress</FormLabel>
+        <FormLabel>{translations.address}</FormLabel>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
             control={form.control}
@@ -105,7 +112,7 @@ export default function AdressChanger() {
             )}
           />
           <Button className="mt-4" type="submit" variant={'secondary'}>
-            change
+            {translations.changeNow}
           </Button>
         </form>
       </Form>
