@@ -20,7 +20,13 @@ const Settings = () => {
         <div className="flex h-full w-[600px] flex-col gap-6">
           <h3 className="text-2xl font-bold">{t('app')}</h3>
           <LocaleSwitcher />
-          <DarkmodeToggler />
+          <DarkmodeToggler
+            translations={{ 
+              theme: t('theme'),
+              //darkmode: t('darkmode'),
+              //lightmode: t('lightmode'), */
+            }}
+          />
           <hr />
           <h3 className="text-2xl font-bold">{t('safety')}</h3>
           <PhoneVerification />

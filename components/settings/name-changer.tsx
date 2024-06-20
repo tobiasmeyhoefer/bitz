@@ -28,7 +28,6 @@ interface NameChangerProps {
   translations: {
     username: string
     changeName: string
-    changeAdress: string
     changeNow: string
   }
 }

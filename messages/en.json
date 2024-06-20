@@ -155,7 +155,7 @@
     "changeName": "new username",
     "changeLocation": "Postleitzahl ändern",
     "changeAdress": "new adress",
-    "theme": "Farbschema ändern",
+    "theme": "Theme",
     "changeNow": "apply now"
   },
   "Navbar": {
