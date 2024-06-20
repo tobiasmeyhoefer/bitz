@@ -14,6 +14,7 @@ import { UpdateImage } from '@/components/myShop/update-image'
 import { useEffect, useState } from 'react'
 import { getUser } from '@/lib/user-actions'
 import { auth } from '@/auth'
+import { CardContainer } from '@/components/ui/3d-card'
 
 export function ProductImageCarousel(props: {
   translations: {
@@ -65,6 +66,7 @@ export function ProductImageCarousel(props: {
         <CarouselContent>
           {props.images.map((img: string | null, index: number) => (
             <CarouselItem key={`ci-${index}`}>
+              {/* <CardContainer> */}
               <Card className="h-fit w-fit">
                 <CardContent className=" p-0">
                   {img ? (
@@ -85,6 +87,7 @@ export function ProductImageCarousel(props: {
                   )}
                 </CardContent>
               </Card>
+              {/* </CardContainer> */}
             </CarouselItem>
           ))}
         </CarouselContent>
