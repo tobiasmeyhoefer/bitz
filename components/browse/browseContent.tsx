@@ -15,6 +15,7 @@ import { ProductType } from '@/schema'
 import AnimatedCard from '../ui/animated-card'
 import { FilterProducts } from '../filter-products/filter-products'
 import { getUser } from '@/lib/user-actions'
+import { Button } from '../ui/button'
 
 const suggestions = [
   'Reciever',
@@ -158,9 +159,9 @@ const BrowseContent = (props: BrowseContentProps) => {
               {noSearchResults && <div className=" px-4">Keine Suchergebnisse gefunden</div>}
             </div>
             {hasMoreProducts && (
-              <button onClick={loadMoreProducts} disabled={isLoadingMore} className="mt-3 mb-4 px-4 py-2 bg-blue-500 text-white rounded">
+              <Button onClick={loadMoreProducts} disabled={isLoadingMore} variant='default' className='mt-4 mb-6'>
                 {isLoadingMore ? 'Loading...' : 'Load More'}
-              </button>
+              </Button>
             )}
           </>
         ) : (
