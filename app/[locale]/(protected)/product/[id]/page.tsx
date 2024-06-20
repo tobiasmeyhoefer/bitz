@@ -61,6 +61,18 @@ export default async function Page({ params }: { params: { id: string } }) {
             ⏎
           </Button>
         </Link>
+        {!isOwner && (
+          <Link href={`/myshop/${product.sellerId}`}>
+            <Button
+              variant="outline"
+              className={
+                'md: fixed bottom-6 right-8 font-semibold  md:right-14 lg:right-8 lg:top-36 xl:right-24 2xl:right-28 2xl:top-40'
+              }
+            >
+              View Shop
+            </Button>{' '}
+          </Link>
+        )}
       </div>
     </>
   )

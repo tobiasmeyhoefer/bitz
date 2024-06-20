@@ -5,6 +5,7 @@ import ProductInfoCardEditable from './productInfoCardEditable'
 import { cn } from '@/lib/utils'
 import { BuyButtons } from '@/components/products/buy-buttons'
 import { ProductType } from '@/schema'
+import { Link } from '@/navigation'
 
 type ProductInfoType = {
   productInfo: ProductType
@@ -121,7 +122,9 @@ export default function ProductInfoCard(props: ProductInfoType) {
               <div className="flex justify-between text-wrap pb-6">
                 <div className="h-fit w-9/12 break-words">{product.description}</div>
               </div>
-              <div>{getDate(product.createdAt!, true, 'text-right')}</div>
+              <div className="flex justify-between">
+                {getDate(product.createdAt!, true, 'text-right')}
+              </div>
             </CardContent>
           </Card>
           <BuyButtons product={product} />

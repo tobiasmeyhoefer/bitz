@@ -73,7 +73,17 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                     <FaLocationDot className="mx-1 size-3" />
                     {props.product.location}
                   </div>
-                  <div className="flex items-end text-right">{formatDate(product.createdAt)}</div>
+                  <div className="text-right">
+                    {!props.editable && props.favIcon && (
+                      <Link
+                        className="font-semibold text-primary"
+                        href={`/myshop/${product.sellerId}`}
+                      >
+                        View Shop
+                      </Link>
+                    )}
+                    <div className="flex items-end text-right">{formatDate(product.createdAt)}</div>
+                  </div>
                 </div>
 
                 {props.product.isSold && <p className="text-green-500">verkauft</p>}
