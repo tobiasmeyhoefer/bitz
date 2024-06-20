@@ -1,7 +1,7 @@
 'use client'
 
 import { pusherClient } from '@/lib/pusher'
-import { cn } from '@/lib/utils'
+import { cn, formatDate } from '@/lib/utils'
 import { useEffect, useState } from 'react'
 import { HiDotsVertical } from 'react-icons/hi'
 import {
@@ -21,6 +21,7 @@ interface MessageProps {
     content: string
     id: string
     isSender: boolean
+    timeStamp: Date
   }[]
   userId: string
 }
@@ -37,11 +38,20 @@ const Messages = ({ convId, initialMessages, userId }: MessageProps) => {
     pusherClient.subscribe(convId)
     scrollToBottom()
 
-    const handleIncomingMessage = (data: { content: string; senderId: string }) => {
+    const handleIncomingMessage = (data: {
+      content: string
+      senderId: string
+      timeStamp: Date
+    }) => {
       const isSender = data.senderId === userId
       setMessages((prev) => [
         ...prev,
-        { content: data.content, id: `${prev.length}-${Date.now()}`, isSender },
+        {
+          content: data.content,
+          id: `${prev.length}-${Date.now()}`,
+          isSender,
+          timeStamp: data.timeStamp,
+        },
       ])
       scrollToBottom()
     }
@@ -71,10 +81,15 @@ const Messages = ({ convId, initialMessages, userId }: MessageProps) => {
           )}
         >
           <div className="flex justify-between">
-            <p>{m.content}</p>
-            
+            <div>
+              <p>{m.content}</p>
+              <p className='text-neutral-500 text-sm'>{formatDate(m.timeStamp)}</p>
+            </div>
+
             <DropdownMenu>
-              <DropdownMenuTrigger><HiDotsVertical /></DropdownMenuTrigger>
+              <DropdownMenuTrigger>
+                <HiDotsVertical />
+              </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuItem onClick={() => deleteMessage(m.id, i)}>Delete</DropdownMenuItem>
               </DropdownMenuContent>
