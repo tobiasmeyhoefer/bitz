@@ -17,6 +17,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
   const [moneyInput, setMoneyInput] = useState('')
   const [locationInput, setLocationInput] = useState('')
   const [timeInput, setTimeInput] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   const scrollToBottom = () => {
     const element = document.getElementById('testo')
@@ -24,11 +25,13 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
   }
 
   const sendMessage = async () => {
+    setIsLoading(true)
     if (input.trim() === '') return
     await createMessage(input, user.id, conv.id)
     await axios.post('/api/message', { content: input, convId: conv.id, senderId: user.id })
     setInput('')
     setTimeout(() => scrollToBottom(), 200)
+    setIsLoading(false)
   }
 
   return (
@@ -38,10 +41,10 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
           <>
             <Popover>
               <PopoverTrigger asChild>
-                <Button variant="outline">Ort</Button>
+                <Button variant="outline">Ort?</Button>
               </PopoverTrigger>
               <PopoverContent className="w-80 flex flex-col gap-2">
-                <h4 className="font-medium leading-none">Ort</h4>
+                <h4 className="font-medium leading-none">Ort?</h4>
                 <PopoverClose>
                   <Button
                     className="w-full"
@@ -74,10 +77,10 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
 
             <Popover>
               <PopoverTrigger asChild>
-                <Button variant="outline">Zeit</Button>
+                <Button variant="outline">Zeit?</Button>
               </PopoverTrigger>
               <PopoverContent className="w-80 flex flex-col gap-2">
-                <h4 className="font-medium leading-none">Zeit</h4>
+                <h4 className="font-medium leading-none">Zeit?</h4>
                 <label id="place">Schreibe hier wann du Zeit hast:</label>
                 <Textarea
                   id="place"
@@ -96,6 +99,13 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
                 </PopoverClose>
               </PopoverContent>
             </Popover>
+
+            <Button
+              onClick={() => setInput('Wir haben einen Deal ✅')}
+              variant={'outline'}
+            >
+              Deal!
+            </Button>
           </>
         ) : (
           <>
@@ -122,7 +132,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
                       <Button
                         className="w-full"
                         onClick={() =>
-                          setInput(`Ich biete dir ${moneyInput} Euro. Was hältst du davon?`)
+                          setInput(`Ich biete dir ${moneyInput} Euro. Haben wir einen Deal?`)
                         }
                         variant={'outline'}
                       >
@@ -195,9 +205,12 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
           onChange={({ target }) => setInput(target.value)}
           type="text"
         />
-        <Button onClick={sendMessage} className="h-[64px] rounded-xl px-6">
+
+        {isLoading ? <Button disabled onClick={sendMessage} className="h-[64px] rounded-xl px-6">
           senden
-        </Button>
+        </Button> : <Button onClick={sendMessage} className="h-[64px] rounded-xl px-6">
+          senden
+        </Button>}
       </div>
     </div>
   )

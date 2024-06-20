@@ -3,6 +3,15 @@
 import { pusherClient } from '@/lib/pusher'
 import { cn } from '@/lib/utils'
 import { useEffect, useState } from 'react'
+import { HiDotsVertical } from 'react-icons/hi'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 
 interface MessageProps {
   convId: string
@@ -32,6 +41,7 @@ const Messages = ({ convId, initialMessages, userId }: MessageProps) => {
         ...prev,
         { content: data.content, id: `${prev.length}-${Date.now()}`, isSender },
       ])
+      scrollToBottom()
     }
 
     pusherClient.bind('incoming-message', handleIncomingMessage)
@@ -52,7 +62,20 @@ const Messages = ({ convId, initialMessages, userId }: MessageProps) => {
             { 'float-right bg-indigo-900': m.isSender, 'float-left bg-neutral-900': !m.isSender },
           )}
         >
-          {m.content}
+          <div className="flex justify-between">
+            <p>{m.content}</p>
+            <DropdownMenu>
+              <DropdownMenuTrigger><HiDotsVertical /></DropdownMenuTrigger>
+              <DropdownMenuContent>
+                {/* <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator /> */}
+                <DropdownMenuItem>Delete</DropdownMenuItem>
+                {/* <DropdownMenuItem>Billing</DropdownMenuItem>
+                <DropdownMenuItem>Team</DropdownMenuItem>
+                <DropdownMenuItem>Subscription</DropdownMenuItem> */}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
       ))}
     </div>
