@@ -12,6 +12,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { MessageType } from '@/schema'
+import { deleteMessageById } from '@/lib/message-actions'
 
 interface MessageProps {
   convId: string
@@ -52,9 +54,15 @@ const Messages = ({ convId, initialMessages, userId }: MessageProps) => {
     }
   }, [convId, userId])
 
+  const deleteMessage = async (messageId: string, index: number) => {
+    await deleteMessageById(messageId)
+    const newMessages = messages.filter((_, i) => i !== index)
+    setMessages(newMessages)
+  }
+
   return (
     <div id="testo" className="overflow-y-scroll">
-      {messages.map((m) => (
+      {messages.map((m, i) => (
         <div
           key={m.id}
           className={cn(
@@ -64,15 +72,11 @@ const Messages = ({ convId, initialMessages, userId }: MessageProps) => {
         >
           <div className="flex justify-between">
             <p>{m.content}</p>
+            
             <DropdownMenu>
               <DropdownMenuTrigger><HiDotsVertical /></DropdownMenuTrigger>
               <DropdownMenuContent>
-                {/* <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator /> */}
-                <DropdownMenuItem>Delete</DropdownMenuItem>
-                {/* <DropdownMenuItem>Billing</DropdownMenuItem>
-                <DropdownMenuItem>Team</DropdownMenuItem>
-                <DropdownMenuItem>Subscription</DropdownMenuItem> */}
+                <DropdownMenuItem onClick={() => deleteMessage(m.id, i)}>Delete</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
