@@ -15,8 +15,7 @@ import PictureChanger from '../settings/picture-changer'
 import { updateProductImage } from '@/lib/product-actions'
 import Image from 'next/image'
 import { useToast } from '@/components/ui/use-toast'
-
-export function UpdateImage(props: { existingImageUrl: string }) {
+export function UpdateImage(props: { existingImageUrl: string; translations: { title: string; description: string; submit: string; close: string } }) {
   const [open, setOpen] = useState(false)
   const { toast } = useToast()
 
@@ -36,13 +35,12 @@ export function UpdateImage(props: { existingImageUrl: string }) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button className="h-7 p-1 md:h-9 md:w-36 md:p-4">
-           
           <FaPencilAlt className="ml-2" />
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Product-Picture</DialogTitle>
+          <DialogTitle>{props.translations.title}</DialogTitle>
           <Image
             width={100}
             height={100}
@@ -50,9 +48,9 @@ export function UpdateImage(props: { existingImageUrl: string }) {
             alt="Product Image"
             style={{ objectFit: 'cover' }}
           />
-          <DialogDescription>edit this Picture</DialogDescription>
+          <DialogDescription>{props.translations.description}</DialogDescription>
         </DialogHeader>
-        <PictureChanger title={''} submitTitle={'submit'} action={handleImageUpdate} />
+        <PictureChanger title={''} submitTitle={props.translations.submit} action={handleImageUpdate} />
         <DialogFooter className="absolute right-1 top-1 ">
           <Button variant="outline" onClick={close}>
             X

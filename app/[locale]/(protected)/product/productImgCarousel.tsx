@@ -19,6 +19,12 @@ export function ProductImageCarousel(props: {
   translations: {
     image: string
     of: string
+    updateImage: {
+      title: string
+      description: string
+      submit: string
+      close: string
+    }
   }
   images: (string | null)[]
   className: string
@@ -92,7 +98,10 @@ export function ProductImageCarousel(props: {
       <div className="z-50 flex flex-row justify-between p-2 text-sm text-muted-foreground">
         {props.translations.image} {current} {props.translations.of} {props.images.length}
         {isOwner && props.images[current - 1] && (
-          <UpdateImage existingImageUrl={props.images[current - 1]!} />
+          <UpdateImage
+            existingImageUrl={props.images[current - 1]!}
+            translations={props.translations.updateImage}
+          />
         )}
       </div>
     </div>
