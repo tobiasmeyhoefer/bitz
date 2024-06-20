@@ -5,16 +5,22 @@ import { Button } from '../ui/button'
 import { toast } from '../ui/use-toast'
 import { useRouter } from '@/navigation'
 
-const RegisterPasskey = () => {
+interface RegisterPasskeyProps {
+  translations: {
+    registerPasskey: string
+    registerPasskeySuccess: string
+  }
+}
+const RegisterPasskey = ({translations}: RegisterPasskeyProps) => {
   const router = useRouter()
 
   const registerPasskey = () => {
     signIn('passkey', { action: 'register' }).catch(router.refresh)
     toast({
-      description: 'Passkey erfolgreich hinzugefügt',
+      description: translations.registerPasskeySuccess,
     })
   }
-  return <Button onClick={registerPasskey}>Register new Passkey</Button>
+  return <Button onClick={registerPasskey}>{translations.registerPasskey}</Button>
 }
 
 export default RegisterPasskey
