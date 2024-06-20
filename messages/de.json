@@ -157,11 +157,12 @@
     "deleteAccountAction": "Account löschen",
     "app": "Anwendung",
     "safety": "Sicherheit",
-    "username": "Benutzer",
-    "change Name": "change name",
-    "change Location": "change location",
-    "change Adress": "change adress",
-    "theme": "change colortheme"
+    "username": "Benutzername",
+    "changeName": "neuer Benutzername",
+    "changeLocation": "change location",
+    "changeAdress": "Adresse ändern",
+    "theme": "change colortheme",
+    "changeNow": "annehmen"
   },
   "Navbar": {
     "loginButton": "anmelden",

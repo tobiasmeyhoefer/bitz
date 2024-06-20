@@ -150,11 +150,12 @@
     "deleteAccountAction": "delete Account",
     "app": "Application",
     "safety": "Safety",
-    "username": "User",
-    "change Name": "Name ändern",
-    "change Location": "Postleitzahl ändern",
-    "change Adress": "Adresse ändern",
-    "theme": "Farbschema ändern"
+    "username": "Username",
+    "changeName": "new username",
+    "changeLocation": "Postleitzahl ändern",
+    "changeAdress": "new adress",
+    "theme": "Farbschema ändern",
+    "changeNow": "apply now"
   },
   "Navbar": {
     "loginButton": "login",

@@ -33,7 +33,14 @@ const ProfileSettings = async () => {
       </div>
       <h3 className="mb-4 text-2xl font-bold">{t('username')}</h3>
       <div className="flex flex-col">
-        <NameChanger />
+        <NameChanger
+          translations={{
+            username: t('username'),
+            changeName: t('changeName'),
+            changeAdress: t('changeAdress'),
+            changeNow: t('changeNow'),
+          }}
+        />
         <AdressChanger />
       </div>
     </div>
