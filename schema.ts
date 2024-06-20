@@ -217,6 +217,7 @@ export const messages = pgTable('messages', {
   senderId: text("senderId").references(() => users.id).notNull(),
   conversationId: text("conversationId").references(() => conversations.id).notNull(),
   timestamp: timestamp('timestamp', { mode: 'date' }).notNull().defaultNow(),
+  isSystemMessage: boolean("isSystemMessage").default(false).notNull()
 })
 
 export type UserType = typeof users.$inferSelect

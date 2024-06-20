@@ -150,21 +150,75 @@ export function convertPostcodeToCity(postcode: string): string {
 
 export function formatPhoneNumber(phoneNumber: string): string {
   // Entferne alle Leerzeichen
-  const cleanedNumber = phoneNumber.replace(/\s+/g, '');
-  
+  const cleanedNumber = phoneNumber.replace(/\s+/g, '')
+
   // Ersetze führende 0 durch +49
-  const formattedNumber = cleanedNumber.replace(/^0/, '+49');
-  
-  return formattedNumber;
+  const formattedNumber = cleanedNumber.replace(/^0/, '+49')
+
+  return formattedNumber
 }
 
 export function formatDate(date: Date): string {
-  const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  const day = date.getDate().toString().padStart(2, '0');
-  const hours = date.getHours().toString().padStart(2, '0');
-  const minutes = date.getMinutes().toString().padStart(2, '0');
-  const seconds = date.getSeconds().toString().padStart(2, '0');
+  const year = date.getFullYear()
+  const month = (date.getMonth() + 1).toString().padStart(2, '0')
+  const day = date.getDate().toString().padStart(2, '0')
+  const hours = date.getHours().toString().padStart(2, '0')
+  const minutes = date.getMinutes().toString().padStart(2, '0')
+  const seconds = date.getSeconds().toString().padStart(2, '0')
 
-  return `${day}.${month}.${year} ${hours}:${minutes}:${seconds}`;
+  return `${day}.${month}.${year} ${hours}:${minutes}:${seconds}`
 }
+
+export const suggestions = [
+  'Reciever',
+  'Monitor',
+  'Audio',
+  'Laptop',
+  'Headphone',
+  'Smartphone',
+  'Tablet',
+  'Smartwatch',
+  'Printer',
+  'Camera',
+  'Speaker',
+  'Projector',
+  'Game Console',
+  'Drone',
+  'Router',
+  'Hard Drive',
+  'SSD',
+  'Keyboard',
+  'Mouse',
+  'Graphics Card',
+  'Motherboard',
+  'Power Supply',
+  'RAM',
+  'Cooling System',
+  'VR Headset',
+  'E-Reader',
+  'Fitness Tracker',
+  'Charger',
+]
+
+export const largestGermanCities = [
+  'Berlin',
+  'Hamburg',
+  'München',
+  'Köln',
+  'Frankfurt am Main',
+  'Stuttgart',
+  'Düsseldorf',
+  'Leipzig',
+  'Dortmund',
+  'Essen',
+  'Bremen',
+  'Dresden',
+  'Hannover',
+  'Nürnberg',
+  'Duisburg',
+  'Bochum',
+  'Wuppertal',
+  'Bielefeld',
+  'Bonn',
+  'Münster',
+]
