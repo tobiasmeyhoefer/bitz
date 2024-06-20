@@ -17,60 +17,58 @@ import { getTranslations } from 'next-intl/server'
 import { Link } from '@/navigation'
 import { Button } from '../ui/button'
 import ExperimentalChatButton from './exp-chat-button'
+import Image from 'next/image'
 
 export const ConversationCard = async ({ conv }: { conv: ConversationType }) => {
   const currentUser = await getUser()
   const user = await getUserById(conv.buyerId)
   const product = await getProductById(conv.productId)
   const t = await getTranslations('Conversations')
-  const translations = await getTranslations('Conversations')
-  //let a = translations.title;
 
   const cardType: 'sellerCard' | 'buyerCard' =
     currentUser.id === product.sellerId ? 'buyerCard' : 'sellerCard'
 
   if (cardType === 'sellerCard') {
     return (
-      <Card className="relative">
-        <ConversationCardDropwdown conv={conv} showDelay={true} showSold={false} />
-        <CardHeader>
-          <CardTitle>
-            {t('wannabuy00')} {product.title} {t('wannabuy01')}
-          </CardTitle>
-          <CardDescription>
-            {conv.status === 'accepted' ? (
-              <span>
-                {t('sellerAccepted')}
-                {await getAddressByUserId(conv.sellerId)}
-              </span>
+      <Link className="transition-all hover:bg-neutral-100" href={`/conversations/${conv.id}`}>
+        <Card className="relative flex h-[140px] bg-transparent">
+          <div>
+            <Image src={product.imageUrl1!} alt="iamge of product" width={140} height={140} className='min-h-[140px] min-w-[140px]'/>
+          </div>
+          <div>
+            {/* <ConversationCardDropwdown conv={conv} showDelay={true} showSold={false} /> */}
+            <CardHeader>
+              <CardTitle>
+                {t('wannabuy00')} {product.title} {t('wannabuy01')}
+              </CardTitle>
+              {/* <CardDescription>
+              {conv.status === 'accepted' ? (
+                <span>
+                  {t('sellerAccepted')}
+                  {await getAddressByUserId(conv.sellerId)}
+                </span>
+              ) : (
+                <span>{t('waiting')} </span>
+              )}
+            </CardDescription> */}
+            </CardHeader>
+            <CardFooter className="flex flex-col items-start text-neutral-400">
+              <p className="font-light text-neutral-400">{formatDate(conv.createdAt)}</p>
+              {/* {conv.delay !== null ? (
+              <p className="text-red-600">
+                {t('delay00')} {conv.delay} {t('delay01')}
+              </p>
             ) : (
-              <span>{t('waiting')} </span>
-            )}
-          </CardDescription>
-          {conv.status === 'accepted' ? (
-            <CardContent className="p-0">
-              <p>{conv.message1}</p>
-              <ConversationForm2 convId={conv.id} />
-            </CardContent>
-          ) : conv.status === 'deal' ? (
-            <p>{t('deal')} ✅</p>
-          ) : (
-            <span></span>
-          )}
-        </CardHeader>
-        <CardFooter className="flex flex-col items-start text-neutral-400">
-          <p className="font-light text-neutral-400">{formatDate(conv.createdAt)}</p>
-          {conv.delay !== null ? (
-            <p className="text-red-600">
-              {t('delay00')} {conv.delay} {t('delay01')}
-            </p>
-          ) : (
-            <span></span>
-          )}
-          <Link href={`/conversations/${conv.id}`}><Button>Exp. Chat</Button></Link>
-          {/* <ExperimentalChatButton/> */}
-        </CardFooter>
-      </Card>
+              <span></span>
+            )} */}
+              {/* <Link href={`/conversations/${conv.id}`}>
+              <Button>Exp. Chat</Button>
+            </Link> */}
+              {/* <ExperimentalChatButton/> */}
+            </CardFooter>
+          </div>
+        </Card>
+      </Link>
     )
   } else if (cardType === 'buyerCard') {
     return (
@@ -78,34 +76,32 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
         {conv.status === 'declined' ? (
           <span></span>
         ) : (
-          <Card className="relative">
-            <ConversationCardDropwdown conv={conv} showDelay={false} showSold={true} />
-            <CardHeader>
-              <CardTitle>
-                {user.name} {t('newbuyer00')} {product.title} {t('newbuyer01')}
-              </CardTitle>
-              {conv.status === 'offen' ? <CardDescription>{t('gotOffer')}</CardDescription> : null}
-            </CardHeader>
-            {conv.status === 'accepted' ? (
-              <CardContent>{t('accepted')} ✅</CardContent>
-            ) : conv.status === 'deal' ? (
-              <CardContent>{conv.message2}</CardContent>
-            ) : (
-              <CardContent>
-                <ConversationForm convId={conv.id} />
-              </CardContent>
-            )}
-            <CardFooter className="flex flex-col items-start text-neutral-400">
-              <p>{formatDate(conv.createdAt)}</p>
-              {conv.delay !== null ? (
+          <Link className="transition-all hover:bg-neutral-100" href={`/conversations/${conv.id}`}>
+            <Card className="relative bg-transparent flex h-[140px]">
+              <div>
+                <Image src={product.imageUrl1!} alt="iamge of product" width={140} height={140} className='min-h-[140px] min-w-[140px]' />
+              </div>
+              <div>
+                <ConversationCardDropwdown conv={conv} showDelay={false} showSold={true} />
+                <CardHeader>
+                  <CardTitle>
+                    {user.name} {t('newbuyer00')} {product.title} {t('newbuyer01')}
+                  </CardTitle>
+                  {/* {conv.status === 'offen' ? <CardDescription>{t('gotOffer')}</CardDescription> : null} */}
+                </CardHeader>
+                <CardFooter className="flex flex-col items-start text-neutral-400">
+                  <p>{formatDate(conv.createdAt)}</p>
+                  {/* {conv.delay !== null ? (
                 <p className="text-red-600">
                   {user.name} {t('delay11')} {conv.delay} {t('delay01')}
                 </p>
               ) : (
                 <span></span>
-              )}
-            </CardFooter>
-          </Card>
+              )} */}
+                </CardFooter>
+              </div>
+            </Card>
+          </Link>
         )}
       </>
     )
@@ -113,3 +109,22 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
 }
 
 export default ConversationCard
+
+// {conv.status === 'accepted' ? (
+//   <CardContent className="p-0">
+//     <p>{conv.message1}</p>
+//     {/* <ConversationForm2 convId={conv.id} /> */}
+//   </CardContent>
+// ) : conv.status === 'deal' ? (
+//   <p>{t('deal')} ✅</p>
+// ) : (
+//   <span></span>
+// )}
+
+// {conv.status === 'accepted' ? (
+//   <CardContent>{t('accepted')} ✅</CardContent>
+// ) : conv.status === 'deal' ? (
+//   <CardContent>{conv.message2}</CardContent>
+// ) : (
+//   <CardContent>{/* <ConversationForm convId={conv.id} /> */}</CardContent>
+// )}

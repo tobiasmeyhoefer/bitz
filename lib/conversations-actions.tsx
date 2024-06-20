@@ -71,3 +71,8 @@ export async function addConversationDelay(id: string, delay: string) {
   await db.update(conversations).set({ delay: delay }).where(eq(conversations.id, id))
   revalidatePath('/conversations')
 }
+
+export async function getConversationById(convId: string) {
+  const response = await db.select().from(conversations).where(eq(conversations.id, convId))
+  return response[0]
+}

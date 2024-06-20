@@ -8,7 +8,9 @@ export default async function RootLayout({
   return (
     <>
       {children}
-      <ExperimentalAi />
+      <div className="max-md:hidden">
+        <ExperimentalAi />
+      </div>
     </>
   )
 }

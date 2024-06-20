@@ -1,6 +1,7 @@
 import { CardWithImage } from '@/components/ui/cardWithImage'
 import { getProductsOwned } from '@/lib/product-actions'
 import { getUser } from '@/lib/user-actions'
+import AnimatedCard from '../ui/animated-card'
 
 const MyShopContent = async () => {
   const user = await getUser()
@@ -17,13 +18,15 @@ const MyShopContent = async () => {
       {
         <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
           {products?.map((p, index) => (
-            <CardWithImage
-              key={`pr-${index}`}
-              className="mx-[5px] my-[0.5rem]"
-              product={products[index]}
-              favIcon
-              editable
-            />
+            // <AnimatedCard  delay={0.3} >
+              <CardWithImage
+                key={`pr-${index}`}
+                className="mx-[5px] my-[0.5rem]"
+                product={products[index]}
+                favIcon
+                editable
+              />
+            // </AnimatedCard>
           ))}
         </div>
       }
