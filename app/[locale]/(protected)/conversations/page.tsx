@@ -6,9 +6,9 @@ const Conversations = async () => {
   const t = await getTranslations('Conversations')
   const conversations = await getAllConversations()
   return (
-    <section className="flex flex-col items-center mt-20">
+    <section className="flex flex-col items-center mt-10 space-y-10 max-lg:px-5">
       <h1 className='text-4xl font-montserrat font-bold mb-6'>{t('title')}</h1>
-      {conversations.length > 0 ? <div className="w-full max-w-[600px] flex flex-col gap-6">
+      {conversations.length > 0 ? <div className="w-full max-w-[800px] flex flex-col gap-6">
         {conversations.map((conv) => (
           <ConversationCard
             conv={conv}
