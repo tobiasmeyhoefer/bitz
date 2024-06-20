@@ -2,7 +2,6 @@
 import { Button } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import Image, { StaticImageData } from 'next/image'
-import image1 from '@/public/images/test_banner.jpg'
 import colorBanner1 from '@/public/images/Banner/cardinal.jpg'
 import colorBanner2 from '@/public/images/Banner/greencrayola.jpg'
 import colorBanner3 from '@/public/images/Banner/ultramarineblue.jpeg'
