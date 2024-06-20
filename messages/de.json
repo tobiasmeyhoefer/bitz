@@ -113,7 +113,13 @@
   "Product": {
     "quantity": "Häufigkeit",
     "image": "Bild",
-    "of": "von"
+    "of": "von",
+    "updateImage": {
+      "title": "Produktbild",
+      "description": "Bearbeite dieses Bild",
+      "submit": "Absenden",
+      "close": "Schließen"
+    }
   },
   "addProductPage": {
     "title": "Titel",

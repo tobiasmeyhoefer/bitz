@@ -31,6 +31,12 @@ export default async function Page({ params }: { params: { id: string } }) {
   const carouselTranslations = {
     image: t('image'),
     of: t('of'),
+    updateImage: {
+      title: t('updateImage.title'),
+      description: t('updateImage.description'),
+      submit: t('updateImage.submit'),
+      close: t('updateImage.close'),
+    },
   }
   const backButtonHref = isOwner ? `/myshop` : '/browse'
 

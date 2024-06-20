@@ -105,14 +105,15 @@
   "Product": {
     "quantity": "Quantity",
     "image": "Image",
-    "of": "of"
+    "of": "of",
+    "updateImage": {
+      "title": "Product Picture",
+      "description": "Edit this picture",
+      "submit": "Submit",
+      "close": "Close"
+    }
   },
-  "updateImage": {
-    "title": "Product Picture",
-    "description": "Edit this picture",
-    "submit": "Submit",
-    "close": "Close"
-  },
+
   "addProductPage": {
     "title": "Title",
     "description": "Description",
