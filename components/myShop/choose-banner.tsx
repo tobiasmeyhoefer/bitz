@@ -3,6 +3,31 @@ import { Button } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import Image, { StaticImageData } from 'next/image'
 import image1 from '@/public/images/test_banner.jpg'
+import colorBanner1 from '@/public/images/Banner/cardinal.jpg'
+import colorBanner2 from '@/public/images/Banner/greencrayola.jpg'
+import colorBanner3 from '@/public/images/Banner/ultramarineblue.jpeg'
+import colorBanner4 from '@/public/images/Banner/yelloworange.jpg'
+import gradientBanner1 from '@/public/images/Banner/gradient1.jpg'
+import gradientBanner2 from '@/public/images/Banner/gradient2.jpg'
+import gradientBanner3 from '@/public/images/Banner/gradient3.jpg'
+import gradientBanner4 from '@/public/images/Banner/gradient4.jpg'
+import pictureBanner1 from '@/public/images/Banner/picture1.jpeg'
+import pictureBanner2 from '@/public/images/Banner/picture2.jpg'
+import pictureBanner3 from '@/public/images/Banner/picture3.jpg'
+import pictureBanner4 from '@/public/images/Banner/picture4.jpg'
+
+const colorImages = [
+  colorBanner1,
+  colorBanner2,
+  colorBanner3,
+  colorBanner4,
+  gradientBanner1,
+  gradientBanner2,
+  gradientBanner3,
+  gradientBanner4,
+]
+
+const pictureImages = [pictureBanner1, pictureBanner2, pictureBanner3, pictureBanner4]
 
 const ChooseBanner = (props: {
   setBanner: (value: StaticImageData | undefined) => void
@@ -41,15 +66,31 @@ const ChooseBanner = (props: {
                 </Button>
               </div>
               <hr />
-              <p className="text-xs text-muted-foreground">choose your Banner</p>
+              <p className="text-sm text-muted-foreground">colors</p>
             </div>
             <div className="grid grid-cols-4 gap-4">
-              <Button
-                className="h-16 bg-transparent p-0 shadow-transparent"
-                onClick={() => chooseImage(image1)}
-              >
-                <Image src={image1} alt="Product Image" className="h-16 rounded" />
-              </Button>
+              {colorImages.map((image, index) => (
+                <Button
+                  key={index}
+                  className="h-16 bg-transparent p-0 shadow-transparent"
+                  onClick={() => chooseImage(image)}
+                >
+                  <Image src={image} alt={`Banner ${index + 1}`} className="h-16 rounded" />
+                </Button>
+              ))}
+            </div>
+            <hr />
+            <p className="text-sm text-muted-foreground">pictures</p>
+            <div className="grid grid-cols-4 gap-4">
+              {pictureImages.map((image, index) => (
+                <Button
+                  key={index}
+                  className="h-16 bg-transparent p-0 shadow-transparent"
+                  onClick={() => chooseImage(image)}
+                >
+                  <Image src={image} alt={`Banner ${index + 1}`} className="h-16 rounded" />
+                </Button>
+              ))}
             </div>
           </div>
         </PopoverContent>

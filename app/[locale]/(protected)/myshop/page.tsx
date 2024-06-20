@@ -3,18 +3,17 @@ import { Link } from '@/navigation'
 import MyShopContent from '@/components/myShop/myshopContent'
 import { getTranslations } from 'next-intl/server'
 import Banner from '@/components/myShop/banner'
-import image1 from '@/public/images/test_banner.jpg'
 
 const MyShop = async () => {
   const t = await getTranslations('MyShop')
   return (
     <div className="inset-x-1/2 flex flex-col items-center">
       <Banner />
-      <h1 className="mt-8 text-left font-montserrat text-3xl font-bold">{t('title')}</h1>
+      {/* <h1 className="mt-4 text-left font-montserrat text-3xl font-bold">{t('title')}</h1> */}
       <div>
         <MyShopContent />
       </div>
-      <div className="fixed bottom-8 right-28 mt-8 flex justify-end space-x-4">
+      <div className="fixed bottom-8 right-28 flex justify-end space-x-4">
         <Link href="myshop/add">
           <Button> {t('addProducts')}</Button>
         </Link>
