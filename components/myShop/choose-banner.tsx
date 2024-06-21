@@ -7,8 +7,6 @@ import colorBanner2 from '@/public/images/Banner/greencrayola.jpg'
 import colorBanner3 from '@/public/images/Banner/ultramarineblue.jpeg'
 import colorBanner4 from '@/public/images/Banner/yelloworange.jpg'
 import gradientBanner1 from '@/public/images/Banner/gradient1.jpg'
-import gradientBanner2 from '@/public/images/Banner/gradient2.jpg'
-import gradientBanner3 from '@/public/images/Banner/gradient3.jpg'
 import gradientBanner4 from '@/public/images/Banner/gradient4.jpg'
 import pictureBanner1 from '@/public/images/Banner/picture1.jpeg'
 import pictureBanner2 from '@/public/images/Banner/picture2.jpg'
@@ -21,8 +19,6 @@ const colorImages = [
   colorBanner3,
   colorBanner4,
   gradientBanner1,
-  gradientBanner2,
-  gradientBanner3,
   gradientBanner4,
 ]
 
