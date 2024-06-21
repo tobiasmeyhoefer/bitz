@@ -30,10 +30,16 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
 
   if (cardType === 'sellerCard') {
     return (
-      <Link className="transition-all hover:bg-neutral-100" href={`/conversations/${conv.id}`}>
+      <Link className="transition-all hover:bg-secondary" href={`/conversations/${conv.id}`}>
         <Card className="relative flex h-[140px] bg-transparent">
           <div>
-            <Image src={product.imageUrl1!} alt="iamge of product" width={140} height={140} className='min-h-[140px] min-w-[140px]'/>
+            <Image
+              src={product.imageUrl1!}
+              alt="iamge of product"
+              width={140}
+              height={140}
+              className="min-h-[140px] min-w-[140px]"
+            />
           </div>
           <div>
             {/* <ConversationCardDropwdown conv={conv} showDelay={true} showSold={false} /> */}
@@ -76,10 +82,16 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
         {conv.status === 'declined' ? (
           <span></span>
         ) : (
-          <Link className="transition-all hover:bg-neutral-100" href={`/conversations/${conv.id}`}>
-            <Card className="relative bg-transparent flex h-[140px]">
+          <Link className="transition-all hover:bg-secondary" href={`/conversations/${conv.id}`}>
+            <Card className="relative flex h-[140px] bg-transparent">
               <div>
-                <Image src={product.imageUrl1!} alt="iamge of product" width={140} height={140} className='min-h-[140px] min-w-[140px]' />
+                <Image
+                  src={product.imageUrl1!}
+                  alt="iamge of product"
+                  width={140}
+                  height={140}
+                  className="min-h-[140px] min-w-[140px]"
+                />
               </div>
               <div>
                 <ConversationCardDropwdown conv={conv} showDelay={false} showSold={true} />

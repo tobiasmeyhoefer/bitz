@@ -22,6 +22,12 @@ This project uses internationalization. Every string that is going to be interna
 - as a prop for client side
 
 
+## Code Conventions
+
+Pascal Case - Bennennung Komponenten
+Kleinbuchstaben mit bindestrich - Bennenung von Dateien
+
+
 ## Technologies
 
 ### Language

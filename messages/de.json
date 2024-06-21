@@ -2,6 +2,7 @@
   "Index": {
     "title": "Hallo Welt!"
   },
+
   "Date": {
     "january": "Januar",
     "february": "Februar",
@@ -16,6 +17,7 @@
     "november": "November",
     "december": "Dezember"
   },
+
   "Landingpage": {
     "subtitle": "von heute für morgen mit Technik versorgen",
     "description": "Entdecke bei Bitz die neuesten Technikgeräte zu unschlagbaren Preisen! Kaufe, verkaufe und tausche deine Lieblingsgadgets in einer sicheren Umgebung. Trete unserer lebendigen Community bei und finde noch heute dein nächstes Technik-Highlight.",
@@ -31,17 +33,13 @@
     "buy": "Produkte kaufen",
     "sell": "Technik-Produkte verkaufen",
     "createAccount": "Account erstellen",
-
     "sub01": "VON",
     "sub02": "GESTERN",
     "sub03": "FÜR",
     "sub04": "MORGEN",
     "sub05": "MIT TECHNIK VERSORGEN",
     "discoverBitz": "Entdecke die neue Kauf- und Verkaufsplattform",
-
-    "Sponsors": {
-      "thanks": "Besonderen Dank an"
-    },
+    "Sponsors": {"thanks": "Besonderen Dank an"},
     "About": {
       "title": "Was Ist",
       "WhatIsBitz": "Bitz ist eine Kauf- und Verkaufsplattform ähnlich wie Kleinanzeigen oder Vinted, nur sehr viel besser. Bei Bitz dreht sich alles um die Freude am Stöbern, Entdecken und Handeln. Unsere Anwendung dient als Marktplatz zum Verkauf eigener Ware, oder zum Kauf von Waren anderer. Unser Augenmerk liegt hierbei auf dem Handel mit technischer Ware, eine erhöhte Sicherheit und eine gute Benutzererfahrung. Durch individualisierbare Nutzerprofile lassen sich eigene kleine Shops erstellen, um die Bitz (deine Artikel) somit ideal zu vermarkten. Mit Bitz lässt sich somit Geld sparen, Platz schaffen und zudem die Umwelt schonen.",
@@ -95,20 +93,30 @@
     "date": "Datum",
     "price": "Preis"
   },
+
   "Search": {
     "title": "Suchen"
   },
+
   "MyShop": {
     "title": "MEINE BITZ",
     "addProducts": "Bit hinzufügen",
     "updateProducts": "Bit aktualisieren",
     "deleteProduct": "Bit löschen"
   },
+
   "Product": {
     "quantity": "Häufigkeit",
     "image": "Bild",
-    "of": "von"
+    "of": "von",
+    "updateImage": {
+      "title": "Produktbild",
+      "description": "Bearbeite dieses Bild",
+      "submit": "Absenden",
+      "close": "Schließen"
+    }
   },
+
   "addProductPage": {
     "title": "Titel",
     "description": "Beschreibung",
@@ -122,18 +130,23 @@
     "submitTitle": "Absenden",
     "save": "Speichern",
     "cancel": "Abbrechen",
-    "edit": "Bearbeiten"
+    "edit": "Bearbeiten",
+    "isDirectlyBuyable": "Ist direkt kaufbar",
+    "deletePicture": "Bild löschen"
   },
+
   "ProdDelAlert": {
     "title": "Achtung!",
     "yousure": "Bist du sicher, dass du dieses Bit löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.",
     "confirm": "Bestätigen",
     "cancel": "Abbrechen"
   },
+
   "Settings": {
     "title": "EINSTELLUNGEN",
     "city": "Stadt",
     "postcode": "Postleitzahl",
+    "address": "neue Adresse",
     "imageChangeTitle": "Profilbild ändern",
     "submitTitle": "absenden",
     "deleteAccount": "Account löschen",
@@ -143,12 +156,30 @@
     "deleteAccountAction": "Account löschen",
     "app": "Anwendung",
     "safety": "Sicherheit",
-    "username": "Benutzer",
-    "change Name": "change name",
-    "change Location": "change location",
-    "change Adress": "change adress",
-    "theme": "change colortheme"
+    "username": "Benutzername & Adresse",
+    "changeName": "neuer Benutzername",
+    "changeLocation": "change location",
+    "changeAddress": "Adresse ändern",
+    "theme": "Farbschema",
+    "changeNow": "annehmen",
+    "Verification": {
+      "notVerified": "Dein Konto ist noch nicht verifiziert!",
+      "verificationAborted": "Verifizierung abgebrochen",
+      "verified": "Dein Konto ist verifiziert.",
+      "wrongNumber": "Falsche Nummer!",
+      "verifyNow": "Jetzt verifizieren!",
+      "typeInNumber": "Gib deine Telefonnummer ein!",
+      "numberNotice": "Verwende das + vor deiner Nummer",
+      "continue": "Weiter",
+      "enterCode": "Gib den Code ein, den du per SMS erhalten hast!",
+      "cancel": "Abbrechen",
+      "submit": "Absenden"
+    },
+    "restartGuide": "Einführung neu starten",
+    "registerPasskey": "Neuen Passkey registrieren",
+    "registerPasskeySuccess": "Passkey wurde erfolgreich registriert!"
   },
+
   "Navbar": {
     "loginButton": "anmelden",
     "logoutButton": "Abmelden",
@@ -160,6 +191,7 @@
     "settings": "Einstellungen",
     "favorites": "Favoriten"
   },
+
   "LoginForm": {
     "loginButton": "anmelden",
     "loginMessage": "via Email oder Google",
@@ -168,8 +200,9 @@
     "loginOrPasskey": "oder",
     "loginPasskeyButton": "mit Passkey"
   },
+
   "LocaleSwitcher": {
-    "label": "Sprache ändern",
+    "label": "Sprache",
     "locale": "{locale, select, de {🇩🇪 Deutsch} en {🇺🇸 English} other {Unbekannt}}"
   },
 
@@ -191,6 +224,7 @@
     "delay01": "Minuten",
     "delay11": "verspätet sich um"
   },
+
   "Transactions": {
     "title": "TRANSAKTIONEN"
   }
