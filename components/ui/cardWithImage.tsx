@@ -13,22 +13,22 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 
 const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
   ({ className, ...props }, ref) => {
-    const cardWidth = 300
+    const cardWidth = 300 / 2
     const product = props.product
 
     return (
       <>
         {props && product ? (
-          <Card className={cn(`w-[${cardWidth}px]`, className)} ref={ref}>
+          <Card className={cn(`w-[${cardWidth}px]!`, className)} ref={ref}>
             <Link href={`/product/${product.id}`}>
               {product.imageUrl1 !== undefined ? (
                 <Image
                   src={product.imageUrl1 as string}
                   width={cardWidth}
-                  height={300}
+                  height={cardWidth}
                   className="rounded-t-xl"
                   alt="Preview Image Article"
-                  style={{ objectFit: 'cover', height: '300px' }}
+                  style={{ objectFit: 'cover', height: cardWidth }}
                 />
               ) : (
                 <div
@@ -43,9 +43,9 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
               <div className="flex max-w-full justify-between">
                 <TooltipProvider>
                   <Tooltip>
-                    <TooltipTrigger className="max-w-[calc(100%-36px)]">
+                    <TooltipTrigger className={`w-[calc(${cardWidth}-36px)]!`}>
                       <CardTitle
-                        className="truncate align-middle text-2xl"
+                        className="truncate align-middle text-lg md:text-2xl"
                         style={{ lineHeight: 'unset' }}
                       >
                         {product.title}
@@ -60,15 +60,15 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                 {props.editable && props.favIcon && <ProdDelAlert productId={product.id} />}
                 {!props.editable && props.favIcon && <FavoriteLike productId={product.id} />}
               </div>
-              <CardDescription className="text-sm">
+              <CardDescription>
                 <div className="flex justify-between">
-                  <Badge className="text-md m-0" variant="secondary">
+                  <Badge className="md:text-md m-0 text-xs" variant="secondary">
                     {props.product.category}
                   </Badge>
-                  <div className="text-left text-xl">{props.product.price}€</div>
+                  <div className="text-left text-lg md:text-xl">{props.product.price}€</div>
                 </div>
 
-                <div className="mt-2 flex justify-between">
+                <div className="mt-2 flex justify-between text-xs md:text-sm">
                   <div className="flex flex-nowrap items-center text-right">
                     <FaLocationDot className="mx-1 size-3" />
                     {props.product.location}
@@ -82,7 +82,7 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                         View Shop
                       </Link>
                     )}
-                    <div className="flex items-end text-right">{formatDate(product.createdAt)}</div>
+                    {/* <div className="flex items-end text-right">{formatDate(product.createdAt)}</div> */}
                   </div>
                 </div>
 

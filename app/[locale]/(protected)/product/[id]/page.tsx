@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
-import { ProductImageCarousel } from '../productImgCarousel'
-import ProductInfoCard from '../productInfoCard'
+import { ProductImageCarousel } from '@/components/products/productImgCarousel'
+import ProductInfoCard from '@/components/products/productInfoCard'
 import { Link } from '@/navigation'
 import { getTranslations } from 'next-intl/server'
 import { getProductById } from '@/lib/product-actions'
@@ -70,7 +70,7 @@ export default async function Page({ params }: { params: { id: string } }) {
               }
             >
               View Shop
-            </Button>{' '}
+            </Button>
           </Link>
         )}
       </div>
