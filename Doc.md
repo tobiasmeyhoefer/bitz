@@ -11,7 +11,7 @@ Bitz ist eine innovative Online-Plattform, die sich auf den Kauf, Verkauf und Ta
 4. Code Conventions
 5. Technologien
     1. Sprache
-        1. Typescript
+        1. Typescriptt
     2. Frontend Framework
         1. Next.js v14+ (App Router)
         2. Three.js (für 3D-Komponenten)
