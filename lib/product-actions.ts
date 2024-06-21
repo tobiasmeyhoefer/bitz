@@ -13,13 +13,15 @@ import { addProductStripe, setProductNotActive, updateProductStripe } from './st
 import { redirect } from '@/navigation'
 import { sortBy } from 'sort-by-typescript'
 
-export async function getProductsBrowse() {
+export async function getProductsBrowse(limit: number = 5, offset: number = 0) { 
   const session = await auth()
   const id = session?.user?.id
   const response = await db
     .select()
     .from(products)
     .where(and(ne(products.sellerId, id!), ne(products.isSold, true)))
+    .limit(limit)
+    .offset(offset)
   return response
 }
 
