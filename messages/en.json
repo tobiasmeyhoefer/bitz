@@ -2,6 +2,7 @@
   "Index": {
     "title": "Hello World"
   },
+
   "Date": {
     "january": "January",
     "february": "February",
@@ -16,6 +17,7 @@
     "november": "November",
     "december": "December"
   },
+
   "Landingpage": {
     "subtitle": "Supplying you with technology from today to tomorrow",
     "description": "Discover the latest tech gadgets at Bitz at unbeatable prices! Buy, sell, and trade your favorite gadgets in a secure environment. Join our vibrant community and find your next tech highlight today.",
@@ -37,9 +39,7 @@
     "sub04": "TOMORROW",
     "sub05": "SUPPLYING TECHNOLOGY",
     "discoverBitz": "Discover the new buying and selling platform",
-    "Sponsors": {
-      "thanks": "Special thanks to"
-    },
+    "Sponsors": {"thanks": "Special thanks to"},
     "About": {
       "title": "What Is",
       "WhatIsBitz": "Bitz is a buying and selling platform similar to classified ads or Vinted, only much better. Bitz is all about the joy of browsing, discovering and trading. Our application serves as a marketplace for selling your own goods or buying those of others. Our focus here is on trading in technical goods, increased security and a good user experience. Customizable user profiles allow you to create your own small stores to market Bitz (your items) in an ideal way. With Bitz, you can save money, create space and also protect the environment.",
@@ -93,20 +93,30 @@
     "date": "date",
     "price": "price"
   },
+
   "Search": {
     "title": "Search"
   },
+
   "MyShop": {
     "title": "MY BITZ",
     "addProducts": "add Bit",
     "updateProducts": "update Bit",
     "deleteProduct": "delete Bit"
   },
+
   "Product": {
     "quantity": "Quantity",
     "image": "Image",
-    "of": "of"
+    "of": "of",
+    "updateImage": {
+      "title": "Product Picture",
+      "description": "Edit this picture",
+      "submit": "Submit",
+      "close": "Close"
+    }
   },
+
   "addProductPage": {
     "title": "Title",
     "description": "Description",
@@ -120,35 +130,58 @@
     "submitTitle": "submit",
     "save": "Save",
     "cancel": "Cancel",
-    "edit": "Edit"
+    "edit": "Edit",
+    "isDirectlyBuyable": "Is directly buyable",
+    "deletePicture": "delete Picture"
   },
+
   "ProdDelAlert": {
     "title": "Attention!",
     "yousure": "This will permanently delete this Bit from the database. This action cannot be undone. ",
     "confirm": "Confirm",
     "cancel": "Cancel"
   },
+
   "Settings": {
     "title": "SETTINGS",
-    "city": "city",
-    "postcode": "postcode",
-    "imageChangeTitle": "change Profilepicture",
+    "city": "City",
+    "postcode": "Postcode",
+    "address": "New Address", 
+    "imageChangeTitle": "Change Profilepicture",
     "submitTitle": "submit",
-    "deleteAccount": "delete Account",
+    "deleteAccount": "Delete Account",
     "deleteAccountTitle": "Are you absolutely sure?",
     "deleteAccountDescription": "This action cannot be undone. This will permanently delete your account and remove your data from our servers.",
     "deleteAccountCancel": "Cancel",
-    "deleteAccountAction": "delete Account",
+    "deleteAccountAction": "Delete Account",
     "app": "Application",
     "safety": "Safety",
-    "username": "User",
-    "change Name": "Name ändern",
-    "change Location": "Postleitzahl ändern",
-    "change Adress": "Adresse ändern",
-    "theme": "Farbschema ändern"
+    "username": "Username & Address",
+    "changeName": "New Username",
+    "changeLocation": "Postleitzahl ändern",
+    "changeAddress": "New Address",
+    "theme": "Theme",
+    "changeNow": "apply now",
+    "Verification": {
+      "notVerified": "You are now verified!",
+      "verificationAborted": "Verification aborted",
+      "verified": "You are verified.",
+      "wrongNumber": "Wrong number!",
+      "verifyNow": "Verify now!",
+      "typeInNumber": "Type in your phone number!",
+      "numberNotice": "Use the + infront of your number",
+      "continue": "Continue",
+      "enterCode": "Enter the code you received on your phone!",
+      "cancel":"Cancel",
+      "submit":"Submit"
+    },
+    "restartGuide": "Restart beginners tour",
+    "registerPasskey": "Register new passkey",
+    "registerPasskeySuccess": "Passkey registered successfully!"
   },
+
   "Navbar": {
-    "loginButton": "login",
+    "loginButton": "Login",
     "logoutButton": "Logout",
     "discover": "Discover",
     "myBitz": "My Bitz",
@@ -158,6 +191,7 @@
     "settings": "Settings",
     "favorites": "Favorites"
   },
+
   "LoginForm": {
     "loginButton": "login",
     "loginMessage": "with Email or Google",
@@ -166,10 +200,12 @@
     "loginOrPasskey": "or",
     "loginPasskeyButton": "with Passkey"
   },
+
   "LocaleSwitcher": {
-    "label": "change language",
+    "label": "Language",
     "locale": "{locale, select, de {🇩🇪 Deutsch} en {🇺🇸 English} other {Unbekannt}}"
   },
+
   "Conversations": {
     "title": "CONVERSATIONS",
     "empty": "There are no opened conversations",
@@ -178,7 +214,6 @@
     "wannabuy00": "You are interested in the Bit '",
     "wannabuy01": "'. ",
     "gotOffer": "You can now accept or decline this offer. If you accept it, the location you specified in the settings will be transmitted. Please enter \"when you have time\" in the field provided!",
-    "accepted": "Du hast das Angebot akzeptiert",
     "waiting": "Waiting for a response...",
     "deal": "You have a deal!",
     "youAccepted": "You have accepted the offer",
