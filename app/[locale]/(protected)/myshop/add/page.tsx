@@ -13,6 +13,8 @@ const AddProductPage = async () => {
     toastTitle: t('toastTitle'),
     toastDescription: t('toastDescription'),
     submitTitle: t('submitTitle'),
+    isDirectlyBuyable: t('isDirectlyBuyable'),
+    deletePicture: t('deletePicture')
   }
   return (
     <>

@@ -12,13 +12,19 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { transactions } from '@/schema'
 
-export function DarkmodeToggler() {
+interface ThemeProps {
+  translations: {
+    theme: string,
+  }
+}
+export function DarkmodeToggler({ translations }: ThemeProps) {
   const { setTheme } = useTheme()
 
   return (
     <div>
-      <h4 className='mb-2'>Farbschema ändern</h4>
+      <h4 className="mb-2">{translations.theme}</h4>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" size="icon">

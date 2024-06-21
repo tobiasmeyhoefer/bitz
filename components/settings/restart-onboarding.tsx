@@ -1,8 +1,9 @@
 import { setOnboardingState } from '@/lib/user-actions'
 import { Button } from '../ui/button'
 import { redirect } from '@/navigation'
-
+import { useTranslations } from 'next-intl'
 const RestartOnboarding = async () => {
+  const t = useTranslations('Settings')
   return (
     <form
       className="w-full"
@@ -12,7 +13,7 @@ const RestartOnboarding = async () => {
         redirect("/browse")
       }}
     >
-      <Button>Einführung neu beginnen</Button>
+      <Button>{t('restartGuide')}</Button>
     </form>
   )
 }

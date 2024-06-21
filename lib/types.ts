@@ -71,6 +71,8 @@ type FormTranslations = {
   toastTitle: string
   toastDescription: string
   submitTitle: string
+  isDirectlyBuyable: string
+  deletePicture: string
 }
 
 type BrowseContentProps = {
