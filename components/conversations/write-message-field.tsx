@@ -60,7 +60,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
 
     if (input.trim() === '') return
 
-    if(await checkProfanity(input)) {
+    if (await checkProfanity(input)) {
       toast({
         title: 'Oh oh',
         description: 'Please check your profanity',
@@ -254,7 +254,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
           </div>
         )}
       </div>
-      <div className="mt-2 flex gap-2">
+      <form className="mt-2 flex gap-2">
         <Input
           className="h-[50px] rounded-xl text-primary md:h-[64px]"
           placeholder="type a message..."
@@ -268,11 +268,15 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
             senden
           </Button>
         ) : (
-          <Button onClick={sendMessage} className="h-[50px] rounded-xl px-6 md:h-[64px]">
+          <Button
+            type="submit"
+            onClick={sendMessage}
+            className="h-[50px] rounded-xl px-6 md:h-[64px]"
+          >
             senden
           </Button>
         )}
-      </div>
+      </form>
     </div>
   )
 }
