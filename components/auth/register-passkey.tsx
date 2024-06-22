@@ -20,7 +20,7 @@ const RegisterPasskey = ({translations}: RegisterPasskeyProps) => {
       description: translations.registerPasskeySuccess,
     })
   }
-  return <Button onClick={registerPasskey}>{translations.registerPasskey}</Button>
+  return <Button className='max-w-full' onClick={registerPasskey}>{translations.registerPasskey}</Button>
 }
 
 export default RegisterPasskey
