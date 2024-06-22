@@ -126,3 +126,22 @@ export async function setOnboardingState(state: boolean) {
   const user = await getUser()
   await db.update(users).set({ onboardingCompleted: state }).where(eq(users.id, user.id))
 }
+
+export async function setBanner(bannerURL: string) {
+  const user = await getUser()
+  await db.update(users).set({ banner: bannerURL }).where(eq(users.id, user.id))
+}
+
+export async function getBanner() {
+  const user = await getUser()
+  const response = await db
+    .select({ banner: users.banner })
+    .from(users)
+    .where(eq(users.id, user.id))
+  return response[0].banner!
+}
+
+export async function deleteBanner() {
+  const user = await getUser()
+  await db.update(users).set({ banner: null }).where(eq(users.id, user.id))
+}

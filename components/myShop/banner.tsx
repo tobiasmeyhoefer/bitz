@@ -1,13 +1,25 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image, { StaticImageData } from 'next/image'
 import ChooseBanner from './choose-banner'
 import { MdOutlineEdit } from 'react-icons/md'
 import { ChangeFont } from './change-font'
+import { getBanner } from '@/lib/user-actions'
 const Banner = ({ title }: { title: string }) => {
-  const [banner, setBanner] = useState<StaticImageData>()
+  // const [banner, setBanner] = useState<StaticImageData>()
+  const [banner, setBanner] = useState('')
   const [isBanner, setIsBanner] = useState(false)
 
+  useEffect(() => {
+    const fetchBanner = async () => {
+      const ban = await getBanner()
+      if (ban) {
+        setBanner(ban)
+        setIsBanner(true)
+      }
+    }
+    fetchBanner()
+  }, [])
   return (
     <>
       {isBanner ? (
@@ -16,6 +28,8 @@ const Banner = ({ title }: { title: string }) => {
             src={banner!}
             alt="Product Image"
             style={{ objectFit: 'cover' }}
+            width={1800}
+            height={150}
             className="h-full w-full rounded-b-lg"
           />
           <h1 className="group absolute bottom-2 left-1/2 -translate-x-1/2 font-montserrat text-3xl font-bold drop-shadow-xl">

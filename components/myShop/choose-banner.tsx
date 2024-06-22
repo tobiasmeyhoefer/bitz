@@ -1,41 +1,39 @@
 'use client'
 import { Button } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import Image, { StaticImageData } from 'next/image'
-import colorBanner1 from '@/public/images/Banner/cardinal.jpg'
-import colorBanner2 from '@/public/images/Banner/greencrayola.jpg'
-import colorBanner3 from '@/public/images/Banner/ultramarineblue.jpeg'
-import colorBanner4 from '@/public/images/Banner/yelloworange.jpg'
-import gradientBanner1 from '@/public/images/Banner/gradient1.jpg'
-import gradientBanner4 from '@/public/images/Banner/gradient4.jpg'
-import pictureBanner1 from '@/public/images/Banner/picture1.jpeg'
-import pictureBanner2 from '@/public/images/Banner/picture2.jpg'
-import pictureBanner3 from '@/public/images/Banner/picture3.jpg'
-import pictureBanner4 from '@/public/images/Banner/picture4.jpg'
+import Image from 'next/image'
+import { deleteBanner, setBanner } from '@/lib/user-actions'
 
 const colorImages = [
-  colorBanner1,
-  colorBanner2,
-  colorBanner3,
-  colorBanner4,
-  gradientBanner1,
-  gradientBanner4,
+  '/images/Banner/cardinal.jpg',
+  '/images/Banner/greencrayola.jpg',
+  '/images/Banner/ultramarineblue.jpeg',
+  '/images/Banner/yelloworange.jpg',
+  '/images/Banner/gradient1.jpg',
+  '/images/Banner/gradient4.jpg',
 ]
 
-const pictureImages = [pictureBanner1, pictureBanner2, pictureBanner3, pictureBanner4]
+const pictureImages = [
+  '/images/Banner/picture1.jpeg',
+  '/images/Banner/picture2.jpg',
+  '/images/Banner/picture3.jpg',
+  '/images/Banner/picture4.jpg',
+]
 
 const ChooseBanner = (props: {
-  setBanner: (value: StaticImageData | undefined) => void
+  setBanner: (value: string) => void
   setIsBanner: (value: boolean) => void
   label: string
 }) => {
-  const chooseImage = (value: StaticImageData) => {
-    props.setBanner(value)
+  const chooseImage = async (bannerURL: string) => {
+    props.setBanner(bannerURL)
+    await setBanner(bannerURL)
     props.setIsBanner(true)
   }
 
-  const removeImage = () => {
-    props.setBanner(undefined)
+  const removeImage = async () => {
+    props.setBanner('')
+    await deleteBanner()
     props.setIsBanner(false)
   }
 
@@ -70,7 +68,13 @@ const ChooseBanner = (props: {
                   className="h-16 bg-transparent p-0 shadow-transparent"
                   onClick={() => chooseImage(image)}
                 >
-                  <Image src={image} alt={`Banner ${index + 1}`} className="h-16 rounded" />
+                  <Image
+                    src={image}
+                    alt={`Banner ${index + 1}`}
+                    width={200}
+                    height={140}
+                    className="h-16 rounded"
+                  />
                 </Button>
               ))}
             </div>
@@ -83,7 +87,13 @@ const ChooseBanner = (props: {
                   className="h-16 bg-transparent p-0 shadow-transparent"
                   onClick={() => chooseImage(image)}
                 >
-                  <Image src={image} alt={`Banner ${index + 1}`} className="h-16 rounded" />
+                  <Image
+                    src={image}
+                    alt={`Banner ${index + 1}`}
+                    width={200}
+                    height={140}
+                    className=" h-16 rounded"
+                  />
                 </Button>
               ))}
             </div>
