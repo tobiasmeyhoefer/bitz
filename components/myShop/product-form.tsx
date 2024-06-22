@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { Input } from '../ui/input'
-import { addProduct } from '@/lib/product-actions'
+import { addProduct, checkProfanity } from '@/lib/product-actions'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -179,6 +179,19 @@ export function ProductForm({
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true)
+
+    if(await checkProfanity(values.title) || await checkProfanity(values.description)) {
+      toast({
+        title: 'Oh oh',
+        description: 'Please check your profanity',
+      })
+      setIsLoading(false)
+      return
+    }
+
+    await checkProfanity(values.title) 
+    await checkProfanity(values.description) 
+
     if (!values.category) {
       values.category = 'Other';
     }

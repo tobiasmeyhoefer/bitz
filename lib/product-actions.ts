@@ -393,3 +393,12 @@ export async function filterProducts(values: {
   }
   return response
 }
+export async function checkProfanity(message: string): Promise<boolean> {
+  const res = await fetch('https://vector.profanity.dev', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message }),
+  })
+  const json = await res.json()
+  return json.isProfanity
+}
