@@ -5,6 +5,7 @@ import ChooseBanner from './choose-banner'
 import { MdOutlineEdit } from 'react-icons/md'
 import { ChangeFont } from './change-font'
 import { getBanner } from '@/lib/user-actions'
+import ChooseFontcolor from './choose-fontcolor'
 const Banner = ({ title }: { title: string }) => {
   // const [banner, setBanner] = useState<StaticImageData>()
   const [banner, setBanner] = useState('')
