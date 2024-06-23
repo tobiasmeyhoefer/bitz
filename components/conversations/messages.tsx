@@ -2,7 +2,7 @@
 
 import { pusherClient } from '@/lib/pusher'
 import { cn, formatDate } from '@/lib/utils'
-import { useEffect, useState } from 'react'
+import { useEffect, useOptimistic, useState } from 'react'
 import { HiDotsVertical } from 'react-icons/hi'
 import {
   DropdownMenu,
@@ -29,6 +29,7 @@ interface MessageProps {
 
 const Messages = ({ convId, initialMessages, userId }: MessageProps) => {
   const [messages, setMessages] = useState(initialMessages)
+  const [optimisticMessages, optimisticSetMessages] = useOptimistic(initialMessages, )
 
   const scrollToBottom = () => {
     const element = document.getElementById('testo')

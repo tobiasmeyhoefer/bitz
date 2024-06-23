@@ -1,4 +1,5 @@
 import createNextIntlPlugin from 'next-intl/plugin'
+import withPlaiceholder from "@plaiceholder/next";
 
 const withNextIntl = createNextIntlPlugin()
 
@@ -22,4 +23,4 @@ const nextConfig = {
   },
 }
 
-export default withNextIntl(nextConfig)
+export default withPlaiceholder(withNextIntl(nextConfig))

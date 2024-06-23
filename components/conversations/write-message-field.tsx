@@ -79,8 +79,8 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
       })
       handleFireworkClick()
     } else {
-      await createMessage(input, user.id, conv.id)
       await axios.post('/api/message', { content: input, convId: conv.id, senderId: user.id })
+      await createMessage(input, user.id, conv.id)
     }
 
     setInput('')

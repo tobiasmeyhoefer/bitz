@@ -11,6 +11,7 @@ import { Badge } from './badge'
 import { FaLocationDot } from 'react-icons/fa6'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { CardContainer } from './3d-card'
+import DynamicImage from '../image-ui/dynamic-image'
 
 const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
   ({ className, ...props }, ref) => {
@@ -24,10 +25,12 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
             <Card className={cn(`w-[${cardWidth}px]`, className)} ref={ref}>
               <Link href={`/product/${product.id}`}>
                 {product.imageUrl1 !== undefined ? (
+                  // <DynamicImage url={product.imageUrl1 as string} containerClass='rounded-t-xl' width={cardWidth}/>
                   <Image
                     src={product.imageUrl1 as string}
                     width={cardWidth}
                     height={300}
+                    
                     className="rounded-t-xl"
                     alt="Preview Image Article"
                     style={{ objectFit: 'cover', height: '300px' }}
