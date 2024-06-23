@@ -145,3 +145,17 @@ export async function deleteBanner() {
   const user = await getUser()
   await db.update(users).set({ banner: null }).where(eq(users.id, user.id))
 }
+
+export async function getShopName() {
+  const user = await getUser()
+  const response = await db
+    .select({ shopname: users.shopname })
+    .from(users)
+    .where(eq(users.id, user.id))
+  return response[0].shopname!
+}
+
+export async function setShopName(shopname: string) {
+  const user = await getUser()
+  await db.update(users).set({ shopname: shopname }).where(eq(users.id, user.id))
+}

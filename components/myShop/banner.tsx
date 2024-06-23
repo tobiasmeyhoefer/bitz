@@ -6,6 +6,7 @@ import { MdOutlineEdit } from 'react-icons/md'
 import { ChangeFont } from './change-font'
 import { getBanner } from '@/lib/user-actions'
 import ChooseFontcolor from './choose-fontcolor'
+import { ChangeText } from './change-text'
 const Banner = ({ title }: { title: string }) => {
   // const [banner, setBanner] = useState<StaticImageData>()
   const [banner, setBanner] = useState('')
@@ -21,6 +22,7 @@ const Banner = ({ title }: { title: string }) => {
     }
     fetchBanner()
   }, [])
+
   return (
     <>
       {isBanner ? (
@@ -43,10 +45,10 @@ const Banner = ({ title }: { title: string }) => {
       ) : (
         <div className="mt-2 flex h-12 w-full flex-col items-center justify-start gap-4 rounded-b-lg">
           <ChooseBanner setBanner={setBanner} setIsBanner={setIsBanner} label={'add Banner'} />
-          <h1 className="group bottom-2 font-montserrat text-3xl font-bold drop-shadow-xl">
-            {title}
-            <ChangeFont />
-          </h1>
+          {/* <h1 className="group bottom-2 font-montserrat text-3xl font-bold drop-shadow-xl"> */}
+          <ChangeText />
+          {/* <ChangeFont /> */}
+          {/* </h1> */}
         </div>
       )}
     </>
