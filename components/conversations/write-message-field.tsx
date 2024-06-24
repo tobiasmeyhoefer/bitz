@@ -9,7 +9,9 @@ import { ConversationType, UserType } from '@/schema'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { PopoverClose } from '@radix-ui/react-popover'
 import { Textarea } from '../ui/textarea'
-import confetti from "canvas-confetti";
+import confetti from 'canvas-confetti'
+import { checkProfanity } from '@/lib/product-actions'
+import { useToast } from '../ui/use-toast'
 
 const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserType }) => {
   const [input, setInput] = useState('')
@@ -18,6 +20,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
   const [locationInput, setLocationInput] = useState('')
   const [timeInput, setTimeInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const { toast } = useToast()
 
   const scrollToBottom = () => {
     const element = document.getElementById('testo')
@@ -25,37 +28,46 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
   }
 
   const handleFireworkClick = () => {
-    const duration = 5 * 1000;
-    const animationEnd = Date.now() + duration;
-    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
- 
-    const randomInRange = (min: number, max: number) =>
-      Math.random() * (max - min) + min;
- 
+    const duration = 5 * 1000
+    const animationEnd = Date.now() + duration
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 }
+
+    const randomInRange = (min: number, max: number) => Math.random() * (max - min) + min
+
     const interval = window.setInterval(() => {
-      const timeLeft = animationEnd - Date.now();
- 
+      const timeLeft = animationEnd - Date.now()
+
       if (timeLeft <= 0) {
-        return clearInterval(interval);
+        return clearInterval(interval)
       }
- 
-      const particleCount = 50 * (timeLeft / duration);
+
+      const particleCount = 50 * (timeLeft / duration)
       confetti({
         ...defaults,
         particleCount,
         origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
-      });
+      })
       confetti({
         ...defaults,
         particleCount,
         origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
-      });
-    }, 250);
-  };
+      })
+    }, 250)
+  }
 
   const sendMessage = async () => {
     setIsLoading(true)
+
     if (input.trim() === '') return
+
+    if (await checkProfanity(input)) {
+      toast({
+        title: 'Oh oh',
+        description: 'Please check your profanity',
+      })
+      setIsLoading(false)
+      return
+    }
 
     if (input === 'Wir haben einen Deal ✅') {
       await createMessage('Juhu es gibt einen Deal!!!', user.id, conv.id, true)
@@ -66,7 +78,6 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
         isSystemMessage: true,
       })
       handleFireworkClick()
-
     } else {
       await createMessage(input, user.id, conv.id)
       await axios.post('/api/message', { content: input, convId: conv.id, senderId: user.id })
@@ -78,7 +89,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
   }
 
   return (
-    <div className="z-10 bg-white">
+    <div className="z-10 bg-background">
       <div>
         {conv.sellerId === user.id ? (
           <div className="flex gap-2 max-sm:overflow-x-scroll">
@@ -243,9 +254,9 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
           </div>
         )}
       </div>
-      <div className="mt-2 flex gap-2">
+      <form className="mt-2 flex gap-2">
         <Input
-          className="h-[50px] rounded-xl bg-white text-primary md:h-[64px]"
+          className="h-[50px] rounded-xl text-primary md:h-[64px]"
           placeholder="type a message..."
           value={input}
           onChange={({ target }) => setInput(target.value)}
@@ -257,11 +268,15 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
             senden
           </Button>
         ) : (
-          <Button onClick={sendMessage} className="h-[50px] rounded-xl px-6 md:h-[64px]">
+          <Button
+            type="submit"
+            onClick={sendMessage}
+            className="h-[50px] rounded-xl px-6 md:h-[64px]"
+          >
             senden
           </Button>
         )}
-      </div>
+      </form>
     </div>
   )
 }

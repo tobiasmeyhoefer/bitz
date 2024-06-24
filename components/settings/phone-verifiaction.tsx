@@ -24,7 +24,23 @@ import { Input } from '../ui/input'
 import { useToast } from '../ui/use-toast'
 import { formatPhoneNumber } from '@/lib/utils'
 
-const PhoneVerification = () => {
+interface VerificationProps {
+  translations: {
+    notVerified: string
+    verified: string
+    wrongNumber: string
+    verificationAborted: string
+    verifyNow: string
+    typeInNumber: string
+    numberNotice: string
+    continue: string
+    enterCode: string
+    cancel: string
+    submit: string
+  }
+}
+
+const PhoneVerification = ({ translations }: VerificationProps) => {
   const [isVerified, setIsVerified] = useState<boolean>(false)
   //wird genutzt als eine session
   const [inVerifactionProcess, setInVerifactionProcess] = useState<boolean>(false)
@@ -60,12 +76,12 @@ const PhoneVerification = () => {
       await setVerifiedState()
       await deleteVerifactionNumber()
       toast({
-        title: 'you are now verified!',
+        title: translations.notVerified,
       })
     } else {
       setIsVerified(false)
       toast({
-        title: 'wrong number ❌',
+        title: '{translations.wrongNumber} ❌',
       })
     }
   }
@@ -73,7 +89,7 @@ const PhoneVerification = () => {
   const handleCancel = async () => {
     await deleteVerifactionNumber()
     toast({
-      title: 'verification cancelled',
+      title: translations.verificationAborted,
     })
   }
 
@@ -86,12 +102,12 @@ const PhoneVerification = () => {
   }
 
   if (isVerified) {
-    return <p>Dein Konto ist Verifizert ✅</p>
+    return <p>{translations.verified} ✅</p>
   }
 
   return (
     <div>
-      <p className="mb-4">Dein Konto ist noch nicht verifiziert ❌</p>
+      <p className="mb-4">{translations.notVerified} ❌</p>
       <AlertDialog>
         <AlertDialogTrigger
           asChild
@@ -99,14 +115,14 @@ const PhoneVerification = () => {
             setInVerifactionProcess(true)
           }}
         >
-          <Button>Jetzt Verifizieren</Button>
+          <Button>{translations.verifyNow}</Button>
         </AlertDialogTrigger>
         {isTypeInNumberState ? (
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>Type in your number</AlertDialogTitle>
+              <AlertDialogTitle>{translations.typeInNumber}</AlertDialogTitle>
               <AlertDialogDescription>
-                <p>use the + infront of your number</p>
+                <p>{translations.numberNotice}</p>
                 <Input
                   onChange={handleInputChangeNumber}
                   className="my-4 h-12"
@@ -116,17 +132,17 @@ const PhoneVerification = () => {
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogCancel onClick={handleCancel}>Cancel</AlertDialogCancel>
+              <AlertDialogCancel onClick={handleCancel}>{translations.cancel}</AlertDialogCancel>
               <Button onClick={sendNumberToUser}>
                 {/* <AlertDialogAction>Continue</AlertDialogAction> */}
-                Continue
+                {translations.continue}
               </Button>
             </AlertDialogFooter>
           </AlertDialogContent>
         ) : (
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>Type in the code sent to your number</AlertDialogTitle>
+              <AlertDialogTitle>{translations.enterCode}</AlertDialogTitle>
               <AlertDialogDescription>
                 <Input
                   onChange={handleInputChangeCode}
@@ -139,7 +155,7 @@ const PhoneVerification = () => {
             <AlertDialogFooter>
               <AlertDialogCancel onClick={handleCancel}>Cancel</AlertDialogCancel>
               {/* <AlertDialogAction>Continue</AlertDialogAction> */}
-              <Button onClick={checkCode}>Submit</Button>
+              <Button onClick={checkCode}>{translations.submit}</Button>
             </AlertDialogFooter>
           </AlertDialogContent>
         )}

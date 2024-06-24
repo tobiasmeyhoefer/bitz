@@ -15,6 +15,7 @@ import { ProductType } from '@/schema'
 import AnimatedCard from '../ui/animated-card'
 import { FilterProducts } from '../filter-products/filter-products'
 import { getUser } from '@/lib/user-actions'
+import { Button } from '../ui/button'
 
 const suggestions = [
   'Reciever',
@@ -53,12 +54,15 @@ const BrowseContent = (props: BrowseContentProps) => {
   const [noSearchResults, setNoSearchResults] = useState(false)
   const [products, setProducts] = useState<ProductType[]>([])
   const [userId, setUserId] = useState<string>(``)
+  const [page, setPage] = useState(1);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [hasMoreProducts, setHasMoreProducts] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       const user = await getUser()
       setUserId(user.id)
-      const result = await getProductsBrowse()
+      const result = await getProductsBrowse(4, 0)
       setProducts(result)
       if (result.length === 0) {
         setNoSearchResults(true)
@@ -67,9 +71,26 @@ const BrowseContent = (props: BrowseContentProps) => {
     fetchData()
   }, [])
 
+  const loadMoreProducts = async () => {
+    setIsLoadingMore(true);
+    const result = await getProductsBrowse(4, page * 4);
+    if (result.length < 4) { // Wert muss angepasst werden, je nach dem wie viele Produkte man mehr Laden moechte 
+      setHasMoreProducts(false);
+    }
+
+    setProducts(prevProducts => [...prevProducts, ...result]);
+    if (result.length === 0) {
+      setNoSearchResults(true);
+    } else {
+      setNoSearchResults(false);
+    }
+    setPage(prevPage => prevPage + 1);
+    setIsLoadingMore(false);
+  };
+
   const loadProductsByCategory = async (category: string) => {
     setLoading(true)
-    const result = await getProductsByCategory(category, userId) // eklig
+    const result = await getProductsByCategory(category, userId)
     setProducts(result)
     if (result.length === 0) {
       setNoSearchResults(true)
@@ -137,6 +158,11 @@ const BrowseContent = (props: BrowseContentProps) => {
               ))}
               {noSearchResults && <div className=" px-4">Keine Suchergebnisse gefunden</div>}
             </div>
+            {hasMoreProducts && (
+              <Button onClick={loadMoreProducts} disabled={isLoadingMore} variant='default' className='mt-4 mb-6'>
+                {isLoadingMore ? 'Loading...' : 'Load More'}
+              </Button>
+            )}
           </>
         ) : (
           <div className="flex h-full items-center justify-center">

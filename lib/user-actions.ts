@@ -24,10 +24,10 @@ export async function saveUserLocation(postcode: string, city: string) {
   await db.update(users).set({ location: location }).where(eq(users.id, id!))
 }
 
-export async function saveUserAdress(adress: string) {
+export async function saveUserAddress(address: string) {
   const session = await auth()
   const id = session?.user?.id
-  await db.update(users).set({ adress: adress }).where(eq(users.id, id!))
+  await db.update(users).set({ adress: address }).where(eq(users.id, id!))
 }
 
 export async function getUserById(userId: string) {
