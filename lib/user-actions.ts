@@ -159,3 +159,17 @@ export async function setShopName(shopname: string) {
   const user = await getUser()
   await db.update(users).set({ shopname: shopname }).where(eq(users.id, user.id))
 }
+
+export async function getShopTextColor() {
+  const user = await getUser()
+  const response = await db
+    .select({ shoptextcolor: users.shoptextcolor })
+    .from(users)
+    .where(eq(users.id, user.id))
+  return response[0].shoptextcolor!
+}
+
+export async function setShopTextColor(shoptextcolor: string) {
+  const user = await getUser()
+  await db.update(users).set({ shoptextcolor: shoptextcolor }).where(eq(users.id, user.id))
+}
