@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { getShopName, getShopTextColor, setShopName } from '@/lib/user-actions'
 import { ChooseFontcolor } from './choose-fontcolor'
 
-export function ShopText({ title }: { title: string }) {
+export function ShopText({ title, isBanner }: { title: string; isBanner: boolean }) {
   const [open, setOpen] = useState(false)
   const [text, setText] = useState('')
   const [textColor, setTextColor] = useState('')
@@ -33,24 +33,29 @@ export function ShopText({ title }: { title: string }) {
   return (
     <>
       {!open ? (
-        <div className="flex gap-6 ">
-          <div className=" z-30">
-            <ChooseFontcolor setColor={setTextColor} />
-          </div>
-          <h1
-            style={{ color: textColor }}
-            className={` bottom-2 font-montserrat text-3xl font-bold drop-shadow-xl`}
-          >
-            {text}
-            <Button
-              onClick={() => setOpen(!open)}
-              className="absolute right-[-24px] top-[-16px] h-8 w-6 bg-transparent shadow-none hover:bg-transparent"
+        <div
+          //  "
+          className={isBanner ? 'absolute bottom-2 left-1/2 h-8 -translate-x-1/2 ' : ' '}
+        >
+          <div className="flex gap-6">
+            <div className=" z-30">
+              <ChooseFontcolor setColor={setTextColor} />
+            </div>
+            <h1
+              style={{ color: textColor }}
+              className=" font-montserrat text-3xl font-bold drop-shadow-xl"
             >
-              <p className="rounded-md p-[0.1rem] text-card-button hover:bg-secondary">✏️</p>
-            </Button>
-          </h1>
-          <div className=" z-30">
-            <ChooseFontcolor setColor={setTextColor} />
+              {text}
+              <Button
+                onClick={() => setOpen(!open)}
+                className="absolute right-[-24px] top-[-16px] h-8 w-6 bg-transparent shadow-none hover:bg-transparent"
+              >
+                <p className="rounded-md p-[0.1rem] text-card-button hover:bg-secondary">✏️</p>
+              </Button>
+            </h1>
+            <div className=" z-30">
+              <ChooseFontcolor setColor={setTextColor} />
+            </div>
           </div>
         </div>
       ) : (

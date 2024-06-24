@@ -35,7 +35,7 @@ const Banner = ({ title }: { title: string }) => {
           {/* <h1 className="group absolute bottom-2 left-1/2 -translate-x-1/2 font-montserrat text-3xl font-bold drop-shadow-xl">
             {title}
           </h1> */}
-          <ShopText title={title} />
+          <ShopText title={title} isBanner={isBanner} />
           <div className="absolute bottom-2 right-2 z-30 h-8 w-24 text-xs">
             <ChooseBanner setBanner={setBanner} setIsBanner={setIsBanner} label={'change Banner'} />
           </div>
@@ -44,7 +44,7 @@ const Banner = ({ title }: { title: string }) => {
         <div className="mt-2 flex h-12 w-full flex-col items-center justify-start gap-4 rounded-b-lg">
           <ChooseBanner setBanner={setBanner} setIsBanner={setIsBanner} label={'add Banner'} />
 
-          <ShopText title={title} />
+          <ShopText title={title} isBanner={isBanner} />
         </div>
       )}
     </>
