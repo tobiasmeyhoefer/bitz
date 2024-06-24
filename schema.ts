@@ -25,7 +25,7 @@ export const users = pgTable('user', {
   phoneVerified: boolean('phoneVerified').default(false),
   onboardingCompleted: boolean('onboardingCompleted').default(false),
   shopname: text('shopname'),
-  shopfont: text('shopfont'),
+  shoptextfont: text('shoptextfont'),
   shoptextcolor: text('shoptextcolor'),
   banner: text('banner'),
 })

@@ -1,5 +1,4 @@
-'use client'
-import { setShopTextColor } from '@/lib/user-actions'
+import { setShopTextFont } from '@/lib/user-actions'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import {
@@ -12,46 +11,34 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 
-const colors = [
-  { value: 'rgb(0,0,0)', text: 'Black' },
-  { value: 'rgb(255,255,255)', text: 'White' },
-  { value: 'rgb(239 68 68)', text: 'Red' },
-  { value: 'rgb(59 130 246)', text: 'Blue' },
-  { value: 'rgb(250 204 21)', text: 'Yellow' },
-  { value: 'rgb(5 150 105)', text: 'Green' },
-  { value: 'rgb(244 114 182)', text: 'Pink' },
-]
+const fonts = ['Montserrat', 'Arial', 'Times New Roman', 'Courier New', 'Georgia']
 
-export function ChooseFontcolor(props: { setColor: (value: string) => void }) {
+export function ChooseFont(props: { setFont: (value: string) => void }) {
   const [position, setPosition] = useState('')
 
   const onSubmit = async (value: string) => {
     setPosition(value)
-    await setShopTextColor(value)
-    props.setColor(value)
+    await setShopTextFont(value)
+    props.setFont(value)
   }
 
   return (
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild className="z-50">
-          <Button variant="outline">change color</Button>
+          <Button variant="outline">change font</Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
-          <DropdownMenuLabel>choose fontcolor</DropdownMenuLabel>
+          <DropdownMenuLabel>choose font</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuRadioGroup value={position} onValueChange={onSubmit}>
-            {colors.map((color, index) => (
+            {fonts.map((font, index) => (
               <DropdownMenuRadioItem
                 key={index}
-                value={color.value}
+                value={font}
                 className="flex cursor-pointer items-center"
               >
-                <div
-                  className="mr-2 h-4 w-4 rounded-full drop-shadow-lg"
-                  style={{ backgroundColor: color.value }}
-                />
-                {color.text}
+                <p style={{ fontFamily: font, fontSize: 16 }}> {font}</p>
               </DropdownMenuRadioItem>
             ))}
           </DropdownMenuRadioGroup>

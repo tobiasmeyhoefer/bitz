@@ -173,3 +173,17 @@ export async function setShopTextColor(shoptextcolor: string) {
   const user = await getUser()
   await db.update(users).set({ shoptextcolor: shoptextcolor }).where(eq(users.id, user.id))
 }
+
+export async function getShopTextFont() {
+  const user = await getUser()
+  const response = await db
+    .select({ shoptextfont: users.shoptextfont })
+    .from(users)
+    .where(eq(users.id, user.id))
+  return response[0].shoptextfont!
+}
+
+export async function setShopTextFont(shoptextfont: string) {
+  const user = await getUser()
+  await db.update(users).set({ shoptextfont: shoptextfont }).where(eq(users.id, user.id))
+}
