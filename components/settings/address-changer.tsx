@@ -74,7 +74,6 @@ export default function AddressChanger({ translations }: AddressChangerProps) {
   }
   function sendPlaceDetailsRequest(feature: any, geocoder: any) {
     setResult(feature)
-    console.log(feature)
     return geocoder.sendPlaceDetailsRequest(feature)
   }
 
