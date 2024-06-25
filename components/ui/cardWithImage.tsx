@@ -25,6 +25,7 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
             <Card className={cn(`w-[${cardWidth}px]`, className)} ref={ref}>
               <Link href={`/product/${product.id}`}>
                 {product.imageUrl1 !== undefined ? (
+                  // Funktionailtät ist fertig funktioniert aber nicht weil das ganze client side ist und zu einer endlosschlefie führt
                   // <DynamicImage url={product.imageUrl1 as string} containerClass='rounded-t-xl' width={cardWidth}/>
                   <Image
                     src={product.imageUrl1 as string}
@@ -33,7 +34,7 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                     
                     className="rounded-t-xl"
                     alt="Preview Image Article"
-                    style={{ objectFit: 'cover', height: '300px' }}
+                    // style={{ objectFit: 'cover', height: '300px' }}
                   />
                 ) : (
                   <div

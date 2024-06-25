@@ -224,18 +224,18 @@ export const largestGermanCities = [
   'Münster',
 ]
 
-export async function getImage(src: string) {
-  const buffer = await fetch(src).then(async res =>
-    Buffer.from(await res.arrayBuffer())
-  )
+// export async function getImage(src: string) {
+//   const buffer = await fetch(src).then(async res =>
+//     Buffer.from(await res.arrayBuffer())
+//   )
 
-  const {
-    metadata: { height, width },
-    ...plaiceholder
-  } = await getPlaiceholder(buffer, { size: 10 })
+//   const {
+//     metadata: { height, width },
+//     ...plaiceholder
+//   } = await getPlaiceholder(buffer, { size: 10 })
 
-  return {
-    ...plaiceholder,
-    img: { src, height, width }
-  }
-}
+//   return {
+//     ...plaiceholder,
+//     img: { src, height, width }
+//   }
+// }
