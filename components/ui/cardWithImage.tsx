@@ -21,6 +21,9 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
       <>
         {props && product ? (
           <CardContainer>
+            <div className="absolute right-0 top-0 m-2">
+              {props.editable && props.favIcon && <ProdDelAlert productId={product.id} />}
+            </div>
             <Card className={cn(`w-[${cardWidth}px]`, className)} ref={ref}>
               <Link href={`/product/${product.id}`}>
                 {product.imageUrl1 !== undefined ? (
@@ -59,7 +62,6 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                     </Tooltip>
                   </TooltipProvider>
 
-                  {props.editable && props.favIcon && <ProdDelAlert productId={product.id} />}
                   {!props.editable && props.favIcon && <FavoriteLike productId={product.id} />}
                 </div>
                 <CardDescription className="text-sm">
