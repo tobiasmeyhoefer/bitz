@@ -227,6 +227,7 @@ export const messages = pgTable('messages', {
     .notNull(),
   timestamp: timestamp('timestamp', { mode: 'date' }).notNull().defaultNow(),
   isSystemMessage: boolean('isSystemMessage').default(false).notNull(),
+  wasRead: boolean('wasRead').default(false).notNull(),
 })
 
 export type UserType = typeof users.$inferSelect
