@@ -12,8 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { MessageType } from '@/schema'
-import { deleteMessageById } from '@/lib/message-actions'
+import { deleteMessageById, setMessagesToRead } from '@/lib/message-actions'
 
 interface MessageProps {
   convId: string
@@ -36,6 +35,13 @@ const Messages = ({ convId, initialMessages, userId }: MessageProps) => {
   }
 
   useEffect(() => {
+
+    const setMessagesRead = async () => {
+      await setMessagesToRead()
+    }
+
+    setMessagesRead()
+
     pusherClient.subscribe(convId)
     scrollToBottom()
 
@@ -89,9 +95,9 @@ const Messages = ({ convId, initialMessages, userId }: MessageProps) => {
             )}
           >
             {m.isSystemMessage ? (
-              <div className='text-center'>
-                <p className='text-xl'>Juhu ihr habt eine Deal</p>
-                <p className='text-sm'>
+              <div className="text-center">
+                <p className="text-xl">Juhu ihr habt eine Deal</p>
+                <p className="text-sm">
                   Sofern noch nicht geschehen solltet ihr noch Ort und Zeitpunkt des Treffs
                   ausmachen
                 </p>
@@ -102,17 +108,18 @@ const Messages = ({ convId, initialMessages, userId }: MessageProps) => {
                   <p>{m.content}</p>
                   <p className="text-sm text-neutral-500">{formatDate(m.timeStamp)}</p>
                 </div>
-
-                <DropdownMenu>
-                  <DropdownMenuTrigger>
-                    <HiDotsVertical />
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                    <DropdownMenuItem onClick={() => deleteMessage(m.id, i)}>
-                      Delete
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                {m.isSender ? (
+                  <DropdownMenu>
+                    <DropdownMenuTrigger>
+                      <HiDotsVertical />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuItem onClick={() => deleteMessage(m.id, i)}>
+                        Delete
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                ) : null}
               </div>
             )}
           </div>

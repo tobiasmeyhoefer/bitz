@@ -10,6 +10,8 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { PopoverClose } from '@radix-ui/react-popover'
 import { Textarea } from '../ui/textarea'
 import confetti from 'canvas-confetti'
+import { checkProfanity } from '@/lib/product-actions'
+import { useToast } from '../ui/use-toast'
 
 const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserType }) => {
   const [input, setInput] = useState('')
@@ -18,6 +20,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
   const [locationInput, setLocationInput] = useState('')
   const [timeInput, setTimeInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const { toast } = useToast()
 
   const scrollToBottom = () => {
     const element = document.getElementById('testo')
@@ -54,7 +57,17 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
 
   const sendMessage = async () => {
     setIsLoading(true)
+
     if (input.trim() === '') return
+
+    if (await checkProfanity(input)) {
+      toast({
+        title: 'Oh oh',
+        description: 'Please check your profanity',
+      })
+      setIsLoading(false)
+      return
+    }
 
     if (input === 'Wir haben einen Deal ✅') {
       await createMessage('Juhu es gibt einen Deal!!!', user.id, conv.id, true)
@@ -241,7 +254,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
           </div>
         )}
       </div>
-      <div className="mt-2 flex gap-2">
+      <form className="mt-2 flex gap-2">
         <Input
           className="h-[50px] rounded-xl text-primary md:h-[64px]"
           placeholder="type a message..."
@@ -255,11 +268,15 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
             senden
           </Button>
         ) : (
-          <Button onClick={sendMessage} className="h-[50px] rounded-xl px-6 md:h-[64px]">
+          <Button
+            type="submit"
+            onClick={sendMessage}
+            className="h-[50px] rounded-xl px-6 md:h-[64px]"
+          >
             senden
           </Button>
         )}
-      </div>
+      </form>
     </div>
   )
 }

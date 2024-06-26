@@ -13,7 +13,7 @@ const RestartOnboarding = async () => {
         redirect("/browse")
       }}
     >
-      <Button>{t('restartGuide')}</Button>
+      <Button className='w-full'>{t('restartGuide')}</Button>
     </form>
   )
 }
