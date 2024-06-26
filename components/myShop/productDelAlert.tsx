@@ -1,4 +1,5 @@
 'use client'
+import React, { useState } from 'react'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -11,38 +12,57 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
-import { FaTrash } from 'react-icons/fa'
 import { deleteProduct } from '@/lib/product-actions'
-// import { useTranslations } from "next-intl";
+import { HiDotsVertical } from 'react-icons/hi'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 
 export function ProdDelAlert({ productId }: { productId: string }) {
-  //const t = useTranslations();
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+
+  const handleDeleteClick = () => {
+    setIsDialogOpen(true)
+  }
+
+  const handleDialogClose = () => {
+    setIsDialogOpen(false)
+  }
+
   return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Button variant="ghost">
-          <FaTrash />
-        </Button>
-      </AlertDialogTrigger>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>Produkt löschen</AlertDialogTitle>
-          <AlertDialogDescription>
-            Bist du dir sicher?{/* {t('submitTitle')} */}
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <form action={() => deleteProduct(productId)}>
-            <Button variant={'destructive'}>
-              <AlertDialogAction className="bg-transparent hover:bg-transparent">
-                Delete
-              </AlertDialogAction>
-            </Button>
-          </form>
-          {/* <AlertDialogAction onClick={() => deleteProduct(productId)}>Continue</AlertDialogAction> */}
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+    <>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost">
+            <HiDotsVertical />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuItem onClick={handleDeleteClick}>Delete</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Produkt löschen</AlertDialogTitle>
+            <AlertDialogDescription>Bist du dir sicher?</AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={handleDialogClose}>Cancel</AlertDialogCancel>
+            <form action={() => deleteProduct(productId)}>
+              <Button variant={'destructive'}>
+                <AlertDialogAction className="bg-transparent hover:bg-transparent">
+                  Delete
+                </AlertDialogAction>
+              </Button>
+            </form>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
   )
 }
