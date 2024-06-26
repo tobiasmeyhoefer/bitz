@@ -47,7 +47,7 @@ const ChooseBanner = (props: {
             {props.label}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-[36rem]">
+        <PopoverContent className="w-[19rem] sm:w-[36rem]">
           <div className="grid gap-4">
             <div className="space-y-2">
               <div className="flex items-center justify-between">

@@ -54,9 +54,9 @@ const BrowseContent = (props: BrowseContentProps) => {
   const [noSearchResults, setNoSearchResults] = useState(false)
   const [products, setProducts] = useState<ProductType[]>([])
   const [userId, setUserId] = useState<string>(``)
-  const [page, setPage] = useState(1);
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const [hasMoreProducts, setHasMoreProducts] = useState(true);
+  const [page, setPage] = useState(1)
+  const [isLoadingMore, setIsLoadingMore] = useState(false)
+  const [hasMoreProducts, setHasMoreProducts] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -72,21 +72,22 @@ const BrowseContent = (props: BrowseContentProps) => {
   }, [])
 
   const loadMoreProducts = async () => {
-    setIsLoadingMore(true);
-    const result = await getProductsBrowse(4, page * 4);
-    if (result.length < 4) { // Wert muss angepasst werden, je nach dem wie viele Produkte man mehr Laden moechte 
-      setHasMoreProducts(false);
+    setIsLoadingMore(true)
+    const result = await getProductsBrowse(4, page * 4)
+    if (result.length < 4) {
+      // Wert muss angepasst werden, je nach dem wie viele Produkte man mehr Laden moechte
+      setHasMoreProducts(false)
     }
 
-    setProducts(prevProducts => [...prevProducts, ...result]);
+    setProducts((prevProducts) => [...prevProducts, ...result])
     if (result.length === 0) {
-      setNoSearchResults(true);
+      setNoSearchResults(true)
     } else {
-      setNoSearchResults(false);
+      setNoSearchResults(false)
     }
-    setPage(prevPage => prevPage + 1);
-    setIsLoadingMore(false);
-  };
+    setPage((prevPage) => prevPage + 1)
+    setIsLoadingMore(false)
+  }
 
   const loadProductsByCategory = async (category: string) => {
     setLoading(true)
@@ -145,10 +146,10 @@ const BrowseContent = (props: BrowseContentProps) => {
             <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
               {products.map((p, index) => (
                 <div key={`kp-${index}`}>
-                  <AnimatedCard delay={0.3} >
+                  <AnimatedCard delay={0.3}>
                     <CardWithImage
                       key={`pr-${index}`}
-                      className="mx-[5px] my-[0.5rem]"
+                      className={`mx-[5px] my-[0.5rem]`} // h-[400px] w-[200px]
                       product={products[index]}
                       favIcon
                       editable={false}
@@ -159,7 +160,12 @@ const BrowseContent = (props: BrowseContentProps) => {
               {noSearchResults && <div className=" px-4">Keine Suchergebnisse gefunden</div>}
             </div>
             {hasMoreProducts && (
-              <Button onClick={loadMoreProducts} disabled={isLoadingMore} variant='default' className='mt-4 mb-6'>
+              <Button
+                onClick={loadMoreProducts}
+                disabled={isLoadingMore}
+                variant="default"
+                className="mb-6 mt-4"
+              >
                 {isLoadingMore ? 'Loading...' : 'Load More'}
               </Button>
             )}

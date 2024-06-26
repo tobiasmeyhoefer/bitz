@@ -60,8 +60,8 @@ export default async function Page({ params }: { params: { id: string } }) {
             variant="outline"
             className={
               isOwner
-                ? ' xl:left-18 ml-12 mt-4 lg:absolute lg:top-32 xl:left-12  xl:top-36 2xl:left-24 2xl:top-36'
-                : 'md: fixed bottom-6 left-8  md:left-14 lg:left-8 lg:top-36 xl:left-24 2xl:left-28 2xl:top-40'
+                ? 'xl:left-18 ml-12 mt-4 lg:absolute lg:top-32 xl:left-12  xl:top-36 2xl:left-24 2xl:top-36'
+                : 'fixed left-8 top-24 font-semibold md:left-14 lg:left-8 lg:top-36 xl:left-24 2xl:left-28 2xl:top-40'
             }
           >
             ⏎
@@ -72,7 +72,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             <Button
               variant="outline"
               className={
-                'md: fixed bottom-6 right-8 font-semibold  md:right-14 lg:right-8 lg:top-36 xl:right-24 2xl:right-28 2xl:top-40'
+                'fixed right-8 top-24 font-semibold md:right-14 lg:right-8 lg:top-36 xl:right-24 2xl:right-28 2xl:top-40'
               }
             >
               View Shop
