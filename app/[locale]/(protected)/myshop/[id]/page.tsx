@@ -13,14 +13,14 @@ import Image from 'next/image'
 export default async function Page({ params }: { params: { id: string } }) {
   const owner = await getUserById(params.id)
   const products = await getProductsOwned(params.id)
-  const banner = await getBannerById(params.id)
+  const banner = (await getBannerById(params.id)) ?? '/images/Banner/white.jpg'
   const title = await getShopNameById(params.id)
   const textColor = (await getShopTextColorById(params.id)) ?? 'rgb(0 0 0)'
   const textFont = (await getShopTextFontById(params.id)) ?? 'Montserrat'
 
   return (
     <>
-      <div className="relative h-52 w-full rounded-b-lg bg-cover bg-center">
+      <div className="relative h-52 w-full rounded-b-lg bg-cover bg-center shadow-lg">
         {banner ? (
           <Image
             src={banner}
@@ -31,12 +31,14 @@ export default async function Page({ params }: { params: { id: string } }) {
             className="h-full w-full rounded-b-lg"
           />
         ) : null}
-        <h1
-          className="group absolute bottom-2 left-1/2 -translate-x-1/2 font-montserrat text-3xl font-bold drop-shadow-xl"
-          style={{ color: textColor, fontFamily: textFont }}
-        >
-          {title || `${owner?.name}'s Shop`}
-        </h1>
+        <div className="absolute bottom-2 left-24 h-8 ">
+          <h1
+            className=" text-3xl font-bold drop-shadow-xl"
+            style={{ color: textColor, fontFamily: textFont }}
+          >
+            {title || `${owner?.name}'s Shop`}
+          </h1>
+        </div>
       </div>
       <div
         className={`flex h-full flex-col items-center justify-center px-4 py-20 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}

@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import Image from 'next/image'
 import { deleteBanner, setBanner } from '@/lib/user-actions'
+import { AiFillPicture } from 'react-icons/ai'
 
 const colorImages = [
   '/images/Banner/cardinal.jpg',
@@ -20,33 +21,32 @@ const pictureImages = [
   '/images/Banner/picture4.jpg',
 ]
 
-const ChooseBanner = (props: {
-  setBanner: (value: string) => void
-  setIsBanner: (value: boolean) => void
-  label: string
-}) => {
+const ChooseBanner = (props: { setBanner: (value: string) => void; label: string }) => {
   const chooseImage = async (bannerURL: string) => {
     props.setBanner(bannerURL)
     await setBanner(bannerURL)
-    props.setIsBanner(true)
+    // props.setIsBanner(true)
   }
 
   const removeImage = async () => {
-    props.setBanner('')
+    props.setBanner('/images/Banner/white.jpg')
     await deleteBanner()
-    props.setIsBanner(false)
+    // props.setIsBanner(false)
   }
 
   return (
-    <>
+    <div className="absolute right-2 top-2 z-30 text-xs">
       <Popover>
         <PopoverTrigger asChild>
-          <Button variant="secondary" className="z-30 h-8 w-24 text-xs">
-            {props.label}
+          <Button
+            variant="ghost"
+            className="z-30 h-9 w-9 border-none  p-0 text-xs hover:bg-transparent"
+          >
+            <AiFillPicture className=" h-8 w-8" />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-[36rem]">
-          <div className="grid gap-4">
+          <div className="grid gap-4 space-y-2">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <h6 className="text-sm font-medium leading-none">Gallery</h6>
@@ -100,7 +100,7 @@ const ChooseBanner = (props: {
           </div>
         </PopoverContent>
       </Popover>
-    </>
+    </div>
   )
 }
 

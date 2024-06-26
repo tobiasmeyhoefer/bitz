@@ -5,8 +5,9 @@ import { useEffect, useState } from 'react'
 import { getShopName, getShopTextColor, getShopTextFont, setShopName } from '@/lib/user-actions'
 import { ChooseFontcolor } from './choose-fontcolor'
 import { ChooseFont } from './choose-font'
+import { FaPencilAlt } from 'react-icons/fa'
 
-export function ShopText({ title, isBanner }: { title: string; isBanner: boolean }) {
+export function ShopText({ title }: { title: string }) {
   const [open, setOpen] = useState(false)
   const [text, setText] = useState('')
   const [textColor, setTextColor] = useState('')
@@ -37,33 +38,30 @@ export function ShopText({ title, isBanner }: { title: string; isBanner: boolean
     await setShopName(text)
   }
   return (
-    <>
+    <div>
       {!open ? (
-        <div className={isBanner ? 'absolute bottom-2 left-1/2 h-8 w-full -translate-x-1/2' : ' '}>
-          <div className="flex flex-row justify-center ">
-            <h1
-              style={{ color: textColor, fontFamily: textFont }}
-              className=" text-3xl font-bold drop-shadow-xl"
-            >
-              {text}
-              <Button
-                onClick={() => setOpen(!open)}
-                className="absolute right-[-24px] top-[-16px] h-8 w-6 bg-transparent shadow-none hover:bg-transparent"
+        <div className="group absolute bottom-0 h-full w-full">
+          <div className="absolute bottom-2 left-24 h-8">
+            <div className="flex w-full flex-row">
+              <h1
+                style={{ color: textColor, fontFamily: textFont }}
+                className=" text-3xl font-bold drop-shadow-xl"
               >
-                <p className="rounded-md p-[0.1rem] text-card-button hover:bg-secondary">✏️</p>
-              </Button>
-            </h1>
-            <div className="absolute bottom-10 right-2">
-              <div className=" z-30 mb-2">
-                <ChooseFont setFont={setTextFont} />
-              </div>
+                {text}
+              </h1>
+              <FaPencilAlt onClick={() => setOpen(!open)} className="cursor-pointer " />
+            </div>
+          </div>
+          <div className="absolute left-2 top-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <div className=" z-30 flex flex-row gap-2">
+              <ChooseFont setFont={setTextFont} />
               <ChooseFontcolor setColor={setTextColor} />
             </div>
           </div>
         </div>
       ) : (
-        <form action={onSubmit} className={isBanner ? '' : 'relative inline'}>
-          <div className={isBanner ? 'absolute bottom-2 left-1/2 h-8 -translate-x-1/2' : ''}>
+        <form action={onSubmit} className="">
+          <div className="absolute bottom-2 left-24 h-8">
             <div className={' flex flex-row gap-1'}>
               <Input
                 type="text"
@@ -71,21 +69,23 @@ export function ShopText({ title, isBanner }: { title: string; isBanner: boolean
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 placeholder="My Shop"
-                className="text-xl font-bold md:text-3xl"
+                className="border-none text-xl font-bold md:text-3xl"
+                style={{ color: textColor, fontFamily: textFont }}
               />
               <Button type="submit" variant={'secondary'}>
                 <p className="text-card-button hover:font-bold"> save</p>
               </Button>
             </div>
           </div>
-          <div className="absolute bottom-12 right-2">
-            <div className=" z-30 mb-2">
+
+          <div className="absolute left-2 top-4">
+            <div className=" z-30 flex flex-row gap-2">
               <ChooseFont setFont={setTextFont} />
+              <ChooseFontcolor setColor={setTextColor} />
             </div>
-            <ChooseFontcolor setColor={setTextColor} />
           </div>
         </form>
       )}
-    </>
+    </div>
   )
 }
