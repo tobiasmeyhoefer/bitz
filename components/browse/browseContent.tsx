@@ -16,6 +16,7 @@ import AnimatedCard from '../ui/animated-card'
 import { FilterProducts } from '../filter-products/filter-products'
 import { getUser } from '@/lib/user-actions'
 import { Button } from '../ui/button'
+import AnimatedButton from '../ui/animated-button'
 
 const suggestions = [
   'Reciever',
@@ -50,7 +51,7 @@ const suggestions = [
 
 const BrowseContent = (props: BrowseContentProps) => {
   const [searchValue, setSearchValue] = useState('')
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true) //
   const [noSearchResults, setNoSearchResults] = useState(false)
   const [products, setProducts] = useState<ProductType[]>([])
   const [userId, setUserId] = useState<string>(``)
@@ -67,6 +68,7 @@ const BrowseContent = (props: BrowseContentProps) => {
       if (result.length === 0) {
         setNoSearchResults(true)
       }
+      setLoading(false)
     }
     fetchData()
   }, [])
@@ -159,9 +161,9 @@ const BrowseContent = (props: BrowseContentProps) => {
               {noSearchResults && <div className=" px-4">Keine Suchergebnisse gefunden</div>}
             </div>
             {hasMoreProducts && (
-              <Button onClick={loadMoreProducts} disabled={isLoadingMore} variant='default' className='mt-4 mb-6'>
+              <AnimatedButton onClick={loadMoreProducts} disabled={isLoadingMore} className='mt-4 mb-6'>
                 {isLoadingMore ? 'Loading...' : 'Load More'}
-              </Button>
+              </AnimatedButton>
             )}
           </>
         ) : (
