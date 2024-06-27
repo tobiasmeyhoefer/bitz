@@ -34,8 +34,8 @@ export default function LocaleSwitcherSelect({
   return (
     <>
       <Select onValueChange={onSelectChange}>
-        <SelectTrigger className="w-[280px]">
-          <SelectValue placeholder={defaultValue} />
+        <SelectTrigger className="w-full">
+          <SelectValue className='hover:cursor-pointer' placeholder={defaultValue} />
         </SelectTrigger>
         <SelectContent>
           {children}

@@ -25,13 +25,13 @@ export const SortProducts = (params: {
     <div className="flex flex-row items-center gap-1">
       <p>{params.translations.sortBy}</p>
       <Select onValueChange={(value) => sort(value)}>
-        <SelectTrigger className="w-[5.4rem] border-0 px-3 shadow-none">
-          <SelectValue placeholder={params.translations.date} />
+        <SelectTrigger className="w-[5.4rem] border-0 px-3 shadow-none focus:ring-0">
+          <SelectValue className='border-none outline-none ring-0' placeholder={params.translations.date} />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            <SelectItem value="createdAt">{params.translations.date}</SelectItem>
-            <SelectItem value="price">{params.translations.price}</SelectItem>
+            <SelectItem className='hover:cursor-pointer' value="createdAt">{params.translations.date}</SelectItem>
+            <SelectItem className='hover:cursor-pointer' value="price">{params.translations.price}</SelectItem>
           </SelectGroup>
         </SelectContent>
       </Select>
