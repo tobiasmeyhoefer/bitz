@@ -16,7 +16,7 @@ const ProfileSettings = async () => {
       <div className="mb-8 flex justify-center gap-4">
         {user.image ? (
           <Image
-            className="w-40 rounded-full"
+            className="h-40 w-40 rounded-full"
             width={200}
             height={200}
             src={user!.image!}
@@ -45,7 +45,8 @@ const ProfileSettings = async () => {
             address: t('address'),
             changeAddress: t('changeAddress'),
             changeNow: t('changeNow'),
-          }}/>
+          }}
+        />
       </div>
     </div>
   )

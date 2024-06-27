@@ -26,8 +26,6 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
 
   const unreadMessages = await getUnreadMessages(conv.id)
 
-
-
   const cardType: 'sellerCard' | 'buyerCard' =
     currentUser.id === product.sellerId ? 'buyerCard' : 'sellerCard'
 
@@ -51,8 +49,12 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
               </CardTitle>
             </CardHeader>
             <CardFooter className="flex flex-col items-start text-neutral-400">
-              <p className="font-light text-neutral-400">{formatDate(conv.createdAt)}</p>
-              {unreadMessages !== 0 ? <div className='absolute text-white font-bold text-sm bottom-2 right-2 bg-red-600 rounded-full w-6 h-6 flex justify-center items-center'>{unreadMessages}</div> : null}
+              <p className="text-sm text-neutral-400 md:text-lg">{formatDate(conv.createdAt)}</p>
+              {unreadMessages !== 0 ? (
+                <div className="absolute bottom-2 right-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-600 text-sm font-bold text-white">
+                  {unreadMessages}
+                </div>
+              ) : null}
             </CardFooter>
           </div>
         </Card>
@@ -83,8 +85,12 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
                   </CardTitle>
                 </CardHeader>
                 <CardFooter className="flex flex-col items-start text-neutral-400">
-                  <p>{formatDate(conv.createdAt)}</p>
-                  {unreadMessages !== 0 ? <div className='absolute text-white font-bold text-sm bottom-2 right-2 bg-red-600 rounded-full w-6 h-6 flex justify-center items-center'>{unreadMessages}</div> : null}
+                  <p className="text-sm md:text-lg">{formatDate(conv.createdAt)}</p>
+                  {unreadMessages !== 0 ? (
+                    <div className="absolute bottom-2 right-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-600 text-sm font-bold text-white">
+                      {unreadMessages}
+                    </div>
+                  ) : null}
                 </CardFooter>
               </div>
             </Card>
