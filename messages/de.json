@@ -103,7 +103,8 @@
     "noBitz": "Du hast noch keine Bitz hinzugefügt.",
     "addProducts": "Bit hinzufügen",
     "updateProducts": "Bit aktualisieren",
-    "deleteProduct": "Bit löschen"
+    "deleteProduct": "Bit löschen",
+    "sold": "Verkauft!"
   },
 
   "Product": {

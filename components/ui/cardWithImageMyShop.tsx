@@ -17,6 +17,7 @@ const CardWithImageMyShop = React.forwardRef<HTMLDivElement, CardWithImageProps>
   ({ className, ...props }, ref) => {
     const product = props.product
     const t = useTranslations('ProdDelAlert')
+    const sold = useTranslations('MyShop')
     return (
       <>
         {props && product ? (
@@ -104,7 +105,7 @@ const CardWithImageMyShop = React.forwardRef<HTMLDivElement, CardWithImageProps>
                       confirm={t('confirm')}
                     />
                   )}
-                  {props.product.isSold && <p className="text-green-500">verkauft</p>}
+                  {props.product.isSold && <p className="text-green-500">{sold('sold')}</p>}
                 </CardDescription>
               </CardHeader>
             </Card>
