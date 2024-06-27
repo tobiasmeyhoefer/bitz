@@ -32,7 +32,7 @@ const Banner = ({ title }: { title: string }) => {
         />
         <ShopText title={title} />
         <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-          <ChooseBanner setBanner={setBanner} label={'change Banner'} />
+          <ChooseBanner setBanner={setBanner} />
         </div>
       </div>
     </>

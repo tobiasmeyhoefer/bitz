@@ -1,4 +1,3 @@
-'use client'
 import { Button } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import Image from 'next/image'
@@ -21,7 +20,7 @@ const pictureImages = [
   '/images/Banner/picture4.jpg',
 ]
 
-const ChooseBanner = (props: { setBanner: (value: string) => void; label: string }) => {
+const ChooseBanner = (props: { setBanner: (value: string) => void }) => {
   const chooseImage = async (bannerURL: string) => {
     props.setBanner(bannerURL)
     await setBanner(bannerURL)

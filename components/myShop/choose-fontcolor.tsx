@@ -1,4 +1,3 @@
-'use client'
 import { setShopTextColor } from '@/lib/user-actions'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
