@@ -1,3 +1,4 @@
+'use client'
 import { getProductsOwned } from '@/lib/product-actions'
 import { CardWithImage } from '@/components/ui/cardWithImage'
 import {
@@ -8,15 +9,40 @@ import {
   getUserById,
 } from '@/lib/user-actions'
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
+import { ProductType, UserType } from '@/schema'
+import { SortProducts } from '@/components/sort-products/sort-products'
 
 // Some user shop
-export default async function Page({ params }: { params: { id: string } }) {
-  const owner = await getUserById(params.id)
-  const products = await getProductsOwned(params.id)
-  const banner = (await getBannerById(params.id)) ?? '/images/Banner/default.png'
-  const title = await getShopNameById(params.id)
-  const textColor = (await getShopTextColorById(params.id)) ?? 'rgb(0 0 0)'
-  const textFont = (await getShopTextFontById(params.id)) ?? 'Montserrat'
+export default function Page({ params }: { params: { id: string } }) {
+  const [owner, setOwner] = useState<UserType>()
+  const [products, setProducts] = useState<ProductType[]>([])
+  const [banner, setBanner] = useState('/images/Banner/default.png')
+  const [title, setTitle] = useState('')
+  const [textColor, setTextColor] = useState('rgb(0 0 0)')
+  const [textFont, setTextFont] = useState('Montserrat')
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const ownerData = await getUserById(params.id)
+        const productsData = await getProductsOwned(params.id)
+        const bannerData = await getBannerById(params.id)
+        const titleData = await getShopNameById(params.id)
+        const textColorData = await getShopTextColorById(params.id)
+        const textFontData = await getShopTextFontById(params.id)
+        setOwner(ownerData)
+        setProducts(productsData)
+        setBanner(bannerData ?? '/images/Banner/default.png')
+        setTitle(titleData)
+        setTextColor(textColorData ?? 'rgb(0 0 0)')
+        setTextFont(textFontData ?? 'Montserrat')
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      }
+    }
+    fetchData()
+  }, [params.id])
 
   return (
     <>
@@ -42,6 +68,16 @@ export default async function Page({ params }: { params: { id: string } }) {
             {title || `${owner?.name}'s Shop`}
           </h1>
         </div>
+      </div>
+      <div className="absolute right-1/2 mt-4 translate-x-1/2">
+        <SortProducts
+          setProducts={setProducts}
+          translations={{
+            sortBy: 'sortby',
+            date: 'date',
+            price: 'price',
+          }}
+        />
       </div>
       <div
         className={`flex h-full flex-col items-center justify-center px-4 py-20 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
