@@ -34,7 +34,7 @@ const CardDescription = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...props }, ref) => (
-  <p ref={ref} className={cn('text-sm text-muted-foreground', className)} {...props} />
+  <div ref={ref} className={cn('text-sm text-muted-foreground', className)} {...props} /> //ursprünglich hier p tag wleches aber zu Hydration Error führt deswegen durch div tag ersetzt
 ))
 CardDescription.displayName = 'CardDescription'
 

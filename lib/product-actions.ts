@@ -13,13 +13,15 @@ import { addProductStripe, setProductNotActive, updateProductStripe } from './st
 import { redirect } from '@/navigation'
 import { sortBy } from 'sort-by-typescript'
 
-export async function getProductsBrowse() {
+export async function getProductsBrowse(limit: number = 5, offset: number = 0) { 
   const session = await auth()
   const id = session?.user?.id
   const response = await db
     .select()
     .from(products)
     .where(and(ne(products.sellerId, id!), ne(products.isSold, true)))
+    .limit(limit)
+    .offset(offset)
   return response
 }
 
@@ -390,4 +392,13 @@ export async function filterProducts(values: {
     response = response.filter((item) => item.price <= price)
   }
   return response
+}
+export async function checkProfanity(message: string): Promise<boolean> {
+  const res = await fetch('https://vector.profanity.dev', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message }),
+  })
+  const json = await res.json()
+  return json.isProfanity
 }

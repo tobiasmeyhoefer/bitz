@@ -12,21 +12,12 @@ import {
 import { getUser, saveUserAddress, saveUserLocation } from '@/lib/user-actions'
 import { useEffect, useState } from 'react'
 import { useToast } from '../ui/use-toast'
-// import '@geoapify/geocoder-autocomplete/styles/round-borders.css'
 import './address.css'
 import {
   GeoapifyContext,
   GeoapifyGeocoderAutocomplete,
 } from '@geoapify/react-geocoder-autocomplete'
 import { AddressResult } from '@/lib/types'
-
-// const formSchema = z.object({
-//   address: z
-//     .string()
-//     .regex(/^[a-zA-Z0-9äöüÄÖÜß\s]+$/, { message: 'No special characters allowed' })
-//     .min(4)
-//     .max(60),
-// })
 
 interface AddressChangerProps {
   translations: {
@@ -48,9 +39,6 @@ export default function AddressChanger({ translations }: AddressChangerProps) {
     getProduct()
   }, [])
 
-  // const form = useForm<z.infer<typeof formSchema>>({
-  //   resolver: zodResolver(formSchema),
-  // })
   const form = useForm()
 
   async function onSubmit() {
@@ -103,15 +91,13 @@ export default function AddressChanger({ translations }: AddressChangerProps) {
                       sendPlaceDetailsRequestFunc={sendPlaceDetailsRequest}
                       allowNonVerifiedStreet={false}
                       debounceDelay={10}
-                      // type={'street'}
                     />
                   </GeoapifyContext>
-                  {/* <Input {...field} defaultValue={address} /> */}
                 </FormControl>
               </FormItem>
             )}
           />
-          <Button className="mt-4" type="submit" variant={'secondary'}>
+          <Button className="mt-4" type="submit">
             {translations.changeNow}
           </Button>
         </form>
