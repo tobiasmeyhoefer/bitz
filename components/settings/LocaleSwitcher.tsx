@@ -12,7 +12,7 @@ export default function LocaleSwitcher() {
       <h5 className='mb-2'>{t('label')}</h5>
       <LocaleSwitcherSelect defaultValue={t('locale', { locale: locale })} label={t('label')}>
         {locales.map((cur) => (
-          <SelectItem key={cur} value={cur}>
+          <SelectItem className='hover:cursor-pointer' key={cur} value={cur}>
             {t('locale', { locale: cur })}
           </SelectItem>
         ))}

@@ -70,7 +70,7 @@ export default function NameChanger({ translations }: NameChangerProps) {
               </FormItem>
             )}
           />
-          <Button className="mt-4" type="submit" variant={'secondary'}>
+          <Button className="mt-4" type="submit">
             {translations.changeNow}
           </Button>
         </form>

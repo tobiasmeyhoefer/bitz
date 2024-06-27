@@ -12,8 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { MessageType } from '@/schema'
-import { deleteMessageById } from '@/lib/message-actions'
+import { deleteMessageById, setMessagesToRead } from '@/lib/message-actions'
 
 interface MessageProps {
   convId: string
@@ -36,6 +35,13 @@ const Messages = ({ convId, initialMessages, userId }: MessageProps) => {
   }
 
   useEffect(() => {
+
+    const setMessagesRead = async () => {
+      await setMessagesToRead()
+    }
+
+    setMessagesRead()
+
     pusherClient.subscribe(convId)
     scrollToBottom()
 
