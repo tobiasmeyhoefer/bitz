@@ -23,25 +23,31 @@ import {
 } from '@/components/ui/dropdown-menu'
 
 type ProdDelAlertProps = {
-  menuDeleteOption: string
   productId: string
   title: string
   yousure: string
   cancel: string
   confirm: string
+  menuDeleteOption: string
 }
 
-export function ProdDelAlert({ productId, title, yousure, cancel, confirm }: ProdDelAlertProps) {
+export function ProdDelAlert({
+  productId,
+  title,
+  yousure,
+  cancel,
+  confirm,
+  menuDeleteOption,
+}: ProdDelAlertProps) {
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
 
-    const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const handleDeleteClick = () => {
+    setIsDialogOpen(true)
+  }
 
-    const handleDeleteClick = () => {
-      setIsDialogOpen(true)
-    }
-
-    const handleDialogClose = () => {
-      setIsDialogOpen(false)
-    }
+  const handleDialogClose = () => {
+    setIsDialogOpen(false)
+  }
   return (
     <>
       <DropdownMenu>
@@ -51,7 +57,7 @@ export function ProdDelAlert({ productId, title, yousure, cancel, confirm }: Pro
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuItem onClick={handleDeleteClick}>X</DropdownMenuItem>
+          <DropdownMenuItem onClick={handleDeleteClick}>{menuDeleteOption}</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
 

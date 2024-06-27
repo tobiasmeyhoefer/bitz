@@ -12,8 +12,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { CardContainer } from './3d-card'
 
 const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
-  ({ className, topRightSlot, ...props }, ref) => {
-    // Hinzufügen von topRightSlot, damit in child-Komponente ein Element an einer bestimmten Stelle ergänzt werden kann
+  ({ className, ...props }, ref) => {
     const product = props.product
     return (
       <>
@@ -58,7 +57,6 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
-                  {props.editable && props.favIcon && <ProdDelAlert productId={product.id} />}
                   {!props.editable && props.favIcon && <FavoriteLike productId={product.id} />}
                 </div>
                 <CardDescription className="text-sm">
