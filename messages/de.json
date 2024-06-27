@@ -100,6 +100,7 @@
 
   "MyShop": {
     "title": "MEINE BITZ",
+    "noBitz": "Du hast noch keine Bitz hinzugefügt.",
     "addProducts": "Bit hinzufügen",
     "updateProducts": "Bit aktualisieren",
     "deleteProduct": "Bit löschen"
@@ -136,6 +137,7 @@
   },
 
   "ProdDelAlert": {
+    "menuDeleteOption": "Löschen",
     "title": "Achtung!",
     "yousure": "Bist du sicher, dass du dieses Bit löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.",
     "confirm": "Bestätigen",

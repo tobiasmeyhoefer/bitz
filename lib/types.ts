@@ -22,6 +22,8 @@ type NavMenuDrawerProps = {
 }
 
 type CardWithImageProps = {
+  children?: React.ReactNode
+  topRightSlot?: JSX.Element
   className?: React.HTMLAttributes<HTMLDivElement> | string
   favIcon?: boolean
   delIcon?: boolean

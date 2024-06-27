@@ -6,22 +6,33 @@ import { cn, formatDate, formatDateDMY } from '@/lib/utils'
 import { Link } from '@/navigation'
 import { Card, CardHeader, CardTitle, CardDescription } from './card'
 import FavoriteLike from '../favorites/favoriteLike'
+import { ProdDelAlert } from '../myShop/productDelAlert'
+import { useTranslations } from 'next-intl'
 import { Badge } from './badge'
 import { FaLocationDot } from 'react-icons/fa6'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { CardContainer } from './3d-card'
 
 const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
-  ({ className, topRightSlot, ...props }, ref) => {
-    // Hinzufügen von topRightSlot, damit in child-Komponente ein Element an einer bestimmten Stelle ergänzt werden kann
+  ({ className, ...props }, ref) => {
     const product = props.product
+    const t = useTranslations('ProdDelAlert')
     return (
       <>
         {props && product ? (
           <CardContainer>
-            <>
-              <div className="absolute right-0 top-0 m-2">{topRightSlot}</div>
-            </>
+            <div className="absolute right-0 top-0 m-2">
+              {props.editable && props.favIcon && (
+                <ProdDelAlert
+                  menuDeleteOption={t('menuDeleteOption')}
+                  productId={props.product.id}
+                  title={t('title')}
+                  yousure={t('yousure')}
+                  cancel={t('cancel')}
+                  confirm={t('confirm')}
+                />
+              )}
+            </div>
             <Card className={cn(`w-[150px] md:w-[200px] lg:w-[300px]`, className)} ref={ref}>
               <Link href={`/product/${product.id}`}>
                 {product.imageUrl1 !== undefined ? (

@@ -1,3 +1,4 @@
+// ProdDelAlert.tsx
 'use client'
 import React, { useState } from 'react'
 import {
@@ -21,17 +22,26 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 
-export function ProdDelAlert({ productId }: { productId: string }) {
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
+type ProdDelAlertProps = {
+  menuDeleteOption: string
+  productId: string
+  title: string
+  yousure: string
+  cancel: string
+  confirm: string
+}
 
-  const handleDeleteClick = () => {
-    setIsDialogOpen(true)
-  }
+export function ProdDelAlert({ productId, title, yousure, cancel, confirm }: ProdDelAlertProps) {
 
-  const handleDialogClose = () => {
-    setIsDialogOpen(false)
-  }
+    const [isDialogOpen, setIsDialogOpen] = useState(false)
 
+    const handleDeleteClick = () => {
+      setIsDialogOpen(true)
+    }
+
+    const handleDialogClose = () => {
+      setIsDialogOpen(false)
+    }
   return (
     <>
       <DropdownMenu>
@@ -41,22 +51,22 @@ export function ProdDelAlert({ productId }: { productId: string }) {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuItem onClick={handleDeleteClick}>Delete</DropdownMenuItem>
+          <DropdownMenuItem onClick={handleDeleteClick}>X</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
 
       <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Produkt löschen</AlertDialogTitle>
-            <AlertDialogDescription>Bist du dir sicher?</AlertDialogDescription>
+            <AlertDialogTitle>{title}</AlertDialogTitle>
+            <AlertDialogDescription>{yousure}</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel onClick={handleDialogClose}>Cancel</AlertDialogCancel>
+            <AlertDialogCancel onClick={handleDialogClose}>{cancel}</AlertDialogCancel>
             <form action={() => deleteProduct(productId)}>
               <Button variant={'destructive'}>
                 <AlertDialogAction className="bg-transparent hover:bg-transparent">
-                  Delete
+                  {confirm}
                 </AlertDialogAction>
               </Button>
             </form>
