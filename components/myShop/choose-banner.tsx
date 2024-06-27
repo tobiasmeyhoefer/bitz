@@ -1,54 +1,49 @@
-'use client'
 import { Button } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import Image, { StaticImageData } from 'next/image'
-import colorBanner1 from '@/public/images/Banner/cardinal.jpg'
-import colorBanner2 from '@/public/images/Banner/greencrayola.jpg'
-import colorBanner3 from '@/public/images/Banner/ultramarineblue.jpeg'
-import colorBanner4 from '@/public/images/Banner/yelloworange.jpg'
-import gradientBanner1 from '@/public/images/Banner/gradient1.jpg'
-import gradientBanner4 from '@/public/images/Banner/gradient4.jpg'
-import pictureBanner1 from '@/public/images/Banner/picture1.jpeg'
-import pictureBanner2 from '@/public/images/Banner/picture2.jpg'
-import pictureBanner3 from '@/public/images/Banner/picture3.jpg'
-import pictureBanner4 from '@/public/images/Banner/picture4.jpg'
+import Image from 'next/image'
+import { deleteBanner, setBanner } from '@/lib/user-actions'
+import { AiFillPicture } from 'react-icons/ai'
 
 const colorImages = [
-  colorBanner1,
-  colorBanner2,
-  colorBanner3,
-  colorBanner4,
-  gradientBanner1,
-  gradientBanner4,
+  '/images/Banner/cardinal.jpg',
+  '/images/Banner/greencrayola.jpg',
+  '/images/Banner/ultramarineblue.jpeg',
+  '/images/Banner/yelloworange.jpg',
+  '/images/Banner/gradient1.jpg',
+  '/images/Banner/gradient4.jpg',
 ]
 
-const pictureImages = [pictureBanner1, pictureBanner2, pictureBanner3, pictureBanner4]
+const pictureImages = [
+  '/images/Banner/picture1.jpg',
+  '/images/Banner/picture2.jpg',
+  '/images/Banner/picture3.jpg',
+  '/images/Banner/picture4.jpg',
+]
 
-const ChooseBanner = (props: {
-  setBanner: (value: StaticImageData | undefined) => void
-  setIsBanner: (value: boolean) => void
-  label: string
-}) => {
-  const chooseImage = (value: StaticImageData) => {
-    props.setBanner(value)
-    props.setIsBanner(true)
+const ChooseBanner = (props: { setBanner: (value: string) => void }) => {
+  const chooseImage = async (bannerURL: string) => {
+    props.setBanner(bannerURL)
+    await setBanner(bannerURL)
   }
 
-  const removeImage = () => {
-    props.setBanner(undefined)
-    props.setIsBanner(false)
+  const removeImage = async () => {
+    props.setBanner('/images/Banner/default.png')
+    await deleteBanner()
   }
 
   return (
-    <>
+    <div className="absolute right-2 top-2 z-30 text-xs">
       <Popover>
         <PopoverTrigger asChild>
-          <Button variant="secondary" className="z-30 h-8 w-24 text-xs">
-            {props.label}
+          <Button
+            variant="ghost"
+            className="z-30 h-8 w-8 rounded-xl border-none p-1 text-xs drop-shadow-xl hover:bg-transparent"
+          >
+            <AiFillPicture className=" h-9 w-9 fill-white drop-shadow-xl hover:fill-gray-300" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-[19rem] sm:w-[36rem]">
-          <div className="grid gap-4">
+        <PopoverContent className="w-[36rem]">
+          <div className="grid gap-4 space-y-2">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <h6 className="text-sm font-medium leading-none">Gallery</h6>
@@ -70,7 +65,13 @@ const ChooseBanner = (props: {
                   className="h-16 bg-transparent p-0 shadow-transparent"
                   onClick={() => chooseImage(image)}
                 >
-                  <Image src={image} alt={`Banner ${index + 1}`} className="h-16 rounded" />
+                  <Image
+                    src={image}
+                    alt={`Banner ${index + 1}`}
+                    width={200}
+                    height={140}
+                    className="h-16 rounded"
+                  />
                 </Button>
               ))}
             </div>
@@ -83,14 +84,20 @@ const ChooseBanner = (props: {
                   className="h-16 bg-transparent p-0 shadow-transparent"
                   onClick={() => chooseImage(image)}
                 >
-                  <Image src={image} alt={`Banner ${index + 1}`} className="h-16 rounded" />
+                  <Image
+                    src={image}
+                    alt={`Banner ${index + 1}`}
+                    width={200}
+                    height={140}
+                    className=" h-16 rounded"
+                  />
                 </Button>
               ))}
             </div>
           </div>
         </PopoverContent>
       </Popover>
-    </>
+    </div>
   )
 }
 

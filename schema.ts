@@ -24,6 +24,10 @@ export const users = pgTable('user', {
   adress: text('adress'),
   phoneVerified: boolean('phoneVerified').default(false),
   onboardingCompleted: boolean('onboardingCompleted').default(false),
+  shopname: text('shopname'),
+  shoptextfont: text('shoptextfont'),
+  shoptextcolor: text('shoptextcolor'),
+  banner: text('banner'),
 })
 
 export const products = pgTable('product', {
@@ -185,7 +189,8 @@ export const conversations = pgTable(
   {
     id: text('id')
       .$defaultFn(() => crypto.randomUUID())
-      .notNull().unique(),
+      .notNull()
+      .unique(),
     buyerId: text('buyerId')
       .notNull()
       .references(() => users.id, { onDelete: 'cascade' }),
@@ -214,11 +219,15 @@ export const messages = pgTable('messages', {
     .notNull()
     .primaryKey(),
   content: text('content').notNull(),
-  senderId: text("senderId").references(() => users.id).notNull(),
-  conversationId: text("conversationId").references(() => conversations.id).notNull(),
+  senderId: text('senderId')
+    .references(() => users.id)
+    .notNull(),
+  conversationId: text('conversationId')
+    .references(() => conversations.id)
+    .notNull(),
   timestamp: timestamp('timestamp', { mode: 'date' }).notNull().defaultNow(),
-  isSystemMessage: boolean("isSystemMessage").default(false).notNull(),
-  wasRead: boolean("wasRead").default(false).notNull()
+  isSystemMessage: boolean('isSystemMessage').default(false).notNull(),
+  wasRead: boolean('wasRead').default(false).notNull(),
 })
 
 export type UserType = typeof users.$inferSelect
