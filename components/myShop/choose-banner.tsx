@@ -15,7 +15,7 @@ const colorImages = [
 ]
 
 const pictureImages = [
-  '/images/Banner/picture1.jpeg',
+  '/images/Banner/picture1.jpg',
   '/images/Banner/picture2.jpg',
   '/images/Banner/picture3.jpg',
   '/images/Banner/picture4.jpg',
@@ -25,13 +25,11 @@ const ChooseBanner = (props: { setBanner: (value: string) => void; label: string
   const chooseImage = async (bannerURL: string) => {
     props.setBanner(bannerURL)
     await setBanner(bannerURL)
-    // props.setIsBanner(true)
   }
 
   const removeImage = async () => {
-    props.setBanner('/images/Banner/white.jpg')
+    props.setBanner('/images/Banner/default.png')
     await deleteBanner()
-    // props.setIsBanner(false)
   }
 
   return (
@@ -40,9 +38,9 @@ const ChooseBanner = (props: { setBanner: (value: string) => void; label: string
         <PopoverTrigger asChild>
           <Button
             variant="ghost"
-            className="z-30 h-9 w-9 border-none  p-0 text-xs hover:bg-transparent"
+            className="z-30 h-8 w-8 rounded-xl border-none p-1 text-xs drop-shadow-xl hover:bg-transparent"
           >
-            <AiFillPicture className=" h-8 w-8" />
+            <AiFillPicture className=" h-9 w-9 fill-white drop-shadow-xl hover:fill-gray-300" />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-[36rem]">

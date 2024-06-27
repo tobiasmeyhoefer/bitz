@@ -35,7 +35,10 @@ export function ChooseFontcolor(props: { setColor: (value: string) => void }) {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild className="z-50">
-          <Button variant="secondary" className="z-30 h-8 w-24 text-xs">
+          <Button
+            variant="ghost"
+            className="z-30 h-8 w-24 text-xs text-white hover:bg-transparent hover:text-gray-300"
+          >
             change color
           </Button>
         </DropdownMenuTrigger>

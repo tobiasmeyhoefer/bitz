@@ -13,28 +13,31 @@ import Image from 'next/image'
 export default async function Page({ params }: { params: { id: string } }) {
   const owner = await getUserById(params.id)
   const products = await getProductsOwned(params.id)
-  const banner = (await getBannerById(params.id)) ?? '/images/Banner/white.jpg'
+  const banner = (await getBannerById(params.id)) ?? '/images/Banner/default.png'
   const title = await getShopNameById(params.id)
   const textColor = (await getShopTextColorById(params.id)) ?? 'rgb(0 0 0)'
   const textFont = (await getShopTextFontById(params.id)) ?? 'Montserrat'
 
   return (
     <>
-      <div className="relative h-52 w-full rounded-b-lg bg-cover bg-center shadow-lg">
-        {banner ? (
-          <Image
-            src={banner}
-            alt="Product Image"
-            style={{ objectFit: 'cover' }}
-            width={1800}
-            height={150}
-            className="h-full w-full rounded-b-lg"
-          />
-        ) : null}
+      <div className="group relative h-40 w-full  bg-cover">
+        <div className="absolute h-3/5 w-full bg-gradient-to-b from-black/40 to-black/0"></div>
+        <Image
+          src={banner}
+          alt="Product Image"
+          style={{ objectFit: 'cover' }}
+          width={1800}
+          height={150}
+          className="h-full w-full rounded-b-lg"
+        />
         <div className="absolute bottom-2 left-24 h-8 ">
           <h1
-            className=" text-3xl font-bold drop-shadow-xl"
-            style={{ color: textColor, fontFamily: textFont }}
+            className="z-40 w-auto border-none text-xl font-bold md:text-3xl"
+            style={{
+              color: textColor,
+              fontFamily: textFont,
+              textShadow: '1px 1px 5px rgba(0, 0, 0, 0.6)',
+            }}
           >
             {title || `${owner?.name}'s Shop`}
           </h1>
