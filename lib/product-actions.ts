@@ -13,7 +13,7 @@ import { addProductStripe, setProductNotActive, updateProductStripe } from './st
 import { redirect } from '@/navigation'
 import { sortBy } from 'sort-by-typescript'
 
-export async function getProductsBrowse(limit: number = 5, offset: number = 0) { 
+export async function getProductsBrowse(limit: number = 5, offset: number = 0) {
   const session = await auth()
   const id = session?.user?.id
   const response = await db
@@ -26,7 +26,10 @@ export async function getProductsBrowse(limit: number = 5, offset: number = 0) {
 }
 
 export async function getProductsOwned(userId: string) {
-  const response = await db.select().from(products).where(eq(products.sellerId, userId)) //muss 'eq' sein und nicht 'ne'
+  const response = await db
+    .select()
+    .from(products)
+    .where(and(eq(products.sellerId, userId), ne(products.isSold, true))) //muss 'eq' sein und nicht 'ne'
   return response
 }
 
@@ -133,7 +136,10 @@ export async function getProductById(productId: string) {
 
 // getter for products with Category as param
 export const getProductsByCategory = async (category: string, sellerId: string) => {
-  const result = await db.select().from(products).where(and(eq(products.category, category), ne(products.sellerId, sellerId)))
+  const result = await db
+    .select()
+    .from(products)
+    .where(and(eq(products.category, category), ne(products.sellerId, sellerId)))
   return result
 }
 
