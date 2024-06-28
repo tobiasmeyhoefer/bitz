@@ -358,7 +358,7 @@ export async function sortProducts(value: string) {
   return result
 }
 
-export async function sortProductsForeignShop(value: string, userID: string) {
+export async function sortProductsShop(value: string, userID: string) {
   const response = await db
     .select()
     .from(products)

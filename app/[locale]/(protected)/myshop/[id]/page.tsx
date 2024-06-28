@@ -11,7 +11,7 @@ import {
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { ProductType, UserType } from '@/schema'
-import { SortProductsForeignShop } from '@/components/sort-products/sort-products-foreignShop'
+import { SortProductsShop } from '@/components/sort-products/sort-products-foreignShop'
 
 export default function Page({ params }: { params: { id: string } }) {
   const [owner, setOwner] = useState<UserType>()
@@ -65,7 +65,7 @@ export default function Page({ params }: { params: { id: string } }) {
         </div>
       </div>
       <div className="absolute right-1/2 mt-4 translate-x-1/2">
-        <SortProductsForeignShop setProducts={setProducts} userId={params.id} />
+        <SortProductsShop setProducts={setProducts} userId={params.id} />
       </div>
       <div
         className={`flex h-full flex-col items-center justify-center px-4 py-20 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
