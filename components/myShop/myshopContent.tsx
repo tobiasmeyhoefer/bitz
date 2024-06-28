@@ -1,14 +1,16 @@
-import { CardWithImage } from '@/components/ui/cardWithImage'
+import { CardWithImageMyShop } from '../ui/cardWithImageMyShop'
+import { CardWithImage } from '../ui/cardWithImage'
 import { getProductsOwned } from '@/lib/product-actions'
 import { getUser } from '@/lib/user-actions'
 import AnimatedCard from '../ui/animated-card'
+import { getTranslations } from 'next-intl/server'
 
 const MyShopContent = async () => {
   const user = await getUser()
   const products = await getProductsOwned(user.id)
-
+  const t = await getTranslations('MyShop')
   if (products.length === 0) {
-    return <p>Du hast noch keine Bitz veröffentlicht</p>
+    return <p>{t('noBitz')}</p>
   }
 
   return (
@@ -19,13 +21,12 @@ const MyShopContent = async () => {
         <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
           {products?.map((p, index) => (
             // <AnimatedCard  delay={0.3} >
-              <CardWithImage
-                key={`pr-${index}`}
-                className="mx-[5px] my-[0.5rem]"
-                product={products[index]}
-                favIcon
-                editable
-              />
+            <CardWithImageMyShop
+              key={`pr-${index}`}
+              className="mx-[5px] my-[0.5rem]"
+              product={products[index]}
+              editable
+            />
             // </AnimatedCard>
           ))}
         </div>

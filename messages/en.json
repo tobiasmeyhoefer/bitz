@@ -100,9 +100,11 @@
 
   "MyShop": {
     "title": "MY BITZ",
+    "noBitz": "You have not added any Bitz yet.",
     "addProducts": "add Bit",
     "updateProducts": "update Bit",
-    "deleteProduct": "delete Bit"
+    "deleteProduct": "delete Bit",
+    "sold": "Sold!"
   },
 
   "Product": {
@@ -136,6 +138,7 @@
   },
 
   "ProdDelAlert": {
+    "menuDeleteOption": "Delete",
     "title": "Attention!",
     "yousure": "This will permanently delete this Bit from the database. This action cannot be undone. ",
     "confirm": "Confirm",
