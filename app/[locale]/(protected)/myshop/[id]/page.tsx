@@ -11,9 +11,8 @@ import {
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { ProductType, UserType } from '@/schema'
-import { SortProducts } from '@/components/sort-products/sort-products'
+import { SortProductsForeignShop } from '@/components/sort-products/sort-products-foreignShop'
 
-// Some user shop
 export default function Page({ params }: { params: { id: string } }) {
   const [owner, setOwner] = useState<UserType>()
   const [products, setProducts] = useState<ProductType[]>([])
@@ -24,22 +23,18 @@ export default function Page({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const ownerData = await getUserById(params.id)
-        const productsData = await getProductsOwned(params.id)
-        const bannerData = await getBannerById(params.id)
-        const titleData = await getShopNameById(params.id)
-        const textColorData = await getShopTextColorById(params.id)
-        const textFontData = await getShopTextFontById(params.id)
-        setOwner(ownerData)
-        setProducts(productsData)
-        setBanner(bannerData ?? '/images/Banner/default.png')
-        setTitle(titleData)
-        setTextColor(textColorData ?? 'rgb(0 0 0)')
-        setTextFont(textFontData ?? 'Montserrat')
-      } catch (error) {
-        console.error('Error fetching data:', error)
-      }
+      const ownerData = await getUserById(params.id)
+      const productsData = await getProductsOwned(params.id)
+      const bannerData = await getBannerById(params.id)
+      const titleData = await getShopNameById(params.id)
+      const textColorData = await getShopTextColorById(params.id)
+      const textFontData = await getShopTextFontById(params.id)
+      setOwner(ownerData)
+      setProducts(productsData)
+      setBanner(bannerData ?? '/images/Banner/default.png')
+      setTitle(titleData)
+      setTextColor(textColorData ?? 'rgb(0 0 0)')
+      setTextFont(textFontData ?? 'Montserrat')
     }
     fetchData()
   }, [params.id])
@@ -70,14 +65,7 @@ export default function Page({ params }: { params: { id: string } }) {
         </div>
       </div>
       <div className="absolute right-1/2 mt-4 translate-x-1/2">
-        <SortProducts
-          setProducts={setProducts}
-          translations={{
-            sortBy: 'sortby',
-            date: 'date',
-            price: 'price',
-          }}
-        />
+        <SortProductsForeignShop setProducts={setProducts} userId={params.id} />
       </div>
       <div
         className={`flex h-full flex-col items-center justify-center px-4 py-20 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
