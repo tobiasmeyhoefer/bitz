@@ -6,18 +6,23 @@ import { cn, formatDate, formatDateDMY } from '@/lib/utils'
 import { Link } from '@/navigation'
 import { Card, CardHeader, CardTitle, CardDescription } from './card'
 import FavoriteLike from '../favorites/favoriteLike'
+import { ProdDelAlert } from '../myShop/productDelAlert'
+import { useTranslations } from 'next-intl'
 import { Badge } from './badge'
 import { FaLocationDot } from 'react-icons/fa6'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { CardContainer } from './3d-card'
 
-const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
+const CardWithImageMyShop = React.forwardRef<HTMLDivElement, CardWithImageProps>(
   ({ className, ...props }, ref) => {
     const product = props.product
+    const t = useTranslations('ProdDelAlert')
+    const sold = useTranslations('MyShop')
     return (
       <>
         {props && product ? (
           <CardContainer>
+            <div className="absolute right-0 top-0 m-2"></div>
             <Card className={cn(`w-[150px] md:w-[200px] lg:w-[300px]`, className)} ref={ref}>
               <Link href={`/product/${product.id}`}>
                 {product.imageUrl1 !== undefined ? (
@@ -57,6 +62,15 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
+                    <ProdDelAlert
+                      menuDeleteOption={t('menuDeleteOption')}
+                      productId={props.product.id}
+                      title={t('title')}
+                      yousure={t('yousure')}
+                      cancel={t('cancel')}
+                      confirm={t('confirm')}
+                    />
+                 
                   {!props.editable && props.favIcon && <FavoriteLike productId={product.id} />}
                 </div>
                 <CardDescription className="text-sm">
@@ -73,14 +87,6 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                       {props.product.location}
                     </div>
                     <div className="text-right">
-                      {!props.editable && props.favIcon && (
-                        <Link
-                          className="hidden font-semibold text-primary md:block"
-                          href={`/myshop/${product.sellerId}`}
-                        >
-                          View Shop
-                        </Link>
-                      )}
                       <div className="md:text-md flex hidden items-end text-right text-xs md:block">
                         {formatDate(product.createdAt)}
                       </div>
@@ -89,6 +95,17 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                       </div>
                     </div>
                   </div>
+                  {props.editable && props.favIcon && (
+                    <ProdDelAlert
+                      menuDeleteOption={t('menuDeleteOption')}
+                      productId={props.product.id}
+                      title={t('title')}
+                      yousure={t('yousure')}
+                      cancel={t('cancel')}
+                      confirm={t('confirm')}
+                    />
+                  )}
+                  {props.product.isSold && <p className="text-green-500">{sold('sold')}</p>}
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -100,6 +117,6 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
     )
   },
 )
-CardWithImage.displayName = 'CardWithImage'
+CardWithImageMyShop.displayName = 'CardWithImageMyShop'
 
-export { CardWithImage }
+export { CardWithImageMyShop }
