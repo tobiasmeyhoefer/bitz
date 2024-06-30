@@ -12,13 +12,9 @@ import { SortProductsProps } from '@/lib/types'
 import { ProductType } from '@/schema'
 import { SetStateAction } from 'react'
 
-export const SortProductsShop = (params: {
-  userId: string
-  setProducts: (value: SetStateAction<ProductType[]>) => void
-}) => {
+export const SortProductsShop = (params: { userId: string; action: (value: string) => void }) => {
   const sort = async (value: string) => {
-    const result = await sortProductsShop(value, params.userId)
-    params.setProducts(result)
+    params.action(value)
   }
 
   return (

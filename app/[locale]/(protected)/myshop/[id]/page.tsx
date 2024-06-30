@@ -1,5 +1,4 @@
-'use client'
-import { getProductsOwned } from '@/lib/product-actions'
+import { getProductsOwned, sortProductsShop } from '@/lib/product-actions'
 import { CardWithImage } from '@/components/ui/cardWithImage'
 import {
   getBannerById,
@@ -11,33 +10,20 @@ import {
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { ProductType, UserType } from '@/schema'
-import { SortProductsShop } from '@/components/sort-products/sort-products-foreignShop'
+import { SortProductsShop } from '@/components/sort-products/sort-products-shop'
+export default async function Page({ params }: { params: { id: string } }) {
+  const owner = await getUserById(params.id)
+  let products = await getProductsOwned(params.id)
+  const banner = await getBannerById(params.id)
+  const title = await getShopNameById(params.id)
+  const textColor = await getShopTextColorById(params.id)
+  const textFont = await getShopTextFontById(params.id)
 
-export default function Page({ params }: { params: { id: string } }) {
-  const [owner, setOwner] = useState<UserType>()
-  const [products, setProducts] = useState<ProductType[]>([])
-  const [banner, setBanner] = useState('/images/Banner/default.png')
-  const [title, setTitle] = useState('')
-  const [textColor, setTextColor] = useState('rgb(0 0 0)')
-  const [textFont, setTextFont] = useState('Montserrat')
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const ownerData = await getUserById(params.id)
-      const productsData = await getProductsOwned(params.id)
-      const bannerData = await getBannerById(params.id)
-      const titleData = await getShopNameById(params.id)
-      const textColorData = await getShopTextColorById(params.id)
-      const textFontData = await getShopTextFontById(params.id)
-      setOwner(ownerData)
-      setProducts(productsData)
-      setBanner(bannerData ?? '/images/Banner/default.png')
-      setTitle(titleData)
-      setTextColor(textColorData ?? 'rgb(0 0 0)')
-      setTextFont(textFontData ?? 'Montserrat')
-    }
-    fetchData()
-  }, [params.id])
+  async function sortProducts(value: string) {
+    'use server'
+    console.log(value)
+    products = await sortProductsShop(value, params.id)
+  }
 
   return (
     <>
@@ -65,7 +51,7 @@ export default function Page({ params }: { params: { id: string } }) {
         </div>
       </div>
       <div className="absolute right-1/2 mt-4 translate-x-1/2">
-        <SortProductsShop setProducts={setProducts} userId={params.id} />
+        <SortProductsShop action={sortProducts} userId={params.id} />
       </div>
       <div
         className={`flex h-full flex-col items-center justify-center px-4 py-20 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
