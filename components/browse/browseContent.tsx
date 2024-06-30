@@ -16,6 +16,7 @@ import AnimatedCard from '../ui/animated-card'
 import { FilterProducts } from '../filter-products/filter-products'
 import { getUser } from '@/lib/user-actions'
 import { Button } from '../ui/button'
+import AddressChooserPopup from '../adressChooser-popup/adressChooser-popup'
 
 const suggestions = [
   'Reciever',
@@ -57,6 +58,7 @@ const BrowseContent = (props: BrowseContentProps) => {
   const [page, setPage] = useState(1)
   const [isLoadingMore, setIsLoadingMore] = useState(false)
   const [hasMoreProducts, setHasMoreProducts] = useState(true)
+  const [addressChoosen, setAddressChoosen] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -64,6 +66,9 @@ const BrowseContent = (props: BrowseContentProps) => {
       setUserId(user.id)
       const result = await getProductsBrowse(4, 0)
       setProducts(result)
+      if (!user.adress) {
+        setAddressChoosen(false)
+      }
       if (result.length === 0) {
         setNoSearchResults(true)
       }
@@ -121,7 +126,12 @@ const BrowseContent = (props: BrowseContentProps) => {
 
   return (
     <>
-      <OnboardingBrowseCard />
+      {!addressChoosen ? (
+        <AddressChooserPopup translations={props.addressChooserTranslations} />
+      ) : (
+        <></>
+      )}
+      {/* <OnboardingBrowseCard /> */}
       <div
         className={`${loading && `h-full`} flex w-full flex-col items-center justify-center  px-4 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
       >
