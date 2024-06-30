@@ -39,7 +39,7 @@
     "sub04": "TOMORROW",
     "sub05": "SUPPLYING TECHNOLOGY",
     "discoverBitz": "Discover the new buying and selling platform",
-    "Sponsors": {"thanks": "Special thanks to"},
+    "Sponsors": { "thanks": "Special thanks to" },
     "About": {
       "title": "What Is",
       "WhatIsBitz": "Bitz is a buying and selling platform similar to classified ads or Vinted, only much better. Bitz is all about the joy of browsing, discovering and trading. Our application serves as a marketplace for selling your own goods or buying those of others. Our focus here is on trading in technical goods, increased security and a good user experience. Customizable user profiles allow you to create your own small stores to market Bitz (your items) in an ideal way. With Bitz, you can save money, create space and also protect the environment.",
@@ -91,7 +91,12 @@
     "suggestions": "Suggestions",
     "sortby": "sort by:",
     "date": "date",
-    "price": "price"
+    "price": "price",
+    "popupTitle": "please enter your address",
+    "addressError": "Error, please select an address",
+    "housenumberError": "Error,please also add your housenumber",
+    "SuccessToast": "address succesfully changed ✅",
+    "submit": "submit"
   },
 
   "Search": {
@@ -149,7 +154,7 @@
     "title": "SETTINGS",
     "city": "City",
     "postcode": "Postcode",
-    "address": "New Address", 
+    "address": "New Address",
     "imageChangeTitle": "Change Profilepicture",
     "submitTitle": "submit",
     "deleteAccount": "Delete Account",
@@ -175,8 +180,8 @@
       "numberNotice": "Use the + infront of your number",
       "continue": "Continue",
       "enterCode": "Enter the code you received on your phone!",
-      "cancel":"Cancel",
-      "submit":"Submit"
+      "cancel": "Cancel",
+      "submit": "Submit"
     },
     "restartGuide": "Restart beginners tour",
     "registerPasskey": "Register new passkey",
