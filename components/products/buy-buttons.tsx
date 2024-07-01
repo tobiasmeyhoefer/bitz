@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react'
 import { useToast } from '@/components/ui/use-toast'
 import { ProductType } from '@/schema'
 import axios from 'axios'
+import { checkIfUserIsPhoneVerified } from '@/lib/verify-actions'
 
 export function BuyButtons(props: { product: ProductType }) {
   const [addressError, setAddressError] = useState(false)
@@ -35,6 +36,14 @@ export function BuyButtons(props: { product: ProductType }) {
   }, [product.id])
 
   async function handleBuyClick() {
+    const isPhoneVerified = await checkIfUserIsPhoneVerified()
+    if (!isPhoneVerified) {
+      toast({
+        title: 'Error',
+        description: 'Please verify your phone number first'
+      })
+      return
+    }
     const seller = await getUserById(product.sellerId)
     await axios.post('/api/mail/welcome', {
       to: seller.email,
@@ -45,6 +54,14 @@ export function BuyButtons(props: { product: ProductType }) {
   }
 
   async function handleDirectBuyClick() {
+    const isPhoneVerified = await checkIfUserIsPhoneVerified()
+    if (!isPhoneVerified) {
+      toast({
+        title: 'Error',
+        description: 'Please verify your phone number first'
+      })
+      return
+    }
     if (!addressError) {
       const openedCheckoutSession = await productHasCheckoutSessionOpened(product.id!)
       if (!openedCheckoutSession) {

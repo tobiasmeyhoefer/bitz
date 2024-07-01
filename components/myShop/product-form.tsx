@@ -35,6 +35,7 @@ import { cn } from '@/lib/utils'
 import { Checkbox } from '../ui/checkbox'
 import { getUser } from '@/lib/user-actions'
 import { ProductType } from '@/schema'
+import { checkIfUserIsPhoneVerified } from '@/lib/verify-actions'
 
 const suggestions = [
   { value: 'Reciever' },
@@ -179,6 +180,16 @@ export function ProductForm({
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true)
+
+    const isPhoneVerified = await checkIfUserIsPhoneVerified()
+    if (!isPhoneVerified) {
+      toast({
+        title: 'Error',
+        description: 'Please verify your phone number first'
+      })
+      setIsLoading(false)
+      return
+    }
 
     if(await checkProfanity(values.title) || await checkProfanity(values.description)) {
       toast({
