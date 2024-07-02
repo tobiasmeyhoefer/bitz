@@ -84,7 +84,7 @@
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.163.0",
-    "twilio": "^5.1.0",
+    "twilio": "^5.2.1",
     "vaul": "^0.9.1",
     "zod": "^3.23.6",
     "zustand": "^4.5.2"
