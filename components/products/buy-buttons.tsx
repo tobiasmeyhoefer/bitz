@@ -45,7 +45,7 @@ export function BuyButtons(props: { product: ProductType }) {
       return
     }
     const seller = await getUserById(product.sellerId)
-    await axios.post('/api/mail/welcome', {
+    await axios.post('/api/mail/productInterest', {
       to: seller.email,
       productName: product.title
     })

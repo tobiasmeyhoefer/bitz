@@ -1,17 +1,17 @@
-import { WelcomeEmail } from '@/components/email/email-template'
+import { ProductInterestEmail } from '@/components/email/email-template'
 import { Resend } from 'resend'
 
 const resend = new Resend(process.env.AUTH_RESEND_KEY)
 
 export async function POST(req: Request) {
-  const { to } = await req.json()
+  const { to, productName } = await req.json()
 
   try {
     const { data, error } = await resend.emails.send({
       from: 'app@bitztech.de',
       to: to,
-      subject: `Welcome at Bitz!`,
-      react: WelcomeEmail(),
+      subject: `New Activity on Bitz!`,
+      react: ProductInterestEmail(productName),
     })
 
     if (error) {
