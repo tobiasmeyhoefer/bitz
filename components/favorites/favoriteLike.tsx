@@ -23,7 +23,7 @@ const FavoriteLike = ({ productId }: { productId: string }) => {
           size="icon"
           type="submit"
           aria-label="like product"
-          className="flex justify-end"
+          className="flex"
           onClick={() => {
             isFavorite ? deleteFavorite(productId) : addToFavorites(productId)
             setIsFavorite(!isFavorite)

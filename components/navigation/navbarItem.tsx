@@ -29,7 +29,7 @@ const NavItemLink = (props: NavbarItemLinkProps) => {
   return (
     <Link
       className={cn(
-        `bg-none text-left text-lg font-normal ${pathname === props.linkTo ? 'cursor-default text-inherit underline underline-offset-8' : ' hover:underline hover:underline-offset-8'} hover:bg-none`,
+        `bg-none text-left text-lg font-normal ${pathname === props.linkTo ? 'text-inherit underline underline-offset-8' : ' hover:underline hover:underline-offset-8'} hover:bg-none`,
         props.className,
       )}
       href={props.linkTo}
@@ -70,7 +70,7 @@ const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
         )}
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel className="text-left">Menu</DropdownMenuLabel>
+        {/* <DropdownMenuLabel className="text-left">Menu</DropdownMenuLabel> */}
         <DropdownMenuItem className="p-0">
           <NavItemLink
             className="w-full px-3 py-2 text-left text-sm no-underline hover:no-underline"
@@ -92,7 +92,7 @@ const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
             linkTo="/transactions"
           ></NavItemLink>
         </DropdownMenuItem>
-        <DropdownMenuSeparator />
+        {/* <DropdownMenuSeparator /> */}
 
         <DropdownMenuItem className="p-0 font-normal">
           <div className="w-full px-3 py-2">{props.signOut}</div>

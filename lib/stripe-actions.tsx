@@ -5,8 +5,10 @@ import { db } from '@/db'
 import { checkoutSession, products, transactions, ProductType } from '@/schema'
 import { desc, eq, or } from 'drizzle-orm'
 import { cookies } from 'next/headers'
-import { getUser } from './user-actions'
+import { getUser, getUserById } from './user-actions'
 import { revalidatePath } from 'next/cache'
+import axios from 'axios'
+import { getProductById } from './product-actions'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 
@@ -111,6 +113,7 @@ export async function createTransaction(
 
 export async function handleCompletedCheckoutSession(event: Stripe.CheckoutSessionCompletedEvent) {
   try {
+
     const sessionWithLineItems = await stripe.checkout.sessions.retrieve(
       (event.data.object as Stripe.Checkout.Session).id,
       { expand: ['line_items'] },
@@ -119,6 +122,20 @@ export async function handleCompletedCheckoutSession(event: Stripe.CheckoutSessi
     if (!lineItems) return false
 
     const product = await stripe.products.retrieve(lineItems.data[0].price?.product as string)
+    const dbProduct = await getProductById(product.metadata.productId)
+    const seller = await getUserById(dbProduct.sellerId)
+
+    await fetch('/api/mail/productDirectlySold', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        to: seller.email,
+        productName: dbProduct.title,
+        address: seller.adress
+      }),
+    })
 
     changeProductStateToSold(product.metadata.productId)
     await savePayment(product.metadata.productId)
