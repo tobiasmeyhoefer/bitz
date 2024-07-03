@@ -63,7 +63,7 @@ const BrowseContent = (props: BrowseContentProps) => {
     const fetchData = async () => {
       const user = await getUser()
       setUserId(user.id)
-      const result = await getProductsBrowse(4, 0)
+      const result = await getProductsBrowse(10, 0)
       setProducts(result)
       if (result.length === 0) {
         setNoSearchResults(true)
@@ -75,7 +75,7 @@ const BrowseContent = (props: BrowseContentProps) => {
 
   const loadMoreProducts = async () => {
     setIsLoadingMore(true);
-    const result = await getProductsBrowse(4, page * 4);
+    const result = await getProductsBrowse(10, page * 10);
     if (result.length < 4) { // Wert muss angepasst werden, je nach dem wie viele Produkte man mehr Laden moechte 
       setHasMoreProducts(false);
     }
@@ -161,7 +161,7 @@ const BrowseContent = (props: BrowseContentProps) => {
               {noSearchResults && <div className=" px-4">Keine Suchergebnisse gefunden</div>}
             </div>
             {hasMoreProducts && (
-              <AnimatedButton onClick={loadMoreProducts} disabled={isLoadingMore} className='mt-4 mb-6'>
+              <AnimatedButton onClick={loadMoreProducts} disabled={isLoadingMore} className='mt-4 mb-6 p-2 ps-5 pr-5 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground rounded-md'>
                 {isLoadingMore ? 'Loading...' : 'Load More'}
               </AnimatedButton>
             )}

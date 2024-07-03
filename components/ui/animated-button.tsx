@@ -10,6 +10,7 @@ interface AnimatedButtonProps {
   disabled?: boolean;
   children: ReactNode;
   className?: string;
+
 }
 
 const buttonVariants = {
