@@ -8,9 +8,9 @@ const Transactions = async () => {
   const t = await getTranslations('Transactions')
   const transactions = await getUserTransactions()
   return (
-    <div className="flex flex-col items-center px-5 md:px-10">
+    <div className="flex flex-col items-center px-5 md:px-10 py-10">
       <div className="w-full">
-        <h1 className="mb-[1.5rem] text-center font-montserrat text-xl font-bold md:text-3xl">
+        <h1 className="mb-12 text-center font-montserrat text-xl font-bold md:text-3xl">
           {t('title')}
         </h1>
         <Suspense fallback={<ConversationLoadingSkeleton />}>

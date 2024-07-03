@@ -80,7 +80,7 @@ const OnboardingBrowseCard: React.FC<OnboardingCardProps> = ({ className }) => {
     <div className="absolute inset-0 flex items-center justify-center">
       <Card
         className={cn(
-          ' z-20 relative flex min-h-[200px] w-[400px] flex-col justify-between shadow-xl',
+          ' relative z-20 flex min-h-[200px] w-[400px] flex-col justify-between shadow-xl',
           className,
         )}
       >
@@ -88,7 +88,7 @@ const OnboardingBrowseCard: React.FC<OnboardingCardProps> = ({ className }) => {
           <CardTitle>{title}</CardTitle>
           <CardDescription>{description}</CardDescription>
         </CardHeader>
-        <CardFooter className='flex gap-4'>
+        <CardFooter className="flex gap-4">
           {onboardingIndexBrowse === 6 ? (
             <Button
               onClick={async () => {
@@ -113,7 +113,7 @@ const OnboardingBrowseCard: React.FC<OnboardingCardProps> = ({ className }) => {
             Überspringen
           </Button>
         </CardFooter>
-        <BorderBeam borderWidth={4} className='-z-10 -m-1' duration={10} />
+        <BorderBeam borderWidth={4} className="-z-10 -m-1" duration={10} />
       </Card>
       <div className="fixed inset-0 z-10 bg-black/70"></div>
     </div>

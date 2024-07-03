@@ -81,6 +81,10 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
     } else {
       await createMessage(input, user.id, conv.id)
       await axios.post('/api/message', { content: input, convId: conv.id, senderId: user.id })
+      //maybe delete because to many mails are generated...
+      // await axios.post('/api/mail/accountVerified', {
+      //   to: .email,
+      // })
     }
 
     setInput('')

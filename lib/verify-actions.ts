@@ -7,7 +7,7 @@ import { generateRandomSixDigitNumber } from './utils'
 import { desc, eq } from 'drizzle-orm'
 import twilio from 'twilio'
 
-async function saveVerifactionNumber(number: string) {
+async function saveVerificationNumber(number: string) {
   try {
     const user = await getUser()
     await db.insert(verificationNumberSessions).values({
@@ -57,7 +57,7 @@ export async function sendSmsToUser(number: string) {
         to: number,
       })
       .catch((error) => {})
-    await saveVerifactionNumber(verificationNumber)
+    await saveVerificationNumber(verificationNumber)
   } catch (error) {
     return { error: "Something wen't wrong on the server" }
   }

@@ -30,8 +30,8 @@ const Settings = () => {
   }
 
   return (
-    <div className="mb-10 ">
-      <h1 className="mb-[1.5rem] text-center font-montserrat text-xl font-bold md:text-3xl">
+    <div className="py-12">
+      <h1 className="mb-16 text-center font-montserrat text-xl font-bold md:text-3xl">
         {t('title')}
       </h1>
       <Suspense fallback={<LoadingSkeletonSettings/>}>
