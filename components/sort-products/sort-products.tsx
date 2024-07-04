@@ -7,18 +7,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { sortProducts } from '@/lib/product-actions'
+import { sortProducts, sortProductsShop } from '@/lib/product-actions'
 import { SortProductsProps } from '@/lib/types'
 import { ProductType } from '@/schema'
 import { SetStateAction } from 'react'
 
-export const SortProducts = (params: {
-  // action : (value: string) => {}
+type sortProps = {
   translations: SortProductsProps
   setProducts: (value: SetStateAction<ProductType[]>) => void
-}) => {
+  userId?: string
+}
+
+export const SortProducts = (params: sortProps) => {
   const sort = async (value: string) => {
-    const result = await sortProducts(value)
+    let result = []
+    if (params.userId) {
+      result = await sortProductsShop(value, params.userId)
+    } else {
+      result = await sortProducts(value)
+    }
     params.setProducts(result)
   }
 
