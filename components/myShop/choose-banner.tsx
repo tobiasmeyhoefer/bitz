@@ -9,15 +9,20 @@ const colorImages = [
   '/images/Banner/greencrayola.jpg',
   '/images/Banner/ultramarineblue.jpeg',
   '/images/Banner/yelloworange.jpg',
-  '/images/Banner/gradient1.jpg',
-  '/images/Banner/gradient4.jpg',
+  '/images/Banner/gradient1.webp',
+  '/images/Banner/gradient2.jpg',
+  '/images/Banner/gradient3.webp',
 ]
 
 const pictureImages = [
-  '/images/Banner/picture1.jpg',
+  '/images/Banner/picture1.webp',
   '/images/Banner/picture2.jpg',
-  '/images/Banner/picture3.jpg',
+  '/images/Banner/picture3.webp',
   '/images/Banner/picture4.jpg',
+  '/images/Banner/picture5.webp',
+  '/images/Banner/picture6.webp',
+  '/images/Banner/picture7.webp',
+  '/images/Banner/picture8.webp',
 ]
 
 const ChooseBanner = (props: { setBanner: (value: string) => void }) => {
