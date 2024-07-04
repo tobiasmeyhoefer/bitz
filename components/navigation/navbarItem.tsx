@@ -15,17 +15,8 @@ import { Drawer, DrawerContent, DrawerTrigger } from '../ui/drawer'
 import Image from 'next/image'
 import { TbMenu } from 'react-icons/tb'
 import { useState, useEffect } from 'react'
-import { HiUserCircle } from 'react-icons/hi2'
 import { FaUserCircle } from 'react-icons/fa'
 import { Separator } from '@/components/ui/separator'
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet'
 import { NavbarItemDropdownProps, NavbarItemLinkProps, NavMenuDrawerProps } from '@/lib/types'
 
 type NavLoginProps = {
@@ -38,7 +29,7 @@ const NavItemLink = (props: NavbarItemLinkProps) => {
   return (
     <Link
       className={cn(
-        `bg-none text-left text-lg font-normal ${pathname === props.linkTo ? 'cursor-default text-inherit underline underline-offset-8' : ' hover:underline hover:underline-offset-8'} hover:bg-none`,
+        `bg-none text-left text-lg font-normal ${pathname === props.linkTo ? 'text-inherit underline underline-offset-8' : ' hover:underline hover:underline-offset-8'} hover:bg-none`,
         props.className,
       )}
       href={props.linkTo}
@@ -79,32 +70,32 @@ const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
         )}
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel className="text-left">Menu</DropdownMenuLabel>
-        <DropdownMenuItem>
+        {/* <DropdownMenuLabel className="text-left">Menu</DropdownMenuLabel> */}
+        <DropdownMenuItem className="p-0">
           <NavItemLink
-            className="w-full text-left text-sm no-underline hover:no-underline"
+            className="w-full px-3 py-2 text-left text-sm no-underline hover:no-underline"
             text={props.favoritesLinkText}
             linkTo="/favorites"
           ></NavItemLink>
         </DropdownMenuItem>
-        <DropdownMenuItem>
+        <DropdownMenuItem className="p-0">
           <NavItemLink
-            className="w-full text-left text-sm no-underline hover:no-underline"
+            className="w-full px-3 py-2 text-left text-sm no-underline hover:no-underline"
             text={props.settingsLinkText}
             linkTo="/settings"
           ></NavItemLink>
         </DropdownMenuItem>
-        <DropdownMenuItem>
+        <DropdownMenuItem className="p-0">
           <NavItemLink
-            className="text-left text-sm no-underline hover:no-underline"
+            className="px-3 py-2 text-left text-sm no-underline hover:no-underline"
             text="Transaktionen"
             linkTo="/transactions"
           ></NavItemLink>
         </DropdownMenuItem>
-        <DropdownMenuSeparator />
+        {/* <DropdownMenuSeparator /> */}
 
-        <DropdownMenuItem className="font-normal">
-          <div className="w-full">{props.signOut}</div>
+        <DropdownMenuItem className="p-0 font-normal">
+          <div className="w-full px-3 py-2">{props.signOut}</div>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

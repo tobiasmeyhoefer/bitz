@@ -22,6 +22,8 @@ type NavMenuDrawerProps = {
 }
 
 type CardWithImageProps = {
+  children?: React.ReactNode
+  topRightSlot?: JSX.Element
   className?: React.HTMLAttributes<HTMLDivElement> | string
   favIcon?: boolean
   delIcon?: boolean
@@ -56,6 +58,14 @@ type SortProductsProps = {
   price: string
 }
 
+type addressChooserTranslations = {
+  popupTitle: string
+  addressError: string
+  housenumberError: string
+  SuccessToast: string
+  submit: string
+}
+
 type SearchTranslations = {
   searchPlaceholder: string
   suggestions: string
@@ -71,11 +81,14 @@ type FormTranslations = {
   toastTitle: string
   toastDescription: string
   submitTitle: string
+  isDirectlyBuyable: string
+  deletePicture: string
 }
 
 type BrowseContentProps = {
   searchTranslations: SearchTranslations
   sortTranslations: SortProductsProps
+  addressChooserTranslations: addressChooserTranslations
 }
 
 // type ProductType = {
@@ -133,6 +146,7 @@ export type {
   CardWithImageProps,
   SearchBarProps,
   SortProductsProps,
+  addressChooserTranslations,
   SearchTranslations,
   BrowseContentProps,
   RevealOnScrollProps,

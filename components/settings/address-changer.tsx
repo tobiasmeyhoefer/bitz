@@ -9,10 +9,9 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { getUser, saveUserAdress, saveUserLocation } from '@/lib/user-actions'
+import { getUser, saveUserAddress, saveUserLocation } from '@/lib/user-actions'
 import { useEffect, useState } from 'react'
 import { useToast } from '../ui/use-toast'
-// import '@geoapify/geocoder-autocomplete/styles/round-borders.css'
 import './address.css'
 import {
   GeoapifyContext,
@@ -20,30 +19,26 @@ import {
 } from '@geoapify/react-geocoder-autocomplete'
 import { AddressResult } from '@/lib/types'
 
-// const formSchema = z.object({
-//   adress: z
-//     .string()
-//     .regex(/^[a-zA-Z0-9äöüÄÖÜß\s]+$/, { message: 'No special characters allowed' })
-//     .min(4)
-//     .max(60),
-// })
-
-export default function AdressChanger() {
-  const [adress, setAdress] = useState<string>('')
+interface AddressChangerProps {
+  translations: {
+    address: string
+    changeAddress: string
+    changeNow: string
+  }
+}
+export default function AddressChanger({ translations }: AddressChangerProps) {
+  const [address, setAddress] = useState<string>('')
   const [value, setValue] = useState('')
   const [result, setResult] = useState<AddressResult | null>(null)
   const { toast } = useToast()
   useEffect(() => {
     const getProduct = async () => {
       const user = await getUser()
-      setAdress(user.adress ?? '')
+      setAddress(user.adress ?? '')
     }
     getProduct()
   }, [])
 
-  // const form = useForm<z.infer<typeof formSchema>>({
-  //   resolver: zodResolver(formSchema),
-  // })
   const form = useForm()
 
   async function onSubmit() {
@@ -53,7 +48,7 @@ export default function AdressChanger() {
           title: 'please add your housenumber ❌',
         })
       } else {
-        await saveUserAdress(result.properties.address_line1)
+        await saveUserAddress(result.properties.address_line1)
         await saveUserLocation(result.properties.postcode, result.properties.city)
         toast({
           title: 'Address changed successfully ✅',
@@ -78,34 +73,32 @@ export default function AdressChanger() {
   return (
     <div className="mb-6">
       <Form {...form}>
-        <FormLabel>change Adress</FormLabel>
+        <FormLabel>{translations.address}</FormLabel>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
             control={form.control}
-            name={'adress'}
+            name={'address'}
             render={({ field }) => (
               <FormItem>
                 <FormMessage />
                 <FormControl>
                   <GeoapifyContext apiKey={process.env.NEXT_PUBLIC_ADDRESS_KEY}>
                     <GeoapifyGeocoderAutocomplete
-                      value={adress}
+                      value={address}
                       filterByCountryCode={['de']}
                       sendGeocoderRequestFunc={sendGeocoderRequest}
                       addDetails={true}
                       sendPlaceDetailsRequestFunc={sendPlaceDetailsRequest}
                       allowNonVerifiedStreet={false}
                       debounceDelay={10}
-                      // type={'street'}
                     />
                   </GeoapifyContext>
-                  {/* <Input {...field} defaultValue={adress} /> */}
                 </FormControl>
               </FormItem>
             )}
           />
-          <Button className="mt-4" type="submit" variant={'secondary'}>
-            change
+          <Button className="mt-4" type="submit">
+            {translations.changeNow}
           </Button>
         </form>
       </Form>

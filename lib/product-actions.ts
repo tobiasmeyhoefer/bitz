@@ -2,7 +2,7 @@
 
 import { products, favorites, ProductType } from '@/schema'
 import { db } from '../db'
-import { count, desc, eq, ne, or, sql, ilike, and } from 'drizzle-orm'
+import { count, desc, eq, ne, or, sql, ilike, and, asc } from 'drizzle-orm'
 import { auth } from '@/auth'
 import { getUserById } from './user-actions'
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3'
@@ -13,7 +13,7 @@ import { addProductStripe, setProductNotActive, updateProductStripe } from './st
 import { redirect } from '@/navigation'
 import { sortBy } from 'sort-by-typescript'
 
-export async function getProductsBrowse(limit: number = 5, offset: number = 0) { 
+export async function getProductsBrowse(limit: number = 5, offset: number = 0) {
   const session = await auth()
   const id = session?.user?.id
   const response = await db
@@ -22,11 +22,16 @@ export async function getProductsBrowse(limit: number = 5, offset: number = 0) {
     .where(and(ne(products.sellerId, id!), ne(products.isSold, true)))
     .limit(limit)
     .offset(offset)
+    .orderBy(desc(products.createdAt))
   return response
 }
 
 export async function getProductsOwned(userId: string) {
-  const response = await db.select().from(products).where(eq(products.sellerId, userId)) //muss 'eq' sein und nicht 'ne'
+  const response = await db
+    .select()
+    .from(products)
+    .where(and(eq(products.sellerId, userId), ne(products.isSold, true))) //muss 'eq' sein und nicht 'ne'
+    .orderBy(desc(products.createdAt))
   return response
 }
 
@@ -133,7 +138,10 @@ export async function getProductById(productId: string) {
 
 // getter for products with Category as param
 export const getProductsByCategory = async (category: string, sellerId: string) => {
-  const result = await db.select().from(products).where(and(eq(products.category, category), ne(products.sellerId, sellerId)))
+  const result = await db
+    .select()
+    .from(products)
+    .where(and(eq(products.category, category), ne(products.sellerId, sellerId)))
   return result
 }
 
@@ -349,6 +357,9 @@ export async function sortProducts(value: string) {
     .from(products)
     .where(and(ne(products.sellerId, id!), ne(products.isSold, true)))
   const result = response.sort(sortBy(value))
+  if (value == 'createdAt') {
+    result.reverse()
+  }
   return result
 }
 
@@ -392,4 +403,13 @@ export async function filterProducts(values: {
     response = response.filter((item) => item.price <= price)
   }
   return response
+}
+export async function checkProfanity(message: string): Promise<boolean> {
+  const res = await fetch('https://vector.profanity.dev', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message }),
+  })
+  const json = await res.json()
+  return json.isProfanity
 }

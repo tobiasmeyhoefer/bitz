@@ -17,6 +17,7 @@ import { FilterProducts } from '../filter-products/filter-products'
 import { getUser } from '@/lib/user-actions'
 import { Button } from '../ui/button'
 import AnimatedButton from '../ui/animated-button'
+import AddressChooserPopup from '../adressChooser-popup/adressChooser-popup'
 
 const suggestions = [
   'Reciever',
@@ -55,9 +56,10 @@ const BrowseContent = (props: BrowseContentProps) => {
   const [noSearchResults, setNoSearchResults] = useState(false)
   const [products, setProducts] = useState<ProductType[]>([])
   const [userId, setUserId] = useState<string>(``)
-  const [page, setPage] = useState(1);
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const [hasMoreProducts, setHasMoreProducts] = useState(true);
+  const [page, setPage] = useState(1)
+  const [isLoadingMore, setIsLoadingMore] = useState(false)
+  const [hasMoreProducts, setHasMoreProducts] = useState(true)
+  const [addressChoosen, setAddressChoosen] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,6 +67,9 @@ const BrowseContent = (props: BrowseContentProps) => {
       setUserId(user.id)
       const result = await getProductsBrowse(10, 0)
       setProducts(result)
+      if (!user.adress) {
+        setAddressChoosen(false)
+      }
       if (result.length === 0) {
         setNoSearchResults(true)
       }
@@ -80,15 +85,15 @@ const BrowseContent = (props: BrowseContentProps) => {
       setHasMoreProducts(false);
     }
 
-    setProducts(prevProducts => [...prevProducts, ...result]);
+    setProducts((prevProducts) => [...prevProducts, ...result])
     if (result.length === 0) {
-      setNoSearchResults(true);
+      setNoSearchResults(true)
     } else {
-      setNoSearchResults(false);
+      setNoSearchResults(false)
     }
-    setPage(prevPage => prevPage + 1);
-    setIsLoadingMore(false);
-  };
+    setPage((prevPage) => prevPage + 1)
+    setIsLoadingMore(false)
+  }
 
   const loadProductsByCategory = async (category: string) => {
     setLoading(true)
@@ -122,7 +127,12 @@ const BrowseContent = (props: BrowseContentProps) => {
 
   return (
     <>
-      <OnboardingBrowseCard />
+      {!addressChoosen ? (
+        <AddressChooserPopup translations={props.addressChooserTranslations} />
+      ) : (
+        <></>
+      )}
+      {/* <OnboardingBrowseCard /> */}
       <div
         className={`${loading && `h-full`} flex w-full flex-col items-center justify-center  px-4 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
       >
@@ -147,10 +157,10 @@ const BrowseContent = (props: BrowseContentProps) => {
             <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
               {products.map((p, index) => (
                 <div key={`kp-${index}`}>
-                  <AnimatedCard delay={0.3} >
+                  <AnimatedCard delay={0.3}>
                     <CardWithImage
                       key={`pr-${index}`}
-                      className="mx-[5px] my-[0.5rem]"
+                      className={`mx-[5px] my-[0.5rem]`} // h-[400px] w-[200px]
                       product={products[index]}
                       favIcon
                       editable={false}

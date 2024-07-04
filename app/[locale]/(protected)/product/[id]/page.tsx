@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
-import { ProductImageCarousel } from '../productImgCarousel'
-import ProductInfoCard from '../productInfoCard'
+import { ProductImageCarousel } from '@/components/products/productImgCarousel'
+import ProductInfoCard from '@/components/products/productInfoCard'
 import { Link } from '@/navigation'
 import { getTranslations } from 'next-intl/server'
 import { getProductById } from '@/lib/product-actions'
@@ -31,6 +31,12 @@ export default async function Page({ params }: { params: { id: string } }) {
   const carouselTranslations = {
     image: t('image'),
     of: t('of'),
+    updateImage: {
+      title: t('updateImage.title'),
+      description: t('updateImage.description'),
+      submit: t('updateImage.submit'),
+      close: t('updateImage.close'),
+    },
   }
   const backButtonHref = isOwner ? `/myshop` : '/browse'
 
@@ -54,13 +60,25 @@ export default async function Page({ params }: { params: { id: string } }) {
             variant="outline"
             className={
               isOwner
-                ? ' xl:left-18 ml-12 mt-4 lg:absolute lg:top-32 xl:left-12  xl:top-36 2xl:left-24 2xl:top-36'
-                : 'md: fixed bottom-6 left-8  md:left-14 lg:left-8 lg:top-36 xl:left-24 2xl:left-28 2xl:top-40'
+                ? 'xl:left-18 ml-12 mt-4 lg:absolute lg:top-32 xl:left-12  xl:top-36 2xl:left-24 2xl:top-36'
+                : 'fixed left-8 top-24 font-semibold md:left-14 lg:left-8 lg:top-36 xl:left-24 2xl:left-28 2xl:top-40'
             }
           >
             ⏎
           </Button>
         </Link>
+        {!isOwner && (
+          <Link href={`/myshop/${product.sellerId}`}>
+            <Button
+              variant="outline"
+              className={
+                'fixed right-8 top-24 font-semibold md:right-14 lg:right-8 lg:top-36 xl:right-24 2xl:right-28 2xl:top-40'
+              }
+            >
+              View Shop
+            </Button>
+          </Link>
+        )}
       </div>
     </>
   )

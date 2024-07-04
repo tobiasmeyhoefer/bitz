@@ -24,10 +24,10 @@ export async function saveUserLocation(postcode: string, city: string) {
   await db.update(users).set({ location: location }).where(eq(users.id, id!))
 }
 
-export async function saveUserAdress(adress: string) {
+export async function saveUserAddress(address: string) {
   const session = await auth()
   const id = session?.user?.id
-  await db.update(users).set({ adress: adress }).where(eq(users.id, id!))
+  await db.update(users).set({ adress: address }).where(eq(users.id, id!))
 }
 
 export async function getUserById(userId: string) {
@@ -125,4 +125,94 @@ export async function getOnboardingState() {
 export async function setOnboardingState(state: boolean) {
   const user = await getUser()
   await db.update(users).set({ onboardingCompleted: state }).where(eq(users.id, user.id))
+}
+
+export async function setBanner(bannerURL: string) {
+  const user = await getUser()
+  await db.update(users).set({ banner: bannerURL }).where(eq(users.id, user.id))
+}
+
+export async function getBanner() {
+  const user = await getUser()
+  const response = await db
+    .select({ banner: users.banner })
+    .from(users)
+    .where(eq(users.id, user.id))
+  return response[0].banner!
+}
+
+export async function deleteBanner() {
+  const user = await getUser()
+  await db.update(users).set({ banner: null }).where(eq(users.id, user.id))
+}
+
+export async function getShopName() {
+  const user = await getUser()
+  const response = await db
+    .select({ shopname: users.shopname })
+    .from(users)
+    .where(eq(users.id, user.id))
+  return response[0].shopname!
+}
+
+export async function setShopName(shopname: string) {
+  const user = await getUser()
+  await db.update(users).set({ shopname: shopname }).where(eq(users.id, user.id))
+}
+
+export async function getShopTextColor() {
+  const user = await getUser()
+  const response = await db
+    .select({ shoptextcolor: users.shoptextcolor })
+    .from(users)
+    .where(eq(users.id, user.id))
+  return response[0].shoptextcolor!
+}
+
+export async function setShopTextColor(shoptextcolor: string) {
+  const user = await getUser()
+  await db.update(users).set({ shoptextcolor: shoptextcolor }).where(eq(users.id, user.id))
+}
+
+export async function getShopTextFont() {
+  const user = await getUser()
+  const response = await db
+    .select({ shoptextfont: users.shoptextfont })
+    .from(users)
+    .where(eq(users.id, user.id))
+  return response[0].shoptextfont!
+}
+
+export async function setShopTextFont(shoptextfont: string) {
+  const user = await getUser()
+  await db.update(users).set({ shoptextfont: shoptextfont }).where(eq(users.id, user.id))
+}
+
+export async function getBannerById(userId: string) {
+  const response = await db.select({ banner: users.banner }).from(users).where(eq(users.id, userId))
+  return response[0].banner!
+}
+
+export async function getShopNameById(userId: string) {
+  const response = await db
+    .select({ shopname: users.shopname })
+    .from(users)
+    .where(eq(users.id, userId))
+  return response[0].shopname!
+}
+
+export async function getShopTextColorById(userId: string) {
+  const response = await db
+    .select({ shoptextcolor: users.shoptextcolor })
+    .from(users)
+    .where(eq(users.id, userId))
+  return response[0].shoptextcolor!
+}
+
+export async function getShopTextFontById(userId: string) {
+  const response = await db
+    .select({ shoptextfont: users.shoptextfont })
+    .from(users)
+    .where(eq(users.id, userId))
+  return response[0].shoptextfont!
 }

@@ -24,7 +24,15 @@ const formSchema = z.object({
     .max(60),
 })
 
-export default function NameChanger() {
+interface NameChangerProps {
+  translations: {
+    username: string
+    changeName: string
+    changeNow: string
+  }
+}
+
+export default function NameChanger({ translations }: NameChangerProps) {
   const [name, setName] = useState<string>('')
   const { toast } = useToast()
   useEffect(() => {
@@ -48,7 +56,7 @@ export default function NameChanger() {
   return (
     <div className="mb-6">
       <Form {...form}>
-        <FormLabel>change Name</FormLabel>
+        <FormLabel>{translations.changeName}</FormLabel>
         <form onSubmit={form.handleSubmit(onSubmit)} className="">
           <FormField
             control={form.control}
@@ -62,8 +70,8 @@ export default function NameChanger() {
               </FormItem>
             )}
           />
-          <Button className="mt-4" type="submit" variant={'secondary'}>
-            change
+          <Button className="mt-4" type="submit">
+            {translations.changeNow}
           </Button>
         </form>
       </Form>

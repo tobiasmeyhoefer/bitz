@@ -3,11 +3,13 @@ import { Button } from '@/components/ui/button'
 import { checkIfConversationAlreadyExist, createConversation } from '@/lib/conversations-actions'
 import { Link, useRouter } from '@/navigation'
 import { createCheckoutSession, productHasCheckoutSessionOpened } from '@/lib/stripe-actions'
-import { getUser } from '@/lib/user-actions'
+import { getUser, getUserById } from '@/lib/user-actions'
 import { useRouter as useRouterNext } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useToast } from '@/components/ui/use-toast'
 import { ProductType } from '@/schema'
+import axios from 'axios'
+import { checkIfUserIsPhoneVerified } from '@/lib/verify-actions'
 
 export function BuyButtons(props: { product: ProductType }) {
   const [addressError, setAddressError] = useState(false)
@@ -34,18 +36,32 @@ export function BuyButtons(props: { product: ProductType }) {
   }, [product.id])
 
   async function handleBuyClick() {
+    const isPhoneVerified = await checkIfUserIsPhoneVerified()
+    if (!isPhoneVerified) {
+      toast({
+        title: 'Error',
+        description: 'Please verify your phone number first'
+      })
+      return
+    }
+    const seller = await getUserById(product.sellerId)
+    await axios.post('/api/mail/productInterest', {
+      to: seller.email,
+      productName: product.title
+    })
     await createConversation(product.id!)
-    // await createChat()
     router.push('/conversations')
   }
 
-  //   const createChat = async () => {
-  //     const res = await fetch("/api/chats/create")
-  // const chatId: string = await res.text()
-  // router.push(`/chat/${chatId}`)
-  // }
-
   async function handleDirectBuyClick() {
+    const isPhoneVerified = await checkIfUserIsPhoneVerified()
+    if (!isPhoneVerified) {
+      toast({
+        title: 'Error',
+        description: 'Please verify your phone number first'
+      })
+      return
+    }
     if (!addressError) {
       const openedCheckoutSession = await productHasCheckoutSessionOpened(product.id!)
       if (!openedCheckoutSession) {
