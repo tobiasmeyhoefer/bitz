@@ -16,6 +16,8 @@ import AnimatedCard from '../ui/animated-card'
 import { FilterProducts } from '../filter-products/filter-products'
 import { getUser } from '@/lib/user-actions'
 import { Button } from '../ui/button'
+import AnimatedButton from '../ui/animated-button'
+import AddressChooserPopup from '../adressChooser-popup/adressChooser-popup'
 
 const suggestions = [
   'Reciever',
@@ -50,33 +52,37 @@ const suggestions = [
 
 const BrowseContent = (props: BrowseContentProps) => {
   const [searchValue, setSearchValue] = useState('')
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true) //
   const [noSearchResults, setNoSearchResults] = useState(false)
   const [products, setProducts] = useState<ProductType[]>([])
   const [userId, setUserId] = useState<string>(``)
   const [page, setPage] = useState(1)
   const [isLoadingMore, setIsLoadingMore] = useState(false)
   const [hasMoreProducts, setHasMoreProducts] = useState(true)
+  const [addressChoosen, setAddressChoosen] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
       const user = await getUser()
       setUserId(user.id)
-      const result = await getProductsBrowse(4, 0)
+      const result = await getProductsBrowse(10, 0)
       setProducts(result)
+      if (!user.adress) {
+        setAddressChoosen(false)
+      }
       if (result.length === 0) {
         setNoSearchResults(true)
       }
+      setLoading(false)
     }
     fetchData()
   }, [])
 
   const loadMoreProducts = async () => {
-    setIsLoadingMore(true)
-    const result = await getProductsBrowse(4, page * 4)
-    if (result.length < 4) {
-      // Wert muss angepasst werden, je nach dem wie viele Produkte man mehr Laden moechte
-      setHasMoreProducts(false)
+    setIsLoadingMore(true);
+    const result = await getProductsBrowse(10, page * 10);
+    if (result.length < 4) { // Wert muss angepasst werden, je nach dem wie viele Produkte man mehr Laden moechte 
+      setHasMoreProducts(false);
     }
 
     setProducts((prevProducts) => [...prevProducts, ...result])
@@ -121,7 +127,12 @@ const BrowseContent = (props: BrowseContentProps) => {
 
   return (
     <>
-      <OnboardingBrowseCard />
+      {!addressChoosen ? (
+        <AddressChooserPopup translations={props.addressChooserTranslations} />
+      ) : (
+        <></>
+      )}
+      {/* <OnboardingBrowseCard /> */}
       <div
         className={`${loading && `h-full`} flex w-full flex-col items-center justify-center  px-4 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
       >
@@ -160,14 +171,9 @@ const BrowseContent = (props: BrowseContentProps) => {
               {noSearchResults && <div className=" px-4">Keine Suchergebnisse gefunden</div>}
             </div>
             {hasMoreProducts && (
-              <Button
-                onClick={loadMoreProducts}
-                disabled={isLoadingMore}
-                variant="default"
-                className="mb-6 mt-4"
-              >
+              <AnimatedButton onClick={loadMoreProducts} disabled={isLoadingMore} className='mt-4 mb-6 p-2 ps-5 pr-5 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground rounded-md'>
                 {isLoadingMore ? 'Loading...' : 'Load More'}
-              </Button>
+              </AnimatedButton>
             )}
           </>
         ) : (

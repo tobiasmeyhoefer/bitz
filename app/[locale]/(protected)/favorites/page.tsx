@@ -6,6 +6,13 @@ import { Suspense } from 'react'
 
 const Favorites = async () => {
   const products: ProductType[] | undefined = await getFavoriteProducts()
+  // await fetch('http://localhost:3000/api/mail/welcome', {
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-type': 'application/json',
+  //   },
+  //   body: JSON.stringify({ to: 'tobias.meyhoefer02@gmail.com' }),
+  // })
 
   return (
     <>
@@ -15,7 +22,7 @@ const Favorites = async () => {
           Du hast noch keine Favoriten. Du kannst welche hinzufügen indem du den like button drückst
         </p>
       ) : (
-        <Suspense fallback={<LoadingSkeletonBrowse/>}>
+        <Suspense fallback={<LoadingSkeletonBrowse />}>
           <div
             className={`${`h-full`} flex w-full flex-col items-center justify-center px-10 py-20 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
           >

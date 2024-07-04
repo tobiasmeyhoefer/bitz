@@ -23,6 +23,8 @@ import {
 import { Input } from '../ui/input'
 import { useToast } from '../ui/use-toast'
 import { formatPhoneNumber } from '@/lib/utils'
+import axios from 'axios'
+import { getUser } from '@/lib/user-actions'
 
 interface VerificationProps {
   translations: {
@@ -75,6 +77,10 @@ const PhoneVerification = ({ translations }: VerificationProps) => {
       setIsVerified(true)
       await setVerifiedState()
       await deleteVerifactionNumber()
+      const currentUser = await getUser()
+      await axios.post('/api/mail/accountVerified', {
+        to: currentUser.email,
+      })
       toast({
         title: translations.notVerified,
       })

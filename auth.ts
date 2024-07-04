@@ -7,6 +7,7 @@ import { drizzleAdapter } from './adapter'
 import { html, text } from './lib/auth-send-request'
 import { saveUserNameLogin } from './lib/user-actions'
 import { cookies } from 'next/headers'
+import axios from 'axios'
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: drizzleAdapter,
@@ -44,6 +45,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       await saveUserNameLogin(name?.value!, email?.value!)
       cookies().delete('name')
       cookies().delete('email')
+      await axios.post('/api/mail/welcome', { to: email?.value! })
     },
   },
   callbacks: {

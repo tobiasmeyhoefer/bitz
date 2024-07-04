@@ -2,7 +2,7 @@
 
 import { products, favorites, ProductType } from '@/schema'
 import { db } from '../db'
-import { count, desc, eq, ne, or, sql, ilike, and } from 'drizzle-orm'
+import { count, desc, eq, ne, or, sql, ilike, and, asc } from 'drizzle-orm'
 import { auth } from '@/auth'
 import { getUserById } from './user-actions'
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3'
@@ -22,6 +22,7 @@ export async function getProductsBrowse(limit: number = 5, offset: number = 0) {
     .where(and(ne(products.sellerId, id!), ne(products.isSold, true)))
     .limit(limit)
     .offset(offset)
+    .orderBy(desc(products.createdAt))
   return response
 }
 
@@ -30,6 +31,7 @@ export async function getProductsOwned(userId: string) {
     .select()
     .from(products)
     .where(and(eq(products.sellerId, userId), ne(products.isSold, true))) //muss 'eq' sein und nicht 'ne'
+    .orderBy(desc(products.createdAt))
   return response
 }
 
@@ -355,6 +357,9 @@ export async function sortProducts(value: string) {
     .from(products)
     .where(and(ne(products.sellerId, id!), ne(products.isSold, true)))
   const result = response.sort(sortBy(value))
+  if (value == 'createdAt') {
+    result.reverse()
+  }
   return result
 }
 
