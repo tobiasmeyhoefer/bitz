@@ -1,5 +1,3 @@
-import { getProductsOwned } from '@/lib/product-actions'
-import { CardWithImage } from '@/components/ui/cardWithImage'
 import {
   getBannerById,
   getShopTextColorById,
@@ -8,16 +6,21 @@ import {
   getUserById,
 } from '@/lib/user-actions'
 import Image from 'next/image'
+import ShopContent from '@/components/myShop/shopContent'
+import { getTranslations } from 'next-intl/server'
 
-// Some user shop
 export default async function Page({ params }: { params: { id: string } }) {
+  const t = await getTranslations('Browse')
+  const sortTranslations = {
+    sortBy: t('sortby'),
+    date: t('date'),
+    price: t('price'),
+  }
   const owner = await getUserById(params.id)
-  const products = await getProductsOwned(params.id)
-  const banner = (await getBannerById(params.id)) ?? '/images/Banner/default.png'
+  const banner = await getBannerById(params.id)
   const title = await getShopNameById(params.id)
-  const textColor = (await getShopTextColorById(params.id)) ?? 'rgb(0 0 0)'
-  const textFont = (await getShopTextFontById(params.id)) ?? 'Montserrat'
-
+  const textColor = await getShopTextColorById(params.id)
+  const textFont = await getShopTextFontById(params.id)
   return (
     <>
       <div className="group relative h-40 w-full  bg-cover">
@@ -43,22 +46,8 @@ export default async function Page({ params }: { params: { id: string } }) {
           </h1>
         </div>
       </div>
-      <div
-        className={`flex h-full flex-col items-center justify-center px-4 py-20 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
-      >
-        <div className="-mx-2 flex flex-wrap justify-around overflow-y-hidden">
-          {products?.map((p, index) => (
-            // <AnimatedCard  delay={0.3} >
-            <CardWithImage
-              key={`pr-${index}`}
-              className="mx-[5px] my-[0.5rem]"
-              product={products[index]}
-              editable={false}
-            />
-            // </AnimatedCard>
-          ))}
-        </div>
-      </div>
+      <div className="absolute right-1/2 mt-4 translate-x-1/2"></div>
+      <ShopContent id={params.id} translation={sortTranslations} />
     </>
   )
 }

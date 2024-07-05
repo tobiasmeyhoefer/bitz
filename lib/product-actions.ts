@@ -363,6 +363,15 @@ export async function sortProducts(value: string) {
   return result
 }
 
+export async function sortProductsShop(value: string, userID: string) {
+  const response = await db
+    .select()
+    .from(products)
+    .where(and(eq(products.sellerId, userID), ne(products.isSold, true)))
+  const result = response.sort(sortBy(value))
+  return result
+}
+
 export async function getMostExpensiveProduct() {
   const session = await auth()
   const id = session?.user?.id
