@@ -40,7 +40,7 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                 )}
               </Link>
 
-              <CardHeader className="p-3">
+              <CardHeader className="p-2 md:p-3">
                 <div className="flex max-w-full justify-between">
                   <TooltipProvider>
                     <Tooltip>
@@ -57,9 +57,11 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
-                  {!props.editable && props.favIcon && <FavoriteLike productId={product.id} />}
+                  {!props.editable && props.favIcon && (
+                    <FavoriteLike className="justify-end" productId={product.id} />
+                  )}
                 </div>
-                <CardDescription className="text-sm">
+                <CardDescription className="!mt-0 text-sm">
                   <div className="flex justify-between">
                     <Badge className="md:text-md m-0 text-xs" variant="secondary">
                       {props.product.category}
@@ -68,8 +70,7 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                   </div>
 
                   <div className="mt-2 flex justify-between">
-                    <div className="md:text-md flex flex-nowrap items-center text-right text-xs">
-                      <FaLocationDot className="mx-1 size-3" />
+                    <div className="md:text-md flex flex-nowrap items-end whitespace-nowrap text-right text-xs">
                       {props.product.location}
                     </div>
                     <div className="text-right">
@@ -81,10 +82,10 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                           View Shop
                         </Link>
                       )}
-                      <div className="md:text-md flex items-end text-right text-xs md:block">
+                      <div className="md:text-md flex hidden items-end text-right text-xs md:block">
                         {formatDate(product.createdAt)}
                       </div>
-                      <div className="md:text-md flex items-end text-right text-xs md:hidden">
+                      <div className="md:text-md block flex items-end text-right text-xs md:hidden">
                         {formatDateDMY(product.createdAt)}
                       </div>
                     </div>
