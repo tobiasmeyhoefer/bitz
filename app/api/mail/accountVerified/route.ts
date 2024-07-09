@@ -1,4 +1,4 @@
-import { AccountVerifiedEmail, NewMessagesEmail, ProductDirectlySoldEmail } from '@/components/email/email-template'
+import AccountVerifiedEmail from '@/components/email/verified'
 import { Resend } from 'resend'
 
 const resend = new Resend(process.env.AUTH_RESEND_KEY)
