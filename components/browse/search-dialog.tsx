@@ -24,9 +24,10 @@ export const SearchDialog = (
       const filtered = props.suggestions.filter((suggestion) =>
         suggestion.toLowerCase().includes(value.toLowerCase()),
       )
-      const realProductTitles = await getProductsByName(value)
-      console.log(realProductTitles)
-      setFilteredSuggestions(filtered.concat(realProductTitles))
+      //FÜR SPÄTERE IMPLEMENTIERUNG
+      // const realProductTitles = await getProductsByName(value)
+      // setFilteredSuggestions(filtered.concat(realProductTitles))
+      setFilteredSuggestions(filtered)
     } else {
       setFilteredSuggestions([])
     }
