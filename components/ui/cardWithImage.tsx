@@ -18,7 +18,7 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
       <>
         {props && product ? (
           <CardContainer>
-            <Card className={cn(`w-[150px] md:w-[200px] lg:w-[300px]`, className)} ref={ref}>
+            <Card className={cn(`w-[160px] md:w-[200px] lg:w-[240px]`, className)} ref={ref}>
               <Link href={`/product/${product.id}`}>
                 {product.imageUrl1 !== undefined ? (
                   <Image
@@ -29,11 +29,11 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                     className={`rounded-t-xl`}
                     alt="Preview Image Article"
                     style={{ objectFit: 'cover' }}
-                    sizes="(max-width: 640px) 150px, (max-width: 768px) 200px, 300px"
+                    sizes="(max-width: 640px) 160px, (max-width: 768px) 200px, 240px"
                   />
                 ) : (
                   <div
-                    className={`flex h-[150px] w-[150px] items-center justify-center rounded-t-xl md:h-[200px] md:w-[200px] lg:h-[300px] lg:w-[300px]`}
+                    className={`flex h-[160px] w-[160px] items-center justify-center rounded-t-xl md:h-[200px] md:w-[200px] lg:h-[240px] lg:w-[240px]`}
                   >
                     <div>Placeholder Image</div>
                   </div>
