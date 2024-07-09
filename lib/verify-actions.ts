@@ -49,14 +49,16 @@ export async function sendSmsToUser(number: string) {
   const verificationNumber = generateRandomSixDigitNumber()
 
   try {
+    console.log('test1')
     const client = twilio(process.env.TWILIO_ACCOUNT_SID!, process.env.TWILIO_AUTH_TOKEN!)
-    client.messages
+    await client.messages
       .create({
         body: verificationNumber + ' is your verification code for bitztech.de',
         from: '+14179323791',
         to: number,
       })
       .catch((error) => {})
+    console.log('test2')
     await saveVerificationNumber(verificationNumber)
   } catch (error) {
     return { error: "Something wen't wrong on the server" }
