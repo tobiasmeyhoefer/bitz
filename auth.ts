@@ -38,16 +38,16 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
     passkey,
   ],
-  events: {
-    createUser: async (message) => {
-      const name = cookies().get('name')
-      const email = cookies().get('email')
-      await saveUserNameLogin(name?.value!, email?.value!)
-      cookies().delete('name')
-      cookies().delete('email')
-      await axios.post('/api/mail/welcome', { to: email?.value! })
-    },
-  },
+  // events: {
+  //   createUser: async (message) => {
+  //     const name = cookies().get('name')
+  //     const email = cookies().get('email')
+  //     await saveUserNameLogin(name?.value!, email?.value!)
+  //     cookies().delete('name')
+  //     cookies().delete('email')
+  //     await axios.post('/api/mail/welcome', { to: email?.value! })
+  //   },
+  // },
   callbacks: {
     async session({ session, user }) {
       session.user.id = user.id
