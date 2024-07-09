@@ -1,4 +1,5 @@
-import { ProductInterestEmail } from '@/components/email/email-template'
+
+import ProductInterestEmail from '@/components/email/product-interest'
 import { Resend } from 'resend'
 
 const resend = new Resend(process.env.AUTH_RESEND_KEY)

@@ -11,7 +11,8 @@
     "start": "next start",
     "lint": "next lint",
     "test": "vitest",
-    "node": "node server.js"
+    "node": "node server.js",
+    "email": "email dev --dir components/email"
   },
   "dependencies": {
     "@ai-sdk/openai": "^0.0.24",
@@ -37,7 +38,7 @@
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-toast": "^1.1.5",
     "@radix-ui/react-tooltip": "^1.0.7",
-    "@react-email/components": "^0.0.19",
+    "@react-email/components": "0.0.19",
     "@react-email/container": "0.0.12",
     "@react-email/html": "0.0.8",
     "@react-email/img": "0.0.8",

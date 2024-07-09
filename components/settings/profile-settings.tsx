@@ -13,7 +13,7 @@ const ProfileSettings = async () => {
   const t = await getTranslations('Settings')
   return (
     <div>
-      <div className="mb-8 flex justify-center gap-4">
+      <div className="mb-8 flex justify-center gap-8">
         {user.image ? (
           <Image
             className="h-40 w-40 rounded-full"
