@@ -79,10 +79,11 @@ const BrowseContent = (props: BrowseContentProps) => {
   }, [])
 
   const loadMoreProducts = async () => {
-    setIsLoadingMore(true);
-    const result = await getProductsBrowse(10, page * 10);
-    if (result.length < 4) { // Wert muss angepasst werden, je nach dem wie viele Produkte man mehr Laden moechte 
-      setHasMoreProducts(false);
+    setIsLoadingMore(true)
+    const result = await getProductsBrowse(10, page * 10)
+    if (result.length < 4) {
+      // Wert muss angepasst werden, je nach dem wie viele Produkte man mehr Laden moechte
+      setHasMoreProducts(false)
     }
 
     setProducts((prevProducts) => [...prevProducts, ...result])
@@ -130,7 +131,7 @@ const BrowseContent = (props: BrowseContentProps) => {
       {!addressChoosen ? (
         <AddressChooserPopup translations={props.addressChooserTranslations} />
       ) : (
-        <></>
+        <OnboardingBrowseCard />
       )}
       {/* <OnboardingBrowseCard /> */}
       <div
@@ -171,7 +172,11 @@ const BrowseContent = (props: BrowseContentProps) => {
               {noSearchResults && <div className=" px-4">Keine Suchergebnisse gefunden</div>}
             </div>
             {hasMoreProducts && (
-              <AnimatedButton onClick={loadMoreProducts} disabled={isLoadingMore} className='mt-4 mb-6 p-2 ps-5 pr-5 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground rounded-md'>
+              <AnimatedButton
+                onClick={loadMoreProducts}
+                disabled={isLoadingMore}
+                className="mb-6 mt-4 rounded-md border border-input bg-background p-2 pr-5 ps-5 shadow-sm hover:bg-accent hover:text-accent-foreground"
+              >
                 {isLoadingMore ? 'Loading...' : 'Load More'}
               </AnimatedButton>
             )}
