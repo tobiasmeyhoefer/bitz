@@ -3,7 +3,7 @@ import { Input } from '@/components/ui/input'
 import { SlClose } from 'react-icons/sl'
 import { useState } from 'react'
 import { SearchBarProps } from '@/lib/types'
-import { searchProductsByTitle } from '@/lib/product-actions'
+import { getProductsByName, searchProductsByTitle } from '@/lib/product-actions'
 
 export const SearchDialog = (
   props: SearchBarProps & {
@@ -17,14 +17,16 @@ export const SearchDialog = (
   const [selectedIndex, setSelectedIndex] = useState(-1) // Index für ausgesuchten Vorschlag
 
   // Funktion zum Filtern der Ergebnisse auf Basis der aktuellen Eingabe
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearchChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     props.setSearchValue(value)
     if (value.length > 0) {
       const filtered = props.suggestions.filter((suggestion) =>
         suggestion.toLowerCase().includes(value.toLowerCase()),
       )
-      setFilteredSuggestions(filtered)
+      const realProductTitles = await getProductsByName(value)
+      console.log(realProductTitles)
+      setFilteredSuggestions(filtered.concat(realProductTitles))
     } else {
       setFilteredSuggestions([])
     }
@@ -47,10 +49,16 @@ export const SearchDialog = (
 
   // Funktion für die Suhce mit Klick auf einem Vorschlag
   const handleSuggestionClick = (suggestion: string) => {
+    console.log(suggestion)
     setOpen(false)
     props.setSearchValue(suggestion)
-    //props.loadProductsByTitle(suggestion)
-    props.loadProductsByCategory(suggestion)
+
+    if (props.suggestions.includes(suggestion)) {
+      props.loadProductsByCategory(suggestion)
+      return
+    }
+
+    props.loadProductsByTitle(suggestion)
   }
 
   // Funktion zum Handhaben der Tastaturereignisse
@@ -119,7 +127,7 @@ export const SearchDialog = (
               {props.suggestions.map((suggestion, index) => (
                 <div
                   onClick={() => handleSuggestionClick(suggestion)}
-                  className="rounded- px-8 py-2 hover:rounded-b-lg hover:bg-input"
+                  className="rounded- px-8 py-2 hover:rounded-b-lg hover:cursor-pointer hover:bg-input"
                   key={`s-${index}`}
                 >
                   {suggestion}
@@ -133,7 +141,7 @@ export const SearchDialog = (
               filteredSuggestions.slice(0, 5).map((suggestion, index) => (
                 <div
                   onClick={() => handleSuggestionClick(suggestion)}
-                  className="rounded- px-8 py-2  hover:rounded-b-lg hover:bg-gray-100"
+                  className="rounded- px-8 py-2  hover:rounded-b-lg hover:cursor-pointer hover:bg-gray-100"
                   key={`fs-${index}`}
                 >
                   {suggestion}
