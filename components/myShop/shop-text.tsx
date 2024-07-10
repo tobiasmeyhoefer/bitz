@@ -49,6 +49,8 @@ export function ShopText({ title }: { title: string }) {
                 color: textColor!,
                 fontFamily: textFont!,
                 textShadow: '1px 1px 5px rgba(0, 0, 0, 0.6)',
+                outline: 'none',
+                boxShadow: 'none',
               }}
             />
           </div>
