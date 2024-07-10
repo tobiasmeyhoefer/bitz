@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 export const About = () => {
-  const t = useTranslations('Landingpage.About');
+  const t = useTranslations('Landingpage.About')
   return (
     <section id="about" className="container py-24 sm:py-32">
       <div className="rounded-lg border bg-muted/50 py-12">
@@ -13,11 +13,11 @@ export const About = () => {
           <div className="bg-green-0 flex flex-col justify-between">
             <div className="pb-6">
               <h2 className="text-3xl font-bold md:text-4xl">
-                {t('title')}
-                {' '}
-                <span className="bg-gradient-to-b from-primary/60 to-primary bg-clip-text text-transparent">
+                {t('title')}{' '}
+                <span className="bg-gradient-to-b from-card-foreground/60 to-card-foreground bg-clip-text text-transparent">
                   Bitz
-                </span>?
+                </span>
+                ?
               </h2>
               <p className="mt-4 text-xl text-muted-foreground">
                 {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

@@ -19,14 +19,14 @@ export const TransactionCard = async ({ transaction }: { transaction: Transactio
   //user is buyer
   if (transaction.buyerId === user.id) {
     return (
-      <Card className="relative flex h-[180px] bg-transparent">
+      <Card className="relative flex bg-transparent">
         <div>
           <Image
             src={product.imageUrl1!}
-            alt="iamge of product"
+            alt="image of product"
             width={140}
             height={140}
-            className="min-h-[180px] min-w-[180px]"
+            className="min-h-[180px] w-auto min-w-[250px]"
           />
         </div>
         <div>
@@ -40,8 +40,8 @@ export const TransactionCard = async ({ transaction }: { transaction: Transactio
               versendet
             </p>
           </CardContent>
-          <CardFooter>
-            <p>{transaction.createdAt.toLocaleDateString()}</p>
+          <CardFooter className=" flex flex-col items-start justify-center py-4">
+            {transaction.createdAt.toLocaleDateString()}
           </CardFooter>
         </div>
       </Card>
@@ -51,16 +51,14 @@ export const TransactionCard = async ({ transaction }: { transaction: Transactio
   //user is seller
   if (transaction.sellerId === user.id) {
     return (
-      <Card className="relative flex h-[180px] bg-transparent ">
-        <div>
-          <Image
-            src={product.imageUrl1!}
-            alt="iamge of product"
-            width={140}
-            height={140}
-            className="min-h-[180px] min-w-[180px]"
-          />
-        </div>
+      <Card className="relative flex bg-transparent">
+        <Image
+          src={product.imageUrl1!}
+          alt="image of product"
+          width={140}
+          height={140}
+          className=" min-h-[180px] w-auto min-w-[250px]"
+        />
         <div>
           <CardHeader>
             <CardTitle>Dein Bit {product.title} wurde gekauft</CardTitle>
@@ -70,8 +68,8 @@ export const TransactionCard = async ({ transaction }: { transaction: Transactio
             <p>Bitte schicke diesen Artikel nun an {buyer.name ?? 'den Verkäufer'}</p>
             <p>Adresse: {buyer.adress}</p>
           </CardContent>
-          <CardFooter className=" h-8 ">
-            <p>{transaction.createdAt.toLocaleDateString()}</p>
+          <CardFooter className=" flex flex-col items-start justify-center py-4">
+            {transaction.createdAt.toLocaleDateString()}
           </CardFooter>
         </div>
       </Card>

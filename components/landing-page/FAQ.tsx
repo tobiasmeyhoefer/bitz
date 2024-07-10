@@ -57,7 +57,7 @@ export const FAQ = () => {
     <section id="faq" className="container py-24 sm:py-32">
       <h2 className="mb-4 text-3xl font-bold md:text-4xl">
         Frequently Asked{' '}
-        <span className="bg-gradient-to-b from-primary/60 to-primary bg-clip-text text-transparent">
+        <span className="bg-gradient-to-b from-card-foreground/60 to-card-foreground bg-clip-text text-transparent">
           Questions
         </span>
       </h2>
