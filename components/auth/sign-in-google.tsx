@@ -4,7 +4,6 @@ import { FcGoogle } from 'react-icons/fc'
 import { useTranslations } from 'next-intl'
 
 export function SignInGoogle() {
-  const t = useTranslations('LoginForm')
   return (
     <form
       className="w-full"

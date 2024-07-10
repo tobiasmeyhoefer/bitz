@@ -44,10 +44,9 @@ const NavLoginLink = ({ text }: NavLoginProps) => {
   const pathname = usePathname()
   return (
     pathname !== '/auth/login' && (
-      // hover:bg-gray-700 hover:text-white
-      <Button className="bg-primary-hover">
-        <Link href="/auth/login">{text}</Link>
-      </Button>
+      <Link href="/auth/login">
+        <Button className='bg-primary-hover'>{text}</Button>
+      </Link>
     )
   )
 }
