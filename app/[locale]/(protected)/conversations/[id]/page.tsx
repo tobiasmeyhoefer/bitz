@@ -27,25 +27,23 @@ export default async function Page({ params }: { params: { id: string } }) {
   }))
 
   return (
-    <>
-      <div className="ml-10 flex items-center gap-10">
+    <div className="h-[calc(100dvh-80px)]">
+      <div className="lg:mx-10 h-[80px] mx-4 flex items-center gap-10">
         <Link href={`/conversations`}>
           <Button>back</Button>
         </Link>
-
-        <h2 className="flex h-20 items-center justify-center text-center text-2xl font-bold">
+        <h2 className="text-sm font-bold md:text-2xl">
           Chat with {user.id === seller.id ? buyer.name : seller.name} about {product.title}
         </h2>
       </div>
-
       <div
         className={
-          'z-10 flex h-[calc(100vh-160px)]  w-full flex-col justify-between rounded-lg p-2'
+          'z-10 flex h-[calc(100dvh-160px)] w-full flex-col justify-between rounded-lg p-2'
         }
       >
         <Messages convId={convId} initialMessages={serializedMessages} userId={user.id} />
         <WriteMessageField conv={conv} user={user} />
       </div>
-    </>
+    </div>
   )
 }

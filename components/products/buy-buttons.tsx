@@ -41,6 +41,11 @@ export function BuyButtons(props: { product: ProductType }) {
       toast({
         title: 'Error',
         description: 'Please verify your phone number first',
+        action: (
+          <Link href="/settings">
+            <Button>go to Settings</Button>
+          </Link>
+        ),
       })
       return
     }

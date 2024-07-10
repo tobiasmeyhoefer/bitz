@@ -95,7 +95,7 @@
     "popupTitle": "please enter your address",
     "addressError": "Error, please select an address",
     "housenumberError": "Error,please also add your housenumber",
-    "SuccessToast": "address succesfully changed ✅",
+    "SuccessToast": "personals succesfully set ✅",
     "submit": "submit"
   },
 

@@ -1,7 +1,7 @@
 'use client'
 import { useForm } from 'react-hook-form'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
-import { getUser, saveUserAddress, saveUserLocation } from '@/lib/user-actions'
+import { getUser, saveUserAddress, saveUserLocation, saveUserName } from '@/lib/user-actions'
 import { useEffect, useState } from 'react'
 import { useToast } from '../ui/use-toast'
 import '@/components/settings/address.css'
@@ -14,6 +14,9 @@ import { Card, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { BorderBeam } from '../magicui/border-beam'
 import { Button } from '../ui/button'
 import OnboardingBrowseCard from '../onboarding/onboarding-browse-card'
+import { Input } from '../ui/input'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 export default function AddressChooserPopup(params: { translations: addressChooserTranslations }) {
   const [address, setAddress] = useState<string>('')
@@ -21,9 +24,7 @@ export default function AddressChooserPopup(params: { translations: addressChoos
   const [result, setResult] = useState<AddressResult | null>(null)
   const [proccessFinished, setProccessFinished] = useState(false)
   const [error, setError] = useState('')
-
   const { toast } = useToast()
-
   useEffect(() => {
     const getProduct = async () => {
       const user = await getUser()
@@ -32,15 +33,27 @@ export default function AddressChooserPopup(params: { translations: addressChoos
     getProduct()
   }, [])
 
-  const form = useForm()
+  const formSchema = z.object({
+    name: z
+      .string()
+      .min(3, { message: 'not enough Characters' })
+      .max(50, { message: 'too much Characters' })
+      .refine((value) => /^[a-zA-Z0-9\s]+$/.test(value)),
+  })
 
-  async function onSubmit() {
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    mode: 'onChange',
+  })
+
+  async function onSubmit(data: any) {
     if (result) {
       if (!result.properties.housenumber) {
         setError(params.translations.housenumberError)
       } else {
         await saveUserAddress(result.properties.address_line1)
         await saveUserLocation(result.properties.postcode, result.properties.city)
+        await saveUserName(data.name)
         toast({
           title: params.translations.SuccessToast,
         })
@@ -78,28 +91,42 @@ export default function AddressChooserPopup(params: { translations: addressChoos
         <CardFooter>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-              <FormField
-                control={form.control}
-                name={'address'}
-                render={({ field }) => (
-                  <FormItem className="w-96">
-                    <FormMessage />
-                    <FormControl>
-                      <GeoapifyContext apiKey={process.env.NEXT_PUBLIC_ADDRESS_KEY}>
-                        <GeoapifyGeocoderAutocomplete
-                          value={address}
-                          filterByCountryCode={['de']}
-                          sendGeocoderRequestFunc={sendGeocoderRequest}
-                          addDetails={true}
-                          sendPlaceDetailsRequestFunc={sendPlaceDetailsRequest}
-                          allowNonVerifiedStreet={false}
-                          debounceDelay={10}
-                        />
-                      </GeoapifyContext>
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
+              <div className="flex flex-col gap-3">
+                <FormField
+                  control={form.control}
+                  name={'name'}
+                  render={({ field }) => (
+                    <FormItem className="w-[21.5rem]">
+                      <FormControl>
+                        <Input placeholder="Enter your name here" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name={'address'}
+                  render={({ field }) => (
+                    <FormItem className="w-96">
+                      <FormMessage />
+                      <FormControl>
+                        <GeoapifyContext apiKey={process.env.NEXT_PUBLIC_ADDRESS_KEY}>
+                          <GeoapifyGeocoderAutocomplete
+                            value={address}
+                            filterByCountryCode={['de']}
+                            sendGeocoderRequestFunc={sendGeocoderRequest}
+                            addDetails={true}
+                            sendPlaceDetailsRequestFunc={sendPlaceDetailsRequest}
+                            allowNonVerifiedStreet={false}
+                            debounceDelay={10}
+                          />
+                        </GeoapifyContext>
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+              </div>
               <Button className="mt-4" type="submit">
                 {params.translations.submit}
               </Button>
