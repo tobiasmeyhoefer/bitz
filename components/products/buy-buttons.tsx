@@ -40,14 +40,14 @@ export function BuyButtons(props: { product: ProductType }) {
     if (!isPhoneVerified) {
       toast({
         title: 'Error',
-        description: 'Please verify your phone number first'
+        description: 'Please verify your phone number first',
       })
       return
     }
     const seller = await getUserById(product.sellerId)
     await axios.post('/api/mail/productInterest', {
       to: seller.email,
-      productName: product.title
+      productName: product.title,
     })
     await createConversation(product.id!)
     router.push('/conversations')
@@ -58,7 +58,8 @@ export function BuyButtons(props: { product: ProductType }) {
     if (!isPhoneVerified) {
       toast({
         title: 'Error',
-        description: 'Please verify your phone number first'
+        description: 'Please verify your phone number first',
+        duration: 2000,
       })
       return
     }

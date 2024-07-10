@@ -64,6 +64,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
       toast({
         title: 'Oh oh',
         description: 'Please check your profanity',
+        duration: 2000,
       })
       setIsLoading(false)
       return

@@ -68,6 +68,7 @@ const PhoneVerification = ({ translations }: VerificationProps) => {
     await sendSmsToUser(formattedNumber)
     toast({
       title: 'SMS sent to: ' + formattedNumber,
+      duration: 2000,
     })
   }
 
@@ -83,11 +84,13 @@ const PhoneVerification = ({ translations }: VerificationProps) => {
       })
       toast({
         title: translations.notVerified,
+        duration: 2000,
       })
     } else {
       setIsVerified(false)
       toast({
         title: '{translations.wrongNumber} ❌',
+        duration: 2000,
       })
     }
   }
@@ -96,6 +99,7 @@ const PhoneVerification = ({ translations }: VerificationProps) => {
     await deleteVerifactionNumber()
     toast({
       title: translations.verificationAborted,
+      duration: 2000,
     })
   }
 
@@ -121,7 +125,7 @@ const PhoneVerification = ({ translations }: VerificationProps) => {
             setInVerifactionProcess(true)
           }}
         >
-          <Button className='w-full mb-6'>{translations.verifyNow}</Button>
+          <Button className="mb-6 w-full">{translations.verifyNow}</Button>
         </AlertDialogTrigger>
         {isTypeInNumberState ? (
           <AlertDialogContent>
