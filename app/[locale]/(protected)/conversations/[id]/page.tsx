@@ -27,8 +27,8 @@ export default async function Page({ params }: { params: { id: string } }) {
   }))
 
   return (
-    <div className="h-dvh">
-      <div className="lg:mx-10 mx-4 flex items-center gap-10">
+    <div className="h-[calc(100dvh-80px)]">
+      <div className="lg:mx-10 h-[80px] mx-4 flex items-center gap-10">
         <Link href={`/conversations`}>
           <Button>back</Button>
         </Link>
@@ -38,7 +38,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       </div>
       <div
         className={
-          'z-10 flex h-[calc(100vh-160px)]  w-full flex-col justify-between rounded-lg p-2'
+          'z-10 flex h-[calc(100dvh-160px)] w-full flex-col justify-between rounded-lg p-2'
         }
       >
         <Messages convId={convId} initialMessages={serializedMessages} userId={user.id} />
