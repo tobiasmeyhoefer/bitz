@@ -51,7 +51,7 @@ export const TransactionCard = async ({ transaction }: { transaction: Transactio
   //user is seller
   if (transaction.sellerId === user.id) {
     return (
-      <Card className="relative flex h-[180px] bg-transparent">
+      <Card className="relative flex h-[180px] bg-transparent ">
         <div>
           <Image
             src={product.imageUrl1!}
@@ -70,7 +70,7 @@ export const TransactionCard = async ({ transaction }: { transaction: Transactio
             <p>Bitte schicke diesen Artikel nun an {buyer.name ?? 'den Verkäufer'}</p>
             <p>Adresse: {buyer.adress}</p>
           </CardContent>
-          <CardFooter>
+          <CardFooter className=" h-8 ">
             <p>{transaction.createdAt.toLocaleDateString()}</p>
           </CardFooter>
         </div>
