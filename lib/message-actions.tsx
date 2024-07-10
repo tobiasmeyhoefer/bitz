@@ -2,7 +2,7 @@
 
 import { db } from "@/db"
 import { messages } from "@/schema"
-import { and, eq, ne } from "drizzle-orm"
+import { and, desc, eq, ne } from "drizzle-orm"
 import { getUser } from "./user-actions"
 
 export async function createMessage(content: string, senderId: string, conversationId: string, isSystemMessage: boolean = false) {
@@ -10,7 +10,7 @@ export async function createMessage(content: string, senderId: string, conversat
 }
 
 export async function getExisitingMessages(convId: string) {
-    return await db.select().from(messages).where(eq(messages.conversationId, convId))
+    return await db.select().from(messages).where(eq(messages.conversationId, convId)).orderBy(desc(messages.timestamp))
 }
 
 export async function deleteMessageById(messageId: string) {
