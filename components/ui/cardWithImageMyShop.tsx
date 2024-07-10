@@ -25,24 +25,32 @@ const CardWithImageMyShop = React.forwardRef<HTMLDivElement, CardWithImageProps>
             <div className="absolute right-0 top-0 m-2"></div>
             <Card className={cn(`w-[150px] md:w-[200px] lg:w-[300px]`, className)} ref={ref}>
               <Link href={`/product/${product.id}`}>
-                {product.imageUrl1 !== undefined ? (
-                  <Image
-                    src={product.imageUrl1 as string}
-                    width={300}
-                    height={300}
-                    layout="responsive"
-                    className={`rounded-t-xl`}
-                    alt="Preview Image Article"
-                    style={{ objectFit: 'cover' }}
-                    sizes="(max-width: 640px) 150px, (max-width: 768px) 200px, 300px"
-                  />
-                ) : (
-                  <div
-                    className={`flex h-[150px] w-[150px] items-center justify-center rounded-t-xl md:h-[200px] md:w-[200px] lg:h-[300px] lg:w-[300px]`}
-                  >
-                    <div>Placeholder Image</div>
-                  </div>
-                )}
+                <div className="relative">
+                  {props.product.isSold && (
+                    <Badge className="md:text-md absolute right-2 top-2 bg-green-500 text-sm md:right-4 md:top-4">
+                      {sold('sold')}
+                    </Badge>
+                  )}
+
+                  {product.imageUrl1 !== undefined ? (
+                    <Image
+                      src={product.imageUrl1 as string}
+                      width={300}
+                      height={300}
+                      layout="responsive"
+                      className={`rounded-t-xl`}
+                      alt="Preview Image Article"
+                      style={{ objectFit: 'cover' }}
+                      sizes="(max-width: 640px) 150px, (max-width: 768px) 200px, 300px"
+                    />
+                  ) : (
+                    <div
+                      className={`flex h-[150px] w-[150px] items-center justify-center rounded-t-xl md:h-[200px] md:w-[200px] lg:h-[300px] lg:w-[300px]`}
+                    >
+                      <div>Placeholder Image</div>
+                    </div>
+                  )}
+                </div>
               </Link>
 
               <CardHeader className="p-3">
@@ -62,15 +70,15 @@ const CardWithImageMyShop = React.forwardRef<HTMLDivElement, CardWithImageProps>
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
-                    <ProdDelAlert
-                      menuDeleteOption={t('menuDeleteOption')}
-                      productId={props.product.id}
-                      title={t('title')}
-                      yousure={t('yousure')}
-                      cancel={t('cancel')}
-                      confirm={t('confirm')}
-                    />
-                 
+                  <ProdDelAlert
+                    menuDeleteOption={t('menuDeleteOption')}
+                    productId={props.product.id}
+                    title={t('title')}
+                    yousure={t('yousure')}
+                    cancel={t('cancel')}
+                    confirm={t('confirm')}
+                  />
+
                   {!props.editable && props.favIcon && <FavoriteLike productId={product.id} />}
                 </div>
                 <CardDescription className="text-sm">
@@ -105,7 +113,6 @@ const CardWithImageMyShop = React.forwardRef<HTMLDivElement, CardWithImageProps>
                       confirm={t('confirm')}
                     />
                   )}
-                  {props.product.isSold && <p className="text-green-500">{sold('sold')}</p>}
                 </CardDescription>
               </CardHeader>
             </Card>

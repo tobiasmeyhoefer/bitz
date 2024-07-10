@@ -133,7 +133,7 @@ const BrowseContent = (props: BrowseContentProps) => {
       ) : (
         <OnboardingBrowseCard />
       )}
-      {/* <OnboardingBrowseCard /> */}
+      {/* <OnboardingBrowseCard />  HIER FIX */}
       <div
         className={`${loading && `h-full`} flex w-full flex-col items-center justify-center  px-4 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
       >
@@ -155,13 +155,13 @@ const BrowseContent = (props: BrowseContentProps) => {
         </div>
         {!loading ? (
           <>
-            <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
+            <div className="mt-[20px] grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4  lg:grid-cols-4 2xl:grid-cols-5 ">
               {products.map((p, index) => (
                 <div key={`kp-${index}`}>
                   <AnimatedCard delay={0.3}>
                     <CardWithImage
                       key={`pr-${index}`}
-                      className={`mx-[5px] my-[0.5rem]`} // h-[400px] w-[200px]
+                      className="mx-auto" // Optional: h-[400px] w-[200px]
                       product={products[index]}
                       favIcon
                       editable={false}
@@ -169,8 +169,9 @@ const BrowseContent = (props: BrowseContentProps) => {
                   </AnimatedCard>
                 </div>
               ))}
-              {noSearchResults && <div className=" px-4">Keine Suchergebnisse gefunden</div>}
+              {noSearchResults && <div className="px-4">Keine Suchergebnisse gefunden</div>}
             </div>
+
             {hasMoreProducts && (
               <AnimatedButton
                 onClick={loadMoreProducts}

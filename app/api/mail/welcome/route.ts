@@ -1,4 +1,4 @@
-import { WelcomeEmail } from '@/components/email/email-template'
+import WelcomeEmail from '@/components/email/welcome'
 import { Resend } from 'resend'
 
 const resend = new Resend(process.env.AUTH_RESEND_KEY)

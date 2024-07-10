@@ -92,6 +92,14 @@
   }
 }
 
+html {
+  height: -webkit-fill-available;
+}
+
+body {
+  height: -webkit-fill-available;
+}
+
 @layer base {
   * {
     @apply border-border;

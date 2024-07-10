@@ -80,7 +80,7 @@ const Messages = ({ convId, initialMessages, userId }: MessageProps) => {
   }
 
   return (
-    <div id="testo" className="overflow-y-scroll">
+    <div id="testo" className="overflow-y-auto">
       {messages.map((m, i) => (
         <>
           <div

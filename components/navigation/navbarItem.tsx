@@ -44,17 +44,18 @@ const NavLoginLink = ({ text }: NavLoginProps) => {
   const pathname = usePathname()
   return (
     pathname !== '/auth/login' && (
-      // hover:bg-gray-700 hover:text-white
-      <Button className="bg-primary-hover">
-        <Link href="/auth/login">{text}</Link>
-      </Button>
+      <Link href="/auth/login">
+        <Button className='bg-primary-hover'>{text}</Button>
+      </Link>
     )
   )
 }
 
 const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
+  'use client'
+  const [open, setOpen] = useState(false)
   return (
-    <DropdownMenu>
+    <DropdownMenu open={open}>
       <DropdownMenuTrigger>
         {props.userImgSrc ? (
           <Image
@@ -64,28 +65,29 @@ const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
             className="rounded-full"
             alt="User Image"
             style={{ objectFit: 'cover', height: '40px' }}
+            onClick={() => setOpen(!open)}
           />
         ) : (
           <FaUserCircle className="h-[45px] w-[45px]" color="gray" />
         )}
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent onPointerDownOutside={() => setOpen(false)}>
         {/* <DropdownMenuLabel className="text-left">Menu</DropdownMenuLabel> */}
-        <DropdownMenuItem className="p-0">
+        <DropdownMenuItem className="p-0" onClick={() => setOpen(false)}>
           <NavItemLink
             className="w-full px-3 py-2 text-left text-sm no-underline hover:no-underline"
             text={props.favoritesLinkText}
             linkTo="/favorites"
           ></NavItemLink>
         </DropdownMenuItem>
-        <DropdownMenuItem className="p-0">
+        <DropdownMenuItem className="p-0" onClick={() => setOpen(false)}>
           <NavItemLink
             className="w-full px-3 py-2 text-left text-sm no-underline hover:no-underline"
             text={props.settingsLinkText}
             linkTo="/settings"
           ></NavItemLink>
         </DropdownMenuItem>
-        <DropdownMenuItem className="p-0">
+        <DropdownMenuItem className="p-0" onClick={() => setOpen(false)}>
           <NavItemLink
             className="px-3 py-2 text-left text-sm no-underline hover:no-underline"
             text="Transaktionen"

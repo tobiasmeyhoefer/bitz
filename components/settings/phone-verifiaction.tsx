@@ -121,7 +121,7 @@ const PhoneVerification = ({ translations }: VerificationProps) => {
             setInVerifactionProcess(true)
           }}
         >
-          <Button>{translations.verifyNow}</Button>
+          <Button className='w-full mb-6'>{translations.verifyNow}</Button>
         </AlertDialogTrigger>
         {isTypeInNumberState ? (
           <AlertDialogContent>

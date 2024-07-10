@@ -1,7 +1,5 @@
 import {
   Card,
-  CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -21,9 +19,6 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
   const user = await getUserById(conv.buyerId)
   const product = await getProductById(conv.productId)
   const t = await getTranslations('Conversations')
-
-  //check if unread messages exist...
-
   const unreadMessages = await getUnreadMessages(conv.id)
 
   const cardType: 'sellerCard' | 'buyerCard' =
@@ -78,7 +73,7 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
                 />
               </div>
               <div>
-                <ConversationCardDropwdown conv={conv} showDelay={false} showSold={true} />
+                <ConversationCardDropwdown conv={conv} showSold={true} />
                 <CardHeader>
                   <CardTitle>
                     {user.name} {t('newbuyer00')} {product.title} {t('newbuyer01')}

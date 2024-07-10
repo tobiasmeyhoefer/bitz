@@ -8,9 +8,6 @@ const VerifyPage = () => {
         <div className="mb-4 font-normal text-gray-700 dark:text-gray-400">
            Please go to your email inbox and click the link for logging in
         </div>
-        {/* <Link href={'/'}>
-          <Button variant={'outline'}>Home</Button>
-        </Link> */}
       </div>
       <div></div>
     </div>
