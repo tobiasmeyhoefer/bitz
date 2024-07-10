@@ -171,9 +171,9 @@ const BrowseContent = (props: BrowseContentProps) => {
               {noSearchResults && <div className=" px-4">Keine Suchergebnisse gefunden</div>}
             </div>
             {hasMoreProducts && (
-              <AnimatedButton onClick={loadMoreProducts} disabled={isLoadingMore} className='mt-4 mb-6 p-2 ps-5 pr-5 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground rounded-md'>
-                {isLoadingMore ? 'Loading...' : 'Load More'}
-              </AnimatedButton>
+              <Button onClick={loadMoreProducts} disabled={isLoadingMore} variant='default' className='mt-4 mb-6'>
+              {isLoadingMore ? 'Loading...' : 'Load More'}
+              </Button>
             )}
           </>
         ) : (
