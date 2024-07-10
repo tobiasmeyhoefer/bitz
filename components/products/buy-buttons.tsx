@@ -64,6 +64,7 @@ export function BuyButtons(props: { product: ProductType }) {
       toast({
         title: 'Error',
         description: 'Please verify your phone number first',
+        duration: 2000,
       })
       return
     }

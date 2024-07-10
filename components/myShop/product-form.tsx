@@ -144,7 +144,7 @@ export function ProductForm({
     toastDescription,
     submitTitle,
     isDirectlyBuyable,
-    deletePicture
+    deletePicture,
   } = translations
 
   useEffect(() => {
@@ -185,32 +185,35 @@ export function ProductForm({
     if (!isPhoneVerified) {
       toast({
         title: 'Error',
-        description: 'Please verify your phone number first'
+        description: 'Please verify your phone number first',
+        duration: 2000,
       })
       setIsLoading(false)
       return
     }
 
-    if(await checkProfanity(values.title) || await checkProfanity(values.description)) {
+    if ((await checkProfanity(values.title)) || (await checkProfanity(values.description))) {
       toast({
         title: 'Oh oh',
         description: 'Please check your profanity',
+        duration: 2000,
       })
       setIsLoading(false)
       return
     }
 
-    await checkProfanity(values.title) 
-    await checkProfanity(values.description) 
+    await checkProfanity(values.title)
+    await checkProfanity(values.description)
 
     if (!values.category) {
-      values.category = 'Other';
+      values.category = 'Other'
     }
 
     if (compressedFiles?.length === 0) {
       toast({
         title: 'Error',
         description: 'at least one image pls',
+        duration: 2000,
       })
       setPreviewUrls(null)
       setFiles(null)
@@ -233,7 +236,7 @@ export function ProductForm({
             <Button>go to Settings</Button>
           </Link>
         ),
-        duration: 2600,
+        duration: 2000,
       })
     } else {
       let imageUrls = []
@@ -276,7 +279,7 @@ export function ProductForm({
       toast({
         title: toastTitle,
         description: toastDescription,
-        duration: 2200,
+        duration: 2000,
       })
     }
   }
