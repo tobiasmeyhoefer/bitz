@@ -23,16 +23,19 @@ export default async function Page({ params }: { params: { id: string } }) {
   const textFont = await getShopTextFontById(params.id)
   return (
     <>
-      <div className="group relative h-40 w-full  bg-cover">
+      <div className="group relative h-40 w-full bg-cover">
         <div className="absolute h-3/5 w-full bg-gradient-to-b from-black/40 to-black/0"></div>
-        <Image
-          src={banner}
-          alt="Product Image"
-          style={{ objectFit: 'cover' }}
-          width={1800}
-          height={150}
-          className="h-full w-full rounded-b-lg"
-        />
+        {banner && (
+          <Image
+            src={banner}
+            alt="Product Image"
+            style={{ objectFit: 'cover' }}
+            width={1800}
+            height={150}
+            className="h-full w-full rounded-b-lg"
+          />
+        )}
+
         <div className="absolute bottom-2 left-24 h-8 ">
           <h1
             className="z-40 w-auto border-none text-xl font-bold md:text-3xl"

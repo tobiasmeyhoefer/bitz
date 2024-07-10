@@ -3,8 +3,9 @@ import { addToFavorites, checkFavorite, deleteFavorite } from '@/lib/product-act
 import { useEffect, useState } from 'react'
 import { FaHeart, FaRegHeart } from 'react-icons/fa'
 import { Button } from '../ui/button'
+import { cn } from '@/lib/utils'
 
-const FavoriteLike = ({ productId }: { productId: string }) => {
+const FavoriteLike = ({ productId, className }: { productId: string; className?: string }) => {
   const [isFavorite, setIsFavorite] = useState(false)
 
   useEffect(() => {
@@ -23,7 +24,7 @@ const FavoriteLike = ({ productId }: { productId: string }) => {
           size="icon"
           type="submit"
           aria-label="like product"
-          className="flex"
+          className={cn('flex', className)}
           onClick={() => {
             isFavorite ? deleteFavorite(productId) : addToFavorites(productId)
             setIsFavorite(!isFavorite)
