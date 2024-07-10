@@ -131,7 +131,7 @@ const BrowseContent = (props: BrowseContentProps) => {
       {!addressChoosen ? (
         <AddressChooserPopup translations={props.addressChooserTranslations} />
       ) : (
-        <></>
+        <OnboardingBrowseCard />
       )}
       {/* <OnboardingBrowseCard />  HIER FIX */}
       <div
