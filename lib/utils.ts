@@ -158,7 +158,7 @@ export function formatPhoneNumber(phoneNumber: string): string {
   return formattedNumber
 }
 
-export function formatDate(date: Date): string {
+export function formatDateLong(date: Date): string {
   const year = date.getFullYear()
   const month = (date.getMonth() + 1).toString().padStart(2, '0')
   const day = date.getDate().toString().padStart(2, '0')
@@ -167,6 +167,25 @@ export function formatDate(date: Date): string {
   const seconds = date.getSeconds().toString().padStart(2, '0')
 
   return `${day}.${month}.${year} ${hours}:${minutes}:${seconds}`
+}
+
+export function formatDate(date: Date): string {
+  const daysOfWeek = [
+    'Sonntag',
+    'Montag',
+    'Dienstag',
+    'Mittwoch',
+    'Donnerstag',
+    'Freitag',
+    'Samstag',
+  ]
+  const dayOfWeek = daysOfWeek[date.getDay()]
+  const day = date.getDate().toString().padStart(2, '0')
+  const month = (date.getMonth() + 1).toString().padStart(2, '0')
+  const hours = date.getHours().toString().padStart(2, '0')
+  const minutes = date.getMinutes().toString().padStart(2, '0')
+
+  return `${dayOfWeek}, ${day}.${month}. , ${hours}:${minutes}`
 }
 
 export function formatDateDMY(date: Date): string {
