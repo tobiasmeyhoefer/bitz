@@ -1,9 +1,4 @@
-import {
-  Card,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import { Card, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { getProductById } from '@/lib/product-actions'
 import { getUser, getUserById } from '@/lib/user-actions'
 import { ConversationType } from '@/schema'
@@ -15,11 +10,18 @@ import Image from 'next/image'
 import { getUnreadMessages } from '@/lib/message-actions'
 
 export const ConversationCard = async ({ conv }: { conv: ConversationType }) => {
-  const currentUser = await getUser()
-  const user = await getUserById(conv.buyerId)
-  const product = await getProductById(conv.productId)
+  const currentUserProm = getUser()
+  const userProm = getUserById(conv.buyerId)
+  const productProm = getProductById(conv.productId)
   const t = await getTranslations('Conversations')
-  const unreadMessages = await getUnreadMessages(conv.id)
+  const unreadMessagesProm = getUnreadMessages(conv.id)
+
+  const [currentUser, user, product, unreadMessages] = await Promise.all([
+    currentUserProm,
+    userProm,
+    productProm,
+    unreadMessagesProm,
+  ])
 
   const cardType: 'sellerCard' | 'buyerCard' =
     currentUser.id === product.sellerId ? 'buyerCard' : 'sellerCard'
@@ -27,14 +29,14 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
   if (cardType === 'sellerCard') {
     return (
       <Link className="transition-all hover:bg-secondary" href={`/conversations/${conv.id}`}>
-        <Card className="relative h-[140px] flex bg-transparent">
+        <Card className="relative flex h-[140px] bg-transparent">
           <div>
             <Image
               src={product.imageUrl1!}
               alt="image of product"
               width={138.4}
               height={138.4}
-              className= "rounded-l-lg"
+              className="rounded-l-lg"
             />
           </div>
           <div>

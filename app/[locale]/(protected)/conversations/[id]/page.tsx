@@ -9,14 +9,15 @@ import { Link } from '@/navigation'
 
 export default async function Page({ params }: { params: { id: string } }) {
   const convId = params.id
-  const existingMessages = await getExisitingMessages(convId)
-  const user = await getUser()
-  const conv = await getConversationById(params.id)
-  const product = await getProductById(conv.productId)
+  const conv = await getConversationById(convId)
+
+  const existingMessagesProm = getExisitingMessages(convId)
+  const userProm = getUser()
+  const productProm = getProductById(conv.productId)
   const sellerProm = getUserById(conv.sellerId)
   const buyerProm = getUserById(conv.buyerId)
 
-  const [seller, buyer] = await Promise.all([sellerProm, buyerProm])
+  const [seller, buyer, product, user, existingMessages] = await Promise.all([sellerProm, buyerProm, productProm, userProm, existingMessagesProm])
 
   const serializedMessages = existingMessages.map((message) => ({
     content: message.content,

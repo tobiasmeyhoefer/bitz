@@ -5,18 +5,9 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
-import { addConversationDelay, deleteConversation } from '@/lib/conversations-actions'
+import { deleteConversation } from '@/lib/conversations-actions'
 import { ConversationType } from '@/schema'
 import { changeProductStateToSold, createTransaction } from '@/lib/stripe-actions'
 import { getProductById } from '@/lib/product-actions'

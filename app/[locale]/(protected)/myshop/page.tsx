@@ -9,7 +9,6 @@ const MyShop = async () => {
   return (
     <div className="inset-x-1/2 flex flex-col items-center">
       <Banner title={t('title')} />
-      {/* <h1 className="mt-4 text-left font-montserrat text-3xl font-bold">{t('title')}</h1> */}
       <div>
         <MyShopContent />
       </div>
