@@ -48,6 +48,7 @@
     "@react-email/text": "0.0.8",
     "@react-three/drei": "^9.105.4",
     "@react-three/fiber": "^8.16.2",
+    "@sentry/nextjs": "^8.17.0",
     "@simplewebauthn/browser": "^9.0.1",
     "@simplewebauthn/server": "^9.0.3",
     "@types/three": "^0.163.0",
