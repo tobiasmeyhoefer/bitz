@@ -36,7 +36,7 @@ export function ShopText({ title }: { title: string }) {
   return (
     <div>
       <div className="group absolute bottom-0 h-full w-full">
-        <div className="absolute bottom-2 left-24 h-8 ">
+        <div className="absolute bottom-2 left-10 h-8 lg:left-24 ">
           <div className=" flex flex-row gap-1 ">
             <Input
               type="text"
