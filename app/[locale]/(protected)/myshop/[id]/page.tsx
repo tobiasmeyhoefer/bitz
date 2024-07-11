@@ -16,11 +16,20 @@ export default async function Page({ params }: { params: { id: string } }) {
     date: t('date'),
     price: t('price'),
   }
-  const owner = await getUserById(params.id)
-  const banner = await getBannerById(params.id)
-  const title = await getShopNameById(params.id)
-  const textColor = await getShopTextColorById(params.id)
-  const textFont = await getShopTextFontById(params.id)
+  const ownerProm = getUserById(params.id)
+  const bannerProm = getBannerById(params.id)
+  const titleProm = getShopNameById(params.id)
+  const textColorProm = getShopTextColorById(params.id)
+  const textFontProm = getShopTextFontById(params.id)
+
+  const [owner, banner, title, textColor, textFont] = await Promise.all([
+    ownerProm,
+    bannerProm,
+    titleProm,
+    textColorProm,
+    textFontProm,
+  ])
+
   return (
     <>
       <div className="group relative h-40 w-full bg-cover">

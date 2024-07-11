@@ -46,17 +46,20 @@ export default function AddressChanger({ translations }: AddressChangerProps) {
       if (!result.properties.housenumber) {
         toast({
           title: 'please add your housenumber ❌',
+          duration: 2000,
         })
       } else {
         await saveUserAddress(result.properties.address_line1)
         await saveUserLocation(result.properties.postcode, result.properties.city)
         toast({
           title: 'Address changed successfully ✅',
+          duration: 2000,
         })
       }
     } else {
       toast({
         title: 'please select an Address ❌',
+        duration: 2000,
       })
     }
   }

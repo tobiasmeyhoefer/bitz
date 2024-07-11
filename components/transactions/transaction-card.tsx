@@ -13,8 +13,10 @@ import Image from 'next/image'
 
 export const TransactionCard = async ({ transaction }: { transaction: TransactionType }) => {
   const user = await getUser()
-  const buyer = await getUserById(transaction.buyerId)
-  const product = await getProductById(transaction.productId)
+  const buyerProm = getUserById(transaction.buyerId)
+  const productProm = getProductById(transaction.productId)
+
+  const [buyer, product] = await Promise.all([buyerProm, productProm])
 
   //user is buyer
   if (transaction.buyerId === user.id) {

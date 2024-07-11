@@ -38,6 +38,7 @@ export default function LocationChooser({ postcode }: { postcode: string }) {
     // await saveUserLocation(values)
     toast({
       title: 'Postcode changed successfully ✅',
+      duration: 2000,
     })
   }
 
