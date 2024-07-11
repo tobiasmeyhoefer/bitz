@@ -171,9 +171,9 @@
     "theme": "Farbschema",
     "changeNow": "annehmen",
     "Verification": {
-      "notVerified": "Deine Telefonnummer ist noch nicht verifiziert!",
+      "notVerified": "Dein Account ist noch nicht verifiziert!",
       "verificationAborted": "Verifizierung abgebrochen",
-      "verified": "Deine Telefonnummer ist verifiziert.",
+      "verified": "Dein Account ist verifiziert.",
       "wrongNumber": "Falsche Nummer!",
       "verifyNow": "Jetzt verifizieren!",
       "typeInNumber": "Gib deine Telefonnummer ein!",

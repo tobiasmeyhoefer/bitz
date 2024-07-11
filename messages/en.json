@@ -171,9 +171,9 @@
     "theme": "Theme",
     "changeNow": "apply now",
     "Verification": {
-      "notVerified": "Your number is not verified!",
+      "notVerified": "Your account is not verified!",
       "verificationAborted": "Verification aborted",
-      "verified": "Your number is verified.",
+      "verified": "Your account is verified.",
       "wrongNumber": "Wrong number!",
       "verifyNow": "Verify now!",
       "typeInNumber": "Type in your phone number!",
