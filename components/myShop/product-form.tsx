@@ -87,7 +87,7 @@ const formSchema = z.object({
   description: z
     .string()
     .min(1, { message: minError })
-    .max(250)
+    .max(500)
     .refine((value) => !/#/.test(value)),
   category: z.string().min(1, { message: minError }).max(250).optional().default('Other'),
   images: z
@@ -133,6 +133,7 @@ export function ProductForm({
   const [locationError, setLocationError] = React.useState(false)
   const [locationErrorMessage, setLocationErrorMessage] = React.useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [charsRemaining, setCharsRemaining] = useState(500)
 
   const {
     title,
@@ -385,6 +386,8 @@ export function ProductForm({
     return compressedFiles
   }
 
+  //const [charsRemaining, setCharsRemaining] = useState(500)
+
   return (
     <>
       <Card className="p-10">
@@ -418,8 +421,19 @@ export function ProductForm({
                 <FormItem>
                   <FormLabel> {description}</FormLabel>
                   <FormControl>
-                    <Textarea className="h-24" placeholder={description} {...field} />
+                    {/* <Textarea className="h-24" placeholder={description} {...field} /> */}
+                    <Textarea
+                      placeholder="Description"
+                      {...field}
+                      maxLength={500} // Begrenzung auf 500 Zeichen
+                      onChange={(event) => {
+                        const value = event.target.value
+                        field.onChange(value)
+                        setCharsRemaining(500 - value.length) // Aktualisieren der verbleibenden Zeichen
+                      }}
+                    />
                   </FormControl>
+                  <p style={{ fontSize: '14px', color: '#666', marginTop: '4px' }}>{charsRemaining} remaining characters</p> {/* Anzeige der verbleibenden Zeichen */}
                   <FormMessage />
                 </FormItem>
               )}
