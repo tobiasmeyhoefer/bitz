@@ -162,8 +162,10 @@ const BrowseContent = (props: BrowseContentProps) => {
             loadProductsByTitle={loadProductsByTitle}
             userId={userId}
           />
-          <SortProducts setProducts={setProducts} translations={props.sortTranslations} />
-          <FilterProducts setProducts={setProducts} />
+          <div className="flex w-[440px] flex-row justify-between lg:w-auto lg:justify-normal">
+            <SortProducts setProducts={setProducts} translations={props.sortTranslations} />
+            <FilterProducts setProducts={setProducts} />
+          </div>
         </div>
         {!loading ? (
           <>

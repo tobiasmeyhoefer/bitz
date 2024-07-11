@@ -17,7 +17,6 @@ export const TransactionCard = async ({ transaction }: { transaction: Transactio
   const productProm = getProductById(transaction.productId)
 
   const [buyer, product] = await Promise.all([buyerProm, productProm])
-  
 
   //user is buyer
   if (transaction.buyerId === user.id) {
@@ -27,15 +26,15 @@ export const TransactionCard = async ({ transaction }: { transaction: Transactio
           <Image
             src={product.imageUrl1!}
             alt="image of product"
-            width={138.4}
-            height={138.4}
-            className="rounded-l-lg h-full w-full object-cover"
+            width={140}
+            height={140}
+            className="min-h-[180px] w-auto min-w-[250px]"
           />
         </div>
         <div>
           <CardHeader>
             <CardTitle>Du hast {product.title} gekauft</CardTitle>
-            <CardDescription>gekauft für {transaction.price}</CardDescription>
+            <CardDescription>gekauft für {transaction.price}€</CardDescription>
           </CardHeader>
           <CardContent>
             <p>
@@ -43,8 +42,8 @@ export const TransactionCard = async ({ transaction }: { transaction: Transactio
               versendet
             </p>
           </CardContent>
-          <CardFooter>
-            <p>{transaction.createdAt.toLocaleDateString()}</p>
+          <CardFooter className=" flex flex-col items-start justify-center py-4">
+            {transaction.createdAt.toLocaleDateString()}
           </CardFooter>
         </div>
       </Card>
@@ -54,27 +53,25 @@ export const TransactionCard = async ({ transaction }: { transaction: Transactio
   //user is seller
   if (transaction.sellerId === user.id) {
     return (
-      <Card className="relative flex h-[180px] bg-transparent">
-        <div>
-          <Image
-            src={product.imageUrl1!}
-            alt="image of product"
-            width={138.4}
-            height={138.4}
-            className="rounded-l-lg"
-          />
-        </div>
+      <Card className="relative flex bg-transparent">
+        <Image
+          src={product.imageUrl1!}
+          alt="image of product"
+          width={140}
+          height={140}
+          className=" min-h-[180px] w-auto min-w-[250px]"
+        />
         <div>
           <CardHeader>
             <CardTitle>Dein Bit {product.title} wurde gekauft</CardTitle>
-            <CardDescription>verkauft für {transaction.price}</CardDescription>
+            <CardDescription>verkauft für {transaction.price}€</CardDescription>
           </CardHeader>
           <CardContent>
             <p>Bitte schicke diesen Artikel nun an {buyer.name ?? 'den Verkäufer'}</p>
             <p>Adresse: {buyer.adress}</p>
           </CardContent>
-          <CardFooter>
-            <p>{transaction.createdAt.toLocaleDateString()}</p>
+          <CardFooter className=" flex flex-col items-start justify-center py-4">
+            {transaction.createdAt.toLocaleDateString()}
           </CardFooter>
         </div>
       </Card>
