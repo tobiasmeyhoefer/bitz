@@ -36,7 +36,7 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
               alt="image of product"
               width={138.4}
               height={138.4}
-              className="rounded-l-lg"
+              className="rounded-l-lg h-full object-cover"
             />
           </div>
           <div>
@@ -71,7 +71,7 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
                   alt="image of product"
                   width={138.4}
                   height={138.4}
-                  className="rounded-l-lg"
+                  className="rounded-l-lg h-full object-cover"
                 />
               </div>
               <div>
