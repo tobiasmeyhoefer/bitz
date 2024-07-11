@@ -1,10 +1,9 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import Image from 'next/image'
-import React, { createContext, useState, useContext, useRef, useEffect } from 'react'
+import React, { createContext, useState, useContext, useRef, useEffect, useCallback } from 'react'
 
-//Animation von https://ui.aceternity.com/components/3d-card-effect
+// Animation von https://ui.aceternity.com/components/3d-card-effect
 const MouseEnterContext = createContext<
   [boolean, React.Dispatch<React.SetStateAction<boolean>>] | undefined
 >(undefined)
@@ -39,12 +38,14 @@ export const CardContainer = ({
     setIsMouseEntered(false)
     containerRef.current.style.transform = `rotateY(0deg) rotateX(0deg)`
   }
+
   return (
     <MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
       <div
-        className={cn('flex items-center justify-center overflow-hidden', containerClassName)}
+        className={cn('flex items-center justify-center', containerClassName)}
         style={{
           perspective: '1000px',
+          overflow: 'visible',
         }}
       >
         <div
@@ -112,14 +113,14 @@ export const CardItem = ({
   const ref = useRef<HTMLDivElement>(null)
   const [isMouseEntered] = useMouseEnter()
 
-  const handleAnimations = () => {
+  const handleAnimations = useCallback(() => {
     if (!ref.current) return
     if (isMouseEntered) {
       ref.current.style.transform = `translateX(${translateX}px) translateY(${translateY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`
     } else {
       ref.current.style.transform = `translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`
     }
-  }
+  }, [isMouseEntered, translateX, translateY, translateZ, rotateX, rotateY, rotateZ])
 
   useEffect(() => {
     handleAnimations()
