@@ -863,7 +863,7 @@ In diesem Beispiel verwenden wir das Twilio SDK, um einen Bestätigungscode per 
 
 #
 #### 3.6 Pusher
-Pusher ist ein Dienst für Echtzeitkommunikation. Wir verwenden Pusher, um Benachrichtigungen und andere Echtzeit-Updates an Benutzer zu senden.
+Pusher ist ein Dienst für Echtzeitkommunikation über Websockets. Wir verwenden Pusher, um Benachrichtigungen und andere Echtzeit-Updates an Benutzer zu senden.
 ```
 // lib/pusher.js
 import Pusher from 'pusher-js';

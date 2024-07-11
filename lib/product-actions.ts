@@ -182,7 +182,10 @@ export async function getFavoriteProducts() {
   const userFavorites = await getUserFavorites()
   if (userFavorites) {
     const favoriteProducts = userFavorites.map(async (product) => {
-      return await db.select().from(products).where(eq(products.id, product.productId))
+      return await db
+        .select()
+        .from(products)
+        .where(and(eq(products.id, product.productId), ne(products.isSold, true)))
     })
     const productsBySeller = await Promise.all(favoriteProducts)
     const response = productsBySeller.flat()
@@ -425,6 +428,14 @@ export async function checkProfanity(message: string): Promise<boolean> {
 
 export async function getProductsByName(productName: string) {
   const user = await getUser()
-  const response = await db.select({ title: products.title }).from(products).where(and(sql`${products.title} LIKE ${sql.raw(`'%${productName}%'`)}`, ne(products.sellerId, user.id)));
-  return response.map(product => product.title);
+  const response = await db
+    .select({ title: products.title })
+    .from(products)
+    .where(
+      and(
+        sql`${products.title} LIKE ${sql.raw(`'%${productName}%'`)}`,
+        ne(products.sellerId, user.id),
+      ),
+    )
+  return response.map((product) => product.title)
 }

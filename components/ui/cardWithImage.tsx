@@ -66,7 +66,9 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                     <Badge className="md:text-md m-0 text-xs" variant="secondary">
                       {props.product.category}
                     </Badge>
-                    <div className="text-left text-lg md:text-xl">{props.product.price}€</div>
+                    <div className="text-left text-lg text-foreground md:text-xl">
+                      {props.product.price}€
+                    </div>
                   </div>
 
                   <div className="mt-2 flex justify-between">
@@ -76,16 +78,16 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                     <div className="text-right">
                       {!props.editable && props.favIcon && (
                         <Link
-                          className="hidden font-semibold text-primary md:block"
+                          className="hidden font-semibold text-foreground md:block"
                           href={`/myshop/${product.sellerId}`}
                         >
                           View Shop
                         </Link>
                       )}
-                      <div className="md:text-md flex hidden items-end text-right text-xs md:block">
+                      <div className="md:text-md flex items-end text-right text-xs md:block">
                         {formatDate(product.createdAt)}
                       </div>
-                      <div className="md:text-md block flex items-end text-right text-xs md:hidden">
+                      <div className="md:text-md flex items-end text-right text-xs md:hidden">
                         {formatDateDMY(product.createdAt)}
                       </div>
                     </div>

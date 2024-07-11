@@ -1,21 +1,30 @@
-
-import React from 'react';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { Check, Linkedin } from 'lucide-react';
-import { LightBulbIcon } from './Icons';
-import { GitHubLogoIcon } from '@radix-ui/react-icons';
-import Image from 'next/image';
-import { Link } from '@/navigation';
-import HeroCardAnimation from './HeroCardAnimation';
+import React from 'react'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  CardFooter,
+} from '@/components/ui/card'
+import { Check, Linkedin } from 'lucide-react'
+import { LightBulbIcon } from './Icons'
+import { GitHubLogoIcon } from '@radix-ui/react-icons'
+import Image from 'next/image'
+import { Link } from '@/navigation'
+import HeroCardAnimation from './HeroCardAnimation'
 
 export const HeroCards = () => {
   return (
     <div className="relative hidden h-[500px] w-[700px] flex-row flex-wrap gap-8 lg:flex">
       {/* Testimonial */}
-      <HeroCardAnimation className="absolute -top-[15px] right-[370px] w-[240px] shadow-black/10 drop-shadow-xl dark:shadow-white/10" delay={0.1}>
+      <HeroCardAnimation
+        className="absolute -top-[15px] right-[370px] w-[240px] shadow-black/10 drop-shadow-xl dark:shadow-white/10"
+        delay={0.1}
+      >
         <Card>
           <CardHeader className="flex flex-row items-center gap-4 pb-2">
             <div className="flex flex-col">
@@ -28,7 +37,10 @@ export const HeroCards = () => {
       </HeroCardAnimation>
 
       {/* Team */}
-      <HeroCardAnimation className="absolute right-[80px] top-4 flex w-64 flex-col items-center justify-center shadow-black/10 drop-shadow-xl dark:shadow-white/10" delay={0.3}>
+      <HeroCardAnimation
+        className="absolute right-[80px] top-4 flex w-64 flex-col items-center justify-center shadow-black/10 drop-shadow-xl dark:shadow-white/10"
+        delay={0.3}
+      >
         <Card>
           <CardHeader className="mt-8 flex items-center justify-center pb-2">
             <Image
@@ -39,7 +51,7 @@ export const HeroCards = () => {
               className="absolute -top-12 aspect-square h-24 w-24 rounded-full object-cover grayscale-[0%]"
             />
             <CardTitle className="text-center">Jens Pilgrim</CardTitle>
-            <CardDescription className="font-normal text-primary">Frontend Developer</CardDescription>
+            <CardDescription className="font-normal ">Frontend Developer</CardDescription>
           </CardHeader>
           <CardContent className="pb-2 text-center">
             <p>This UI is absolutely stunning thanks to the team of bitz</p>
@@ -58,7 +70,7 @@ export const HeroCards = () => {
               <span className="sr-only">Github icon</span>
               <GitHubLogoIcon className="h-5 w-5" />
             </a> */}
-            {/* <a
+              {/* <a
               rel="noreferrer noopener"
               href="https://twitter.com/leo_mirand4"
               target="_blank"
@@ -79,7 +91,7 @@ export const HeroCards = () => {
               </svg>
             </a> */}
 
-            {/* <a
+              {/* <a
               rel="noreferrer noopener"
               href="https://www.linkedin.com/"
               target="_blank"
@@ -97,12 +109,17 @@ export const HeroCards = () => {
       </HeroCardAnimation>
 
       {/* Pricing */}
-      <HeroCardAnimation className="absolute left-[80px] top-[150px] w-64 shadow-black/10 drop-shadow-xl dark:shadow-white/10" delay={0.5}>
+      <HeroCardAnimation
+        className="absolute left-[80px] top-[150px] w-64 shadow-black/10 drop-shadow-xl dark:shadow-white/10"
+        delay={0.5}
+      >
         <Card>
           <CardHeader>
             <CardTitle className="item-center flex justify-between">
               Free
-              <Badge variant="secondary" className="text-sm text-primary">For ever</Badge>
+              <Badge variant="secondary" className="text-sm">
+                For ever
+              </Badge>
             </CardTitle>
             <div>
               <span className="text-3xl font-bold">$0</span>
@@ -129,7 +146,10 @@ export const HeroCards = () => {
       </HeroCardAnimation>
 
       {/* Service */}
-      <HeroCardAnimation className="absolute bottom-[35px] right-[80px] w-[250px] shadow-black/10 drop-shadow-xl dark:shadow-white/10" delay={0.7}>
+      <HeroCardAnimation
+        className="absolute bottom-[35px] right-[80px] w-[250px] shadow-black/10 drop-shadow-xl dark:shadow-white/10"
+        delay={0.7}
+      >
         <Card>
           <CardHeader className="flex items-start justify-start gap-4 space-y-1 md:flex-row">
             <div className="mt-1 rounded-2xl bg-primary/20 p-1">
@@ -137,11 +157,13 @@ export const HeroCards = () => {
             </div>
             <div>
               <CardTitle>Light & dark mode</CardTitle>
-              <CardDescription className="text-md mt-2">Easily switch between your favorite theme</CardDescription>
+              <CardDescription className="text-md mt-2">
+                Easily switch between your favorite theme
+              </CardDescription>
             </div>
           </CardHeader>
         </Card>
       </HeroCardAnimation>
     </div>
-  );
-};
+  )
+}

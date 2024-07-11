@@ -13,6 +13,7 @@ const ProfileSettings = async () => {
   const t = await getTranslations('Settings')
   return (
     <div>
+      <h3 className="mb-4 text-2xl font-bold">{t('profilesettings')}</h3>
       <div className="mb-8 flex justify-center gap-8">
         {user.image ? (
           <Image
@@ -31,7 +32,6 @@ const ProfileSettings = async () => {
           action={changeUserImage}
         />
       </div>
-      <h3 className="mb-4 text-2xl font-bold">{t('username')}</h3>
       <div className="flex flex-col">
         <NameChanger
           translations={{
