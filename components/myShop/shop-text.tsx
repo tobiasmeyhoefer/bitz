@@ -6,26 +6,18 @@ import { ChooseFontcolor } from './choose-fontcolor'
 import { ChooseFont } from './choose-font'
 
 export function ShopText({ title }: { title: string }) {
-  const [text, setText] = useState('')
-  const [textColor, setTextColor] = useState('')
-  const [textFont, setTextFont] = useState('')
+  const [text, setText] = useState<string | null>(null)
+  const [textColor, setTextColor] = useState<string | null>(null)
+  const [textFont, setTextFont] = useState<string | null>(null)
 
   useEffect(() => {
     const fetchShopname = async () => {
       const shopname = await getShopName()
       const shopcolor = await getShopTextColor()
       const shopfont = await getShopTextFont()
-      if (shopname) {
-        setText(shopname)
-      } else {
-        setText(title)
-      }
-      if (shopcolor) {
-        setTextColor(shopcolor)
-      }
-      if (shopfont) {
-        setTextFont(shopfont)
-      }
+      setText(shopname ?? title)
+      setTextColor(shopcolor)
+      setTextFont(shopfont)
     }
     fetchShopname()
   }, [title])
@@ -37,6 +29,10 @@ export function ShopText({ title }: { title: string }) {
     }, 3500)
   }
 
+  if (text === null) {
+    return null
+  }
+
   return (
     <div>
       <div className="group absolute bottom-0 h-full w-full">
@@ -45,13 +41,13 @@ export function ShopText({ title }: { title: string }) {
             <Input
               type="text"
               name="shopname"
-              value={text}
+              value={text!}
               onChange={(e) => onInputChange(e.target.value)}
               placeholder="My Shop"
               className="z-40 w-auto border-none text-xl font-bold md:text-3xl"
               style={{
-                color: textColor,
-                fontFamily: textFont,
+                color: textColor!,
+                fontFamily: textFont!,
                 textShadow: '1px 1px 5px rgba(0, 0, 0, 0.6)',
               }}
             />

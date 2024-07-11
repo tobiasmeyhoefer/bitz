@@ -36,6 +36,7 @@ import { Checkbox } from '../ui/checkbox'
 import { getUser } from '@/lib/user-actions'
 import { ProductType } from '@/schema'
 import { checkIfUserIsPhoneVerified } from '@/lib/verify-actions'
+import { DialogClose } from '../ui/dialog'
 
 const suggestions = [
   { value: 'Reciever' },
@@ -144,7 +145,7 @@ export function ProductForm({
     toastDescription,
     submitTitle,
     isDirectlyBuyable,
-    deletePicture
+    deletePicture,
   } = translations
 
   useEffect(() => {
@@ -185,32 +186,35 @@ export function ProductForm({
     if (!isPhoneVerified) {
       toast({
         title: 'Error',
-        description: 'Please verify your phone number first'
+        description: 'Please verify your phone number first',
+        duration: 2000,
       })
       setIsLoading(false)
       return
     }
 
-    if(await checkProfanity(values.title) || await checkProfanity(values.description)) {
+    if ((await checkProfanity(values.title)) || (await checkProfanity(values.description))) {
       toast({
         title: 'Oh oh',
         description: 'Please check your profanity',
+        duration: 2000,
       })
       setIsLoading(false)
       return
     }
 
-    await checkProfanity(values.title) 
-    await checkProfanity(values.description) 
+    await checkProfanity(values.title)
+    await checkProfanity(values.description)
 
     if (!values.category) {
-      values.category = 'Other';
+      values.category = 'Other'
     }
 
     if (compressedFiles?.length === 0) {
       toast({
         title: 'Error',
         description: 'at least one image pls',
+        duration: 2000,
       })
       setPreviewUrls(null)
       setFiles(null)
@@ -233,7 +237,7 @@ export function ProductForm({
             <Button>go to Settings</Button>
           </Link>
         ),
-        duration: 2600,
+        duration: 2000,
       })
     } else {
       let imageUrls = []
@@ -271,12 +275,13 @@ export function ProductForm({
         }
       }
       await addProduct(JSON.parse(JSON.stringify(values)), imageUrls)
+      document.getElementById('closeDialog')?.click()
       setIsLoading(false)
       router.push('/myshop')
       toast({
         title: toastTitle,
         description: toastDescription,
-        duration: 2200,
+        duration: 2000,
       })
     }
   }
@@ -382,7 +387,7 @@ export function ProductForm({
 
   return (
     <>
-      <Card className="w-full max-w-[800px] p-10">
+      <Card className="p-10">
         {locationError && (
           <div className="mb-2 flex flex-row items-center gap-2">
             <p className="font-medium text-red-400">Error: Location not set</p>

@@ -8,13 +8,13 @@ const Transactions = async () => {
   const t = await getTranslations('Transactions')
   const transactions = await getUserTransactions()
   return (
-    <div className="flex flex-col items-center px-5 md:px-10 py-10">
+    <div className="flex flex-col items-center px-5 py-10 md:px-10">
       <div className="w-full">
         <h1 className="mb-12 text-center font-montserrat text-xl font-bold md:text-3xl">
           {t('title')}
         </h1>
         <Suspense fallback={<ConversationLoadingSkeleton />}>
-          <div className="flex flex-col gap-4">
+          <div className="grid w-full grid-cols-1 gap-6 xl:grid-cols-2">
             {transactions.map((transaction) => (
               <TransactionCard key={transaction.productId} transaction={transaction} />
             ))}

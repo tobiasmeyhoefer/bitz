@@ -4,7 +4,6 @@ import { HeroCards } from '@/components/landing-page/HeroCards'
 import { GitHubLogoIcon } from '@radix-ui/react-icons'
 import { Link } from '@/navigation'
 import dynamic from 'next/dynamic'
-import { Suspense } from 'react'
 import { useTranslations } from 'next-intl'
 
 const CubeScene = dynamic(() => import('@/components/explosion/cubeScene'), {

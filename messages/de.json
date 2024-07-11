@@ -95,7 +95,7 @@
     "popupTitle": "Bitte gib deine Adresse an",
     "addressError": "Error, bitte wähle eine Adresse aus",
     "housenumberError": "Error, bitte gib deine Hausnummer mit an",
-    "SuccessToast": "Addresse erfolgreich gesetzt ✅",
+    "SuccessToast": "Personalien erfolgreich gesetzt ✅",
     "submit": "Absenden"
   },
 
@@ -171,9 +171,9 @@
     "theme": "Farbschema",
     "changeNow": "annehmen",
     "Verification": {
-      "notVerified": "Dein Konto ist noch nicht verifiziert!",
+      "notVerified": "Deine Telefonnummer ist noch nicht verifiziert!",
       "verificationAborted": "Verifizierung abgebrochen",
-      "verified": "Dein Konto ist verifiziert.",
+      "verified": "Deine Telefonnummer ist verifiziert.",
       "wrongNumber": "Falsche Nummer!",
       "verifyNow": "Jetzt verifizieren!",
       "typeInNumber": "Gib deine Telefonnummer ein!",
@@ -234,6 +234,6 @@
   },
 
   "Transactions": {
-    "title": "TRANSAKTIONEN"
+    "title": "Transaktionen"
   }
 }

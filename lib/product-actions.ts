@@ -4,7 +4,7 @@ import { products, favorites, ProductType } from '@/schema'
 import { db } from '../db'
 import { count, desc, eq, ne, or, sql, ilike, and, asc } from 'drizzle-orm'
 import { auth } from '@/auth'
-import { getUserById } from './user-actions'
+import { getUser, getUserById } from './user-actions'
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import crypto from 'crypto'
@@ -363,6 +363,15 @@ export async function sortProducts(value: string) {
   return result
 }
 
+export async function sortProductsShop(value: string, userID: string) {
+  const response = await db
+    .select()
+    .from(products)
+    .where(and(eq(products.sellerId, userID), ne(products.isSold, true)))
+  const result = response.sort(sortBy(value))
+  return result
+}
+
 export async function getMostExpensiveProduct() {
   const session = await auth()
   const id = session?.user?.id
@@ -412,4 +421,10 @@ export async function checkProfanity(message: string): Promise<boolean> {
   })
   const json = await res.json()
   return json.isProfanity
+}
+
+export async function getProductsByName(productName: string) {
+  const user = await getUser()
+  const response = await db.select({ title: products.title }).from(products).where(and(sql`${products.title} LIKE ${sql.raw(`'%${productName}%'`)}`, ne(products.sellerId, user.id)));
+  return response.map(product => product.title);
 }

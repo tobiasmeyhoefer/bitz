@@ -95,7 +95,7 @@
     "popupTitle": "please enter your address",
     "addressError": "Error, please select an address",
     "housenumberError": "Error,please also add your housenumber",
-    "SuccessToast": "address succesfully changed ✅",
+    "SuccessToast": "personals succesfully set ✅",
     "submit": "submit"
   },
 
@@ -171,9 +171,9 @@
     "theme": "Theme",
     "changeNow": "apply now",
     "Verification": {
-      "notVerified": "You are now verified!",
+      "notVerified": "Your number is not verified!",
       "verificationAborted": "Verification aborted",
-      "verified": "You are verified.",
+      "verified": "Your number is verified.",
       "wrongNumber": "Wrong number!",
       "verifyNow": "Verify now!",
       "typeInNumber": "Type in your phone number!",

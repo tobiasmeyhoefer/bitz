@@ -6,13 +6,6 @@ import { Suspense } from 'react'
 
 const Favorites = async () => {
   const products: ProductType[] | undefined = await getFavoriteProducts()
-  // await fetch('http://localhost:3000/api/mail/welcome', {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-type': 'application/json',
-  //   },
-  //   body: JSON.stringify({ to: 'tobias.meyhoefer02@gmail.com' }),
-  // })
 
   return (
     <>

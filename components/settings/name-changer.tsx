@@ -50,6 +50,7 @@ export default function NameChanger({ translations }: NameChangerProps) {
     await saveUserName(values.name)
     toast({
       title: 'Username changed successfully ✅',
+      duration: 2000,
     })
   }
 
