@@ -36,6 +36,7 @@ import { Checkbox } from '../ui/checkbox'
 import { getUser } from '@/lib/user-actions'
 import { ProductType } from '@/schema'
 import { checkIfUserIsPhoneVerified } from '@/lib/verify-actions'
+import { DialogClose } from '../ui/dialog'
 
 const suggestions = [
   { value: 'Reciever' },
@@ -274,6 +275,7 @@ export function ProductForm({
         }
       }
       await addProduct(JSON.parse(JSON.stringify(values)), imageUrls)
+      document.getElementById('closeDialog')?.click()
       setIsLoading(false)
       router.push('/myshop')
       toast({
@@ -385,7 +387,7 @@ export function ProductForm({
 
   return (
     <>
-      <Card className="w-full max-w-[800px] p-10">
+      <Card className="p-10">
         {locationError && (
           <div className="mb-2 flex flex-row items-center gap-2">
             <p className="font-medium text-red-400">Error: Location not set</p>
