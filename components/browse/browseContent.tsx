@@ -16,7 +16,6 @@ import AnimatedCard from '../ui/animated-card'
 import { FilterProducts } from '../filter-products/filter-products'
 import { getUser } from '@/lib/user-actions'
 import { Button } from '../ui/button'
-import AnimatedButton from '../ui/animated-button'
 import AddressChooserPopup from '../adressChooser-popup/adressChooser-popup'
 
 const suggestions = [
@@ -60,6 +59,7 @@ const BrowseContent = (props: BrowseContentProps) => {
   const [isLoadingMore, setIsLoadingMore] = useState(false)
   const [hasMoreProducts, setHasMoreProducts] = useState(true)
   const [addressChoosen, setAddressChoosen] = useState(true)
+  const [showLoadMoreButton, setShowLoadMoreButton] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -74,12 +74,21 @@ const BrowseContent = (props: BrowseContentProps) => {
         setNoSearchResults(true)
       }
       setLoading(false)
+
+      setTimeout(() => {
+        setShowLoadMoreButton(true)
+      }, 1000)
     }
     fetchData()
   }, [])
 
   const loadMoreProducts = async () => {
     setIsLoadingMore(true);
+    setShowLoadMoreButton(false)
+    setTimeout(() => {
+      setShowLoadMoreButton(true)
+    }, 1000)
+    
     const result = await getProductsBrowse(10, page * 10);
     if (result.length < 4) { // Wert muss angepasst werden, je nach dem wie viele Produkte man mehr Laden moechte 
       setHasMoreProducts(false);
@@ -93,6 +102,10 @@ const BrowseContent = (props: BrowseContentProps) => {
     }
     setPage((prevPage) => prevPage + 1)
     setIsLoadingMore(false)
+
+    setTimeout(() => {
+      setShowLoadMoreButton(true)
+    }, 1000)
   }
 
   const loadProductsByCategory = async (category: string) => {
@@ -170,7 +183,7 @@ const BrowseContent = (props: BrowseContentProps) => {
               ))}
               {noSearchResults && <div className=" px-4">Keine Suchergebnisse gefunden</div>}
             </div>
-            {hasMoreProducts && (
+            {hasMoreProducts && showLoadMoreButton && (
               <Button onClick={loadMoreProducts} disabled={isLoadingMore} variant='default' className='mt-4 mb-6'>
               {isLoadingMore ? 'Loading...' : 'Load More'}
               </Button>
