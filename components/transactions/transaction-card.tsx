@@ -19,14 +19,14 @@ export const TransactionCard = async ({ transaction }: { transaction: Transactio
   //user is buyer
   if (transaction.buyerId === user.id) {
     return (
-      <Card className="relative flex h-[180px] bg-transparent">
+      <Card className="relative flex bg-transparent">
         <div>
           <Image
             src={product.imageUrl1!}
-            alt="iamge of product"
-            width={140}
-            height={140}
-            className="min-h-[180px] min-w-[180px]"
+            alt="image of product"
+            width={138.4}
+            height={138.4}
+            className="rounded-l-lg h-full w-full object-cover"
           />
         </div>
         <div>
@@ -55,10 +55,10 @@ export const TransactionCard = async ({ transaction }: { transaction: Transactio
         <div>
           <Image
             src={product.imageUrl1!}
-            alt="iamge of product"
-            width={140}
-            height={140}
-            className="min-h-[180px] min-w-[180px]"
+            alt="image of product"
+            width={138.4}
+            height={138.4}
+            className="rounded-l-lg"
           />
         </div>
         <div>

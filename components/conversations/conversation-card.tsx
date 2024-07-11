@@ -27,14 +27,14 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
   if (cardType === 'sellerCard') {
     return (
       <Link className="transition-all hover:bg-secondary" href={`/conversations/${conv.id}`}>
-        <Card className="relative flex h-[140px] bg-transparent">
+        <Card className="relative h-[140px] flex bg-transparent">
           <div>
             <Image
               src={product.imageUrl1!}
-              alt="iamge of product"
-              width={140}
-              height={140}
-              className="min-h-[140px] min-w-[140px]"
+              alt="image of product"
+              width={138.4}
+              height={138.4}
+              className= "rounded-l-lg"
             />
           </div>
           <div>
@@ -66,10 +66,10 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
               <div>
                 <Image
                   src={product.imageUrl1!}
-                  alt="iamge of product"
-                  width={140}
-                  height={140}
-                  className="min-h-[140px] min-w-[140px]"
+                  alt="image of product"
+                  width={138.4}
+                  height={138.4}
+                  className="rounded-l-lg"
                 />
               </div>
               <div>
