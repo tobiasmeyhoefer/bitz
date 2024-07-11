@@ -105,9 +105,9 @@ export const SearchDialog = (
         />
       </DialogTrigger>
       <DialogContent className="gap-0 border-0  p-0">
-        <div className="flex">
+        <div className="relative flex">
           <Input
-            className="rounded-t-l m-0 h-14 rounded-b-none px-4"
+            className="m-0 h-14 rounded-tl rounded-bl rounded-tr-none rounded-br-none px-4 flex-grow"  // "rounded-t-l m-0 h-14 rounded-b-none px-4"
             type="input"
             placeholder={props.placeholder}
             onChange={handleSearchChange}
@@ -117,7 +117,7 @@ export const SearchDialog = (
           {props.searchValue.length > 0 && (
             <SlClose
               onClick={() => props.setSearchValue('')}
-              className="absolute right-[20px] top-[20%] h-[20px] w-[20px]"
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 h-[20px] w-[20px] cursor-pointer" // "absolute right-[20px] top-[20%] h-[20px] w-[20px]" 
             />
           )}
         </div>
