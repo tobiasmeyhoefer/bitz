@@ -389,7 +389,6 @@ export function ProductForm({
   //const [charsRemaining, setCharsRemaining] = useState(500)
 
   return (
-    <>
       <Card className="p-10">
         {locationError && (
           <div className="mb-2 flex flex-row items-center gap-2">
