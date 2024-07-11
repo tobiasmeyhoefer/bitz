@@ -36,6 +36,7 @@ export function BuyButtons(props: { product: ProductType }) {
   }, [product.id])
 
   async function handleBuyClick() {
+    setDisabled(true)
     const isPhoneVerified = await checkIfUserIsPhoneVerified()
     if (!isPhoneVerified) {
       toast({
@@ -55,6 +56,7 @@ export function BuyButtons(props: { product: ProductType }) {
       productName: product.title,
     })
     await createConversation(product.id!)
+    setDisabled(false)
     router.push('/conversations')
   }
 
