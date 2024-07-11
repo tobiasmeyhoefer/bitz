@@ -33,7 +33,7 @@ export default async function LocaleLayout({
     <html lang={locale} className=''>
       <body
         className={cn(
-          'min-h-screen overflow-x-hidden bg-background font-space_grotesk antialiased',
+          'min-h-svh overflow-x-hidden bg-background font-space_grotesk antialiased',
           space_grotesk.variable,
           montserrat.variable,
         )}
@@ -47,10 +47,9 @@ export default async function LocaleLayout({
           <header>
             <NavBar />
           </header>
-          <main className="h-fit min-h-[calc(100vh-80px)]">
+          <main className="h-[calc(100svh-80px)]">
             {children}
           </main>{' '}
-          {/* bg-white rausgenommen*/}
           <Toaster />
         </ThemeProvider>
       </body>

@@ -28,7 +28,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   }))
 
   return (
-    <div className="h-[calc(100dvh-80px)]">
+    <div className="h-full">
       <div className="lg:mx-10 h-[80px] mx-4 flex items-center gap-10">
         <Link href={`/conversations`}>
           <Button>back</Button>
