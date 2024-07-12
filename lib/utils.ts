@@ -194,7 +194,7 @@ export function formatDate(date: Date): string {
       'Samstag',
     ]
     const dayOfWeek = daysOfWeek[date.getDay()]
-    return `${dayOfWeek} ${hours}:${minutes}`
+    return `${dayOfWeek}`
   } else {
     // Älter: tt.mm.jjjj
     const year = date.getFullYear()
