@@ -21,14 +21,14 @@ export const TransactionCard = async ({ transaction }: { transaction: Transactio
   //user is buyer
   if (transaction.buyerId === user.id) {
     return (
-      <Card className="relative flex bg-transparent">
+      <Card className="relative flex h-[200px] bg-transparent sm:h-[170px]">
         <div>
           <Image
             src={product.imageUrl1!}
             alt="image of product"
-            width={140}
-            height={140}
-            className="min-h-[180px] w-auto min-w-[250px]"
+            width={138.4}
+            height={138.4}
+            className="h-full rounded-l-lg object-cover"
           />
         </div>
         <div>
@@ -37,14 +37,12 @@ export const TransactionCard = async ({ transaction }: { transaction: Transactio
             <CardDescription>gekauft für {transaction.price}€</CardDescription>
           </CardHeader>
           <CardContent>
-            <p>
+            <p className="text-xs sm:text-base">
               Dein Paket wird jetzt verpackt und an den festgelegten Ort in deinen Einstellungen
               versendet
             </p>
+            <CardDescription>{transaction.createdAt.toLocaleDateString()}</CardDescription>
           </CardContent>
-          <CardFooter className=" flex flex-col items-start justify-center py-4">
-            {transaction.createdAt.toLocaleDateString()}
-          </CardFooter>
         </div>
       </Card>
     )
@@ -53,13 +51,13 @@ export const TransactionCard = async ({ transaction }: { transaction: Transactio
   //user is seller
   if (transaction.sellerId === user.id) {
     return (
-      <Card className="relative flex bg-transparent">
+      <Card className="relative flex h-[200px] bg-transparent sm:h-[170px]">
         <Image
           src={product.imageUrl1!}
           alt="image of product"
-          width={140}
-          height={140}
-          className=" min-h-[180px] w-auto min-w-[250px]"
+          width={138.4}
+          height={138.4}
+          className="h-full rounded-l-lg object-cover"
         />
         <div>
           <CardHeader>
@@ -67,12 +65,13 @@ export const TransactionCard = async ({ transaction }: { transaction: Transactio
             <CardDescription>verkauft für {transaction.price}€</CardDescription>
           </CardHeader>
           <CardContent>
-            <p>Bitte schicke diesen Artikel nun an {buyer.name ?? 'den Verkäufer'}</p>
-            <p>Adresse: {buyer.adress}</p>
+            <p className="text-xs sm:text-base">
+              Bitte schicke diesen Artikel nun an {buyer.name ?? 'den Verkäufer'}
+            </p>
+            <p className="mb-2 text-xs sm:text-sm">Adresse: {buyer.adress}</p>
+
+            <CardDescription>{transaction.createdAt.toLocaleDateString()}</CardDescription>
           </CardContent>
-          <CardFooter className=" flex flex-col items-start justify-center py-4">
-            {transaction.createdAt.toLocaleDateString()}
-          </CardFooter>
         </div>
       </Card>
     )

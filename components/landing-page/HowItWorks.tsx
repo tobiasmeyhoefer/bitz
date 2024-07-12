@@ -49,7 +49,7 @@ export const HowItWorks = () => {
           <Card key={title} className="bg-muted/50">
             <CardHeader>
               <CardTitle className="grid place-items-center gap-4">
-                {icon}
+                <span className="fill-white">{icon}</span>
                 {title}
               </CardTitle>
             </CardHeader>

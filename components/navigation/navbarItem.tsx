@@ -45,7 +45,7 @@ const NavLoginLink = ({ text }: NavLoginProps) => {
   return (
     pathname !== '/auth/login' && (
       <Link href="/auth/login">
-        <Button className='bg-primary-hover'>{text}</Button>
+        <Button className="bg-primary-hover">{text}</Button>
       </Link>
     )
   )
@@ -56,7 +56,7 @@ const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
   const [open, setOpen] = useState(false)
   return (
     <DropdownMenu open={open}>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger className="outline-none ">
         {props.userImgSrc ? (
           <Image
             src={props.userImgSrc!} // TODO: {props?.userImgSrc as string}
@@ -117,9 +117,9 @@ const NavMenuDrawer = (props: NavMenuDrawerProps) => {
       <DrawerTrigger asChild>
         <Button
           onClick={() => setDrawerOpen(true)}
-          className="text-bg-primary-foreground h-fit bg-transparent p-0 shadow-none hover:bg-transparent hover:text-primary-hover "
+          className="text-bg-primary-foreground h-fit bg-transparent p-0 shadow-none outline-none ring-0 hover:bg-transparent hover:text-primary-hover focus-visible:ring-0 "
         >
-          <TbMenu className="h-[30px] w-[40px]" />
+          <TbMenu className="h-[30px] w-[40px] outline-none " />
         </Button>
       </DrawerTrigger>
       <DrawerContent className="max-w-smd mx-auto w-full border-0 bg-primary-foreground text-primary">
