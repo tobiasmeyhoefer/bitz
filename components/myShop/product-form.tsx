@@ -551,11 +551,11 @@ export function ProductForm({
             </div>
           )}
           {isLoading ? (
-            <Button disabled className="mt-4" type="submit">
+            <Button disabled className="mt-4 max-md:mb-6" type="submit">
               {submitTitle}
             </Button>
           ) : (
-            <Button className="mt-4" type="submit">
+            <Button className="mt-4 max-md:mb-6" type="submit">
               {submitTitle}
             </Button>
           )}
