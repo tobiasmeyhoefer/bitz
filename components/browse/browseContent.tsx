@@ -17,6 +17,7 @@ import { FilterProducts } from '../filter-products/filter-products'
 import { getUser } from '@/lib/user-actions'
 import { Button } from '../ui/button'
 import AddressChooserPopup from '../adressChooser-popup/adressChooser-popup'
+import LoadingSkeletonBrowse from '../fallbacks/browse-fallback'
 
 const suggestions = [
   'Reciever',
@@ -198,9 +199,7 @@ const BrowseContent = (props: BrowseContentProps) => {
             )}
           </>
         ) : (
-          <div className="flex h-full items-center justify-center">
-            <div className="h-20 w-20 animate-ping rounded-[30px] bg-black"></div>
-          </div>
+          <LoadingSkeletonBrowse/>
         )}
       </div>
     </>

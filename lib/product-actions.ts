@@ -1,6 +1,6 @@
 'use server'
 
-import { products, favorites, ProductType } from '@/schema'
+import { products, favorites, ProductType, messages } from '@/schema'
 import { db } from '../db'
 import { count, desc, eq, ne, or, sql, ilike, and, asc } from 'drizzle-orm'
 import { auth } from '@/auth'
@@ -101,6 +101,8 @@ export async function deleteProduct(productId: string) {
       await deleteImageOnAws(imageUrl)
     }
   }
+  
+
   await db.delete(products).where(eq(products.id, productId))
   await setProductNotActive(product!.stripeId!)
   revalidatePath('/myShop')
