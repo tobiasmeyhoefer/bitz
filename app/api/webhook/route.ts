@@ -6,7 +6,6 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 export async function POST(req: NextRequest) {
   const payload = await req.text()
   const res = JSON.parse(payload)
-
   const sig = req.headers.get('stripe-signature')
 
   const secret =
@@ -14,15 +13,11 @@ export async function POST(req: NextRequest) {
       ? process.env.STRIPE_WEBHOOK_SECRET!
       : process.env.STRIPE_WEBHOOK_SECRET_LOCAL!
 
-
   try {
     let event = stripe.webhooks.constructEvent(payload, sig!, secret!)
 
-    console.log("test1")
-
     switch (event.type) {
       case 'checkout.session.completed':
-        console.log("test2")
         const savedSession = await handleCompletedCheckoutSession(event)
         break
     }
