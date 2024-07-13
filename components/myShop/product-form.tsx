@@ -389,6 +389,7 @@ export function ProductForm({
   //const [charsRemaining, setCharsRemaining] = useState(500)
 
   return (
+    <>
       <Card className="p-10">
         {locationError && (
           <div className="mb-2 flex flex-row items-center gap-2">
@@ -558,118 +559,27 @@ export function ProductForm({
                       className="border"
                     />
                     <Button
-                      variant="outline"
-                      role="combobox"
-                      aria-expanded={open}
-                      className="w-full justify-between bg-card"
+                      className="absolute bottom-1 right-1"
+                      onClick={() => handleDelete(index)}
                     >
-                      {categoryValue
-                        ? suggestions.find((framework) => framework.value === categoryValue)?.value
-                        : categoryPlaceholder}
+                      {deletePicture}
                     </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className=" w-[15em]">
-                    <Command>
-                      <CommandList>
-                        <CommandInput placeholder="Search framework..." />
-                        <CommandEmpty>No framework found.</CommandEmpty>
-                        <CommandGroup>
-                          {suggestions.map((framework) => (
-                            <CommandItem
-                              key={framework.value}
-                              value={framework.value}
-                              onSelect={(currentValue: string) => {
-                                form.setValue('category', framework.value),
-                                  setcategoryValue(
-                                    currentValue === categoryValue ? '' : currentValue,
-                                  )
-                                setOpen(false)
-                              }}
-                            >
-                              <p
-                                className={cn(
-                                  'mr-2 h-4 w-4',
-                                  categoryValue === framework.value ? 'opacity-100' : 'opacity-0',
-                                )}
-                              />
-                              {framework.value}
-                            </CommandItem>
-                          ))}
-                        </CommandGroup>
-                      </CommandList>
-                    </Command>
-                  </PopoverContent>
-                </Popover>
-                <FormMessage />
-              </FormItem>
+                  </div>
+                ))}
+              </div>
             )}
-          />
-          <FormField
-            control={form.control}
-            name={'isDirectlyBuyable'}
-            render={({ field }) => (
-              <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-3">
-                <FormLabel>{isDirectlyBuyable}</FormLabel>
-                <FormControl>
-                  <Checkbox checked={field.value} onCheckedChange={field.onChange} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
+            {isLoading ? (
+              <Button disabled className="mt-4 border-2" type="submit">
+                {submitTitle}
+              </Button>
+            ) : (
+              <Button className="mt-4 border-2" type="submit">
+                {submitTitle}
+              </Button>
             )}
-          />
-          <FormField
-            control={form.control}
-            name="images"
-            render={({ field: { value, onChange, ...fieldProps } }) => (
-              <FormItem>
-                <FormLabel>{images}</FormLabel>
-                <FormControl>
-                  <Input
-                    {...fieldProps}
-                    multiple
-                    type="file"
-                    accept="image/jpeg,image/png,image/webp"
-                    onChange={(event) => {
-                      onChange(event.target.files)
-                      // onChange(event.target.files && event.target.files[0])
-                      handleFileChange(event)
-                    }}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          {previewUrls && files && (
-            <div className="flex flex-wrap">
-              {previewUrls.map((url, index) => (
-                <div className="relative" key={url}>
-                  <Image
-                    src={url}
-                    key={url}
-                    alt="Selected files"
-                    width={150}
-                    height={150}
-                    className="border"
-                  />
-                  <Button className="absolute bottom-1 right-1" onClick={() => handleDelete(index)}>
-                    {deletePicture}
-                  </Button>
-                </div>
-              ))}
-            </div>
-          )}
-          {isLoading ? (
-            <Button disabled className="mt-4" type="submit">
-              {submitTitle}
-            </Button>
-          ) : (
-            <Button className="mt-4" type="submit">
-              {submitTitle}
-            </Button>
-          )}
-        </form>
-      </Form>
-    </Card>
+          </form>
+        </Form>
+      </Card>
+    </>
   )
 }
