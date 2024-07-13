@@ -24,7 +24,7 @@ const ProfileSettings = async () => {
             alt="user image"
           />
         ) : (
-          <FaUserCircle className="w-40 rounded-full" />
+          <FaUserCircle className="h-40 w-40 rounded-full" />
         )}
         <PictureChanger
           title={t('imageChangeTitle')}
