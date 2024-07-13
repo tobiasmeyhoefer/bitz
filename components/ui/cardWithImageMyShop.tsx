@@ -95,10 +95,10 @@ const CardWithImageMyShop = React.forwardRef<HTMLDivElement, CardWithImageProps>
                       {props.product.location}
                     </div>
                     <div className="text-right">
-                      <div className="md:text-md flex hidden items-end text-right text-xs md:block">
+                      <div className="md:text-md flex items-end text-right text-xs md:block">
                         {formatDate(product.createdAt)}
                       </div>
-                      <div className="md:text-md block flex items-end text-right text-xs md:hidden">
+                      <div className="md:text-md flex items-end text-right text-xs md:hidden">
                         {formatDateDMY(product.createdAt)}
                       </div>
                     </div>

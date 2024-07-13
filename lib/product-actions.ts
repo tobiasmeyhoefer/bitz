@@ -280,6 +280,7 @@ export async function deleteImageOnAws(imageUrl: string) {
 }
 
 export async function updateProductImage(existingImageUrl: string, newImageUrl: string) {
+  // Check all images of all products if existingImageUrl exists
   const product = await db
     .select()
     .from(products)
@@ -294,6 +295,7 @@ export async function updateProductImage(existingImageUrl: string, newImageUrl: 
     )
   const p = product[0]
   if (p) {
+    // Check which of the products images is the existingImageUrl and update the right one & delete the old one on AWS
     switch (existingImageUrl) {
       case p.imageUrl1:
         await db
@@ -361,6 +363,7 @@ export async function sortProducts(value: string) {
     .where(and(ne(products.sellerId, id!), ne(products.isSold, true)))
   const result = response.sort(sortBy(value))
   if (value == 'createdAt') {
+    // Reverse the order so that the newest products are the first ones
     result.reverse()
   }
   return result
@@ -372,6 +375,10 @@ export async function sortProductsShop(value: string, userID: string) {
     .from(products)
     .where(and(eq(products.sellerId, userID), ne(products.isSold, true)))
   const result = response.sort(sortBy(value))
+  if (value == 'createdAt') {
+    // Reverse the order so that the newest products are the first ones
+    result.reverse()
+  }
   return result
 }
 
@@ -402,6 +409,7 @@ export async function filterProducts(values: {
     .select()
     .from(products)
     .where(and(ne(products.sellerId, id!), ne(products.isSold, true)))
+  // Check which category needs to be filtered
   if (category) {
     response = response.filter((item) => item.category == category)
   }

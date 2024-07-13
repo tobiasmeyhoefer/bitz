@@ -27,13 +27,13 @@ const ShopContent = (params: { id: string; translation: SortProductsProps }) => 
         setProducts={setProducts}
         translations={params.translation}
       />
-      <div className="-mx-2 mt-6 flex flex-wrap justify-around overflow-y-hidden">
+      <div className="mx-2 mt-6 flex flex-wrap justify-around overflow-y-hidden">
         {products?.map((p, index) => (
           // <AnimatedCard  delay={0.3} >
           <CardWithImage
             key={`pr-${index}`}
             className="mx-[5px] my-[0.5rem]"
-            product={products[index]}
+            product={p}
             editable={false}
           />
           // </AnimatedCard>
