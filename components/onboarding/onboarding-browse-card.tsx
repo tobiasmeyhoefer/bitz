@@ -93,6 +93,7 @@ const OnboardingBrowseCard: React.FC<OnboardingCardProps> = ({ className }) => {
             <Button
               onClick={async () => {
                 setOnboardingFinished(true)
+                updateOnboardingIndexBrowse(0)
                 await setOnboardingState(true)
               }}
             >
@@ -106,6 +107,7 @@ const OnboardingBrowseCard: React.FC<OnboardingCardProps> = ({ className }) => {
           <Button
             onClick={async () => {
               setOnboardingFinished(true)
+              updateOnboardingIndexBrowse(0)
               await setOnboardingState(true)
             }}
             variant={'ghost'}
