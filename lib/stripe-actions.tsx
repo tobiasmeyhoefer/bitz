@@ -113,7 +113,7 @@ export async function createTransaction(
 
 export async function handleCompletedCheckoutSession(event: Stripe.CheckoutSessionCompletedEvent) {
   try {
-
+    console.log("bin dabei")
     const sessionWithLineItems = await stripe.checkout.sessions.retrieve(
       (event.data.object as Stripe.Checkout.Session).id,
       { expand: ['line_items'] },
@@ -137,7 +137,7 @@ export async function handleCompletedCheckoutSession(event: Stripe.CheckoutSessi
       }),
     })
 
-    changeProductStateToSold(product.metadata.productId)
+    await changeProductStateToSold(product.metadata.productId)
     await savePayment(product.metadata.productId)
     await deleteCheckoutSession(product.metadata.productId)
   } catch (error) {}
