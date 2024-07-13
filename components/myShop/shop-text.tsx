@@ -22,6 +22,7 @@ export function ShopText({ title }: { title: string }) {
     fetchShopname()
   }, [title])
 
+  // Saves the changed text in the Database after 3500ms of no new input
   async function onInputChange(value: string) {
     setText(value)
     setTimeout(async () => {
