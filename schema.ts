@@ -223,8 +223,11 @@ export const messages = pgTable('messages', {
     .references(() => users.id)
     .notNull(),
   conversationId: text('conversationId')
-    .references(() => conversations.id)
+    .references(() => conversations.id, { onDelete: 'cascade' })
     .notNull(),
+  productId: text('productId')
+    .notNull()
+    .references(() => products.id, { onDelete: 'cascade' }),
   timestamp: timestamp('timestamp', { mode: 'date' }).notNull().defaultNow(),
   isSystemMessage: boolean('isSystemMessage').default(false).notNull(),
   wasRead: boolean('wasRead').default(false).notNull(),

@@ -21,6 +21,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
   const [timeInput, setTimeInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const { toast } = useToast()
+  const [warning, setWarning] = useState(false)
 
   const scrollToBottom = () => {
     const element = document.getElementById('testo')
@@ -71,7 +72,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
     }
 
     if (input === 'Wir haben einen Deal ✅') {
-      await createMessage('Juhu es gibt einen Deal!!!', user.id, conv.id, true)
+      await createMessage('Juhu es gibt einen Deal!!!', user.id, conv.id, true, conv.productId)
       await axios.post('/api/message', {
         content: input,
         convId: conv.id,
@@ -80,12 +81,8 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
       })
       handleFireworkClick()
     } else {
-      await createMessage(input, user.id, conv.id)
+      await createMessage(input, user.id, conv.id, false, conv.productId)
       await axios.post('/api/message', { content: input, convId: conv.id, senderId: user.id })
-      //maybe delete because to many mails are generated...
-      // await axios.post('/api/mail/accountVerified', {
-      //   to: .email,
-      // })
     }
 
     setInput('')
@@ -95,7 +92,8 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
 
   return (
     <div className="z-10 bg-background">
-      <div>
+      {warning ? <p className="text-red-500 bg-red-100 rounded-lg p-2 mb-2 text-sm">selbst geschriebene Nachrichten bitte vermeiden</p> : null}
+      <div className='mt-2'>
         {conv.sellerId === user.id ? (
           <div className="flex gap-2 max-sm:overflow-x-scroll">
             <Popover>
@@ -264,7 +262,15 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
           className="h-[50px] rounded-xl text-primary md:h-[64px]"
           placeholder="type a message..."
           value={input}
-          onChange={({ target }) => setInput(target.value)}
+          onChange={({ target }) => {
+            setInput(target.value)
+
+            if (target.value === '') {
+              setWarning(false)
+              return
+            }
+            setWarning(true)
+          }}
           type="text"
         />
 

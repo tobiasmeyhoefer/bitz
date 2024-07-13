@@ -30,7 +30,7 @@ export default async function LocaleLayout({
   params: { locale: string }
 }>) {
   return (
-    <html lang={locale} className=''>
+    <html lang={locale} className='' suppressHydrationWarning>
       <body
         className={cn(
           'min-h-svh overflow-x-hidden bg-background font-space_grotesk antialiased',

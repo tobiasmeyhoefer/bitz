@@ -17,137 +17,6 @@ export function generateRandomSixDigitNumber(): string {
   return randomSixDigitStr
 }
 
-export function convertPostcodeToCity(postcode: string): string {
-  switch (true) {
-    case postcode.startsWith('0'):
-      if (postcode.startsWith('04')) {
-        return 'Leipzig'
-      }
-      if (postcode.startsWith('01')) {
-        return 'Dresden'
-      }
-      return 'Deutschland'
-    case postcode.startsWith('1'):
-      if (postcode.startsWith('144')) {
-        return 'Potsdam'
-      }
-      if (postcode.startsWith('18')) {
-        return 'Rostock'
-      }
-      return 'Berlin'
-    case postcode.startsWith('2'):
-      if (postcode.startsWith('20') || postcode.startsWith('21') || postcode.startsWith('22')) {
-        return 'Hamburg'
-      }
-      if (postcode.startsWith('28')) {
-        return 'Bremen'
-      }
-      if (postcode.startsWith('24')) {
-        return 'Kiel'
-      }
-      return 'Deutschland'
-    case postcode.startsWith('3'):
-      if (postcode.startsWith('30')) {
-        return 'Hannover'
-      }
-      if (postcode.startsWith('33')) {
-        return 'Bielefeld'
-      }
-      if (postcode.startsWith('34')) {
-        return 'Kassel'
-      }
-      if (postcode.startsWith('39')) {
-        return 'Magdeburg'
-      }
-      return 'Deutschland'
-    case postcode.startsWith('4'):
-      if (postcode.startsWith('40')) {
-        return 'Düsseldorf'
-      }
-      if (postcode.startsWith('42')) {
-        return 'Wuppertal'
-      }
-      if (
-        postcode.startsWith('443') ||
-        postcode.startsWith('444') ||
-        postcode.startsWith('445') ||
-        postcode.startsWith('446')
-      ) {
-        return 'Dortmund'
-      }
-      if (postcode.startsWith('447') || postcode.startsWith('448') || postcode.startsWith('449')) {
-        return 'Bochum'
-      }
-      if (postcode.startsWith('45')) {
-        return 'Essen'
-      }
-      if (postcode.startsWith('47')) {
-        return 'Duisburg'
-      }
-      if (postcode.startsWith('48')) {
-        return 'Münster'
-      }
-      return 'Deutschland'
-    case postcode.startsWith('5'):
-      if (postcode.startsWith('50') || postcode.startsWith('51')) {
-        return 'Köln'
-      }
-      if (postcode.startsWith('52')) {
-        return 'Aachen'
-      }
-      if (postcode.startsWith('53')) {
-        return 'Bonn'
-      }
-      if (postcode.startsWith('55')) {
-        return 'Mainz'
-      }
-      return 'Deutschland'
-    case postcode.startsWith('6'):
-      if (postcode.startsWith('60')) {
-        return 'Frankfurt am Main'
-      }
-      if (postcode.startsWith('65')) {
-        return 'Wiesbaden'
-      }
-      if (postcode.startsWith('66')) {
-        return 'Saarbrücken'
-      }
-      if (postcode.startsWith('68')) {
-        return 'Mannheim'
-      }
-      return 'Deutschland'
-    case postcode.startsWith('7'):
-      if (postcode.startsWith('70')) {
-        return 'Stuttgart'
-      }
-      if (postcode.startsWith('76')) {
-        return 'Karlsruhe'
-      }
-      if (postcode.startsWith('79')) {
-        return 'Freiburg'
-      }
-      return 'Deutschland'
-    case postcode.startsWith('8'):
-      if (postcode.startsWith('80') || postcode.startsWith('81')) {
-        return 'München'
-      }
-      if (postcode.startsWith('86')) {
-        return 'Augsburg'
-      }
-      return 'Deutschland'
-    case postcode.startsWith('9'):
-      if (postcode.startsWith('90')) {
-        return 'Nürnberg'
-      }
-      if (postcode.startsWith('93')) {
-        return 'Regensburg'
-      }
-      return 'Deutschland'
-    default:
-      return 'Deutschland'
-  }
-}
-
 export function formatPhoneNumber(phoneNumber: string): string {
   // Entferne alle Leerzeichen
   const cleanedNumber = phoneNumber.replace(/\s+/g, '')
@@ -170,22 +39,37 @@ export function formatDateLong(date: Date): string {
 }
 
 export function formatDate(date: Date): string {
-  const daysOfWeek = [
-    'Sonntag',
-    'Montag',
-    'Dienstag',
-    'Mittwoch',
-    'Donnerstag',
-    'Freitag',
-    'Samstag',
-  ]
-  const dayOfWeek = daysOfWeek[date.getDay()]
-  const day = date.getDate().toString().padStart(2, '0')
-  const month = (date.getMonth() + 1).toString().padStart(2, '0')
+  const now = new Date()
+  const diffInMs = now.getTime() - date.getTime()
+  const diffInHours = diffInMs / (1000 * 60 * 60)
+  const diffInDays = diffInMs / (1000 * 60 * 60 * 24)
+
   const hours = date.getHours().toString().padStart(2, '0')
   const minutes = date.getMinutes().toString().padStart(2, '0')
 
-  return `${dayOfWeek}, ${day}.${month}. , ${hours}:${minutes}`
+  if (diffInHours < 24) {
+    // Innerhalb der letzten 24 Stunden: nur die Uhrzeit
+    return `${hours}:${minutes}`
+  } else if (diffInDays < 7) {
+    // Innerhalb der letzten 7 Tage: Wochentag + Zeit
+    const daysOfWeek = [
+      'Sonntag',
+      'Montag',
+      'Dienstag',
+      'Mittwoch',
+      'Donnerstag',
+      'Freitag',
+      'Samstag',
+    ]
+    const dayOfWeek = daysOfWeek[date.getDay()]
+    return `${dayOfWeek}`
+  } else {
+    // Älter: tt.mm.jjjj
+    const year = date.getFullYear()
+    const month = (date.getMonth() + 1).toString().padStart(2, '0')
+    const day = date.getDate().toString().padStart(2, '0')
+    return `${day}.${month}.${year}`
+  }
 }
 
 export function formatDateDMY(date: Date): string {

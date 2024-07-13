@@ -79,7 +79,7 @@ const PhoneVerification = ({ translations }: VerificationProps) => {
       await setVerifiedState()
       await deleteVerifactionNumber()
       const currentUser = await getUser()
-      await axios.post('/api/mail/accountVerified', {
+      await axios.post('https://bitztech.de/api/mail/accountVerified', {
         to: currentUser.email,
       })
       toast({
