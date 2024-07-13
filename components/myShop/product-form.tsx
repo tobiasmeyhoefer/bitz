@@ -386,7 +386,8 @@ export function ProductForm({
   }
 
   return (
-    <Card className="p-6 md:p-10">
+    <Card className="p-6 md:p-10 max-md:h-fit">
+      <h2 className='font-bold text-2xl mb-6'>Produkt hinzufügen</h2>
       {locationError && (
         <div className="mb-2 flex flex-row items-center gap-2">
           <p className="font-medium text-red-400">Error: Location not set</p>

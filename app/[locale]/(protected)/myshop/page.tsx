@@ -41,11 +41,12 @@ const MyShop = async () => {
         <MyShopContent />
       </div>
       <div className="">
+        {/* <div className='w-20 h-20 bg-green-300'></div> */}
         <Dialog>
           <DialogTrigger asChild>
             <Button className='fixed bottom-8 right-28 space-x-4'>{t('addProducts')}</Button>
           </DialogTrigger>
-          <DialogContent className= "w-full p-0 max-w-[800px] rounded-xl">
+          <DialogContent className= "w-full p-0 max-w-[800px] rounded-xl md:h-[800px] h-[600px] overflow-y-auto">
             <ProductForm
               submitText={t2('submitTitle')}
               whichFunction="add"
