@@ -68,7 +68,6 @@ export default function AddressChooserPopup(params: { translations: addressChoos
 
   function sendPlaceDetailsRequest(feature: any, geocoder: any) {
     setResult(feature)
-    console.log(feature)
     return geocoder.sendPlaceDetailsRequest(feature)
   }
 

@@ -2,6 +2,7 @@ import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { customAlphabet } from 'nanoid'
 
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
@@ -170,23 +171,39 @@ export function formatDateLong(date: Date): string {
 }
 
 export function formatDate(date: Date): string {
-  const daysOfWeek = [
-    'Sonntag',
-    'Montag',
-    'Dienstag',
-    'Mittwoch',
-    'Donnerstag',
-    'Freitag',
-    'Samstag',
-  ]
-  const dayOfWeek = daysOfWeek[date.getDay()]
-  const day = date.getDate().toString().padStart(2, '0')
-  const month = (date.getMonth() + 1).toString().padStart(2, '0')
+  const now = new Date()
+  const diffInMs = now.getTime() - date.getTime()
+  const diffInHours = diffInMs / (1000 * 60 * 60)
+  const diffInDays = diffInMs / (1000 * 60 * 60 * 24)
+
   const hours = date.getHours().toString().padStart(2, '0')
   const minutes = date.getMinutes().toString().padStart(2, '0')
 
-  return `${dayOfWeek}, ${day}.${month}. , ${hours}:${minutes}`
+  if (diffInHours < 24) {
+    // Innerhalb der letzten 24 Stunden: nur die Uhrzeit
+    return `${hours}:${minutes}`
+  } else if (diffInDays < 7) {
+    // Innerhalb der letzten 7 Tage: Wochentag + Zeit
+    const daysOfWeek = [
+      'Sonntag',
+      'Montag',
+      'Dienstag',
+      'Mittwoch',
+      'Donnerstag',
+      'Freitag',
+      'Samstag',
+    ]
+    const dayOfWeek = daysOfWeek[date.getDay()]
+    return `${dayOfWeek}`
+  } else {
+    // Älter: tt.mm.jjjj
+    const year = date.getFullYear()
+    const month = (date.getMonth() + 1).toString().padStart(2, '0')
+    const day = date.getDate().toString().padStart(2, '0')
+    return `${day}.${month}.${year}`
+  }
 }
+
 
 export function formatDateDMY(date: Date): string {
   const year = date.getFullYear()

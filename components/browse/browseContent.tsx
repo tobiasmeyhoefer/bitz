@@ -83,15 +83,16 @@ const BrowseContent = (props: BrowseContentProps) => {
   }, [])
 
   const loadMoreProducts = async () => {
-    setIsLoadingMore(true);
+    setIsLoadingMore(true)
     setShowLoadMoreButton(false)
     setTimeout(() => {
       setShowLoadMoreButton(true)
     }, 1000)
-    
-    const result = await getProductsBrowse(10, page * 10);
-    if (result.length < 4) { // Wert muss angepasst werden, je nach dem wie viele Produkte man mehr Laden moechte 
-      setHasMoreProducts(false);
+
+    const result = await getProductsBrowse(10, page * 10)
+    if (result.length < 4) {
+      // Wert muss angepasst werden, je nach dem wie viele Produkte man mehr Laden moechte
+      setHasMoreProducts(false)
     }
 
     setProducts((prevProducts) => [...prevProducts, ...result])
@@ -162,7 +163,7 @@ const BrowseContent = (props: BrowseContentProps) => {
             loadProductsByTitle={loadProductsByTitle}
             userId={userId}
           />
-          <div className="flex w-[440px] flex-row justify-between lg:w-auto lg:justify-normal">
+          <div className="flex w-full flex-row justify-around lg:w-auto lg:justify-normal">
             <SortProducts setProducts={setProducts} translations={props.sortTranslations} />
             <FilterProducts setProducts={setProducts} />
           </div>
@@ -186,8 +187,13 @@ const BrowseContent = (props: BrowseContentProps) => {
               {noSearchResults && <div className="px-4">Keine Suchergebnisse gefunden</div>}
             </div>
             {hasMoreProducts && showLoadMoreButton && (
-              <Button onClick={loadMoreProducts} disabled={isLoadingMore} variant='default' className='mt-4 mb-6'>
-              {isLoadingMore ? 'Loading...' : 'Load More'}
+              <Button
+                onClick={loadMoreProducts}
+                disabled={isLoadingMore}
+                variant="default"
+                className="mb-6 mt-4"
+              >
+                {isLoadingMore ? 'Loading...' : 'Load More'}
               </Button>
             )}
           </>

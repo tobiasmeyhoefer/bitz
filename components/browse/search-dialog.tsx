@@ -50,7 +50,6 @@ export const SearchDialog = (
 
   // Funktion für die Suhce mit Klick auf einem Vorschlag
   const handleSuggestionClick = (suggestion: string) => {
-    console.log(suggestion)
     setOpen(false)
     props.setSearchValue(suggestion)
 
