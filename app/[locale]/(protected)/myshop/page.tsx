@@ -44,15 +44,17 @@ const MyShop = async () => {
         {/* <div className='w-20 h-20 bg-green-300'></div> */}
         <Dialog>
           <DialogTrigger asChild>
-            <Button className='fixed bottom-8 right-28 space-x-4'>{t('addProducts')}</Button>
+            <Button className="fixed bottom-6 left-[calc(100vw-160px)] flex h-[60px] w-[60px] space-x-4 rounded-full text-3xl">
+              +
+            </Button>
           </DialogTrigger>
-          <DialogContent className= "w-full p-0 max-w-[800px] rounded-xl md:h-[800px] h-[600px] overflow-y-auto">
+          <DialogContent className="h-[600px] w-full max-w-[800px] overflow-y-auto rounded-xl p-0 md:h-[800px]">
             <ProductForm
               submitText={t2('submitTitle')}
               whichFunction="add"
               translations={translations}
             />
-            <DialogClose className='hidden' id='closeDialog'></DialogClose>
+            <DialogClose className="hidden" id="closeDialog"></DialogClose>
           </DialogContent>
         </Dialog>
       </div>
