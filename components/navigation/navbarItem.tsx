@@ -59,7 +59,7 @@ const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
       <DropdownMenuTrigger className="outline-none ">
         {props.userImgSrc ? (
           <Image
-            src={props.userImgSrc!} // TODO: {props?.userImgSrc as string}
+            src={props.userImgSrc!}
             width={40}
             height={40}
             className="rounded-full"
