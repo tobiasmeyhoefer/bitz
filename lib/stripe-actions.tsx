@@ -121,9 +121,15 @@ export async function handleCompletedCheckoutSession(event: Stripe.CheckoutSessi
     const lineItems = sessionWithLineItems.line_items
     if (!lineItems) return false
 
+    console.log("nach lineitems")
+
     const product = await stripe.products.retrieve(lineItems.data[0].price?.product as string)
+    console.log("metadata: " + product.metadata.productId)
     const dbProduct = await getProductById(product.metadata.productId)
     const seller = await getUserById(dbProduct.sellerId)
+
+    console.log("nach produkt geholt")
+    console.log(dbProduct)
 
     await fetch('/api/mail/productDirectlySold', {
       method: 'POST',
@@ -136,6 +142,8 @@ export async function handleCompletedCheckoutSession(event: Stripe.CheckoutSessi
         address: seller.adress
       }),
     })
+
+    console.log("nach email fetch")
 
     await changeProductStateToSold(product.metadata.productId)
     await savePayment(product.metadata.productId)
