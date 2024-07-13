@@ -117,7 +117,7 @@ const NavMenuDrawer = (props: NavMenuDrawerProps) => {
       <DrawerTrigger asChild>
         <Button
           onClick={() => setDrawerOpen(true)}
-          className="text-bg-primary-foreground h-fitbg-transparent p-0 shadow-none outline-none ring-0 hover:bg-transparent hover:text-primary-hover focus-visible:ring-0 "
+          className="text-bg-primary-foreground h-fit bg-transparent p-0 shadow-none outline-none ring-0 hover:bg-transparent hover:text-primary-hover focus-visible:ring-0 "
         >
           <TbMenu className="h-[30px] w-[40px] outline-none " />
         </Button>
