@@ -92,8 +92,12 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
 
   return (
     <div className="z-10 bg-background">
-      {warning ? <p className="text-red-500 bg-red-100 rounded-lg p-2 mb-2 text-sm">selbst geschriebene Nachrichten bitte vermeiden</p> : null}
-      <div className='mt-2'>
+      {warning ? (
+        <p className="mb-2 rounded-lg bg-red-100 p-2 text-sm text-red-500">
+          selbst geschriebene Nachrichten bitte vermeiden
+        </p>
+      ) : null}
+      <div className="mt-2">
         {conv.sellerId === user.id ? (
           <div className="flex gap-2 max-sm:overflow-x-scroll">
             <Popover>
@@ -104,7 +108,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
                 <h4 className="font-medium leading-none">Ort?</h4>
                 <PopoverClose>
                   <Button
-                    className="w-full"
+                    className="w-full bg-card-button"
                     onClick={() => setInput(`Du kannst das Bit hier abholen: ${user.adress} `)}
                     variant={'outline'}
                   >
@@ -122,7 +126,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
                 />
                 <PopoverClose>
                   <Button
-                    className="w-full"
+                    className="w-full bg-card-button"
                     onClick={() => setInput(`Du kannst das Bit hier abholen: ${locationInput}`)}
                     variant={'outline'}
                   >
@@ -148,7 +152,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
                 />
                 <PopoverClose>
                   <Button
-                    className="w-full"
+                    className="w-full bg-card-button"
                     onClick={() => setInput(`Ich habe ${timeInput} Zeit ✨`)}
                     variant={'outline'}
                   >
@@ -190,7 +194,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
                     </div>
                     <PopoverClose>
                       <Button
-                        className="w-full"
+                        className="w-full bg-card-button"
                         onClick={() =>
                           setInput(`Ich biete dir ${moneyInput} Euro. Haben wir einen Deal?`)
                         }
@@ -236,7 +240,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
                     </div>
                     <PopoverClose>
                       <Button
-                        className="w-full"
+                        className="w-full bg-card-button"
                         onClick={() => setInput(`Ich verspäte mich um ${delayInput} Minuten`)}
                         variant={'outline'}
                       >
@@ -259,7 +263,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
       </div>
       <form className="mt-2 flex gap-2">
         <Input
-          className="h-[50px] rounded-xl text-primary md:h-[64px]"
+          className="h-[50px] rounded-xl md:h-[64px]"
           placeholder="type a message..."
           value={input}
           onChange={({ target }) => {
