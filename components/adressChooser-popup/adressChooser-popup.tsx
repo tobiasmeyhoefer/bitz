@@ -38,7 +38,7 @@ export default function AddressChooserPopup(params: { translations: addressChoos
       .string()
       .min(3, { message: 'not enough Characters' })
       .max(50, { message: 'too much Characters' })
-      .refine((value) => /^[a-zA-Z0-9\s]+$/.test(value)),
+      .refine((value) => /^[a-zA-Z0-9\säöüÄÖÜß]+$/.test(value)), // allows no special characters
   })
 
   const form = useForm({
@@ -49,6 +49,7 @@ export default function AddressChooserPopup(params: { translations: addressChoos
   async function onSubmit(data: any) {
     if (result) {
       if (!result.properties.housenumber) {
+        //Case: if choosen address doesn't contain a housenumber
         setError(params.translations.housenumberError)
       } else {
         await saveUserAddress(result.properties.address_line1)
@@ -62,16 +63,18 @@ export default function AddressChooserPopup(params: { translations: addressChoos
         setProccessFinished(true)
       }
     } else {
+      //Case: if no suggested address was choosen
       setError(params.translations.addressError)
     }
   }
 
+  //is called everytime a suggested address is selected
   function sendPlaceDetailsRequest(feature: any, geocoder: any) {
     setResult(feature)
-    console.log(feature)
     return geocoder.sendPlaceDetailsRequest(feature)
   }
 
+  //is called everytime the input-value changes
   function sendGeocoderRequest(value: any, geocoder: any) {
     setValue(value)
     return geocoder.sendGeocoderRequest(value)
@@ -119,7 +122,7 @@ export default function AddressChooserPopup(params: { translations: addressChoos
                             addDetails={true}
                             sendPlaceDetailsRequestFunc={sendPlaceDetailsRequest}
                             allowNonVerifiedStreet={false}
-                            debounceDelay={10}
+                            debounceDelay={1}
                           />
                         </GeoapifyContext>
                       </FormControl>

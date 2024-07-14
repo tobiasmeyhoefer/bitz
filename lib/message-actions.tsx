@@ -5,8 +5,8 @@ import { messages } from "@/schema"
 import { and, asc, desc, eq, ne } from "drizzle-orm"
 import { getUser } from "./user-actions"
 
-export async function createMessage(content: string, senderId: string, conversationId: string, isSystemMessage: boolean = false) {
-    return await db.insert(messages).values({content: content, senderId: senderId, conversationId: conversationId, isSystemMessage: isSystemMessage}).returning()
+export async function createMessage(content: string, senderId: string, conversationId: string, isSystemMessage: boolean = false, productId: string) {
+    return await db.insert(messages).values({content: content, senderId: senderId, conversationId: conversationId, isSystemMessage: isSystemMessage, productId: productId}).returning()
 }
 
 export async function getExisitingMessages(convId: string) {

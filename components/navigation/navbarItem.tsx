@@ -59,7 +59,7 @@ const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
       <DropdownMenuTrigger className="outline-none ">
         {props.userImgSrc ? (
           <Image
-            src={props.userImgSrc!} // TODO: {props?.userImgSrc as string}
+            src={props.userImgSrc!}
             width={40}
             height={40}
             className="rounded-full"
@@ -68,7 +68,7 @@ const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
             onClick={() => setOpen(!open)}
           />
         ) : (
-          <FaUserCircle className="h-[45px] w-[45px]" color="gray" />
+          <FaUserCircle className="h-[45px] w-[45px]" color="gray" onClick={() => setOpen(!open)} />
         )}
       </DropdownMenuTrigger>
       <DropdownMenuContent onPointerDownOutside={() => setOpen(false)}>

@@ -159,7 +159,7 @@ export function ProductForm({
         setLocationErrorMessage('Location gotta be set.')
       } else if (!user.adress) {
         setLocationError(true)
-        setLocationErrorMessage('Adress gotta be set.')
+        setLocationErrorMessage('Address gotta be set.')
       }
     }
     getProduct()
@@ -386,8 +386,8 @@ export function ProductForm({
   }
 
   return (
-    <Card className="p-6 md:p-10 max-md:h-fit">
-      <h2 className='font-bold text-2xl mb-6'>Produkt hinzufügen</h2>
+    <Card className="p-6 max-md:h-fit md:p-10">
+      <h2 className="mb-6 text-2xl font-bold">Produkt hinzufügen</h2>
       {locationError && (
         <div className="mb-2 flex flex-row items-center gap-2">
           <p className="font-medium text-red-400">Error: Location not set</p>
@@ -551,11 +551,11 @@ export function ProductForm({
             </div>
           )}
           {isLoading ? (
-            <Button disabled className="mt-4" type="submit">
+            <Button disabled className="mt-4 max-md:mb-6" type="submit">
               {submitTitle}
             </Button>
           ) : (
-            <Button className="mt-4" type="submit">
+            <Button className="mt-4 max-md:mb-6" type="submit">
               {submitTitle}
             </Button>
           )}

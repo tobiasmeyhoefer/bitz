@@ -72,7 +72,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
     }
 
     if (input === 'Wir haben einen Deal ✅') {
-      await createMessage('Juhu es gibt einen Deal!!!', user.id, conv.id, true)
+      await createMessage('Juhu es gibt einen Deal!!!', user.id, conv.id, true, conv.productId)
       await axios.post('/api/message', {
         content: input,
         convId: conv.id,
@@ -81,7 +81,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
       })
       handleFireworkClick()
     } else {
-      await createMessage(input, user.id, conv.id)
+      await createMessage(input, user.id, conv.id, false, conv.productId)
       await axios.post('/api/message', { content: input, convId: conv.id, senderId: user.id })
     }
 

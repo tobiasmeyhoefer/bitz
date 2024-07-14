@@ -5,11 +5,7 @@ import { count, eq } from 'drizzle-orm'
 import { auth, signOut } from '@/auth'
 import { deleteImageOnAws, getProductsOwned } from './product-actions'
 import { revalidatePath } from 'next/cache'
-
-export async function saveUserNameLogin(name: string, email: string) {
-  const response = await db.select().from(users).where(eq(users.email, email))
-  await db.update(users).set({ name: name }).where(eq(users.id, response[0].id))
-}
+import axios from 'axios'
 
 export async function saveUserName(name: string) {
   const session = await auth()
