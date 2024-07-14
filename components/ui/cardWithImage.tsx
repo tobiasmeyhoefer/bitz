@@ -81,7 +81,7 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                           className="hidden font-semibold text-foreground md:block"
                           href={`/myshop/${product.sellerId}`}
                         >
-                          View Shop
+                          {props.viewTranslation}
                         </Link>
                       )}
                       <div className="md:text-md flex items-end text-right text-xs md:block">

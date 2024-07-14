@@ -2,18 +2,18 @@ import LoadingSkeletonBrowse from '@/components/fallbacks/browse-fallback'
 import { CardWithImage } from '@/components/ui/cardWithImage'
 import { getFavoriteProducts } from '@/lib/product-actions'
 import { ProductType } from '@/schema'
+import { getTranslations } from 'next-intl/server'
 import { Suspense } from 'react'
 
 const Favorites = async () => {
+  const t = await getTranslations('Favorites')
   const products: ProductType[] | undefined = await getFavoriteProducts()
 
   return (
     <>
-      <h1 className="mt-10 text-center font-montserrat text-3xl font-bold">FAVORITEN</h1>
+      <h1 className="mt-10 text-center font-montserrat text-3xl font-bold">{t('title')}</h1>
       {products?.length === 0 ? (
-        <p className="mt-6 text-center">
-          Du hast noch keine Favoriten. Du kannst welche hinzufügen indem du den like button drückst
-        </p>
+        <p className="mt-6 text-center">{t('noFavorites')}</p>
       ) : (
         <Suspense fallback={<LoadingSkeletonBrowse />}>
           <div
@@ -27,6 +27,7 @@ const Favorites = async () => {
                   product={products[index]}
                   favIcon
                   editable={false}
+                  viewTranslation={t('viewShop')}
                 />
               ))}
             </div>

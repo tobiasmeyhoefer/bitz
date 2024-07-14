@@ -98,9 +98,6 @@ const CardWithImageMyShop = React.forwardRef<HTMLDivElement, CardWithImageProps>
                       <div className="md:text-md flex items-end text-right text-xs md:block">
                         {formatDate(product.createdAt)}
                       </div>
-                      <div className="md:text-md flex items-end text-right text-xs md:hidden">
-                        {formatDateDMY(product.createdAt)}
-                      </div>
                     </div>
                   </div>
                   {props.editable && props.favIcon && (

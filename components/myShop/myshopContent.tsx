@@ -25,6 +25,7 @@ const MyShopContent = async () => {
               className="mx-[5px] my-[0.5rem]"
               product={p}
               editable
+              viewTranslation={t('viewShop')}
             />
             // </AnimatedCard>
           ))}

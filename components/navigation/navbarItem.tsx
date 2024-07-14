@@ -90,7 +90,7 @@ const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
         <DropdownMenuItem className="p-0" onClick={() => setOpen(false)}>
           <NavItemLink
             className="px-3 py-2 text-left text-sm no-underline hover:no-underline"
-            text="Transaktionen"
+            text={props.transactionsLinkText}
             linkTo="/transactions"
           ></NavItemLink>
         </DropdownMenuItem>

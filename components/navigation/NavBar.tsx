@@ -41,13 +41,13 @@ const NavBar = async () => {
       key={'dil-4'}
       className="w-full py-4 text-center text-2xl hover:no-underline"
       linkTo="/transactions"
-      text="Transaktionen"
+      text={t('transactions')}
     ></NavItemLink>,
     <NavItemLink
       key={'dil-4'}
       className="w-full py-4 text-center text-2xl hover:no-underline"
       linkTo="/conversations"
-      text="Konversationen"
+      text={t('conversations')}
     ></NavItemLink>,
     <NavItemLink
       key={'dil-4'}
@@ -83,6 +83,7 @@ const NavBar = async () => {
               }
               settingsLinkText={t('settings')}
               favoritesLinkText={t('favorites')}
+              transactionsLinkText={t('transactions')}
             />
           </div>
           <div className="block md:hidden">

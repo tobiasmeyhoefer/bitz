@@ -96,7 +96,15 @@
     "addressError": "Error, please select an address",
     "housenumberError": "Error,please also add your housenumber",
     "SuccessToast": "personals succesfully set ✅",
-    "submit": "submit"
+    "submit": "submit",
+    "category": "category",
+    "location": "location",
+    "howtobuy": "how to buy?",
+    "chooseCategory": "choose Category",
+    "chooseLocation": "choose Location",
+    "buyable": "is directly buyable",
+    "delete": "delete filter",
+    "viewShop": "view Shop"
   },
 
   "Search": {
@@ -109,13 +117,15 @@
     "addProducts": "add Bit",
     "updateProducts": "update Bit",
     "deleteProduct": "delete Bit",
-    "sold": "Sold!"
+    "sold": "Sold!",
+    "viewShop": "view Shop"
   },
 
   "Product": {
     "quantity": "Quantity",
     "image": "Image",
     "of": "of",
+    "viewShop": "view Shop",
     "updateImage": {
       "title": "Product Picture",
       "description": "Edit this picture",
@@ -198,7 +208,8 @@
     "search": "Search",
     "profile": "my profile",
     "settings": "Settings",
-    "favorites": "Favorites"
+    "favorites": "Favorites",
+    "transactions": "Transactions"
   },
 
   "LoginForm": {
@@ -236,5 +247,11 @@
 
   "Transactions": {
     "title": "TRANSACTIONS"
+  },
+
+  "Favorites": {
+    "title": "FAVORITES",
+    "noFavorites": "You have no favorites yet. You can add some by pressing the like button on products.",
+    "viewShop": "view Shop"
   }
 }

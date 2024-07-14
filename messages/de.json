@@ -96,7 +96,15 @@
     "addressError": "Error, bitte wähle eine Adresse aus",
     "housenumberError": "Error, bitte gib deine Hausnummer mit an",
     "SuccessToast": "Personalien erfolgreich gesetzt ✅",
-    "submit": "Absenden"
+    "submit": "Absenden",
+    "category": "Kategorie",
+    "location": "Ort",
+    "howtobuy": "Wie wird verkauft?",
+    "chooseCategory": "Kategorie wählen",
+    "chooseLocation": "Ort wählen",
+    "buyable": "direkt kaufbar",
+    "delete": "Filter löschen",
+    "viewShop": "zum Shop"
   },
 
   "Search": {
@@ -109,13 +117,15 @@
     "addProducts": "Bit hinzufügen",
     "updateProducts": "Bit aktualisieren",
     "deleteProduct": "Bit löschen",
-    "sold": "Verkauft!"
+    "sold": "Verkauft!",
+    "viewShop": "view Shop"
   },
 
   "Product": {
     "quantity": "Häufigkeit",
     "image": "Bild",
     "of": "von",
+    "viewShop": "zum Shop",
     "updateImage": {
       "title": "Produktbild",
       "description": "Bearbeite dieses Bild",
@@ -198,7 +208,8 @@
     "search": "Suchen",
     "profile": "Profil vewalten",
     "settings": "Einstellungen",
-    "favorites": "Favoriten"
+    "favorites": "Favoriten",
+    "transactions": "Transaktionen"
   },
 
   "LoginForm": {
@@ -235,6 +246,12 @@
   },
 
   "Transactions": {
-    "title": "Transaktionen"
+    "title": "TRANSAKTIONEN"
+  },
+
+  "Favorites": {
+    "title": "FAVORITEN",
+    "noFavorites": "Du hast noch keine Favoriten. Du kannst welche hinzufügen indem du den like button auf Produkten drückst",
+    "viewShop": "zum Shop"
   }
 }

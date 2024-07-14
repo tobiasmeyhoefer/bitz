@@ -6,9 +6,11 @@ import { useEffect, useState } from 'react'
 import { CardWithImage } from '../ui/cardWithImage'
 import { SortProducts } from '../sort-products/sort-products'
 import { SortProductsProps } from '@/lib/types'
+import { useTranslations } from 'next-intl'
 
 const ShopContent = (params: { id: string; translation: SortProductsProps }) => {
   const [products, setProducts] = useState<ProductType[]>([])
+  const t = useTranslations('MyShop')
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -35,6 +37,7 @@ const ShopContent = (params: { id: string; translation: SortProductsProps }) => 
             className="mx-[5px] my-[0.5rem]"
             product={p}
             editable={false}
+            viewTranslation={t('viewShop')}
           />
           // </AnimatedCard>
         ))}

@@ -14,6 +14,7 @@ type NavbarItemDropdownProps = {
   signOutLinkText?: string
   settingsLinkText?: string
   favoritesLinkText?: string
+  transactionsLinkText?: string
 }
 
 type NavMenuDrawerProps = {
@@ -30,6 +31,7 @@ type CardWithImageProps = {
   shopID?: string
   product: ProductType
   editable: boolean
+  viewTranslation: string
 }
 // type User = {
 //   userId: string
@@ -56,6 +58,17 @@ type SortProductsProps = {
   sortBy: string
   date: string
   price: string
+}
+
+type FilterProductsProps = {
+  category: string
+  location: string
+  howtobuy: string
+  price: string
+  chooseCategory: string
+  chooseLocation: string
+  buyable: string
+  delete: string
 }
 
 type addressChooserTranslations = {
@@ -88,7 +101,9 @@ type FormTranslations = {
 type BrowseContentProps = {
   searchTranslations: SearchTranslations
   sortTranslations: SortProductsProps
+  filterTranslations: FilterProductsProps
   addressChooserTranslations: addressChooserTranslations
+  viewTranslations: string
 }
 
 // type ProductType = {
@@ -146,6 +161,7 @@ export type {
   CardWithImageProps,
   SearchBarProps,
   SortProductsProps,
+  FilterProductsProps,
   addressChooserTranslations,
   SearchTranslations,
   BrowseContentProps,

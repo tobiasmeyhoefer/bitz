@@ -25,9 +25,11 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { SetStateAction } from 'react'
 import { ProductType } from '@/schema'
 import { largestGermanCities, suggestions } from '@/lib/utils'
+import { FilterProductsProps } from '@/lib/types'
 
 export const FilterProducts = (props: {
   setProducts: (value: SetStateAction<ProductType[]>) => void
+  translations: FilterProductsProps
 }) => {
   const [highestPrice, sethighestPrice] = useState(0)
   const [open, setOpen] = useState(false)
@@ -91,7 +93,9 @@ export const FilterProducts = (props: {
         <PopoverContent className="w-[23.5rem] bg-card">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6">
-              <FormLabel className=" text-base font-semibold">Category</FormLabel>
+              <FormLabel className=" text-base font-semibold">
+                {props.translations.category}
+              </FormLabel>
               <hr className="my-[-14px]" />
               <FormField
                 control={form.control}
@@ -105,7 +109,7 @@ export const FilterProducts = (props: {
                         defaultValue={isEdited ? selectedCategory : undefined}
                       >
                         <SelectTrigger className="w-48 rounded-2xl py-5">
-                          <SelectValue placeholder="choose Category" />
+                          <SelectValue placeholder={props.translations.chooseCategory} />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectGroup>
@@ -121,7 +125,9 @@ export const FilterProducts = (props: {
                   </FormItem>
                 )}
               />
-              <FormLabel className=" text-base font-semibold">Location</FormLabel>
+              <FormLabel className=" text-base font-semibold">
+                {props.translations.location}
+              </FormLabel>
               <hr className="my-[-14px]" />
               <FormField
                 control={form.control}
@@ -135,7 +141,7 @@ export const FilterProducts = (props: {
                         defaultValue={isEdited ? selectedLocation : undefined}
                       >
                         <SelectTrigger className="w-48 rounded-2xl py-5">
-                          <SelectValue placeholder="choose Location" />
+                          <SelectValue placeholder={props.translations.chooseLocation} />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectGroup>
@@ -151,7 +157,9 @@ export const FilterProducts = (props: {
                   </FormItem>
                 )}
               />
-              <FormLabel className="text-base font-semibold">how to buy?</FormLabel>
+              <FormLabel className="text-base font-semibold">
+                {props.translations.howtobuy}
+              </FormLabel>
               <hr className="my-[-14px]" />
               <FormField
                 control={form.control}
@@ -166,12 +174,12 @@ export const FilterProducts = (props: {
                         onCheckedChange={field.onChange}
                       />
                     </FormControl>
-                    <FormLabel>is directly buyable</FormLabel>
+                    <FormLabel>{props.translations.buyable}</FormLabel>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <FormLabel className="text-base font-semibold">Price</FormLabel>
+              <FormLabel className="text-base font-semibold">{props.translations.price}</FormLabel>
               <hr className="my-[-14px]" />
 
               <FormField
@@ -179,7 +187,7 @@ export const FilterProducts = (props: {
                 name="price"
                 render={({ field: { value, onChange } }) => (
                   <FormItem>
-                    <FormLabel>{'Max. Price: ' + value}</FormLabel>
+                    <FormLabel>{'Max.' + props.translations.price + ': ' + value}</FormLabel>
                     <FormControl>
                       {isEdited ? (
                         <Slider
@@ -215,7 +223,7 @@ export const FilterProducts = (props: {
                   type="button"
                   variant={'secondary'}
                 >
-                  delete filter
+                  {props.translations.delete}
                 </Button>
               </div>
             </form>

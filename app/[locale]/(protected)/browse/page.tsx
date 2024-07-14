@@ -24,12 +24,25 @@ const Browse = () => {
     submit: t('submit'),
   }
 
+  const filterTranslations = {
+    category: t('category'),
+    location: t('location'),
+    howtobuy: t('howtobuy'),
+    price: t('price'),
+    chooseCategory: t('chooseCategory'),
+    chooseLocation: t('chooseLocation'),
+    buyable: t('buyable'),
+    delete: t('delete'),
+  }
+
   return (
     <Suspense fallback={<LoadingSkeletonBrowse />}>
       <BrowseContent
         searchTranslations={searchTranslations}
         sortTranslations={sortTranslations}
         addressChooserTranslations={addressChooserTranslations}
+        filterTranslations={filterTranslations}
+        viewTranslations={t('viewShop')}
       />
     </Suspense>
   )

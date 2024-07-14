@@ -75,7 +75,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                 'fixed right-8 top-24 font-semibold md:right-14 lg:right-8 lg:top-36 xl:right-24 2xl:right-28 2xl:top-40'
               }
             >
-              View Shop
+              {t('viewShop')}
             </Button>
           </Link>
         )}

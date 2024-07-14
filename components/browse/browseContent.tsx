@@ -166,7 +166,7 @@ const BrowseContent = (props: BrowseContentProps) => {
           />
           <div className="flex w-full flex-row justify-around lg:w-auto lg:justify-normal">
             <SortProducts setProducts={setProducts} translations={props.sortTranslations} />
-            <FilterProducts setProducts={setProducts} />
+            <FilterProducts setProducts={setProducts} translations={props.filterTranslations} />
           </div>
         </div>
         {!loading ? (
@@ -181,6 +181,7 @@ const BrowseContent = (props: BrowseContentProps) => {
                       product={products[index]}
                       favIcon
                       editable={false}
+                      viewTranslation={props.viewTranslations}
                     />
                   </AnimatedCard>
                 </div>
@@ -199,7 +200,7 @@ const BrowseContent = (props: BrowseContentProps) => {
             )}
           </>
         ) : (
-          <LoadingSkeletonBrowse/>
+          <LoadingSkeletonBrowse />
         )}
       </div>
     </>
