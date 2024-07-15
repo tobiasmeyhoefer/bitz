@@ -17,7 +17,13 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
       <>
         {props && product && (
           <CardContainer>
-            <Card className={cn(`w-[160px] md:w-[200px] lg:w-[240px]`, className)} ref={ref}>
+            <Card
+              className={cn(
+                `w-[calc(90svw/2)] max-w-[calc(1420px/6)] sm:w-[calc(90svw/3)] md:w-[calc(90svw/4)] lg:w-[calc(90svw/5)]`,
+                className,
+              )}
+              ref={ref}
+            >
               <Link href={`/product/${product.id}`}>
                 {product.imageUrl1 ? (
                   <Image
