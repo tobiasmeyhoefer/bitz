@@ -154,14 +154,14 @@ export default function ProductInfoCardEditable(props: {
         <div className=" w-[90vw] lg:h-[70vh] lg:w-[50vw]">
           <Card className="mt-2 flex h-full flex-col justify-between lg:mt-0 lg:h-[70vh]">
             <div>
-              <CardHeader className="flex h-[20%] flex-row items-center justify-between">
+              <CardHeader className="flex flex-row items-center justify-between">
                 <CardTitle className="">{product.title}</CardTitle>
                 <CardTitle className="!mt-0 w-1/4 text-right text-2xl md:text-3xl">
                   {product.price}€
                 </CardTitle>
               </CardHeader>
               <Separator />
-              <CardContent className="flex flex-col justify-between p-6 ">
+              <CardContent className="flex min-h-[80%] flex-col justify-between p-6">
                 <div className="h-fit break-words text-sm">{product.description}</div>
               </CardContent>
             </div>

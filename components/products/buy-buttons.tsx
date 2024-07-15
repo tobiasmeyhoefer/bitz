@@ -92,21 +92,21 @@ export function BuyButtons(props: { product: ProductType }) {
   }
 
   return (
-    <>
+    <div className="mt-6 flex w-full justify-end">
       {disabled ? (
-        <Button disabled onClick={handleBuyClick} type="submit" className="fixed bottom-8 right-28">
+        <Button disabled onClick={handleBuyClick} type="submit">
           Kaufen
         </Button>
       ) : (
-        <Button onClick={handleBuyClick} type="submit" className="fixed bottom-8 right-28">
+        <Button onClick={handleBuyClick} type="submit">
           Kaufen
         </Button>
       )}
       {product?.isDirectlyBuyable ? (
-        <Button onClick={handleDirectBuyClick} className="fixed bottom-8 right-52" type="submit">
+        <Button onClick={handleDirectBuyClick} className="ml-2" type="submit">
           Direkt Kaufen
         </Button>
       ) : null}
-    </>
+    </div>
   )
 }

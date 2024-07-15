@@ -44,7 +44,7 @@ export default async function LocaleLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className='flex justify-center'>
+          <div className="flex justify-center">
             <header className="w-screen md:max-w-[1420px]">
               <NavBar />
             </header>

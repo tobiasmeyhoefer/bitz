@@ -42,10 +42,27 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <div className="flex flex-col">
+      <div className="mb-16 flex flex-col px-4 sm:px-10 md:mb-0 md:px-[20px] lg:px-[30px] xl:px-[80px]">
+        <div className="flex w-full justify-between">
+          <Link href={backButtonHref} className="w-2">
+            <Button
+              variant="outline"
+              className={isOwner ? 'top-[80px]' : ' top-[80px] font-semibold'}
+            >
+              ⏎
+            </Button>
+          </Link>
+          {!isOwner && (
+            <Link href={`/myshop/${product.sellerId}`}>
+              <Button variant="outline" className={'top-[80px]'}>
+                {t('viewShop')}
+              </Button>
+            </Link>
+          )}
+        </div>
         <div
           id="product-info-container"
-          className="mb-16 mt-[5vh] flex w-screen max-w-full flex-col items-center px-4 sm:px-10 md:mb-0 md:px-[20px] lg:flex-row lg:items-start lg:justify-around lg:gap-10 lg:px-[30px] xl:px-[80px]"
+          className="mb-16 mt-2 flex flex-col items-center md:mb-0 md:mt-[5vh] lg:flex-row lg:items-start lg:justify-between lg:gap-6 "
         >
           <ProductImageCarousel
             translations={carouselTranslations}
@@ -55,30 +72,6 @@ export default async function Page({ params }: { params: { id: string } }) {
           />
           <ProductInfoCard productInfo={product} isOwner={isOwner} />
         </div>
-        <Link href={backButtonHref} className="w-2">
-          <Button
-            variant="outline"
-            className={
-              isOwner
-                ? 'fixed left-4 top-[80px] sm:left-10 md:left-[20px] lg:left-[30px] xl:left-[80px]'
-                : 'fixed left-4 top-[80px] font-semibold sm:left-10 md:left-[20px] lg:left-[30px] xl:left-[80px]'
-            }
-          >
-            ⏎
-          </Button>
-        </Link>
-        {!isOwner && (
-          <Link href={`/myshop/${product.sellerId}`}>
-            <Button
-              variant="outline"
-              className={
-                'fixed right-4 top-[80px]  top-[80px] font-semibold sm:right-10 md:right-[20px] lg:right-[30px] xl:right-[80px] '
-              }
-            >
-              {t('viewShop')}
-            </Button>
-          </Link>
-        )}
       </div>
     </>
   )
