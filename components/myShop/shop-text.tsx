@@ -2,7 +2,7 @@
 import { Input } from '@/components/ui/input'
 import { useEffect, useState } from 'react'
 import { getShopName, getShopTextColor, getShopTextFont, setShopName } from '@/lib/user-actions'
-import { ChooseFontcolor } from './choose-fontcolor'
+import { ChooseFontcolor } from './choose-font-color'
 import { ChooseFont } from './choose-font'
 
 export function ShopText({ title }: { title: string }) {
