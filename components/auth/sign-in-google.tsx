@@ -1,7 +1,6 @@
 import { signIn } from '@/auth'
 import { Button } from '../ui/button'
 import { FcGoogle } from 'react-icons/fc'
-import { useTranslations } from 'next-intl'
 
 export function SignInGoogle() {
   return (
