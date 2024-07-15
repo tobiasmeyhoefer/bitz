@@ -11,6 +11,8 @@ import { getTranslations } from 'next-intl/server'
 
 export default async function Page({ params }: { params: { id: string } }) {
   const t = await getTranslations('Browse')
+  const tshop = await getTranslations('MyShop')
+
   const sortTranslations = {
     sortBy: t('sortby'),
     date: t('date'),
@@ -59,7 +61,11 @@ export default async function Page({ params }: { params: { id: string } }) {
         </div>
       </div>
       <div className="absolute right-1/2 mt-4 translate-x-1/2"></div>
-      <ShopContent id={params.id} translation={sortTranslations} />
+      <ShopContent
+        viewTranslation={tshop('viewShop')}
+        id={params.id}
+        translation={sortTranslations}
+      />
     </>
   )
 }

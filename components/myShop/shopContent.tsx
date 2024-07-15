@@ -6,11 +6,13 @@ import { useEffect, useState } from 'react'
 import { CardWithImage } from '../ui/cardWithImage'
 import { SortProducts } from '../sort-products/sort-products'
 import { SortProductsProps } from '@/lib/types'
-import { useTranslations } from 'next-intl'
 
-const ShopContent = (params: { id: string; translation: SortProductsProps }) => {
+const ShopContent = (params: {
+  id: string
+  translation: SortProductsProps
+  viewTranslation: string
+}) => {
   const [products, setProducts] = useState<ProductType[]>([])
-  const t = useTranslations('MyShop')
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -29,7 +31,7 @@ const ShopContent = (params: { id: string; translation: SortProductsProps }) => 
         setProducts={setProducts}
         translations={params.translation}
       />
-      <div className="mx-2 mt-6 flex flex-wrap justify-around overflow-y-hidden">
+      <div className="mt-[20px] grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4  lg:grid-cols-4 2xl:grid-cols-5 ">
         {products?.map((p, index) => (
           // <AnimatedCard  delay={0.3} >
           <CardWithImage
@@ -37,7 +39,7 @@ const ShopContent = (params: { id: string; translation: SortProductsProps }) => 
             className="mx-[5px] my-[0.5rem]"
             product={p}
             editable={false}
-            viewTranslation={t('viewShop')}
+            viewTranslation={params.viewTranslation}
           />
           // </AnimatedCard>
         ))}
