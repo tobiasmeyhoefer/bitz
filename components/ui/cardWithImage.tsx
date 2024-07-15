@@ -2,12 +2,11 @@ import * as React from 'react'
 import Image from 'next/image'
 
 import { CardWithImageProps } from '@/lib/types'
-import { cn, formatDate, formatDateDMY } from '@/lib/utils'
+import { cn, formatDate } from '@/lib/utils'
 import { Link } from '@/navigation'
 import { Card, CardHeader, CardTitle, CardDescription } from './card'
 import FavoriteLike from '../favorites/favoriteLike'
 import { Badge } from './badge'
-import { FaLocationDot } from 'react-icons/fa6'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { CardContainer } from './3d-card'
 
@@ -16,11 +15,11 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
     const product = props.product
     return (
       <>
-        {props && product ? (
+        {props && product && (
           <CardContainer>
             <Card className={cn(`w-[160px] md:w-[200px] lg:w-[240px]`, className)} ref={ref}>
               <Link href={`/product/${product.id}`}>
-                {product.imageUrl1 !== undefined ? (
+                {product.imageUrl1 ? (
                   <Image
                     src={product.imageUrl1 as string}
                     width={300}
@@ -70,31 +69,29 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                       {props.product.price}€
                     </div>
                   </div>
-
+                  {!props.editable && props.favIcon && (
+                    <Link
+                      className="hidden text-right font-semibold text-foreground md:block"
+                      href={`/myshop/${product.sellerId}`}
+                    >
+                      {props.viewTranslation}
+                    </Link>
+                  )}
                   <div className="mt-2 flex justify-between">
-                    <div className="md:text-md flex flex-nowrap items-end whitespace-nowrap text-right text-xs">
+                    <div className="md:text-md hidden flex-nowrap items-end whitespace-nowrap text-right text-xs md:flex">
                       {props.product.location}
                     </div>
-                    <div className="text-right">
-                      {!props.editable && props.favIcon && (
-                        <Link
-                          className="hidden font-semibold text-foreground md:block"
-                          href={`/myshop/${product.sellerId}`}
-                        >
-                          {props.viewTranslation}
-                        </Link>
-                      )}
-                      <div className="md:text-md flex items-end text-right text-xs md:block">
-                        {formatDate(product.createdAt)}
-                      </div>
+                    <div className="md:text-md flex flex-nowrap items-end whitespace-nowrap text-right text-xs md:hidden">
+                      {props.product.location?.split(' ').slice(1)}
+                    </div>
+                    <div className=" md:text-md flex items-end text-right text-right text-xs md:block">
+                      {formatDate(product.createdAt)}
                     </div>
                   </div>
                 </CardDescription>
               </CardHeader>
             </Card>
           </CardContainer>
-        ) : (
-          <></>
         )}
       </>
     )
