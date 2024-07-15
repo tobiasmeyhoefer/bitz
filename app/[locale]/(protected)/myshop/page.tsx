@@ -1,5 +1,4 @@
 import { Button } from '@/components/ui/button'
-import { Link } from '@/navigation'
 import MyShopContent from '@/components/myShop/myshopContent'
 import { getTranslations } from 'next-intl/server'
 import Banner from '@/components/myShop/banner'
@@ -7,14 +6,8 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { ProductForm } from '@/components/myShop/product-form'
 
 const MyShop = async () => {
@@ -41,7 +34,6 @@ const MyShop = async () => {
         <MyShopContent />
       </div>
       <div className="">
-        {/* <div className='w-20 h-20 bg-green-300'></div> */}
         <Dialog>
           <DialogTrigger asChild>
             <Button className="fixed bottom-6 left-[calc(100vw-160px)] flex h-[60px] w-[60px] space-x-4 rounded-full text-3xl">

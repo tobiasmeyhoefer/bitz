@@ -113,7 +113,7 @@
 
   "MyShop": {
     "title": "MEINE BITZ",
-    "noBitz": "Du hast noch keine Bitz hinzugefügt.",
+    "noBitz": "Du hast noch keine Bitz hinzugefügt. Klicke auf das + um das zu tun!",
     "addProducts": "Bit hinzufügen",
     "updateProducts": "Bit aktualisieren",
     "deleteProduct": "Bit löschen",
@@ -182,9 +182,9 @@
     "theme": "Farbschema",
     "changeNow": "annehmen",
     "Verification": {
-      "notVerified": "Dein Account ist noch nicht verifiziert!",
+      "notVerified": "Dein Account ist noch nicht verifiziert",
       "verificationAborted": "Verifizierung abgebrochen",
-      "verified": "Dein Account ist verifiziert.",
+      "verified": "Dein Account ist verifiziert",
       "wrongNumber": "Falsche Nummer!",
       "verifyNow": "Jetzt verifizieren!",
       "typeInNumber": "Gib deine Telefonnummer ein!",

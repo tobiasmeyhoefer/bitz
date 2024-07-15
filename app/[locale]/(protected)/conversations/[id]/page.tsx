@@ -5,7 +5,6 @@ import { getConversationById } from '@/lib/conversations-actions'
 import { getExisitingMessages } from '@/lib/message-actions'
 import { getProductById } from '@/lib/product-actions'
 import { getUser, getUserById } from '@/lib/user-actions'
-import { Link } from '@/navigation'
 import { revalidatePath } from 'next/cache'
 import { redirect } from '@/navigation'
 
@@ -44,11 +43,9 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <div className="h-full">
       <div className="mx-4 flex h-[80px] items-center gap-10 lg:mx-10">
-        {/* <Link href={`/conversations`}> */}
         <form action={navigateBack}>
           <Button type="submit">back</Button>
         </form>
-        {/* </Link> */}
         <h2 className="text-sm font-bold md:text-2xl">
           Chat with {user.id === seller.id ? buyer.name : seller.name} about {product.title}
         </h2>

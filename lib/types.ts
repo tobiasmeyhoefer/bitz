@@ -33,13 +33,6 @@ type CardWithImageProps = {
   editable: boolean
   viewTranslation: string
 }
-// type User = {
-//   userId: string
-// }
-
-// type UserId = {
-//   id: string
-// }
 
 type MyShopProps = {
   userId: string
@@ -106,26 +99,6 @@ type BrowseContentProps = {
   viewTranslations: string
 }
 
-// type ProductType = {
-//   id?: string
-//   title: string
-//   description: string | null
-//   location?: string | null
-//   price: number
-//   category?: string
-//   createdAt?: Date
-//   sellerId?: string
-//   imageUrl1?: string | null
-//   imageUrl2?: string | null
-//   imageUrl3?: string | null
-//   imageUrl4?: string | null
-//   imageUrl5?: string | null
-//   isDirectlyBuyable?: boolean
-//   isSold?: boolean
-//   stripeId?: string
-//   paymentLink?: string
-// }
-
 type ProdDelAlert = {
   productId: string
 }
@@ -166,10 +139,7 @@ export type {
   SearchTranslations,
   BrowseContentProps,
   RevealOnScrollProps,
-  // ProductType,
   FormTranslations,
-  // User,
-  // UserId,
   MyShopProps,
   ProdDelAlert,
   Shop,

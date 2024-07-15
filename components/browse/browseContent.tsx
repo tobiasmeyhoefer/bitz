@@ -147,11 +147,10 @@ const BrowseContent = (props: BrowseContentProps) => {
       ) : (
         <OnboardingBrowseCard />
       )}
-      {/* <OnboardingBrowseCard />  HIER FIX */}
       <div
         className={`${loading && `h-full`} flex w-full flex-col items-center justify-center  px-4 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
       >
-        <div className="flex w-full flex-col items-center justify-center gap-6 lg:flex-row">
+        <div className="flex w-full flex-col items-center justify-between gap-6 lg:flex-row">
           <SearchDialog
             placeholder={
               searchValue.length > 0 ? searchValue : props.searchTranslations.searchPlaceholder

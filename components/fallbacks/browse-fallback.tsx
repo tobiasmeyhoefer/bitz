@@ -2,52 +2,1020 @@ import { Skeleton, SVGSkeleton } from '@/components/ui/skeleton'
 
 const LoadingSkeleton = () => (
   <>
-    <div className="-mx-2 mt-[20px] flex flex-wrap justify-around overflow-y-hidden">
-      <div>
+    <div className="flex w-full flex-col items-center justify-center px-4 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]">
+      <div className="flex w-full flex-col items-center justify-center gap-6 lg:flex-row">
+        <div className="top-[20px] flex h-14 w-full border border-input px-3 py-1 shadow-sm transition-colors file:border-0 md:w-2/3">
+          <Skeleton className="w-[136px] max-w-full" />
+        </div>
+        <div className="flex w-full flex-row justify-around lg:w-auto lg:justify-normal">
+          <div className="flex flex-row items-center gap-1">
+            <div>
+              <Skeleton className="w-[120px] max-w-full" />
+            </div>
+            <div className="[&amp;>span]:line-clamp-1 flex h-9 w-[5.4rem] items-center justify-between border-0 border-input px-3 py-2 shadow-none">
+              <span>
+                <Skeleton className="w-[40px] max-w-full" />
+              </span>
+              <SVGSkeleton className="h-[15px] w-[15px]" />
+            </div>
+          </div>
+          <div className="inline-flex h-9 items-center justify-center border border-input px-4 py-2 shadow-sm transition-colors">
+            <Skeleton className="w-[48px] max-w-full" />
+          </div>
+        </div>
+      </div>
+      <div className="mt-[20px] grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 2xl:grid-cols-5">
         <div>
-          <div className="flex items-center justify-center">
-            <div className="relative flex items-center justify-center">
-              <div className="absolute right-0 top-0 m-2"></div>
-              <div className="border w-[150px] md:w-[200px] lg:w-[300px] mx-[5px] my-[0.5rem]">
-                <a>
-                  <SVGSkeleton className="rounded-t-xl w-[300px] h-[300px]" />
-                </a>
-                <div className="flex flex-col space-y-1.5 p-3">
-                  <div className="flex max-w-full justify-between">
-                    <div className="max-w-[calc(100%-36px)]">
-                      <h3 className="tracking-tight align-middle">
-                        <Skeleton className="w-[56px] max-w-full" />
-                      </h3>
-                    </div>
-                    <form>
-                      <div className="items-center transition-colors h-9 w-9 flex justify-end">
-                        <SVGSkeleton className="w-[20px] h-[20px]" />
+          <div>
+            <div className="flex items-center justify-center">
+              <div className="relative flex items-center justify-center">
+                <div className="mx-auto w-[160px] border md:w-[200px] lg:w-[240px]">
+                  <a>
+                    <SVGSkeleton className="h-[300px] w-[300px] rounded-t-xl" />
+                  </a>
+                  <div className="flex flex-col space-y-1.5 p-2 md:p-3">
+                    <div className="flex max-w-full justify-between">
+                      <div className="max-w-[calc(100%-36px)]">
+                        <h3 className="align-middle tracking-tight">
+                          <Skeleton className="w-[336px] max-w-full" />
+                        </h3>
                       </div>
-                    </form>
+                      <form>
+                        <div className="flex h-9 w-9 items-center justify-center transition-colors">
+                          <SVGSkeleton className="h-[20px] w-[20px]" />
+                        </div>
+                      </form>
+                    </div>
+                    <div className="!mt-0">
+                      <div className="flex justify-between">
+                        <div className="m-0 inline-flex items-center border border-transparent px-2.5 py-0.5 transition-colors">
+                          <Skeleton className="w-[48px] max-w-full" />
+                        </div>
+                        <div className="text-left">
+                          <Skeleton className="w-[24px] max-w-full" />
+                        </div>
+                      </div>
+                      <div className="mt-2 flex justify-between">
+                        <div className="flex flex-nowrap items-end text-right">
+                          <Skeleton className="w-[96px] max-w-full" />
+                        </div>
+                        <div className="text-right">
+                          <a className="hidden md:block">
+                            <Skeleton className="w-[64px] max-w-full" />
+                          </a>
+                          <div className="flex items-end text-right md:block">
+                            <Skeleton className="w-[56px] max-w-full" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <div className="flex justify-between">
-                      <div className="inline-flex items-center border px-2.5 py-0.5 transition-colors border-transparent m-0">
-                        <Skeleton className="w-[40px] max-w-full" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div className="flex items-center justify-center">
+              <div className="relative flex items-center justify-center">
+                <div className="mx-auto w-[160px] border md:w-[200px] lg:w-[240px]">
+                  <a>
+                    <SVGSkeleton className="h-[300px] w-[300px] rounded-t-xl" />
+                  </a>
+                  <div className="flex flex-col space-y-1.5 p-2 md:p-3">
+                    <div className="flex max-w-full justify-between">
+                      <div className="max-w-[calc(100%-36px)]">
+                        <h3 className="align-middle tracking-tight">
+                          <Skeleton className="w-[72px] max-w-full" />
+                        </h3>
                       </div>
-                      <div className="text-left">
-                        <Skeleton className="w-[24px] max-w-full" />
+                      <form>
+                        <div className="flex h-9 w-9 items-center justify-center transition-colors">
+                          <SVGSkeleton className="h-[20px] w-[20px]" />
+                        </div>
+                      </form>
+                    </div>
+                    <div className="!mt-0">
+                      <div className="flex justify-between">
+                        <div className="m-0 inline-flex items-center border border-transparent px-2.5 py-0.5 transition-colors">
+                          <Skeleton className="w-[40px] max-w-full" />
+                        </div>
+                        <div className="text-left">
+                          <Skeleton className="w-[32px] max-w-full" />
+                        </div>
+                      </div>
+                      <div className="mt-2 flex justify-between">
+                        <div className="flex flex-nowrap items-end text-right">
+                          <Skeleton className="w-[96px] max-w-full" />
+                        </div>
+                        <div className="text-right">
+                          <a className="hidden md:block">
+                            <Skeleton className="w-[64px] max-w-full" />
+                          </a>
+                          <div className="flex items-end text-right md:block">
+                            <Skeleton className="w-[64px] max-w-full" />
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <div className="mt-2 flex justify-between">
-                      <div className="flex flex-nowrap items-center text-right">
-                        <Skeleton className="w-[96px] max-w-full" />
-                        <SVGSkeleton className="mx-1 size-3 w-[1empx] h-[1empx]" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div className="flex items-center justify-center">
+              <div className="relative flex items-center justify-center">
+                <div className="mx-auto w-[160px] border md:w-[200px] lg:w-[240px]">
+                  <a>
+                    <SVGSkeleton className="h-[300px] w-[300px] rounded-t-xl" />
+                  </a>
+                  <div className="flex flex-col space-y-1.5 p-2 md:p-3">
+                    <div className="flex max-w-full justify-between">
+                      <div className="max-w-[calc(100%-36px)]">
+                        <h3 className="align-middle tracking-tight">
+                          <Skeleton className="w-[232px] max-w-full" />
+                        </h3>
                       </div>
-                      <div className="text-right">
-                        <a className="hidden md:block">
+                      <form>
+                        <div className="flex h-9 w-9 items-center justify-center transition-colors">
+                          <SVGSkeleton className="h-[20px] w-[20px]" />
+                        </div>
+                      </form>
+                    </div>
+                    <div className="!mt-0">
+                      <div className="flex justify-between">
+                        <div className="m-0 inline-flex items-center border border-transparent px-2.5 py-0.5 transition-colors">
+                          <Skeleton className="w-[40px] max-w-full" />
+                        </div>
+                        <div className="text-left">
+                          <Skeleton className="w-[24px] max-w-full" />
+                        </div>
+                      </div>
+                      <div className="mt-2 flex justify-between">
+                        <div className="flex flex-nowrap items-end text-right">
+                          <Skeleton className="w-[96px] max-w-full" />
+                        </div>
+                        <div className="text-right">
+                          <a className="hidden md:block">
+                            <Skeleton className="w-[64px] max-w-full" />
+                          </a>
+                          <div className="flex items-end text-right md:block">
+                            <Skeleton className="w-[80px] max-w-full" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div className="flex items-center justify-center">
+              <div className="relative flex items-center justify-center">
+                <div className="mx-auto w-[160px] border md:w-[200px] lg:w-[240px]">
+                  <a>
+                    <SVGSkeleton className="h-[300px] w-[300px] rounded-t-xl" />
+                  </a>
+                  <div className="flex flex-col space-y-1.5 p-2 md:p-3">
+                    <div className="flex max-w-full justify-between">
+                      <div className="max-w-[calc(100%-36px)]">
+                        <h3 className="align-middle tracking-tight">
+                          <Skeleton className="w-[160px] max-w-full" />
+                        </h3>
+                      </div>
+                      <form>
+                        <div className="flex h-9 w-9 items-center justify-center transition-colors">
+                          <SVGSkeleton className="h-[20px] w-[20px]" />
+                        </div>
+                      </form>
+                    </div>
+                    <div className="!mt-0">
+                      <div className="flex justify-between">
+                        <div className="m-0 inline-flex items-center border border-transparent px-2.5 py-0.5 transition-colors">
+                          <Skeleton className="w-[40px] max-w-full" />
+                        </div>
+                        <div className="text-left">
+                          <Skeleton className="w-[24px] max-w-full" />
+                        </div>
+                      </div>
+                      <div className="mt-2 flex justify-between">
+                        <div className="flex flex-nowrap items-end text-right">
+                          <Skeleton className="w-[96px] max-w-full" />
+                        </div>
+                        <div className="text-right">
+                          <a className="hidden md:block">
+                            <Skeleton className="w-[64px] max-w-full" />
+                          </a>
+                          <div className="flex items-end text-right md:block">
+                            <Skeleton className="w-[80px] max-w-full" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div className="flex items-center justify-center">
+              <div className="relative flex items-center justify-center">
+                <div className="mx-auto w-[160px] border md:w-[200px] lg:w-[240px]">
+                  <a>
+                    <SVGSkeleton className="h-[300px] w-[300px] rounded-t-xl" />
+                  </a>
+                  <div className="flex flex-col space-y-1.5 p-2 md:p-3">
+                    <div className="flex max-w-full justify-between">
+                      <div className="max-w-[calc(100%-36px)]">
+                        <h3 className="align-middle tracking-tight">
+                          <Skeleton className="w-[296px] max-w-full" />
+                        </h3>
+                      </div>
+                      <form>
+                        <div className="flex h-9 w-9 items-center justify-center transition-colors">
+                          <SVGSkeleton className="h-[20px] w-[20px]" />
+                        </div>
+                      </form>
+                    </div>
+                    <div className="!mt-0">
+                      <div className="flex justify-between">
+                        <div className="m-0 inline-flex items-center border border-transparent px-2.5 py-0.5 transition-colors">
                           <Skeleton className="w-[72px] max-w-full" />
-                        </a>
-                        <div className="hidden items-end text-right md:block">
+                        </div>
+                        <div className="text-left">
+                          <Skeleton className="w-[32px] max-w-full" />
+                        </div>
+                      </div>
+                      <div className="mt-2 flex justify-between">
+                        <div className="flex flex-nowrap items-end text-right">
+                          <Skeleton className="w-[96px] max-w-full" />
+                        </div>
+                        <div className="text-right">
+                          <a className="hidden md:block">
+                            <Skeleton className="w-[64px] max-w-full" />
+                          </a>
+                          <div className="flex items-end text-right md:block">
+                            <Skeleton className="w-[80px] max-w-full" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div className="flex items-center justify-center">
+              <div className="relative flex items-center justify-center">
+                <div className="mx-auto w-[160px] border md:w-[200px] lg:w-[240px]">
+                  <a>
+                    <SVGSkeleton className="h-[300px] w-[300px] rounded-t-xl" />
+                  </a>
+                  <div className="flex flex-col space-y-1.5 p-2 md:p-3">
+                    <div className="flex max-w-full justify-between">
+                      <div className="max-w-[calc(100%-36px)]">
+                        <h3 className="align-middle tracking-tight">
+                          <Skeleton className="w-[184px] max-w-full" />
+                        </h3>
+                      </div>
+                      <form>
+                        <div className="flex h-9 w-9 items-center justify-center transition-colors">
+                          <SVGSkeleton className="h-[20px] w-[20px]" />
+                        </div>
+                      </form>
+                    </div>
+                    <div className="!mt-0">
+                      <div className="flex justify-between">
+                        <div className="m-0 inline-flex items-center border border-transparent px-2.5 py-0.5 transition-colors">
+                          <Skeleton className="w-[40px] max-w-full" />
+                        </div>
+                        <div className="text-left">
+                          <Skeleton className="w-[24px] max-w-full" />
+                        </div>
+                      </div>
+                      <div className="mt-2 flex justify-between">
+                        <div className="flex flex-nowrap items-end text-right">
+                          <Skeleton className="w-[96px] max-w-full" />
+                        </div>
+                        <div className="text-right">
+                          <a className="hidden md:block">
+                            <Skeleton className="w-[64px] max-w-full" />
+                          </a>
+                          <div className="flex items-end text-right md:block">
+                            <Skeleton className="w-[80px] max-w-full" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div className="flex items-center justify-center">
+              <div className="relative flex items-center justify-center">
+                <div className="mx-auto w-[160px] border md:w-[200px] lg:w-[240px]">
+                  <a>
+                    <SVGSkeleton className="h-[300px] w-[300px] rounded-t-xl" />
+                  </a>
+                  <div className="flex flex-col space-y-1.5 p-2 md:p-3">
+                    <div className="flex max-w-full justify-between">
+                      <div className="max-w-[calc(100%-36px)]">
+                        <h3 className="align-middle tracking-tight">
+                          <Skeleton className="w-[184px] max-w-full" />
+                        </h3>
+                      </div>
+                      <form>
+                        <div className="flex h-9 w-9 items-center justify-center transition-colors">
+                          <SVGSkeleton className="h-[20px] w-[20px]" />
+                        </div>
+                      </form>
+                    </div>
+                    <div className="!mt-0">
+                      <div className="flex justify-between">
+                        <div className="m-0 inline-flex items-center border border-transparent px-2.5 py-0.5 transition-colors">
+                          <Skeleton className="w-[80px] max-w-full" />
+                        </div>
+                        <div className="text-left">
+                          <Skeleton className="w-[32px] max-w-full" />
+                        </div>
+                      </div>
+                      <div className="mt-2 flex justify-between">
+                        <div className="flex flex-nowrap items-end text-right">
+                          <Skeleton className="w-[96px] max-w-full" />
+                        </div>
+                        <div className="text-right">
+                          <a className="hidden md:block">
+                            <Skeleton className="w-[64px] max-w-full" />
+                          </a>
+                          <div className="flex items-end text-right md:block">
+                            <Skeleton className="w-[80px] max-w-full" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div className="flex items-center justify-center">
+              <div className="relative flex items-center justify-center">
+                <div className="mx-auto w-[160px] border md:w-[200px] lg:w-[240px]">
+                  <a>
+                    <SVGSkeleton className="h-[300px] w-[300px] rounded-t-xl" />
+                  </a>
+                  <div className="flex flex-col space-y-1.5 p-2 md:p-3">
+                    <div className="flex max-w-full justify-between">
+                      <div className="max-w-[calc(100%-36px)]">
+                        <h3 className="align-middle tracking-tight">
+                          <Skeleton className="w-[304px] max-w-full" />
+                        </h3>
+                      </div>
+                      <form>
+                        <div className="flex h-9 w-9 items-center justify-center transition-colors">
+                          <SVGSkeleton className="h-[20px] w-[20px]" />
+                        </div>
+                      </form>
+                    </div>
+                    <div className="!mt-0">
+                      <div className="flex justify-between">
+                        <div className="m-0 inline-flex items-center border border-transparent px-2.5 py-0.5 transition-colors">
+                          <Skeleton className="w-[96px] max-w-full" />
+                        </div>
+                        <div className="text-left">
+                          <Skeleton className="w-[16px] max-w-full" />
+                        </div>
+                      </div>
+                      <div className="mt-2 flex justify-between">
+                        <div className="flex flex-nowrap items-end text-right">
+                          <Skeleton className="w-[96px] max-w-full" />
+                        </div>
+                        <div className="text-right">
+                          <a className="hidden md:block">
+                            <Skeleton className="w-[64px] max-w-full" />
+                          </a>
+                          <div className="flex items-end text-right md:block">
+                            <Skeleton className="w-[80px] max-w-full" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div className="flex items-center justify-center">
+              <div className="relative flex items-center justify-center">
+                <div className="mx-auto w-[160px] border md:w-[200px] lg:w-[240px]">
+                  <a>
+                    <SVGSkeleton className="h-[300px] w-[300px] rounded-t-xl" />
+                  </a>
+                  <div className="flex flex-col space-y-1.5 p-2 md:p-3">
+                    <div className="flex max-w-full justify-between">
+                      <div className="max-w-[calc(100%-36px)]">
+                        <h3 className="align-middle tracking-tight">
+                          <Skeleton className="w-[392px] max-w-full" />
+                        </h3>
+                      </div>
+                      <form>
+                        <div className="flex h-9 w-9 items-center justify-center transition-colors">
+                          <SVGSkeleton className="h-[20px] w-[20px]" />
+                        </div>
+                      </form>
+                    </div>
+                    <div className="!mt-0">
+                      <div className="flex justify-between">
+                        <div className="m-0 inline-flex items-center border border-transparent px-2.5 py-0.5 transition-colors">
+                          <Skeleton className="w-[40px] max-w-full" />
+                        </div>
+                        <div className="text-left">
+                          <Skeleton className="w-[24px] max-w-full" />
+                        </div>
+                      </div>
+                      <div className="mt-2 flex justify-between">
+                        <div className="flex flex-nowrap items-end text-right">
+                          <Skeleton className="w-[96px] max-w-full" />
+                        </div>
+                        <div className="text-right">
+                          <a className="hidden md:block">
+                            <Skeleton className="w-[64px] max-w-full" />
+                          </a>
+                          <div className="flex items-end text-right md:block">
+                            <Skeleton className="w-[80px] max-w-full" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div className="flex items-center justify-center">
+              <div className="relative flex items-center justify-center">
+                <div className="mx-auto w-[160px] border md:w-[200px] lg:w-[240px]">
+                  <a>
+                    <SVGSkeleton className="h-[300px] w-[300px] rounded-t-xl" />
+                  </a>
+                  <div className="flex flex-col space-y-1.5 p-2 md:p-3">
+                    <div className="flex max-w-full justify-between">
+                      <div className="max-w-[calc(100%-36px)]">
+                        <h3 className="align-middle tracking-tight">
+                          <Skeleton className="w-[248px] max-w-full" />
+                        </h3>
+                      </div>
+                      <form>
+                        <div className="flex h-9 w-9 items-center justify-center transition-colors">
+                          <SVGSkeleton className="h-[20px] w-[20px]" />
+                        </div>
+                      </form>
+                    </div>
+                    <div className="!mt-0">
+                      <div className="flex justify-between">
+                        <div className="m-0 inline-flex items-center border border-transparent px-2.5 py-0.5 transition-colors">
+                          <Skeleton className="w-[48px] max-w-full" />
+                        </div>
+                        <div className="text-left">
+                          <Skeleton className="w-[32px] max-w-full" />
+                        </div>
+                      </div>
+                      <div className="mt-2 flex justify-between">
+                        <div className="flex flex-nowrap items-end text-right">
+                          <Skeleton className="w-[96px] max-w-full" />
+                        </div>
+                        <div className="text-right">
+                          <a className="hidden md:block">
+                            <Skeleton className="w-[64px] max-w-full" />
+                          </a>
+                          <div className="flex items-end text-right md:block">
+                            <Skeleton className="w-[80px] max-w-full" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div className="flex items-center justify-center">
+              <div className="relative flex items-center justify-center">
+                <div className="mx-auto w-[160px] border md:w-[200px] lg:w-[240px]">
+                  <a>
+                    <SVGSkeleton className="h-[300px] w-[300px] rounded-t-xl" />
+                  </a>
+                  <div className="flex flex-col space-y-1.5 p-2 md:p-3">
+                    <div className="flex max-w-full justify-between">
+                      <div className="max-w-[calc(100%-36px)]">
+                        <h3 className="align-middle tracking-tight">
+                          <Skeleton className="w-[272px] max-w-full" />
+                        </h3>
+                      </div>
+                      <form>
+                        <div className="flex h-9 w-9 items-center justify-center transition-colors">
+                          <SVGSkeleton className="h-[20px] w-[20px]" />
+                        </div>
+                      </form>
+                    </div>
+                    <div className="!mt-0">
+                      <div className="flex justify-between">
+                        <div className="m-0 inline-flex items-center border border-transparent px-2.5 py-0.5 transition-colors">
+                          <Skeleton className="w-[40px] max-w-full" />
+                        </div>
+                        <div className="text-left">
+                          <Skeleton className="w-[32px] max-w-full" />
+                        </div>
+                      </div>
+                      <div className="mt-2 flex justify-between">
+                        <div className="flex flex-nowrap items-end text-right">
+                          <Skeleton className="w-[96px] max-w-full" />
+                        </div>
+                        <div className="text-right">
+                          <a className="hidden md:block">
+                            <Skeleton className="w-[64px] max-w-full" />
+                          </a>
+                          <div className="flex items-end text-right md:block">
+                            <Skeleton className="w-[80px] max-w-full" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div className="flex items-center justify-center">
+              <div className="relative flex items-center justify-center">
+                <div className="mx-auto w-[160px] border md:w-[200px] lg:w-[240px]">
+                  <a>
+                    <SVGSkeleton className="h-[300px] w-[300px] rounded-t-xl" />
+                  </a>
+                  <div className="flex flex-col space-y-1.5 p-2 md:p-3">
+                    <div className="flex max-w-full justify-between">
+                      <div className="max-w-[calc(100%-36px)]">
+                        <h3 className="align-middle tracking-tight">
+                          <Skeleton className="w-[392px] max-w-full" />
+                        </h3>
+                      </div>
+                      <form>
+                        <div className="flex h-9 w-9 items-center justify-center transition-colors">
+                          <SVGSkeleton className="h-[20px] w-[20px]" />
+                        </div>
+                      </form>
+                    </div>
+                    <div className="!mt-0">
+                      <div className="flex justify-between">
+                        <div className="m-0 inline-flex items-center border border-transparent px-2.5 py-0.5 transition-colors">
+                          <Skeleton className="w-[40px] max-w-full" />
+                        </div>
+                        <div className="text-left">
+                          <Skeleton className="w-[24px] max-w-full" />
+                        </div>
+                      </div>
+                      <div className="mt-2 flex justify-between">
+                        <div className="flex flex-nowrap items-end text-right">
                           <Skeleton className="w-[152px] max-w-full" />
                         </div>
-                        <div className="flex items-end text-right md:hidden">
-                          <Skeleton className="w-[80px] max-w-full" />
+                        <div className="text-right">
+                          <a className="hidden md:block">
+                            <Skeleton className="w-[64px] max-w-full" />
+                          </a>
+                          <div className="flex items-end text-right md:block">
+                            <Skeleton className="w-[80px] max-w-full" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div className="flex items-center justify-center">
+              <div className="relative flex items-center justify-center">
+                <div className="mx-auto w-[160px] border md:w-[200px] lg:w-[240px]">
+                  <a>
+                    <SVGSkeleton className="h-[300px] w-[300px] rounded-t-xl" />
+                  </a>
+                  <div className="flex flex-col space-y-1.5 p-2 md:p-3">
+                    <div className="flex max-w-full justify-between">
+                      <div className="max-w-[calc(100%-36px)]">
+                        <h3 className="align-middle tracking-tight">
+                          <Skeleton className="w-[400px] max-w-full" />
+                        </h3>
+                      </div>
+                      <form>
+                        <div className="flex h-9 w-9 items-center justify-center transition-colors">
+                          <SVGSkeleton className="h-[20px] w-[20px]" />
+                        </div>
+                      </form>
+                    </div>
+                    <div className="!mt-0">
+                      <div className="flex justify-between">
+                        <div className="m-0 inline-flex items-center border border-transparent px-2.5 py-0.5 transition-colors">
+                          <Skeleton className="w-[40px] max-w-full" />
+                        </div>
+                        <div className="text-left">
+                          <Skeleton className="w-[32px] max-w-full" />
+                        </div>
+                      </div>
+                      <div className="mt-2 flex justify-between">
+                        <div className="flex flex-nowrap items-end text-right">
+                          <Skeleton className="w-[152px] max-w-full" />
+                        </div>
+                        <div className="text-right">
+                          <a className="hidden md:block">
+                            <Skeleton className="w-[64px] max-w-full" />
+                          </a>
+                          <div className="flex items-end text-right md:block">
+                            <Skeleton className="w-[80px] max-w-full" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div className="flex items-center justify-center">
+              <div className="relative flex items-center justify-center">
+                <div className="mx-auto w-[160px] border md:w-[200px] lg:w-[240px]">
+                  <a>
+                    <SVGSkeleton className="h-[300px] w-[300px] rounded-t-xl" />
+                  </a>
+                  <div className="flex flex-col space-y-1.5 p-2 md:p-3">
+                    <div className="flex max-w-full justify-between">
+                      <div className="max-w-[calc(100%-36px)]">
+                        <h3 className="align-middle tracking-tight">
+                          <Skeleton className="w-[384px] max-w-full" />
+                        </h3>
+                      </div>
+                      <form>
+                        <div className="flex h-9 w-9 items-center justify-center transition-colors">
+                          <SVGSkeleton className="h-[20px] w-[20px]" />
+                        </div>
+                      </form>
+                    </div>
+                    <div className="!mt-0">
+                      <div className="flex justify-between">
+                        <div className="m-0 inline-flex items-center border border-transparent px-2.5 py-0.5 transition-colors">
+                          <Skeleton className="w-[40px] max-w-full" />
+                        </div>
+                        <div className="text-left">
+                          <Skeleton className="w-[24px] max-w-full" />
+                        </div>
+                      </div>
+                      <div className="mt-2 flex justify-between">
+                        <div className="flex flex-nowrap items-end text-right">
+                          <Skeleton className="w-[152px] max-w-full" />
+                        </div>
+                        <div className="text-right">
+                          <a className="hidden md:block">
+                            <Skeleton className="w-[64px] max-w-full" />
+                          </a>
+                          <div className="flex items-end text-right md:block">
+                            <Skeleton className="w-[80px] max-w-full" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div className="flex items-center justify-center">
+              <div className="relative flex items-center justify-center">
+                <div className="mx-auto w-[160px] border md:w-[200px] lg:w-[240px]">
+                  <a>
+                    <SVGSkeleton className="h-[300px] w-[300px] rounded-t-xl" />
+                  </a>
+                  <div className="flex flex-col space-y-1.5 p-2 md:p-3">
+                    <div className="flex max-w-full justify-between">
+                      <div className="max-w-[calc(100%-36px)]">
+                        <h3 className="align-middle tracking-tight">
+                          <Skeleton className="w-[360px] max-w-full" />
+                        </h3>
+                      </div>
+                      <form>
+                        <div className="flex h-9 w-9 items-center justify-center transition-colors">
+                          <SVGSkeleton className="h-[20px] w-[20px]" />
+                        </div>
+                      </form>
+                    </div>
+                    <div className="!mt-0">
+                      <div className="flex justify-between">
+                        <div className="m-0 inline-flex items-center border border-transparent px-2.5 py-0.5 transition-colors">
+                          <Skeleton className="w-[40px] max-w-full" />
+                        </div>
+                        <div className="text-left">
+                          <Skeleton className="w-[24px] max-w-full" />
+                        </div>
+                      </div>
+                      <div className="mt-2 flex justify-between">
+                        <div className="flex flex-nowrap items-end text-right">
+                          <Skeleton className="w-[152px] max-w-full" />
+                        </div>
+                        <div className="text-right">
+                          <a className="hidden md:block">
+                            <Skeleton className="w-[64px] max-w-full" />
+                          </a>
+                          <div className="flex items-end text-right md:block">
+                            <Skeleton className="w-[80px] max-w-full" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div className="flex items-center justify-center">
+              <div className="relative flex items-center justify-center">
+                <div className="mx-auto w-[160px] border md:w-[200px] lg:w-[240px]">
+                  <a>
+                    <SVGSkeleton className="h-[300px] w-[300px] rounded-t-xl" />
+                  </a>
+                  <div className="flex flex-col space-y-1.5 p-2 md:p-3">
+                    <div className="flex max-w-full justify-between">
+                      <div className="max-w-[calc(100%-36px)]">
+                        <h3 className="align-middle tracking-tight">
+                          <Skeleton className="w-[304px] max-w-full" />
+                        </h3>
+                      </div>
+                      <form>
+                        <div className="flex h-9 w-9 items-center justify-center transition-colors">
+                          <SVGSkeleton className="h-[20px] w-[20px]" />
+                        </div>
+                      </form>
+                    </div>
+                    <div className="!mt-0">
+                      <div className="flex justify-between">
+                        <div className="m-0 inline-flex items-center border border-transparent px-2.5 py-0.5 transition-colors">
+                          <Skeleton className="w-[40px] max-w-full" />
+                        </div>
+                        <div className="text-left">
+                          <Skeleton className="w-[32px] max-w-full" />
+                        </div>
+                      </div>
+                      <div className="mt-2 flex justify-between">
+                        <div className="flex flex-nowrap items-end text-right">
+                          <Skeleton className="w-[152px] max-w-full" />
+                        </div>
+                        <div className="text-right">
+                          <a className="hidden md:block">
+                            <Skeleton className="w-[64px] max-w-full" />
+                          </a>
+                          <div className="flex items-end text-right md:block">
+                            <Skeleton className="w-[80px] max-w-full" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div className="flex items-center justify-center">
+              <div className="relative flex items-center justify-center">
+                <div className="mx-auto w-[160px] border md:w-[200px] lg:w-[240px]">
+                  <a>
+                    <SVGSkeleton className="h-[300px] w-[300px] rounded-t-xl" />
+                  </a>
+                  <div className="flex flex-col space-y-1.5 p-2 md:p-3">
+                    <div className="flex max-w-full justify-between">
+                      <div className="max-w-[calc(100%-36px)]">
+                        <h3 className="align-middle tracking-tight">
+                          <Skeleton className="w-[264px] max-w-full" />
+                        </h3>
+                      </div>
+                      <form>
+                        <div className="flex h-9 w-9 items-center justify-center transition-colors">
+                          <SVGSkeleton className="h-[20px] w-[20px]" />
+                        </div>
+                      </form>
+                    </div>
+                    <div className="!mt-0">
+                      <div className="flex justify-between">
+                        <div className="m-0 inline-flex items-center border border-transparent px-2.5 py-0.5 transition-colors">
+                          <Skeleton className="w-[40px] max-w-full" />
+                        </div>
+                        <div className="text-left">
+                          <Skeleton className="w-[32px] max-w-full" />
+                        </div>
+                      </div>
+                      <div className="mt-2 flex justify-between">
+                        <div className="flex flex-nowrap items-end text-right">
+                          <Skeleton className="w-[152px] max-w-full" />
+                        </div>
+                        <div className="text-right">
+                          <a className="hidden md:block">
+                            <Skeleton className="w-[64px] max-w-full" />
+                          </a>
+                          <div className="flex items-end text-right md:block">
+                            <Skeleton className="w-[80px] max-w-full" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div className="flex items-center justify-center">
+              <div className="relative flex items-center justify-center">
+                <div className="mx-auto w-[160px] border md:w-[200px] lg:w-[240px]">
+                  <a>
+                    <SVGSkeleton className="h-[300px] w-[300px] rounded-t-xl" />
+                  </a>
+                  <div className="flex flex-col space-y-1.5 p-2 md:p-3">
+                    <div className="flex max-w-full justify-between">
+                      <div className="max-w-[calc(100%-36px)]">
+                        <h3 className="align-middle tracking-tight">
+                          <Skeleton className="w-[368px] max-w-full" />
+                        </h3>
+                      </div>
+                      <form>
+                        <div className="flex h-9 w-9 items-center justify-center transition-colors">
+                          <SVGSkeleton className="h-[20px] w-[20px]" />
+                        </div>
+                      </form>
+                    </div>
+                    <div className="!mt-0">
+                      <div className="flex justify-between">
+                        <div className="m-0 inline-flex items-center border border-transparent px-2.5 py-0.5 transition-colors">
+                          <Skeleton className="w-[40px] max-w-full" />
+                        </div>
+                        <div className="text-left">
+                          <Skeleton className="w-[32px] max-w-full" />
+                        </div>
+                      </div>
+                      <div className="mt-2 flex justify-between">
+                        <div className="flex flex-nowrap items-end text-right">
+                          <Skeleton className="w-[152px] max-w-full" />
+                        </div>
+                        <div className="text-right">
+                          <a className="hidden md:block">
+                            <Skeleton className="w-[64px] max-w-full" />
+                          </a>
+                          <div className="flex items-end text-right md:block">
+                            <Skeleton className="w-[80px] max-w-full" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div className="flex items-center justify-center">
+              <div className="relative flex items-center justify-center">
+                <div className="mx-auto w-[160px] border md:w-[200px] lg:w-[240px]">
+                  <a>
+                    <SVGSkeleton className="h-[300px] w-[300px] rounded-t-xl" />
+                  </a>
+                  <div className="flex flex-col space-y-1.5 p-2 md:p-3">
+                    <div className="flex max-w-full justify-between">
+                      <div className="max-w-[calc(100%-36px)]">
+                        <h3 className="align-middle tracking-tight">
+                          <Skeleton className="w-[184px] max-w-full" />
+                        </h3>
+                      </div>
+                      <form>
+                        <div className="flex h-9 w-9 items-center justify-center transition-colors">
+                          <SVGSkeleton className="h-[20px] w-[20px]" />
+                        </div>
+                      </form>
+                    </div>
+                    <div className="!mt-0">
+                      <div className="flex justify-between">
+                        <div className="m-0 inline-flex items-center border border-transparent px-2.5 py-0.5 transition-colors">
+                          <Skeleton className="w-[40px] max-w-full" />
+                        </div>
+                        <div className="text-left">
+                          <Skeleton className="w-[24px] max-w-full" />
+                        </div>
+                      </div>
+                      <div className="mt-2 flex justify-between">
+                        <div className="flex flex-nowrap items-end text-right">
+                          <Skeleton className="w-[152px] max-w-full" />
+                        </div>
+                        <div className="text-right">
+                          <a className="hidden md:block">
+                            <Skeleton className="w-[64px] max-w-full" />
+                          </a>
+                          <div className="flex items-end text-right md:block">
+                            <Skeleton className="w-[80px] max-w-full" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div className="flex items-center justify-center">
+              <div className="relative flex items-center justify-center">
+                <div className="mx-auto w-[160px] border md:w-[200px] lg:w-[240px]">
+                  <a>
+                    <SVGSkeleton className="h-[300px] w-[300px] rounded-t-xl" />
+                  </a>
+                  <div className="flex flex-col space-y-1.5 p-2 md:p-3">
+                    <div className="flex max-w-full justify-between">
+                      <div className="max-w-[calc(100%-36px)]">
+                        <h3 className="align-middle tracking-tight">
+                          <Skeleton className="w-[120px] max-w-full" />
+                        </h3>
+                      </div>
+                      <form>
+                        <div className="flex h-9 w-9 items-center justify-center transition-colors">
+                          <SVGSkeleton className="h-[20px] w-[20px]" />
+                        </div>
+                      </form>
+                    </div>
+                    <div className="!mt-0">
+                      <div className="flex justify-between">
+                        <div className="m-0 inline-flex items-center border border-transparent px-2.5 py-0.5 transition-colors">
+                          <Skeleton className="w-[40px] max-w-full" />
+                        </div>
+                        <div className="text-left">
+                          <Skeleton className="w-[24px] max-w-full" />
+                        </div>
+                      </div>
+                      <div className="mt-2 flex justify-between">
+                        <div className="flex flex-nowrap items-end text-right">
+                          <Skeleton className="w-[152px] max-w-full" />
+                        </div>
+                        <div className="text-right">
+                          <a className="hidden md:block">
+                            <Skeleton className="w-[64px] max-w-full" />
+                          </a>
+                          <div className="flex items-end text-right md:block">
+                            <Skeleton className="w-[80px] max-w-full" />
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -58,619 +1026,17 @@ const LoadingSkeleton = () => (
           </div>
         </div>
       </div>
-      <div>
-        <div>
-          <div className="flex items-center justify-center">
-            <div className="relative flex items-center justify-center">
-              <div className="absolute right-0 top-0 m-2"></div>
-              <div className="border w-[150px] md:w-[200px] lg:w-[300px] mx-[5px] my-[0.5rem]">
-                <a>
-                  <SVGSkeleton className="rounded-t-xl w-[300px] h-[300px]" />
-                </a>
-                <div className="flex flex-col space-y-1.5 p-3">
-                  <div className="flex max-w-full justify-between">
-                    <div className="max-w-[calc(100%-36px)]">
-                      <h3 className="tracking-tight align-middle">
-                        <Skeleton className="w-[112px] max-w-full" />
-                      </h3>
-                    </div>
-                    <form>
-                      <div className="items-center transition-colors h-9 w-9 flex justify-end">
-                        <SVGSkeleton className="w-[20px] h-[20px]" />
-                      </div>
-                    </form>
-                  </div>
-                  <div>
-                    <div className="flex justify-between">
-                      <div className="inline-flex items-center border px-2.5 py-0.5 transition-colors border-transparent m-0">
-                        <Skeleton className="w-[96px] max-w-full" />
-                      </div>
-                      <div className="text-left">
-                        <Skeleton className="w-[24px] max-w-full" />
-                      </div>
-                    </div>
-                    <div className="mt-2 flex justify-between">
-                      <div className="flex flex-nowrap items-center text-right">
-                        <Skeleton className="w-[40px] max-w-full" />
-                        <SVGSkeleton className="mx-1 size-3 w-[1empx] h-[1empx]" />
-                      </div>
-                      <div className="text-right">
-                        <a className="hidden md:block">
-                          <Skeleton className="w-[72px] max-w-full" />
-                        </a>
-                        <div className="hidden items-end text-right md:block">
-                          <Skeleton className="w-[152px] max-w-full" />
-                        </div>
-                        <div className="flex items-end text-right md:hidden">
-                          <Skeleton className="w-[80px] max-w-full" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div>
-          <div className="flex items-center justify-center">
-            <div className="relative flex items-center justify-center">
-              <div className="absolute right-0 top-0 m-2"></div>
-              <div className="border w-[150px] md:w-[200px] lg:w-[300px] mx-[5px] my-[0.5rem]">
-                <a>
-                  <SVGSkeleton className="rounded-t-xl w-[300px] h-[300px]" />
-                </a>
-                <div className="flex flex-col space-y-1.5 p-3">
-                  <div className="flex max-w-full justify-between">
-                    <div className="max-w-[calc(100%-36px)]">
-                      <h3 className="tracking-tight align-middle">
-                        <Skeleton className="w-[80px] max-w-full" />
-                      </h3>
-                    </div>
-                    <form>
-                      <div className="items-center transition-colors h-9 w-9 flex justify-end">
-                        <SVGSkeleton className="w-[20px] h-[20px]" />
-                      </div>
-                    </form>
-                  </div>
-                  <div>
-                    <div className="flex justify-between">
-                      <div className="inline-flex items-center border px-2.5 py-0.5 transition-colors border-transparent m-0">
-                        <Skeleton className="w-[40px] max-w-full" />
-                      </div>
-                      <div className="text-left">
-                        <Skeleton className="w-[32px] max-w-full" />
-                      </div>
-                    </div>
-                    <div className="mt-2 flex justify-between">
-                      <div className="flex flex-nowrap items-center text-right">
-                        <Skeleton className="w-[40px] max-w-full" />
-                        <SVGSkeleton className="mx-1 size-3 w-[1empx] h-[1empx]" />
-                      </div>
-                      <div className="text-right">
-                        <a className="hidden md:block">
-                          <Skeleton className="w-[72px] max-w-full" />
-                        </a>
-                        <div className="hidden items-end text-right md:block">
-                          <Skeleton className="w-[152px] max-w-full" />
-                        </div>
-                        <div className="flex items-end text-right md:hidden">
-                          <Skeleton className="w-[80px] max-w-full" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div>
-          <div className="flex items-center justify-center">
-            <div className="relative flex items-center justify-center">
-              <div className="absolute right-0 top-0 m-2"></div>
-              <div className="border w-[150px] md:w-[200px] lg:w-[300px] mx-[5px] my-[0.5rem]">
-                <a>
-                  <SVGSkeleton className="rounded-t-xl w-[300px] h-[300px]" />
-                </a>
-                <div className="flex flex-col space-y-1.5 p-3">
-                  <div className="flex max-w-full justify-between">
-                    <div className="max-w-[calc(100%-36px)]">
-                      <h3 className="tracking-tight align-middle">
-                        <Skeleton className="w-[48px] max-w-full" />
-                      </h3>
-                    </div>
-                    <form>
-                      <div className="items-center transition-colors h-9 w-9 flex justify-end">
-                        <SVGSkeleton className="w-[20px] h-[20px]" />
-                      </div>
-                    </form>
-                  </div>
-                  <div>
-                    <div className="flex justify-between">
-                      <div className="inline-flex items-center border px-2.5 py-0.5 transition-colors border-transparent m-0">
-                        <Skeleton className="w-[64px] max-w-full" />
-                      </div>
-                      <div className="text-left">
-                        <Skeleton className="w-[24px] max-w-full" />
-                      </div>
-                    </div>
-                    <div className="mt-2 flex justify-between">
-                      <div className="flex flex-nowrap items-center text-right">
-                        <Skeleton className="w-[40px] max-w-full" />
-                        <SVGSkeleton className="mx-1 size-3 w-[1empx] h-[1empx]" />
-                      </div>
-                      <div className="text-right">
-                        <a className="hidden md:block">
-                          <Skeleton className="w-[72px] max-w-full" />
-                        </a>
-                        <div className="hidden items-end text-right md:block">
-                          <Skeleton className="w-[152px] max-w-full" />
-                        </div>
-                        <div className="flex items-end text-right md:hidden">
-                          <Skeleton className="w-[80px] max-w-full" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div>
-          <div className="flex items-center justify-center">
-            <div className="relative flex items-center justify-center">
-              <div className="absolute right-0 top-0 m-2"></div>
-              <div className="border w-[150px] md:w-[200px] lg:w-[300px] mx-[5px] my-[0.5rem]">
-                <a>
-                  <SVGSkeleton className="rounded-t-xl w-[300px] h-[300px]" />
-                </a>
-                <div className="flex flex-col space-y-1.5 p-3">
-                  <div className="flex max-w-full justify-between">
-                    <div className="max-w-[calc(100%-36px)]">
-                      <h3 className="tracking-tight align-middle">
-                        <Skeleton className="w-[96px] max-w-full" />
-                      </h3>
-                    </div>
-                    <form>
-                      <div className="items-center transition-colors h-9 w-9 flex justify-end">
-                        <SVGSkeleton className="w-[20px] h-[20px]" />
-                      </div>
-                    </form>
-                  </div>
-                  <div>
-                    <div className="flex justify-between">
-                      <div className="inline-flex items-center border px-2.5 py-0.5 transition-colors border-transparent m-0">
-                        <Skeleton className="w-[48px] max-w-full" />
-                      </div>
-                      <div className="text-left">
-                        <Skeleton className="w-[24px] max-w-full" />
-                      </div>
-                    </div>
-                    <div className="mt-2 flex justify-between">
-                      <div className="flex flex-nowrap items-center text-right">
-                        <Skeleton className="w-[40px] max-w-full" />
-                        <SVGSkeleton className="mx-1 size-3 w-[1empx] h-[1empx]" />
-                      </div>
-                      <div className="text-right">
-                        <a className="hidden md:block">
-                          <Skeleton className="w-[72px] max-w-full" />
-                        </a>
-                        <div className="hidden items-end text-right md:block">
-                          <Skeleton className="w-[152px] max-w-full" />
-                        </div>
-                        <div className="flex items-end text-right md:hidden">
-                          <Skeleton className="w-[80px] max-w-full" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div>
-          <div className="flex items-center justify-center">
-            <div className="relative flex items-center justify-center">
-              <div className="absolute right-0 top-0 m-2"></div>
-              <div className="border w-[150px] md:w-[200px] lg:w-[300px] mx-[5px] my-[0.5rem]">
-                <a>
-                  <SVGSkeleton className="rounded-t-xl w-[300px] h-[300px]" />
-                </a>
-                <div className="flex flex-col space-y-1.5 p-3">
-                  <div className="flex max-w-full justify-between">
-                    <div className="max-w-[calc(100%-36px)]">
-                      <h3 className="tracking-tight align-middle">
-                        <Skeleton className="w-[320px] max-w-full" />
-                      </h3>
-                    </div>
-                    <form>
-                      <div className="items-center transition-colors h-9 w-9 flex justify-end">
-                        <SVGSkeleton className="w-[20px] h-[20px]" />
-                      </div>
-                    </form>
-                  </div>
-                  <div>
-                    <div className="flex justify-between">
-                      <div className="inline-flex items-center border px-2.5 py-0.5 transition-colors border-transparent m-0">
-                        <Skeleton className="w-[120px] max-w-full" />
-                      </div>
-                      <div className="text-left">
-                        <Skeleton className="w-[32px] max-w-full" />
-                      </div>
-                    </div>
-                    <div className="mt-2 flex justify-between">
-                      <div className="flex flex-nowrap items-center text-right">
-                        <Skeleton className="w-[40px] max-w-full" />
-                        <SVGSkeleton className="mx-1 size-3 w-[1empx] h-[1empx]" />
-                      </div>
-                      <div className="text-right">
-                        <a className="hidden md:block">
-                          <Skeleton className="w-[72px] max-w-full" />
-                        </a>
-                        <div className="hidden items-end text-right md:block">
-                          <Skeleton className="w-[152px] max-w-full" />
-                        </div>
-                        <div className="flex items-end text-right md:hidden">
-                          <Skeleton className="w-[80px] max-w-full" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div>
-          <div className="flex items-center justify-center">
-            <div className="relative flex items-center justify-center">
-              <div className="absolute right-0 top-0 m-2"></div>
-              <div className="border w-[150px] md:w-[200px] lg:w-[300px] mx-[5px] my-[0.5rem]">
-                <a>
-                  <SVGSkeleton className="rounded-t-xl w-[300px] h-[300px]" />
-                </a>
-                <div className="flex flex-col space-y-1.5 p-3">
-                  <div className="flex max-w-full justify-between">
-                    <div className="max-w-[calc(100%-36px)]">
-                      <h3 className="tracking-tight align-middle">
-                        <Skeleton className="w-[48px] max-w-full" />
-                      </h3>
-                    </div>
-                    <form>
-                      <div className="items-center transition-colors h-9 w-9 flex justify-end">
-                        <SVGSkeleton className="w-[20px] h-[20px]" />
-                      </div>
-                    </form>
-                  </div>
-                  <div>
-                    <div className="flex justify-between">
-                      <div className="inline-flex items-center border px-2.5 py-0.5 transition-colors border-transparent m-0">
-                        <Skeleton className="w-[56px] max-w-full" />
-                      </div>
-                      <div className="text-left">
-                        <Skeleton className="w-[16px] max-w-full" />
-                      </div>
-                    </div>
-                    <div className="mt-2 flex justify-between">
-                      <div className="flex flex-nowrap items-center text-right">
-                        <Skeleton className="w-[40px] max-w-full" />
-                        <SVGSkeleton className="mx-1 size-3 w-[1empx] h-[1empx]" />
-                      </div>
-                      <div className="text-right">
-                        <a className="hidden md:block">
-                          <Skeleton className="w-[72px] max-w-full" />
-                        </a>
-                        <div className="hidden items-end text-right md:block">
-                          <Skeleton className="w-[152px] max-w-full" />
-                        </div>
-                        <div className="flex items-end text-right md:hidden">
-                          <Skeleton className="w-[80px] max-w-full" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div>
-          <div className="flex items-center justify-center">
-            <div className="relative flex items-center justify-center">
-              <div className="absolute right-0 top-0 m-2"></div>
-              <div className="border w-[150px] md:w-[200px] lg:w-[300px] mx-[5px] my-[0.5rem]">
-                <a>
-                  <SVGSkeleton className="rounded-t-xl w-[300px] h-[300px]" />
-                </a>
-                <div className="flex flex-col space-y-1.5 p-3">
-                  <div className="flex max-w-full justify-between">
-                    <div className="max-w-[calc(100%-36px)]">
-                      <h3 className="tracking-tight align-middle">
-                        <Skeleton className="w-[136px] max-w-full" />
-                      </h3>
-                    </div>
-                    <form>
-                      <div className="items-center transition-colors h-9 w-9 flex justify-end">
-                        <SVGSkeleton className="w-[20px] h-[20px]" />
-                      </div>
-                    </form>
-                  </div>
-                  <div>
-                    <div className="flex justify-between">
-                      <div className="inline-flex items-center border px-2.5 py-0.5 transition-colors border-transparent m-0">
-                        <Skeleton className="w-[40px] max-w-full" />
-                      </div>
-                      <div className="text-left">
-                        <Skeleton className="w-[24px] max-w-full" />
-                      </div>
-                    </div>
-                    <div className="mt-2 flex justify-between">
-                      <div className="flex flex-nowrap items-center text-right">
-                        <Skeleton className="w-[40px] max-w-full" />
-                        <SVGSkeleton className="mx-1 size-3 w-[1empx] h-[1empx]" />
-                      </div>
-                      <div className="text-right">
-                        <a className="hidden md:block">
-                          <Skeleton className="w-[72px] max-w-full" />
-                        </a>
-                        <div className="hidden items-end text-right md:block">
-                          <Skeleton className="w-[152px] max-w-full" />
-                        </div>
-                        <div className="flex items-end text-right md:hidden">
-                          <Skeleton className="w-[80px] max-w-full" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div>
-          <div className="flex items-center justify-center">
-            <div className="relative flex items-center justify-center">
-              <div className="absolute right-0 top-0 m-2"></div>
-              <div className="border w-[150px] md:w-[200px] lg:w-[300px] mx-[5px] my-[0.5rem]">
-                <a>
-                  <SVGSkeleton className="rounded-t-xl w-[300px] h-[300px]" />
-                </a>
-                <div className="flex flex-col space-y-1.5 p-3">
-                  <div className="flex max-w-full justify-between">
-                    <div className="max-w-[calc(100%-36px)]">
-                      <h3 className="tracking-tight align-middle">
-                        <Skeleton className="w-[104px] max-w-full" />
-                      </h3>
-                    </div>
-                    <form>
-                      <div className="items-center transition-colors h-9 w-9 flex justify-end">
-                        <SVGSkeleton className="w-[20px] h-[20px]" />
-                      </div>
-                    </form>
-                  </div>
-                  <div>
-                    <div className="flex justify-between">
-                      <div className="inline-flex items-center border px-2.5 py-0.5 transition-colors border-transparent m-0">
-                        <Skeleton className="w-[40px] max-w-full" />
-                      </div>
-                      <div className="text-left">
-                        <Skeleton className="w-[24px] max-w-full" />
-                      </div>
-                    </div>
-                    <div className="mt-2 flex justify-between">
-                      <div className="flex flex-nowrap items-center text-right">
-                        <Skeleton className="w-[40px] max-w-full" />
-                        <SVGSkeleton className="mx-1 size-3 w-[1empx] h-[1empx]" />
-                      </div>
-                      <div className="text-right">
-                        <a className="hidden md:block">
-                          <Skeleton className="w-[72px] max-w-full" />
-                        </a>
-                        <div className="hidden items-end text-right md:block">
-                          <Skeleton className="w-[152px] max-w-full" />
-                        </div>
-                        <div className="flex items-end text-right md:hidden">
-                          <Skeleton className="w-[80px] max-w-full" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div>
-          <div className="flex items-center justify-center">
-            <div className="relative flex items-center justify-center">
-              <div className="absolute right-0 top-0 m-2"></div>
-              <div className="border w-[150px] md:w-[200px] lg:w-[300px] mx-[5px] my-[0.5rem]">
-                <a>
-                  <SVGSkeleton className="rounded-t-xl w-[300px] h-[300px]" />
-                </a>
-                <div className="flex flex-col space-y-1.5 p-3">
-                  <div className="flex max-w-full justify-between">
-                    <div className="max-w-[calc(100%-36px)]">
-                      <h3 className="tracking-tight align-middle">
-                        <Skeleton className="w-[56px] max-w-full" />
-                      </h3>
-                    </div>
-                    <form>
-                      <div className="items-center transition-colors h-9 w-9 flex justify-end">
-                        <SVGSkeleton className="w-[20px] h-[20px]" />
-                      </div>
-                    </form>
-                  </div>
-                  <div>
-                    <div className="flex justify-between">
-                      <div className="inline-flex items-center border px-2.5 py-0.5 transition-colors border-transparent m-0">
-                        <Skeleton className="w-[24px] max-w-full" />
-                      </div>
-                      <div className="text-left">
-                        <Skeleton className="w-[24px] max-w-full" />
-                      </div>
-                    </div>
-                    <div className="mt-2 flex justify-between">
-                      <div className="flex flex-nowrap items-center text-right">
-                        <Skeleton className="w-[40px] max-w-full" />
-                        <SVGSkeleton className="mx-1 size-3 w-[1empx] h-[1empx]" />
-                      </div>
-                      <div className="text-right">
-                        <a className="hidden md:block">
-                          <Skeleton className="w-[72px] max-w-full" />
-                        </a>
-                        <div className="hidden items-end text-right md:block">
-                          <Skeleton className="w-[152px] max-w-full" />
-                        </div>
-                        <div className="flex items-end text-right md:hidden">
-                          <Skeleton className="w-[80px] max-w-full" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div>
-          <div className="flex items-center justify-center">
-            <div className="relative flex items-center justify-center">
-              <div className="absolute right-0 top-0 m-2"></div>
-              <div className="border w-[150px] md:w-[200px] lg:w-[300px] mx-[5px] my-[0.5rem]">
-                <a>
-                  <SVGSkeleton className="rounded-t-xl w-[300px] h-[300px]" />
-                </a>
-                <div className="flex flex-col space-y-1.5 p-3">
-                  <div className="flex max-w-full justify-between">
-                    <div className="max-w-[calc(100%-36px)]">
-                      <h3 className="tracking-tight align-middle">
-                        <Skeleton className="w-[80px] max-w-full" />
-                      </h3>
-                    </div>
-                    <form>
-                      <div className="items-center transition-colors h-9 w-9 flex justify-end">
-                        <SVGSkeleton className="w-[20px] h-[20px]" />
-                      </div>
-                    </form>
-                  </div>
-                  <div>
-                    <div className="flex justify-between">
-                      <div className="inline-flex items-center border px-2.5 py-0.5 transition-colors border-transparent m-0">
-                        <Skeleton className="w-[48px] max-w-full" />
-                      </div>
-                      <div className="text-left">
-                        <Skeleton className="w-[40px] max-w-full" />
-                      </div>
-                    </div>
-                    <div className="mt-2 flex justify-between">
-                      <div className="flex flex-nowrap items-center text-right">
-                        <Skeleton className="w-[40px] max-w-full" />
-                        <SVGSkeleton className="mx-1 size-3 w-[1empx] h-[1empx]" />
-                      </div>
-                      <div className="text-right">
-                        <a className="hidden md:block">
-                          <Skeleton className="w-[72px] max-w-full" />
-                        </a>
-                        <div className="hidden items-end text-right md:block">
-                          <Skeleton className="w-[152px] max-w-full" />
-                        </div>
-                        <div className="flex items-end text-right md:hidden">
-                          <Skeleton className="w-[80px] max-w-full" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div>
-          <div className="flex items-center justify-center">
-            <div className="relative flex items-center justify-center">
-              <div className="absolute right-0 top-0 m-2"></div>
-              <div className="border w-[150px] md:w-[200px] lg:w-[300px] mx-[5px] my-[0.5rem]">
-                <a>
-                  <SVGSkeleton className="rounded-t-xl w-[300px] h-[300px]" />
-                </a>
-                <div className="flex flex-col space-y-1.5 p-3">
-                  <div className="flex max-w-full justify-between">
-                    <div className="max-w-[calc(100%-36px)]">
-                      <h3 className="tracking-tight align-middle">
-                        <Skeleton className="w-[32px] max-w-full" />
-                      </h3>
-                    </div>
-                    <form>
-                      <div className="items-center transition-colors h-9 w-9 flex justify-end">
-                        <SVGSkeleton className="w-[20px] h-[20px]" />
-                      </div>
-                    </form>
-                  </div>
-                  <div>
-                    <div className="flex justify-between">
-                      <div className="inline-flex items-center border px-2.5 py-0.5 transition-colors border-transparent m-0">
-                        <Skeleton className="w-[96px] max-w-full" />
-                      </div>
-                      <div className="text-left">
-                        <Skeleton className="w-[32px] max-w-full" />
-                      </div>
-                    </div>
-                    <div className="mt-2 flex justify-between">
-                      <div className="flex flex-nowrap items-center text-right">
-                        <Skeleton className="w-[40px] max-w-full" />
-                        <SVGSkeleton className="mx-1 size-3 w-[1empx] h-[1empx]" />
-                      </div>
-                      <div className="text-right">
-                        <a className="hidden md:block">
-                          <Skeleton className="w-[72px] max-w-full" />
-                        </a>
-                        <div className="hidden items-end text-right md:block">
-                          <Skeleton className="w-[152px] max-w-full" />
-                        </div>
-                        <div className="flex items-end text-right md:hidden">
-                          <Skeleton className="w-[80px] max-w-full" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div className="mb-6 mt-4 inline-flex h-9 items-center justify-center px-4 py-2 transition-colors">
+        <Skeleton className="w-[72px] max-w-full" />
       </div>
     </div>
   </>
-);
+)
 
 const LoadingSkeletonBrowse = () => (
-  <div className="flex justify-center w-full h-full p-10">
+  <div className="flex h-full w-full justify-center p-10">
     <LoadingSkeleton />
   </div>
-);
+)
 
-export default LoadingSkeletonBrowse;
+export default LoadingSkeletonBrowse

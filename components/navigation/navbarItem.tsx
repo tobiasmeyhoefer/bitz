@@ -7,8 +7,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
 import { Drawer, DrawerContent, DrawerTrigger } from '../ui/drawer'
@@ -72,7 +70,6 @@ const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
         )}
       </DropdownMenuTrigger>
       <DropdownMenuContent onPointerDownOutside={() => setOpen(false)}>
-        {/* <DropdownMenuLabel className="text-left">Menu</DropdownMenuLabel> */}
         <DropdownMenuItem className="p-0" onClick={() => setOpen(false)}>
           <NavItemLink
             className="w-full px-3 py-2 text-left text-sm no-underline hover:no-underline"
@@ -94,7 +91,6 @@ const NavbarItemDropdown = (props: NavbarItemDropdownProps) => {
             linkTo="/transactions"
           ></NavItemLink>
         </DropdownMenuItem>
-        {/* <DropdownMenuSeparator /> */}
 
         <DropdownMenuItem className="p-0 font-normal">
           <div className="w-full px-3 py-2">{props.signOut}</div>

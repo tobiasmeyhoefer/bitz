@@ -30,7 +30,7 @@ export default async function LocaleLayout({
   params: { locale: string }
 }>) {
   return (
-    <html lang={locale} className='' suppressHydrationWarning>
+    <html lang={locale} className="" suppressHydrationWarning>
       <body
         className={cn(
           'min-h-svh overflow-x-hidden bg-background font-space_grotesk antialiased',
@@ -44,11 +44,13 @@ export default async function LocaleLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <header>
-            <NavBar />
-          </header>
-          <main className="h-[calc(100svh-80px)]">
-            {children}
+          <div className='flex justify-center'>
+            <header className="w-screen md:max-w-[1420px]">
+              <NavBar />
+            </header>
+          </div>
+          <main className="flex h-[calc(100svh-80px)] justify-center">
+            <div className="w-screen md:max-w-[1420px]">{children}</div>
           </main>{' '}
           <Toaster />
         </ThemeProvider>

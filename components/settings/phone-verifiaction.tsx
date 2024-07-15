@@ -83,7 +83,7 @@ const PhoneVerification = ({ translations }: VerificationProps) => {
         to: currentUser.email,
       })
       toast({
-        title: translations.notVerified,
+        title: translations.verified,
         duration: 2000,
       })
     } else {
@@ -117,7 +117,7 @@ const PhoneVerification = ({ translations }: VerificationProps) => {
 
   return (
     <div>
-      <p className="mb-4">{translations.notVerified} ❌</p>
+      <p className="mb-4">{translations.notVerified}</p>
       <AlertDialog>
         <AlertDialogTrigger
           asChild
@@ -144,7 +144,6 @@ const PhoneVerification = ({ translations }: VerificationProps) => {
             <AlertDialogFooter>
               <AlertDialogCancel onClick={handleCancel}>{translations.cancel}</AlertDialogCancel>
               <Button onClick={sendNumberToUser}>
-                {/* <AlertDialogAction>Continue</AlertDialogAction> */}
                 {translations.continue}
               </Button>
             </AlertDialogFooter>
@@ -164,7 +163,6 @@ const PhoneVerification = ({ translations }: VerificationProps) => {
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel onClick={handleCancel}>Cancel</AlertDialogCancel>
-              {/* <AlertDialogAction>Continue</AlertDialogAction> */}
               <Button onClick={checkCode}>{translations.submit}</Button>
             </AlertDialogFooter>
           </AlertDialogContent>

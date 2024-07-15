@@ -1,8 +1,6 @@
 import {
   Card,
-  CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
@@ -81,10 +79,6 @@ export const Team = () => {
                 {position}
               </CardDescription>
             </CardHeader>
-
-            {/* <CardContent className="pb-2 text-center">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-            </CardContent> */}
           </Card>
         ))}
       </div>

@@ -113,7 +113,7 @@
 
   "MyShop": {
     "title": "MY BITZ",
-    "noBitz": "You have not added any Bitz yet.",
+    "noBitz": "You have not added any Bitz yet. You can add some by pressing the plus button!",
     "addProducts": "add Bit",
     "updateProducts": "update Bit",
     "deleteProduct": "delete Bit",

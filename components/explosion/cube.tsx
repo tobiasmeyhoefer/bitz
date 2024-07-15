@@ -9,7 +9,6 @@ import { AnimationMixer, Group, LoopOnce, MathUtils } from 'three'
 useGLTF.preload('/bitz_explosion_normal.glb')
 
 export default function Cube() {
-  // const [isPlaying, setIsPlaying] = useState(false);
   const motionVal = useMotionValue(0)
   const spring = useSpring(motionVal, { damping: 1, stiffness: 20 })
   const group = useRef<Group>(null)
@@ -17,9 +16,6 @@ export default function Cube() {
   let mixer = new AnimationMixer(scene)
 
   const handleClick = () => {
-    // const wrapper = document.getElementById("clickEventWrapper")
-    // wrapper?.classList.add("absolute", "inset-0", "-z-50")
-
     animations.forEach((clip) => {
       const action = mixer.clipAction(clip)
       action.reset().play()

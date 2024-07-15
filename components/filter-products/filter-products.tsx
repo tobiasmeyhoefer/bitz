@@ -195,7 +195,6 @@ export const FilterProducts = (props: {
                           max={highestPrice}
                           step={1}
                           defaultValue={[selectedValue]}
-                          // value={value}
                           onValueChange={onChange}
                         />
                       ) : (

@@ -42,9 +42,6 @@ export async function addProduct(values: ProductType, imageUrls: string[]) {
   const created = new Date(Date.now())
   created.setHours(created.getHours() + 2)
 
-  //nicht jeder User will das
-  // const {stripeId, paymentLink} = await addProductStripe(title, description ?? '', price, imageUrls)
-
   if (id) {
     const user = await getUserById(id)
     const product = await db
@@ -64,11 +61,8 @@ export async function addProduct(values: ProductType, imageUrls: string[]) {
         imageUrl5: imageUrls[4],
         isDirectlyBuyable: isDirectlyBuyable,
         isSold: false,
-        // stripeId: stripeId,
-        // paymentLink: paymentLink
       })
       .returning()
-    // product[0].id
     const { stripeId, paymentLink } = await addProductStripe(
       title,
       description ?? '',
@@ -83,7 +77,6 @@ export async function addProduct(values: ProductType, imageUrls: string[]) {
   }
   revalidatePath('/myshop')
   redirect('/myshop')
-  // const {stripeId, paymentLink} = await addProductStripe(title, description ?? '', price, imageUrls)
 }
 
 // Delete function requiring productId as string

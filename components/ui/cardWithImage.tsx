@@ -58,7 +58,7 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                     </Tooltip>
                   </TooltipProvider>
                   {!props.editable && props.favIcon && (
-                    <FavoriteLike className="justify-end" productId={product.id} />
+                    <FavoriteLike className="" productId={product.id} />
                   )}
                 </div>
                 <CardDescription className="!mt-0 text-sm">

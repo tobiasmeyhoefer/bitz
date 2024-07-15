@@ -18,11 +18,8 @@ const t = useTranslations('Landingpage')
       <div className="space-y-6 text-center lg:text-start">
         <main className="font-montserrat text-5xl font-bold md:text-6xl">
           <div id="clickEventWrapper" className="h-[300px] md:h-[400px]">
-            {/* <Suspense fallback={<p className="absolute left-0 top-0">Das ist ein test</p>}> */}
               <CubeScene />
-            {/* </Suspense> */}
           </div>
-          {/* <CubeScene /> */}
           <h1 className="inline">
             {t('sub01')}{' '}
             <span className="inline bg-gradient-to-r from-indigo-700  to-indigo-800 bg-clip-text text-transparent">
