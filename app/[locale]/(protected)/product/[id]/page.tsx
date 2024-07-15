@@ -45,7 +45,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       <div className="flex flex-col">
         <div
           id="product-info-container"
-          className="mb-16 mt-[5vh] flex w-screen flex-col items-center px-4 sm:px-10 md:mb-0 md:px-[20px] lg:flex-row lg:items-start lg:justify-around lg:gap-10 lg:px-[30px] xl:px-[80px]"
+          className="mb-16 mt-[5vh] flex w-screen max-w-full flex-col items-center px-4 sm:px-10 md:mb-0 md:px-[20px] lg:flex-row lg:items-start lg:justify-around lg:gap-10 lg:px-[30px] xl:px-[80px]"
         >
           <ProductImageCarousel
             translations={carouselTranslations}

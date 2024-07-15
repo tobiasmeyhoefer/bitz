@@ -109,8 +109,8 @@ export default function ProductInfoCard(props: ProductInfoType) {
           locale={locale}
         />
       ) : (
-        <div className="flex flex-col justify-center">
-          <Card className="my-3 h-full w-[90vw] lg:my-0 lg:h-[70vh] lg:w-[40vw]">
+        <div className=" w-[90vw] lg:h-[70vh] lg:w-[50vw]">
+          <Card className="mt-2 flex h-full flex-col justify-between lg:mt-0 lg:h-[70vh]">
             <CardHeader className="flex h-[20%] flex-row items-center justify-between">
               <CardTitle className="">{product.title}</CardTitle>
               <CardTitle className="!mt-0 w-1/4 text-right text-2xl md:text-3xl">
