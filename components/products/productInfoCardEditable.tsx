@@ -92,7 +92,7 @@ export default function ProductInfoCardEditable(props: {
   return (
     <>
       {isEditing ? (
-        <div className="my-3 flex h-full w-[90vw] justify-center lg:my-0 lg:h-[60vh] lg:w-[40vw]">
+        <div className="my-3 flex h-full w-[90vw] justify-center lg:my-0 lg:h-[70vh] lg:w-[50vw]">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
               <FormField
@@ -151,15 +151,17 @@ export default function ProductInfoCardEditable(props: {
           </Form>
         </div>
       ) : (
-        <div className="h-[50vh] w-[90vw] lg:h-[60vh] lg:w-[40vw] 2xl:w-[60vh]">
-          <Card className="mt-2 flex h-full flex-col justify-between lg:mt-0 lg:h-[60vh]">
+        <div className=" w-[90vw] lg:h-[70vh] lg:w-[50vw]">
+          <Card className="mt-2 flex h-full flex-col justify-between lg:mt-0 lg:h-[70vh]">
             <div>
-              <CardHeader className="flex h-[10vh] flex-row items-center justify-between">
-                <CardTitle className="text-center">{product.title}</CardTitle>
-                <CardTitle className="text-3xl">{product.price}€</CardTitle>
+              <CardHeader className="flex h-[20%] flex-row items-center justify-between">
+                <CardTitle className="">{product.title}</CardTitle>
+                <CardTitle className="!mt-0 w-1/4 text-right text-2xl md:text-3xl">
+                  {product.price}€
+                </CardTitle>
               </CardHeader>
               <Separator />
-              <CardContent className="flex min-h-[30vh] flex-col justify-between p-6 pb-0">
+              <CardContent className="flex flex-col justify-between p-6 ">
                 <div className="h-fit break-words text-sm">{product.description}</div>
               </CardContent>
             </div>

@@ -42,15 +42,15 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <div className="flex flex-col ">
+      <div className="flex flex-col">
         <div
           id="product-info-container"
-          className="flex min-h-[calc(100vh-80px)] w-screen flex-col items-center gap-10 lg:flex-row lg:justify-around"
+          className="mb-16 mt-[5vh] flex w-screen flex-col items-center px-4 sm:px-10 md:mb-0 md:px-[20px] lg:flex-row lg:items-start lg:justify-around lg:gap-10 lg:px-[30px] xl:px-[80px]"
         >
           <ProductImageCarousel
             translations={carouselTranslations}
             images={images}
-            className="h-[50vh] lg:h-[60vh]"
+            className=""
             sellerId={product.sellerId}
           />
           <ProductInfoCard productInfo={product} isOwner={isOwner} />
@@ -60,8 +60,8 @@ export default async function Page({ params }: { params: { id: string } }) {
             variant="outline"
             className={
               isOwner
-                ? 'xl:left-18 ml-12 mt-4 lg:absolute lg:top-32 xl:left-12  xl:top-36 2xl:left-24 2xl:top-36'
-                : 'fixed left-8 top-24 font-semibold md:left-14 lg:left-8 lg:top-36 xl:left-24 2xl:left-28 2xl:top-40'
+                ? 'fixed left-4 top-[80px] sm:left-10 md:left-[20px] lg:left-[30px] xl:left-[80px]'
+                : 'fixed left-4 top-[80px] font-semibold sm:left-10 md:left-[20px] lg:left-[30px] xl:left-[80px]'
             }
           >
             ⏎
@@ -72,7 +72,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             <Button
               variant="outline"
               className={
-                'fixed right-8 top-24 font-semibold md:right-14 lg:right-8 lg:top-36 xl:right-24 2xl:right-28 2xl:top-40'
+                'fixed right-4 top-[80px]  top-[80px] font-semibold sm:right-10 md:right-[20px] lg:right-[30px] xl:right-[80px] '
               }
             >
               {t('viewShop')}

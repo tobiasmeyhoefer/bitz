@@ -109,12 +109,12 @@ export default function ProductInfoCard(props: ProductInfoType) {
           locale={locale}
         />
       ) : (
-        <div className="flex flex-col">
-          <Card className="my-3 h-full w-[90vw] lg:my-0 lg:h-[60vh] lg:w-[40vw]">
+        <div className="flex flex-col justify-center">
+          <Card className="my-3 h-full w-[90vw] lg:my-0 lg:h-[70vh] lg:w-[40vw]">
             <CardHeader className="flex h-[20%] flex-row items-center justify-between">
-              <CardTitle className="text-center">{product.title}</CardTitle>
-              <CardTitle className="text-3xl">
-                {product.price} {locale === 'en' ? '$' : '€'}
+              <CardTitle className="">{product.title}</CardTitle>
+              <CardTitle className="!mt-0 w-1/4 text-right text-2xl md:text-3xl">
+                {product.price} €
               </CardTitle>
             </CardHeader>
             <Separator />
@@ -122,7 +122,10 @@ export default function ProductInfoCard(props: ProductInfoType) {
               <div className="flex justify-between text-wrap pb-6">
                 <div className="h-fit w-9/12 break-words">{product.description}</div>
               </div>
-              <div className="flex justify-between">
+              <div className="flex justify-between ">
+                <div className="md:text-md flex flex-nowrap items-end whitespace-nowrap text-right text-xs">
+                  {product.location}
+                </div>
                 {getDate(product.createdAt!, true, 'text-right')}
               </div>
             </CardContent>
