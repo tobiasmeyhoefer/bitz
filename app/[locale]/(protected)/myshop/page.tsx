@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import MyShopContent from '@/components/myShop/myshopContent'
+import MyShopContent from '@/components/myShop/my-shop-content'
 import { getTranslations } from 'next-intl/server'
 import Banner from '@/components/myShop/banner'
 import {

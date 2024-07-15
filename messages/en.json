@@ -253,5 +253,10 @@
     "title": "FAVORITES",
     "noFavorites": "You have no favorites yet. You can add some by pressing the like button on products.",
     "viewShop": "view Shop"
+  },
+  
+  "VerifyPage": {
+    "Email verification": "Email verification",
+    "Advice": "Please verify your email address by clicking the link in the email we sent you. If you don't receive an email, please check your spam folder."
   }
 }

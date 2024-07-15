@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl'
-import BrowseContent from '@/components/browse/browseContent'
+import BrowseContent from '@/components/browse/browse-content'
 import { SearchTranslations } from '@/lib/types'
 import { Suspense } from 'react'
 import LoadingSkeletonBrowse from '@/components/fallbacks/browse-fallback'

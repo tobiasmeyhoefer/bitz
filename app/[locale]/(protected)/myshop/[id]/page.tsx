@@ -6,7 +6,7 @@ import {
   getUserById,
 } from '@/lib/user-actions'
 import Image from 'next/image'
-import ShopContent from '@/components/myShop/shopContent'
+import ShopContent from '@/components/myShop/shop-content'
 import { getTranslations } from 'next-intl/server'
 
 export default async function Page({ params }: { params: { id: string } }) {

@@ -11,11 +11,11 @@ import {
   CardFooter,
 } from '@/components/ui/card'
 import { Check, Linkedin } from 'lucide-react'
-import { LightBulbIcon } from './Icons'
+import { LightBulbIcon } from './icons'
 import { GitHubLogoIcon } from '@radix-ui/react-icons'
 import Image from 'next/image'
 import { Link } from '@/navigation'
-import HeroCardAnimation from './HeroCardAnimation'
+import HeroCardAnimation from './hero-card-animation'
 
 export const HeroCards = () => {
   return (

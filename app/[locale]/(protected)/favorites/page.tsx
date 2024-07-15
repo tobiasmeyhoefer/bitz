@@ -1,5 +1,5 @@
 import LoadingSkeletonBrowse from '@/components/fallbacks/browse-fallback'
-import { CardWithImage } from '@/components/ui/cardWithImage'
+import { CardWithImage } from '@/components/ui/card-with-image'
 import { getFavoriteProducts } from '@/lib/product-actions'
 import { ProductType } from '@/schema'
 import { getTranslations } from 'next-intl/server'

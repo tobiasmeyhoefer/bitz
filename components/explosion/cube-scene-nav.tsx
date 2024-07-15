@@ -2,7 +2,7 @@
 import { Center } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { Suspense } from 'react'
-import Cube from './cubeNav'
+import Cube from './cube-nav'
 
 export default function Scene() {
   return (

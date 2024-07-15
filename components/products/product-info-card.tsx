@@ -1,7 +1,7 @@
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { useTranslations, useLocale } from 'next-intl'
-import ProductInfoCardEditable from './productInfoCardEditable'
+import ProductInfoCardEditable from './product-info-card-editable'
 import { cn } from '@/lib/utils'
 import { BuyButtons } from '@/components/products/buy-buttons'
 import { ProductType } from '@/schema'

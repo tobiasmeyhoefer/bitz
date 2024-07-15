@@ -253,5 +253,14 @@
     "title": "FAVORITEN",
     "noFavorites": "Du hast noch keine Favoriten. Du kannst welche hinzufügen indem du den like button auf Produkten drückst",
     "viewShop": "zum Shop"
+  },
+
+  "VerifyPage": {
+    "Email verification": "Email verifizierung",
+    "Advice": "Bitte überprüfe dein E-Mail-Postfach und klicke auf den Link zum Einloggen!",
+    "title": "Verifizierung",
+    "verify": "Verifizierung",
+    "verifying": "Verifizierung...",
+    "verifyingSuccess": "Dein Account wurde erfolgreich verifiziert"
   }
 }

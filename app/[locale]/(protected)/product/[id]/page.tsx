@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
-import { ProductImageCarousel } from '@/components/products/productImgCarousel'
-import ProductInfoCard from '@/components/products/productInfoCard'
+import { ProductImageCarousel } from '@/components/products/product-img-carousel'
+import ProductInfoCard from '@/components/products/product-info-card'
 import { Link } from '@/navigation'
 import { getTranslations } from 'next-intl/server'
 import { getProductById } from '@/lib/product-actions'

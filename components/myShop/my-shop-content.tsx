@@ -1,4 +1,4 @@
-import { CardWithImageMyShop } from '../ui/cardWithImageMyShop'
+import { CardWithImageMyShop } from '../ui/card-with-image-my-shop'
 import { getProductsOwned } from '@/lib/product-actions'
 import { getUser } from '@/lib/user-actions'
 import { getTranslations } from 'next-intl/server'
