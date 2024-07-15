@@ -51,7 +51,7 @@ const BrowseContent = (props: BrowseContentProps) => {
     const fetchData = async () => {
       const user = await getUser()
       setUserId(user.id)
-      const result = await getProductsBrowse(10, 0)
+      const result = await getProductsBrowse(40, 0)
       setProducts(result)
       if (!user.adress) {
         setAddressChoosen(false)
@@ -75,7 +75,7 @@ const BrowseContent = (props: BrowseContentProps) => {
       setShowLoadMoreButton(true)
     }, 1000)
 
-    const result = await getProductsBrowse(10, page * 10)
+    const result = await getProductsBrowse(40, page * 40)
     if (result.length < 4) {
       // Wert muss angepasst werden, je nach dem wie viele Produkte man mehr Laden moechte
       setHasMoreProducts(false)
@@ -155,7 +155,7 @@ const BrowseContent = (props: BrowseContentProps) => {
         </div>
         {!loading ? (
           <>
-            <div className="mt-[20px] grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4  lg:grid-cols-4 2xl:grid-cols-5 ">
+            <div className="mt-[20px] grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 xl:grid-cols-5 3xl:grid-cols-6">    {/*"mt-[20px] grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4  lg:grid-cols-4 2xl:grid-cols-5 "*/}
               {products.map((p, index) => (
                 <div key={`kp-${index}`}>
                   <AnimatedCard delay={0.3}>
