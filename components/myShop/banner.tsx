@@ -20,7 +20,7 @@ const Banner = ({ title }: { title: string }) => {
 
   return (
     <>
-      <div className="group relative h-40 w-full  bg-cover">
+      <div className="group relative h-40 w-full bg-cover">
         <div className="absolute h-3/5 w-full bg-gradient-to-b from-black/40 to-black/0"></div>
         <Image
           src={banner}

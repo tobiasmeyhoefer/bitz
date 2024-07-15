@@ -7,16 +7,13 @@ import { ChooseFont } from './choose-font'
 
 export function ShopText({ title }: { title: string }) {
   const [text, setText] = useState<string | null>(null)
-  const [textColor, setTextColor] = useState<string | null>(null)
   const [textFont, setTextFont] = useState<string | null>(null)
 
   useEffect(() => {
     const fetchShopname = async () => {
       const shopname = await getShopName()
-      const shopcolor = await getShopTextColor()
       const shopfont = await getShopTextFont()
       setText(shopname ?? title)
-      setTextColor(shopcolor)
       setTextFont(shopfont)
     }
     fetchShopname()
@@ -47,7 +44,6 @@ export function ShopText({ title }: { title: string }) {
               placeholder="My Shop"
               className="z-40 w-[55rem] border-none text-xl font-bold md:text-3xl"
               style={{
-                color: textColor!,
                 fontFamily: textFont!,
                 textShadow: '1px 1px 5px rgba(0, 0, 0, 0.6)',
                 outline: 'none',
@@ -58,10 +54,9 @@ export function ShopText({ title }: { title: string }) {
           </div>
         </div>
 
-        <div className="absolute left-2 top-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+        <div className="absolute left-10 top-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:left-24">
           <div className=" z-30 flex flex-row gap-2">
             <ChooseFont setFont={setTextFont} />
-            <ChooseFontcolor setColor={setTextColor} />
           </div>
         </div>
       </div>
