@@ -1,4 +1,4 @@
-import { Statistics } from './statistics'
+import { Statistics } from '@/components/landing-page/Statistics'
 import pilot from '@/public/images/pilot.png'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
