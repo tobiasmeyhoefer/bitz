@@ -21,16 +21,14 @@ export const TransactionCard = async ({ transaction }: { transaction: Transactio
   //user is buyer
   if (transaction.buyerId === user.id) {
     return (
-      <Card className="relative flex h-[200px] bg-transparent sm:h-[170px]">
-        <div>
-          <Image
-            src={product.imageUrl1!}
-            alt="image of product"
-            width={138.4}
-            height={138.4}
-            className="h-full rounded-l-lg object-cover"
-          />
-        </div>
+      <Card className="relative flex h-[188px] flex-row gap-4 bg-transparent sm:h-[170px]">
+        <Image
+          src={product.imageUrl1!}
+          alt="image of product"
+          width={150}
+          height={150}
+          className="h-full rounded-l-lg object-cover"
+        />
         <div>
           <CardHeader>
             <CardTitle>Du hast {product.title} gekauft</CardTitle>
@@ -51,12 +49,12 @@ export const TransactionCard = async ({ transaction }: { transaction: Transactio
   //user is seller
   if (transaction.sellerId === user.id) {
     return (
-      <Card className="relative flex h-[200px] bg-transparent sm:h-[170px]">
+      <Card className="relative flex h-[188px] flex-row gap-4 bg-transparent sm:h-[170px]">
         <Image
           src={product.imageUrl1!}
           alt="image of product"
-          width={138.4}
-          height={138.4}
+          width={150}
+          height={150}
           className="h-full rounded-l-lg object-cover"
         />
         <div>

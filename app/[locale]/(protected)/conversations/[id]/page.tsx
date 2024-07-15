@@ -6,7 +6,7 @@ import { getExisitingMessages } from '@/lib/message-actions'
 import { getProductById } from '@/lib/product-actions'
 import { getUser, getUserById } from '@/lib/user-actions'
 import { revalidatePath } from 'next/cache'
-import { redirect } from '@/navigation'
+import { Link, redirect } from '@/navigation'
 
 export default async function Page({ params }: { params: { id: string } }) {
   const convId = params.id

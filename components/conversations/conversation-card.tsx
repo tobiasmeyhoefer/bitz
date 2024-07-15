@@ -29,16 +29,14 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
   if (cardType === 'sellerCard') {
     return (
       <Link className="transition-all hover:bg-secondary" href={`/conversations/${conv.id}`}>
-        <Card className="relative flex h-[140px] bg-transparent">
-          <div>
-            <Image
-              src={product.imageUrl1!}
-              alt="image of product"
-              width={138.4}
-              height={138.4}
-              className="rounded-l-lg h-full object-cover"
-            />
-          </div>
+        <Card className="relative flex h-[140px] flex-row gap-4 bg-transparent">
+          <Image
+            src={product.imageUrl1!}
+            alt="image of product"
+            width={138.4}
+            height={138.4}
+            className="h-full rounded-l-lg object-cover"
+          />
           <div>
             <CardHeader>
               <CardTitle>
@@ -64,16 +62,14 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
           <span></span>
         ) : (
           <Link className="transition-all hover:bg-secondary" href={`/conversations/${conv.id}`}>
-            <Card className="relative flex h-[140px] bg-transparent">
-              <div>
-                <Image
-                  src={product.imageUrl1!}
-                  alt="image of product"
-                  width={138.4}
-                  height={138.4}
-                  className="rounded-l-lg h-full object-cover"
-                />
-              </div>
+            <Card className="relative flex h-[140px] flex-row gap-4 bg-transparent">
+              <Image
+                src={product.imageUrl1!}
+                alt="image of product"
+                width={138.4}
+                height={138.4}
+                className="h-full rounded-l-lg object-cover"
+              />
               <div>
                 <ConversationCardDropwdown conv={conv} showSold={true} />
                 <CardHeader>
