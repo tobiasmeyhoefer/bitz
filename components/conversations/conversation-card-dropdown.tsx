@@ -30,6 +30,10 @@ export const ConversationCardDropwdown = ({
     router.push('/transactions')
   }
 
+  const notInterested = async () => {
+    await deleteConversation(conv.productId, conv.buyerId)
+  }
+
   return (
     <div className="absolute right-4 top-4">
       <DropdownMenu>
@@ -41,7 +45,11 @@ export const ConversationCardDropwdown = ({
             <DropdownMenuItem onClick={changeProdStateToSold} className="cursor-pointer">
               verkauft
             </DropdownMenuItem>
-          ) : null}
+          ) : (
+            <DropdownMenuItem onClick={notInterested} className="cursor-pointer">
+              Nicht mehr interessiert
+            </DropdownMenuItem>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
