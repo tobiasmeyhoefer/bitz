@@ -44,6 +44,7 @@ export async function deleteConversation(productId: string, buyerId: string) {
   await db
     .delete(conversations)
     .where(or(eq(conversations.productId, productId), eq(conversations.buyerId, buyerId)))
+  revalidatePath('/conversations')
 }
 
 export async function declineOffer(id: string) {

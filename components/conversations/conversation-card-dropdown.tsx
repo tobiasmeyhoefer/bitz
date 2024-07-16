@@ -32,6 +32,7 @@ export const ConversationCardDropwdown = ({
 
   const notInterested = async () => {
     await deleteConversation(conv.productId, conv.buyerId)
+    router.push('/conversations')
   }
 
   return (
