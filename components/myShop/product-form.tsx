@@ -430,7 +430,7 @@ export function ProductForm({
                       }}
                     />
                   </FormControl>
-                  <p style={{ fontSize: '14px', color: '#666', marginTop: '4px' }}>{charsRemaining} remaining characters</p>
+                  <p style={{ fontSize: '14px', color: '#666', marginTop: '4px' }}>{charsRemaining} Remaining characters</p>
                   <FormMessage />
                 </FormItem>
             )}
