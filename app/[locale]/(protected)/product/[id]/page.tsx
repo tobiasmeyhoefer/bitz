@@ -42,43 +42,36 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <div className="flex flex-col ">
+      <div className="mb-16 flex flex-col px-4 sm:px-10 md:mb-0 md:px-[20px] lg:px-[30px] xl:px-[80px]">
+        <div className="flex w-full justify-between">
+          <Link href={backButtonHref} className="w-2">
+            <Button
+              variant="outline"
+              className={isOwner ? 'top-[80px]' : ' top-[80px] font-semibold'}
+            >
+              ⏎
+            </Button>
+          </Link>
+          {!isOwner && (
+            <Link href={`/myshop/${product.sellerId}`}>
+              <Button variant="outline" className={'top-[80px]'}>
+                {t('viewShop')}
+              </Button>
+            </Link>
+          )}
+        </div>
         <div
           id="product-info-container"
-          className="flex min-h-[calc(100vh-80px)] w-screen flex-col items-center gap-10 lg:flex-row lg:justify-around"
+          className="mb-16 mt-2 flex flex-col items-center md:mb-0 md:mt-[5vh] lg:flex-row lg:items-start lg:justify-between lg:gap-6 "
         >
           <ProductImageCarousel
             translations={carouselTranslations}
             images={images}
-            className="h-[50vh] lg:h-[60vh]"
+            className=""
             sellerId={product.sellerId}
           />
           <ProductInfoCard productInfo={product} isOwner={isOwner} />
         </div>
-        <Link href={backButtonHref} className="w-2">
-          <Button
-            variant="outline"
-            className={
-              isOwner
-                ? 'xl:left-18 ml-12 mt-4 lg:absolute lg:top-32 xl:left-12  xl:top-36 2xl:left-24 2xl:top-36'
-                : 'fixed left-8 top-24 font-semibold md:left-14 lg:left-8 lg:top-36 xl:left-24 2xl:left-28 2xl:top-40'
-            }
-          >
-            ⏎
-          </Button>
-        </Link>
-        {!isOwner && (
-          <Link href={`/myshop/${product.sellerId}`}>
-            <Button
-              variant="outline"
-              className={
-                'fixed right-8 top-24 font-semibold md:right-14 lg:right-8 lg:top-36 xl:right-24 2xl:right-28 2xl:top-40'
-              }
-            >
-              {t('viewShop')}
-            </Button>
-          </Link>
-        )}
       </div>
     </>
   )

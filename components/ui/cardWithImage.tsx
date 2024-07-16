@@ -9,34 +9,50 @@ import FavoriteLike from '../favorites/favoriteLike'
 import { Badge } from './badge'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { CardContainer } from './3d-card'
+import { ProdDelAlert } from '../myShop/productDelAlert'
 
 const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
   ({ className, ...props }, ref) => {
     const product = props.product
+    const myshopTranslations = props.myshopTranslations
     return (
       <>
         {props && product && (
           <CardContainer>
-            <Card className={cn(`w-[160px] md:w-[200px] lg:w-[240px]`, className)} ref={ref}>
+            <Card
+              className={cn(
+                `w-[calc(90svw/2)] max-w-[calc(1420px/6)] sm:w-[calc(90svw/3)] md:w-[calc(90svw/4)] lg:w-[calc(90svw/5)]`,
+                className,
+              )}
+              ref={ref}
+            >
               <Link href={`/product/${product.id}`}>
-                {product.imageUrl1 ? (
-                  <Image
-                    src={product.imageUrl1 as string}
-                    width={300}
-                    height={300}
-                    layout="responsive"
-                    className={`rounded-t-xl`}
-                    alt="Preview Image Article"
-                    style={{ objectFit: 'cover' }}
-                    sizes="(max-width: 640px) 160px, (max-width: 768px) 200px, 240px"
-                  />
-                ) : (
-                  <div
-                    className={`flex h-[160px] w-[160px] items-center justify-center rounded-t-xl md:h-[200px] md:w-[200px] lg:h-[240px] lg:w-[240px]`}
-                  >
-                    <div>Placeholder Image</div>
-                  </div>
-                )}
+                <div className="relative">
+                  {props.product.isSold && myshopTranslations && (
+                    <Badge className="md:text-md absolute right-2 top-2 bg-green-500 text-sm md:right-4 md:top-4">
+                      {myshopTranslations.sold}
+                    </Badge>
+                  )}
+
+                  {product.imageUrl1 ? (
+                    <Image
+                      src={product.imageUrl1 as string}
+                      width={300}
+                      height={300}
+                      layout="responsive"
+                      className={`rounded-t-xl`}
+                      alt="Preview Image Article"
+                      style={{ objectFit: 'cover' }}
+                      sizes="(max-width: 640px) 160px, (max-width: 768px) 200px, 240px"
+                    />
+                  ) : (
+                    <div
+                      className={`flex h-[160px] w-[160px] items-center justify-center rounded-t-xl md:h-[200px] md:w-[200px] lg:h-[240px] lg:w-[240px]`}
+                    >
+                      <div>Placeholder Image</div>
+                    </div>
+                  )}
+                </div>
               </Link>
 
               <CardHeader className="p-2 md:p-3">
@@ -56,6 +72,16 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
+                  {myshopTranslations && (
+                    <ProdDelAlert
+                      menuDeleteOption={myshopTranslations.menuDeleteOption}
+                      productId={props.product.id}
+                      title={myshopTranslations.title}
+                      yousure={myshopTranslations.yousure}
+                      cancel={myshopTranslations.cancel}
+                      confirm={myshopTranslations.confirm}
+                    />
+                  )}
                   {!props.editable && props.favIcon && (
                     <FavoriteLike className="" productId={product.id} />
                   )}
@@ -88,6 +114,16 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                       {formatDate(product.createdAt)}
                     </div>
                   </div>
+                  {props.editable && props.favIcon && myshopTranslations && (
+                    <ProdDelAlert
+                      menuDeleteOption={myshopTranslations.menuDeleteOption}
+                      productId={props.product.id}
+                      title={myshopTranslations.title}
+                      yousure={myshopTranslations.yousure}
+                      cancel={myshopTranslations.cancel}
+                      confirm={myshopTranslations.confirm}
+                    />
+                  )}
                 </CardDescription>
               </CardHeader>
             </Card>
