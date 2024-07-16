@@ -110,7 +110,7 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                     <div className="md:text-md flex flex-nowrap items-end whitespace-nowrap text-right text-xs md:hidden">
                       {props.product.location?.split(' ').slice(1)}
                     </div>
-                    <div className=" md:text-md flex items-end text-right text-right text-xs md:block">
+                    <div className=" md:text-md flex items-end text-right text-xs md:block">
                       {formatDate(product.createdAt)}
                     </div>
                   </div>
