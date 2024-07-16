@@ -5,18 +5,12 @@ import ChooseBanner from './choose-banner'
 import { getBanner } from '@/lib/user-actions'
 import { ShopText } from './shop-text'
 
-const Banner = ({ title }: { title: string }) => {
-  const [banner, setBanner] = useState('/images/Banner/default.png')
+const Banner = ({ title, myBanner }: { title: string; myBanner: string }) => {
+  const [banner, setBanner] = useState('')
 
   useEffect(() => {
-    const fetchBanner = async () => {
-      const ban = await getBanner()
-      if (ban) {
-        setBanner(ban)
-      }
-    }
-    fetchBanner()
-  }, [])
+    setBanner(myBanner ?? '/images/Banner/default.png')
+  }, [myBanner])
 
   return (
     <>
@@ -26,7 +20,7 @@ const Banner = ({ title }: { title: string }) => {
           src={banner}
           alt="Product Image"
           style={{ objectFit: 'cover' }}
-          width={1800}
+          width={3800}
           height={150}
           className="h-full w-full"
         />

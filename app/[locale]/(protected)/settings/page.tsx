@@ -8,6 +8,8 @@ import ProfileSettings from '@/components/settings/profile-settings'
 import RestartOnboarding from '@/components/settings/restart-onboarding'
 import { Suspense } from 'react'
 import LoadingSkeletonSettings from '@/components/fallbacks/settings-fallback'
+import { Link } from '@/navigation'
+import { Button } from '@/components/ui/button'
 
 const Settings = () => {
   const t = useTranslations('Settings')
@@ -56,6 +58,7 @@ const Settings = () => {
             />
           </div>
         </div>
+        <Link href={"https://www.youtube.com"} className='absolute left-8 bottom-8' target='_blank'><Button className=''>Ich brauche Hilfe</Button></Link>
       </Suspense>
     </div>
   )

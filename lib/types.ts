@@ -32,6 +32,15 @@ type CardWithImageProps = {
   product: ProductType
   editable: boolean
   viewTranslation: string
+  myshopTranslations?: {
+    sold: string
+    menuDeleteOption: string
+    title: string
+    yousure: string
+    cancel: string
+    confirm: string
+    
+  }
 }
 
 type MyShopProps = {

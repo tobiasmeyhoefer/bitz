@@ -2,13 +2,9 @@ import { Button } from '@/components/ui/button'
 import MyShopContent from '@/components/myShop/myshopContent'
 import { getTranslations } from 'next-intl/server'
 import Banner from '@/components/myShop/banner'
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogTrigger,
-} from '@/components/ui/dialog'
+import { Dialog, DialogClose, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { ProductForm } from '@/components/myShop/product-form'
+import { getBanner } from '@/lib/user-actions'
 
 const MyShop = async () => {
   const t = await getTranslations('MyShop')
@@ -26,10 +22,10 @@ const MyShop = async () => {
     isDirectlyBuyable: t2('isDirectlyBuyable'),
     deletePicture: t2('deletePicture'),
   }
-
+  const banner = await getBanner()
   return (
     <div className="inset-x-1/2 flex flex-col items-center">
-      <Banner title={t('title')} />
+      <Banner title={t('title')} myBanner={banner} />
       <div>
         <MyShopContent />
       </div>
