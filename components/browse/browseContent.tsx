@@ -20,34 +20,19 @@ import AddressChooserPopup from '../adressChooser-popup/adressChooser-popup'
 import LoadingSkeletonBrowse from '../fallbacks/browse-fallback'
 
 const suggestions = [
-  'Reciever',
-  'Monitor',
-  'Audio',
-  'Laptop',
-  'Headphone',
-  'Smartphone',
-  'Tablet',
-  'Smartwatch',
-  'Printer',
-  'Camera',
-  'Speaker',
-  'Projector',
-  'Game Console',
-  'Drone',
-  'Router',
-  'Hard Drive',
-  'SSD',
-  'Keyboard',
-  'Mouse',
-  'Graphics Card',
-  'Motherboard',
-  'Power Supply',
-  'RAM',
-  'Cooling System',
-  'VR Headset',
-  'E-Reader',
-  'Fitness Tracker',
-  'Charger',
+  'Audio', 'Beamer', 'Bluetooth Speaker', 'Blu-ray Player', 'Camera',
+  'Charger', 'Cooling System', 'CPU', 'Dashcam', 'Desktop PC',
+  'Digital Frame', 'DJ Equipment', 'Drone', 'E-Reader', 'External Sound Card',
+  'Fitness Tracker', 'Game Console', 'Gaming Chair', 'Gaming Controller', 'Graphics Card',
+  'Hard Drive', 'Headphone', 'Home Theater', 'Keyboard', 'Laptop',
+  'Lighting', 'Microphone', 'Monitor', 'Motherboard', 'Mouse',
+  'Network Switch', 'Notebook', 'Power Supply', 'Printer', 'Projector',
+  'RAM', 'Receiver', 'Router', 'Scanner', 'Smart Doorbell',
+  'Smart Home Hub', 'Smart Lock', 'Smart Plug', 'Smart Speaker', 'Smart Thermostat',
+  'Smartphone', 'Smartwatch', 'Soundbar', 'SSD', 'Streaming Device',
+  'Tablet', 'TV', 'UPS', 'VR Headset', 'Walkie Talkie',
+  'Weather Station', 'Webcam', 'WiFi Extender', 'WiFi Router', 'Wireless Charger',
+  'Wireless Earbuds', 'Workstation'
 ]
 
 const BrowseContent = (props: BrowseContentProps) => {
@@ -66,7 +51,7 @@ const BrowseContent = (props: BrowseContentProps) => {
     const fetchData = async () => {
       const user = await getUser()
       setUserId(user.id)
-      const result = await getProductsBrowse(10, 0)
+      const result = await getProductsBrowse(60, 0)
       setProducts(result)
       if (!user.adress) {
         setAddressChoosen(false)
@@ -90,7 +75,7 @@ const BrowseContent = (props: BrowseContentProps) => {
       setShowLoadMoreButton(true)
     }, 1000)
 
-    const result = await getProductsBrowse(10, page * 10)
+    const result = await getProductsBrowse(60, page * 60)
     if (result.length < 4) {
       // Wert muss angepasst werden, je nach dem wie viele Produkte man mehr Laden moechte
       setHasMoreProducts(false)
@@ -185,18 +170,22 @@ const BrowseContent = (props: BrowseContentProps) => {
                   </AnimatedCard>
                 </div>
               ))}
-              {noSearchResults && <div className="px-4">Keine Suchergebnisse gefunden</div>}
             </div>
-            {hasMoreProducts && showLoadMoreButton && (
-              <Button
-                onClick={loadMoreProducts}
-                disabled={isLoadingMore}
-                variant="default"
-                className="mb-6 mt-4"
-              >
-                {isLoadingMore ? 'Loading...' : 'Load More'}
-              </Button>
-            )}
+            <div className="flex justify-center mt-4 mb-6">
+              {noSearchResults ? (
+                <div>Keine Suchergebnisse gefunden</div>
+              ) : (
+                hasMoreProducts && showLoadMoreButton && (
+                  <Button
+                    onClick={loadMoreProducts}
+                    disabled={isLoadingMore}
+                    variant="default"
+                  >
+                    {isLoadingMore ? 'Loading...' : 'Load More'}
+                  </Button>
+                )
+              )}
+            </div>
           </>
         ) : (
           <LoadingSkeletonBrowse />
