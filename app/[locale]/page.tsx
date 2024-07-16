@@ -15,14 +15,14 @@
  * The translations for the content are handled using the `useTranslations` hook from `next-intl`.
  */
 import { About } from '@/components/landing-page/About'
-import { FAQ } from '@/components/landing-page/faq'
+import { FAQ } from '@/components/landing-page/FAQ'
 import { Hero } from '@/components/landing-page/Hero'
 import { HowItWorks } from '@/components/landing-page/HowItWorks'
-import { Newsletter } from '@/components/landing-page/newsletter'
+import { Newsletter } from '@/components/landing-page/Newsletter'
 import { ScrollToTop } from '@/components/landing-page/ScrollToTop'
-import { Sponsors } from '@/components/landing-page/sponsors'
-import { Team } from '@/components/landing-page/team'
-import { Testimonials } from '@/components/landing-page/testimonials'
+import { Sponsors } from '@/components/landing-page/Sponsors'
+import { Team } from '@/components/landing-page/Team'
+import { Testimonials } from '@/components/landing-page/Testimonials'
 import AnimatedCard from '@/components/ui/animated-card'
 import { useTranslations } from 'next-intl'
 

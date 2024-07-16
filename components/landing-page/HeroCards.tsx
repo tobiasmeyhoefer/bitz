@@ -18,7 +18,7 @@ import {
   CardFooter,
 } from '@/components/ui/card'
 import { Check } from 'lucide-react'
-import { LightBulbIcon } from './icons'
+import { LightBulbIcon } from './Icons'
 import Image from 'next/image'
 import { Link } from '@/navigation'
 import HeroCardAnimation from './HeroCardAnimation'

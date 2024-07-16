@@ -6,11 +6,10 @@
  * The section is wrapped in a container with some padding and centered text. The title uses a gradient background to highlight the key phrase.
  *
  * @returns {JSX.Element} The "How It Works" section component
-*/
-
+ */
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { MedalIcon, MapIcon, PlaneIcon, GiftIcon } from '@/components/landing-page/icons'
+import { MedalIcon, MapIcon, PlaneIcon, GiftIcon } from '@/components/landing-page/Icons'
 import { useTranslations } from 'next-intl'
 interface FeatureProps {
   icon: JSX.Element
