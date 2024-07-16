@@ -21,7 +21,7 @@ import LoadingSkeletonBrowse from '../fallbacks/browse-fallback'
 
 const suggestions = [
   'Audio', 'Beamer', 'Bluetooth Speaker', 'Blu-ray Player', 'Camera',
-  'Charger', 'Cooling System', 'CPU', 'Dashcam', 'Desktop PC', 
+  'Charger', 'Cooling System', 'CPU', 'Dashcam', 'Desktop PC',
   'Digital Frame', 'DJ Equipment', 'Drone', 'E-Reader', 'External Sound Card',
   'Fitness Tracker', 'Game Console', 'Gaming Chair', 'Gaming Controller', 'Graphics Card',
   'Hard Drive', 'Headphone', 'Home Theater', 'Keyboard', 'Laptop',
@@ -51,7 +51,7 @@ const BrowseContent = (props: BrowseContentProps) => {
     const fetchData = async () => {
       const user = await getUser()
       setUserId(user.id)
-      const result = await getProductsBrowse(40, 0)
+      const result = await getProductsBrowse(60, 0)
       setProducts(result)
       if (!user.adress) {
         setAddressChoosen(false)
@@ -75,7 +75,7 @@ const BrowseContent = (props: BrowseContentProps) => {
       setShowLoadMoreButton(true)
     }, 1000)
 
-    const result = await getProductsBrowse(40, page * 40)
+    const result = await getProductsBrowse(60, page * 60)
     if (result.length < 4) {
       // Wert muss angepasst werden, je nach dem wie viele Produkte man mehr Laden moechte
       setHasMoreProducts(false)
@@ -155,7 +155,7 @@ const BrowseContent = (props: BrowseContentProps) => {
         </div>
         {!loading ? (
           <>
-            <div className="mt-[20px] grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 xl:grid-cols-5 3xl:grid-cols-6">    {/*"mt-[20px] grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4  lg:grid-cols-4 2xl:grid-cols-5 "*/}
+            <div className="mt-[20px] grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4  lg:grid-cols-4 2xl:grid-cols-5 ">
               {products.map((p, index) => (
                 <div key={`kp-${index}`}>
                   <AnimatedCard delay={0.3}>
@@ -170,18 +170,22 @@ const BrowseContent = (props: BrowseContentProps) => {
                   </AnimatedCard>
                 </div>
               ))}
-              {noSearchResults && <div className="px-4">Keine Suchergebnisse gefunden</div>}
             </div>
-            {hasMoreProducts && showLoadMoreButton && (
-              <Button
-                onClick={loadMoreProducts}
-                disabled={isLoadingMore}
-                variant="default"
-                className="mb-6 mt-4"
-              >
-                {isLoadingMore ? 'Loading...' : 'Load More'}
-              </Button>
-            )}
+            <div className="flex justify-center mt-4 mb-6">
+              {noSearchResults ? (
+                <div>Keine Suchergebnisse gefunden</div>
+              ) : (
+                hasMoreProducts && showLoadMoreButton && (
+                  <Button
+                    onClick={loadMoreProducts}
+                    disabled={isLoadingMore}
+                    variant="default"
+                  >
+                    {isLoadingMore ? 'Loading...' : 'Load More'}
+                  </Button>
+                )
+              )}
+            </div>
           </>
         ) : (
           <LoadingSkeletonBrowse />
