@@ -1,4 +1,5 @@
 'use client'
+import { RxCross2 } from 'react-icons/rx'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import { z } from 'zod'
@@ -58,19 +59,26 @@ export default function NameChanger({ translations }: NameChangerProps) {
     <div className="mb-6">
       <Form {...form}>
         <FormLabel>{translations.changeName}</FormLabel>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="">
-          <FormField
-            control={form.control}
-            name={'name'}
-            render={({ field }) => (
-              <FormItem>
-                <FormMessage />
-                <FormControl>
-                  <Input {...field} defaultValue={name} />
-                </FormControl>
-              </FormItem>
-            )}
-          />
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <div className="flex items-center gap-2">
+            <FormField
+              control={form.control}
+              name={'name'}
+              render={({ field }) => (
+                <FormItem className="w-[calc(100%-40px)]">
+                  <FormMessage />
+                  <FormControl>
+                    <Input {...field} defaultValue={name} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <RxCross2
+              size={22}
+              onClick={() => form.reset({ name: name })}
+              className="hover:cursor-pointer"
+            />
+          </div>
           <Button className="mt-4" type="submit">
             {translations.changeNow}
           </Button>
