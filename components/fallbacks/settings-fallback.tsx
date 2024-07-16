@@ -1,10 +1,16 @@
+/**
+ * Renders a loading skeleton UI for the settings page.
+ * The skeleton includes placeholders for various UI elements such as a profile picture, form fields, and buttons.
+ * This component is used to provide a smooth loading experience while the actual content is being fetched.
+ */
+
 import { Skeleton, SVGSkeleton } from '@/components/ui/skeleton'
 
 const LoadingSkeleton = () => (
   <>
     <div>
       <div className="mb-8 flex justify-center gap-4">
-        <SVGSkeleton className="rounded-full w-[200px] h-[200px]" />
+        <SVGSkeleton className="h-[200px] w-[200px] rounded-full" />
         <div className="mt-6">
           <form className="space-y-4">
             <div className="space-y-2">
@@ -13,7 +19,7 @@ const LoadingSkeleton = () => (
               </label>
               <div className="flex h-9 w-full border border-input px-3 py-1 shadow-sm transition-colors file:border-0"></div>
             </div>
-            <div className="inline-flex items-center justify-center transition-colors shadow-sm h-9 px-4 py-2 mt-4">
+            <div className="mt-4 inline-flex h-9 items-center justify-center px-4 py-2 shadow-sm transition-colors">
               <Skeleton className="w-[64px] max-w-full" />
             </div>
           </form>
@@ -31,7 +37,7 @@ const LoadingSkeleton = () => (
             <div className="space-y-2">
               <div className="flex h-9 w-full border border-input px-3 py-1 shadow-sm transition-colors file:border-0"></div>
             </div>
-            <div className="inline-flex items-center justify-center transition-colors shadow-sm h-9 px-4 py-2 mt-4">
+            <div className="mt-4 inline-flex h-9 items-center justify-center px-4 py-2 shadow-sm transition-colors">
               <Skeleton className="w-[64px] max-w-full" />
             </div>
           </form>
@@ -47,11 +53,11 @@ const LoadingSkeleton = () => (
                   <Skeleton className="w-[168px] max-w-full" />
                 </div>
                 <div>
-                  <SVGSkeleton className="w-4 h-[24px]" />
+                  <SVGSkeleton className="h-[24px] w-4" />
                 </div>
               </div>
             </div>
-            <div className="inline-flex items-center justify-center transition-colors shadow-sm h-9 px-4 py-2 mt-4">
+            <div className="mt-4 inline-flex h-9 items-center justify-center px-4 py-2 shadow-sm transition-colors">
               <Skeleton className="w-[64px] max-w-full" />
             </div>
           </form>
@@ -59,12 +65,12 @@ const LoadingSkeleton = () => (
       </div>
     </div>
   </>
-);
+)
 
 const LoadingSkeletonSettings = () => (
-  <div className="flex justify-center w-full h-full p-10">
+  <div className="flex h-full w-full justify-center p-10">
     <LoadingSkeleton />
   </div>
-);
+)
 
-export default LoadingSkeletonSettings;
+export default LoadingSkeletonSettings

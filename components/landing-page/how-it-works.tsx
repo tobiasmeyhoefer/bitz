@@ -1,3 +1,13 @@
+/**
+ * Renders the "How It Works" section of the landing page, displaying a grid of feature cards with icons, titles, and descriptions.
+ *
+ * The feature data is defined in the `features` array, which is mapped to render the individual feature cards.
+ *
+ * The section is wrapped in a container with some padding and centered text. The title uses a gradient background to highlight the key phrase.
+ *
+ * @returns {JSX.Element} The "How It Works" section component
+ */
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { MedalIcon, MapIcon, PlaneIcon, GiftIcon } from '@/components/landing-page/icons'
 import { useTranslations } from 'next-intl'

@@ -1,3 +1,9 @@
+/**
+ * Renders a locale switcher component that allows the user to select the current locale.
+ * The component uses the `useLocale` and `useTranslations` hooks from `next-intl` to get the current locale and translations.
+ * The available locales are defined in the `locales` array imported from `@/i18n`.
+ * The component renders a select dropdown with the available locales, and updates the current locale when the user selects a new one.
+ */
 import { useLocale, useTranslations } from 'next-intl'
 import LocaleSwitcherSelect from './locale-switcher-select'
 import { locales } from '@/i18n'

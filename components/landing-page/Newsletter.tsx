@@ -1,3 +1,9 @@
+/**
+ * The `Newsletter` component renders a section for a newsletter signup form.
+ * It includes a heading, a brief description, and a button to navigate to the login page.
+ * The component is wrapped in a section with an `id` of "newsletter" and includes
+ * horizontal rules above and below the content.
+ */
 'use client'
 
 import { Button } from '@/components/ui/button'

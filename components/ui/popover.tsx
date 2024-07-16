@@ -1,3 +1,14 @@
+/**
+ * A Popover component that provides a customizable popup content area.
+ *
+ * The Popover component is built on top of the Radix UI Popover primitive, providing a set of sub-components for controlling the trigger, anchor, and content of the popover.
+ *
+ * The PopoverContent component is the main content area of the popover, which can be positioned relative to the trigger element using the `align` and `sideOffset` props.
+ *
+ * The Popover, PopoverTrigger, and PopoverAnchor components are used to compose the overall popover structure, while the PopoverContent component is responsible for rendering the actual content.
+ *
+ * The popover content can be styled using the provided CSS classes, which include animations for opening and closing the popover.
+ */
 "use client"
 
 import * as React from "react"

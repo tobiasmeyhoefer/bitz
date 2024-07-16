@@ -1,3 +1,12 @@
+/**
+ * A React component that renders a sort dropdown for products.
+ *
+ * @param {sortProps} params - The props for the SortProducts component.
+ * @param {SortProductsProps} params.translations - The translations for the sort options.
+ * @param {(value: SetStateAction<ProductType[]>) => void} params.setProducts - A function to set the products to be displayed.
+ * @param {string} [params.userId] - An optional user ID for sorting products for a specific user.
+ * @returns {JSX.Element} - The rendered SortProducts component.
+ */
 'use client'
 import {
   Select,

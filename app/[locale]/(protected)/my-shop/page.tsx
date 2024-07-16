@@ -1,3 +1,14 @@
+/**
+ * The main component for the MyShop page.
+ * 
+ * This component renders the MyShop page, which includes a banner, the MyShopContent component, and a floating button that opens a dialog to add a new product.
+ * 
+ * The component uses the `getTranslations` function from `next-intl/server` to fetch translations for the page content.
+ * 
+ * The `getBanner` function from `@/lib/user-actions` is used to fetch the banner data to be displayed.
+ * 
+ * The `ProductForm` component is rendered inside the dialog, which allows the user to add a new product.
+ */
 import { Button } from '@/components/ui/button'
 import MyShopContent from '@/components/my-shop/my-shop-content'
 import { getTranslations } from 'next-intl/server'

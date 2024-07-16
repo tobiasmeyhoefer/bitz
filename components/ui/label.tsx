@@ -1,3 +1,11 @@
+/**
+ * A React component that renders a label using the Radix UI Label primitive.
+ * The label can be styled using the `cva` (class-variance-authority) library.
+ *
+ * @param {React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> & VariantProps<typeof labelVariants>} props - The props for the label component.
+ * @param {string} [props.className] - Additional CSS classes to apply to the label.
+ * @returns {React.ReactElement} - The rendered label component.
+ */
 "use client"
 
 import * as React from "react"

@@ -1,3 +1,12 @@
+/**
+ * A React component that renders a card-like UI element with a header, title, description, content, and optional footer.
+ *
+ * The `Card` component is a reusable building block for creating card-based layouts in a React application. It provides a consistent and customizable structure for displaying content within a card-like container.
+ *
+ * The `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, and `CardFooter` components are sub-components that can be used to compose the structure of the card.
+ *
+ * The `Card` component and its sub-components use Tailwind CSS utility classes for styling, which can be customized by passing a `className` prop.
+ */
 import * as React from 'react'
 
 import { cn } from '@/lib/utils'

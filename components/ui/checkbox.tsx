@@ -1,3 +1,11 @@
+/**
+ * A custom Checkbox component that wraps the Radix UI Checkbox component.
+ * It provides a consistent look and feel, with additional styles and accessibility features.
+ *
+ * @param className - An optional CSS class name to apply to the checkbox.
+ * @param props - Additional props to pass to the Radix UI Checkbox component.
+ * @returns A React component that renders a custom checkbox.
+ */
 'use client'
 
 import * as React from 'react'

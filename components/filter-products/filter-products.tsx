@@ -1,3 +1,27 @@
+/**
+ * The `FilterProducts` component is responsible for rendering a filter UI that allows users to filter products based on various criteria such as category, location, price, and whether the product is directly buyable.
+ *
+ * The component uses the `react-hook-form` library to manage the form state and validation. It also utilizes various UI components from the `@/components/ui` module to create the filter UI.
+ *
+ * The component receives two props:
+ * - `setProducts`: a function that updates the list of products based on the applied filters
+ * - `translations`: an object containing localized strings for the filter UI
+ *
+ * The component maintains the following state:
+ * - `highestPrice`: the highest price among all products
+ * - `open`: a boolean indicating whether the filter popover is open
+ * - `isEdited`: a boolean indicating whether the user has edited the filters
+ * - `selectedValue`: the currently selected price value
+ * - `selectedCategory`: the currently selected category
+ * - `selectedLocation`: the currently selected location
+ * - `selectedDirectlyBuyable`: the currently selected "directly buyable" option
+ *
+ * The component provides the following functionality:
+ * - Fetching the highest product price and initializing the price slider
+ * - Applying the selected filters and updating the list of products
+ * - Resetting the filters to their default state
+ * - Toggling the visibility of the filter popover
+ */
 'use client'
 import { Button } from '@/components/ui/button'
 import { useForm } from 'react-hook-form'

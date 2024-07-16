@@ -1,3 +1,16 @@
+/**
+ * A set of React components that provide a customizable avatar UI element.
+ *
+ * The `Avatar` component is the main container for the avatar, and can be used to
+ * display an image or a fallback component. The `AvatarImage` component is used
+ * to display the avatar image, and the `AvatarFallback` component is used to
+ * display a fallback when the image is not available.
+ *
+ * These components are built using the Radix UI library, and provide a consistent
+ * and accessible avatar UI element that can be easily customized and integrated
+ * into your application.
+ */
+
 "use client"
 
 import * as React from "react";

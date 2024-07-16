@@ -1,3 +1,13 @@
+/**
+ * A React component that provides a drawer UI element.
+ *
+ * The `Drawer` component is a wrapper around the `Drawer` component from the `vaul` library. It provides a consistent interface for creating drawers in your application.
+ *
+ * The `Drawer` component supports the following props:
+ * - `shouldScaleBackground`: a boolean that determines whether the background should scale when the drawer is opened.
+ *
+ * The `DrawerTrigger`, `DrawerPortal`, `DrawerClose`, `DrawerOverlay`, `DrawerContent`, `DrawerHeader`, `DrawerFooter`, `DrawerTitle`, and `DrawerDescription` components are also exported and can be used to build custom drawer layouts.
+ */
 'use client'
 
 import * as React from 'react'

@@ -1,3 +1,15 @@
+/**
+ * A React component that renders a card with an image, title, description, and other details.
+ *
+ * @param {CardWithImageProps} props - The props for the component.
+ * @param {string} [props.className] - An optional CSS class name to apply to the card.
+ * @param {Product} props.product - The product data to display in the card.
+ * @param {MyshopTranslations} props.myshopTranslations - Translations for the myshop feature.
+ * @param {boolean} [props.editable] - Whether the card is in an editable mode.
+ * @param {boolean} [props.favIcon] - Whether to display a favorite icon.
+ * @param {string} [props.viewTranslation] - The translation for the "View" link.
+ * @returns {React.ReactElement} - The rendered card component.
+ */
 import * as React from 'react'
 import Image from 'next/image'
 

@@ -1,3 +1,7 @@
+/**
+ * Provides a form component that allows the user to restart the onboarding process.
+ * When the form is submitted, it sets the onboarding state to false and redirects the user to the "/browse" page.
+ */
 import { setOnboardingState } from '@/lib/user-actions'
 import { Button } from '../ui/button'
 import { redirect } from '@/navigation'

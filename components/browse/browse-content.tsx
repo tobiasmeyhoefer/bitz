@@ -1,3 +1,13 @@
+/**
+ * The `BrowseContent` component is responsible for rendering the main content of the browse page. It fetches and displays products, allows searching and filtering, and provides pagination functionality.
+ *
+ * The component uses various helper functions and components to achieve its functionality, such as:
+ * - `getProductsBrowse`, `getProductsByCategory`, and `searchProductsByTitle` to fetch products
+ * - `CardWithImage`, `SortProducts`, `SearchDialog`, `FilterProducts`, and other UI components to render the content
+ * - `useState` and `useEffect` hooks to manage the component's state and side effects
+ *
+ * The component also handles user interactions, such as searching for products, loading more products, and choosing an address. It updates the state accordingly and re-renders the content based on the changes.
+ */
 'use client'
 
 import {

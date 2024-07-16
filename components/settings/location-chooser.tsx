@@ -1,3 +1,12 @@
+/**
+ * A React component that allows the user to change their location by entering a postcode.
+ * The component uses the `react-hook-form` library to handle form validation and submission.
+ * It also uses the `useToast` hook from the custom UI library to display a success message when the location is changed.
+ *
+ * @param {object} props - The component props.
+ * @param {string} props.postcode - The current postcode of the user.
+ * @returns {JSX.Element} - The rendered LocationChooser component.
+ */
 'use client'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'

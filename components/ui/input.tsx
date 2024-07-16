@@ -1,3 +1,13 @@
+/**
+ * A reusable input component that extends the standard HTML `<input>` element.
+ * It provides a consistent styling and behavior across the application.
+ *
+ * @param {InputProps} props - The props for the input component.
+ * @param {string} [props.className] - Additional CSS classes to apply to the input.
+ * @param {string} [props.type] - The type of the input (e.g. "text", "email", "password").
+ * @param {React.InputHTMLAttributes<HTMLInputElement>} props - All other standard HTML input attributes.
+ * @returns {React.ReactElement} - The rendered input component.
+ */
 import * as React from "react"
 
 import { cn } from "@/lib/utils"

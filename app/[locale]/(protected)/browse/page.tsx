@@ -1,3 +1,10 @@
+/**
+ * The `Browse` component is the main entry point for the browse page of the application. It sets up the necessary translations and passes them down to the `BrowseContent` component, which handles the rendering of the browse functionality.
+ *
+ * The `Browse` component uses the `useTranslations` hook from `next-intl` to retrieve the necessary translations for the browse page, including search, sort, address chooser, and filter options.
+ *
+ * The component is wrapped in a `Suspense` component, which displays a fallback `LoadingSkeletonBrowse` component while the translations are being loaded.
+ */
 import { useTranslations } from 'next-intl'
 import BrowseContent from '@/components/browse/browse-content'
 import { SearchTranslations } from '@/lib/types'

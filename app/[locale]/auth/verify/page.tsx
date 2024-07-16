@@ -1,3 +1,7 @@
+/**
+ * Renders a page component that displays a message for email verification.
+ * The page is centered on the screen and contains a card with the message.
+ */
 const VerifyPage = () => {
   return (
     <div className="flex h-screen w-full flex-col items-center justify-center">

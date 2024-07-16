@@ -1,3 +1,11 @@
+/**
+ * Renders a loading skeleton for a 3D scene.
+ *
+ * The `LoadingSkeleton` component renders a canvas element with a fixed size to simulate a loading 3D scene.
+ * The `ThreeSkeleton` component wraps the `LoadingSkeleton` and centers it within a container.
+ *
+ * These components are typically used as placeholders while the actual 3D scene is being loaded, to provide a smooth user experience.
+ */
 // import "./tailwind.css";
 // import { Skeleton, SVGSkeleton } from "./Skeleton";
 

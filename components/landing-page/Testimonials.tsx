@@ -1,3 +1,7 @@
+/**
+ * Imports the `Avatar`, `AvatarFallback`, and `AvatarImage` components from the `@/components/ui/avatar` module.
+ * These components are used to display user avatars or profile images.
+ */
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useTranslations } from 'next-intl'

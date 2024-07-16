@@ -1,3 +1,10 @@
+/**
+ * Renders an error page with a message, a reload button, and an optional "more info" dialog that displays the error message and stack trace.
+ *
+ * @param error - The error object, which may contain a `digest` property.
+ * @param reset - A function to reset the error state and potentially reload the page.
+ * @returns A React component that renders the error page.
+ */
 'use client' // Error components must be Client Components
 
 import { Button } from '@/components/ui/button'

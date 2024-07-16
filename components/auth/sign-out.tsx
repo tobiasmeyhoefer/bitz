@@ -1,3 +1,12 @@
+/**
+ * A React component that renders a sign-out button.
+ *
+ * @param props - The component props.
+ * @param props.typeText - Whether to display the text or not.
+ * @param props.className - An optional CSS class name to apply to the button.
+ * @param props.text - The text to display on the button.
+ * @returns A React element representing the sign-out button.
+ */
 import { signOut } from '@/auth'
 import { Button } from '../ui/button'
 import { useTranslations } from 'next-intl'

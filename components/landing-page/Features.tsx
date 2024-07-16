@@ -1,3 +1,11 @@
+/**
+ * The `Features` component renders a section displaying various features of the application.
+ * It includes a list of feature badges, as well as a grid of feature cards with images and descriptions.
+ *
+ * The feature data is defined in the `features` and `featureList` arrays, which can be customized as needed.
+ *
+ * @returns {JSX.Element} The rendered `Features` section.
+ */
 import { Badge } from "@/components/ui/badge";
 import {
   Card,

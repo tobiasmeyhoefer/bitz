@@ -1,3 +1,14 @@
+/**
+ * A set of React components that provide an accordion-style UI element using the Radix UI Accordion primitive.
+ *
+ * The main components are:
+ * - `Accordion`: The root component that wraps the entire accordion.
+ * - `AccordionItem`: A single item within the accordion, representing a collapsible panel.
+ * - `AccordionTrigger`: The header/trigger for an accordion item that expands/collapses the content.
+ * - `AccordionContent`: The content area of an accordion item that is shown/hidden when the item is expanded/collapsed.
+ *
+ * These components can be used to create interactive accordion-style UI elements with customizable styles and behavior.
+ */
 import * as React from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { ChevronDown } from "lucide-react";

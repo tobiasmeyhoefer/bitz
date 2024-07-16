@@ -1,3 +1,17 @@
+/**
+ * A React component that renders a dot pattern SVG background.
+ *
+ * @param {DotPatternProps} props - The component props.
+ * @param {number} [props.width=16] - The width of the dot pattern.
+ * @param {number} [props.height=16] - The height of the dot pattern.
+ * @param {number} [props.x=0] - The x-coordinate of the pattern.
+ * @param {number} [props.y=0] - The y-coordinate of the pattern.
+ * @param {number} [props.cx=1] - The x-coordinate of the circle in the pattern.
+ * @param {number} [props.cy=1] - The y-coordinate of the circle in the pattern.
+ * @param {number} [props.cr=1] - The radius of the circle in the pattern.
+ * @param {string} [props.className] - Additional CSS classes to apply to the component.
+ * @returns {JSX.Element} - The rendered dot pattern SVG.
+ */
 import { cn } from '@/lib/utils'
 import { useId } from 'react'
 

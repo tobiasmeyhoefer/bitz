@@ -1,3 +1,9 @@
+/**
+ * A dropdown menu component for a conversation card, which allows the user to mark the conversation as "sold".
+ *
+ * @param conv - The conversation object containing the necessary information to update the product state and create a transaction.
+ * @param showSold - A boolean indicating whether the "sold" option should be displayed in the dropdown menu.
+ */
 'use client'
 
 import { BsThreeDotsVertical } from "react-icons/bs";

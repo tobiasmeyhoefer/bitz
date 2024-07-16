@@ -1,3 +1,9 @@
+/**
+ * Renders the page for a specific shop, fetching and displaying the shop's banner, name, owner, and other details.
+ *
+ * @param params - An object containing the `id` parameter from the URL path.
+ * @returns A React component that renders the shop page.
+ */
 import {
   getBannerById,
   getShopTextColorById,

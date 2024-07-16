@@ -1,3 +1,11 @@
+/**
+ * Renders a 3D scene with a cube and various lighting effects.
+ *
+ * The `Scene` component sets up a Three.js canvas with an OrbitControls component
+ * to allow the user to rotate and zoom the camera. It adds several directional and
+ * point lights to create a dynamic lighting environment. The `Cube` component is
+ * centered in the scene and rendered within the canvas.
+ */
 'use client'
 import { Center, OrbitControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'

@@ -1,3 +1,24 @@
+/**
+ * The `NavBar` component is the main navigation bar for the application. It displays different navigation links and user-related actions based on whether the user is logged in or not.
+
+ * The component uses the `auth` and `getUser` functions to retrieve the current user session and user information. It then renders the appropriate navigation links and user actions based on the user's login status.
+
+ * The navigation links include:
+ * - Discover page ("/browse")
+ * - My Bitz page ("/myshop")
+ * - Favorites page ("/favorites")
+ * - Transactions page ("/transactions")
+ * - Conversations page ("/conversations")
+ * - Settings page ("/settings")
+
+ * The user actions include:
+ * - Sign out button
+ * - Settings link
+ * - Favorites link
+ * - Transactions link
+
+ * The component also includes a responsive design, with a mobile-friendly drawer menu for the navigation links and user actions.
+ */
 import { auth } from '@/auth'
 import { getUser } from '@/lib/user-actions'
 import { Link } from '@/navigation'

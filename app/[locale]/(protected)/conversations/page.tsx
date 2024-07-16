@@ -1,3 +1,14 @@
+/**
+ * Renders the Conversations page, which displays a list of conversations.
+ * 
+ * The page fetches all conversations using the `getAllConversations` function from `@/lib/conversations-actions`,
+ * and renders them using the `ConversationCard` component. If there are no conversations, it displays a message.
+ * 
+ * The page uses the `getTranslations` function from `next-intl/server` to fetch translations for the page content.
+ * 
+ * The page is wrapped in a `Suspense` component to display a loading skeleton while the data is being fetched.
+ */
+
 import { getAllConversations } from '@/lib/conversations-actions'
 import ConversationCard from '@/components/conversations/conversation-card'
 import { getTranslations } from 'next-intl/server'

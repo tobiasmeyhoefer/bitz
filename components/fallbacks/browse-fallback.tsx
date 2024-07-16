@@ -1,3 +1,10 @@
+/**
+ * Renders a loading skeleton UI for the browse page.
+ * This component displays a series of skeleton placeholders to indicate that content is still loading.
+ * The skeleton placeholders are used for various UI elements such as search bar, filters, and product cards.
+ * This component is typically used as a fallback when the actual content is not yet available.
+ */
+
 import { Skeleton, SVGSkeleton } from '@/components/ui/skeleton'
 
 const LoadingSkeleton = () => (

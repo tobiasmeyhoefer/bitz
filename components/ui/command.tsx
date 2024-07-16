@@ -1,3 +1,17 @@
+/**
+ * A React component that provides a command dialog interface using the `cmdk` library.
+ *
+ * The `CommandDialog` component wraps the `Command` component, which is a custom wrapper around the `cmdk` library's `Command` component. It provides a consistent styling and layout for the command dialog, including the input field, list, and other UI elements.
+ *
+ * The `CommandInput` component is a custom input field that includes a search icon and styles to match the overall command dialog design.
+ *
+ * The `CommandList`, `CommandEmpty`, `CommandGroup`, `CommandItem`, and `CommandSeparator` components are custom wrappers around the corresponding `cmdk` library components, providing additional styling and functionality.
+ *
+ * The `CommandShortcut` component is a custom component used to display a shortcut or label within a `CommandItem`.
+ *
+ * These components can be used together to create a command-based user interface, such as a search or command palette, within a React application.
+ */
+
 "use client"
 
 import * as React from "react"

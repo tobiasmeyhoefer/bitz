@@ -1,3 +1,15 @@
+/**
+ * A React component that renders a radial gradient.
+ *
+ * @param {RadialProps} props - The props for the radial gradient component.
+ * @param {Type} [props.type="circle"] - The type of radial gradient, either "circle" or "ellipse".
+ * @param {string} [props.from="rgba(120,119,198,0.3)"] - The color to transition from.
+ * @param {string} [props.to="hsla(0, 0%, 0%, 0)"] - The color to transition to.
+ * @param {number} [props.size=300] - The size of the gradient in pixels.
+ * @param {Origin} [props.origin="center"] - The origin of the gradient.
+ * @param {string} [props.className=""] - The class name to apply to the gradient.
+ * @returns {React.ReactElement} - The radial gradient component.
+ */
 import { CSSProperties } from "react";
 
 type Type = "circle" | "ellipse";

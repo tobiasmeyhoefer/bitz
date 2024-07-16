@@ -1,3 +1,20 @@
+/**
+ * A set of React components that implement a dropdown menu UI, using the Radix UI library.
+ * These components provide a consistent and accessible way to create dropdown menus in your application.
+ *
+ * The main components exported are:
+ * - `DropdownMenu`: The root component that wraps the entire dropdown menu.
+ * - `DropdownMenuTrigger`: The component that triggers the dropdown menu to open.
+ * - `DropdownMenuContent`: The component that contains the dropdown menu items.
+ * - `DropdownMenuItem`: A single item in the dropdown menu.
+ * - `DropdownMenuCheckboxItem`: A dropdown menu item that acts as a checkbox.
+ * - `DropdownMenuRadioItem`: A dropdown menu item that acts as a radio button.
+ * - `DropdownMenuLabel`: A label for a group of dropdown menu items.
+ * - `DropdownMenuSeparator`: A separator between dropdown menu items.
+ * - `DropdownMenuShortcut`: A component to display a keyboard shortcut for a dropdown menu item.
+ *
+ * These components can be used to build complex and customizable dropdown menus in your React application.
+ */
 'use client'
 
 import * as React from 'react'

@@ -1,3 +1,8 @@
+/**
+ * Renders a sign-in resend form that allows users to request a new sign-in link.
+ * The form includes an email input field and a submit button.
+ * When the form is submitted, the `signIn` function is called with the 'resend' strategy to send a new sign-in link to the user's email.
+ */
 import { signIn } from '@/auth'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'

@@ -1,6 +1,12 @@
+/**
+ * Renders a section with statistics about the application, including the number of users, products, downloads, and developers.
+ *
+ * The statistics are fetched asynchronously and displayed in a grid layout.
+ *
+ * @returns A React component that renders the statistics section.
+ */
 import { getAllProductsCount } from "@/lib/product-actions";
 import { getAllUsersCount } from "@/lib/user-actions";
-import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 
 export const Statistics = async () => {

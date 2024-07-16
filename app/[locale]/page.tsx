@@ -1,3 +1,19 @@
+/**
+ * The main landing page component for the application.
+ * It renders various sections of the landing page, including:
+ * - Hero section
+ * - Sponsors section
+ * - About section
+ * - How It Works section
+ * - Testimonials section
+ * - Team section
+ * - Newsletter section
+ * - FAQ section
+ * - Scroll to Top button
+ *
+ * The content for these sections is imported from various child components.
+ * The translations for the content are handled using the `useTranslations` hook from `next-intl`.
+ */
 import { About } from '@/components/landing-page/about'
 import { FAQ } from '@/components/landing-page/faq'
 import { Hero } from '@/components/landing-page/hero'

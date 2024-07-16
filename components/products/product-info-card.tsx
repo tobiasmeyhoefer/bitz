@@ -1,3 +1,11 @@
+/**
+ * Renders a product information card component, either in an editable or read-only mode depending on the `isOwner` prop.
+ *
+ * @param {ProductInfoType} props - The props for the component.
+ * @param {ProductType} props.productInfo - The product information to display.
+ * @param {boolean} props.isOwner - Indicates whether the current user is the owner of the product.
+ * @returns {JSX.Element} - The rendered product information card.
+ */
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { useTranslations, useLocale } from 'next-intl'
@@ -5,7 +13,6 @@ import ProductInfoCardEditable from './product-info-card-editable'
 import { cn } from '@/lib/utils'
 import { BuyButtons } from '@/components/products/buy-buttons'
 import { ProductType } from '@/schema'
-import { Link } from '@/navigation'
 
 type ProductInfoType = {
   productInfo: ProductType

@@ -1,3 +1,16 @@
+/**
+ * A React component that renders a like/favorite button for a product.
+ *
+ * The component checks if the product is already in the user's favorites, and
+ * updates the button's appearance and functionality accordingly. Clicking the
+ * button will add or remove the product from the user's favorites.
+ *
+ * @param {object} props - The component props.
+ * @param {string} props.productId - The ID of the product.
+ * @param {string} [props.className] - An optional CSS class name to apply to the button.
+ * @returns {JSX.Element} - The rendered like/favorite button.
+ */
+
 'use client'
 import { addToFavorites, checkFavorite, deleteFavorite } from '@/lib/product-actions'
 import { useEffect, useState } from 'react'

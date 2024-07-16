@@ -1,3 +1,11 @@
+/**
+ * A set of React components for rendering navigation items in a navbar.
+ *
+ * `NavItemLink`: A link component that renders a navigation item with an optional icon and text.
+ * `NavLoginLink`: A link component that renders a login button if the current path is not the login page.
+ * `NavbarItemDropdown`: A dropdown menu component that renders a user profile image or icon, and links to favorites, settings, transactions, and sign out.
+ * `NavMenuDrawer`: A drawer component that renders a menu of navigation items, and a sign out link, in a mobile-friendly drawer.
+ */
 'use client'
 
 import { Link, usePathname } from '@/navigation'

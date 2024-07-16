@@ -1,3 +1,13 @@
+/**
+ * A button component that triggers an alert dialog to confirm deleting the user's account.
+ *
+ * @param header - The text to display in the button that triggers the alert dialog.
+ * @param title - The title of the alert dialog.
+ * @param description - The description text to display in the alert dialog.
+ * @param cancel - The text to display on the cancel button in the alert dialog.
+ * @param action - The text to display on the action button in the alert dialog.
+ * @returns A React component that renders the delete account button and alert dialog.
+ */
 import {
   AlertDialog,
   AlertDialogAction,

@@ -1,3 +1,12 @@
+/**
+ * Renders a transaction card component that displays information about a transaction.
+ *
+ * The component checks if the current user is the buyer or seller of the transaction and renders the card accordingly.
+ *
+ * @param {Object} props - The component props.
+ * @param {TransactionType} props.transaction - The transaction object.
+ * @returns {JSX.Element} - The transaction card component.
+ */
 import {
   Card,
   CardContent,

@@ -1,3 +1,17 @@
+/**
+ * The `SearchDialog` component provides a search input field with suggestions and functionality to search for products by title or category.
+ *
+ * @param props - An object containing the following properties:
+ *   - `searchValue`: The current value of the search input field.
+ *   - `setSearchValue`: A function to update the search input field value.
+ *   - `suggestions`: An array of suggested search terms.
+ *   - `suggestionsTitle`: The title to display above the suggestions.
+ *   - `loadProductsByCategory`: A function to load products by a given category.
+ *   - `loadProductsByTitle`: A function to load products by a given title.
+ *   - `userId`: The ID of the current user.
+ *
+ * @returns The `SearchDialog` component.
+ */
 import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog'
 import { Input } from '@/components/ui/input'
 import { SlClose } from 'react-icons/sl'

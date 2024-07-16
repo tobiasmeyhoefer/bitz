@@ -1,3 +1,10 @@
+/**
+ * Renders a page component that displays the user's transactions.
+ * 
+ * This component fetches the user's transactions from the Stripe API and renders them in a grid layout using the `TransactionCard` component.
+ * 
+ * @returns {JSX.Element} The transactions page component.
+ */
 import { ConversationLoadingSkeleton } from '@/components/fallbacks/conversations-fallback'
 import TransactionCard from '@/components/transactions/transaction-card'
 import { getUserTransactions } from '@/lib/stripe-actions'

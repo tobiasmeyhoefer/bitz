@@ -1,3 +1,5 @@
+// Collection of many little helper functions.
+
 'use server'
 import { users } from '@/schema'
 import { db } from '../db'
@@ -5,7 +7,6 @@ import { count, eq } from 'drizzle-orm'
 import { auth, signOut } from '@/auth'
 import { deleteImageOnAws, getProductsOwned } from './product-actions'
 import { revalidatePath } from 'next/cache'
-import axios from 'axios'
 
 export async function saveUserName(name: string) {
   const session = await auth()

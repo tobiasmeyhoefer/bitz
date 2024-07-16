@@ -1,3 +1,13 @@
+/**
+ * A React component that renders an animated card with a delay.
+ *
+ * @param {Object} props - The component props.
+ * @param {number} props.delay - The delay in seconds before the card animation starts.
+ * @param {React.ReactNode} props.children - The content to be rendered inside the card.
+ * @param {string} [props.className] - An optional CSS class name to apply to the card.
+ * @returns {React.ReactElement} - The animated card component.
+ */
+
 'use client';
 
 import { LazyMotion, domAnimation, m, useAnimation } from 'framer-motion';

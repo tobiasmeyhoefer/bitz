@@ -1,3 +1,19 @@
+/**
+ * The `Sheet` component is a Radix UI dialog component that provides a full-screen or partial-screen sheet interface. It can be positioned at the top, bottom, left, or right of the screen, and includes a close button and optional header and footer content.
+ *
+ * The `Sheet` component is composed of several sub-components:
+ * - `SheetTrigger`: The element that triggers the sheet to open.
+ * - `SheetClose`: The element that closes the sheet.
+ * - `SheetPortal`: The portal that renders the sheet content.
+ * - `SheetOverlay`: The semi-transparent overlay that covers the screen when the sheet is open.
+ * - `SheetContent`: The main content area of the sheet, which can be positioned on the top, bottom, left, or right of the screen.
+ * - `SheetHeader`: An optional header component for the sheet.
+ * - `SheetFooter`: An optional footer component for the sheet.
+ * - `SheetTitle`: An optional title component for the sheet.
+ * - `SheetDescription`: An optional description component for the sheet.
+ *
+ * The `Sheet` component uses the `class-variance-authority` library to apply CSS styles based on the `side` prop, which determines the position of the sheet on the screen.
+ */
 "use client"
 
 import * as React from "react"

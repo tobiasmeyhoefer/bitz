@@ -1,6 +1,14 @@
 import { Html } from '@react-email/html'
 import { Head, Hr, Link, Row, Section, Tailwind, Text } from '@react-email/components'
 
+/**
+ * Renders an email template for a product interest notification.
+ *
+ * @param {object} props - The component props.
+ * @param {string} props.productName - The name of the product.
+ * @returns {JSX.Element} - The rendered email template.
+ */
+
 export default function ProductInterestEmail({productName}: {productName: string}) {
   return (
     <Tailwind>

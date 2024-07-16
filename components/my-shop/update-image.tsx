@@ -1,3 +1,11 @@
+/**
+ * A React component that provides a dialog for updating the image of a product.
+ *
+ * @param props - An object containing the following properties:
+ *   - `existingImageUrl`: The URL of the existing product image.
+ *   - `translations`: An object containing localized strings for the dialog's title, description, submit button, and close button.
+*/
+
 'use client'
 import React, { useState } from 'react'
 import { Button } from '@/components/ui/button'

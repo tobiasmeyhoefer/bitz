@@ -1,3 +1,12 @@
+/**
+ * A React component that renders an animated button.
+ *
+ * @param onClick - A function to be called when the button is clicked.
+ * @param disabled - An optional boolean indicating whether the button should be disabled.
+ * @param children - The content to be rendered inside the button.
+ * @param className - An optional CSS class name to be applied to the button.
+ */
+
 'use client';
 
 import { LazyMotion, domAnimation, m, useAnimation } from 'framer-motion';

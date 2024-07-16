@@ -1,3 +1,8 @@
+/**
+ * Renders the content for the MyShop component, which displays a grid of product cards for the authenticated user's owned products.
+ *
+ * @returns {JSX.Element} The rendered MyShop content.
+ */
 import { getProductsOwned } from '@/lib/product-actions'
 import { getUser } from '@/lib/user-actions'
 import { getTranslations } from 'next-intl/server'

@@ -1,3 +1,8 @@
+/**
+ * Renders the AddProductPage component, which displays a form for adding a new product.
+ * The component uses the ProductForm component to render the form, and fetches translations
+ * for the page content using the getTranslations function from next-intl/server.
+ */
 import { ProductForm } from '@/components/my-shop/product-form'
 import { getTranslations } from 'next-intl/server'
 

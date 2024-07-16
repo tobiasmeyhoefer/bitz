@@ -1,3 +1,7 @@
+/**
+ * A React component that renders a "Scroll to Top" button that appears when the user scrolls down past 400 pixels.
+ * When the button is clicked, it scrolls the page back to the top.
+ */
 "use client"
 
 import { useState, useEffect } from "react";

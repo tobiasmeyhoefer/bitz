@@ -1,3 +1,7 @@
+/**
+ * Renders a rotating cube component using the 'bitz_transparent.glb' model.
+ * The cube can be interacted with by the user, triggering a motion value change.
+ */
 'use client'
 
 import { useGLTF } from '@react-three/drei'
