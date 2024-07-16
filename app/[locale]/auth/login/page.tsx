@@ -1,3 +1,9 @@
+/**
+ * The Login component is the main entry point for the login functionality of the application.
+ * It renders a card-based UI with various login options, including Google, GitHub, and Passkey authentication.
+ * The component also includes visual elements like a border beam, radial gradient, and dot pattern to enhance the overall design.
+ * The translations for the login form are provided using the `useTranslations` hook from the `next-intl` library.
+ */
 import { SignInGoogle } from '@/components/auth/sign-in-google'
 import { SignInResend } from '@/components/auth/sign-in-resend'
 import {

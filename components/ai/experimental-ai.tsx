@@ -1,3 +1,12 @@
+/**
+ * The `ExperimentalAi` component is a React functional component that provides an AI-powered chat interface. It uses the `useChat` hook to manage the chat state and interactions.
+ *
+ * The component renders a fixed button that, when clicked, opens a chat window. The chat window displays a list of messages, with messages from the user displayed on the right and messages from the AI assistant displayed on the left. The user can enter a new message in an input field and submit it using the "senden" button.
+ *
+ * The component also includes functionality to close the chat window when the user clicks outside of it.
+ *
+ * @returns The `ExperimentalAi` React component.
+ */
 'use client'
 
 import { cn } from '@/lib/utils'

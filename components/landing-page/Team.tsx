@@ -1,3 +1,15 @@
+/**
+ * The `Team` component displays a section with a list of team members, including their profile images, names, and positions.
+ *
+ * The team member data is defined in the `teamList` array, which contains objects with the following properties:
+ * - `imageUrl`: the URL of the team member's profile image
+ * - `name`: the name of the team member
+ * - `position`: the position or role of the team member
+ *
+ * The component uses the `useTranslations` hook from `next-intl` to retrieve the translated strings for the section title and subtitle.
+ *
+ * The team member cards are rendered using the `Card` component from the `@/components/ui/card` module, with the profile image, name, and position displayed within the card.
+ */
 import {
   Card,
   CardDescription,

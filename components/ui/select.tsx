@@ -1,3 +1,16 @@
+/**
+ * A set of React components that implement a custom select dropdown UI using the Radix UI library.
+ * 
+ * The main components are:
+ * - `Select`: The root component that wraps the entire select dropdown.
+ * - `SelectTrigger`: The button that opens the dropdown when clicked.
+ * - `SelectContent`: The dropdown menu that appears when the trigger is clicked.
+ * - `SelectItem`: Individual items in the dropdown menu.
+ * - `SelectLabel`: Labels for groups of items in the dropdown.
+ * - `SelectSeparator`: Separators between groups of items in the dropdown.
+ * 
+ * These components provide a customizable and accessible select dropdown UI that can be used in React applications.
+ */
 "use client"
 
 import * as React from "react"

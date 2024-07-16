@@ -1,6 +1,17 @@
 import { Skeleton, SVGSkeleton } from '@/components/ui/skeleton'
 
+
+/**
+ * Renders a loading skeleton for a conversation list.
+ * The skeleton includes placeholders for the conversation image, title, and description.
+ * This component is typically used when the actual conversation data is being loaded.
+ */
+
 export const ConversationLoadingSkeleton = () => (
+  /**
+   * Renders the ConversationLoadingSkeleton component within a centered container.
+   * This component is typically used for previewing the loading skeleton in a sandbox or development environment.
+   */
   <>
     <div className="flex w-full flex-col gap-6">
       <a>
@@ -121,6 +132,7 @@ export const ConversationLoadingSkeleton = () => (
   </>
 )
 
+// Sandbox preview implementation
 const SandboxPreview = () => (
   <div className="flex h-full w-full justify-center p-10">
     <ConversationLoadingSkeleton />

@@ -1,3 +1,11 @@
+/**
+ * A custom Slider component that wraps the Radix UI Slider component.
+ * It provides a consistent look and feel for the slider UI element.
+ *
+ * @param className - Additional CSS classes to apply to the slider.
+ * @param props - Additional props to pass to the Radix UI Slider component.
+ * @returns A React component that renders the custom Slider.
+ */
 "use client"
 
 import * as React from "react"

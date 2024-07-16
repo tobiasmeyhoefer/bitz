@@ -1,3 +1,27 @@
+/**
+ * A reusable button component that supports various styles and sizes.
+ *
+ * The `Button` component is a React component that provides a consistent and customizable button interface. It uses the `class-variance-authority` library to define a set of button variants and sizes, which can be applied to the button through props.
+ *
+ * The component supports the following variants:
+ * - `default`: A default button style with a primary color background and shadow.
+ * - `callToAction`: A call-to-action button style with a gradient background and rounded corners.
+ * - `destructive`: A destructive button style with a red background.
+ * - `outline`: An outline button style with a border and hover effect.
+ * - `secondary`: A secondary button style with a gray background.
+ * - `ghost`: A ghost button style with a hover effect.
+ * - `link`: A link-style button with an underline on hover.
+ *
+ * The component supports the following sizes:
+ * - `default`: A standard-sized button.
+ * - `sm`: A small-sized button.
+ * - `lg`: A large-sized button.
+ * - `xl`: An extra-large-sized button.
+ * - `icon`: A button-sized icon.
+ *
+ * The `Button` component can be used as a regular button or as a child of another component (using the `asChild` prop). It supports all the standard button HTML attributes, as well as the `variant` and `size` props to customize the button's appearance.
+ */
+
 import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
 import * as React from 'react'

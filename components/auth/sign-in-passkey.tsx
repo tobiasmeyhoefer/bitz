@@ -1,3 +1,12 @@
+/**
+ * A React component that renders a sign-in button for passkey authentication.
+ *
+ * @param intlProps - An object containing localized text for the component.
+ * @param intlProps.text - The text to display above the sign-in button.
+ * @param intlProps.button - The text to display on the sign-in button.
+ * @param intlProps.tip - The text to display below the sign-in button.
+ * @returns A React element that renders the sign-in passkey component.
+ */
 'use client'
 
 import { signIn } from 'next-auth/webauthn'

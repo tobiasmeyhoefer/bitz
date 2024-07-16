@@ -1,3 +1,12 @@
+/**
+ * A React component that renders a carousel of product images.
+ *
+ * @param props - The component props:
+ * @param props.translations - An object containing translations for various UI elements.
+ * @param props.images - An array of image URLs to display in the carousel.
+ * @param props.className - A CSS class name to apply to the component.
+ * @param props.sellerId - The ID of the seller whose images are being displayed.
+ */
 'use client'
 import * as React from 'react'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
@@ -13,8 +22,6 @@ import Image from 'next/image'
 import { UpdateImage } from '@/components/myShop/update-image'
 import { useEffect, useState } from 'react'
 import { getUser } from '@/lib/user-actions'
-import { auth } from '@/auth'
-import { CardContainer } from '@/components/ui/3d-card'
 
 export function ProductImageCarousel(props: {
   translations: {

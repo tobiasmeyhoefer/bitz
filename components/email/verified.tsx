@@ -1,3 +1,11 @@
+/**
+ * Renders an email template for an account verification notification.
+ *
+ * This component is used to generate an HTML email that is sent to users when their
+ * Bitz account has been successfully verified. It includes a title, a message
+ * indicating that the account is now fully functional, and a link to the Bitz
+ * website.
+ */
 import { Html } from '@react-email/html'
 import { Head, Hr, Link, Row, Section, Tailwind, Text } from '@react-email/components'
 

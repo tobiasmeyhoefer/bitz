@@ -1,3 +1,13 @@
+/**
+ * Renders the Favorites page, displaying a list of the user's favorite products.
+ *
+ * The page fetches the user's favorite products from the server and displays them in a grid layout using the `CardWithImage` component. If the user has no favorite products, a message is displayed instead.
+ *
+ * The page is wrapped in a `Suspense` component, which displays a loading skeleton while the data is being fetched.
+ *
+ * @returns {JSX.Element} The Favorites page component.
+ */
+
 import LoadingSkeletonBrowse from '@/components/fallbacks/browse-fallback'
 import { CardWithImage } from '@/components/ui/cardWithImage'
 import { getFavoriteProducts } from '@/lib/product-actions'

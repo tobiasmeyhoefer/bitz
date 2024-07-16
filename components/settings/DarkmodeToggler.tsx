@@ -1,3 +1,11 @@
+/**
+ * A React component that provides a dropdown menu to toggle the theme between light, dark, and system.
+ *
+ * @param {ThemeProps} props - The props for the component.
+ * @param {object} props.translations - An object containing translations for the component.
+ * @param {string} props.translations.theme - The translation for the "theme" label.
+ * @returns {JSX.Element} - The rendered DarkmodeToggler component.
+ */
 'use client'
 
 import * as React from 'react'

@@ -1,3 +1,12 @@
+/**
+ * Renders a welcome email component for the Bitz Open Source Project.
+ *
+ * This component displays a welcome message, a link to the Bitz website, and some
+ * additional information for new users who have created an account.
+ *
+ * @returns {JSX.Element} The welcome email component
+ */
+
 import { Html } from '@react-email/html'
 import { Head, Hr, Link, Row, Section, Tailwind, Text } from '@react-email/components'
 

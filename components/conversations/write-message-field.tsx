@@ -1,5 +1,22 @@
 'use client'
 
+/**
+ * The `WriteMessageField` component is responsible for rendering the input field and buttons for sending messages in a conversation.
+ *
+ * It provides the following functionality:
+ * - Allows the user to input a message and send it.
+ * - Includes various buttons for adding location, time, and deal information to the message.
+ * - Checks for profanity in the message before sending.
+ * - Scrolls to the bottom of the conversation when a message is sent.
+ * - Displays a warning if the user tries to send a self-written message.
+ *
+ * @param {Object} props - The component props.
+ * @param {ConversationType} props.conv - The current conversation object.
+ * @param {UserType} props.user - The current user object.
+ * @returns {JSX.Element} The `WriteMessageField` component.
+ */
+
+
 import axios from 'axios'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'

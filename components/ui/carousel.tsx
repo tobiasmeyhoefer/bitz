@@ -1,3 +1,14 @@
+/**
+ * A React component that provides a carousel functionality with customizable options and plugins.
+ *
+ * The `Carousel` component is the main entry point for the carousel functionality. It provides a context that can be used by its child components to access the carousel's state and control functions.
+ *
+ * The `CarouselContent` component is a container for the carousel items, and the `CarouselItem` component represents a single item in the carousel.
+ *
+ * The `CarouselPrevious` and `CarouselNext` components are buttons that allow the user to navigate to the previous or next slide in the carousel.
+ *
+ * The `useCarousel` hook can be used to access the carousel's context from within a child component.
+ */
 "use client"
 
 import * as React from "react"

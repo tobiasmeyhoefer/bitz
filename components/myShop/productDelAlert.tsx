@@ -1,3 +1,15 @@
+/**
+ * A React component that renders a product deletion alert dialog.
+ *
+ * The `ProdDelAlert` component provides a dropdown menu with a "Delete" option that, when clicked, opens an alert dialog to confirm the deletion of a product. The component takes in several props to customize the dialog's content and behavior.
+ *
+ * @param {string} productId - The ID of the product to be deleted.
+ * @param {string} title - The title of the alert dialog.
+ * @param {string} yousure - The description text in the alert dialog.
+ * @param {string} cancel - The text for the "Cancel" button in the alert dialog.
+ * @param {string} confirm - The text for the "Confirm" button in the alert dialog.
+ * @param {string} menuDeleteOption - The text for the "Delete" option in the dropdown menu.
+ */
 // ProdDelAlert.tsx
 'use client'
 import React, { useState } from 'react'

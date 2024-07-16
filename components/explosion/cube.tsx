@@ -1,3 +1,8 @@
+/**
+ * Renders a 3D cube that explodes when clicked.
+ * The cube is loaded from a GLTF file and its animation is controlled using Framer Motion and Three.js.
+ * When the cube is clicked, the explosion animation is played at an accelerated speed.
+ */
 'use client'
 
 import { useAnimations, useGLTF } from '@react-three/drei'

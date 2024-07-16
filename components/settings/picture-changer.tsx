@@ -1,3 +1,16 @@
+/**
+ * A React component that allows users to change their profile picture.
+ *
+ * The component provides a file input field where users can select an image file. The selected image is then compressed and uploaded to a signed URL. Once the upload is successful, the `action` function is called with the URL of the uploaded image.
+ *
+ * The component also includes a preview of the selected image, and validates the file size to ensure it is less than 8MB.
+ *
+ * @param {object} props - The component props.
+ * @param {string} props.title - The title to display above the file input field.
+ * @param {string} props.submitTitle - The title to display on the submit button.
+ * @param {(url: string) => Promise<void>} props.action - A function to be called with the URL of the uploaded image.
+ * @returns {JSX.Element} - The PictureChanger component.
+ */
 'use client'
 import { getSignedURL } from '@/lib/product-actions'
 import { z } from 'zod'

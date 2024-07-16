@@ -1,3 +1,22 @@
+/**
+ * The `AlertDialog` component is a reusable UI element that provides a modal dialog for displaying important information or actions to the user. It is built using the Radix UI library and provides a set of sub-components for customizing the dialog's appearance and behavior.
+
+ * The main components are:
+ * - `AlertDialog`: The root component that wraps the entire dialog.
+ * - `AlertDialogTrigger`: A component that triggers the opening of the dialog.
+ * - `AlertDialogPortal`: A component that renders the dialog in a portal, ensuring it is positioned correctly on the page.
+ * - `AlertDialogOverlay`: A semi-transparent overlay that covers the entire screen when the dialog is open.
+ * - `AlertDialogContent`: The main content area of the dialog, which can include a header, body, and footer.
+ * - `AlertDialogHeader`: A container for the dialog's title and description.
+ * - `AlertDialogFooter`: A container for the dialog's action buttons.
+ * - `AlertDialogTitle`: The title of the dialog.
+ * - `AlertDialogDescription`: The description or body content of the dialog.
+ * - `AlertDialogAction`: A button that performs a primary action in the dialog.
+ * - `AlertDialogCancel`: A button that cancels the dialog and closes it.
+
+ * The component uses Tailwind CSS classes for styling and provides a consistent, accessible, and customizable way to display important information or actions to the user.
+ */
+
 "use client"
 
 import * as React from "react"

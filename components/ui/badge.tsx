@@ -1,3 +1,23 @@
+/**
+ * A React component that renders a badge with customizable styles.
+ *
+ * The `Badge` component uses the `cva` (class-variance-authority) library to define
+ * the available variants for the badge. The supported variants are:
+ *
+ * - `default`: A primary-colored badge with a hover effect.
+ * - `secondary`: A secondary-colored badge with a hover effect.
+ * - `destructive`: A destructive-colored badge with a hover effect.
+ * - `outline`: An outline-style badge with no background color.
+ *
+ * The component accepts all standard HTML attributes for a `div` element, as well as
+ * the `variant` prop to specify the desired badge style.
+ *
+ * @param props - The props for the `Badge` component.
+ * @param props.className - An optional CSS class name to apply to the badge.
+ * @param props.variant - The variant of the badge to render (default, secondary, destructive, or outline).
+ * @returns A React element representing the badge.
+ */
+
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 

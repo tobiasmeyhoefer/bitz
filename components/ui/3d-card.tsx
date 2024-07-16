@@ -1,3 +1,20 @@
+/**
+ * A set of React components that provide a 3D card effect with mouse interaction.
+ *
+ * The `CardContainer` component is the main container that manages the 3D card effect.
+ * It provides a `MouseEnterContext` that can be used by child components to access the
+ * mouse enter/leave state.
+ *
+ * The `CardBody` component is a container for the card content, with a fixed size and
+ * 3D transform styles.
+ *
+ * The `CardItem` component is a child component that can be used inside the `CardBody`.
+ * It provides props to control the 3D transform animations based on the mouse enter/leave
+ * state.
+ *
+ * The `useMouseEnter` hook can be used to access the mouse enter/leave state from within
+ * the `CardItem` component.
+ */
 'use client'
 
 import { cn } from '@/lib/utils'

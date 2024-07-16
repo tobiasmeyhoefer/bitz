@@ -1,3 +1,15 @@
+/**
+ * The `AddressChooserPopup` component is a React component that renders a popup for the user to choose an address and enter their name.
+ *
+ * The component uses the `react-hook-form` library to handle form validation and submission. It also uses the `GeoapifyGeocoderAutocomplete` component from the `@geoapify/react-geocoder-autocomplete` library to provide address autocomplete functionality.
+ *
+ * When the user submits the form, the component calls the `saveUserAddress`, `saveUserLocation`, and `saveUserName` functions from the `@/lib/user-actions` module to save the user's address, location, and name. If the address chosen by the user does not contain a house number, an error message is displayed. If the user does not choose an address, an error message is also displayed.
+ *
+ * The component also includes a `BorderBeam` component from the `@/components/magicui/border-beam` module to add a border effect to the card.
+ *
+ * @param params - An object containing the `translations` property, which is an object with translations for the component's UI elements.
+ * @returns The `AddressChooserPopup` component.
+ */
 'use client'
 import { useForm } from 'react-hook-form'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'

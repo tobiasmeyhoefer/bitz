@@ -1,3 +1,18 @@
+/**
+ * The `AddressChanger` component allows users to update their address and location information.
+ *
+ * It uses the `GeoapifyGeocoderAutocomplete` component from the `@geoapify/react-geocoder-autocomplete` library to provide an autocomplete feature for address input.
+ *
+ * When the user submits the form, the component calls the `saveUserAddress` and `saveUserLocation` functions from the `@/lib/user-actions` module to update the user's address and location information.
+ *
+ * The component also uses the `useToast` hook from the `@/components/ui/use-toast` module to display success or error messages to the user.
+ *
+ * @param {AddressChangerProps} props - The props for the `AddressChanger` component.
+ * @param {object} props.translations - An object containing translations for the component's UI elements.
+ * @param {string} props.translations.address - The translation for the "Address" label.
+ * @param {string} props.translations.changeAddress - The translation for the "Change Address" button.
+ * @param {string} props.translations.changeNow - The translation for the "Change Now" button.
+ */
 'use client'
 import { Button } from '../ui/button'
 import { useForm } from 'react-hook-form'

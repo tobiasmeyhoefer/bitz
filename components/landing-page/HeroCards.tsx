@@ -1,5 +1,12 @@
+/**
+ * The `HeroCards` component renders a set of hero cards on the landing page. It includes a testimonial card, a team card, a pricing card, and a service card. Each card is animated using the `HeroCardAnimation` component.
+ *
+ * The testimonial card displays a user's quote and their username. The team card displays an image of a team member, their name, and their role. The pricing card displays the free pricing plan with a list of benefits. The service card displays information about the light and dark mode feature.
+ *
+ * This component is part of the `landing-page` module and is used to showcase the key features and benefits of the application.
+ */
+
 import React from 'react'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
@@ -10,9 +17,8 @@ import {
   CardTitle,
   CardFooter,
 } from '@/components/ui/card'
-import { Check, Linkedin } from 'lucide-react'
-import { LightBulbIcon } from './Icons'
-import { GitHubLogoIcon } from '@radix-ui/react-icons'
+import { Check } from 'lucide-react'
+import { LightBulbIcon } from './icons'
 import Image from 'next/image'
 import { Link } from '@/navigation'
 import HeroCardAnimation from './HeroCardAnimation'
@@ -57,8 +63,7 @@ export const HeroCards = () => {
             <p>This UI is absolutely stunning thanks to the team of bitz</p>
           </CardContent>
           <CardFooter>
-            <div>
-            </div>
+            <div></div>
           </CardFooter>
         </Card>
       </HeroCardAnimation>

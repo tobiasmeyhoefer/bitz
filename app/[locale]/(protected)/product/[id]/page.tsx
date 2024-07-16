@@ -1,3 +1,9 @@
+/**
+ * Renders the product page for a specific product.
+ *
+ * @param params - An object containing the `id` parameter from the URL.
+ * @returns A React component that displays the product information, including the product image carousel and product info card.
+ */
 import { Button } from '@/components/ui/button'
 import { ProductImageCarousel } from '@/components/products/productImgCarousel'
 import ProductInfoCard from '@/components/products/productInfoCard'

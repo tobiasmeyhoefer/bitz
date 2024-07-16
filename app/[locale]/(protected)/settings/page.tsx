@@ -1,3 +1,12 @@
+/**
+ * Renders the Settings page component, which includes various settings-related components such as profile settings, locale switcher, darkmode toggler, phone verification, and more.
+ * 
+ * The Settings component is wrapped in a Suspense component that displays a loading skeleton while the child components are being loaded.
+ * 
+ * The component uses the `useTranslations` hook from `next-intl` to retrieve translations for the various settings-related strings.
+ * 
+ * @returns {JSX.Element} The rendered Settings page component
+ */
 import RegisterPasskey from '@/components/auth/register-passkey'
 import LocaleSwitcher from '@/components/settings/LocaleSwitcher'
 import { useTranslations } from 'next-intl'

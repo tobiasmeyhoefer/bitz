@@ -1,3 +1,11 @@
+/**
+ * A React component that renders a popover with a gallery of banner images that the user can select from.
+ *
+ * The component allows the user to choose a banner image from a set of color and picture images, and provides a button to remove the currently selected banner.
+ *
+ * @param props - An object containing a `setBanner` function that is called when the user selects a new banner image.
+ * @param props.setBanner - A function that sets the current banner image.
+ */
 import { Button } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import Image from 'next/image'

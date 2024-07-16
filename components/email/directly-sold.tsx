@@ -7,6 +7,15 @@ interface ProductDirectlySoldEmailProps {
   address: string;
 }
 
+/**
+ * React component that renders an email template for a product that has been directly sold.
+ *
+ * @param {ProductDirectlySoldEmailProps} props - The props for the component.
+ * @param {string} props.productName - The name of the product that was sold.
+ * @param {string} props.address - The address where the buyer should send the product.
+ * @returns {JSX.Element} - The rendered email template.
+ */
+
 const ProductDirectlySoldEmail = ({ productName, address }: ProductDirectlySoldEmailProps) => {
   return (
     <Tailwind>

@@ -1,3 +1,11 @@
+/**
+ * A React component that provides a dropdown menu for selecting a font color.
+ *
+ * The component uses the `DropdownMenu` UI component from the `@/components/ui/dropdown-menu` module to display a list of color options. When a color is selected, the `setShopTextColor` function from `@/lib/user-actions` is called to update the shop's text color, and the `setColor` function passed as a prop is called to update the parent component's state.
+ *
+ * @param props - An object with a `setColor` function that is called when a color is selected.
+ * @param props.setColor - A function that is called with the selected color value.
+ */
 import { setShopTextColor } from '@/lib/user-actions'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'

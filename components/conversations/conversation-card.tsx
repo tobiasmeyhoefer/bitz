@@ -1,3 +1,10 @@
+/**
+ * Renders a conversation card component that displays information about a conversation, including the product, buyer/seller details, and unread message count.
+ *
+ * @param {Object} props - The component props.
+ * @param {ConversationType} props.conv - The conversation object.
+ * @returns {JSX.Element} - The rendered conversation card component.
+ */
 import { Card, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { getProductById } from '@/lib/product-actions'
 import { getUser, getUserById } from '@/lib/user-actions'

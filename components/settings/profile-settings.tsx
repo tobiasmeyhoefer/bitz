@@ -1,3 +1,9 @@
+/**
+ * The `ProfileSettings` component renders the user's profile settings, including their profile image, name, and address.
+ * It uses various child components to handle the different settings, such as `NameChanger`, `LocationChooser`, `AddressChanger`, and `PictureChanger`.
+ * The component fetches the user's data using the `getUser` function from `@/lib/user-actions` and the translations using `getTranslations` from `next-intl/server`.
+ * The `changeUserImage` function from `@/lib/user-actions` is used to update the user's profile image.
+ */
 import { getUser } from '@/lib/user-actions'
 import Image from 'next/image'
 import { FaUserCircle } from 'react-icons/fa'

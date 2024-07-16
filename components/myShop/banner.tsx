@@ -1,3 +1,10 @@
+/**
+ * Renders a banner component with a title and an optional custom banner image.
+ *
+ * @param title - The title to display in the banner.
+ * @param myBanner - An optional URL for a custom banner image. If not provided, the default banner image will be used.
+ * @returns A React component that renders the banner.
+ */
 'use client'
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'

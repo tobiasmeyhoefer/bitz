@@ -1,3 +1,12 @@
+/**
+ * The `ShopContent` component is responsible for rendering the content of a shop page. It fetches the products owned by a user, sorts them based on provided translations, and renders them using the `CardWithImage` component.
+ *
+ * @param params - An object containing the following properties:
+ * @param params.id - The ID of the user whose products should be displayed.
+ * @param params.translation - An object containing translations for the sort options.
+ * @param params.viewTranslation - A string containing the translation for the view mode.
+ * @returns A React component that displays the shop content.
+ */
 'use client'
 
 import { getProductsOwned } from '@/lib/product-actions'

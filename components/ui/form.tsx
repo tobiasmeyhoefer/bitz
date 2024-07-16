@@ -1,3 +1,17 @@
+/**
+ * This module provides a set of React components and hooks for building forms using the react-hook-form library.
+ *
+ * The main components exported are:
+ * - `Form`: A wrapper component that provides the form context to its children.
+ * - `FormField`: A component that wraps a form field and provides context for the field.
+ * - `FormItem`: A component that wraps a form field and provides layout and accessibility features.
+ * - `FormLabel`: A component that renders a label for a form field.
+ * - `FormControl`: A component that renders the input control for a form field.
+ * - `FormDescription`: A component that renders a description for a form field.
+ * - `FormMessage`: A component that renders an error message for a form field.
+ *
+ * The `useFormField` hook can be used to access the context of the current form field, including its name, error state, and accessibility IDs.
+ */
 "use client"
 import * as React from "react"
 import * as LabelPrimitive from "@radix-ui/react-label"

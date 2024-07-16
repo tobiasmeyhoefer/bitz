@@ -1,3 +1,12 @@
+/**
+ * A React component that renders a select dropdown for switching the locale.
+ *
+ * @param {Object} props - The component props.
+ * @param {ReactNode} props.children - The options to display in the select dropdown.
+ * @param {string} props.defaultValue - The default value to display in the select dropdown.
+ * @param {string} props.label - The label to display for the select dropdown.
+ * @returns {JSX.Element} - The LocaleSwitcherSelect component.
+ */
 'use client'
 
 import { ReactNode, useTransition } from 'react'

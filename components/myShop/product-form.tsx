@@ -1,3 +1,15 @@
+/**
+ * The `ProductForm` component is a React component that renders a form for creating a new product. It uses the `react-hook-form` library to handle form state and validation, and the `zod` library to define the form schema.
+ *
+ * The component accepts the following props:
+ * - `submitText`: a string that represents the text to display on the submit button
+ * - `whichFunction`: a string that represents the function to be called when the form is submitted
+ * - `translations`: an object that contains translations for various form elements
+ *
+ * The component handles file uploads, image compression, and form submission. It also checks for profanity in the product title and description, and verifies that the user's phone number is verified before allowing the form to be submitted.
+ *
+ * The component also includes a category selection dropdown, which uses the `Popover` and `Command` components from the `@/components/ui/command` module.
+ */
 'use client'
 
 import React, { useEffect, useState } from 'react'

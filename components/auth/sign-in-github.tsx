@@ -1,3 +1,10 @@
+/**
+ * Renders a sign-in button for GitHub authentication.
+ *
+ * This component renders a button that, when clicked, initiates the GitHub sign-in
+ * flow using the `signIn` function from the `@/auth` module. The button is styled
+ * with a GitHub logo and the text "Sign in with GitHub".
+ */
 import { signIn } from '@/auth'
 import { Button } from '../ui/button'
 import { FaGithub } from 'react-icons/fa'

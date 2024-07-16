@@ -1,3 +1,12 @@
+/**
+ * The `OnboardingBrowseCard` component is a React functional component that displays an onboarding card with information about different sections of the application.
+ * 
+ * The component uses the `useOnboardingStore` hook to manage the state of the onboarding process, and the `getOnboardingState` and `setOnboardingState` functions from `@/lib/user-actions` to fetch and update the onboarding state.
+ * 
+ * The component renders a card with a title and description that changes based on the value of the `onboardingIndexBrowse` state. The card also includes two buttons: one to navigate to the next onboarding step, and one to skip the onboarding process.
+ * 
+ * The component is rendered within a fixed full-screen overlay with a semi-transparent black background.
+ */
 'use client'
 
 import {

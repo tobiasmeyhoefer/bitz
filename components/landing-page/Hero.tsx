@@ -1,3 +1,10 @@
+/**
+ * The `Hero` component is the main hero section of the landing page. It includes a 3D cube animation, a title and subtitle, a call-to-action button, and a link to the project's GitHub repository.
+ *
+ * The component uses the `useTranslations` hook from `next-intl` to retrieve localized strings for the content. It also imports various UI components and icons from other parts of the application.
+ *
+ * The component is responsible for rendering the main hero content and layout, including the positioning of the 3D cube animation and the hero cards section.
+ */
 import { Button } from '@/components/ui/button'
 import { buttonVariants } from '@/components/ui/button'
 import { HeroCards } from '@/components/landing-page/HeroCards'

@@ -1,3 +1,12 @@
+/**
+ * A React component that renders a product information card with an editable form.
+ *
+ * @param props - The component props:
+ * @param props.productInfo - The product information to display.
+ * @param props.translations - The translations for the UI elements.
+ * @param props.locale - The current locale.
+ * @returns A React element representing the product information card.
+ */
 'use client'
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'

@@ -1,3 +1,9 @@
+/**
+ * The `Page` component is the main entry point for the conversation page. It fetches the necessary data, including the conversation, existing messages, and user/product information, and renders the conversation UI with the `Messages` and `WriteMessageField` components.
+ *
+ * @param params - An object containing the `id` parameter, which is the ID of the conversation to display.
+ * @returns A React component that renders the conversation page.
+ */
 import Messages from '@/components/conversations/messages'
 import WriteMessageField from '@/components/conversations/write-message-field'
 import { Button } from '@/components/ui/button'

@@ -1,3 +1,9 @@
+/**
+ * Renders an error page for authentication-related errors.
+ * 
+ * This component is responsible for displaying appropriate error messages based on the error code passed in the URL query parameters.
+ * It provides a "Home" button to navigate back to the main application.
+ */
 'use client'
 
 import { Button } from '@/components/ui/button'

@@ -1,3 +1,9 @@
+/**
+ * The `Sponsors` component displays a section with a list of sponsors for the landing page.
+ * It uses the `useTranslations` hook from `next-intl` to retrieve the translated text for the section title.
+ * The sponsors are defined in the `sponsors` array, which contains objects with an icon and a name for each sponsor.
+ * The component renders the sponsors in a centered, responsive layout.
+ */
 import { Radar } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 

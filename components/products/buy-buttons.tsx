@@ -1,3 +1,15 @@
+/**
+ * The `BuyButtons` component renders buttons for buying a product, either through a conversation or a direct checkout session.
+ *
+ * The component checks if the user has an existing conversation for the product, and if so, disables the "Buy" button. It also checks if the user has a valid address set, and if not, displays an error message.
+ *
+ * When the "Buy" button is clicked, the component creates a new conversation for the product and redirects the user to the conversations page. When the "Direct Buy" button is clicked, the component checks if the user has a valid address and if a checkout session has already been opened for the product. If not, it creates a new checkout session and redirects the user to the payment link.
+ *
+ * The component uses various helper functions from the `@/lib/conversations-actions`, `@/lib/stripe-actions`, `@/lib/user-actions`, and `@/lib/verify-actions` modules to perform these actions.
+ *
+ * @param props - An object containing the `product` prop, which is of type `ProductType`.
+ * @returns A React component that renders the buy buttons for the product.
+ */
 'use client'
 import { Button } from '@/components/ui/button'
 import { checkIfConversationAlreadyExist, createConversation } from '@/lib/conversations-actions'

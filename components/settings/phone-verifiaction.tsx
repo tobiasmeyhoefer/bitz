@@ -1,3 +1,11 @@
+/**
+ * The `PhoneVerification` component is responsible for handling the phone verification process for a user.
+ * It allows the user to enter their phone number, receive a verification code via SMS, and then enter the code to verify their phone number.
+ * The component also checks if the user is already verified and displays the appropriate message.
+ *
+ * @param translations - An object containing localized strings for various UI elements.
+ * @returns A React component that renders the phone verification UI.
+ */
 'use client'
 
 import {

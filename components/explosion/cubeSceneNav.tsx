@@ -1,3 +1,10 @@
+/**
+ * Renders a 3D scene with a cube and various lighting effects.
+ *
+ * This component sets up a Three.js canvas and adds several directional and point lights to create a dynamic lighting environment. It then renders a `Cube` component at the center of the scene, wrapped in a `Suspense` component to handle any asynchronous loading.
+ *
+ * The `Canvas` component from `@react-three/fiber` is used to create the 3D rendering context, and the `Center` component from `@react-three/drei` is used to position the `Cube` at the center of the scene.
+ */
 'use client'
 import { Center } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'

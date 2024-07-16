@@ -1,3 +1,19 @@
+/**
+ * A set of React components that implement a dialog UI using the Radix UI library.
+ *
+ * The main components are:
+ * - `Dialog`: The root component that wraps the entire dialog.
+ * - `DialogTrigger`: A component that triggers the opening of the dialog.
+ * - `DialogPortal`: A component that renders the dialog in a portal.
+ * - `DialogOverlay`: A semi-transparent overlay that covers the entire screen when the dialog is open.
+ * - `DialogContent`: The main content area of the dialog, which can be customized with a header, footer, title, and description.
+ * - `DialogHeader`: A container for the header content of the dialog.
+ * - `DialogFooter`: A container for the footer content of the dialog.
+ * - `DialogTitle`: The title of the dialog.
+ * - `DialogDescription`: The description of the dialog.
+ *
+ * These components can be used to create custom dialog UI experiences in a React application.
+ */
 'use client'
 
 import * as React from 'react'

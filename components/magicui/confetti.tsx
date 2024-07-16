@@ -1,3 +1,20 @@
+/**
+ * A React component that renders a canvas and provides an API to trigger confetti animations.
+ *
+ * The `Confetti` component creates a canvas element and initializes a `canvas-confetti` instance. It provides an API to fire confetti animations, either automatically on mount or manually through the `fire` method.
+ *
+ * The `ConfettiButton` component is a button that triggers a confetti animation when clicked, with the confetti origin centered on the button.
+ *
+ * @param {Props} props - The props for the `Confetti` component.
+ * @param {ConfettiOptions} [props.options] - Options for the confetti animation.
+ * @param {ConfettiGlobalOptions} [props.globalOptions] - Global options for the confetti animation.
+ * @param {boolean} [props.manualstart] - If true, the confetti animation will not start automatically on mount.
+ * @param {ReactNode} [props.children] - Additional content to render inside the `Confetti` component.
+ *
+ * @param {ConfettiButtonProps} props - The props for the `ConfettiButton` component.
+ * @param {ConfettiOptions & ConfettiGlobalOptions & { canvas?: HTMLCanvasElement }} [props.options] - Options for the confetti animation.
+ * @param {React.ReactNode} [props.children] - The content to render inside the `ConfettiButton` component.
+ */
 import { Button, ButtonProps } from "@/components/ui/button";
 import confetti from "canvas-confetti";
 import type { ReactNode } from "react";

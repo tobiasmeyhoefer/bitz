@@ -1,3 +1,12 @@
+/**
+ * Renders a shop text input component that allows the user to update the shop name.
+ * The component fetches the current shop name and text font from the database and displays them in an input field.
+ * The input field updates the shop name in the database after 3.5 seconds of no new input.
+ * The component also includes a font selection dropdown that allows the user to change the font of the shop name.
+ *
+ * @param {string} title - The default shop name to display if no shop name is found in the database.
+ * @returns {JSX.Element} - The rendered shop text input component.
+ */
 'use client'
 import { Input } from '@/components/ui/input'
 import { useEffect, useState } from 'react'

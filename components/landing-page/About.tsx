@@ -1,3 +1,11 @@
+/**
+ * Renders the "About" section of the landing page.
+ * 
+ * This component displays information about the Bitz platform, including a title, description, and statistics.
+ * The component uses the `useTranslations` hook from `next-intl` to retrieve localized strings for the content.
+ * 
+ * @returns {JSX.Element} The rendered "About" section
+ */
 import { Statistics } from './Statistics'
 import pilot from '@/public/images/pilot.png'
 import Image from 'next/image'
@@ -20,11 +28,6 @@ export const About = () => {
                 ?
               </h2>
               <p className="mt-4 text-xl text-muted-foreground">
-                {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit
-                amet, consectetur adipiscing elit. */}
                 {t('WhatIsBitz')}
               </p>
             </div>

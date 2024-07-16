@@ -1,3 +1,14 @@
+/**
+ * The `Messages` component is responsible for rendering a list of messages in a conversation.
+ * It handles the subscription to incoming messages via Pusher, sets the messages as read,
+ * and provides functionality to delete messages.
+ *
+ * @param {MessageProps} props - The props for the `Messages` component.
+ * @param {string} props.convId - The ID of the conversation.
+ * @param {Array<{ content: string; id: string; isSender: boolean; timeStamp: Date; isSystemMessage: boolean }>} props.initialMessages - The initial messages for the conversation.
+ * @param {string} props.userId - The ID of the current user.
+ * @returns {JSX.Element} - The rendered `Messages` component.
+ */
 'use client'
 
 import { pusherClient } from '@/lib/pusher'
