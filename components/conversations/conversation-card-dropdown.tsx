@@ -1,6 +1,6 @@
 'use client'
 
-import { CiMenuKebab } from 'react-icons/ci'
+import { BsThreeDotsVertical } from "react-icons/bs";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -30,18 +30,27 @@ export const ConversationCardDropwdown = ({
     router.push('/transactions')
   }
 
+  const notInterested = async () => {
+    await deleteConversation(conv.productId, conv.buyerId)
+    router.push('/conversations')
+  }
+
   return (
     <div className="absolute right-4 top-4">
       <DropdownMenu>
         <DropdownMenuTrigger>
-          <CiMenuKebab />
+          <BsThreeDotsVertical/>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="z-20">
           {showSold === true ? (
             <DropdownMenuItem onClick={changeProdStateToSold} className="cursor-pointer">
               verkauft
             </DropdownMenuItem>
-          ) : null}
+          ) : (
+            <DropdownMenuItem onClick={notInterested} className="cursor-pointer">
+              Nicht mehr interessiert
+            </DropdownMenuItem>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
