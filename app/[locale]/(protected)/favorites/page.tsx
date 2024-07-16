@@ -19,7 +19,7 @@ const Favorites = async () => {
           <div
             className={`${`h-full`} flex w-full flex-col items-center justify-center px-10 py-20 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
           >
-            <div className="mt-[20px] grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4  lg:grid-cols-4 2xl:grid-cols-5 ">
+            <div className="mt-[20px] grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5  ">
               {products?.map((p: ProductType, index: number) => (
                 <CardWithImage
                   key={`pr-${index}`}

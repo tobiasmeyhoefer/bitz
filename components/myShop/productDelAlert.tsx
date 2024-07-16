@@ -71,7 +71,7 @@ export function ProdDelAlert({
             <AlertDialogCancel onClick={handleDialogClose}>{cancel}</AlertDialogCancel>
             <form action={() => deleteProduct(productId)}>
               <Button variant={'destructive'}>
-                <AlertDialogAction className="bg-transparent hover:bg-transparent">
+                <AlertDialogAction className="bg-transparent shadow-none hover:bg-transparent">
                   {confirm}
                 </AlertDialogAction>
               </Button>

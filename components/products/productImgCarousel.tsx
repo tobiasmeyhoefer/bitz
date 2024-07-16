@@ -61,7 +61,7 @@ export function ProductImageCarousel(props: {
         opts={{
           loop: true,
         }}
-        className="h-full w-[90vw] lg:h-[60vh] lg:w-[50vw] xl:w-[60vh] 2xl:w-[70vh]"
+        className="flex h-full w-[90vw] justify-center lg:h-[70vh] lg:w-[70vh]"
       >
         <CarouselContent>
           {props.images.map((img: string | null, index: number) => (
@@ -75,7 +75,7 @@ export function ProductImageCarousel(props: {
                       height={500}
                       src={img} //"/test_img.jpg"
                       alt="Product Image"
-                      className="aspect-square h-[50vh] w-[90vw] rounded-xl object-cover lg:h-[60vh] lg:w-[50vw] xl:w-[60vh] 2xl:w-[70vh]"
+                      className="aspect-square h-[90vw] w-[90vw] rounded-xl object-cover md:h-[50vw] md:w-[50vw] lg:h-[70vh] lg:w-[70vh]"
                       style={{ objectFit: 'cover' }}
                     />
                   ) : (

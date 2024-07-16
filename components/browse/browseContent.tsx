@@ -170,7 +170,7 @@ const BrowseContent = (props: BrowseContentProps) => {
         </div>
         {!loading ? (
           <>
-            <div className="mt-[20px] grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4  lg:grid-cols-4 2xl:grid-cols-5 ">
+            <div className="mt-[20px] grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5  ">
               {products.map((p, index) => (
                 <div key={`kp-${index}`}>
                   <AnimatedCard delay={0.3}>
