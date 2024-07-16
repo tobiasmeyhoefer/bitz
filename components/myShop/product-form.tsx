@@ -289,6 +289,7 @@ export function ProductForm({
   const [files, setFiles] = useState<FileList | null>(null)
   const [compressedFiles, setCompressedFiles] = useState<File[] | null>(null)
   const [previewUrls, setPreviewUrls] = useState<string[] | null>(null)
+  const [charsRemaining, setCharsRemaining] = useState(500)
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files ?? null
@@ -418,10 +419,20 @@ export function ProductForm({
               <FormItem>
                 <FormLabel> {description}</FormLabel>
                 <FormControl>
-                  <Textarea className="h-24" placeholder={description} {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
+                <Textarea
+                      placeholder="Description"
+                      {...field}
+                      maxLength={500}
+                      onChange={(event) => {
+                        const value = event.target.value
+                        field.onChange(value)
+                        setCharsRemaining(500 - value.length)
+                      }}
+                    />
+                  </FormControl>
+                  <p style={{ fontSize: '14px', color: '#666', marginTop: '4px' }}>{charsRemaining} Remaining characters</p>
+                  <FormMessage />
+                </FormItem>
             )}
           />
           <FormField
