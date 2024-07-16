@@ -1,5 +1,5 @@
 import { useLocale, useTranslations } from 'next-intl'
-import LocaleSwitcherSelect from './LocaleSwitcherSelect'
+import LocaleSwitcherSelect from './locale-switcher-select'
 import { locales } from '@/i18n'
 import { SelectItem } from '../ui/select'
 

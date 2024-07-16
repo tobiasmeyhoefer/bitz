@@ -7,7 +7,7 @@ import {
 } from '@/lib/product-actions'
 import { BrowseContentProps } from '@/lib/types'
 import { useEffect, useState } from 'react'
-import { CardWithImage } from '../ui/cardWithImage'
+import { CardWithImage } from '../ui/card-with-image'
 import { SortProducts } from '../sort-products/sort-products'
 import { SearchDialog } from './search-dialog'
 import OnboardingBrowseCard from '../onboarding/onboarding-browse-card'
@@ -16,7 +16,7 @@ import AnimatedCard from '../ui/animated-card'
 import { FilterProducts } from '../filter-products/filter-products'
 import { getUser } from '@/lib/user-actions'
 import { Button } from '../ui/button'
-import AddressChooserPopup from '../adressChooser-popup/adressChooser-popup'
+import AddressChooserPopup from '../address-chooser-popup/address-chooser-popup'
 import LoadingSkeletonBrowse from '../fallbacks/browse-fallback'
 
 const suggestions = [

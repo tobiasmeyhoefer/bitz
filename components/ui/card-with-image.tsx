@@ -5,11 +5,11 @@ import { CardWithImageProps } from '@/lib/types'
 import { cn, formatDate } from '@/lib/utils'
 import { Link } from '@/navigation'
 import { Card, CardHeader, CardTitle, CardDescription } from './card'
-import FavoriteLike from '../favorites/favoriteLike'
+import FavoriteLike from '../favorites/favorite-like'
 import { Badge } from './badge'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { CardContainer } from './3d-card'
-import { ProdDelAlert } from '../myShop/productDelAlert'
+import { ProdDelAlert } from '../my-shop/product-delete-alert'
 
 const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
   ({ className, ...props }, ref) => {

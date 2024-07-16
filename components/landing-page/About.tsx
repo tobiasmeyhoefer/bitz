@@ -1,4 +1,4 @@
-import { Statistics } from './Statistics'
+import { Statistics } from './statistics'
 import pilot from '@/public/images/pilot.png'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'

@@ -10,7 +10,7 @@ import {
   type CarouselApi,
 } from '@/components/ui/carousel'
 import Image from 'next/image'
-import { UpdateImage } from '@/components/myShop/update-image'
+import { UpdateImage } from '@/components/my-shop/update-image'
 import { useEffect, useState } from 'react'
 import { getUser } from '@/lib/user-actions'
 import { auth } from '@/auth'

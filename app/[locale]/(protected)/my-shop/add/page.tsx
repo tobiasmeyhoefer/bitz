@@ -1,4 +1,4 @@
-import { ProductForm } from '@/components/myShop/product-form'
+import { ProductForm } from '@/components/my-shop/product-form'
 import { getTranslations } from 'next-intl/server'
 
 const AddProductPage = async () => {

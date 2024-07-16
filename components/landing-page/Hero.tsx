@@ -1,12 +1,12 @@
 import { Button } from '@/components/ui/button'
 import { buttonVariants } from '@/components/ui/button'
-import { HeroCards } from '@/components/landing-page/HeroCards'
+import { HeroCards } from '@/components/landing-page/hero-cards'
 import { GitHubLogoIcon } from '@radix-ui/react-icons'
 import { Link } from '@/navigation'
 import dynamic from 'next/dynamic'
 import { useTranslations } from 'next-intl'
 
-const CubeScene = dynamic(() => import('@/components/explosion/cubeScene'), {
+const CubeScene = dynamic(() => import('@/components/explosion/cube-scene'), {
   ssr: false,
 })
 

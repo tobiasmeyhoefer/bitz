@@ -3,7 +3,7 @@
 import { getProductsOwned } from '@/lib/product-actions'
 import { ProductType } from '@/schema'
 import { useEffect, useState } from 'react'
-import { CardWithImage } from '../ui/cardWithImage'
+import { CardWithImage } from '../ui/card-with-image'
 import { SortProducts } from '../sort-products/sort-products'
 import { SortProductsProps } from '@/lib/types'
 

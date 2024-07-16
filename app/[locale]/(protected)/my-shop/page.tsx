@@ -1,9 +1,9 @@
 import { Button } from '@/components/ui/button'
-import MyShopContent from '@/components/myShop/myshopContent'
+import MyShopContent from '@/components/my-shop/my-shop-content'
 import { getTranslations } from 'next-intl/server'
-import Banner from '@/components/myShop/banner'
+import Banner from '@/components/my-shop/banner'
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from '@/components/ui/dialog'
-import { ProductForm } from '@/components/myShop/product-form'
+import { ProductForm } from '@/components/my-shop/product-form'
 import { getBanner } from '@/lib/user-actions'
 
 const MyShop = async () => {
