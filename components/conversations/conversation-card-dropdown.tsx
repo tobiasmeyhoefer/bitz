@@ -1,6 +1,6 @@
 'use client'
 
-import { CiMenuKebab } from 'react-icons/ci'
+import { BsThreeDotsVertical } from "react-icons/bs";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -39,7 +39,7 @@ export const ConversationCardDropwdown = ({
     <div className="absolute right-4 top-4">
       <DropdownMenu>
         <DropdownMenuTrigger>
-          <CiMenuKebab />
+          <BsThreeDotsVertical/>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="z-20">
           {showSold === true ? (
