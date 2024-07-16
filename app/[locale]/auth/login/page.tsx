@@ -19,7 +19,7 @@ import { SignInGithub } from '@/components/auth/sign-in-github'
 
 const Login = () => {
   const t = useTranslations('LoginForm')
-  const CubeSceneNav = dynamic(() => import('@/components/explosion/cubeSceneNav'), {
+  const CubeSceneNav = dynamic(() => import('@/components/explosion/cube-scene-nav'), {
     ssr: false,
   })
   return (

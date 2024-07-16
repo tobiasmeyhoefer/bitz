@@ -4,7 +4,7 @@ import { Link } from '@/navigation'
 import { getTranslations } from 'next-intl/server'
 import dynamic from 'next/dynamic'
 import { SignOut } from '../auth/sign-out'
-import { NavItemLink, NavLoginLink, NavMenuDrawer, NavbarItemDropdown } from './navbarItem'
+import { NavItemLink, NavLoginLink, NavMenuDrawer, NavbarItemDropdown } from './navbar-item'
 
 const NavBar = async () => {
   const t = await getTranslations('Navbar')
@@ -14,7 +14,7 @@ const NavBar = async () => {
     user = await getUser()
   }
   const isLoggedIn = !!session?.user
-  const CubeSceneNav = dynamic(() => import('@/components/explosion/cubeSceneNav'), {
+  const CubeSceneNav = dynamic(() => import('@/components/explosion/cube-scene-nav'), {
     ssr: false,
   })
 

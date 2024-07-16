@@ -1,7 +1,7 @@
 import { getProductsOwned } from '@/lib/product-actions'
 import { getUser } from '@/lib/user-actions'
 import { getTranslations } from 'next-intl/server'
-import { CardWithImage } from '../ui/cardWithImage'
+import { CardWithImage } from '../ui/card-with-image'
 
 const MyShopContent = async () => {
   const user = await getUser()
