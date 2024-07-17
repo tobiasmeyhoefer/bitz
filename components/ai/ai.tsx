@@ -1,11 +1,11 @@
 /**
- * The `ExperimentalAi` component is a React functional component that provides an AI-powered chat interface. It uses the `useChat` hook to manage the chat state and interactions.
+ * The `Ai` component is a React functional component that provides an AI-powered chat interface. It uses the `useChat` hook to manage the chat state and interactions.
  *
  * The component renders a fixed button that, when clicked, opens a chat window. The chat window displays a list of messages, with messages from the user displayed on the right and messages from the AI assistant displayed on the left. The user can enter a new message in an input field and submit it using the "senden" button.
  *
  * The component also includes functionality to close the chat window when the user clicks outside of it.
  *
- * @returns The `ExperimentalAi` React component.
+ * @returns The `Ai` React component.
  */
 'use client'
 
@@ -15,7 +15,7 @@ import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import { useChat } from 'ai/react'
 
-const ExperimentalAi: React.FC = () => {
+const Ai: React.FC = () => {
   const [isOpened, setIsOpened] = useState(false)
   const { messages, input, handleInputChange, handleSubmit } = useChat()
   const containerRef = useRef<HTMLDivElement>(null)
@@ -59,11 +59,11 @@ const ExperimentalAi: React.FC = () => {
       <div
         ref={containerRef}
         className={cn(
-          'fixed bottom-20 right-20 z-10 flex h-[400px] w-[300px] flex-col justify-between rounded-lg border border-neutral-400 bg-white/80 p-2 shadow-2xl md:h-[500px] md:w-[400px]',
+          'fixed md:bottom-20 md:right-20 bottom-16 right-16 z-10 flex h-[400px] md:text-md text-sm w-[280px] flex-col justify-between rounded-lg border border-neutral-400 bg-white p-2 shadow-2xl md:h-[500px] md:w-[400px]',
           { hidden: !isOpened },
         )}
       >
-        <div className="overflow-y-scroll">
+        <div className="overflow-auto">
           {messages.map((m) => (
             <div
               key={m.id}
@@ -96,4 +96,4 @@ const ExperimentalAi: React.FC = () => {
   )
 }
 
-export default ExperimentalAi
+export default Ai

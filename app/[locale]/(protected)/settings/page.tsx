@@ -67,7 +67,7 @@ const Settings = () => {
             />
           </div>
         </div>
-        <Link href={"https://www.youtube.com"} className='absolute left-8 bottom-8' target='_blank'><Button className=''>Ich brauche Hilfe</Button></Link>
+        <Link href={"https://www.youtube.com"} className='fixed left-8 bottom-8' target='_blank'><Button className=''>Ich brauche Hilfe</Button></Link>
       </Suspense>
     </div>
   )
