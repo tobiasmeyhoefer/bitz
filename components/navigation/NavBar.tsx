@@ -5,7 +5,7 @@
 
  * The navigation links include:
  * - Discover page ("/browse")
- * - My Bitz page ("/myshop")
+ * - My Bitz page ("/my-shop")
  * - Favorites page ("/favorites")
  * - Transactions page ("/transactions")
  * - Conversations page ("/conversations")
@@ -88,7 +88,7 @@ const NavBar = async () => {
             </Link>
             <div className="hidden md:flex">
               <NavItemLink className="mr-14" linkTo="/browse" text={t('discover')} />
-              <NavItemLink className="mr-14" linkTo="/myshop" text={t('myBitz')} />
+              <NavItemLink className="mr-14" linkTo="/my-shop" text={t('myBitz')} />
               <NavItemLink className="mr-14" linkTo="/conversations" text={t('conversations')} />
             </div>
           </>

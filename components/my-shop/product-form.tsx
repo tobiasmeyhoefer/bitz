@@ -274,7 +274,7 @@ export function ProductForm({
       await addProduct(JSON.parse(JSON.stringify(values)), imageUrls)
       document.getElementById('closeDialog')?.click()
       setIsLoading(false)
-      router.push('/myshop')
+      router.push('/my-shop')
       toast({
         title: toastTitle,
         description: toastDescription,
