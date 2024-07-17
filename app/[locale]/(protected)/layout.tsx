@@ -1,9 +1,9 @@
 /**
  * The root layout component for the application.
- * This component renders the children components and also includes the `ExperimentalAi` component.
- * The `ExperimentalAi` component is likely a custom component that provides some experimental AI-related functionality.
+ * This component renders the children components and also includes the `Ai` component.
+ * The `Ai` component is likely a custom component that provides some AI-related functionality.
  */
-import ExperimentalAi from '@/components/ai/experimental-ai'
+import Ai from '@/components/ai/ai'
 
 export default async function RootLayout({
   children,
@@ -14,7 +14,7 @@ export default async function RootLayout({
     <>
       {children}
       <div className="">
-        <ExperimentalAi />
+        <Ai />
       </div>
     </>
   )

@@ -270,7 +270,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
             </Popover>
 
             <Button
-              onClick={() => setInput('Ich bin nicht mehr interessiert, Entschuligung ❌')}
+              onClick={() => setInput('Ich bin nicht mehr interessiert, Entschuldigung ❌')}
               variant={'outline'}
             >
               Abbruch

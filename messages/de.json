@@ -144,7 +144,7 @@
     "images": "Bilder",
     "toastTitle": "Erfolgreich",
     "toastDescription": "Produkt wurde hinzugefügt",
-    "submitTitle": "Absenden",
+    "submitTitle": "hinzufügen",
     "save": "Speichern",
     "cancel": "Abbrechen",
     "edit": "Bearbeiten",
@@ -180,7 +180,7 @@
     "changeLocation": "change location",
     "changeAddress": "Adresse ändern",
     "theme": "Farbschema",
-    "changeNow": "annehmen",
+    "changeNow": "ändern",
     "Verification": {
       "notVerified": "Dein Account ist noch nicht verifiziert",
       "verificationAborted": "Verifizierung abgebrochen",
