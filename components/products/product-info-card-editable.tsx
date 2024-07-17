@@ -103,7 +103,7 @@ export default function ProductInfoCardEditable(props: {
       {isEditing ? (
         <div className="my-3 flex h-full w-[90vw] justify-center lg:my-0 lg:h-[70vh] lg:w-[50vw]">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
               <FormField
                 control={form.control}
                 name="title"
