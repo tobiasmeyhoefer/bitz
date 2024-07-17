@@ -9,14 +9,14 @@ import { Head, Hr, Link, Row, Section, Tailwind, Text } from '@react-email/compo
  * @returns {JSX.Element} - The rendered email template.
  */
 
-export default function ProductInterestEmail({productName}: {productName: string}) {
+export default function ProductInterestEmail(productName: string) {
   return (
     <Tailwind>
       <Html>
         <Section className="text-center">
           <Row>
             <Head>
-              <title>Somebody wants to buy your Bit {productName}!</title>
+              <title>{productName}</title>
             </Head>
             <Text className="text-2xl font-bold">
               Somebody wants to buy your Bit {productName}!
