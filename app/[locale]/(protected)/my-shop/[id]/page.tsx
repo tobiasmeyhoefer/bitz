@@ -6,6 +6,7 @@
  */
 import {
   getBannerById,
+  getShopTextColorById,
   getShopTextFontById,
   getShopNameById,
   getUserById,
@@ -37,37 +38,38 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <div className="group relative h-40 w-full bg-cover">
-        <div className="absolute h-3/5 w-full bg-gradient-to-b from-black/40 to-black/0"></div>
-        {banner && (
-          <Image
-            src={banner}
-            alt="Product Image"
-            style={{ objectFit: 'cover' }}
-            width={1800}
-            height={150}
-            className="h-full w-full rounded-b-lg"
-          />
-        )}
+      <div className="inset-x-1/2 flex flex-col items-center">
+        <div className="group relative h-40 w-screen bg-cover">
+          <div className="absolute h-3/5 w-full bg-gradient-to-b from-black/40 to-black/0"></div>
+          {banner && (
+            <Image
+              src={banner}
+              alt="Product Image"
+              style={{ objectFit: 'cover' }}
+              width={3800}
+              height={150}
+              className="h-full w-full "
+            />
+          )}
 
-        <div className="absolute bottom-2 left-24 h-8 ">
-          <h1
-            className="z-40 w-auto border-none text-xl font-bold text-white md:text-3xl"
-            style={{
-              fontFamily: textFont,
-              textShadow: '1px 1px 5px rgba(0, 0, 0, 0.6)',
-            }}
-          >
-            {title || `${owner?.name}'s Shop`}
-          </h1>
+          <div className="absolute bottom-2 left-24 h-8 ">
+            <h1
+              className="z-40 w-auto border-none text-xl font-bold text-white md:text-3xl"
+              style={{
+                fontFamily: textFont,
+                textShadow: '1px 1px 5px rgba(0, 0, 0, 0.6)',
+              }}
+            >
+              {title || `${owner?.name}'s Shop`}
+            </h1>
+          </div>
         </div>
+        <ShopContent
+          viewTranslation={tshop('viewShop')}
+          id={params.id}
+          translation={sortTranslations}
+        />
       </div>
-      <div className="absolute right-1/2 mt-4 translate-x-1/2"></div>
-      <ShopContent
-        viewTranslation={tshop('viewShop')}
-        id={params.id}
-        translation={sortTranslations}
-      />
     </>
   )
 }
