@@ -94,7 +94,6 @@ export async function deleteProduct(productId: string) {
       await deleteImageOnAws(imageUrl)
     }
   }
-  
 
   await db.delete(products).where(eq(products.id, productId))
   await setProductNotActive(product!.stripeId!)
@@ -147,7 +146,13 @@ export const searchProductsByTitle = async (title: string, sellerId: string) => 
     .select()
     .from(products)
     //.where(ilike(products.title, `%${title}%`)) // title
-    .where(and(ilike(products.title, sanitizedTitle), ne(products.sellerId, sellerId)))
+    .where(
+      and(
+        ilike(products.title, sanitizedTitle),
+        ne(products.sellerId, sellerId),
+        ne(products.isSold, true),
+      ),
+    )
   return res
 }
 
