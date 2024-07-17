@@ -14,7 +14,7 @@ ___
   3. React
      1. React-Dom
      2. Zod (Formularvalidierung)
-  4. Tailwind CSS (für Styling in der TSX-Syntax)V
+  4. Tailwind CSS (für Styling in der TSX-Syntax)
      1. Tailwind Merge
      2. Tailwind CSS Animate
   5. Next-Intl (Internationalisierung)
@@ -32,14 +32,15 @@ ___
   13. Icons
       1.  React Icons
       2.  Lucide React
-  14. Zustand
-  15. @geoapify/react-geocoder-autocomplete
+  14. Skeletons
+  15. Zustand
+  16. @geoapify/react-geocoder-autocomplete
       1.  @geoapify/geocoder-autocomplete
-  16. React Intersection Observer (Lazy Loading)
-  17. Canvas Confetti
+  17. React Intersection Observer (Lazy Loading)
+  18. Canvas Confetti
       1.  @types/canvas-confetti
-  18. Sonner
-  19. Axios
+  19. Sonner
+  20. Axios
 
 ##### III. Backend-Technologien
   1. Drizzle (Object Relational Mapper)
@@ -624,8 +625,38 @@ function Navigation() {
 export default Navigation;
 ```
 In diesem Beispiel verwenden wir das Icon Home aus Lucide React, um einen Link zur Startseite in unserer Navigation zu erstellen.
+
 #
-#### 2.14 Zustand
+#### 2.14 Skeletons
+In diesem Projekt verwenden wir Skeletons, um Platzhalter für Inhalte anzuzeigen, die noch geladen werden. Dies verbessert die Benutzererfahrung, indem es visuelles Feedback gibt, während Daten abgerufen werden.
+
+```
+// components/ProductSkeleton.tsx
+import React from 'react';
+import { Skeleton } from '@mui/material'; // Importiert das Skeleton-Komponente aus der Material-UI-Bibliothek
+
+
+const ProductSkeleton = () => {
+  return (
+    <div>
+      <Skeleton variant="rectangular" width={210} height={118} /> // Erstellt ein rechteckiges Skeleton mit einer Breite von 210 und einer Höhe von 118
+      <Skeleton variant="text" /> // Erstellt ein Skeleton in Textform
+
+      <Skeleton variant="text" />
+    </div>
+  );
+};
+
+export default ProductSkeleton;
+```
+'
+Eine weitere Stelle, wo Skeletons angewendet werden, ist die Datei ```app\[locale]\(protected)\browse\loading.tsx```
+
+'
+
+
+#
+#### 2.15 Zustand
 Zustand ist eine Bibliothek zur Zustandsverwaltung in React. Sie ermöglicht es uns, den Zustand unserer Anwendung auf einfache und effiziente Weise zu verwalten und zwischen Komponenten zu teilen.
 ```
 // components/ShoppingCart.js
@@ -653,7 +684,7 @@ export default ShoppingCart;
 In diesem Beispiel verwenden wir zustand, um einen globalen Warenkorb-Zustand zu erstellen. Die Funktionen addItem und removeItem können verwendet werden, um Artikel zum Warenkorb hinzuzufügen oder daraus zu entfernen.
 
 #
-#### 2.15 @geoapify/react-geocoder-autocomplete
+#### 2.16 @geoapify/react-geocoder-autocomplete
 
 @geoapify/react-geocoder-autocomplete ist eine React-Komponente für die automatische Vervollständigung von Adressen und Orten.
 ```
@@ -689,10 +720,10 @@ import {
 
 ```
 In diesem Beispiel verwenden wir GeocoderAutocomplete, um ein Eingabefeld mit automatischer Adressvervollständigung zu erstellen.
-##### 2.15.1 @geoapify/geocoder-autocomplete
+##### 2.16.1 @geoapify/geocoder-autocomplete
 @geoapify/geocoder-autocomplete ist die zugrunde liegende Bibliothek für die Adressvervollständigung, die von @geoapify/react-geocoder-autocomplete verwendet wird.
 #
-#### 2.16 React Intersection Observer (Lazy Loading)
+#### 2.17 React Intersection Observer (Lazy Loading)
 React Intersection Observer ist eine React-Implementierung der Intersection Observer API. Sie ermöglicht es uns, zu erkennen, wann ein Element im Ansichtsbereich des Benutzers sichtbar ist.
 ```
 // components/LazyLoadedImage.js
@@ -718,9 +749,9 @@ In diesem Beispiel verwenden wir useInView, um zu erkennen, wann das Bild im Ans
 
 _**Die Webseite wird durch LazyLoading performanter und verursacht weniger Traffic.**_
 #
-#### 2.17 Canvas Confetti
+#### 2.18 Canvas Confetti
 Canvas Confetti ist eine Bibliothek zum Anzeigen von Konfetti-Animationen im Browser.
-##### 2.17.1 @types/canvas-confetti
+##### 2.18.1 @types/canvas-confetti
 @types/canvas-confetti enthält TypeScript-Typdefinitionen für Canvas Confetti.
 ```
 // components/ConfettiExplosion.js
@@ -735,11 +766,11 @@ export default ConfettiExplosion;
 ```
 In diesem Beispiel verwenden wir confetti(), um eine Konfetti-Explosion auszulösen.
 #
-#### 2.18 Sonner
+#### 2.19 Sonner
 Sonner ist eine Bibliothek zum Anzeigen von Benachrichtigungen in React.
 
 #
-#### 2.19 Axios
+#### 2.20 Axios
 Axios ist eine Bibliothek zum Erstellen von HTTP-Anfragen in JavaScript.
 ```
 // api/products.js
