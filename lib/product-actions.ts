@@ -30,7 +30,7 @@ export async function getProductsOwned(userId: string) {
   const response = await db
     .select()
     .from(products)
-    .where(and(eq(products.sellerId, userId), ne(products.isSold, true))) //muss 'eq' sein und nicht 'ne'
+    .where(and(eq(products.sellerId, userId), ne(products.isSold, true)))
     .orderBy(desc(products.createdAt))
   return response
 }
@@ -101,13 +101,14 @@ export async function updateProduct(productId: string, values: ProductType) {
   //#endregion
   const existingProduct = await getProductById(productId)
   if (existingProduct) {
-    const { title, description, price } = values
+    const { title, description, price, category } = values
     await db
       .update(products)
       .set({
         title: title || existingProduct.title,
         description: description || existingProduct.description,
         price: price || existingProduct.price,
+        category: category || existingProduct.category,
       })
       .where(eq(products.id, productId))
     await updateProductStripe(existingProduct.stripeId!, values)

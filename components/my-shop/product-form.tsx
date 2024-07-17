@@ -175,10 +175,10 @@ export function ProductForm({
 }) {
   const router = useRouter()
   const { toast } = useToast()
-  const [open, setOpen] = React.useState(false)
-  const [categoryValue, setcategoryValue] = React.useState('')
-  const [locationError, setLocationError] = React.useState(false)
-  const [locationErrorMessage, setLocationErrorMessage] = React.useState('')
+  const [open, setOpen] = useState(false)
+  const [categoryValue, setcategoryValue] = useState('')
+  const [locationError, setLocationError] = useState(false)
+  const [locationErrorMessage, setLocationErrorMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
   const {
@@ -441,7 +441,7 @@ export function ProductForm({
   }
 
   return (
-    <Card className="p-6 h-fit md:p-10 border-none shadow-none">
+    <Card className="h-fit border-none p-6 shadow-none md:p-10">
       <h2 className="mb-6 text-2xl font-bold">Produkt hinzufügen</h2>
       {locationError && (
         <div className="mb-2 flex flex-row items-center gap-2">

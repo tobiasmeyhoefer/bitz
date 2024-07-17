@@ -26,10 +26,20 @@ import {
   FormDescription,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { toast } from '@/components/ui/use-toast'
+import { useToast } from '../ui/use-toast'
 import { Textarea } from '@/components/ui/textarea'
 import { updateProduct } from '@/lib/product-actions'
 import { ProductType } from '@/schema'
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from '@/components/ui/command'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { cn } from '@/lib/utils'
 
 const minError = 'Eingabe erfordert'
 const FormSchema = z.object({
@@ -44,7 +54,74 @@ const FormSchema = z.object({
     .min(1, { message: minError })
     .max(250)
     .refine((value) => !/#/.test(value)),
+  category: z.string().min(1, { message: minError }).max(250).optional().default('Other'),
 })
+
+const suggestions = [
+  { value: 'Audio' },
+  { value: 'Beamer' },
+  { value: 'Bluetooth Speaker' },
+  { value: 'Blu-ray Player' },
+  { value: 'Camera' },
+  { value: 'Charger' },
+  { value: 'Cooling System' },
+  { value: 'CPU' },
+  { value: 'Dashcam' },
+  { value: 'Desktop PC' },
+  { value: 'Digital Frame' },
+  { value: 'DJ Equipment' },
+  { value: 'Drone' },
+  { value: 'E-Reader' },
+  { value: 'External Sound Card' },
+  { value: 'Fitness Tracker' },
+  { value: 'Game Console' },
+  { value: 'Gaming Chair' },
+  { value: 'Gaming Controller' },
+  { value: 'Graphics Card' },
+  { value: 'Hard Drive' },
+  { value: 'Headphone' },
+  { value: 'Home Theater' },
+  { value: 'Keyboard' },
+  { value: 'Laptop' },
+  { value: 'Lighting' },
+  { value: 'Microphone' },
+  { value: 'Monitor' },
+  { value: 'Motherboard' },
+  { value: 'Mouse' },
+  { value: 'Network Switch' },
+  { value: 'Notebook' },
+  { value: 'Power Supply' },
+  { value: 'Printer' },
+  { value: 'Projector' },
+  { value: 'RAM' },
+  { value: 'Receiver' },
+  { value: 'Router' },
+  { value: 'Scanner' },
+  { value: 'Smart Doorbell' },
+  { value: 'Smart Home Hub' },
+  { value: 'Smart Lock' },
+  { value: 'Smart Plug' },
+  { value: 'Smart Speaker' },
+  { value: 'Smart Thermostat' },
+  { value: 'Smartphone' },
+  { value: 'Smartwatch' },
+  { value: 'Soundbar' },
+  { value: 'SSD' },
+  { value: 'Streaming Device' },
+  { value: 'Tablet' },
+  { value: 'TV' },
+  { value: 'UPS' },
+  { value: 'VR Headset' },
+  { value: 'Walkie Talkie' },
+  { value: 'Weather Station' },
+  { value: 'Webcam' },
+  { value: 'WiFi Extender' },
+  { value: 'WiFi Router' },
+  { value: 'Wireless Charger' },
+  { value: 'Wireless Earbuds' },
+  { value: 'Workstation' },
+  { value: 'Other' },
+]
 
 export default function ProductInfoCardEditable(props: {
   productInfo: ProductType
@@ -62,7 +139,9 @@ export default function ProductInfoCardEditable(props: {
   const translations = props.translations
   const [isEditing, setIsEditing] = useState(false)
   const [product, setProduct] = useState(initialProduct)
-
+  const [open, setOpen] = useState(false)
+  const [categoryValue, setcategoryValue] = useState(product.category)
+  const { toast } = useToast()
   const handleEditClick = () => {
     setIsEditing(!isEditing)
   }
@@ -73,7 +152,9 @@ export default function ProductInfoCardEditable(props: {
       title: product.title,
       price: product.price,
       description: product.description!,
+      category: product.category!,
     })
+    setcategoryValue(product.category)
   }
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -82,6 +163,7 @@ export default function ProductInfoCardEditable(props: {
       title: product.title,
       price: product.price,
       description: product.description!,
+      category: product.category!,
     },
   })
 
@@ -90,11 +172,12 @@ export default function ProductInfoCardEditable(props: {
       ...product,
       ...data,
     }
+    toast({
+      title: 'Changes applied ✅',
+      duration: 1000,
+    })
     setProduct(updatedProduct)
     updateProduct(initialProduct.id!, updatedProduct)
-    toast({
-      title: 'Changes applied',
-    })
     setIsEditing(false)
   }
 
@@ -146,6 +229,61 @@ export default function ProductInfoCardEditable(props: {
                       />
                     </FormControl>
                     <FormDescription className="!mt-0 text-right">max. 850</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="category"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col">
+                    <FormLabel className="leading-0"> category </FormLabel>
+                    <Popover open={open} onOpenChange={setOpen}>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          role="combobox"
+                          aria-expanded={open}
+                          className="w-full justify-between bg-card"
+                        >
+                          {categoryValue}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className=" w-[15em]">
+                        <Command>
+                          <CommandList>
+                            <CommandInput placeholder="Search framework..." />
+                            <CommandEmpty>No framework found.</CommandEmpty>
+                            <CommandGroup>
+                              {suggestions.map((framework) => (
+                                <CommandItem
+                                  key={framework.value}
+                                  value={framework.value}
+                                  onSelect={(currentValue: string) => {
+                                    form.setValue('category', framework.value),
+                                      setcategoryValue(
+                                        currentValue === categoryValue ? '' : currentValue,
+                                      )
+                                    setOpen(false)
+                                  }}
+                                >
+                                  <p
+                                    className={cn(
+                                      'mr-2 h-4 w-4',
+                                      categoryValue === framework.value
+                                        ? 'opacity-100'
+                                        : 'opacity-0',
+                                    )}
+                                  />
+                                  {framework.value}
+                                </CommandItem>
+                              ))}
+                            </CommandGroup>
+                          </CommandList>
+                        </Command>
+                      </PopoverContent>
+                    </Popover>
                     <FormMessage />
                   </FormItem>
                 )}
