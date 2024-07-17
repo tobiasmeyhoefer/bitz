@@ -441,7 +441,7 @@ export function ProductForm({
   }
 
   return (
-    <Card className="p-6 max-md:h-fit md:p-10">
+    <Card className="p-6 h-fit md:p-10 border-none shadow-none">
       <h2 className="mb-6 text-2xl font-bold">Produkt hinzufügen</h2>
       {locationError && (
         <div className="mb-2 flex flex-row items-center gap-2">
