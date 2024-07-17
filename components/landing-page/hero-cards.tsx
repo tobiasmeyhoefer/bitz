@@ -26,9 +26,6 @@ import { useTranslations } from 'next-intl'
 
 export const HeroCards = () => {
   const t = useTranslations('HeroCards')
-  const tec = '{t("tech")}'
-  const cust = '{t("customize")}'
-  const saf = '{t("safety")}'
   const benefits = [
     t('tech'),
     t('customize'),
@@ -93,7 +90,7 @@ export const HeroCards = () => {
               </Badge>
             </CardTitle>
             <div>
-              <span className="text-3xl font-bold">$0</span>
+              <span className="text-3xl font-bold">€0</span>
               <span className="text-muted-foreground"> {t('month')}</span>
             </div>
             <CardDescription>{t('freeuse')}</CardDescription>
