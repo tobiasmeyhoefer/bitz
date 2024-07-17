@@ -75,8 +75,8 @@ export async function addProduct(values: ProductType, imageUrls: string[]) {
       .set({ paymentLink: paymentLink, stripeId: stripeId })
       .where(eq(products.id, product[0].id))
   }
-  revalidatePath('/myshop')
-  redirect('/myshop')
+  revalidatePath('/my-shop')
+  redirect('/my-shop')
 }
 
 // Delete function requiring productId as string
@@ -98,7 +98,7 @@ export async function deleteProduct(productId: string) {
 
   await db.delete(products).where(eq(products.id, productId))
   await setProductNotActive(product!.stripeId!)
-  revalidatePath('/myShop')
+  revalidatePath('/my-Shop')
 }
 
 // Update function requiring productData as
@@ -340,7 +340,7 @@ export async function updateProductImage(existingImageUrl: string, newImageUrl: 
       default:
         return
     }
-    redirect('/myshop')
+    redirect('/my-shop')
   }
 }
 

@@ -110,7 +110,7 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                   {!props.editable && props.favIcon && (
                     <Link
                       className="hidden text-right font-semibold text-foreground md:block"
-                      href={`/myshop/${product.sellerId}`}
+                      href={`/my-shop/${product.sellerId}`}
                     >
                       {props.viewTranslation}
                     </Link>
