@@ -49,7 +49,7 @@ const NavBar = async () => {
     <NavItemLink
       key={'dil-2'}
       className="w-full py-4 text-center text-2xl hover:no-underline"
-      linkTo="/myshop"
+      linkTo="/my-shop"
       text={t('myBitz')}
     />,
     <NavItemLink

@@ -44,7 +44,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       close: t('updateImage.close'),
     },
   }
-  const backButtonHref = isOwner ? `/myshop` : '/browse'
+  const backButtonHref = isOwner ? `/my-shop` : '/browse'
 
   return (
     <>
@@ -59,7 +59,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             </Button>
           </Link>
           {!isOwner && (
-            <Link href={`/myshop/${product.sellerId}`}>
+            <Link href={`/my-shop/${product.sellerId}`}>
               <Button variant="outline" className={'top-[80px]'}>
                 {t('viewShop')}
               </Button>
