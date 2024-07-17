@@ -19,7 +19,7 @@ import image3 from "@/public/images/reflecting.png";
 import image4 from "@/public/images/looking-ahead.png";
 import { StaticImageData } from "next/image";
 import Image from "next/image";
-
+ 
 interface FeatureProps {
   title: string;
   description: string;
