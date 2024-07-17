@@ -274,5 +274,23 @@
     "tech": "Technik ohne Ende",
     "customize": "Passen Sie Ihr Profil an",
     "safety": "Sicherheit geht vor"
+  },
+
+  "FAQ": {
+    "title": "Häufig gestellte Fragen",
+    "question1": "Wie funktioniert Bitz?",
+    "answer1": "Bitz ist eine Plattform, auf der du Technikgeräte kaufen und verkaufen kannst. Registriere dich, erstelle ein Profil und beginne, deine Lieblingsgadgets zu entdecken oder zu verkaufen.",
+    "question2": "Ist die Nutzung von Bitz kostenlos?",
+    "answer2": "Ja, die Registrierung und Nutzung von Bitz ist kostenlos. Es können jedoch Gebühren anfallen, wenn du bestimmte Premium-Dienste oder Funktionen nutzt.",
+    "question3": "Wie sicher ist der Handel auf Bitz?",
+    "answer3": "Bei Bitz legen wir großen Wert auf Sicherheit. Wir bieten sichere Zahlungsoptionen und jeder Verkäufer muss sich über seine Telefonnummer verifizieren.",
+    "question4": "Wie kann ich ein Produkt verkaufen?",
+    "answer4": "Um ein Produkt zu verkaufen, erstelle einfach ein neues Angebot, füge Fotos und eine Beschreibung hinzu und bestimme deinen Preis. Sobald ein Käufer Interesse zeigt, könnt ihr die Details des Verkaufs besprechen oder eine 'Sofort kaufen'-Option anbieten, wenn du bereit bist zu verschicken.",
+    "question5": "Wie kann ich mein Konto bei Bitz löschen?",
+    "answer5": "Um dein Konto zu löschen, gehe zu den Kontoeinstellungen und wähle die Option 'Account löschen'. Folge den Anweisungen im Pop-up und bestätige deine Entscheidung.",
+    "question6": "Welche Zahlungsmethoden werden bei Bitz akzeptiert?",
+    "answer6": "Bitz akzeptiert aktuell die Zahlung mit Kreditkarte. Du kannst auch mit dem Verkäufer einen Termin ausmachen und direkt bar bezahlen.",
+    "contactPrompt": "Hast du noch Fragen?",
+    "contactLink": "Kontaktiere uns"
   }
 }
