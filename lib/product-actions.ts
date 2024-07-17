@@ -98,10 +98,9 @@ export async function deleteProduct(productId: string) {
 
 // Update function requiring productData as
 export async function updateProduct(productId: string, values: ProductType) {
-  //#endregion
   const existingProduct = await getProductById(productId)
   if (existingProduct) {
-    const { title, description, price, category } = values
+    const { title, description, price, category, isDirectlyBuyable } = values
     await db
       .update(products)
       .set({
@@ -109,6 +108,7 @@ export async function updateProduct(productId: string, values: ProductType) {
         description: description || existingProduct.description,
         price: price || existingProduct.price,
         category: category || existingProduct.category,
+        isDirectlyBuyable: isDirectlyBuyable,
       })
       .where(eq(products.id, productId))
     await updateProductStripe(existingProduct.stripeId!, values)

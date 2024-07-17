@@ -68,12 +68,12 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
               </Link>
 
               <CardHeader className="p-2 md:p-3">
-                <div className="flex max-w-full justify-between">
+                <div className="mb-[-4px] flex max-w-full justify-between">
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger className="max-w-[calc(100%-36px)]">
                         <CardTitle
-                          className="truncate align-middle text-lg md:text-2xl"
+                          className="truncate align-middle text-xl md:text-2xl"
                           style={{ lineHeight: 'unset' }}
                         >
                           {product.title}
@@ -99,27 +99,22 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                   )}
                 </div>
                 <CardDescription className="!mt-0 text-sm">
-                  <div className="flex justify-between">
-                    <Badge className="md:text-md m-0 text-xs" variant="secondary">
-                      {props.product.category}
-                    </Badge>
-                    <div className="text-left text-lg text-foreground md:text-xl">
-                      {props.product.price}€
+                  <div className="flex flex-col justify-between gap-2">
+                    <div className="m-0 w-28 text-xs md:text-sm">{props.product.category}</div>
+                    <div className="flex items-end justify-between">
+                      <div className="text-left text-lg text-foreground md:text-xl">
+                        {props.product.price}€
+                      </div>
+                      {!props.editable && props.favIcon && (
+                        <Link
+                          className="hidden  text-right font-semibold text-foreground md:block"
+                          href={`/my-shop/${product.sellerId}`}
+                        >
+                          {props.viewTranslation}
+                        </Link>
+                      )}
                     </div>
                   </div>
-                  {!props.editable && props.favIcon && (
-                    <Link
-                      className="hidden  text-right font-semibold text-foreground md:block"
-                      href={`/my-shop/${product.sellerId}`}
-                    >
-                      <Badge
-                        className="md:text-md h-6 text-xs hover:font-extrabold"
-                        variant="outline"
-                      >
-                        {props.viewTranslation}
-                      </Badge>
-                    </Link>
-                  )}
                   <div className="mt-2 flex justify-between">
                     <div className="md:text-md hidden flex-nowrap items-end whitespace-nowrap text-right text-xs md:flex">
                       {props.product.location}

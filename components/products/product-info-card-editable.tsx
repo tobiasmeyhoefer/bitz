@@ -40,6 +40,7 @@ import {
 } from '@/components/ui/command'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { cn } from '@/lib/utils'
+import { Checkbox } from '../ui/checkbox'
 
 const minError = 'Eingabe erfordert'
 const FormSchema = z.object({
@@ -55,6 +56,7 @@ const FormSchema = z.object({
     .max(250)
     .refine((value) => !/#/.test(value)),
   category: z.string().min(1, { message: minError }).max(250).optional().default('Other'),
+  isDirectlyBuyable: z.boolean().default(false).optional(),
 })
 
 const suggestions = [
@@ -132,6 +134,8 @@ export default function ProductInfoCardEditable(props: {
     cancel: string
     save: string
     edit: string
+    category: string
+    isDirectlyBuyable: string
   }
   locale: string
 }) {
@@ -153,6 +157,7 @@ export default function ProductInfoCardEditable(props: {
       price: product.price,
       description: product.description!,
       category: product.category!,
+      isDirectlyBuyable: product.isDirectlyBuyable!,
     })
     setcategoryValue(product.category)
   }
@@ -164,6 +169,7 @@ export default function ProductInfoCardEditable(props: {
       price: product.price,
       description: product.description!,
       category: product.category!,
+      isDirectlyBuyable: product.isDirectlyBuyable!,
     },
   })
 
@@ -235,10 +241,23 @@ export default function ProductInfoCardEditable(props: {
               />
               <FormField
                 control={form.control}
+                name={'isDirectlyBuyable'}
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-3">
+                    <FormLabel>{translations.isDirectlyBuyable}</FormLabel>
+                    <FormControl>
+                      <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
                 name="category"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
-                    <FormLabel className="leading-0"> category </FormLabel>
+                    <FormLabel className="leading-0"> {translations.category} </FormLabel>
                     <Popover open={open} onOpenChange={setOpen}>
                       <PopoverTrigger asChild>
                         <Button

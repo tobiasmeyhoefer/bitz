@@ -9,7 +9,6 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import ChooseBanner from './choose-banner'
-import { getBanner } from '@/lib/user-actions'
 import { ShopText } from './shop-text'
 
 const Banner = ({ title, myBanner }: { title: string; myBanner: string }) => {

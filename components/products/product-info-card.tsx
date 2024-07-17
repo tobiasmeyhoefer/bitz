@@ -33,6 +33,8 @@ export default function ProductInfoCard(props: ProductInfoType) {
     cancel: tProductForm('cancel'),
     save: tProductForm('save'),
     edit: tProductForm('edit'),
+    category: tProductForm('category'),
+    isDirectlyBuyable: tProductForm('isDirectlyBuyable'),
   }
   const getDate = (
     timestamp: Date | string,
