@@ -8,7 +8,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Space_Grotesk, Montserrat } from 'next/font/google'
 import './globals.css'
-import NavBar from '@/components/navigation/navbar'
+import NavBar from '@/components/navigation/NavBar'
 import { cn } from '@/lib/utils'
 import { Toaster } from '@/components/ui/toaster'
 import { ThemeProvider } from '@/components/darkmode/theme-provider'

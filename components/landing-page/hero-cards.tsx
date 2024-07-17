@@ -17,7 +17,7 @@ import {
   CardTitle,
   CardFooter,
 } from '@/components/ui/card'
-import { LightBulbIcon } from './icons'
+import { LightBulbIcon } from './Icons'
 import { Check } from 'lucide-react'
 import Image from 'next/image'
 import { Link } from '@/navigation'
@@ -26,11 +26,7 @@ import { useTranslations } from 'next-intl'
 
 export const HeroCards = () => {
   const t = useTranslations('HeroCards')
-  const benefits = [
-    t('tech'),
-    t('customize'),
-    t('safety'),
-  ];
+  const benefits = [t('tech'), t('customize'), t('safety')]
 
   return (
     <div className="relative hidden h-[500px] w-[700px] flex-row flex-wrap gap-8 lg:flex">
