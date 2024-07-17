@@ -258,7 +258,12 @@
   },
 
   "Transactions": {
-    "title": "TRANSACTIONS"
+    "title": "TRANSACTIONS",
+    "noTransactions": "You have no transactions yet",
+    "b1": "You have",
+    "b2": "bought",
+    "b3": "bought for",
+    "otw": "Your package is now being packed and shipped to the location specified in your settings"
   },
 
   "Favorites": {
@@ -309,8 +314,8 @@
     "addressError": "Location & address must be set"
   },
   "ProductInfoCard": {
-  "quantity": "Quantity",
-  "price": "Price"
-}
+    "quantity": "Quantity",
+    "price": "Price"
+  }
 }
 

@@ -258,7 +258,12 @@
   },
 
   "Transactions": {
-    "title": "TRANSAKTIONEN"
+    "title": "TRANSAKTIONEN",
+    "noTransactions": "Du hast noch keine Transaktionen",
+    "b1": "Du hast",
+    "b2": "gekauft",
+    "b3": "gekauft für",
+    "otw": "Dein Paket wird jetzt verpackt und an den festgelegten Ort in deinen Einstellungen versendet"
   },
 
   "Favorites": {

@@ -19,8 +19,10 @@ import { getProductById } from '@/lib/product-actions'
 import { getUser, getUserById } from '@/lib/user-actions'
 import { TransactionType } from '@/schema'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 
 export const TransactionCard = async ({ transaction }: { transaction: TransactionType }) => {
+  const t = useTranslations('Transactions')
   const user = await getUser()
   const buyerProm = getUserById(transaction.buyerId)
   const productProm = getProductById(transaction.productId)
@@ -40,13 +42,12 @@ export const TransactionCard = async ({ transaction }: { transaction: Transactio
         />
         <div>
           <CardHeader>
-            <CardTitle>Du hast {product.title} gekauft</CardTitle>
-            <CardDescription>gekauft für {transaction.price}€</CardDescription>
+            <CardTitle>{t('b1')} {product.title} {t('b2')}</CardTitle>
+            <CardDescription>{t('b3')} {transaction.price}€</CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-xs sm:text-base">
-              Dein Paket wird jetzt verpackt und an den festgelegten Ort in deinen Einstellungen
-              versendet
+              {t('otw')}
             </p>
             <CardDescription>{transaction.createdAt.toLocaleDateString()}</CardDescription>
           </CardContent>

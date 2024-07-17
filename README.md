@@ -753,10 +753,10 @@ const ProductSkeleton = () => {
 
 export default ProductSkeleton;
 ```
-'
-Eine weitere Stelle, wo Skeletons angewendet werden, ist die Datei ```app\[locale]\(protected)\browse\loading.tsx```
 
-'
+Eine weitere Stelle, wo Skeletons angewendet werden, ist die Datei ```app\[locale]\(protected)\browse\loading.tsx```. Der Code ist allerdings zu lang, daher wird er hier nicht vollständig angezeigt.
+
+
 
 
 #

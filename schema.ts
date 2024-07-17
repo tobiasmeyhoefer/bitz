@@ -178,11 +178,11 @@ export const checkoutSession = pgTable('checkoutSession', {
 })
 
 /*
-Der Käufer klickt den Kaunfe Button, es wird ein Eintrag gemacht und der Verkäufer erhält in seinem Posteingang eine Nachricht dafür...
+Der Käufer klickt den 'Kaufen'-Button, es wird ein Eintrag gemacht und der Verkäufer erhält in seinem Posteingang eine Nachricht dafür...
 Es gibt eine Seite für Konversation, auf button click eröffnet man eine Konversation die hat erstmal diese Felder: Käufer, Verkäufer, Produkt, Status
 */
 
-export const statusEnum = pgEnum('status', ['offen', 'accepted', 'declined', 'deal', 'verkauft'])
+export const statusEnum = pgEnum('status', ['open', 'accepted', 'declined', 'deal', 'sold'])
 
 export const conversations = pgTable(
   'conversations',
@@ -200,7 +200,7 @@ export const conversations = pgTable(
     productId: text('productId')
       .notNull()
       .references(() => products.id, { onDelete: 'cascade' }),
-    status: statusEnum('status').default('offen'),
+    status: statusEnum('status').default('open'),
     createdAt: timestamp('createdAt', { mode: 'date' }).notNull().defaultNow(),
     message1: text('message1'),
     message2: text('message2'),
