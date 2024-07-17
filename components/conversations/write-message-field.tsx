@@ -16,7 +16,6 @@
  * @returns {JSX.Element} The `WriteMessageField` component.
  */
 
-
 import axios from 'axios'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
@@ -143,7 +142,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
                 />
                 <PopoverClose>
                   <Button
-                    className="w-full bg-card-button"
+                    className="w-full bg-card-button text-primary-foreground"
                     onClick={() => setInput(`Du kannst das Bit hier abholen: ${locationInput}`)}
                     variant={'outline'}
                   >
@@ -169,7 +168,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
                 />
                 <PopoverClose>
                   <Button
-                    className="w-full bg-card-button"
+                    className="w-full bg-card-button text-primary-foreground"
                     onClick={() => setInput(`Ich habe ${timeInput} Zeit ✨`)}
                     variant={'outline'}
                   >
@@ -211,7 +210,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
                     </div>
                     <PopoverClose>
                       <Button
-                        className="w-full bg-card-button"
+                        className="w-full bg-card-button text-primary-foreground"
                         onClick={() =>
                           setInput(`Ich biete dir ${moneyInput} Euro. Haben wir einen Deal?`)
                         }
@@ -257,7 +256,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
                     </div>
                     <PopoverClose>
                       <Button
-                        className="w-full bg-card-button"
+                        className="w-full bg-card-button text-primary-foreground"
                         onClick={() => setInput(`Ich verspäte mich um ${delayInput} Minuten`)}
                         variant={'outline'}
                       >
