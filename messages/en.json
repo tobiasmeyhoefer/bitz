@@ -9,7 +9,6 @@
     "conv": "Conversations"
   },
 
-
   "Date": {
     "january": "January",
     "february": "February",
@@ -83,10 +82,10 @@
       "sub": "consisting of frontend and backend specialists"
     },
     "Newsletter": {
-    "join": "Join",
-    "today": "Today",
-    "fromyesterdayfortomorrow": "From yesterday for tomorrow",
-    "getstarted": "Lets Get Started"
+      "join": "Join",
+      "today": "Today",
+      "fromyesterdayfortomorrow": "From yesterday for tomorrow",
+      "getstarted": "Lets Get Started"
     }
   },
 
@@ -299,6 +298,19 @@
     "answer6": "Bitz currently accepts credit card payments. You can also arrange a meeting with the seller and pay in cash.",
     "contactPrompt": "Still have questions?",
     "contactLink": "Contact us"
-  }
+  },
+
+  "buyButtons": {
+    "interest": "Interest",
+    "directBuy": "Direct Buy",
+    "error": "Error",
+    "verifyPhoneNumber": "Please verify your phone number first",
+    "goToSettings": "Go to Settings",
+    "addressError": "Location & address must be set"
+  },
+  "ProductInfoCard": {
+  "quantity": "Quantity",
+  "price": "Price"
+}
 }
 

@@ -23,7 +23,16 @@ import { ProductType } from '@/schema'
 import axios from 'axios'
 import { checkIfUserIsPhoneVerified } from '@/lib/verify-actions'
 
-export function BuyButtons(props: { product: ProductType }) {
+  type translations = {
+    interest: string
+    directBuy: string
+    error: string
+    verifyPhoneNumber: string
+    goToSettings: string
+    addressError: string
+}
+  
+export function BuyButtons(props: { product: ProductType; translations: any }) {
   const [addressError, setAddressError] = useState(false)
   const [addressErrorMessage, setAddressErrorMesage] = useState('')
   const [disabled, setDisabled] = useState(false)
@@ -31,6 +40,7 @@ export function BuyButtons(props: { product: ProductType }) {
   const router = useRouter()
   const routerNext = useRouterNext()
   const product = props.product
+  const translations = props.translations
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -41,23 +51,22 @@ export function BuyButtons(props: { product: ProductType }) {
       const user = await getUser()
       if (!user.adress) {
         setAddressError(true)
-        setAddressErrorMesage('location & address gotta be set')
+        setAddressErrorMesage(translations.addressError)
       }
     }
     fetchUser()
-  }, [product.id])
+  }, [product.id, translations])
 
   async function handleBuyClick() {
     setDisabled(true)
-    // const start1 = Date.now()
     const isPhoneVerified = await checkIfUserIsPhoneVerified()
     if (!isPhoneVerified) {
       toast({
-        title: 'Error',
-        description: 'Please verify your phone number first',
+        title: translations.errorTitle,
+        description: translations.verifyPhoneError,
         action: (
           <Link href="/settings">
-            <Button>go to Settings</Button>
+            <Button>{translations.goToSettings}</Button>
           </Link>
         ),
       })
@@ -77,8 +86,8 @@ export function BuyButtons(props: { product: ProductType }) {
     const isPhoneVerified = await checkIfUserIsPhoneVerified()
     if (!isPhoneVerified) {
       toast({
-        title: 'Error',
-        description: 'Please verify your phone number first',
+        title: translations.errorTitle,
+        description: translations.verifyPhoneError,
         duration: 2000,
       })
       return
@@ -92,10 +101,10 @@ export function BuyButtons(props: { product: ProductType }) {
       }
     } else {
       toast({
-        title: 'Error',
+        title: translations.errorTitle,
         action: (
           <Link href="/settings">
-            <Button className="w-28">go to Settings</Button>
+            <Button className="w-28">{translations.goToSettings}</Button>
           </Link>
         ),
         description: addressErrorMessage,
@@ -108,16 +117,16 @@ export function BuyButtons(props: { product: ProductType }) {
     <div className="mt-6 flex w-full justify-end">
       {disabled ? (
         <Button disabled onClick={handleBuyClick} type="submit">
-          Interesse
+          {translations.interest}
         </Button>
       ) : (
         <Button onClick={handleBuyClick} type="submit">
-          Interesse
+          {translations.interest}
         </Button>
       )}
       {product?.isDirectlyBuyable ? (
         <Button onClick={handleDirectBuyClick} className="ml-2" type="submit">
-          Direkt Kaufen
+          {translations.directBuy}
         </Button>
       ) : null}
     </div>

@@ -7,8 +7,6 @@
     "title": "Jemand möchte dein Bit kaufen.",
     "chatnow": "Jetzt chatten!",
     "conv": "Konversationen"
-
-
   },
 
   "Date": {
@@ -300,5 +298,18 @@
     "answer6": "Bitz akzeptiert aktuell die Zahlung mit Kreditkarte. Du kannst auch mit dem Verkäufer einen Termin ausmachen und direkt bar bezahlen.",
     "contactPrompt": "Hast du noch Fragen?",
     "contactLink": "Kontaktiere uns"
+  },
+
+  "buyButtons": {
+    "interest": "Interesse",
+    "directBuy": "Direkt Kaufen",
+    "error": "Fehler",
+    "verifyPhoneNumber": "Bitte verifiziere zuerst deine Telefonnummer",
+    "goToSettings": "Zu den Einstellungen",
+    "addressError": "Standort & Adresse müssen gesetzt sein"
+  },
+  "ProductInfoCard": {
+    "quantity": "Quantity",
+    "price": "Price"
   }
 }
