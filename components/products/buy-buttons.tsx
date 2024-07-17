@@ -22,11 +22,13 @@ import { useToast } from '@/components/ui/use-toast'
 import { ProductType } from '@/schema'
 import axios from 'axios'
 import { checkIfUserIsPhoneVerified } from '@/lib/verify-actions'
+import { LoadingButton } from '@/components/ui/button'
 
 export function BuyButtons(props: { product: ProductType }) {
   const [addressError, setAddressError] = useState(false)
   const [addressErrorMessage, setAddressErrorMesage] = useState('')
   const [disabled, setDisabled] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const { toast } = useToast()
   const router = useRouter()
   const routerNext = useRouterNext()
@@ -47,8 +49,16 @@ export function BuyButtons(props: { product: ProductType }) {
     fetchUser()
   }, [product.id])
 
+  const onClick = () => {
+    setIsLoading(true)
+    setTimeout(() => {
+      setDisabled(true)
+      setIsLoading(false)
+    }, 12000)
+  }
+
   async function handleBuyClick() {
-    setDisabled(true)
+    onClick()
     // const start1 = Date.now()
     const isPhoneVerified = await checkIfUserIsPhoneVerified()
     if (!isPhoneVerified) {
@@ -110,6 +120,10 @@ export function BuyButtons(props: { product: ProductType }) {
         <Button disabled onClick={handleBuyClick} type="submit">
           Interesse
         </Button>
+      ) : isLoading ? (
+        <LoadingButton loading={isLoading} onClick={onClick}>
+          Interesse
+        </LoadingButton>
       ) : (
         <Button onClick={handleBuyClick} type="submit">
           Interesse
