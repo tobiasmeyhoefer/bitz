@@ -109,10 +109,12 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                   </div>
                   {!props.editable && props.favIcon && (
                     <Link
-                      className="hidden text-right font-semibold text-foreground md:block"
+                      className="hidden  text-right font-semibold text-foreground md:block"
                       href={`/my-shop/${product.sellerId}`}
                     >
-                      {props.viewTranslation}
+                      <Badge className="md:text-md h-6 text-xs" variant="outline">
+                        {props.viewTranslation}
+                      </Badge>
                     </Link>
                   )}
                   <div className="mt-2 flex justify-between">
