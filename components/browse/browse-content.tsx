@@ -30,19 +30,68 @@ import AddressChooserPopup from '../address-chooser-popup/address-chooser-popup'
 import LoadingSkeletonBrowse from '../fallbacks/browse-fallback'
 
 const suggestions = [
-  'Audio', 'Beamer', 'Bluetooth Speaker', 'Blu-ray Player', 'Camera',
-  'Charger', 'Cooling System', 'CPU', 'Dashcam', 'Desktop PC',
-  'Digital Frame', 'DJ Equipment', 'Drone', 'E-Reader', 'External Sound Card',
-  'Fitness Tracker', 'Game Console', 'Gaming Chair', 'Gaming Controller', 'Graphics Card',
-  'Hard Drive', 'Headphone', 'Home Theater', 'Keyboard', 'Laptop',
-  'Lighting', 'Microphone', 'Monitor', 'Motherboard', 'Mouse',
-  'Network Switch', 'Notebook', 'Power Supply', 'Printer', 'Projector',
-  'RAM', 'Receiver', 'Router', 'Scanner', 'Smart Doorbell',
-  'Smart Home Hub', 'Smart Lock', 'Smart Plug', 'Smart Speaker', 'Smart Thermostat',
-  'Smartphone', 'Smartwatch', 'Soundbar', 'SSD', 'Streaming Device',
-  'Tablet', 'TV', 'UPS', 'VR Headset', 'Walkie Talkie',
-  'Weather Station', 'Webcam', 'WiFi Extender', 'WiFi Router', 'Wireless Charger',
-  'Wireless Earbuds', 'Workstation'
+  'Audio',
+  'Beamer',
+  'Bluetooth Speaker',
+  'Blu-ray Player',
+  'Camera',
+  'Charger',
+  'Cooling System',
+  'CPU',
+  'Dashcam',
+  'Desktop PC',
+  'Digital Frame',
+  'DJ Equipment',
+  'Drone',
+  'E-Reader',
+  'External Sound Card',
+  'Fitness Tracker',
+  'Game Console',
+  'Gaming Chair',
+  'Gaming Controller',
+  'Graphics Card',
+  'Hard Drive',
+  'Headphone',
+  'Home Theater',
+  'Keyboard',
+  'Laptop',
+  'Lighting',
+  'Microphone',
+  'Monitor',
+  'Motherboard',
+  'Mouse',
+  'Network Switch',
+  'Notebook',
+  'Power Supply',
+  'Printer',
+  'Projector',
+  'RAM',
+  'Receiver',
+  'Router',
+  'Scanner',
+  'Smart Doorbell',
+  'Smart Home Hub',
+  'Smart Lock',
+  'Smart Plug',
+  'Smart Speaker',
+  'Smart Thermostat',
+  'Smartphone',
+  'Smartwatch',
+  'Soundbar',
+  'SSD',
+  'Streaming Device',
+  'Tablet',
+  'TV',
+  'UPS',
+  'VR Headset',
+  'Walkie Talkie',
+  'Weather Station',
+  'Webcam',
+  'WiFi Extender',
+  'WiFi Router',
+  'Wireless Charger',
+  'Wireless Earbuds',
+  'Workstation',
 ]
 
 const BrowseContent = (props: BrowseContentProps) => {
@@ -158,14 +207,14 @@ const BrowseContent = (props: BrowseContentProps) => {
             loadProductsByTitle={loadProductsByTitle}
             userId={userId}
           />
-          <div className="flex w-full flex-row justify-around lg:w-auto lg:justify-normal">
+          <div className="flex w-full flex-row justify-between lg:w-auto lg:justify-normal">
             <SortProducts setProducts={setProducts} translations={props.sortTranslations} />
             <FilterProducts setProducts={setProducts} translations={props.filterTranslations} />
           </div>
         </div>
         {!loading ? (
           <>
-            <div className="mt-[20px] grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4 sm:gap-x-14 md:grid-cols-4 lg:grid-cols-5 ">
+            <div className="mt-[20px] grid grid-cols-2 gap-6 sm:grid-cols-3 sm:gap-4 sm:gap-x-14 md:grid-cols-4 md:gap-x-7 lg:grid-cols-5 ">
               {products.map((p, index) => (
                 <div key={`kp-${index}`}>
                   <AnimatedCard delay={0.3}>
@@ -181,16 +230,13 @@ const BrowseContent = (props: BrowseContentProps) => {
                 </div>
               ))}
             </div>
-            <div className="flex justify-center mt-4 mb-6">
+            <div className="mb-6 mt-4 flex justify-center">
               {noSearchResults ? (
                 <div>Keine Suchergebnisse gefunden</div>
               ) : (
-                hasMoreProducts && showLoadMoreButton && (
-                  <Button
-                    onClick={loadMoreProducts}
-                    disabled={isLoadingMore}
-                    variant="default"
-                  >
+                hasMoreProducts &&
+                showLoadMoreButton && (
+                  <Button onClick={loadMoreProducts} disabled={isLoadingMore} variant="default">
                     {isLoadingMore ? 'Loading...' : 'Load More'}
                   </Button>
                 )
