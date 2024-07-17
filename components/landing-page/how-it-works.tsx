@@ -9,7 +9,7 @@
  */
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { MedalIcon, MapIcon, PlaneIcon, GiftIcon } from '@/components/landing-page/Icons'
+import { MedalIcon, MapIcon, PlaneIcon, GiftIcon } from '@/components/landing-page/icons'
 import { useTranslations } from 'next-intl'
 interface FeatureProps {
   icon: JSX.Element
