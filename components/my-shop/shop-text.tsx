@@ -51,7 +51,7 @@ export function ShopText({ title }: { title: string }) {
               value={text!}
               onChange={(e) => onInputChange(e.target.value)}
               placeholder="My Shop"
-              className="z-40 w-[55rem] border-none text-xl font-bold md:text-3xl"
+              className="z-40 w-[55rem] border-none text-xl font-bold text-white md:text-3xl"
               style={{
                 fontFamily: textFont!,
                 textShadow: '1px 1px 5px rgba(0, 0, 0, 0.6)',

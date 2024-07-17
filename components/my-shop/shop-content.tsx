@@ -40,7 +40,7 @@ const ShopContent = (params: {
         setProducts={setProducts}
         translations={params.translation}
       />
-      <div className="mt-[20px] grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5  ">
+      <div className="mt-[20px] grid grid-cols-2 gap-6 sm:grid-cols-3 sm:gap-4 sm:gap-x-14 md:grid-cols-4 md:gap-x-7 lg:grid-cols-5 ">
         {products?.map((p, index) => (
           // <AnimatedCard  delay={0.3} >
           <CardWithImage

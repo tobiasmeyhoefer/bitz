@@ -157,12 +157,12 @@
     "images": "Images",
     "toastTitle": "Success",
     "toastDescription": "added Product",
-    "submitTitle": "submit",
+    "submitTitle": "add",
     "save": "Save",
     "cancel": "Cancel",
     "edit": "Edit",
     "isDirectlyBuyable": "Is directly buyable",
-    "deletePicture": "delete Picture"
+    "deletePicture": "X"
   },
 
   "ProdDelAlert": {

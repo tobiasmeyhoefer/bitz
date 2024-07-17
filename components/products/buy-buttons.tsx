@@ -49,6 +49,7 @@ export function BuyButtons(props: { product: ProductType }) {
 
   async function handleBuyClick() {
     setDisabled(true)
+    // const start1 = Date.now()
     const isPhoneVerified = await checkIfUserIsPhoneVerified()
     if (!isPhoneVerified) {
       toast({
@@ -63,13 +64,13 @@ export function BuyButtons(props: { product: ProductType }) {
       return
     }
     const seller = await getUserById(product.sellerId)
+    await createConversation(product.id!)
+    setDisabled(false)
+    router.push('/conversations')
     await axios.post('/api/mail/productInterest', {
       to: seller.email,
       productName: product.title,
     })
-    await createConversation(product.id!)
-    setDisabled(false)
-    router.push('/conversations')
   }
 
   async function handleDirectBuyClick() {
@@ -107,11 +108,11 @@ export function BuyButtons(props: { product: ProductType }) {
     <div className="mt-6 flex w-full justify-end">
       {disabled ? (
         <Button disabled onClick={handleBuyClick} type="submit">
-          Kaufen
+          Interesse
         </Button>
       ) : (
         <Button onClick={handleBuyClick} type="submit">
-          Kaufen
+          Interesse
         </Button>
       )}
       {product?.isDirectlyBuyable ? (

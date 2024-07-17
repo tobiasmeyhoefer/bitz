@@ -43,7 +43,7 @@ export async function checkIfConversationAlreadyExist(productId: string): Promis
 export async function deleteConversation(productId: string, buyerId: string) {
   await db
     .delete(conversations)
-    .where(or(eq(conversations.productId, productId), eq(conversations.buyerId, buyerId)))
+    .where(and(eq(conversations.productId, productId), eq(conversations.buyerId, buyerId)))
   revalidatePath('/conversations')
 }
 

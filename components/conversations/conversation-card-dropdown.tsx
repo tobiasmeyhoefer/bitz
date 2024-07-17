@@ -6,7 +6,7 @@
  */
 'use client'
 
-import { BsThreeDotsVertical } from "react-icons/bs";
+import { BsThreeDotsVertical } from 'react-icons/bs'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -44,12 +44,12 @@ export const ConversationCardDropwdown = ({
   return (
     <div className="absolute right-4 top-4">
       <DropdownMenu>
-        <DropdownMenuTrigger>
-          <BsThreeDotsVertical/>
+        <DropdownMenuTrigger className=" outline-none ring-0 focus-visible:ring-0">
+          <BsThreeDotsVertical />
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="z-20">
+        <DropdownMenuContent className="z-40">
           {showSold === true ? (
-            <DropdownMenuItem onClick={changeProdStateToSold} className="cursor-pointer">
+            <DropdownMenuItem onClick={changeProdStateToSold} className="cursor-pointer ">
               verkauft
             </DropdownMenuItem>
           ) : (

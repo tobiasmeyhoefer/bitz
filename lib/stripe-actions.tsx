@@ -41,7 +41,6 @@ export async function setProductNotActive(productId: string) {
   })
 }
 
-// experimental
 export async function updateProductStripe(productId: string, values: ProductType) {
   const price = await stripe.prices.create({
     currency: 'eur',
