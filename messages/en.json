@@ -254,7 +254,36 @@
     "sellerDeclined": "The seller has declined your offer",
     "delay00": "You have a delay of around",
     "delay01": "minutes",
-    "delay11": "has a delay of around"
+    "delay11": "has a delay of around",
+    "messages": {
+      "title": "Oh oh",
+      "description": "Please check your profanity",
+      "deal1": "We have a deal ✅",
+      "deal2": "You have a deal!",
+      "warnMsg": "Please avoid self-written messages",
+      "location": "Location?",
+      "myAddress": "My Address",
+      "otherLocation": "Other Location?",
+      "pickUpHere": "You can pick up the Bit here:",
+      "done": "Done",
+      "timeQuestion": "Time?",
+      "writeWhenTime": "Write here when you have time:",
+      "timePlaceholder": "Morgen bis 12 oder Donnerstag von 14-16Uhr",
+      "iHave": "I have",
+      "time": "Zeit",
+      "negotiation": "Negotiation",
+      "offer": "Offer",
+      "offerAmount": "I offer you",
+      "dealQuestion": "Euros. Do we have a deal?",
+      "whereMeet": "Where do we want to meet?",
+      "whenPickUp": "When can I pick up the Bit?",
+      "delay": "Delay",
+      "minutes": "Minutes",
+      "notInterested": "I am no longer interested, sorry ❌",
+      "cancel": "Cancel",
+      "delayMessage": "I am running late by",
+      "send": "Send"
+    }
   },
 
   "Transactions": {

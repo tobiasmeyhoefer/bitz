@@ -254,7 +254,37 @@
     "sellerDeclined": "Der Verkäufer hat dein Angebot abgelehnt",
     "delay00": "Du verspätest dich um",
     "delay01": "Minuten",
-    "delay11": "verspätet sich um"
+    "delay11": "verspätet sich um",
+    "messages": {
+      "title": "Oh oh",
+      "description": "Bleibe bitte freundlich und rücksichtsvoll!",
+      "deal1": "Wir haben einen Deal ✅",
+      "deal2": "Juhu es gibt einen Deal!!!",
+      "warnMsg": "selbst geschriebene Nachrichten bitte vermeiden",
+      "location": "Ort?",
+      "myAddress": "Meine Adresse",
+      "otherLocation": "anderer Ort?",
+      "pickUpHere": "Du kannst das Bit hier abholen:",
+      "done": "Fertig",
+      "timeQuestion": "Zeit?",
+      "writeWhenTime": "Schreibe hier wann du Zeit hast:",
+      "timePlaceholder": "Morgen bis 12 oder Donnerstag von 14-16Uhr",
+      "iHave": "Ich habe",
+      "time": "Zeit",
+      "negotiation": "Verhandlung",
+      "offer": "Angebot",
+      "offerAmount": "Ich biete dir",
+      "dealQuestion": "Euro. Haben wir einen Deal?",
+      "whereMeet": "Wo wollen wir uns treffen?",
+      "whenPickUp": "Wann kann ich das Bit abholen?",
+      "delay": "Verspätung",
+      "minutes": "Minuten",
+      "notInterested": "Ich bin nicht mehr interessiert, Entschuldigung ❌",
+      "cancel": "Abbruch",
+      "delayMessage": "Ich verspäte mich um",
+      "send": "Senden"
+
+    }
   },
 
   "Transactions": {
