@@ -9,7 +9,7 @@ import { useTranslations } from 'next-intl'
  * @returns {JSX.Element} - The rendered email template.
  */
 
-export default function ProductInterestEmail({ productName }: { productName: string }) {
+export default function ProductInterestEmail(productName: string) {
   const t = useTranslations('common')
   return (
     <Tailwind>
