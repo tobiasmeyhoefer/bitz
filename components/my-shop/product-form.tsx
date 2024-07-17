@@ -225,7 +225,7 @@ export function ProductForm({
     defaultValues: {
       title: '',
       description: '',
-      price: 0,
+      price: 10,
       quantity: 1,
       category: 'Other',
       isDirectlyBuyable: true,

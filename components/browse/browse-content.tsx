@@ -170,7 +170,7 @@ const BrowseContent = (props: BrowseContentProps) => {
     setLoading(true)
     let result
     if (title === '') {
-      result = await getProductsBrowse()
+      result = await getProductsBrowse(60, 0)
     } else {
       result = await searchProductsByTitle(title, userId)
     }
