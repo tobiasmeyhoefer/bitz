@@ -74,6 +74,12 @@
     "OurTeam": {
       "title": "Our Dedicated",
       "sub": "consisting of frontend and backend specialists"
+    },
+    "Newsletter": {
+    "join": "Join",
+    "today": "Today",
+    "fromyesterdayfortomorrow": "From yesterday for tomorrow",
+    "getstarted": "Lets Get Started"
     }
   },
 
@@ -268,5 +274,11 @@
     "tech": "Unlimited Tech",
     "customize": "Customize your profile",
     "safety": "Safety first"
+  },
+
+  "Newsletter": {
+    "join": "Join",
+    "today": "Today",
+    "getstarted": "Lets Get Started"
   }
 }

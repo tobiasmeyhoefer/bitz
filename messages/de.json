@@ -74,6 +74,12 @@
     "OurTeam": {
       "title": "Unser Motiviertes",
       "sub": "consisting of frontend and backend specialists"
+    },
+    "Newsletter": {
+    "join": "Werde Teil der",
+    "today": "Gemeinschaft",
+    "fromyesterdayfortomorrow": "von gestern für morgen",
+    "getstarted": "Jetzt Loslegen!"
     }
   },
 
@@ -262,7 +268,7 @@
     "forever": "für immer",
     "month": "/Monat",
     "freeuse": "Die Nutzung von Bitz ist kostenlos.",
-    "startnow": "Jetzt loslegen",
+    "startnow": "Jetzt Loslegen",
     "easyswitch": "Wechsle ganz einfach das Farbschema!",
     "darklight": "Dunkles oder Helles Schema",
     "tech": "Technik ohne Ende",
@@ -270,3 +276,4 @@
     "safety": "Sicherheit geht vor"
   }
 }
+

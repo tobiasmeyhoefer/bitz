@@ -26,9 +26,15 @@ import { Testimonials } from '@/components/landing-page/testimonials'
 import AnimatedCard from '@/components/ui/animated-card'
 import { useTranslations } from 'next-intl'
 
+
 export default function Home() {
   const t = useTranslations('Landingpage')
-
+  const newsletterTranslations = {
+    join: t('Newsletter.join'),
+    today: t('Newsletter.today'),
+    fromyesterdayfortomorrow: t('Newsletter.fromyesterdayfortomorrow'),
+    getstarted: t('Newsletter.getstarted'),
+  }
   return (
     <>
       <Hero />
@@ -48,7 +54,7 @@ export default function Home() {
         <Team />
       </AnimatedCard>
       <AnimatedCard delay={0.3}>
-        <Newsletter />
+        <Newsletter {...newsletterTranslations} />
       </AnimatedCard>
       <AnimatedCard delay={0.3}>
         <FAQ />
