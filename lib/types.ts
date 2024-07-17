@@ -39,7 +39,6 @@ type CardWithImageProps = {
     yousure: string
     cancel: string
     confirm: string
-    
   }
 }
 
@@ -54,6 +53,7 @@ type SearchBarProps = {
   setSearchValue: React.Dispatch<React.SetStateAction<string>>
   suggestions: string[]
   suggestionsTitle: string
+  noSuggestions: string
 }
 
 type SortProductsProps = {
@@ -84,6 +84,8 @@ type addressChooserTranslations = {
 type SearchTranslations = {
   searchPlaceholder: string
   suggestions: string
+  noSuggestions: string
+  noResults: string
 }
 
 type FormTranslations = {

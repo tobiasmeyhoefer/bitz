@@ -89,6 +89,8 @@
     "title": "Entdecken",
     "searchPlaceholder": "Wonach suchst du?",
     "suggestions": "Vorschläge",
+    "noSuggestions": "Keine Vorschläge gefunden",
+    "noResults": "Keine Suchergebnisse gefunden",
     "sortby": "Sortieren nach:",
     "date": "Datum",
     "price": "Preis",

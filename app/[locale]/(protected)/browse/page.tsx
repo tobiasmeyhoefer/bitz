@@ -17,6 +17,8 @@ const Browse = () => {
   const searchTranslations: SearchTranslations = {
     searchPlaceholder: t('searchPlaceholder'),
     suggestions: t('suggestions'),
+    noSuggestions: t('noSuggestions'),
+    noResults: t('noResults'),
   }
   const sortTranslations = {
     sortBy: t('sortby'),
