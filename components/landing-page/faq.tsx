@@ -1,5 +1,15 @@
 'use client'
 
+/**
+ * The `FAQ` component renders a frequently asked questions section with an accordion-style interface.
+ * 
+ * The `FAQList` array contains the questions, answers, and unique values for each FAQ item.
+ * The `Accordion` component from the `@/components/ui/accordion` module is used to render the accordion.
+ * Each `AccordionItem` contains a `question` as the trigger and an `answer` as the content.
+ * 
+ * The component also includes a link at the bottom for users to contact the site if they have additional questions.
+ */
+
 import {
   Accordion,
   AccordionContent,
