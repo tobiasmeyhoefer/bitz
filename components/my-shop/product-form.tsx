@@ -46,29 +46,79 @@ import { useToast } from '@/components/ui/use-toast'
 import { cn } from '@/lib/utils'
 import { Checkbox } from '../ui/checkbox'
 import { getUser } from '@/lib/user-actions'
-import { ProductType } from '@/schema'
 import { checkIfUserIsPhoneVerified } from '@/lib/verify-actions'
-import { DialogClose } from '../ui/dialog'
+import { LoadingButton } from '@/components/ui/button'
 
 const suggestions = [
-  { value: 'Audio' }, { value: 'Beamer' }, { value: 'Bluetooth Speaker' }, { value: 'Blu-ray Player' }, { value: 'Camera' },
-  { value: 'Charger' }, { value: 'Cooling System' }, { value: 'CPU' }, { value: 'Dashcam' }, { value: 'Desktop PC' },
-  { value: 'Digital Frame' }, { value: 'DJ Equipment' }, { value: 'Drone' }, { value: 'E-Reader' }, { value: 'External Sound Card' },
-  { value: 'Fitness Tracker' }, { value: 'Game Console' }, { value: 'Gaming Chair' }, { value: 'Gaming Controller' }, { value: 'Graphics Card' },
-  { value: 'Hard Drive' }, { value: 'Headphone' }, { value: 'Home Theater' }, { value: 'Keyboard' }, { value: 'Laptop' },
-  { value: 'Lighting' }, { value: 'Microphone' }, { value: 'Monitor' }, { value: 'Motherboard' }, { value: 'Mouse' },
-  { value: 'Network Switch' }, { value: 'Notebook' }, { value: 'Power Supply' }, { value: 'Printer' }, { value: 'Projector' },
-  { value: 'RAM' }, { value: 'Receiver' }, { value: 'Router' }, { value: 'Scanner' }, { value: 'Smart Doorbell' },
-  { value: 'Smart Home Hub' }, { value: 'Smart Lock' }, { value: 'Smart Plug' }, { value: 'Smart Speaker' }, { value: 'Smart Thermostat' },
-  { value: 'Smartphone' }, { value: 'Smartwatch' }, { value: 'Soundbar' }, { value: 'SSD' }, { value: 'Streaming Device' },
-  { value: 'Tablet' }, { value: 'TV' }, { value: 'UPS' }, { value: 'VR Headset' }, { value: 'Walkie Talkie' },
-  { value: 'Weather Station' }, { value: 'Webcam' }, { value: 'WiFi Extender' }, { value: 'WiFi Router' }, { value: 'Wireless Charger' },
-  { value: 'Wireless Earbuds' }, { value: 'Workstation' }, { value: 'Other' },
+  { value: 'Audio' },
+  { value: 'Beamer' },
+  { value: 'Bluetooth Speaker' },
+  { value: 'Blu-ray Player' },
+  { value: 'Camera' },
+  { value: 'Charger' },
+  { value: 'Cooling System' },
+  { value: 'CPU' },
+  { value: 'Dashcam' },
+  { value: 'Desktop PC' },
+  { value: 'Digital Frame' },
+  { value: 'DJ Equipment' },
+  { value: 'Drone' },
+  { value: 'E-Reader' },
+  { value: 'External Sound Card' },
+  { value: 'Fitness Tracker' },
+  { value: 'Game Console' },
+  { value: 'Gaming Chair' },
+  { value: 'Gaming Controller' },
+  { value: 'Graphics Card' },
+  { value: 'Hard Drive' },
+  { value: 'Headphone' },
+  { value: 'Home Theater' },
+  { value: 'Keyboard' },
+  { value: 'Laptop' },
+  { value: 'Lighting' },
+  { value: 'Microphone' },
+  { value: 'Monitor' },
+  { value: 'Motherboard' },
+  { value: 'Mouse' },
+  { value: 'Network Switch' },
+  { value: 'Notebook' },
+  { value: 'Power Supply' },
+  { value: 'Printer' },
+  { value: 'Projector' },
+  { value: 'RAM' },
+  { value: 'Receiver' },
+  { value: 'Router' },
+  { value: 'Scanner' },
+  { value: 'Smart Doorbell' },
+  { value: 'Smart Home Hub' },
+  { value: 'Smart Lock' },
+  { value: 'Smart Plug' },
+  { value: 'Smart Speaker' },
+  { value: 'Smart Thermostat' },
+  { value: 'Smartphone' },
+  { value: 'Smartwatch' },
+  { value: 'Soundbar' },
+  { value: 'SSD' },
+  { value: 'Streaming Device' },
+  { value: 'Tablet' },
+  { value: 'TV' },
+  { value: 'UPS' },
+  { value: 'VR Headset' },
+  { value: 'Walkie Talkie' },
+  { value: 'Weather Station' },
+  { value: 'Webcam' },
+  { value: 'WiFi Extender' },
+  { value: 'WiFi Router' },
+  { value: 'Wireless Charger' },
+  { value: 'Wireless Earbuds' },
+  { value: 'Workstation' },
+  { value: 'Other' },
 ]
 
 const MAX_FILE_SIZE = 8000000
 
 const minError = 'Eingabe erfordert'
+//define the schema and its validation rules
 const formSchema = z.object({
   title: z
     .string()
@@ -144,6 +194,13 @@ export function ProductForm({
     isDirectlyBuyable,
     deletePicture,
   } = translations
+
+  const onClick = () => {
+    setIsLoading(true)
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 12000)
+  }
 
   useEffect(() => {
     const getProduct = async () => {
@@ -416,20 +473,22 @@ export function ProductForm({
               <FormItem>
                 <FormLabel> {description}</FormLabel>
                 <FormControl>
-                <Textarea
-                      placeholder="Description"
-                      {...field}
-                      maxLength={500}
-                      onChange={(event) => {
-                        const value = event.target.value
-                        field.onChange(value)
-                        setCharsRemaining(500 - value.length)
-                      }}
-                    />
-                  </FormControl>
-                  <p style={{ fontSize: '14px', color: '#666', marginTop: '4px' }}>{charsRemaining} Remaining characters</p>
-                  <FormMessage />
-                </FormItem>
+                  <Textarea
+                    placeholder="Description"
+                    {...field}
+                    maxLength={500}
+                    onChange={(event) => {
+                      const value = event.target.value
+                      field.onChange(value)
+                      setCharsRemaining(500 - value.length)
+                    }}
+                  />
+                </FormControl>
+                <p style={{ fontSize: '14px', color: '#666', marginTop: '4px' }}>
+                  {charsRemaining} Remaining characters
+                </p>
+                <FormMessage />
+              </FormItem>
             )}
           />
           <FormField
@@ -559,9 +618,9 @@ export function ProductForm({
             </div>
           )}
           {isLoading ? (
-            <Button disabled className="mt-4 max-md:mb-6" type="submit">
+            <LoadingButton loading={isLoading} onClick={onClick} className="mt-4 max-md:mb-6">
               {submitTitle}
-            </Button>
+            </LoadingButton>
           ) : (
             <Button className="mt-4 max-md:mb-6" type="submit">
               {submitTitle}

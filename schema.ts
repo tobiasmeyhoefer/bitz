@@ -42,7 +42,7 @@ export const products = pgTable('product', {
   sellerId: text('sellerId')
     .notNull()
     .references(() => users.id, { onDelete: 'cascade' }),
-  createdAt: timestamp('createdAt', { mode: 'date' }).notNull(),
+  createdAt: timestamp('createdAt', { mode: 'date' }).notNull().defaultNow(),
   imageUrl1: text('imageUrl1'),
   imageUrl2: text('imageUrl2'),
   imageUrl3: text('imageUrl3'),

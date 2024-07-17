@@ -39,9 +39,6 @@ export async function addProduct(values: ProductType, imageUrls: string[]) {
   let { title, description, price, category, isDirectlyBuyable } = values
   const session = await auth()
   const id = session?.user?.id
-  const created = new Date(Date.now())
-  created.setHours(created.getHours() + 2)
-
   if (id) {
     const user = await getUserById(id)
     const product = await db
@@ -53,7 +50,6 @@ export async function addProduct(values: ProductType, imageUrls: string[]) {
         category: category,
         sellerId: id,
         location: user.location ?? null,
-        createdAt: created,
         imageUrl1: imageUrls[0],
         imageUrl2: imageUrls[1],
         imageUrl3: imageUrls[2],

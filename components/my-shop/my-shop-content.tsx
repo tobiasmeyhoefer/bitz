@@ -30,7 +30,7 @@ const MyShopContent = async () => {
       className={`flex h-full flex-col items-center justify-center px-4 py-10 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
     >
       {
-        <div className="mt-[20px] grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5  ">
+        <div className="mt-[20px] grid grid-cols-2 gap-6 sm:grid-cols-3 sm:gap-4 sm:gap-x-14 md:grid-cols-4 md:gap-x-7 lg:grid-cols-5 ">
           {products?.map((p, index) => (
             <CardWithImage
               key={`pr-${index}`}

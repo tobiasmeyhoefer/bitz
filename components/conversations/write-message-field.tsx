@@ -124,7 +124,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
                 <h4 className="font-medium leading-none">Ort?</h4>
                 <PopoverClose>
                   <Button
-                    className="w-full bg-card-button"
+                    className="w-full bg-card-button text-primary-foreground"
                     onClick={() => setInput(`Du kannst das Bit hier abholen: ${user.adress} `)}
                     variant={'outline'}
                   >
