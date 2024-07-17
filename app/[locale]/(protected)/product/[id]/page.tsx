@@ -44,7 +44,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       close: t('updateImage.close'),
     },
   }
-  const backButtonHref = isOwner ? `/my-shop` : '/browse'
+  const backButtonHref = isOwner ? `/my--shop` : '/browse'
 
   return (
     <>

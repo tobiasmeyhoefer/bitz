@@ -10,7 +10,7 @@
  * @param {string} confirm - The text for the "Confirm" button in the alert dialog.
  * @param {string} menuDeleteOption - The text for the "Delete" option in the dropdown menu.
  */
-// ProdDelAlert.tsx
+
 'use client'
 import React, { useState } from 'react'
 import {

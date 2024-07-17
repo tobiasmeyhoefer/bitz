@@ -3,6 +3,13 @@
     "title": "Hello World"
   },
 
+  "common": {
+    "title": "Somebody wants to buy your Bit.",
+    "chatnow": "Start chatting now!",
+    "conv": "Conversations"
+  },
+
+
   "Date": {
     "january": "January",
     "february": "February",
@@ -74,6 +81,12 @@
     "OurTeam": {
       "title": "Our Dedicated",
       "sub": "consisting of frontend and backend specialists"
+    },
+    "Newsletter": {
+    "join": "Join",
+    "today": "Today",
+    "fromyesterdayfortomorrow": "From yesterday for tomorrow",
+    "getstarted": "Lets Get Started"
     }
   },
 
@@ -253,5 +266,39 @@
     "title": "FAVORITES",
     "noFavorites": "You have no favorites yet. You can add some by pressing the like button on products.",
     "viewShop": "view Shop"
+  },
+
+  "HeroCards": {
+    "bitzawesome": "Bitz is awesome!",
+    "stunning": "This UI is absolutely stunning thanks to the team of bitz",
+    "free": "Free",
+    "forever": "Forever",
+    "month": "/month",
+    "freeuse": "Bitz is free to use.",
+    "startnow": "Start Now",
+    "easyswitch": "Easily switch between your favorite themes!",
+    "darklight": "Light & dark mode",
+    "tech": "Unlimited Tech",
+    "customize": "Customize your profile",
+    "safety": "Safety first"
+  },
+
+  "FAQ": {
+    "title": "Frequently Asked Questions",
+    "question1": "How does Bitz work?",
+    "answer1": "Bitz is a platform where you can buy and sell tech gadgets. Register, create a profile, and start discovering or selling your favorite gadgets.",
+    "question2": "Is using Bitz free?",
+    "answer2": "Yes, registration and use of Bitz are free. However, fees may apply if you use certain premium services or features.",
+    "question3": "How secure is trading on Bitz?",
+    "answer3": "At Bitz, we place great emphasis on security. We offer secure payment options, and every seller must verify their phone number.",
+    "question4": "How can I sell a product?",
+    "answer4": "To sell a product, simply create a new listing, add photos and a description, and set your price. Once a buyer shows interest, you can discuss the sale details or offer a 'Buy Now' option if you're ready to ship.",
+    "question5": "How can I delete my Bitz account?",
+    "answer5": "To delete your account, go to account settings and select 'Delete Account'. Follow the instructions in the pop-up and confirm your decision.",
+    "question6": "What payment methods are accepted on Bitz?",
+    "answer6": "Bitz currently accepts credit card payments. You can also arrange a meeting with the seller and pay in cash.",
+    "contactPrompt": "Still have questions?",
+    "contactLink": "Contact us"
   }
 }
+
