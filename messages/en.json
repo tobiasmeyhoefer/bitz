@@ -3,6 +3,13 @@
     "title": "Hello World"
   },
 
+  "common": {
+    "title": "Somebody wants to buy your Bit.",
+    "chatnow": "Start chatting now!",
+    "conv": "Conversations"
+  },
+
+
   "Date": {
     "january": "January",
     "february": "February",

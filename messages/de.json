@@ -3,6 +3,14 @@
     "title": "Hallo Welt!"
   },
 
+  "common": {
+    "title": "Jemand möchte dein Bit kaufen.",
+    "chatnow": "Jetzt chatten!",
+    "conv": "Konversationen"
+
+
+  },
+
   "Date": {
     "january": "Januar",
     "february": "Februar",
@@ -76,10 +84,10 @@
       "sub": "consisting of frontend and backend specialists"
     },
     "Newsletter": {
-    "join": "Werde Teil der",
-    "today": "Gemeinschaft",
-    "fromyesterdayfortomorrow": "von gestern für morgen",
-    "getstarted": "Jetzt Loslegen!"
+      "join": "Werde Teil der",
+      "today": "Gemeinschaft",
+      "fromyesterdayfortomorrow": "von gestern für morgen",
+      "getstarted": "Jetzt Loslegen!"
     }
   },
 
