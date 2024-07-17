@@ -124,8 +124,8 @@ const PhoneVerification = ({ translations }: VerificationProps) => {
   }
 
   return (
-    <div>
-      <p className="mb-4">{translations.notVerified}</p>
+    <div className="flex items-center justify-between rounded-xl border-2 p-2">
+      <p>{translations.notVerified}</p>
       <AlertDialog>
         <AlertDialogTrigger
           asChild
@@ -133,7 +133,7 @@ const PhoneVerification = ({ translations }: VerificationProps) => {
             setInVerifactionProcess(true)
           }}
         >
-          <Button className="mb-6 w-full">{translations.verifyNow}</Button>
+          <Button>{translations.verifyNow}</Button>
         </AlertDialogTrigger>
         {isTypeInNumberState ? (
           <AlertDialogContent>
@@ -151,9 +151,7 @@ const PhoneVerification = ({ translations }: VerificationProps) => {
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel onClick={handleCancel}>{translations.cancel}</AlertDialogCancel>
-              <Button onClick={sendNumberToUser}>
-                {translations.continue}
-              </Button>
+              <Button onClick={sendNumberToUser}>{translations.continue}</Button>
             </AlertDialogFooter>
           </AlertDialogContent>
         ) : (

@@ -71,8 +71,8 @@ export async function addProduct(values: ProductType, imageUrls: string[]) {
       .set({ paymentLink: paymentLink, stripeId: stripeId })
       .where(eq(products.id, product[0].id))
   }
-  revalidatePath('/my-shop')
-  redirect('/my-shop')
+  revalidatePath('/my--shop')
+  redirect('/my--shop')
 }
 
 // Delete function requiring productId as string
@@ -93,7 +93,7 @@ export async function deleteProduct(productId: string) {
 
   await db.delete(products).where(eq(products.id, productId))
   await setProductNotActive(product!.stripeId!)
-  revalidatePath('/my-Shop')
+  revalidatePath('/my-shop')
 }
 
 // Update function requiring productData as
@@ -112,7 +112,7 @@ export async function updateProduct(productId: string, values: ProductType) {
       })
       .where(eq(products.id, productId))
     await updateProductStripe(existingProduct.stripeId!, values)
-    revalidatePath('myshop')
+    revalidatePath('my-shop')
   } else {
     throw new Error('Product not found or unauthorized to update.')
   }

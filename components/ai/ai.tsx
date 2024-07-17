@@ -14,12 +14,14 @@ import { useState, useEffect, useRef } from 'react'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import { useChat } from 'ai/react'
+import { usePathname } from '@/navigation'
 
 const Ai: React.FC = () => {
   const [isOpened, setIsOpened] = useState(false)
   const { messages, input, handleInputChange, handleSubmit } = useChat()
   const containerRef = useRef<HTMLDivElement>(null)
   const buttonRef = useRef<HTMLDivElement>(null)
+  const pathname = usePathname()
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -46,6 +48,10 @@ const Ai: React.FC = () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [messages])
+
+  if(pathname.startsWith("/conversations/")) {
+    return null
+  }
 
   return (
     <div className="fixed">

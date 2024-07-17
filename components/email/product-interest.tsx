@@ -1,6 +1,6 @@
 import { Html } from '@react-email/html'
 import { Head, Hr, Link, Row, Section, Tailwind, Text } from '@react-email/components'
-
+import { useTranslations } from 'next-intl'
 /**
  * Renders an email template for a product interest notification.
  *
@@ -9,25 +9,28 @@ import { Head, Hr, Link, Row, Section, Tailwind, Text } from '@react-email/compo
  * @returns {JSX.Element} - The rendered email template.
  */
 
-export default function ProductInterestEmail({productName}: {productName: string}) {
+export default function ProductInterestEmail(productName: string) {
+  const t = useTranslations('common')
   return (
     <Tailwind>
       <Html>
         <Section className="text-center">
           <Row>
             <Head>
-              <title>Somebody wants to buy your Bit {productName}!</title>
+              <title>
+                {t('title')} {productName}!
+              </title>
             </Head>
             <Text className="text-2xl font-bold">
-              Somebody wants to buy your Bit {productName}!
+              {t('title')} {productName}!
             </Text>
-            <Text className="text-lg">Start chatting now</Text>
+            <Text className="text-lg">{t('chatnow')}</Text>
             <Hr className="mb-10" />
             <Link
               className="rounded-lg bg-black px-6 py-2 text-white hover:bg-neutral-800"
               href="https://bitztech.de/en/conversations"
             >
-              Conversations
+              {t('chatnow')}
             </Link>
           </Row>
         </Section>

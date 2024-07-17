@@ -28,6 +28,36 @@ import { useTranslations } from 'next-intl'
 
 export default function Home() {
   const t = useTranslations('Landingpage')
+  const tFAQ = useTranslations('FAQ')
+
+  const newsletterTranslations = {
+    join: t('Newsletter.join'),
+    today: t('Newsletter.today'),
+    fromyesterdayfortomorrow: t('Newsletter.fromyesterdayfortomorrow'),
+    getstarted: t('Newsletter.getstarted'),
+  }
+
+  const faqTranslations = {
+    title: tFAQ('title'),
+    questions: [
+      tFAQ('question1'),
+      tFAQ('question2'),
+      tFAQ('question3'),
+      tFAQ('question4'),
+      tFAQ('question5'),
+      tFAQ('question6'),
+    ],
+    answers: [
+      tFAQ('answer1'),
+      tFAQ('answer2'),
+      tFAQ('answer3'),
+      tFAQ('answer4'),
+      tFAQ('answer5'),
+      tFAQ('answer6'),
+    ],
+    contactPrompt: tFAQ('contactPrompt'),
+    contactLink: tFAQ('contactLink'),
+  }
 
   return (
     <>
@@ -48,10 +78,10 @@ export default function Home() {
         <Team />
       </AnimatedCard>
       <AnimatedCard delay={0.3}>
-        <Newsletter />
+        <Newsletter {...newsletterTranslations} />
       </AnimatedCard>
       <AnimatedCard delay={0.3}>
-        <FAQ />
+        <FAQ translations={faqTranslations} />
       </AnimatedCard>
       <ScrollToTop />
     </>
