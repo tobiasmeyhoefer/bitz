@@ -112,7 +112,10 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                       className="hidden  text-right font-semibold text-foreground md:block"
                       href={`/my-shop/${product.sellerId}`}
                     >
-                      <Badge className="md:text-md h-6 text-xs" variant="outline">
+                      <Badge
+                        className="md:text-md h-6 text-xs hover:font-extrabold"
+                        variant="outline"
+                      >
                         {props.viewTranslation}
                       </Badge>
                     </Link>
