@@ -253,5 +253,17 @@
     "title": "FAVORITES",
     "noFavorites": "You have no favorites yet. You can add some by pressing the like button on products.",
     "viewShop": "view Shop"
+  },
+
+  "HeroCards": {
+    "bitzawesome": "Bitz is awesome!",
+    "stunning": "This UI is absolutely stunning thanks to the team of bitz",
+    "free": "Free",
+    "forever": "Forever",
+    "month": "/month",
+    "freeuse": "Bitz is free to use.",
+    "startnow": "Start Now",
+    "easyswitch": "Easily switch between your favorite themes!",
+    "darklight": "Light & dark mode"
   }
 }

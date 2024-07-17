@@ -22,8 +22,10 @@ import { Check } from 'lucide-react'
 import Image from 'next/image'
 import { Link } from '@/navigation'
 import HeroCardAnimation from './hero-card-animation'
+import { useTranslations } from 'next-intl'
 
 export const HeroCards = () => {
+  const t = useTranslations('HeroCards')
   return (
     <div className="relative hidden h-[500px] w-[700px] flex-row flex-wrap gap-8 lg:flex">
       {/* Testimonial */}
@@ -38,7 +40,7 @@ export const HeroCards = () => {
               <CardDescription>@maltostan</CardDescription>
             </div>
           </CardHeader>
-          <CardContent>Bitz is awesome!</CardContent>
+          <CardContent>{t('bitzawesome')}</CardContent>
         </Card>
       </HeroCardAnimation>
 
@@ -60,7 +62,7 @@ export const HeroCards = () => {
             <CardDescription className="font-normal ">Frontend Developer</CardDescription>
           </CardHeader>
           <CardContent className="pb-2 text-center">
-            <p>This UI is absolutely stunning thanks to the team of bitz</p>
+            <p>{t('stunning')}</p>
           </CardContent>
           <CardFooter>
             <div></div>
@@ -76,20 +78,20 @@ export const HeroCards = () => {
         <Card>
           <CardHeader>
             <CardTitle className="item-center flex justify-between">
-              Free
+              {t('free')}
               <Badge variant="secondary" className="text-sm">
-                For ever
+                {t('forever')}
               </Badge>
             </CardTitle>
             <div>
               <span className="text-3xl font-bold">$0</span>
-              <span className="text-muted-foreground"> /month</span>
+              <span className="text-muted-foreground"> {t('month')}</span>
             </div>
-            <CardDescription>Die Nutzung von Bitz ist kostenlos</CardDescription>
+            <CardDescription>{t('freeuse')}</CardDescription>
           </CardHeader>
           <CardContent>
             <Link href={'/auth/login'}>
-              <Button className="w-full bg-card-button">Start Now</Button>
+              <Button className="w-full bg-card-button">{t('startnow')}</Button>
             </Link>
           </CardContent>
           <hr className="m-auto mb-4 w-4/5" />
@@ -116,10 +118,8 @@ export const HeroCards = () => {
               <LightBulbIcon />
             </div>
             <div>
-              <CardTitle>Light & dark mode</CardTitle>
-              <CardDescription className="text-md mt-2">
-                Easily switch between your favorite theme
-              </CardDescription>
+              <CardTitle>{t('darklight')}</CardTitle>
+              <CardDescription className="text-md mt-2">{t('easyswitch')}</CardDescription>
             </div>
           </CardHeader>
         </Card>

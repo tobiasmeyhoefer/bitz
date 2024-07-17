@@ -253,5 +253,17 @@
     "title": "FAVORITEN",
     "noFavorites": "Du hast noch keine Favoriten. Du kannst welche hinzufügen indem du den like button auf Produkten drückst",
     "viewShop": "zum Shop"
+  },
+
+  "HeroCards": {
+    "bitzawesome": "Bitz ist fantastisch!",
+    "stunning": "Diese Benutzeroberfläche ist absolut atemberaubend, dank des Teams von bitz",
+    "free": "Frei",
+    "forever": "für immer",
+    "month": "/Monat",
+    "freeuse": "Die Nutzung von Bitz ist kostenlos.",
+    "startnow": "Jetzt loslegen",
+    "easyswitch": "Wechsle ganz einfach das Farbschema!",
+    "darklight": "Dunkles oder Helles Schema"
   }
 }
