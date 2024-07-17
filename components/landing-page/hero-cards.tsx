@@ -26,6 +26,15 @@ import { useTranslations } from 'next-intl'
 
 export const HeroCards = () => {
   const t = useTranslations('HeroCards')
+  const tec = '{t("tech")}'
+  const cust = '{t("customize")}'
+  const saf = '{t("safety")}'
+  const benefits = [
+    t('tech'),
+    t('customize'),
+    t('safety'),
+  ];
+
   return (
     <div className="relative hidden h-[500px] w-[700px] flex-row flex-wrap gap-8 lg:flex">
       {/* Testimonial */}
@@ -97,7 +106,7 @@ export const HeroCards = () => {
           <hr className="m-auto mb-4 w-4/5" />
           <CardFooter className="flex">
             <div className="space-y-4">
-              {['Unlimited Tech', 'Customize your Shop', 'Safety first'].map((benefit) => (
+              {benefits.map((benefit) => (
                 <span key={benefit} className="flex">
                   <Check className="text-green-500" /> <h3 className="ml-2">{benefit}</h3>
                 </span>
