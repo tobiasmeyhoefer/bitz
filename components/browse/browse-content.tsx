@@ -108,6 +108,7 @@ const BrowseContent = (props: BrowseContentProps) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true)
       const user = await getUser()
       setUserId(user.id)
       const result = await getProductsBrowse(60, 0)
