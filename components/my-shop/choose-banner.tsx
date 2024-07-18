@@ -45,7 +45,7 @@ const ChooseBanner = (props: { setBanner: (value: string) => void }) => {
   }
 
   return (
-    <div className="absolute right-2 top-2 z-30 text-xs">
+    <div className="absolute right-6 top-2 z-30 text-xs">
       <Popover>
         <PopoverTrigger asChild>
           <Button
