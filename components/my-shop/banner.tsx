@@ -9,7 +9,6 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import ChooseBanner from './choose-banner'
-import { getBanner } from '@/lib/user-actions'
 import { ShopText } from './shop-text'
 
 const Banner = ({ title, myBanner }: { title: string; myBanner: string }) => {
@@ -21,7 +20,7 @@ const Banner = ({ title, myBanner }: { title: string; myBanner: string }) => {
 
   return (
     <>
-      <div className="group relative h-40 w-full bg-cover">
+      <div className="group absolute h-40 w-screen bg-cover">
         <div className="absolute h-3/5 w-full bg-gradient-to-b from-black/40 to-black/0"></div>
         <Image
           src={banner}

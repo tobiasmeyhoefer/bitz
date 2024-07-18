@@ -12,6 +12,8 @@
  *
  * @returns The `SearchDialog` component.
  */
+'use client'
+
 import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog'
 import { Input } from '@/components/ui/input'
 import { SlClose } from 'react-icons/sl'
@@ -22,7 +24,7 @@ import { getProductsByName, searchProductsByTitle } from '@/lib/product-actions'
 export const SearchDialog = (
   props: SearchBarProps & {
     loadProductsByCategory: (category: string) => void
-    loadProductsByTitle: (title: string) => void,
+    loadProductsByTitle: (title: string) => void
     userId: string
   },
 ) => {
@@ -117,10 +119,10 @@ export const SearchDialog = (
           readOnly
         />
       </DialogTrigger>
-      <DialogContent className="gap-0 border-0  p-0">
+      <DialogContent className="gap-0 border-0 p-0">
         <div className="relative flex">
           <Input
-            className="m-0 h-14 rounded-tl rounded-bl rounded-tr-none rounded-br-none px-4 flex-grow"  // "rounded-t-l m-0 h-14 rounded-b-none px-4"
+            className="m-0 h-14 flex-grow rounded-bl rounded-br-none rounded-tl rounded-tr-none px-4" // "rounded-t-l m-0 h-14 rounded-b-none px-4"
             type="input"
             placeholder={props.placeholder}
             onChange={handleSearchChange}
@@ -130,18 +132,18 @@ export const SearchDialog = (
           {props.searchValue.length > 0 && (
             <SlClose
               onClick={() => props.setSearchValue('')}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 h-[20px] w-[20px] cursor-pointer" // "absolute right-[20px] top-[20%] h-[20px] w-[20px]" 
+              className="absolute right-4 top-1/2 h-[20px] w-[20px] -translate-y-1/2 transform cursor-pointer" // "absolute right-[20px] top-[20%] h-[20px] w-[20px]"
             />
           )}
         </div>
         {!props.searchValue ? (
           <>
-            <h1 className="px-4 pt-2 text-lg font-medium ">{props.suggestionsTitle}</h1>
+            <h1 className="px-4 pt-2 text-lg font-medium">{props.suggestionsTitle}</h1>
             <div className="max-h-[200px] overflow-y-auto">
               {props.suggestions.map((suggestion, index) => (
                 <div
                   onClick={() => handleSuggestionClick(suggestion)}
-                  className="rounded- px-8 py-2 hover:rounded-b-lg hover:cursor-pointer hover:bg-input"
+                  className="rounded- px-8 py-2 hover:cursor-pointer hover:rounded-b-lg hover:bg-input"
                   key={`s-${index}`}
                 >
                   {suggestion}
@@ -155,14 +157,14 @@ export const SearchDialog = (
               filteredSuggestions.slice(0, 5).map((suggestion, index) => (
                 <div
                   onClick={() => handleSuggestionClick(suggestion)}
-                  className="rounded- px-8 py-2  hover:rounded-b-lg hover:cursor-pointer hover:bg-gray-100"
+                  className="rounded- px-8 py-2  hover:cursor-pointer hover:rounded-b-lg hover:bg-gray-100"
                   key={`fs-${index}`}
                 >
                   {suggestion}
                 </div>
               ))
             ) : (
-              <div className="px-4 ">Keine Vorschläge gefunden</div>
+              <div className="px-4 ">{props.noSuggestions}</div>
             )}
           </div>
         )}

@@ -206,6 +206,7 @@ const BrowseContent = (props: BrowseContentProps) => {
             loadProductsByCategory={loadProductsByCategory}
             loadProductsByTitle={loadProductsByTitle}
             userId={userId}
+            noSuggestions={props.searchTranslations.noSuggestions}
           />
           <div className="flex w-full flex-row justify-between lg:w-auto lg:justify-normal">
             <SortProducts setProducts={setProducts} translations={props.sortTranslations} />
@@ -232,7 +233,7 @@ const BrowseContent = (props: BrowseContentProps) => {
             </div>
             <div className="mb-6 mt-4 flex justify-center">
               {noSearchResults ? (
-                <div>Keine Suchergebnisse gefunden</div>
+                <div>{props.searchTranslations.noResults}</div>
               ) : (
                 hasMoreProducts &&
                 showLoadMoreButton && (

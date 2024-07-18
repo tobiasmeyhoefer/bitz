@@ -19,7 +19,7 @@ const ProfileSettings = async () => {
   return (
     <div>
       <h3 className="mb-4 text-2xl font-bold">{t('profilesettings')}</h3>
-      <div className="mb-8 flex justify-center gap-8">
+      <div className="mb-8 flex min-w-[21rem] justify-start gap-8">
         {user.image ? (
           <Image
             className="h-40 w-40 rounded-full"
