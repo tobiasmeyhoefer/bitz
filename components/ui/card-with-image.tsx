@@ -100,7 +100,7 @@ const CardWithImage = React.forwardRef<HTMLDivElement, CardWithImageProps>(
                 </div>
                 <CardDescription className="!mt-0 text-sm">
                   <div className="flex flex-col justify-between gap-2">
-                    <div className="m-0 w-28 text-xs md:text-sm">{props.product.category}</div>
+                    <div className="m-0 w-52 text-xs md:text-sm">{props.product.category}</div>
                     <div className="flex items-end justify-between">
                       <div className="text-left text-lg text-foreground md:text-xl">
                         {props.product.price}€
