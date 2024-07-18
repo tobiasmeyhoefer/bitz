@@ -117,15 +117,15 @@ export function BuyButtons(props: { product: ProductType }) {
   return (
     <div className="mt-6 flex w-full justify-end">
       {disabled ? (
-        <Button disabled onClick={handleBuyClick} type="submit">
+        <Button variant={"outline"} disabled onClick={handleBuyClick} type="submit">
           Interesse
         </Button>
       ) : isLoading ? (
-        <LoadingButton loading={isLoading} onClick={onClick}>
+        <LoadingButton variant={"outline"} loading={isLoading} onClick={onClick}>
           Interesse
         </LoadingButton>
       ) : (
-        <Button onClick={handleBuyClick} type="submit">
+        <Button variant={"outline"} onClick={handleBuyClick} type="submit">
           Interesse
         </Button>
       )}

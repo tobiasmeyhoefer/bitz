@@ -58,7 +58,7 @@ const Ai: React.FC = () => {
       <div
         ref={buttonRef}
         onClick={() => setIsOpened(!isOpened)}
-        className="fixed bottom-6 left-[calc(100vw-84px)] flex h-[60px] w-[60px] cursor-pointer items-center justify-center rounded-full bg-neutral-900 hover:bg-neutral-800"
+        className="fixed bottom-6 left-[calc(100vw-84px)] flex h-[60px] w-[60px] cursor-pointer transition-all items-center justify-center rounded-full bg-indigo-950 hover:bg-indigo-900"
       >
         <p className="text-xl font-bold text-white">AI</p>
       </div>
