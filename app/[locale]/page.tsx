@@ -61,6 +61,9 @@ export default function Home() {
 
   return (
     <>
+      <div className="absolute left-2 top-2 text-sm text-primary-hover md:left-10 md:top-14">
+        Ein Projekt im Rahmen des Studiums an der BHT
+      </div>
       <Hero />
       <AnimatedCard delay={0.3}>
         <Sponsors />
