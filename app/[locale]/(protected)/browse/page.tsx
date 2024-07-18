@@ -45,7 +45,7 @@ const Browse = () => {
   }
 
   return (
-    <Suspense fallback={<LoadingSkeletonBrowse />}>
+    <div className=''>
       <BrowseContent
         searchTranslations={searchTranslations}
         sortTranslations={sortTranslations}
@@ -53,7 +53,7 @@ const Browse = () => {
         filterTranslations={filterTranslations}
         viewTranslations={t('viewShop')}
       />
-    </Suspense>
+    </div>
   )
 }
 

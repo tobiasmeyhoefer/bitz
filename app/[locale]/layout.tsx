@@ -36,10 +36,10 @@ export default async function LocaleLayout({
   params: { locale: string }
 }>) {
   return (
-    <html lang={locale} className="ml-[calc(100vw-100%)]" suppressHydrationWarning>
+    <html lang={locale} className="" suppressHydrationWarning>
       <body
         className={cn(
-          'min-h-svh overflow-x-hidden bg-background font-space_grotesk antialiased',
+          'min-h-svh overflow-x-hidden bg-background font-space_grotesk antialiased overflow-y-scroll',
           space_grotesk.variable,
           montserrat.variable,
         )}
