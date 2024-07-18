@@ -13,7 +13,7 @@ import { addProductStripe, setProductNotActive, updateProductStripe } from './st
 import { redirect } from '@/navigation'
 import { sortBy } from 'sort-by-typescript'
 
-export async function getProductsBrowse(limit: number = 5, offset: number = 0) {
+export async function getProductsBrowse(limit: number = 60, offset: number = 0) {
   const session = await auth()
   const id = session?.user?.id
   const response = await db
