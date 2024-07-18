@@ -164,6 +164,13 @@ const BrowseContent = (props: BrowseContentProps) => {
     } else {
       setNoSearchResults(false)
     }
+
+    if (result.length < 60) {
+      setShowLoadMoreButton(false)
+    } else {
+      setShowLoadMoreButton(true)
+    }
+
     setLoading(false)
   }
 
@@ -172,6 +179,7 @@ const BrowseContent = (props: BrowseContentProps) => {
     let result
     if (title === '') {
       result = await getProductsBrowse(60, 0)
+      setShowLoadMoreButton(true)
     } else {
       result = await searchProductsByTitle(title, userId)
     }
@@ -182,6 +190,13 @@ const BrowseContent = (props: BrowseContentProps) => {
     } else {
       setNoSearchResults(false)
     }
+
+    if (result.length < 60) {
+      setShowLoadMoreButton(false)
+    } else {
+      setShowLoadMoreButton(true)
+    }
+
     setLoading(false)
   }
 
