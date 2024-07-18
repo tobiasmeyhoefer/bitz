@@ -101,6 +101,8 @@
     "title": "Entdecken",
     "searchPlaceholder": "Wonach suchst du?",
     "suggestions": "Vorschläge",
+    "noSuggestions": "Keine Vorschläge gefunden",
+    "noResults": "Keine Suchergebnisse gefunden",
     "sortby": "Sortieren nach:",
     "date": "Datum",
     "price": "Preis",
@@ -227,7 +229,7 @@
   "LoginForm": {
     "loginButton": "anmelden",
     "loginMessage": "via Email oder Google",
-    "loginOAuthMessage": "mit Google ode Github",
+    "loginOAuthMessage": "mit Google oder Github",
     "loginPasskeyTip": "registriere einen Passkey in den Einstellungen",
     "loginOrPasskey": "oder",
     "loginPasskeyButton": "mit Passkey"

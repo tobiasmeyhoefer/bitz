@@ -28,7 +28,7 @@ const RegisterPasskey = ({translations}: RegisterPasskeyProps) => {
       description: translations.registerPasskeySuccess,
     })
   }
-  return <Button className='max-w-full' onClick={registerPasskey}>{translations.registerPasskey}</Button>
+  return <Button variant={"outline"} className='max-w-full' onClick={registerPasskey}>{translations.registerPasskey}</Button>
 }
 
 export default RegisterPasskey

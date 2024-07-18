@@ -45,6 +45,8 @@ export default function ProductInfoCard(props: ProductInfoType) {
     cancel: tProductForm('cancel'),
     save: tProductForm('save'),
     edit: tProductForm('edit'),
+    category: tProductForm('category'),
+    isDirectlyBuyable: tProductForm('isDirectlyBuyable'),
   }
   const getDate = (
     timestamp: Date | string,
@@ -132,7 +134,7 @@ export default function ProductInfoCard(props: ProductInfoType) {
           <Card className="mt-2 flex h-full flex-col justify-between lg:mt-0 lg:h-[70vh]">
             <CardHeader className="flex h-[20%] flex-row items-center justify-between">
               <CardTitle className="">{product.title}</CardTitle>
-              <CardTitle className="!mt-0 w-1/4 text-right text-2xl md:text-3xl">
+              <CardTitle className="!mt-0 w-1/2 text-right text-2xl md:text-3xl">
                 {product.price} €
               </CardTitle>
             </CardHeader>

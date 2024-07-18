@@ -114,7 +114,7 @@ export default function AddressChanger({ translations }: AddressChangerProps) {
               </FormItem>
             )}
           />
-          <Button className="mt-4" type="submit">
+          <Button variant={"outline"} className="mt-4" type="submit">
             {translations.changeNow}
           </Button>
         </form>

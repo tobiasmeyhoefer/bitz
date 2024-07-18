@@ -101,6 +101,8 @@
     "title": "Browse",
     "searchPlaceholder": "What are you searching for?",
     "suggestions": "Suggestions",
+    "noSuggestions": "no suggestions found",
+    "noResults": "no results found",
     "sortby": "sort by:",
     "date": "date",
     "price": "price",

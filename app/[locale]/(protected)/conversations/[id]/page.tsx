@@ -82,7 +82,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     <div className="h-full">
       <div className="mx-4 flex h-[80px] items-center gap-10 lg:mx-10">
         <form action={navigateBack}>
-          <Button type="submit">back</Button>
+          <Button variant={"outline"} type="submit">back</Button>
         </form>
         <h2 className="text-sm font-bold md:text-2xl">
           Chat with {user.id === seller.id ? buyer.name : seller.name} about {product.title}

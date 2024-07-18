@@ -201,7 +201,7 @@ export default function PictureChanger({
               />
             </div>
           )}
-          <Button className="mt-4" type="submit">
+          <Button variant={"outline"} className="mt-4" type="submit">
             {submitTitle}
           </Button>
         </form>

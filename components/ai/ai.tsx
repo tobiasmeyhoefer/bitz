@@ -14,12 +14,14 @@ import { useState, useEffect, useRef } from 'react'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import { useChat } from 'ai/react'
+import { usePathname } from '@/navigation'
 
 const Ai: React.FC = () => {
   const [isOpened, setIsOpened] = useState(false)
   const { messages, input, handleInputChange, handleSubmit } = useChat()
   const containerRef = useRef<HTMLDivElement>(null)
   const buttonRef = useRef<HTMLDivElement>(null)
+  const pathname = usePathname()
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -47,12 +49,16 @@ const Ai: React.FC = () => {
     }
   }, [messages])
 
+  if(pathname.startsWith("/conversations/")) {
+    return null
+  }
+
   return (
     <div className="fixed">
       <div
         ref={buttonRef}
         onClick={() => setIsOpened(!isOpened)}
-        className="fixed bottom-6 left-[calc(100vw-84px)] flex h-[60px] w-[60px] cursor-pointer items-center justify-center rounded-full bg-neutral-900 hover:bg-neutral-800"
+        className="fixed bottom-6 left-[calc(100vw-84px)] flex h-[60px] w-[60px] cursor-pointer transition-all items-center justify-center rounded-full bg-indigo-950 hover:bg-indigo-900"
       >
         <p className="text-xl font-bold text-white">AI</p>
       </div>

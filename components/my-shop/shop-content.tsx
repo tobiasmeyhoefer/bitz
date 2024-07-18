@@ -33,7 +33,7 @@ const ShopContent = (params: {
 
   return (
     <div
-      className={`flex h-full flex-col items-center justify-center px-4 py-10 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
+      className={` flex h-full flex-col items-center justify-center px-4 py-10 sm:px-10 md:px-[20px] lg:px-[30px] xl:px-[80px]`}
     >
       <SortProducts
         userId={params.id}

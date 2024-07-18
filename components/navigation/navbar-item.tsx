@@ -7,7 +7,7 @@
  * `NavMenuDrawer`: A drawer component that renders a menu of navigation items, and a sign out link, in a mobile-friendly drawer.
  */
 'use client'
-
+import './navbar.css'
 import { Link, usePathname } from '@/navigation'
 import { Button } from '../ui/button'
 import { cn } from '@/lib/utils'
@@ -35,7 +35,7 @@ const NavItemLink = (props: NavbarItemLinkProps) => {
   return (
     <Link
       className={cn(
-        `bg-none text-left text-lg font-normal ${pathname === props.linkTo ? 'text-inherit underline underline-offset-8' : ' hover:underline hover:underline-offset-8'} hover:bg-none`,
+        `bg-none text-left text-lg font-normal ${pathname === props.linkTo ? 'text-inherit underline underline-offset-[6px]' : ' underline-from-center'} hover:bg-none`,
         props.className,
       )}
       href={props.linkTo}
@@ -50,7 +50,7 @@ const NavLoginLink = ({ text }: NavLoginProps) => {
   const pathname = usePathname()
   return (
     pathname !== '/auth/login' && (
-      <Link href="/auth/login">
+      <Link className='mt-12' href="/auth/login">
         <Button className="bg-primary-hover">{text}</Button>
       </Link>
     )

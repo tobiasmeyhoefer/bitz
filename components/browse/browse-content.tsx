@@ -108,6 +108,7 @@ const BrowseContent = (props: BrowseContentProps) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true)
       const user = await getUser()
       setUserId(user.id)
       const result = await getProductsBrowse(60, 0)
@@ -163,6 +164,13 @@ const BrowseContent = (props: BrowseContentProps) => {
     } else {
       setNoSearchResults(false)
     }
+
+    if (result.length < 60) {
+      setShowLoadMoreButton(false)
+    } else {
+      setShowLoadMoreButton(true)
+    }
+    
     setLoading(false)
   }
 
@@ -170,7 +178,8 @@ const BrowseContent = (props: BrowseContentProps) => {
     setLoading(true)
     let result
     if (title === '') {
-      result = await getProductsBrowse()
+      result = await getProductsBrowse(60, 0)
+      setShowLoadMoreButton(true)
     } else {
       result = await searchProductsByTitle(title, userId)
     }
@@ -181,6 +190,13 @@ const BrowseContent = (props: BrowseContentProps) => {
     } else {
       setNoSearchResults(false)
     }
+
+    if (result.length < 60) {
+      setShowLoadMoreButton(false)
+    } else {
+      setShowLoadMoreButton(true)
+    }
+
     setLoading(false)
   }
 
@@ -206,6 +222,7 @@ const BrowseContent = (props: BrowseContentProps) => {
             loadProductsByCategory={loadProductsByCategory}
             loadProductsByTitle={loadProductsByTitle}
             userId={userId}
+            noSuggestions={props.searchTranslations.noSuggestions}
           />
           <div className="flex w-full flex-row justify-between lg:w-auto lg:justify-normal">
             <SortProducts setProducts={setProducts} translations={props.sortTranslations} />
@@ -232,7 +249,7 @@ const BrowseContent = (props: BrowseContentProps) => {
             </div>
             <div className="mb-6 mt-4 flex justify-center">
               {noSearchResults ? (
-                <div>Keine Suchergebnisse gefunden</div>
+                <div>{props.searchTranslations.noResults}</div>
               ) : (
                 hasMoreProducts &&
                 showLoadMoreButton && (

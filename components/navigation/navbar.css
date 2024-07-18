@@ -1,0 +1,22 @@
+.underline-from-center {
+  position: relative;
+  display: inline-block;
+}
+
+.underline-from-center::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 1.5px;
+  background-color: currentColor;
+  transition:
+    width 0.3s ease-in-out,
+    left 0.3s ease-in-out;
+}
+
+.underline-from-center:hover::after {
+  width: 100%;
+  left: 0;
+}

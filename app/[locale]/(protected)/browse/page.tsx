@@ -17,6 +17,8 @@ const Browse = () => {
   const searchTranslations: SearchTranslations = {
     searchPlaceholder: t('searchPlaceholder'),
     suggestions: t('suggestions'),
+    noSuggestions: t('noSuggestions'),
+    noResults: t('noResults'),
   }
   const sortTranslations = {
     sortBy: t('sortby'),
@@ -43,7 +45,7 @@ const Browse = () => {
   }
 
   return (
-    <Suspense fallback={<LoadingSkeletonBrowse />}>
+    <div className=''>
       <BrowseContent
         searchTranslations={searchTranslations}
         sortTranslations={sortTranslations}
@@ -51,7 +53,7 @@ const Browse = () => {
         filterTranslations={filterTranslations}
         viewTranslations={t('viewShop')}
       />
-    </Suspense>
+    </div>
   )
 }
 

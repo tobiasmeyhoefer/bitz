@@ -113,7 +113,7 @@ const NavBar = async () => {
               signOut={
                 <div
                   key={'dil-5'}
-                  className="flex justify-center py-4 text-center  text-2xl hover:bg-slate-100"
+                  className="flex justify-center py-4 text-center text-2xl hover:bg-slate-100"
                 >
                   <SignOut
                     typeText={true}
