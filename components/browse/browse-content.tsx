@@ -170,7 +170,7 @@ const BrowseContent = (props: BrowseContentProps) => {
     } else {
       setShowLoadMoreButton(true)
     }
-
+    
     setLoading(false)
   }
 
