@@ -36,6 +36,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     negotiation: t('negotiation'),
     offer: t('offer'),
     offerAmount: t('offerAmount'),
+    dealQuestion: t('dealQuestion'),
     whereMeet: t('whereMeet'),
     whenPickUp: t('whenPickUp'),
     delay: t('delay'),
@@ -44,8 +45,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     notInterested: t('notInterested'),
     cancel: t('cancel'),
     send: t('send'),
-  } 
-
+  }
 
   const convId = params.id
   const conv = await getConversationById(convId)
@@ -94,7 +94,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         }
       >
         <Messages convId={convId} initialMessages={serializedMessages} userId={user.id} />
-        <WriteMessageField conv={conv} user={user} translations={t} />
+        <WriteMessageField conv={conv} user={user} translations={translations} />
       </div>
     </div>
   )

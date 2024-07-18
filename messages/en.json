@@ -241,7 +241,7 @@
   "Conversations": {
     "title": "CONVERSATIONS",
     "empty": "There are no opened conversations",
-    "newbuyer00": "is interested in your Bitz '",
+    "newbuyer00": "is interested in your Bit '",
     "newbuyer01": "'.",
     "wannabuy00": "You are interested in the Bit '",
     "wannabuy01": "'. ",
@@ -347,4 +347,3 @@
     "price": "Price"
   }
 }
-

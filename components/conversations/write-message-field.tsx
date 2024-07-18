@@ -58,6 +58,7 @@ interface WriteMessageFieldProps {
     cancel: string
     delayMessage: string
     send: string
+    location: string
   }
 }
 
