@@ -50,7 +50,7 @@ const NavLoginLink = ({ text }: NavLoginProps) => {
   const pathname = usePathname()
   return (
     pathname !== '/auth/login' && (
-      <Link href="/auth/login">
+      <Link className='mt-12' href="/auth/login">
         <Button className="bg-primary-hover">{text}</Button>
       </Link>
     )
