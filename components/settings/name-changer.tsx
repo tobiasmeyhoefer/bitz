@@ -99,7 +99,7 @@ export default function NameChanger({ translations }: NameChangerProps) {
               className="hover:cursor-pointer"
             />
           </div>
-          <Button className="mt-4" type="submit">
+          <Button variant={"outline"} className="mt-4" type="submit">
             {translations.changeNow}
           </Button>
         </form>
