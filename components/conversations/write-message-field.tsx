@@ -15,7 +15,6 @@
  * @param {UserType} props.user - The current user object.
  * @returns {JSX.Element} The `WriteMessageField` component.
  */
-
 import axios from 'axios'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
@@ -29,7 +28,41 @@ import confetti from 'canvas-confetti'
 import { checkProfanity } from '@/lib/product-actions'
 import { useToast } from '../ui/use-toast'
 
-const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserType }) => {
+interface WriteMessageFieldProps {
+  conv: ConversationType
+  user: UserType
+  translations: {
+    title: string
+    description: string
+    deal1: string
+    deal2: string
+    warnMsg: string
+    myAddress: string
+    otherLocation: string
+    pickUpHere: string
+    done: string
+    timeQuestion: string
+    writeWhenTime: string
+    timePlaceholder: string
+    iHave: string
+    time: string
+    negotiation: string
+    offer: string
+    offerAmount: string
+    dealQuestion: string
+    whereMeet: string
+    whenPickUp: string
+    delay: string
+    minutes: string
+    notInterested: string
+    cancel: string
+    delayMessage: string
+    send: string
+    location: string
+  }
+}
+
+const WriteMessageField = ({ conv, user, translations }: WriteMessageFieldProps) => {
   const [input, setInput] = useState('')
   const [delayInput, setDelayInput] = useState('10')
   const [moneyInput, setMoneyInput] = useState('')
@@ -79,16 +112,16 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
 
     if (await checkProfanity(input)) {
       toast({
-        title: 'Oh oh',
-        description: 'Please check your profanity',
+        title: translations.title,
+        description: translations.description,
         duration: 2000,
       })
       setIsLoading(false)
       return
     }
 
-    if (input === 'Wir haben einen Deal ✅') {
-      await createMessage('Juhu es gibt einen Deal!!!', user.id, conv.id, true, conv.productId)
+    if (input === 'Wir haben einen Deal ✅' || input === 'We have a deal ✅') {
+      await createMessage(translations.deal2, user.id, conv.id, true, conv.productId)
       await axios.post('/api/message', {
         content: input,
         convId: conv.id,
@@ -110,7 +143,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
     <div className="z-10 bg-background">
       {warning ? (
         <p className="mb-2 rounded-lg bg-red-100 p-2 text-sm text-red-500">
-          selbst geschriebene Nachrichten bitte vermeiden
+          {translations.warnMsg}
         </p>
       ) : null}
       <div className="mt-2">
@@ -118,7 +151,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
           <div className="flex gap-2 max-sm:overflow-x-scroll">
             <Popover>
               <PopoverTrigger asChild>
-                <Button variant="outline">Ort?</Button>
+                <Button variant="outline">{translations.location}</Button>
               </PopoverTrigger>
               <PopoverContent className="flex w-80 flex-col gap-2">
                 <h4 className="font-medium leading-none">Ort?</h4>
@@ -128,10 +161,10 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
                     onClick={() => setInput(`Du kannst das Bit hier abholen: ${user.adress} `)}
                     variant={'outline'}
                   >
-                    Meine Adresse
+                    {translations.myAddress}
                   </Button>
                 </PopoverClose>
-                <label id="place">anderer Ort?</label>
+                <label id="place">{translations.otherLocation}</label>
                 <Input
                   type="text"
                   id="place"
@@ -143,10 +176,10 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
                 <PopoverClose>
                   <Button
                     className="w-full bg-card-button text-primary-foreground"
-                    onClick={() => setInput(`Du kannst das Bit hier abholen: ${locationInput}`)}
+                    onClick={() => setInput(`${translations.pickUpHere} ${locationInput}`)}
                     variant={'outline'}
                   >
-                    Fertig
+                    {translations.done}
                   </Button>
                 </PopoverClose>
               </PopoverContent>
@@ -154,25 +187,27 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
 
             <Popover>
               <PopoverTrigger asChild>
-                <Button variant="outline">Zeit?</Button>
+                <Button variant="outline">{translations.timeQuestion}</Button>
               </PopoverTrigger>
               <PopoverContent className="flex w-80 flex-col gap-2">
-                <h4 className="font-medium leading-none">Zeit?</h4>
-                <label id="place">Schreibe hier wann du Zeit hast:</label>
+                <h4 className="font-medium leading-none">{translations.timeQuestion}</h4>
+                <label id="place">{translations.writeWhenTime}</label>
                 <Textarea
                   id="place"
                   onChange={({ target }) => setTimeInput(target.value)}
                   defaultValue=""
-                  placeholder="Morgen bis 12 oder Donnerstag von 14-16Uhr "
+                  placeholder={translations.timePlaceholder}
                   className="col-span-2 h-8"
                 />
                 <PopoverClose>
                   <Button
                     className="w-full bg-card-button text-primary-foreground"
-                    onClick={() => setInput(`Ich habe ${timeInput} Zeit ✨`)}
+                    onClick={() =>
+                      setInput(`${translations.iHave} ${timeInput} ${translations.time} ✨`)
+                    }
                     variant={'outline'}
                   >
-                    Fertig
+                    {translations.done}
                   </Button>
                 </PopoverClose>
               </PopoverContent>
@@ -180,7 +215,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
 
             <Button
               onClick={async () => {
-                setInput('Wir haben einen Deal ✅')
+                setInput(translations.deal1)
               }}
               variant={'outline'}
             >
@@ -191,12 +226,12 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
           <div className="flex gap-2 max-sm:overflow-x-scroll">
             <Popover>
               <PopoverTrigger asChild>
-                <Button variant="outline">Verhandlung</Button>
+                <Button variant="outline">{translations.negotiation}</Button>
               </PopoverTrigger>
               <PopoverContent className="w-80">
                 <div className="grid gap-4">
                   <div className="space-y-2">
-                    <h4 className="font-medium leading-none">Angebot</h4>
+                    <h4 className="font-medium leading-none">{translations.offer}</h4>
                   </div>
                   <div className="grid gap-2">
                     <div className="grid grid-cols-3 items-center gap-4">
@@ -212,11 +247,13 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
                       <Button
                         className="w-full bg-card-button text-primary-foreground"
                         onClick={() =>
-                          setInput(`Ich biete dir ${moneyInput} Euro. Haben wir einen Deal?`)
+                          setInput(
+                            `${translations.offerAmount} ${moneyInput} ${translations.dealQuestion}`,
+                          )
                         }
                         variant={'outline'}
                       >
-                        Fertig
+                        {translations.done}
                       </Button>
                     </PopoverClose>
                   </div>
@@ -224,24 +261,21 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
               </PopoverContent>
             </Popover>
 
-            <Button onClick={() => setInput('Wo wollen wir uns treffen? ✨')} variant={'outline'}>
-              Ort
+            <Button onClick={() => setInput(translations.whereMeet)} variant={'outline'}>
+              {translations.location}
             </Button>
-            <Button
-              onClick={() => setInput('Wann kann ich das Bit abholen? ✨')}
-              variant={'outline'}
-            >
-              Zeit
+            <Button onClick={() => setInput(translations.whenPickUp)} variant={'outline'}>
+              {translations.time}
             </Button>
 
             <Popover>
               <PopoverTrigger asChild>
-                <Button variant="outline">Verspätung</Button>
+                <Button variant="outline">{translations.delay}</Button>
               </PopoverTrigger>
               <PopoverContent className="w-80">
                 <div className="grid gap-4">
                   <div className="space-y-2">
-                    <h4 className="font-medium leading-none">Verspätung</h4>
+                    <h4 className="font-medium leading-none">{translations.delay}</h4>
                   </div>
                   <div className="grid gap-2">
                     <div className="grid grid-cols-3 items-center gap-4">
@@ -252,15 +286,19 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
                         defaultValue="10"
                         className="col-span-2 h-8"
                       />
-                      <span className="text-sm">Minuten</span>
+                      <span className="text-sm">{translations.minutes}</span>
                     </div>
                     <PopoverClose>
                       <Button
                         className="w-full bg-card-button text-primary-foreground"
-                        onClick={() => setInput(`Ich verspäte mich um ${delayInput} Minuten`)}
+                        onClick={() =>
+                          setInput(
+                            `${translations.delayMessage} ${delayInput} ${translations.minutes}`,
+                          )
+                        }
                         variant={'outline'}
                       >
-                        Fertig
+                        {translations.done}
                       </Button>
                     </PopoverClose>
                   </div>
@@ -268,11 +306,8 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
               </PopoverContent>
             </Popover>
 
-            <Button
-              onClick={() => setInput('Ich bin nicht mehr interessiert, Entschuldigung ❌')}
-              variant={'outline'}
-            >
-              Abbruch
+            <Button onClick={() => setInput(translations.notInterested)} variant={'outline'}>
+              {translations.cancel}
             </Button>
           </div>
         )}
@@ -296,7 +331,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
 
         {isLoading ? (
           <Button disabled onClick={sendMessage} className="h-[50px] rounded-xl px-6 md:h-[64px]">
-            senden
+            {translations.send}
           </Button>
         ) : (
           <Button
@@ -304,7 +339,7 @@ const WriteMessageField = ({ conv, user }: { conv: ConversationType; user: UserT
             onClick={sendMessage}
             className="h-[50px] rounded-xl px-6 md:h-[64px]"
           >
-            senden
+            {translations.send}
           </Button>
         )}
       </form>

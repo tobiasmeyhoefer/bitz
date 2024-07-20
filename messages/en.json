@@ -9,7 +9,6 @@
     "conv": "Conversations"
   },
 
-
   "Date": {
     "january": "January",
     "february": "February",
@@ -83,10 +82,10 @@
       "sub": "consisting of frontend and backend specialists"
     },
     "Newsletter": {
-    "join": "Join",
-    "today": "Today",
-    "fromyesterdayfortomorrow": "From yesterday for tomorrow",
-    "getstarted": "Lets Get Started"
+      "join": "Join",
+      "today": "Today",
+      "fromyesterdayfortomorrow": "From yesterday for tomorrow",
+      "getstarted": "Lets Get Started"
     }
   },
 
@@ -244,7 +243,7 @@
   "Conversations": {
     "title": "CONVERSATIONS",
     "empty": "There are no opened conversations",
-    "newbuyer00": "is interested in your Bitz '",
+    "newbuyer00": "is interested in your Bit '",
     "newbuyer01": "'.",
     "wannabuy00": "You are interested in the Bit '",
     "wannabuy01": "'. ",
@@ -257,11 +256,45 @@
     "sellerDeclined": "The seller has declined your offer",
     "delay00": "You have a delay of around",
     "delay01": "minutes",
-    "delay11": "has a delay of around"
+    "delay11": "has a delay of around",
+    "messages": {
+      "title": "Oh oh",
+      "description": "Please check your profanity",
+      "deal1": "We have a deal ✅",
+      "deal2": "You have a deal!",
+      "warnMsg": "Please avoid self-written messages",
+      "location": "Location?",
+      "myAddress": "My Address",
+      "otherLocation": "Other Location?",
+      "pickUpHere": "You can pick up the Bit here:",
+      "done": "Done",
+      "timeQuestion": "Time?",
+      "writeWhenTime": "Write here when you have time:",
+      "timePlaceholder": "Morgen bis 12 oder Donnerstag von 14-16Uhr",
+      "iHave": "I have",
+      "time": "Zeit",
+      "negotiation": "Negotiation",
+      "offer": "Offer",
+      "offerAmount": "I offer you",
+      "dealQuestion": "Euros. Do we have a deal?",
+      "whereMeet": "Where do we want to meet?",
+      "whenPickUp": "When can I pick up the Bit?",
+      "delay": "Delay",
+      "minutes": "Minutes",
+      "notInterested": "I am no longer interested, sorry ❌",
+      "cancel": "Cancel",
+      "delayMessage": "I am running late by",
+      "send": "Send"
+    }
   },
 
   "Transactions": {
-    "title": "TRANSACTIONS"
+    "title": "TRANSACTIONS",
+    "noTransactions": "You have no transactions yet",
+    "b1": "You have",
+    "b2": "bought",
+    "b3": "bought for",
+    "otw": "Your package is now being packed and shipped to the location specified in your settings"
   },
 
   "Favorites": {
@@ -289,7 +322,7 @@
     "title": "Frequently Asked Questions",
     "question1": "How does Bitz work?",
     "answer1": "Bitz is a platform where you can buy and sell tech gadgets. Register, create a profile, and start discovering or selling your favorite gadgets.",
-    "question2": "Is using Bitz free?",
+    "question2": "Is the use of Bitz free of charge?",
     "answer2": "Yes, registration and use of Bitz are free. However, fees may apply if you use certain premium services or features.",
     "question3": "How secure is trading on Bitz?",
     "answer3": "At Bitz, we place great emphasis on security. We offer secure payment options, and every seller must verify their phone number.",
@@ -301,6 +334,18 @@
     "answer6": "Bitz currently accepts credit card payments. You can also arrange a meeting with the seller and pay in cash.",
     "contactPrompt": "Still have questions?",
     "contactLink": "Contact us"
+  },
+
+  "buyButtons": {
+    "interest": "Interest",
+    "directBuy": "Direct Buy",
+    "error": "Error",
+    "verifyPhoneNumber": "Please verify your phone number first",
+    "goToSettings": "Go to Settings",
+    "addressError": "Location & address must be set"
+  },
+  "ProductInfoCard": {
+    "quantity": "Quantity",
+    "price": "Price"
   }
 }
-

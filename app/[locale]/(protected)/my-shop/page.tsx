@@ -11,11 +11,11 @@
  */
 import { Button } from '@/components/ui/button'
 import MyShopContent from '@/components/my-shop/my-shop-content'
-import { getTranslations } from 'next-intl/server'
 import Banner from '@/components/my-shop/banner'
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { ProductForm } from '@/components/my-shop/product-form'
 import { getBanner } from '@/lib/user-actions'
+import { getTranslations } from 'next-intl/server'
 
 const MyShop = async () => {
   const t = await getTranslations('MyShop')

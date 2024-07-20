@@ -7,8 +7,6 @@
     "title": "Jemand möchte dein Bit kaufen.",
     "chatnow": "Jetzt chatten!",
     "conv": "Konversationen"
-
-
   },
 
   "Date": {
@@ -258,11 +256,46 @@
     "sellerDeclined": "Der Verkäufer hat dein Angebot abgelehnt",
     "delay00": "Du verspätest dich um",
     "delay01": "Minuten",
-    "delay11": "verspätet sich um"
+    "delay11": "verspätet sich um",
+    "messages": {
+      "title": "Oh oh",
+      "description": "Bleibe bitte freundlich und rücksichtsvoll!",
+      "deal1": "Wir haben einen Deal ✅",
+      "deal2": "Juhu es gibt einen Deal!!!",
+      "warnMsg": "selbst geschriebene Nachrichten bitte vermeiden",
+      "location": "Ort?",
+      "myAddress": "Meine Adresse",
+      "otherLocation": "anderer Ort?",
+      "pickUpHere": "Du kannst das Bit hier abholen:",
+      "done": "Fertig",
+      "timeQuestion": "Zeit?",
+      "writeWhenTime": "Schreibe hier wann du Zeit hast:",
+      "timePlaceholder": "Morgen bis 12 oder Donnerstag von 14-16Uhr",
+      "iHave": "Ich habe",
+      "time": "Zeit",
+      "negotiation": "Verhandlung",
+      "offer": "Angebot",
+      "offerAmount": "Ich biete dir",
+      "dealQuestion": "Euro. Haben wir einen Deal?",
+      "whereMeet": "Wo wollen wir uns treffen?",
+      "whenPickUp": "Wann kann ich das Bit abholen?",
+      "delay": "Verspätung",
+      "minutes": "Minuten",
+      "notInterested": "Ich bin nicht mehr interessiert, Entschuldigung ❌",
+      "cancel": "Abbruch",
+      "delayMessage": "Ich verspäte mich um",
+      "send": "Senden"
+
+    }
   },
 
   "Transactions": {
-    "title": "TRANSAKTIONEN"
+    "title": "TRANSAKTIONEN",
+    "noTransactions": "Du hast noch keine Transaktionen",
+    "b1": "Du hast",
+    "b2": "gekauft",
+    "b3": "gekauft für",
+    "otw": "Dein Paket wird jetzt verpackt und an den festgelegten Ort in deinen Einstellungen versendet"
   },
 
   "Favorites": {
@@ -302,5 +335,18 @@
     "answer6": "Bitz akzeptiert aktuell die Zahlung mit Kreditkarte. Du kannst auch mit dem Verkäufer einen Termin ausmachen und direkt bar bezahlen.",
     "contactPrompt": "Hast du noch Fragen?",
     "contactLink": "Kontaktiere uns"
+  },
+
+  "buyButtons": {
+    "interest": "Interesse",
+    "directBuy": "Direkt Kaufen",
+    "error": "Fehler",
+    "verifyPhoneNumber": "Bitte verifiziere zuerst deine Telefonnummer",
+    "goToSettings": "Zu den Einstellungen",
+    "addressError": "Standort & Adresse müssen gesetzt sein"
+  },
+  "ProductInfoCard": {
+    "quantity": "Quantity",
+    "price": "Price"
   }
 }

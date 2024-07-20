@@ -13,6 +13,7 @@ import ProductInfoCardEditable from './product-info-card-editable'
 import { cn } from '@/lib/utils'
 import { BuyButtons } from '@/components/products/buy-buttons'
 import { ProductType } from '@/schema'
+import { error } from 'console'
 
 type ProductInfoType = {
   productInfo: ProductType
@@ -25,6 +26,17 @@ export default function ProductInfoCard(props: ProductInfoType) {
   const tDate = useTranslations('Date')
   const tProductForm = useTranslations('addProductPage')
   const locale = useLocale()
+  const tbuyButtons = useTranslations('buyButtons')
+
+  const buyButtonsTranslations = {
+    interest: tbuyButtons('interest'),
+    directBuy: tbuyButtons('directBuy'),
+    error: tbuyButtons('error'),
+    verifyPhoneNumber: tbuyButtons('verifyPhoneNumber'),
+    goToSettings: tbuyButtons('goToSettings'),
+    adressError: tbuyButtons('addressError')
+    // Füge hier weitere Übersetzungen hinzu, die du benötigst
+  }
 
   const editableCardTranslations = {
     title: tProductForm('title'),
@@ -139,9 +151,10 @@ export default function ProductInfoCard(props: ProductInfoType) {
               </div>
             </CardContent>
           </Card>
-          <BuyButtons product={product} />
+          <BuyButtons product={product} translations={buyButtonsTranslations} />
         </div>
       )}
     </>
   )
 }
+

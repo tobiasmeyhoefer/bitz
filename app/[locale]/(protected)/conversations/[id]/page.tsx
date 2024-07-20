@@ -13,8 +13,40 @@ import { getProductById } from '@/lib/product-actions'
 import { getUser, getUserById } from '@/lib/user-actions'
 import { revalidatePath } from 'next/cache'
 import { Link, redirect } from '@/navigation'
+import { getTranslations } from 'next-intl/server'
 
 export default async function Page({ params }: { params: { id: string } }) {
+  const t = await getTranslations('Conversations.messages')
+  const translations = {
+    title: t('title'),
+    description: t('description'),
+    deal2: t('deal2'),
+    warnMsg: t('warnMsg'),
+    location: t('location'),
+    myAddress: t('myAddress'),
+    otherLocation: t('otherLocation'),
+    pickUpHere: t('pickUpHere'),
+    done: t('done'),
+    timeQuestion: t('timeQuestion'),
+    writeWhenTime: t('writeWhenTime'),
+    timePlaceholder: t('timePlaceholder'),
+    iHave: t('iHave'),
+    time: t('time'),
+    deal1: t('deal1'),
+    negotiation: t('negotiation'),
+    offer: t('offer'),
+    offerAmount: t('offerAmount'),
+    dealQuestion: t('dealQuestion'),
+    whereMeet: t('whereMeet'),
+    whenPickUp: t('whenPickUp'),
+    delay: t('delay'),
+    minutes: t('minutes'),
+    delayMessage: t('delayMessage'),
+    notInterested: t('notInterested'),
+    cancel: t('cancel'),
+    send: t('send'),
+  }
+
   const convId = params.id
   const conv = await getConversationById(convId)
 
@@ -62,7 +94,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         }
       >
         <Messages convId={convId} initialMessages={serializedMessages} userId={user.id} />
-        <WriteMessageField conv={conv} user={user} />
+        <WriteMessageField conv={conv} user={user} translations={translations} />
       </div>
     </div>
   )
