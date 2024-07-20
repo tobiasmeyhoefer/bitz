@@ -24,7 +24,7 @@ export function SignInResend() {
         name="email"
         placeholder="john@doe.com"
       />
-      <Button className="h-[50px] w-full bg-card-button md:h-[60px]" type="submit">
+      <Button className="h-[50px] w-full md:h-[60px]" type="submit">
         {t('loginButton')}
       </Button>
     </form>

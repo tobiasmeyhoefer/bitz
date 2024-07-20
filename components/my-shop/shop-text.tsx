@@ -10,8 +10,7 @@
 'use client'
 import { Input } from '@/components/ui/input'
 import { useEffect, useState } from 'react'
-import { getShopName, getShopTextColor, getShopTextFont, setShopName } from '@/lib/user-actions'
-import { ChooseFontcolor } from './choose-fontcolor'
+import { getShopName, getShopTextFont, setShopName } from '@/lib/user-actions'
 import { ChooseFont } from './choose-font'
 
 export function ShopText({ title }: { title: string }) {
@@ -51,7 +50,7 @@ export function ShopText({ title }: { title: string }) {
               value={text!}
               onChange={(e) => onInputChange(e.target.value)}
               placeholder="My Shop"
-              className="z-40 w-[55rem] border-none text-xl font-bold text-white md:text-3xl"
+              className="z-40 md:w-[880px] w-[300px] border-none text-xl font-bold text-white md:text-3xl"
               style={{
                 fontFamily: textFont!,
                 textShadow: '1px 1px 5px rgba(0, 0, 0, 0.6)',

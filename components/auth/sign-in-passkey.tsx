@@ -24,7 +24,7 @@ const SignInPasskey = (intlProps: { text: string; button: string; tip: string })
   return (
     <>
       <p className="mb-6 text-sm text-neutral-600">{intlProps.text}</p>
-      <Button onClick={signInWithPasskey} className="bg-card-button md:h-[50px] h-[40px] w-1/2">
+      <Button onClick={signInWithPasskey} className="md:h-[50px] h-[40px] w-1/2">
         {intlProps.button}
       </Button>
       <p className="mt-6 text-sm text-neutral-600">{intlProps.tip}</p>

@@ -47,7 +47,7 @@ const t = useTranslations('Landingpage')
 
         <div className="space-y-4 md:space-x-4 md:space-y-0">
           <Link href={'/auth/login'}>
-            <Button className="w-full md:w-1/3">{t('callButton')}</Button>
+          <Button variant="gooeyLeft" className="w-full md:w-1/3">{t('callButton')}</Button>
           </Link>
 
           <Link

@@ -60,6 +60,7 @@ const config = {
           button: 'hsl(var(--card-button))',
         },
         steelBlue: '#4A90E2',
+        bitz: "var(--bitz)"
       },
       borderRadius: {
         lg: 'var(--radius)',

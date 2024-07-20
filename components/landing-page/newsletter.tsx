@@ -40,7 +40,7 @@ export const Newsletter = ({
 
         <div className="mx-auto flex w-full flex-col items-center justify-center gap-4 md:w-6/12 md:flex-row md:gap-2 lg:w-4/12">
           <Link href={'/auth/login'} className="">
-            <Button>{getstarted}</Button>
+            <Button variant={"ringHover"}>{getstarted}</Button>
           </Link>
         </div>
       </div>

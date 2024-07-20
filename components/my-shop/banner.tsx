@@ -26,7 +26,7 @@ const Banner = ({ title, myBanner }: { title: string; myBanner: string }) => {
           src={banner}
           alt="Product Image"
           style={{ objectFit: 'cover' }}
-          width={3800}
+          width={300}
           height={150}
           className="h-full w-full"
         />

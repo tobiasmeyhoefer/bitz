@@ -44,6 +44,8 @@
     --radius: 0.5rem;
 
     --filter-normal: 0%;
+
+    --bitz: #1e1b4b;
   }
 
   .dark {
@@ -80,6 +82,7 @@
     --filter-normal: 90%;
 
     --link: 120 50% 75%;
+    --bitz: #6366f1;
   }
 
   .white-filter {
