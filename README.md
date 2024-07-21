@@ -1168,6 +1168,16 @@ ein weiterer möglicher Grund ist, dass das Konto, das Sie verwenden, bereits mi
 Überprüfen Sie die installierte Node-Version, sie sollte nicht kleiner als v18 sein.
 
 #
+##### Herausforderungen
+Die Herausforderungen, denen wir in der Entwicklung begegnet sind, lassen sich grob in drei Teile einteilen. 
+
+Zunächst stellte die Auswahl des richtigen Technologie-Stacks eine erhebliche Hürde dar. Es war entscheidend, sowohl ein stabiles Backend als auch ein reaktionsschnelles Frontend zu entwickeln, die nahtlos miteinander kommunizieren können. So haben wir anfangs UI Komponenten wie Buttons und ähnliches selbst als Komponente erstellt, sind aber dann im mittleren Teil der Entwicklung größtenteils auf die von shadcn Komponenten zur Verfügung gestellten umgestiegen und haben diese dann noch persönlich gestylt. Die Integration einer sicheren Zahlungsabwicklung war ein weiterer komplexer Bereich, diese haben wir dann mit Hilfe von Stripe implementiert. Es mussten umfassende Sicherheitsmaßnahmen implementiert werden, um mögliche Hackerangriffe zu verhindern (z. B. durch mögliche SQL Injections), was zusätzliche Zeit und Ressourcen erforderte. 
+
+Das zweite zentrale Thema war die Benutzererfahrung (UX/UI). Hier war es besonders wichtig, ein benutzerfreundliches und ansprechendes Design zu entwickeln. Unser Ziel war es, die Navigation so intuitiv wie möglich zu gestalten, damit die Nutzer schnell und einfach zu den gewünschten Produkten finden. Die Durchführung von Usability-Tests war dabei eine Herausforderung, denn es war nicht leicht, repräsentatives Feedback zu sammeln und sinnvoll umzusetzen. Bei dieser Thematik hat vor allem der Playtest sehr geholfen. Zudem musste die Plattform für mobile Endgeräte optimiert werden, da viele Nutzer über Smartphones und Tablets auf die Seite zugreifen. Dies erforderte eine sorgfältige Anpassung des Designs und der Funktionalität, um auf allen Geräten eine optimale Nutzererfahrung und Responsivität zu gewährleisten.
+
+Drittens gab es auch innerhalb unseres Teams einige Hürden zu überwinden, insbesondere in Bezug auf die Koordination und Kommunikation. Es war entscheidend, klare Rollen und Verantwortlichkeiten zu definieren, um einen reibungslosen Arbeitsablauf zu gewährleisten. Anfangs gab es hier Unklarheiten, die zu Verzögerungen und ineffizienten Prozessen führten. Eine kontinuierliche Verbesserung der Kommunikation war nötig, um Missverständnisse zu vermeiden und sicherzustellen, dass alle Teammitglieder auf dem gleichen Stand sind. Doch mit der Zeit haben wir gelernt, mit Notion als unserem Projektmanagement-Tool und Discord als unsere Kommunikationsplattform diese Zusammenarbeit zu optimieren. Im Rahmen des Projekts haben wir uns auf 3 wöchentliche Meetings geeinigt, was sich als ausreichend erwies. Diese Erfahrungen haben gezeigt, wie wichtig eine strukturierte und transparente Kommunikation für den Projekterfolg ist.
+
+#
 ##### Lessons Learned
 Die Entwicklung von “Bitz” war für uns alle eine sehr spannende und vor allem lehrreiche Reise. Vom Projektmanagement, technologischen Entscheidungen bis zum Zwischenmenschlichen haben wir viel mitgenommen. Der folgende Teil soll einige unserer wichtigsten Lektionen und Lerneffekte beinhalten, welche wir während des Projektes erlebt haben.
 
