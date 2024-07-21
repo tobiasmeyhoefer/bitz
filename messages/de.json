@@ -295,7 +295,12 @@
     "b1": "Du hast",
     "b2": "gekauft",
     "b3": "gekauft für",
-    "otw": "Dein Paket wird jetzt verpackt und an den festgelegten Ort in deinen Einstellungen versendet"
+    "otw": "Dein Paket wird jetzt verpackt und an den festgelegten Ort in deinen Einstellungen versendet",
+    "your_bit": "Dein Bit",
+    "has_been_bought": "wurde gekauft",
+    "send_article": "Bitte sende den Artikel jetzt an",
+    "address": "Adresse",
+    "bought for": "gekauft für"
   },
 
   "Favorites": {

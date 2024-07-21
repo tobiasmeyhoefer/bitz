@@ -71,12 +71,12 @@ export const TransactionCard = async ({ transaction }: { transaction: Transactio
         />
         <div>
           <CardHeader>
-            <CardTitle>Dein Bit {product.title} wurde gekauft</CardTitle>
-            <CardDescription>verkauft für {transaction.price}€</CardDescription>
+            <CardTitle>{t("your_bit")} {product.title} {t("has_been_bought")}</CardTitle>
+            <CardDescription>{t("bought for")} {transaction.price}€</CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-xs sm:text-base">
-              Bitte schicke diesen Artikel nun an {buyer.name ?? 'den Verkäufer'}
+              {t("send_article")} {buyer.name ?? 'den Verkäufer'}
             </p>
             <p className="mb-2 text-xs sm:text-sm">Adresse: {buyer.adress}</p>
 

@@ -45,7 +45,7 @@ export const ConversationCard = async ({ conv }: { conv: ConversationType }) => 
             className="h-full rounded-l-lg object-cover"
           />
           <div>
-          <ConversationCardDropwdown conv={conv} showSold={false} />
+            <ConversationCardDropwdown conv={conv} showSold={false} />
             <CardHeader>
               <CardTitle>
                 {t('wannabuy00')} {product.title} {t('wannabuy01')}
