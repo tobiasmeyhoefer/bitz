@@ -1216,8 +1216,7 @@ Notion ist umfangreiches Organisationswerkzeug. Wir verwenden Notion, um unsere 
 Durch die Verwendung von Figma in diesem Projekt wird eine enge Zusammenarbeit zwischen Design und Entwicklung gefördert. Das visuelle Design der Anwendung kann effizient erstellt, getestet und iteriert werden. Die Erstellung von wiederverwendbaren Designkomponenten und Stilen gewährleistet eine konsistente visuelle Identität und erleichtert die Pflege des Designs. Insgesamt trägt Figma dazu bei, eine ansprechende und benutzerfreundliche Oberfläche zu schaffen, die den Anforderungen und Erwartungen der Benutzer entspricht.
 
 ___
-#
-##### V. Herausforderungen
+## V. Herausforderungen
 Die Herausforderungen, denen wir in der Entwicklung begegnet sind, lassen sich grob in drei Teile einteilen. 
 
 Zunächst stellte die Auswahl des richtigen Technologie-Stacks eine erhebliche Hürde dar. Es war entscheidend, sowohl ein stabiles Backend als auch ein reaktionsschnelles Frontend zu entwickeln, die nahtlos miteinander kommunizieren können. So haben wir anfangs UI Komponenten wie Buttons und ähnliches selbst als Komponente erstellt, sind aber dann im mittleren Teil der Entwicklung größtenteils auf die von shadcn Komponenten zur Verfügung gestellten umgestiegen und haben diese dann noch persönlich gestylt. Die Integration einer sicheren Zahlungsabwicklung war ein weiterer komplexer Bereich, diese haben wir dann mit Hilfe von Stripe implementiert. Es mussten umfassende Sicherheitsmaßnahmen implementiert werden, um mögliche Hackerangriffe zu verhindern (z. B. durch mögliche SQL Injections), was zusätzliche Zeit und Ressourcen erforderte. 
