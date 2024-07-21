@@ -70,7 +70,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           <ProductImageCarousel
             translations={carouselTranslations}
             images={images}
-            className=""
+            className="aspect-square lg:w-[50vw]"
             sellerId={product.sellerId}
           />
           <ProductInfoCard productInfo={product} isOwner={isOwner} />
