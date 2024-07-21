@@ -32,7 +32,7 @@ export const TransactionCard = async ({ transaction }: { transaction: Transactio
   //user is buyer
   if (transaction.buyerId === user.id) {
     return (
-      <Card className="relative flex h-[188px] flex-row gap-4 bg-transparent sm:h-[170px]">
+      <Card className="relative flex flex-row gap-4 bg-transparent sm:h-[170px]">
         <Image
           src={product.imageUrl1!}
           alt="image of product"
@@ -42,13 +42,15 @@ export const TransactionCard = async ({ transaction }: { transaction: Transactio
         />
         <div>
           <CardHeader>
-            <CardTitle>{t('b1')} {product.title} {t('b2')}</CardTitle>
-            <CardDescription>{t('b3')} {transaction.price}€</CardDescription>
+            <CardTitle>
+              {t('b1')} {product.title} {t('b2')}
+            </CardTitle>
+            <CardDescription>
+              {t('b3')} {transaction.price}€
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <p className="text-xs sm:text-base">
-              {t('otw')}
-            </p>
+            <p className="text-xs sm:text-base">{t('otw')}</p>
             <CardDescription>{transaction.createdAt.toLocaleDateString()}</CardDescription>
           </CardContent>
         </div>
@@ -59,7 +61,7 @@ export const TransactionCard = async ({ transaction }: { transaction: Transactio
   //user is seller
   if (transaction.sellerId === user.id) {
     return (
-      <Card className="relative flex h-[188px] flex-row gap-4 bg-transparent sm:h-[170px]">
+      <Card className="relative flex flex-row gap-4 bg-transparent sm:h-[170px]">
         <Image
           src={product.imageUrl1!}
           alt="image of product"
