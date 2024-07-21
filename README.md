@@ -125,7 +125,35 @@ Willkommen im BITZ-Team! Hier sind einige Schritte, um Ihnen den Einstieg zu erl
  ```bash
  ```
 5. *Projektstruktur verstehen*: 
-   Schauen sie sich die Struktur des Projektes im Explorer an, um ein Gefühl für die Organisation des Codes zu bekommen.
+   Schauen sie sich die Struktur des Projektes im Explorer an, um ein Gefühl für die Organisation des Codes zu bekommen. 
+   __
+   *Wichtige Ordner und Unterordner:*
+   * `app`: Hauptverzeichnis für die Next.js-Anwendung.
+   * `app/[locale]`: Enthält lokalisierte Routen und Seiten für verschiedene Sprachen.
+   * `app/[locale]/(protected)`: Enthält geschützte Routen und Seiten, die nur für authentifizierte Benutzer zugänglich sind.
+   * `app/api`: Enthält API-Routen fr serverseitige Funktionen und Endpunkte.
+   * `components`: Enthält wiederverwendbare React-Komponenten, die in der gesamten Anwendung verwendet werden
+   * `lib`: Enthält Hilfsfunktionen und Logik, die in verschiedenen Teilen der Anwendung verwendet werden.
+       * _Beispiel_: `productaction.ts` - Funktionen und Logik im Zusammenhang mit Produktaktionen.
+   * `messages`: Enthält die Lokalisierungsdateien für die Internationalisierung der Anwendung.
+       * en.json: Lokalisierungsdatei für englische Texte.
+       * de.json: Lokalisierungsdatei für deutsche Texte.
+   * `package.json`: Definiert die Abhängigkeiten des Projekts, Skripte zum Bauen, Starten und Testen der Anwendung sowie andere Metadaten.
+  
+   __
+    *Wichtige Konfigurations-Dateien im Root-Ordner*
+     * `i18n.ts`: Konfiguriert die Internationalisierung der Anwendung.
+     * `navigation.ts`: Definiert die Navigationslogik der Anwendung.
+     * `db.ts`: Stellt die Datenbankverbindung her.
+     * `drizzle.config.ts`: Konfiguriert den Drizzle ORM.
+     * `middleware.ts`: Definiert Middleware-Funktionen für die Anwendung.
+     * `routes.ts`: Definiert die Routen der Anwendung.
+     * `schema.ts`: Definiert das Datenbankschema.
+     * `auth.ts`: Konfiguriert die Authentifizierungslogik.
+     * __Hinweis: Diese Dateien sind wichtig für die Gesamtfunktionalität der Anwendung, aber für die meisten Entwickler zunächst nicht von zentraler Bedeutung, sobald sie einmal korrekt eingerichtet sind.__
+
+   
+
 #
 #### 1.3 Zusätzliche Hinweise für Developer
 
