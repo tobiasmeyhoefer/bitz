@@ -7,8 +7,14 @@ ___
 
 ##### I. Einleitung
   1. Einleitung
-  2. Onboarding
-  3. Wichtige Skripte
+  2. Onboarding für neue Mitarbeiter
+  3. Zusätzliche Hinweise für Developer
+     1. weitere wichtige Skripte
+     2. ...zur Datenbankmigrationen
+     3. Gitflow, Pullrequests & Merging
+     4. Internationalierung (i18n)
+     5. Code Conventions
+     6. Lösungen für typische Probleme
 
 ##### II. Frontend-Technologien
   1. TypeScript
@@ -69,15 +75,13 @@ ___
   6. Notion (Organisation)
   7. Figma (für Styling und Corporate Design)
 
-##### V. Zusätzliche Hinweise für Developer
+##### V. Lessons Learned
 
-  1. Getting started
-  2. Pullrequests & Merging
-  3. Internationalierung (i18n)
-  4. Code Conventions
-  5. Lösungen für typische Probleme
+##### VI. Zukunft
 
-##### VI. Autoren
+##### VII. Fazit
+
+##### VIII. Entwickler & Autoren
 
 
 #
@@ -125,27 +129,27 @@ Willkommen im BITZ-Team! Hier sind einige Schritte, um Ihnen den Einstieg zu erl
 #
 #### 1.3 Zusätzliche Hinweise für Developer
 
-##### weitere wichtige Skripte:
+##### 1.3.1 weitere wichtige Skripte:
 
 - `npm run dev`: Startet die Anwendung im Entwicklungsmodus.
 - `npm run build`: Erstellt ein Produktions-Build der Anwendung.
 
 
-##### ...zur Datenbankmigrationen:
+##### 1.3.2 ...zur Datenbankmigrationen:
 
 - `npm run db:migrate`: Führt Datenbankmigrationen durch.
 - `npm run db:generate`: Generiert das Schema für die Datenbank.
 - `npm run db:push`: Pusht das Schema zur Datenbank.
 
 
-##### 1.4 Gitflow, Pullrequests & Merging
+##### 1.3.3 Gitflow, Pullrequests & Merging
 
 Für alle Arbeiten am Code sollte ein eigener Branch erstellt werden. Diese Branches sollten nach Möglichkeit eingeleitet werden mit `fix/` oder `feat/` als Prefix. Wenn die Abeiten in dem Branch beendet sind, ist es Zeit, den Branch in den Masterbranch zu mergen.
 
 Die Branches dürfen jedoch nicht direkt in ```main``` mergen, sondern stattdesssen ist ein Pullrequest zu erstellen!
 **ACHTUNG:** Bevor du einen Pullrequest erstellst, führe ```npm run build``` aus und stelle sicher, dass die Anwendung funktioniert!
 #
-##### 1.5 Internationalierung (i18n)
+##### 1.3.4 Internationalierung (i18n)
 
 Dieses Projekt verwendet die Internationalisierung. Jeder String, der internationalisiert werden soll, muss in die entsprechende Sprach-Json-Datei geschrieben und mit dem 
 - useTranslations Hook (for server side)
@@ -154,13 +158,13 @@ Dieses Projekt verwendet die Internationalisierung. Jeder String, der internatio
 in die Komponente implentiert werden.
 
 #
-##### 1.6 Code Conventions
+##### 1.3.5 Code Conventions
 
 Pascal Case - Bennennung Komponenten
 Kleinbuchstaben mit Bindestrich - Bennenung von Dateien und Ordnern
 
 #
-##### 1.7 Lösungen für typische Probleme
+##### 1.3.6 Lösungen für typische Probleme
 
 * Die Google-Authentifizierung funktioniert nicht?
 Dies könnte daran liegen, dass die Anwendung nicht auf localhost:3000 läuft. Dies kann passieren, wenn Sie bereits eine Anwendung auf localhost:3000 laufen lassen, 
@@ -171,8 +175,10 @@ ein weiterer möglicher Grund ist, dass das Konto, das Sie verwenden, bereits mi
 <br/>
 * Ich kann die Anwendung gar nicht starten.
 Überprüfen Sie die installierte Node-Version, sie sollte nicht kleiner als v18 sein.
+#
 
-
+**Wenn Sie Fragen haben oder Hilfe benötigen, zögern Sie nicht, sich an einen Kollegen oder Ihren Vorgesetzten zu wenden.
+ Viel Erfolg und willkommen an Bord!**
 
 
 
@@ -1215,7 +1221,7 @@ ___
 
 
 #
-##### Lessons Learned
+## V. Lessons Learned
 Die Entwicklung von “Bitz” war für uns alle eine sehr spannende und vor allem lehrreiche Reise. Vom Projektmanagement, technologischen Entscheidungen bis zum Zwischenmenschlichen haben wir viel mitgenommen. Der folgende Teil soll einige unserer wichtigsten Lektionen und Lerneffekte beinhalten, welche wir während des Projektes erlebt haben.
 
 Nutzerfeedback war elementar in der Entwicklung. Die aus dem Feedback des Playtests enthaltenen Ideen, Probleme und Anmerkungen haben Bitz auf das nächste Level gebracht. 
@@ -1226,7 +1232,7 @@ Für das Ordnen und Managen der Sprints haben wir Notion benutzt. Dort haben wir
 Die Aufteilung des Workloads war eine komplexe Entscheidung. Da Mitglieder im Team verschiedene Erfahrungsstände im Bereich Webentwicklung hatten und vor allem verschiedene Arbeitstempo, musste hier die Aufgabenverteilung gut gewählt sein. So haben wir probiert, die Aufgaben so zu verteilen, dass alle eine ungefähr gleiche zeitliche Auslastung haben.
 
 #
-##### Zukunft
+## VI. Zukunft
 Eine Ausweitung in den europäischen Markt wäre eine Option, um unsere Plattform international zu etablieren. Dies würde es uns ermöglichen, neue Kunden zu erreichen und unser Wachstum voranzutreiben. Wir könnten eng mit lokalen Partnern zusammenarbeiten, um sicherzustellen, dass der Kauf und Verkauf auch über Grenzen hinweg reibungslos funktioniert. So könnten Nutzer weltweit von unserem Service profitieren und Elektronikware einfacher kaufen und verkaufen.
 
 Nach wie vor bleibt auch in der Zukunft unser Ziel, das Einkaufserlebnis für jeden Nutzer individuell zu gestalten. Zusätzlich zu unserem individuellen Shopdesign könnte man durch den Einsatz von Algorithmen und maschinellem Lernen personalisierte Produktempfehlungen geben, die auf den bisherigen Aktivitäten und Vorlieben der Nutzer basieren. Das würde sich vor allem auf unserer Browse Page anbieten, wo man dann als Nutzer neue Produkte entdecken kann. Auch ein überarbeiteter Suchalgorithmus würde an der Stelle ein Punkt mit hohem Entwicklungspotential sein. Das würde das Einkaufen nicht nur einfacher, sondern auch viel spannender machen.
@@ -1236,7 +1242,7 @@ Die Implementierung eines fairen und transparenten Bewertungssystems wäre uns s
 Eine Technologie, die leider erst zum Schluss unserer Projektarbeit wirklich relevant geworden ist, ist Optimistic UI. Da diese aber erst mit der nächsten React Version rauskommt, konnten wir sie leider noch nicht implementieren. Die Nutzung von Optimistic UI würde bedeuten, dass Aktionen auf der Plattform sofort visuell bestätigt würden, noch bevor sie endgültig verarbeitet sind. Wenn Sie beispielsweise ein Produkt einstellen oder eine Transaktion durchführen, würden Sie sofort sehen, dass Ihre Aktion erfolgreich war. Das würde Wartezeiten reduzieren und die Nutzung unserer Plattform noch angenehmer und effizienter machen. Zusätzlich wäre das ganze Nutzungserlebnis unserer Plattform dadurch noch flüssiger.
 
 #
-##### Fazit
+## VII. Fazit
 Unser Ziel bei der Erstellung von Bitz war es, eine Plattform für den An- und Verkauf für gebrauchte Elektronikware zu schaffen und uns durch eine sichere und benutzerfreundliche Implementierung von Marktkonkurrenten abzuheben. Von der ersten Idee bis zur fertigen Umsetzung haben wir verschiedene Entwicklungsphasen durchlaufen und dabei moderne Technologien genutzt, um die Plattform optimal auf die Bedürfnisse unserer Nutzer abzustimmen.
 
 Wir sind stolz auf die Erfolge und Meilensteine, die wir bisher erreicht haben. Besonders erfreulich ist die positive Resonanz unserer Nutzer. Technisch gesehen haben wir einige Herausforderungen gemeistert, etwa die Implementierung eines sicheren Zahlungssystems und eine sichere Anmeldung, welche auf die Nutzung eines Passwortes verzichtet und durch die Nutzung von Passkeys beschleunigt werden kann.
@@ -1250,7 +1256,7 @@ Unser Team hat sich im Laufe des Projekts stark weiterentwickelt. Die Zusammenar
 Abschließend können wir sagen, dass unser Projekt ein großer Erfolg ist. Wir haben unsere ursprünglichen Ziele größtenteils erreicht und in manchen Bereichen sogar übertroffen. Wir sind besonders dankbar für die Unterstützung und das Vertrauen unserer Betreuer sowie für die engagierte Zusammenarbeit im Team. Wir freuen uns darauf, die Plattform weiter zu verbessern und unseren Beitrag zu einer nachhaltigeren Zukunft zu leisten.
 
 #
-## Entwickler
+## VIII. Entwickler
 
 Anna Laves s78700@bht-berlin.de, (891023)<br/>
 Anton Kripp s88371@bht-berlin.de, (936120)<br/>
