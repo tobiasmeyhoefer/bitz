@@ -82,12 +82,12 @@ export function ProductImageCarousel(props: {
                       height={500}
                       src={img} //"/test_img.jpg"
                       alt="Product Image"
-                      className="aspect-square w-[90vw] rounded-xl object-cover md:w-[50vw]"
+                      className="aspect-square w-[90dvw] rounded-xl object-cover md:w-[50dvw]"
                       style={{ objectFit: 'cover' }}
                     />
                   ) : (
                     <div
-                      className={`-mr-1 flex h-[50vh] w-[90vw] items-center justify-center lg:h-[60vh] lg:w-[50vw] xl:w-[60vh] 2xl:w-[70vh]`}
+                      className={`-mr-1 flex h-[50dvh] w-[90dvw] items-center justify-center lg:h-[60dvh] lg:w-[50dvw] xl:w-[60dvh] 2xl:w-[70dvh]`}
                     >
                       <div>Placeholder Image</div>
                     </div>
