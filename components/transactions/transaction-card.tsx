@@ -19,10 +19,10 @@ import { getProductById } from '@/lib/product-actions'
 import { getUser, getUserById } from '@/lib/user-actions'
 import { TransactionType } from '@/schema'
 import Image from 'next/image'
-import { useTranslations } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
 
 export const TransactionCard = async ({ transaction }: { transaction: TransactionType }) => {
-  const t = useTranslations('Transactions')
+  const t = await getTranslations('Transactions')
   const user = await getUser()
   const buyerProm = getUserById(transaction.buyerId)
   const productProm = getProductById(transaction.productId)
