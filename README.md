@@ -122,19 +122,15 @@ Willkommen im BITZ-Team! Hier sind einige Schritte, um Ihnen den Einstieg zu erl
   ```
   Durch diesen Schritt installieren Sie alle Abhängigkeiten, die für das Projekt erforderlich sind.
 
-3. *Umgebungsvariablen einrichten*
-    Sie benütigen eine .env.local Datei im Stammverzeichnis und mit den die notwendigen Umgebungsvariablen hinzu. Kontaktieren sie einen Administrator, um diese Datei zu erhalten.
-    ```bash
-    ```    
-
-4. *Entwicklungsserver starten*:
+3. *Entwicklungsserver starten*:
    ```bash
    npm run dev
    ```
-   Durch diesen Schritt starten Sie den Entwicklungsserver, um den Projektcode zu berprüfen und zu debuggen. Jede veränderung im Code wird live sichtbar.
+   Durch diesen Schritt starten Sie den Entwicklungsserver, um den Projektcode zu überprüfen und zu debuggen. Jede veränderung im Code wird live sichtbar.
  ```bash
+   npm run build
  ```
-5. *Projektstruktur verstehen*: 
+4. *Projektstruktur verstehen*: 
    Schauen sie sich die Struktur des Projektes im Explorer an, um ein Gefühl für die Organisation des Codes zu bekommen. 
    __
    *Wichtige Ordner und Unterordner:*
