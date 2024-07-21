@@ -1168,6 +1168,41 @@ ein weiterer möglicher Grund ist, dass das Konto, das Sie verwenden, bereits mi
 Überprüfen Sie die installierte Node-Version, sie sollte nicht kleiner als v18 sein.
 
 #
+##### Lessons Learned
+Die Entwicklung von “Bitz” war für uns alle eine sehr spannende und vor allem lehrreiche Reise. Vom Projektmanagement, technologischen Entscheidungen bis zum Zwischenmenschlichen haben wir viel mitgenommen. Der folgende Teil soll einige unserer wichtigsten Lektionen und Lerneffekte beinhalten, welche wir während des Projektes erlebt haben.
+
+Nutzerfeedback war elementar in der Entwicklung. Die aus dem Feedback des Playtests enthaltenen Ideen, Probleme und Anmerkungen haben Bitz auf das nächste Level gebracht. 
+Teamarbeit und transparente Kommunikation waren wesentliche Faktoren für die erfolgreiche Umsetzung unseres Projekts. Da verschiedene Gruppenmitglieder verschiedene Belegungen und Arbeitszeiten im Semester hatten, war es natürlich eine Aufgabe, einen gemeinsamen zeitlichen Rahmen für das Projekt zu schaffen. So haben wir es geschafft, für drei wöchentliche Meetings zusammen zu kommen. In einem größeren beruflichen Rahmen eines solchen Projektes würden sich jedoch tägliche Stand-Ups mehr lohnen. Für die Kommunikation haben wir einen gemeinsamen Discord Server erstellt und genutzt, welcher verschiedene Text-Channel für verschiedene Nachrichtentypen hatte. So gab es zum Beispiel separate Kanäle für Bugs, Probleme bei der Entwicklung und ein Arbeitslog. In diesen Kanälen hat zum Ende des Projekts insbesondere eine hohe Rate an Kommunikation stattgefunden, welche auch im Rahmen des Projekts erlernt und verbessert wurde. Generell wurde gelernt, dass wenn alle Teammitglieder auf dem gleichen Stand waren, die Koordination der Entwicklung einfacher fiel.
+
+Für das Ordnen und Managen der Sprints haben wir Notion benutzt. Dort haben wir in unseren wöchentlichen Sprintplanungmeetings Tickets erstellt und diese mit Akzeptanzkriterien und anderen wichtigen Metriken ausgestattet. Das Design der Tickets haben wir auch im Laufe des Projekts angepasst.
+
+Die Aufteilung des Workloads war eine komplexe Entscheidung. Da Mitglieder im Team verschiedene Erfahrungsstände im Bereich Webentwicklung hatten und vor allem verschiedene Arbeitstempo, musste hier die Aufgabenverteilung gut gewählt sein. So haben wir probiert, die Aufgaben so zu verteilen, dass alle eine ungefähr gleiche zeitliche Auslastung haben.
+
+#
+##### Zukunft
+Eine Ausweitung in den europäischen Markt wäre eine Option, um unsere Plattform international zu etablieren. Dies würde es uns ermöglichen, neue Kunden zu erreichen und unser Wachstum voranzutreiben. Wir könnten eng mit lokalen Partnern zusammenarbeiten, um sicherzustellen, dass der Kauf und Verkauf auch über Grenzen hinweg reibungslos funktioniert. So könnten Nutzer weltweit von unserem Service profitieren und Elektronikware einfacher kaufen und verkaufen.
+
+Nach wie vor bleibt auch in der Zukunft unser Ziel, das Einkaufserlebnis für jeden Nutzer individuell zu gestalten. Zusätzlich zu unserem individuellen Shopdesign könnte man durch den Einsatz von Algorithmen und maschinellem Lernen personalisierte Produktempfehlungen geben, die auf den bisherigen Aktivitäten und Vorlieben der Nutzer basieren. Das würde sich vor allem auf unserer Browse Page anbieten, wo man dann als Nutzer neue Produkte entdecken kann. Auch ein überarbeiteter Suchalgorithmus würde an der Stelle ein Punkt mit hohem Entwicklungspotential sein. Das würde das Einkaufen nicht nur einfacher, sondern auch viel spannender machen.
+
+Die Implementierung eines fairen und transparenten Bewertungssystems wäre uns sehr wichtig. Käufer und Verkäufer sollten sich auf unserer Plattform sicher fühlen und einander vertrauen können. Daher würden wir ein Bewertungssystem einführen, das beiden Seiten die Möglichkeit gäbe, ihre Erfahrungen zu teilen. So könnten neue Nutzer schnell erkennen, welche Verkäufer vertrauenswürdig sind und welche Käufer zuverlässig sind. Wir würden auch Maßnahmen ergreifen, um sicherzustellen, dass die Bewertungen echt und glaubwürdig sind.
+
+Eine Technologie, die leider erst zum Schluss unserer Projektarbeit wirklich relevant geworden ist, ist Optimistic UI. Da diese aber erst mit der nächsten React Version rauskommt, konnten wir sie leider noch nicht implementieren. Die Nutzung von Optimistic UI würde bedeuten, dass Aktionen auf der Plattform sofort visuell bestätigt würden, noch bevor sie endgültig verarbeitet sind. Wenn Sie beispielsweise ein Produkt einstellen oder eine Transaktion durchführen, würden Sie sofort sehen, dass Ihre Aktion erfolgreich war. Das würde Wartezeiten reduzieren und die Nutzung unserer Plattform noch angenehmer und effizienter machen. Zusätzlich wäre das ganze Nutzungserlebnis unserer Plattform dadurch noch flüssiger.
+
+#
+##### Fazit
+Unser Ziel bei der Erstellung von Bitz war es, eine Plattform für den An- und Verkauf für gebrauchte Elektronikware zu schaffen und uns durch eine sichere und benutzerfreundliche Implementierung von Marktkonkurrenten abzuheben. Von der ersten Idee bis zur fertigen Umsetzung haben wir verschiedene Entwicklungsphasen durchlaufen und dabei moderne Technologien genutzt, um die Plattform optimal auf die Bedürfnisse unserer Nutzer abzustimmen.
+
+Wir sind stolz auf die Erfolge und Meilensteine, die wir bisher erreicht haben. Besonders erfreulich ist die positive Resonanz unserer Nutzer. Technisch gesehen haben wir einige Herausforderungen gemeistert, etwa die Implementierung eines sicheren Zahlungssystems und eine sichere Anmeldung, welche auf die Nutzung eines Passwortes verzichtet und durch die Nutzung von Passkeys beschleunigt werden kann.
+
+Natürlich gab es auch Herausforderungen, die wir bewältigen mussten. Zum einen technische Hürden wie die Integration des direkten Zahlungssystems, die Chatfunktion und die Optimierung für mobile Endgeräte verlangten viel Kreativität und Ausdauer von uns. Zum anderen gab es im Team anfangs zum Beispiel Schwierigkeiten bei der Sprintplanung, dabei beispielsweise das Einschätzen des eigenen machbaren Workloads.
+
+Mit Blick auf die Zukunft haben wir viele Ideen und Pläne, wie wir unsere Plattform weiterentwickeln können. Wir möchten neue Funktionen einführen, die Benutzerfreundlichkeit weiter steigern und neue Märkte sowie Zielgruppen erschließen, wie zum Beispiel zweiseitige Bewertungssysteme.
+
+Unser Team hat sich im Laufe des Projekts stark weiterentwickelt. Die Zusammenarbeit hat nicht nur unser Wissen und unsere Fähigkeiten erweitert, sondern auch das Team enger zusammengeschweißt. Jeder von uns hat wertvolle Erfahrungen gesammelt, die weit über die technische Umsetzung hinausgehen.
+
+Abschließend können wir sagen, dass unser Projekt ein großer Erfolg ist. Wir haben unsere ursprünglichen Ziele größtenteils erreicht und in manchen Bereichen sogar übertroffen. Wir sind besonders dankbar für die Unterstützung und das Vertrauen unserer Betreuer sowie für die engagierte Zusammenarbeit im Team. Wir freuen uns darauf, die Plattform weiter zu verbessern und unseren Beitrag zu einer nachhaltigeren Zukunft zu leisten.
+
+#
 ## Entwickler
 
 Anna Laves s78700@bht-berlin.de, (891023)<br/>
