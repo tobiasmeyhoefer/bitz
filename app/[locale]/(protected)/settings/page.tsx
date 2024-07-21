@@ -64,7 +64,11 @@ const Settings = () => {
           />
         </div>
       </div>
-      <Link href={'https://www.youtube.com'} className="fixed bottom-8 left-11" target="_blank">
+      <Link
+        href={'https://youtu.be/kMiKA-BBDuc'}
+        className="fixed bottom-8 left-11"
+        target="_blank"
+      >
         <Button variant="gooeyLeft">Hilfe</Button>
       </Link>
     </div>
