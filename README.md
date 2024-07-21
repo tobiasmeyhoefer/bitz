@@ -1,11 +1,14 @@
 # BITZ - Next Generation
-Bitz ist eine innovative Online-Plattform, die sich auf den Kauf, Verkauf und Tausch von Technikprodukten spezialisiert hat. Unser Ziel ist es, Menschen zusammenzubringen, die ihre gebrauchte Technik verkaufen möchten, mit denen, die auf der Suche nach erschwinglichen und hochwertigen Geräten sind. Bitz bietet eine benutzerfreundliche und sichere Umgebung, in der Transaktionen einfach und unkompliziert abgewickelt werden können. Durch unseren Fokus auf Technologie und unsere engagierte Community unterscheiden wir uns von anderen Online-Marktplätzen. Bei Bitz finden Sie eine große Auswahl an Technikprodukten zu wettbewerbsfähigen Preisen und profitieren von einem erstklassigen Kundenerlebnis.
+
 
 #
 ___
 ### Inhaltsverzeichnis
 
 ##### I. Einleitung
+  1. Einleitung
+  2. Onboarding
+  3. Wichtige Skripte
 
 ##### II. Frontend-Technologien
   1. TypeScript
@@ -79,13 +82,100 @@ ___
 
 #
 ___
-
+#
 ### I. Einleitung
 
+#### 1.1 Kontext
 **BITZ - Next Generation**
 Bitz ist eine innovative Online-Plattform, die sich auf den Kauf, Verkauf und Tausch von Technikprodukten spezialisiert hat. Unser Ziel ist es, Menschen zusammenzubringen, die ihre gebrauchte Technik verkaufen möchten, mit denen, die auf der Suche nach erschwinglichen und hochwertigen Geräten sind. Bitz bietet eine benutzerfreundliche und sichere Umgebung, in der Transaktionen einfach und unkompliziert abgewickelt werden können. Durch unseren Fokus auf Technologie und unsere engagierte Community unterscheiden wir uns von anderen Online-Marktplätzen. Bei Bitz finden Sie eine große Auswahl an Technikprodukten zu wettbewerbsfähigen Preisen und profitieren von einem erstklassigen Kundenerlebnis.
 
 Dieses Dokument bietet eine detaillierte Dokumentation der in unserem Projekt "Bitz" verwendeten Technologien. Es konzentriert sich speziell darauf, welchen Mehrwert die einzelnen Technologien für unser Projekt bieten und wie sie zu einer besseren Benutzererfahrung, verbesserter Codequalität und effizienter Entwicklung beitragen.
+
+#### 1.2 Onboarding für neue Mitarbeiter
+
+Willkommen im BITZ-Team! Hier sind einige Schritte, um Ihnen den Einstieg zu erleichtern:
+
+1. *Repository klonen*:
+  ```bash
+  git clone https://github.com/tobiasmeyhoefer/bitz.git
+  cd bitz
+  ```
+  Durch diesen Schritt klonen Sie das Projektrepository auf Ihren lokalen Computer.
+
+2. *Abhängigkeiten installieren*:
+  ```bash
+  npm install
+  ```
+  Durch diesen Schritt installieren Sie alle Abhängigkeiten, die für das Projekt erforderlich sind.
+
+3. *Umgebungsvariablen einrichten*
+    Sie benütigen eine .env.local Datei im Stammverzeichnis und mit den die notwendigen Umgebungsvariablen hinzu. Kontaktieren sie einen Administrator, um diese Datei zu erhalten.
+    ```bash
+    ```    
+
+4. *Entwicklungsserver starten*:
+   ```bash
+   npm run dev
+   ```
+   Durch diesen Schritt starten Sie den Entwicklungsserver, um den Projektcode zu berprüfen und zu debuggen. Jede veränderung im Code wird live sichtbar.
+ ```bash
+ ```
+5. *Projektstruktur verstehen*: 
+   Schauen sie sich die Struktur des Projektes im Explorer an, um ein Gefühl für die Organisation des Codes zu bekommen.
+#
+#### 1.3 Zusätzliche Hinweise für Developer
+
+##### weitere wichtige Skripte:
+
+- `npm run dev`: Startet die Anwendung im Entwicklungsmodus.
+- `npm run build`: Erstellt ein Produktions-Build der Anwendung.
+
+
+##### ...zur Datenbankmigrationen:
+
+- `npm run db:migrate`: Führt Datenbankmigrationen durch.
+- `npm run db:generate`: Generiert das Schema für die Datenbank.
+- `npm run db:push`: Pusht das Schema zur Datenbank.
+
+
+##### 1.4 Gitflow, Pullrequests & Merging
+
+Für alle Arbeiten am Code sollte ein eigener Branch erstellt werden. Diese Branches sollten nach Möglichkeit eingeleitet werden mit `fix/` oder `feat/` als Prefix. Wenn die Abeiten in dem Branch beendet sind, ist es Zeit, den Branch in den Masterbranch zu mergen.
+
+Die Branches dürfen jedoch nicht direkt in ```main``` mergen, sondern stattdesssen ist ein Pullrequest zu erstellen!
+**ACHTUNG:** Bevor du einen Pullrequest erstellst, führe ```npm run build``` aus und stelle sicher, dass die Anwendung funktioniert!
+#
+##### 1.5 Internationalierung (i18n)
+
+Dieses Projekt verwendet die Internationalisierung. Jeder String, der internationalisiert werden soll, muss in die entsprechende Sprach-Json-Datei geschrieben und mit dem 
+- useTranslations Hook (for server side)
+- getTranslations Hook (for async server side)
+- als eine Property (prop) für Komponenten, die mit 'use client' makiert sind,
+in die Komponente implentiert werden.
+
+#
+##### 1.6 Code Conventions
+
+Pascal Case - Bennennung Komponenten
+Kleinbuchstaben mit Bindestrich - Bennenung von Dateien und Ordnern
+
+#
+##### 1.7 Lösungen für typische Probleme
+
+* Die Google-Authentifizierung funktioniert nicht?
+Dies könnte daran liegen, dass die Anwendung nicht auf localhost:3000 läuft. Dies kann passieren, wenn Sie bereits eine Anwendung auf localhost:3000 laufen lassen, 
+ein weiterer möglicher Grund ist, dass das Konto, das Sie verwenden, bereits mit einem Magic Link-Konto verwendet wird.
+<br/>
+* Andere Probleme mit der Authentifizierung?
+  Wenn Sie auf localhost laufen, stellen Sie sicher, dass Sie die aktuellste ```.env.locale```- Datei verwenden
+<br/>
+* Ich kann die Anwendung gar nicht starten.
+Überprüfen Sie die installierte Node-Version, sie sollte nicht kleiner als v18 sein.
+
+
+
+
+
 #
 ___
 ### II. Frontend-Technologien
@@ -1122,50 +1212,7 @@ Durch die Verwendung von Figma in diesem Projekt wird eine enge Zusammenarbeit z
 #
 ___
 #
-## 5. Zusätzliche Hinweise für Developer
-#
-##### 5.1 Getting Started
 
-```
-git clone https://github.com/tobiasmeyhoefer/bitz.git
-cd bitz
-npm i
-npm run dev
-```
-Das startet die Anwendung unter Verwendung von localhost:3000
-
-#
-##### 5.2 Pullrequests & Merging
-Die Branches nicht direkt in ```main``` mergen, sondern stattdesssen einen Pullrequest erstellen!
-Bevor du einen Pullrequest erstellst, führe ```npm run build``` aus und stelle sicher, dass die Anwendung funktioniert!
-#
-##### 5.3 Internationalierung (i18n)
-
-Dieses Projekt verwendet die Internationalisierung. Jeder String, der internationalisiert werden soll, muss in die entsprechende Sprach-Json-Datei geschrieben und mit dem 
-- useTranslations Hook (for server side)
-- getTranslations Hook (for async server side)
-- as a prop for client side
-
-in die Komponente implentiert werden.
-
-#
-##### 5.4 Code Conventions
-
-Pascal Case - Bennennung Komponenten
-Kleinbuchstaben mit Bindestrich - Bennenung von Dateien
-
-#
-##### Lösungen für typische Probleme
-
-* Die Google-Authentifizierung funktioniert nicht?
-Dies könnte daran liegen, dass die Anwendung nicht auf localhost:3000 läuft. Dies kann passieren, wenn Sie bereits eine Anwendung auf localhost:3000 laufen lassen, 
-ein weiterer möglicher Grund ist, dass das Konto, das Sie verwenden, bereits mit einem Magic Link-Konto verwendet wird.
-<br/>
-* Andere Probleme mit der Authentifizierung?
-  Wenn Sie auf localhost laufen, stellen Sie sicher, dass Sie die aktuellste ```.env.locale```- Datei verwenden
-<br/>
-* Ich kann die Anwendung gar nicht starten.
-Überprüfen Sie die installierte Node-Version, sie sollte nicht kleiner als v18 sein.
 
 #
 ##### Lessons Learned
