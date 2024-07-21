@@ -107,7 +107,7 @@ const NavBar = async () => {
               transactionsLinkText={t('transactions')}
             />
           </div>
-          <div className="block md:hidden">
+          <div className="block md:hidden ">
             <NavMenuDrawer
               menuItems={drawerItems}
               signOut={

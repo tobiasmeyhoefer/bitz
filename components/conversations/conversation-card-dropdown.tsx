@@ -17,7 +17,7 @@ import { deleteConversation } from '@/lib/conversations-actions'
 import { ConversationType } from '@/schema'
 import { changeProductStateToSold, createTransaction } from '@/lib/stripe-actions'
 import { getProductById } from '@/lib/product-actions'
-import { useRouter } from '@/navigation'
+import { Link, useRouter } from '@/navigation'
 
 export const ConversationCardDropwdown = ({
   conv,
@@ -53,9 +53,14 @@ export const ConversationCardDropwdown = ({
               verkauft
             </DropdownMenuItem>
           ) : (
-            <DropdownMenuItem onClick={notInterested} className="cursor-pointer">
-              Nicht mehr interessiert
-            </DropdownMenuItem>
+            <Link href="/conversations">
+              <DropdownMenuItem
+                onClick={notInterested}
+                className="cursor-pointer"
+              >
+                Nicht mehr interessiert
+              </DropdownMenuItem>
+            </Link>
           )}
         </DropdownMenuContent>
       </DropdownMenu>

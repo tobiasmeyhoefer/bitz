@@ -294,7 +294,12 @@
     "b1": "You have",
     "b2": "bought",
     "b3": "bought for",
-    "otw": "Your package is now being packed and shipped to the location specified in your settings"
+    "otw": "Your package is now being packed and shipped to the location specified in your settings",
+    "your_bit": "Your Bit",
+    "has_been_bought": "has been bought",
+    "send_article": "please send your bit now to: ",
+    "address": "Address",
+    "bought for": "bought for"
   },
 
   "Favorites": {

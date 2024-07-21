@@ -50,7 +50,7 @@ const NavLoginLink = ({ text }: NavLoginProps) => {
   const pathname = usePathname()
   return (
     pathname !== '/auth/login' && (
-      <Link className='mt-12' href="/auth/login">
+      <Link className="mt-12" href="/auth/login">
         <Button className="bg-primary-hover">{text}</Button>
       </Link>
     )
@@ -118,12 +118,15 @@ const NavMenuDrawer = (props: NavMenuDrawerProps) => {
 
   return (
     <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
-      <DrawerTrigger asChild>
+      <DrawerTrigger
+        asChild
+        className="text-bg-primary-foreground h-fit bg-transparent p-0 shadow-none ring-transparent hover:bg-transparent hover:text-primary-hover focus:outline-none focus:ring-0 focus-visible:ring-0"
+      >
         <Button
           onClick={() => setDrawerOpen(true)}
-          className="text-bg-primary-foreground h-fit bg-transparent p-0 shadow-none outline-none ring-0 hover:bg-transparent hover:text-primary-hover focus-visible:ring-0 "
+          className="text-bg-primary-foreground box-shadow-none h-fit border-none bg-transparent p-0 shadow-none ring-transparent hover:bg-transparent hover:text-primary-hover focus:outline-none focus:ring-0 focus-visible:ring-0"
         >
-          <TbMenu className="h-[30px] w-[40px] outline-none " />
+          <TbMenu className="box-shadow-none h-[30px] w-[40px] border-none outline-none" />
         </Button>
       </DrawerTrigger>
       <DrawerContent className="max-w-smd mx-auto w-full border-0 bg-primary-foreground text-primary">

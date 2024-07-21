@@ -30,7 +30,7 @@ const Conversations = async () => {
           </div>
         </Suspense>
       ) : (
-        <p>{t('empty')}</p>
+        <p className='font-bold'>{t('empty')}</p>
       )}
     </section>
   )

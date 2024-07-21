@@ -1,8 +1,11 @@
 # BITZ - Next Generation
 
+Bitz ist eine innovative Online-Plattform, die sich auf den Kauf, Verkauf und Tausch von Technikprodukten spezialisiert hat. Unser Ziel ist es, Menschen zusammenzubringen, die ihre gebrauchte Technik verkaufen möchten, mit denen, die auf der Suche nach erschwinglichen und hochwertigen Geräten sind. Bitz bietet eine benutzerfreundliche und sichere Umgebung, in der Transaktionen einfach und unkompliziert abgewickelt werden können. Durch unseren Fokus auf Technologie und unsere engagierte Community unterscheiden wir uns von anderen Online-Marktplätzen. Bei Bitz finden Sie eine große Auswahl an Technikprodukten zu wettbewerbsfähigen Preisen und profitieren von einem erstklassigen Kundenerlebnis.
 
 #
-___
+
+---
+
 ### Inhaltsverzeichnis
 
 ##### I. Einleitung
@@ -49,28 +52,29 @@ ___
   17. Axios
 
 ##### III. Backend-Technologien
-  1. Drizzle (Object Relational Mapper)
-  2. Authentifizierung
-     1. Next Auth.js (Authentifizierung)
-     2. @simplewebauthn/browser & @simplewebauthn/server
-     3. @auth/drizzle-adapter
-  3. Neon Database (serverless PostgreSQL-Datenbank)
-  4. AWS SDK 
-  5. Twilio
-     1. @types/twilio
-  6. Pusher
-      1.  Pusher JS
-  7. Stripe
-  8. React Email
+1. Drizzle (Object Relational Mapper)
+2. Authentifizierung
+   1. Next Auth.js (Authentifizierung)
+   2. @simplewebauthn/browser & @simplewebauthn/server
+   3. @auth/drizzle-adapter
+3. Neon Database (serverless PostgreSQL-Datenbank)
+4. AWS SDK
+5. Twilio
+   1. @types/twilio
+6. Pusher
+   1. Pusher JS
+7. Stripe
+8. React Email
 
-##### IV.  Weitere Tools
-  1. Node.js
-  2. npm
-  3. Git und Github (Versionskontrolle)
-  4. Vercel (Deployment)
-  5. Discord (Kommunikation)
-  6. Notion (Organisation)
-  7. Figma (für Styling und Corporate Design)
+##### IV. Weitere Tools
+
+1. Node.js
+2. npm
+3. Git und Github (Versionskontrolle)
+4. Vercel (Deployment)
+5. Discord (Kommunikation)
+6. Notion (Organisation)
+7. Figma (für Styling und Corporate Design)
 
 ##### V. Herausforderungen
 
@@ -79,14 +83,21 @@ ___
 ##### VII. Zukunft
 
 ##### VIII. Fazit
+1. Getting started
+2. Pullrequests & Merging
+3. Internationalierung (i18n)
+4. Code Conventions
+5. Lösungen für typische Probleme
 
 ##### IX. Entwickler & Autoren
 
+##### VII. Quellen
 
 #
-___
+
 #
 ## I. Einleitung
+---
 
 #### 1.1 Kontext
 **BITZ - Next Generation**
@@ -208,14 +219,18 @@ ein weiterer möglicher Grund ist, dass das Konto, das Sie verwenden, bereits mi
  Viel Erfolg und willkommen an Bord!**
 
 
-
 #
 ___
 ## II. Frontend-Technologien
+
+#
+
+---
+
 #### 2.1 TypeScript
+
 TypeScript ermöglicht es uns, unseren Frontend-Code typsicher zu gestalten. Dies führt zu einer höheren Codequalität, da Fehler frühzeitig erkannt und behoben werden können.
 
-  
 ```
 // Definition einer Produkt-Schnittstelle
 interface Product {
@@ -234,7 +249,9 @@ function displayProduct(product: Product) {
 Durch die Verwendung von TypeScript können wir sicherstellen, dass die Funktion displayProduct immer ein Objekt vom Typ Product erhält. Dies verhindert Laufzeitfehler, die auftreten könnten, wenn die Funktion mit falschen Datentypen aufgerufen wird.
 
 ##### 2.1.1 Sort-By-Typescript
+
 Sort-By-Typescript ist eine Bibliothek zum Sortieren von Arrays in TypeScript.
+
 ```
 // utils/sorting.ts
 import sortBy from 'sort-by-typescript';
@@ -247,11 +264,15 @@ const products = [
 
 const sortedProducts = sortBy(products, 'price');
 ```
+
 In diesem Beispiel verwenden wir sortBy, um das Array products nach dem Preis zu sortieren.
 
 #
+
 #### 2.2 Next.js
+
 Next.js ist ein Framework für serverseitiges Rendering und statische Seitengenerierung in React-Anwendungen. Es bietet uns Funktionen wie serverseitiges Rendering, Routing, Datenabruf und Bildoptimierung, die die Leistung und SEO unserer Anwendung verbessern.
+
 ```
 // pages/products/[id].js
 import { getProductById } from '../api/products';
@@ -272,8 +293,11 @@ function ProductPage({ product }) {
 
 export default ProductPage;
 ```
+
 In diesem Beispiel verwenden wir getServerSideProps, um Produktdaten serverseitig abzurufen und an die Komponente ProductPage zu übergeben. Dies verbessert die SEO, da Suchmaschinen den vollständigen HTML-Code der Seite crawlen können.
+
 #
+
 #### 2.3 React
 
 React ist eine JavaScript-Bibliothek zum Erstellen von Benutzeroberflächen. Es ermöglicht uns, unsere Benutzeroberfläche in wiederverwendbare Komponenten zu zerlegen, was die Entwicklung und Wartung vereinfacht.
@@ -292,9 +316,11 @@ function ProductCard({ product }) {
 
 export default ProductCard;
 ```
+
 In diesem Beispiel definieren wir eine wiederverwendbare Komponente ProductCard, die die Details eines Produkts anzeigt. Diese Komponente kann dann an verschiedenen Stellen in der Anwendung wiederverwendet werden.
 
 ##### 2.3.1 React-Dom
+
 React-Dom ist ein Paket, das die Interaktion zwischen React und dem Document Object Model (DOM) ermöglicht. Es ist für die Darstellung von React-Komponenten im Browser unerlässlich.
 
 ```
@@ -306,9 +332,11 @@ import App from './App';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);
 ```
+
 In diesem Beispiel verwenden wir ReactDOM.createRoot, um eine Root-Instanz zu erstellen und die Komponente App im DOM-Element mit der ID "root" zu rendern.
 
 ##### 2.3.2 Zod
+
 Zod ist eine Bibliothek zur Schemavalidierung in TypeScript. Sie ermöglicht es uns, die Struktur und den Datentyp von Daten zu definieren und zu validieren.
 
 ```
@@ -323,20 +351,27 @@ const productSchema = z.object({
 
 export default productSchema;
 ```
+
 In diesem Beispiel definieren wir ein Schema für ein Produkt mit Zod. Das Schema gibt an, dass die Eigenschaft id ein UUID-String, name ein String mit mindestens 3 Zeichen und price eine positive Zahl sein muss.
 
 #
+
 #### 2.4 Tailwind CSS
+
 Tailwind CSS ist ein Utility-First-CSS-Framework. Es bietet uns eine große Sammlung von vorgefertigten CSS-Klassen, mit denen wir unsere Benutzeroberfläche schnell und einfach gestalten können.
+
 ```
 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
   Button
 </button>
 ```
+
 In diesem Beispiel verwenden wir Tailwind CSS-Klassen, um einen blauen Button mit Hover-Effekt zu erstellen.
 
 ##### 2.4.1 Tailwind Merge
+
 Tailwind Merge ist ein Tool, das uns hilft, Tailwind CSS-Klassen in unserem JavaScript-Code zu kombinieren und zu optimieren.
+
 ```
 // components/Button.js
 import { twMerge } from 'tailwind-merge';
@@ -354,23 +389,29 @@ function Button({ variant = 'primary', className, children }) {
 
 export default Button;
 ```
+
 In diesem Beispiel verwenden wir twMerge, um die Basis-Button-Klassen mit den variantenspezifischen Klassen und den benutzerdefinierten Klassen aus der Prop className zu kombinieren.
 
 ##### 2.4.2 Tailwind CSS Animate
+
 Tailwind CSS Animate ist eine Erweiterung für Tailwind CSS, die uns vorgefertigte CSS-Animationen bietet.
+
 ```
 <div class="animate-spin">
   {/* ... */}
 </div>
 ```
+
 In diesem Beispiel verwenden wir die Klasse animate-spin aus Tailwind CSS Animate, um ein Element zu drehen.
 
-
 #
+
 #### 2.5 Next-Intl
+
 Next-Intl ist eine Bibliothek für die Internationalisierung (i18n) in Next.js-Anwendungen. Sie ermöglicht es uns, unsere Anwendung in mehrere Sprachen zu übersetzen und an verschiedene Regionen anzupassen.
 
 Beispiel Serverseitige Komponente:
+
 ```
 // pages/index.js
 import { useTranslations } from 'next-intl';
@@ -390,6 +431,7 @@ export default HomePage;
 
 Beispiel 'use client' - Komponente:
 app\[locale]\(protected)\my-shop\add\page.tsx
+
 ```
 import { getBanner } from '@/lib/user-actions'
 import { getTranslations } from 'next-intl/server'
@@ -432,6 +474,7 @@ const MyShop = async () => {
             />
 
 ```
+
 ```
 // components/my-shop/product-form.tsx
 'use client'
@@ -491,10 +534,12 @@ export const ProductForm: React.FC<ProductFormProps> = ({ submitText, whichFunct
 }
 ```
 
-
 In diesem Beispiel verwenden wir den Hook useTranslations, um auf Übersetzungen für die Komponente HomePage zuzugreifen. Die Funktion t gibt die Übersetzung für den angegebenen Schlüssel zurück.
+
 #
+
 #### 2.6 React-Hook-Form
+
 React-Hook-Form ist eine Bibliothek zur Formularverarbeitung in React. Sie vereinfacht die Erstellung und Validierung von Formularen und reduziert die Menge an Boilerplate-Code.
 
 ```
@@ -517,10 +562,14 @@ function LoginForm() {
 
 export default LoginForm;
 ```
+
 In diesem Beispiel verwenden wir useForm, um eine Formularinstanz zu erstellen. Die Funktion register wird verwendet, um Formularfelder zu registrieren, und handleSubmit verarbeitet die Formularübermittlung.
+
 #
 #### 2.7 clsx
+
 clsx ist eine Hilfsfunktion zum Kombinieren von CSS-Klassen in React. Sie vereinfacht die bedingte Anwendung von CSS-Klassen und verbessert die Lesbarkeit des Codes.
+
 ```
 // components/ProductCard.js
 import clsx from 'clsx';
@@ -535,13 +584,18 @@ function ProductCard({ product, isSelected }) {
 
 export default ProductCard;
 ```
+
 In diesem Beispiel verwenden wir clsx, um die CSS-Klasse "selected" bedingt anzuwenden, wenn die Prop isSelected wahr ist.
+
 #
+
 #### 2.8 ShadCN
+
 ShadCN ist eine Sammlung von vorgestalteten UI-Komponenten, die in unserem Projekt verwendet werden, um schnell ansprechende Benutzeroberflächen zu erstellen. Diese Komponenten sind sorgfältig gestaltet und bieten ein professionelles und modernes Erscheinungsbild. Der Hauptvorteil der Verwendung von ShadCN-Komponenten ist die Zeitersparnis bei der Entwicklung, da wir nicht jede Komponente von Grund auf neu gestalten müssen. Stattdessen können wir die vorhandenen Komponenten von ShadCN nutzen und sie nahtlos in unsere Anwendung integrieren.
 
 Beispiel für die Verwendung von ShadCN
 Ein Beispiel für den Einsatz von ShadCN in unserem Projekt ist die Implementierung von Dialog- und Sheet-Komponenten. Diese Komponenten werden verwendet, um modale Dialoge und seitliche Überlagerungen in der Benutzeroberfläche zu erstellen.
+
 ```// components/ui/dialog.tsx
 import { Dialog, DialogTrigger, DialogContent } from '@shadcn/ui';
 
@@ -561,6 +615,7 @@ const CustomDialog: React.FC<DialogContentProps> = ({ closeBtn, ...props }) => (
 
 export default CustomDialog;
 ```
+
 In diesem Beispiel verwenden wir die Dialog, DialogTrigger und DialogContent Komponenten von ShadCN, um einen modalen Dialog zu erstellen. Die DialogContent Komponente wird erweitert, um eine optionale Schaltfläche zum Schließen des Dialogs hinzuzufügen. Durch die Verwendung von ShadCN-Komponenten können wir schnell und effizient ansprechende und konsistente UI-Elemente erstellen, ohne viel Zeit mit dem Design und der Implementierung von Grund auf zu verbringen.
 
 ```// components/ui/button.tsx
@@ -620,6 +675,7 @@ export { Button, buttonVariants }
 Radix UI ist eine Sammlung von unaufdringlichen UI-Komponenten für React. Sie bieten uns eine solide Grundlage für die Erstellung zugänglicher und benutzerfreundlicher Benutzeroberflächen.
 
 In unserem Projekt wird ein Dropdown-Menü mit Radix und ShadCN wie folgt implementiert:
+
 ```
 // components/ui/dropdown-menu.tsx
 "use client"
@@ -674,15 +730,20 @@ export {
 }
 
 ```
+
 In diesem Beispiel verwenden wir Komponenten aus Radix UI, um ein Dropdown-Menü zu erstellen. Die Komponenten sind bereits auf Barrierefreiheit und Benutzerfreundlichkeit ausgelegt.
 
 Diese vereinfachten Beispiele zeigen, wie ShadCN und Radix UI im Projekt verwendet werden, um ein Dropdown-Menü und eine Schaltfläche zu erstellen. Beide Komponenten nutzen die Flexibilität und Modularität von Radix UI und die leistungsstarke Variantenverwaltung von ShadCN.
+
 #
+
 #### 2.9 Framer Motion
+
 
 Framer Motion ist eine Animationsbibliothek für React. Sie ermöglicht es uns, flüssige und ansprechende Animationen und Übergänge in unserer Benutzeroberfläche zu erstellen.
 
 Beispiel:
+
 ```
 // components/Modal.js
 import { motion } from 'framer-motion';
@@ -707,9 +768,7 @@ function Modal({ isOpen, onClose, children }) {
 export default Modal;
 ```
 
-
 In diesem Beispiel verwenden wir motion.div, um eine animierte Modal-Komponente zu erstellen. Die Animation wird durch die variants-Eigenschaft definiert und durch den Zustand der Prop isOpen gesteuert.
-#
 
 #
 #### 2.10 Three
@@ -717,6 +776,7 @@ In diesem Beispiel verwenden wir motion.div, um eine animierte Modal-Komponente 
 Three.js ist eine JavaScript-Bibliothek zum Erstellen und Anzeigen von 3D-Grafiken im Browser. Sie bietet uns eine leistungsstarke API für die Arbeit mit 3D-Objekten, -Materialien, -Lichtern und -Kameras.
 
 Beispiel:
+
 ```
 // components/Product3DModel.js
 import * as THREE from 'three';
@@ -738,11 +798,13 @@ export default Product3DModel;
 ```
 
 In diesem Beispiel verwenden wir THREE.ObjectLoader, um ein 3D-Modell aus einer Datei zu laden.
+
 ##### 2.10.1 React Three Fiber
 
 React Three Fiber ist eine Bibliothek zum Rendern von 3D-Grafiken in React mit Three.js. Sie ermöglicht es uns, interaktive 3D-Erlebnisse in unserer Anwendung zu erstellen.
 
 Beispiel:
+
 ```
 // components/Product3DModel.js
 import { Canvas } from '@react-three/fiber';
@@ -760,7 +822,6 @@ function Product3DModel({ modelUrl }) {
 export default Product3DModel;
 ```
 
-
 In diesem Beispiel verwenden wir Canvas aus React Three Fiber, um ein 3D-Modell eines Produkts zu rendern.
 
 ##### 2.10.2 @types/three
@@ -773,6 +834,7 @@ Drei ist eine Sammlung von Hilfsfunktionen und -komponenten für React Three Fib
 #### 2.11 Icons
 
 ##### 2.11.1 React Icons
+
 React Icons ist eine Sammlung von SVG-Icons, die als React-Komponenten verwendet werden können. Sie bietet uns eine große Auswahl an Icons für verschiedene Anwendungsfälle.
 
 ```
@@ -789,10 +851,13 @@ function IconButton({ icon, onClick }) {
 
 export default IconButton;
 ```
+
 In diesem Beispiel verwenden wir das Icon FaSearch aus React Icons, um einen Button mit einem Such-Icon zu erstellen.
 
 ##### 2.11.2 Lucide React
+
 Lucide React ist eine weitere Sammlung von SVG-Icons, die für ihre minimalistische Ästhetik und gute Barrierefreiheit bekannt ist.
+
 ```
 // components/Navigation.js
 import { Home } from 'lucide-react';
@@ -814,10 +879,13 @@ function Navigation() {
 
 export default Navigation;
 ```
+
 In diesem Beispiel verwenden wir das Icon Home aus Lucide React, um einen Link zur Startseite in unserer Navigation zu erstellen.
 
 #
+
 #### 2.12 Skeletons
+
 In diesem Projekt verwenden wir Skeletons, um Platzhalter für Inhalte anzuzeigen, die noch geladen werden. Dies verbessert die Benutzererfahrung, indem es visuelles Feedback gibt, während Daten abgerufen werden.
 
 ```
@@ -840,14 +908,14 @@ const ProductSkeleton = () => {
 export default ProductSkeleton;
 ```
 
-Eine weitere Stelle, wo Skeletons angewendet werden, ist die Datei ```app\[locale]\(protected)\browse\loading.tsx```. Der Code ist allerdings zu lang, daher wird er hier nicht vollständig angezeigt.
-
-
-
+Eine weitere Stelle, wo Skeletons angewendet werden, ist die Datei `app\[locale]\(protected)\browse\loading.tsx`. Der Code ist allerdings zu lang, daher wird er hier nicht vollständig angezeigt.
 
 #
+
 #### 2.13 Zustand
+
 Zustand ist eine Bibliothek zur Zustandsverwaltung in React. Sie ermöglicht es uns, den Zustand unserer Anwendung auf einfache und effiziente Weise zu verwalten und zwischen Komponenten zu teilen.
+
 ```
 // components/ShoppingCart.js
 import { create } from 'zustand';
@@ -871,12 +939,16 @@ function ShoppingCart() {
 
 export default ShoppingCart;
 ```
+
 In diesem Beispiel verwenden wir zustand, um einen globalen Warenkorb-Zustand zu erstellen. Die Funktionen addItem und removeItem können verwendet werden, um Artikel zum Warenkorb hinzuzufügen oder daraus zu entfernen.
 
 #
+
 #### 2.14 @geoapify/react-geocoder-autocomplete
 
+
 @geoapify/react-geocoder-autocomplete ist eine React-Komponente für die automatische Vervollständigung von Adressen und Orten.
+
 ```
 import {
   GeoapifyContext,
@@ -909,12 +981,17 @@ import {
 />
 
 ```
+
 In diesem Beispiel verwenden wir GeocoderAutocomplete, um ein Eingabefeld mit automatischer Adressvervollständigung zu erstellen.
 ##### 2.14.1 @geoapify/geocoder-autocomplete
+
 @geoapify/geocoder-autocomplete ist die zugrunde liegende Bibliothek für die Adressvervollständigung, die von @geoapify/react-geocoder-autocomplete verwendet wird.
+
 #
 #### 2.15 React Intersection Observer (Lazy Loading)
+
 React Intersection Observer ist eine React-Implementierung der Intersection Observer API. Sie ermöglicht es uns, zu erkennen, wann ein Element im Ansichtsbereich des Benutzers sichtbar ist.
+
 ```
 // components/LazyLoadedImage.js
 import { useInView } from 'react-intersection-observer';
@@ -934,15 +1011,18 @@ function LazyLoadedImage({ src, alt }) {
 export default LazyLoadedImage;
 ```
 
-
 In diesem Beispiel verwenden wir useInView, um zu erkennen, wann das Bild im Ansichtsbereich des Benutzers sichtbar ist. Nur dann wird das Bild geladen.
 
 _**Die Webseite wird durch LazyLoading performanter und verursacht weniger Traffic.**_
+
 #
+
 #### 2.16 Canvas Confetti
 Canvas Confetti ist eine Bibliothek zum Anzeigen von Konfetti-Animationen im Browser.
 ##### 2.16.1 @types/canvas-confetti
+
 @types/canvas-confetti enthält TypeScript-Typdefinitionen für Canvas Confetti.
+
 ```
 // components/ConfettiExplosion.js
 import confetti from 'canvas-confetti';
@@ -954,11 +1034,14 @@ function ConfettiExplosion() {
 
 export default ConfettiExplosion;
 ```
+
 In diesem Beispiel verwenden wir confetti(), um eine Konfetti-Explosion auszulösen.
 
 #
 #### 2.17 Axios
+
 Axios ist eine Bibliothek zum Erstellen von HTTP-Anfragen in JavaScript.
+
 ```
 // api/products.js
 import axios from 'axios';
@@ -968,15 +1051,21 @@ export const getProducts = async () => {
   return response.data;
 };
 ```
+
 In diesem Beispiel verwenden wir axios.get, um eine GET-Anfrage an die API-Route /api/products zu senden.
 
+#
 
+---
 
 #
 ___ 
 ## III. Backend-Technologien
+
 #### 3.1 Drizzle ORM
+
 Drizzle ORM ist ein TypeScript-first ORM, das eine typsichere Möglichkeit bietet, mit unserer Datenbank zu interagieren. Es vereinfacht Datenbankabfragen und -migrationen und verbessert die Lesbarkeit und Wartbarkeit unseres Backend-Codes.
+
 ```
 // schema.ts
 import { pgTable, text, integer } from 'drizzle-orm/pg-core';
@@ -995,13 +1084,17 @@ export const getProducts = async () => {
   return allProducts;
 };
 ```
+
 In diesem Beispiel definieren wir eine Tabelle products mit Drizzle ORM und verwenden sie, um alle Produkte aus der Datenbank abzufragen.
 
-
 #
-#### 3.2 Authentifizierung 
+
+#### 3.2 Authentifizierung
+
 ##### 3.2.1 Next Auth.js
+
 NextAuth.js ist eine Authentifizierungsbibliothek für Next.js, die verschiedene Authentifizierungsanbieter wie Google, Facebook, Twitter usw. unterstützt. Sie vereinfacht die Implementierung der Benutzerauthentifizierung und -autorisierung in unserer Anwendung.
+
 ```
 // pages/api/auth/[...nextauth].js
 import NextAuth from 'next-auth';
@@ -1016,20 +1109,28 @@ export default NextAuth({
   ],
 });
 ```
+
 In diesem Beispiel konfigurieren wir NextAuth.js für die Verwendung von Google als Authentifizierungsanbieter.
 
 ##### 3.2.2 @simplewebauthn/browser & @simplewebauthn/server
 @simplewebauthn/browser wird in unserem Projekt für die Implementierung von WebAuthn in unseren Frontend-Komponenten verwendet. Es ermöglicht uns, sichere und benutzerfreundliche Authentifizierungsmethoden wie biometrische Authentifizierung und Sicherheitsschlüssel zu unterstützen.
 @simplewebauthn/server wird in unserem Projekt verwendet, um die serverseitige Logik für WebAuthn zu implementieren. Es wird zur Implementierung von WebAuthn-Authentifizierungslogik in unseren Backend-Komponenten verwendet.
 ##### 3.2.3 @auth/drizzle-adapter
+
 @auth/drizzle-adapter ist ein Adapter, der die Integration von NextAuth.js mit Drizzle ORM ermöglicht. Er ermöglicht es uns, Benutzerdaten und Sitzungsdaten in unserer Neon-Datenbank zu speichern.
+
 #
+
 #### 3.3 Neon Database
+
 Neon ist ein Serverless PostgreSQL-Datenbankdienst. Er bietet uns eine skalierbare, zuverlässige und kostengünstige Datenbanklösung für unsere Anwendung.
 
 #
+
 #### 3.4 AWS SDK
+
 AWS SDK (Software Development Kit) ermöglicht es uns, auf verschiedene AWS-Dienste wie Amazon S3 (Simple Storage Service) zuzugreifen. Wir verwenden S3 zum Speichern von Benutzeruploads wie Produktbildern.
+
 ```
 // lib/s3.js
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
@@ -1053,10 +1154,15 @@ export const uploadImage = async (file) => {
   await s3Client.send(command);
 };
 ```
+
 In diesem Beispiel verwenden wir das AWS SDK, um ein Bild in unseren S3-Bucket hochzuladen.
+
 #
+
 #### 3.5 Twilio
+
 Twilio ist eine Cloud-Kommunikationsplattform, die es uns ermöglicht, SMS-Nachrichten zu senden. Wir verwenden Twilio, um Benutzern Bestätigungscodes für die Telefonnummernüberprüfung zu senden.
+
 ```
 // lib/twilio.js
 const twilio = require('twilio');
@@ -1074,14 +1180,19 @@ export const sendVerificationCode = async (phoneNumber, code) => {
   });
 };
 ```
+
 In diesem Beispiel verwenden wir das Twilio SDK, um einen Bestätigungscode per SMS zu senden.
 
 ##### 3.5.1 @types/twilio
+
 @types/twilio enthält TypeScript-Typdefinitionen für das Twilio SDK.
 
 #
+
 #### 3.6 Pusher
+
 Pusher ist ein Dienst für Echtzeitkommunikation über Websockets. Wir verwenden Pusher, um Benachrichtigungen und andere Echtzeit-Updates an Benutzer zu senden.
+
 ```
 // lib/pusher.js
 import Pusher from 'pusher-js';
@@ -1092,13 +1203,19 @@ const pusher = new Pusher(process.env.PUSHER_APP_KEY, {
 
 export default pusher;
 ```
+
 In diesem Beispiel erstellen wir eine Instanz des Pusher-Clients.
 
 ##### 3.6.1 Pusher JS
+
 Pusher JS ist die JavaScript-Clientbibliothek für Pusher.
+
 #
+
 #### 3.7 Stripe
+
 Stripe ist eine Plattform für Online-Zahlungen. Wir verwenden Stripe, um Zahlungen von Benutzern zu verarbeiten.
+
 ```
 // pages/api/checkout_sessions.js
 import { stripe } from '../../lib/stripe';
@@ -1122,10 +1239,13 @@ export default async function handler(req, res) {
   res.status(200).json({ sessionId: session.id });
 }
 ```
+
 In diesem Beispiel verwenden wir das Stripe SDK, um eine Checkout-Sitzung zu erstellen.
 
 #
+
 #### 3.8 React Email
+
 React Email ist eine Bibliothek, die es ermöglicht, E-Mails in React zu erstellen und zu versenden. Sie bietet eine einfache Möglichkeit, E-Mail-Vorlagen zu erstellen und diese in einer React-Anwendung zu verwenden.
 
 ```
@@ -1184,27 +1304,38 @@ export function text({ url, host }: { url: string; host: string }) {
 }
 
 ```
-___
+
+---
 
 ## IV. Weitere Tools
 
 #### 4.1 Node.js
+
 Node.js ist eine JavaScript-Laufzeitumgebung, die es uns ermöglicht, JavaScript-Code außerhalb eines Webbrowsers auszuführen. Wir verwenden Node.js für unseren Backend-Server und für die Ausführung von Build-Tools.
+
 #
+
 #### 4.2 npm
+
 npm (Node Package Manager) ist der Paketmanager für Node.js. Wir verwenden npm, um Abhängigkeiten zu verwalten und unsere Anwendung zu erstellen.
+
 #
+
 #### 4.3 Git und Github
+
 Git ist ein Versionskontrollsystem, das es uns ermöglicht, Änderungen an unserem Code zu verfolgen und mit anderen Entwicklern zusammenzuarbeiten. Github ist eine webbasierte Hosting-Plattform für Git-Repositories.
 Wir verwenden GitFlow, um unsere Entwicklung zu organisieren. Wir erstellen und nutzen neue Branches für die meisten neuen Features oder Überarbeitungen. Die Branches werden gekennzeichnet mit fix-, feat-, refactor- oder chore-Präfixen.
 #
+
 #### 4.4 Vercel (Deployment)
 Vercel ist eine Plattform für Continuous Deployment. Wir verwenden Vercel, um unsere Anwendung zu bereitstellen und sie zu verffentlichen.
 (https://vercel.com/) 
 Obwohl Next.js und Vercel von demselben Unternehmen, Vercel, entwickelt wurden, sind sie zwei verschiedene Produkte. Next.js ist ein React-Framework, während Vercel eine Serverless-Plattform ist.
 
+
 Next.js kann auf verschiedenen Plattformen bereitgestellt werden, einschließlich Vercel. Vercel bietet jedoch eine Reihe von Funktionen, die speziell für Next.js optimiert sind, und ist daher die beste Plattform für die Bereitstellung und Skalierung von Next.js-Anwendungen.
 #
+
 #### 4.5 Discord (Kommunikation)
 Discord ist eine Plattform für Chat- und Videokonferenzen. Wir verwenden Discord, um uns zu kommunizieren und zu informieren, sowie für den unkomplizierten schnellen Austausch von Datien.
 #
@@ -1237,6 +1368,7 @@ Für das Ordnen und Managen der Sprints haben wir Notion benutzt. Dort haben wir
 Die Aufteilung des Workloads war eine komplexe Entscheidung. Da Mitglieder im Team verschiedene Erfahrungsstände im Bereich Webentwicklung hatten und vor allem verschiedene Arbeitstempo, musste hier die Aufgabenverteilung gut gewählt sein. So haben wir probiert, die Aufgaben so zu verteilen, dass alle eine ungefähr gleiche zeitliche Auslastung haben.
 
 #
+
 ## VII. Zukunft
 Eine Ausweitung in den europäischen Markt wäre eine Option, um unsere Plattform international zu etablieren. Dies würde es uns ermöglichen, neue Kunden zu erreichen und unser Wachstum voranzutreiben. Wir könnten eng mit lokalen Partnern zusammenarbeiten, um sicherzustellen, dass der Kauf und Verkauf auch über Grenzen hinweg reibungslos funktioniert. So könnten Nutzer weltweit von unserem Service profitieren und Elektronikware einfacher kaufen und verkaufen.
 
@@ -1247,6 +1379,7 @@ Die Implementierung eines fairen und transparenten Bewertungssystems wäre uns s
 Eine Technologie, die leider erst zum Schluss unserer Projektarbeit wirklich relevant geworden ist, ist Optimistic UI. Da diese aber erst mit der nächsten React Version rauskommt, konnten wir sie leider noch nicht implementieren. Die Nutzung von Optimistic UI würde bedeuten, dass Aktionen auf der Plattform sofort visuell bestätigt würden, noch bevor sie endgültig verarbeitet sind. Wenn Sie beispielsweise ein Produkt einstellen oder eine Transaktion durchführen, würden Sie sofort sehen, dass Ihre Aktion erfolgreich war. Das würde Wartezeiten reduzieren und die Nutzung unserer Plattform noch angenehmer und effizienter machen. Zusätzlich wäre das ganze Nutzungserlebnis unserer Plattform dadurch noch flüssiger.
 
 #
+
 ## VIII. Fazit
 Unser Ziel bei der Erstellung von Bitz war es, eine Plattform für den An- und Verkauf für gebrauchte Elektronikware zu schaffen und uns durch eine sichere und benutzerfreundliche Implementierung von Marktkonkurrenten abzuheben. Von der ersten Idee bis zur fertigen Umsetzung haben wir verschiedene Entwicklungsphasen durchlaufen und dabei moderne Technologien genutzt, um die Plattform optimal auf die Bedürfnisse unserer Nutzer abzustimmen.
 
@@ -1269,3 +1402,13 @@ Dennis Blömeke s87697@bht-berlin.de, (929261)<br/>
 Lucas Knäuper s67752@bht-berlin.de, (864306)<br/>
 Niko Budic s87786@bht-berlin.de, (936244)<br/>
 Tobias Meyhöfer s87766@bht-berlin.de (933280)<br/>
+
+#
+
+## Quellen
+
+#### Quellen der Banner-Bilder
+
+https://www.solidbackgrounds.com
+https://www.vecteezy.com
+https://www.freepik.com
