@@ -1215,7 +1215,6 @@ Notion ist umfangreiches Organisationswerkzeug. Wir verwenden Notion, um unsere 
 #### 4.7 Figma (Designprototypen)
 Durch die Verwendung von Figma in diesem Projekt wird eine enge Zusammenarbeit zwischen Design und Entwicklung gefördert. Das visuelle Design der Anwendung kann effizient erstellt, getestet und iteriert werden. Die Erstellung von wiederverwendbaren Designkomponenten und Stilen gewährleistet eine konsistente visuelle Identität und erleichtert die Pflege des Designs. Insgesamt trägt Figma dazu bei, eine ansprechende und benutzerfreundliche Oberfläche zu schaffen, die den Anforderungen und Erwartungen der Benutzer entspricht.
 
-#
 ___
 #
 ##### V. Herausforderungen
