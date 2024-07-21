@@ -6,7 +6,7 @@ ___
 ### Inhaltsverzeichnis
 
 ##### I. Einleitung
-  1. Einleitung
+  1. Kontext
   2. Onboarding für neue Mitarbeiter
   3. Zusätzliche Hinweise für Developer
      1. weitere wichtige Skripte
@@ -28,28 +28,25 @@ ___
      2. Tailwind CSS Animate
   5. Next-Intl (Internationalisierung)
   6. React-Hook-Form
-  7. Class Variance Authority
-  8.  clsx
-  9.  ShadCN (für bereits gut aussehende Komponenten)
-      1.  Radix UI
-  10. Framer Motion
-  11. Embla Carousel React
-  12. React Three Fiber
-      1. Three (für 3D-Komponenten)
+  7. clsx
+  8. ShadCN (für bereits gut aussehende Komponenten)
+     1.  Radix UI
+  9.  Framer Motion
+  10. Three (für 3D-Komponenten)
+      1. React Three Fiber
       2. @types/three
       3. Drei
-  13. Icons
+  11. Icons
       1.  React Icons
       2.  Lucide React
-  14. Skeletons
-  15. Zustand
-  16. @geoapify/react-geocoder-autocomplete
+  12. Skeletons
+  13. Zustand
+  14. @geoapify/react-geocoder-autocomplete
       1.  @geoapify/geocoder-autocomplete
-  17. React Intersection Observer (Lazy Loading)
-  18. Canvas Confetti
+  15. React Intersection Observer (Lazy Loading)
+  16. Canvas Confetti
       1.  @types/canvas-confetti
-  19. Sonner
-  20. Axios
+  17. Axios
 
 ##### III. Backend-Technologien
   1. Drizzle (Object Relational Mapper)
@@ -87,7 +84,7 @@ ___
 #
 ___
 #
-### I. Einleitung
+## I. Einleitung
 
 #### 1.1 Kontext
 **BITZ - Next Generation**
@@ -195,7 +192,7 @@ Kleinbuchstaben mit Bindestrich - Bennenung von Dateien und Ordnern
 ##### 1.3.6 Lösungen für typische Probleme
 
 * Die Google-Authentifizierung funktioniert nicht?
-Dies könnte daran liegen, dass die Anwendung nicht auf localhost:3000 läuft. Dies kann passieren, wenn Sie bereits eine Anwendung auf localhost:3000 laufen lassen, 
+Dies könnte daran liegen, dass die Anwendung nicht auf `localhost:3000` läuft. Dies kann passieren, wenn Sie bereits eine Anwendung auf `localhost:3000` laufen lassen, 
 ein weiterer möglicher Grund ist, dass das Konto, das Sie verwenden, bereits mit einem Magic Link-Konto verwendet wird.
 <br/>
 * Andere Probleme mit der Authentifizierung?
@@ -212,7 +209,7 @@ ein weiterer möglicher Grund ist, dass das Konto, das Sie verwenden, bereits mi
 
 #
 ___
-### II. Frontend-Technologien
+## II. Frontend-Technologien
 #### 2.1 TypeScript
 TypeScript ermöglicht es uns, unseren Frontend-Code typsicher zu gestalten. Dies führt zu einer höheren Codequalität, da Fehler frühzeitig erkannt und behoben werden können.
 
@@ -520,41 +517,7 @@ export default LoginForm;
 ```
 In diesem Beispiel verwenden wir useForm, um eine Formularinstanz zu erstellen. Die Funktion register wird verwendet, um Formularfelder zu registrieren, und handleSubmit verarbeitet die Formularübermittlung.
 #
-#### 2.7 Class Variance Authority
-Class Variance Authority (CVA) ist eine Bibliothek, die uns hilft, dynamische CSS-Klassen basierend auf dem Zustand von Komponenten zu generieren. Dies ermöglicht es uns, unsere Benutzeroberfläche flexibler und interaktiver zu gestalten.
-```
-// components/Button.js
-import { cva } from 'class-variance-authority';
-
-const buttonStyles = cva(
-  'px-4 py-2 rounded-md font-medium',
-  {
-    variants: {
-      intent: {
-        primary: 'bg-blue-500 text-white',
-        secondary: 'bg-gray-200 text-gray-800',
-      },
-      size: {
-        small: 'text-sm',
-        large: 'text-lg',
-      },
-    },
-  }
-);
-
-function Button({ intent = 'primary', size = 'small', children }) {
-  return (
-    <button className={buttonStyles({ intent, size })}>
-      {children}
-    </button>
-  );
-}
-
-export default Button;
-```
-In diesem Beispiel verwenden wir cva, um eine Funktion buttonStyles zu erstellen, die dynamische CSS-Klassen basierend auf den Props intent und size generiert.
-#
-#### 2.8 clsx
+#### 2.7 clsx
 clsx ist eine Hilfsfunktion zum Kombinieren von CSS-Klassen in React. Sie vereinfacht die bedingte Anwendung von CSS-Klassen und verbessert die Lesbarkeit des Codes.
 ```
 // components/ProductCard.js
@@ -572,8 +535,7 @@ export default ProductCard;
 ```
 In diesem Beispiel verwenden wir clsx, um die CSS-Klasse "selected" bedingt anzuwenden, wenn die Prop isSelected wahr ist.
 #
-#### #
-#### 2.9 ShadCN
+#### 2.8 ShadCN
 ShadCN ist eine Sammlung von vorgestalteten UI-Komponenten, die in unserem Projekt verwendet werden, um schnell ansprechende Benutzeroberflächen zu erstellen. Diese Komponenten sind sorgfältig gestaltet und bieten ein professionelles und modernes Erscheinungsbild. Der Hauptvorteil der Verwendung von ShadCN-Komponenten ist die Zeitersparnis bei der Entwicklung, da wir nicht jede Komponente von Grund auf neu gestalten müssen. Stattdessen können wir die vorhandenen Komponenten von ShadCN nutzen und sie nahtlos in unsere Anwendung integrieren.
 
 Beispiel für die Verwendung von ShadCN
@@ -652,10 +614,10 @@ Button.displayName = 'Button'
 export { Button, buttonVariants }
 ```
 
-##### 2.9.1 Radix UI
+##### 2.8.1 Radix UI
 Radix UI ist eine Sammlung von unaufdringlichen UI-Komponenten für React. Sie bieten uns eine solide Grundlage für die Erstellung zugänglicher und benutzerfreundlicher Benutzeroberflächen.
 
-In unserem Projekt wird ein Dropdown-Menü mt Radix und ShadCN wie folgt implementiert:
+In unserem Projekt wird ein Dropdown-Menü mit Radix und ShadCN wie folgt implementiert:
 ```
 // components/ui/dropdown-menu.tsx
 "use client"
@@ -714,7 +676,7 @@ In diesem Beispiel verwenden wir Komponenten aus Radix UI, um ein Dropdown-Menü
 
 Diese vereinfachten Beispiele zeigen, wie ShadCN und Radix UI im Projekt verwendet werden, um ein Dropdown-Menü und eine Schaltfläche zu erstellen. Beide Komponenten nutzen die Flexibilität und Modularität von Radix UI und die leistungsstarke Variantenverwaltung von ShadCN.
 #
-#### 2.10 Framer Motion
+#### 2.9 Framer Motion
 
 Framer Motion ist eine Animationsbibliothek für React. Sie ermöglicht es uns, flüssige und ansprechende Animationen und Übergänge in unserer Benutzeroberfläche zu erstellen.
 
@@ -746,11 +708,9 @@ export default Modal;
 
 In diesem Beispiel verwenden wir motion.div, um eine animierte Modal-Komponente zu erstellen. Die Animation wird durch die variants-Eigenschaft definiert und durch den Zustand der Prop isOpen gesteuert.
 #
-#### 2.11 Embla Carousel React
-Embla Carousel React ist eine Bibliothek zum Erstellen von Karussells in React. Sie bietet uns eine flexible und einfach zu bedienende Möglichkeit, Bilder und andere Inhalte in einem Karussell anzuzeigen.
 
 #
-#### 2.12 Three
+#### 2.10 Three
 
 Three.js ist eine JavaScript-Bibliothek zum Erstellen und Anzeigen von 3D-Grafiken im Browser. Sie bietet uns eine leistungsstarke API für die Arbeit mit 3D-Objekten, -Materialien, -Lichtern und -Kameras.
 
@@ -776,7 +736,7 @@ export default Product3DModel;
 ```
 
 In diesem Beispiel verwenden wir THREE.ObjectLoader, um ein 3D-Modell aus einer Datei zu laden.
-##### 2.12.1 React Three Fiber
+##### 2.10.1 React Three Fiber
 
 React Three Fiber ist eine Bibliothek zum Rendern von 3D-Grafiken in React mit Three.js. Sie ermöglicht es uns, interaktive 3D-Erlebnisse in unserer Anwendung zu erstellen.
 
@@ -801,16 +761,16 @@ export default Product3DModel;
 
 In diesem Beispiel verwenden wir Canvas aus React Three Fiber, um ein 3D-Modell eines Produkts zu rendern.
 
-##### 2.12.2 @types/three
+##### 2.10.2 @types/three
 @types/three enthält TypeScript-Typdefinitionen für Three.js. Dies ermöglicht es uns, Three.js in unserem TypeScript-Code typsicher zu verwenden.
 
-##### 2.12.3 Drei
+##### 2.10.3 Drei
 Drei ist eine Sammlung von Hilfsfunktionen und -komponenten für React Three Fiber. Sie vereinfacht die Verwendung von Three.js in React und bietet zusätzliche Funktionen.
 
 #
-#### 2.13 Icons
+#### 2.11 Icons
 
-##### 2.13.1 React Icons
+##### 2.11.1 React Icons
 React Icons ist eine Sammlung von SVG-Icons, die als React-Komponenten verwendet werden können. Sie bietet uns eine große Auswahl an Icons für verschiedene Anwendungsfälle.
 
 ```
@@ -829,7 +789,7 @@ export default IconButton;
 ```
 In diesem Beispiel verwenden wir das Icon FaSearch aus React Icons, um einen Button mit einem Such-Icon zu erstellen.
 
-##### 2.13.2 Lucide React
+##### 2.11.2 Lucide React
 Lucide React ist eine weitere Sammlung von SVG-Icons, die für ihre minimalistische Ästhetik und gute Barrierefreiheit bekannt ist.
 ```
 // components/Navigation.js
@@ -855,7 +815,7 @@ export default Navigation;
 In diesem Beispiel verwenden wir das Icon Home aus Lucide React, um einen Link zur Startseite in unserer Navigation zu erstellen.
 
 #
-#### 2.14 Skeletons
+#### 2.12 Skeletons
 In diesem Projekt verwenden wir Skeletons, um Platzhalter für Inhalte anzuzeigen, die noch geladen werden. Dies verbessert die Benutzererfahrung, indem es visuelles Feedback gibt, während Daten abgerufen werden.
 
 ```
@@ -884,7 +844,7 @@ Eine weitere Stelle, wo Skeletons angewendet werden, ist die Datei ```app\[local
 
 
 #
-#### 2.15 Zustand
+#### 2.13 Zustand
 Zustand ist eine Bibliothek zur Zustandsverwaltung in React. Sie ermöglicht es uns, den Zustand unserer Anwendung auf einfache und effiziente Weise zu verwalten und zwischen Komponenten zu teilen.
 ```
 // components/ShoppingCart.js
@@ -912,7 +872,7 @@ export default ShoppingCart;
 In diesem Beispiel verwenden wir zustand, um einen globalen Warenkorb-Zustand zu erstellen. Die Funktionen addItem und removeItem können verwendet werden, um Artikel zum Warenkorb hinzuzufügen oder daraus zu entfernen.
 
 #
-#### 2.16 @geoapify/react-geocoder-autocomplete
+#### 2.14 @geoapify/react-geocoder-autocomplete
 
 @geoapify/react-geocoder-autocomplete ist eine React-Komponente für die automatische Vervollständigung von Adressen und Orten.
 ```
@@ -948,10 +908,10 @@ import {
 
 ```
 In diesem Beispiel verwenden wir GeocoderAutocomplete, um ein Eingabefeld mit automatischer Adressvervollständigung zu erstellen.
-##### 2.16.1 @geoapify/geocoder-autocomplete
+##### 2.14.1 @geoapify/geocoder-autocomplete
 @geoapify/geocoder-autocomplete ist die zugrunde liegende Bibliothek für die Adressvervollständigung, die von @geoapify/react-geocoder-autocomplete verwendet wird.
 #
-#### 2.17 React Intersection Observer (Lazy Loading)
+#### 2.15 React Intersection Observer (Lazy Loading)
 React Intersection Observer ist eine React-Implementierung der Intersection Observer API. Sie ermöglicht es uns, zu erkennen, wann ein Element im Ansichtsbereich des Benutzers sichtbar ist.
 ```
 // components/LazyLoadedImage.js
@@ -977,9 +937,9 @@ In diesem Beispiel verwenden wir useInView, um zu erkennen, wann das Bild im Ans
 
 _**Die Webseite wird durch LazyLoading performanter und verursacht weniger Traffic.**_
 #
-#### 2.18 Canvas Confetti
+#### 2.16 Canvas Confetti
 Canvas Confetti ist eine Bibliothek zum Anzeigen von Konfetti-Animationen im Browser.
-##### 2.18.1 @types/canvas-confetti
+##### 2.16.1 @types/canvas-confetti
 @types/canvas-confetti enthält TypeScript-Typdefinitionen für Canvas Confetti.
 ```
 // components/ConfettiExplosion.js
@@ -993,12 +953,9 @@ function ConfettiExplosion() {
 export default ConfettiExplosion;
 ```
 In diesem Beispiel verwenden wir confetti(), um eine Konfetti-Explosion auszulösen.
-#
-#### 2.19 Sonner
-Sonner ist eine Bibliothek zum Anzeigen von Benachrichtigungen in React.
 
 #
-#### 2.20 Axios
+#### 2.17 Axios
 Axios ist eine Bibliothek zum Erstellen von HTTP-Anfragen in JavaScript.
 ```
 // api/products.js
@@ -1015,7 +972,7 @@ In diesem Beispiel verwenden wir axios.get, um eine GET-Anfrage an die API-Route
 
 #
 ___ 
-### III. Backend-Technologien
+## III. Backend-Technologien
 #### 3.1 Drizzle ORM
 Drizzle ORM ist ein TypeScript-first ORM, das eine typsichere Möglichkeit bietet, mit unserer Datenbank zu interagieren. Es vereinfacht Datenbankabfragen und -migrationen und verbessert die Lesbarkeit und Wartbarkeit unseres Backend-Codes.
 ```
@@ -1059,10 +1016,10 @@ export default NextAuth({
 ```
 In diesem Beispiel konfigurieren wir NextAuth.js für die Verwendung von Google als Authentifizierungsanbieter.
 
-#### 3.3.2 @simplewebauthn/browser & @simplewebauthn/server
+##### 3.2.2 @simplewebauthn/browser & @simplewebauthn/server
 @simplewebauthn/browser wird in unserem Projekt für die Implementierung von WebAuthn in unseren Frontend-Komponenten verwendet. Es ermöglicht uns, sichere und benutzerfreundliche Authentifizierungsmethoden wie biometrische Authentifizierung und Sicherheitsschlüssel zu unterstützen.
 @simplewebauthn/server wird in unserem Projekt verwendet, um die serverseitige Logik für WebAuthn zu implementieren. Es wird zur Implementierung von WebAuthn-Authentifizierungslogik in unseren Backend-Komponenten verwendet.
-##### 3.3.3 @auth/drizzle-adapter
+##### 3.2.3 @auth/drizzle-adapter
 @auth/drizzle-adapter ist ein Adapter, der die Integration von NextAuth.js mit Drizzle ORM ermöglicht. Er ermöglicht es uns, Benutzerdaten und Sitzungsdaten in unserer Neon-Datenbank zu speichern.
 #
 #### 3.3 Neon Database
@@ -1227,7 +1184,7 @@ export function text({ url, host }: { url: string; host: string }) {
 ```
 ___
 
-### IV. Weitere Tools
+## IV. Weitere Tools
 
 #### 4.1 Node.js
 Node.js ist eine JavaScript-Laufzeitumgebung, die es uns ermöglicht, JavaScript-Code außerhalb eines Webbrowsers auszuführen. Wir verwenden Node.js für unseren Backend-Server und für die Ausführung von Build-Tools.
@@ -1238,9 +1195,22 @@ npm (Node Package Manager) ist der Paketmanager für Node.js. Wir verwenden npm,
 #### 4.3 Git und Github
 Git ist ein Versionskontrollsystem, das es uns ermöglicht, Änderungen an unserem Code zu verfolgen und mit anderen Entwicklern zusammenzuarbeiten. Github ist eine webbasierte Hosting-Plattform für Git-Repositories.
 Wir verwenden GitFlow, um unsere Entwicklung zu organisieren. Wir erstellen und nutzen neue Branches für die meisten neuen Features oder Überarbeitungen. Die Branches werden gekennzeichnet mit fix-, feat-, refactor- oder chore-Präfixen.
+#
+#### 4.4 Vercel (Deployment)
+Vercel ist eine Plattform für Continuous Deployment. Wir verwenden Vercel, um unsere Anwendung zu bereitstellen und sie zu verffentlichen.
+(https://vercel.com/) 
+Obwohl Next.js und Vercel von demselben Unternehmen, Vercel, entwickelt wurden, sind sie zwei verschiedene Produkte. Next.js ist ein React-Framework, während Vercel eine Serverless-Plattform ist.
+
+Next.js kann auf verschiedenen Plattformen bereitgestellt werden, einschließlich Vercel. Vercel bietet jedoch eine Reihe von Funktionen, die speziell für Next.js optimiert sind, und ist daher die beste Plattform für die Bereitstellung und Skalierung von Next.js-Anwendungen.
+#
+#### 4.5 Discord (Kommunikation)
+Discord ist eine Plattform für Chat- und Videokonferenzen. Wir verwenden Discord, um uns zu kommunizieren und zu informieren, sowie für den unkomplizierten schnellen Austausch von Datien.
+#
+#### 4.6 Notion (Dokumentation)
+Notion ist umfangreiches Organisationswerkzeug. Wir verwenden Notion, um unsere Projektdokumentation zu verwalten und zu aktualisieren. Insbesondere fr unsere Entwicklungsprozesse nutzen wir Notion, um Scrum-Boards zu erstellen und zu verwalten.
 
 #
-#### 4.4 Figma (Designprototypen)
+#### 4.7 Figma (Designprototypen)
 Durch die Verwendung von Figma in diesem Projekt wird eine enge Zusammenarbeit zwischen Design und Entwicklung gefördert. Das visuelle Design der Anwendung kann effizient erstellt, getestet und iteriert werden. Die Erstellung von wiederverwendbaren Designkomponenten und Stilen gewährleistet eine konsistente visuelle Identität und erleichtert die Pflege des Designs. Insgesamt trägt Figma dazu bei, eine ansprechende und benutzerfreundliche Oberfläche zu schaffen, die den Anforderungen und Erwartungen der Benutzer entspricht.
 
 #
