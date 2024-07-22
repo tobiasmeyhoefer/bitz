@@ -68,7 +68,7 @@ export function ProductImageCarousel(props: {
         opts={{
           loop: true,
         }}
-        className="flex h-full w-[90vw] justify-center lg:h-[70vh] lg:w-[70vh]"
+        className="flex justify-center"
       >
         <CarouselContent>
           {props.images.map((img: string | null, index: number) => (
@@ -82,12 +82,12 @@ export function ProductImageCarousel(props: {
                       height={500}
                       src={img} //"/test_img.jpg"
                       alt="Product Image"
-                      className="aspect-square h-[90vw] w-[90vw] rounded-xl object-cover md:h-[50vw] md:w-[50vw] lg:h-[70vh] lg:w-[70vh]"
+                      className="aspect-square w-[90dvw] rounded-xl object-cover md:w-[50dvw]"
                       style={{ objectFit: 'cover' }}
                     />
                   ) : (
                     <div
-                      className={`-mr-1 flex h-[50vh] w-[90vw] items-center justify-center lg:h-[60vh] lg:w-[50vw] xl:w-[60vh] 2xl:w-[70vh]`}
+                      className={`-mr-1 flex h-[50dvh] w-[90dvw] items-center justify-center lg:h-[60dvh] lg:w-[50dvw] xl:w-[60dvh] 2xl:w-[70dvh]`}
                     >
                       <div>Placeholder Image</div>
                     </div>

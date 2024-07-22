@@ -34,7 +34,7 @@ export default function ProductInfoCard(props: ProductInfoType) {
     error: tbuyButtons('error'),
     verifyPhoneNumber: tbuyButtons('verifyPhoneNumber'),
     goToSettings: tbuyButtons('goToSettings'),
-    adressError: tbuyButtons('addressError')
+    adressError: tbuyButtons('addressError'),
     // Füge hier weitere Übersetzungen hinzu, die du benötigst
   }
 
@@ -130,8 +130,8 @@ export default function ProductInfoCard(props: ProductInfoType) {
           locale={locale}
         />
       ) : (
-        <div className="w-[90vw] lg:h-[70vh] lg:w-[50vw]">
-          <Card className="mt-2 flex h-full flex-col justify-between lg:mt-0 lg:h-[70vh]">
+        <div className="w-[90vw] lg:aspect-square lg:w-[50vw]">
+          <Card className="mt-2 flex h-full flex-col lg:mt-0">
             <CardHeader className="flex h-[20%] flex-row items-center justify-between">
               <CardTitle className="">{product.title}</CardTitle>
               <CardTitle className="!mt-0 w-1/2 text-right text-2xl md:text-3xl">
@@ -139,11 +139,11 @@ export default function ProductInfoCard(props: ProductInfoType) {
               </CardTitle>
             </CardHeader>
             <Separator />
-            <CardContent className="flex min-h-[80%] flex-col justify-between p-6">
+            <CardContent className="flex h-full flex-col justify-between p-6">
               <div className="flex justify-between text-wrap pb-6">
                 <div className="h-fit w-9/12 break-words">{product.description}</div>
               </div>
-              <div className="flex justify-between ">
+              <div className="flex justify-between">
                 <div className="md:text-md flex flex-nowrap items-end whitespace-nowrap text-right text-xs">
                   {product.location}
                 </div>
@@ -157,4 +157,3 @@ export default function ProductInfoCard(props: ProductInfoType) {
     </>
   )
 }
-

@@ -51,13 +51,13 @@ export default async function Page({ params }: { params: { id: string } }) {
       <div className="mb-16 flex flex-col justify-between px-4 sm:px-10 md:mb-0 md:px-[20px] lg:px-[30px] xl:px-[80px]">
         <div className="flex w-full justify-between">
           <Link href={backButtonHref} className="w-2">
-            <Button variant="outline" className={isOwner ? 'mt-[1vh]' : 'mt-[1vh] font-semibold'}>
+            <Button variant="outline" className={isOwner ? 'mt-[1dvh]' : 'mt-[1dvh] font-semibold'}>
               ⏎
             </Button>
           </Link>
           {!isOwner && (
             <Link href={`/my-shop/${product.sellerId}`}>
-              <Button variant="outline" className={'mt-[1vh]'}>
+              <Button variant="outline" className={'mt-[1dvh]'}>
                 {t('viewShop')}
               </Button>
             </Link>
@@ -65,12 +65,12 @@ export default async function Page({ params }: { params: { id: string } }) {
         </div>
         <div
           id="product-info-container"
-          className="mb-16 mt-2 flex flex-col items-center md:mb-0 md:mt-[2vh] lg:flex-row lg:items-start lg:justify-between lg:gap-6 "
+          className="mb-16 mt-2 flex flex-col items-center md:mb-0 md:mt-[2dvh] lg:flex-row lg:items-start lg:justify-between lg:gap-6 "
         >
           <ProductImageCarousel
             translations={carouselTranslations}
             images={images}
-            className=""
+            className="aspect-square lg:w-[50dvw]"
             sellerId={product.sellerId}
           />
           <ProductInfoCard productInfo={product} isOwner={isOwner} />
