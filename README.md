@@ -99,8 +99,6 @@ Bitz ist eine innovative Online-Plattform, die sich auf den Kauf, Verkauf und Ta
 
 #
 
-#
-
 ## I. Einleitung
 
 ---
@@ -133,15 +131,15 @@ npm install
 
 Durch diesen Schritt installieren Sie alle Abhängigkeiten, die für das Projekt erforderlich sind.
 
+<br>
+
 3. _Entwicklungsserver starten_:
    ```bash
    npm run dev
    ```
    Durch diesen Schritt starten Sie den Entwicklungsserver, um den Projektcode zu überprüfen und zu debuggen. Jede veränderung im Code wird live sichtbar.
 
-```bash
-  npm run build
-```
+   <br>
 
 4. _Projektstruktur verstehen_:
    Schauen sie sich die Struktur des Projektes im Explorer an, um ein Gefühl für die Organisation des Codes zu bekommen.
@@ -151,7 +149,7 @@ Durch diesen Schritt installieren Sie alle Abhängigkeiten, die für das Projekt
    - `app`: Hauptverzeichnis für die Next.js-Anwendung.
    - `app/[locale]`: Enthält lokalisierte Routen und Seiten für verschiedene Sprachen.
    - `app/[locale]/(protected)`: Enthält geschützte Routen und Seiten, die nur für authentifizierte Benutzer zugänglich sind.
-   - `app/api`: Enthält API-Routen fr serverseitige Funktionen und Endpunkte.
+   - `app/api`: Enthält API-Routen für serverseitige Funktionen und Endpunkte.
    - `components`: Enthält wiederverwendbare React-Komponenten, die in der gesamten Anwendung verwendet werden
    - `lib`: Enthält Hilfsfunktionen und Logik, die in verschiedenen Teilen der Anwendung verwendet werden.
      - _Beispiel_: `productaction.ts` - Funktionen und Logik im Zusammenhang mit Produktaktionen.
@@ -219,10 +217,10 @@ Kleinbuchstaben mit Bindestrich - Bennenung von Dateien und Ordnern
 
 - Die Google-Authentifizierung funktioniert nicht?
   Dies könnte daran liegen, dass die Anwendung nicht auf `localhost:3000` läuft. Dies kann passieren, wenn Sie bereits eine Anwendung auf `localhost:3000` laufen lassen,
-  ein weiterer möglicher Grund ist, dass das Konto, das Sie verwenden, bereits mit einem Magic Link-Konto verwendet wird.
+  ein weiterer möglicher Grund ist, dass das Konto, das Sie verwenden, bereits mit einem Magic Link-Konto verwendet wird. Bislang unterstützen wir nicht die Verknüpfung von mehreren OAuth Providern
   <br/>
 - Andere Probleme mit der Authentifizierung?
-  Wenn Sie auf localhost laufen, stellen Sie sicher, dass Sie die aktuellste `.env.locale`- Datei verwenden
+  Wenn Sie auf localhost laufen, stellen Sie sicher, dass Sie die aktuellste `.env.local`- Datei verwenden
   <br/>
 - Ich kann die Anwendung gar nicht starten.
   Überprüfen Sie die installierte Node-Version, sie sollte nicht kleiner als v18 sein.
@@ -233,8 +231,6 @@ Viel Erfolg und willkommen an Bord!**
 #
 
 ## II. Frontend-Technologien
-
-#
 
 ---
 
@@ -285,27 +281,21 @@ In diesem Beispiel verwenden wir sortBy, um das Array products nach dem Preis zu
 Next.js ist ein Framework für serverseitiges Rendering und statische Seitengenerierung in React-Anwendungen. Es bietet uns Funktionen wie serverseitiges Rendering, Routing, Datenabruf und Bildoptimierung, die die Leistung und SEO unserer Anwendung verbessern.
 
 ```
-// pages/products/[id].js
-import { getProductById } from '../api/products';
+// app/[locale]/(protected)/products/[id]/page.tsx
+export default async function Page({ params }: { params: { id: string } }) {
+  const t = await getTranslations('Product')
+  const productId = params.id
 
-export async function getServerSideProps({ params }) {
-  const product = await getProductById(params.id);
-  return { props: { product } };
-}
+  const product: ProductType = await getProductById(productId)
+  const user = await getUser()
 
-function ProductPage({ product }) {
   return (
-    <div>
-      <h1>{product.name}</h1>
-      <p>{product.description}</p>
-    </div>
-  );
+    .... JSX ....
+  )
 }
-
-export default ProductPage;
 ```
 
-In diesem Beispiel verwenden wir getServerSideProps, um Produktdaten serverseitig abzurufen und an die Komponente ProductPage zu übergeben. Dies verbessert die SEO, da Suchmaschinen den vollständigen HTML-Code der Seite crawlen können.
+In diesem Beispiel verwenden wir den neuen App Router, um Produktdaten serverseitig abzurufen und in die Komponente zu holen. Dies verbessert die SEO, da Suchmaschinen den vollständigen HTML-Code der Seite crawlen können.
 
 #
 
@@ -329,22 +319,6 @@ export default ProductCard;
 ```
 
 In diesem Beispiel definieren wir eine wiederverwendbare Komponente ProductCard, die die Details eines Produkts anzeigt. Diese Komponente kann dann an verschiedenen Stellen in der Anwendung wiederverwendet werden.
-
-##### 2.3.1 React-Dom
-
-React-Dom ist ein Paket, das die Interaktion zwischen React und dem Document Object Model (DOM) ermöglicht. Es ist für die Darstellung von React-Komponenten im Browser unerlässlich.
-
-```
-// index.js
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
-```
-
-In diesem Beispiel verwenden wir ReactDOM.createRoot, um eine Root-Instanz zu erstellen und die Komponente App im DOM-Element mit der ID "root" zu rendern.
 
 ##### 2.3.2 Zod
 
@@ -578,30 +552,7 @@ In diesem Beispiel verwenden wir useForm, um eine Formularinstanz zu erstellen. 
 
 #
 
-#### 2.7 clsx
-
-clsx ist eine Hilfsfunktion zum Kombinieren von CSS-Klassen in React. Sie vereinfacht die bedingte Anwendung von CSS-Klassen und verbessert die Lesbarkeit des Codes.
-
-```
-// components/ProductCard.js
-import clsx from 'clsx';
-
-function ProductCard({ product, isSelected }) {
-  return (
-    <div className={clsx('product-card', isSelected && 'selected')}>
-      {/* ... */}
-    </div>
-  );
-}
-
-export default ProductCard;
-```
-
-In diesem Beispiel verwenden wir clsx, um die CSS-Klasse "selected" bedingt anzuwenden, wenn die Prop isSelected wahr ist.
-
-#
-
-#### 2.8 ShadCN
+#### 2.7 ShadCN
 
 ShadCN ist eine Sammlung von vorgestalteten UI-Komponenten, die in unserem Projekt verwendet werden, um schnell ansprechende Benutzeroberflächen zu erstellen. Diese Komponenten sind sorgfältig gestaltet und bieten ein professionelles und modernes Erscheinungsbild. Der Hauptvorteil der Verwendung von ShadCN-Komponenten ist die Zeitersparnis bei der Entwicklung, da wir nicht jede Komponente von Grund auf neu gestalten müssen. Stattdessen können wir die vorhandenen Komponenten von ShadCN nutzen und sie nahtlos in unsere Anwendung integrieren.
 
@@ -683,7 +634,7 @@ Button.displayName = 'Button'
 export { Button, buttonVariants }
 ```
 
-##### 2.8.1 Radix UI
+##### 2.7.1 Radix UI
 
 Radix UI ist eine Sammlung von unaufdringlichen UI-Komponenten für React. Sie bieten uns eine solide Grundlage für die Erstellung zugänglicher und benutzerfreundlicher Benutzeroberflächen.
 
@@ -750,7 +701,7 @@ Diese vereinfachten Beispiele zeigen, wie ShadCN und Radix UI im Projekt verwend
 
 #
 
-#### 2.9 Framer Motion
+#### 2.8 Framer Motion
 
 Framer Motion ist eine Animationsbibliothek für React. Sie ermöglicht es uns, flüssige und ansprechende Animationen und Übergänge in unserer Benutzeroberfläche zu erstellen.
 
@@ -784,7 +735,7 @@ In diesem Beispiel verwenden wir motion.div, um eine animierte Modal-Komponente 
 
 #
 
-#### 2.10 Three
+#### 2.9 Three
 
 Three.js ist eine JavaScript-Bibliothek zum Erstellen und Anzeigen von 3D-Grafiken im Browser. Sie bietet uns eine leistungsstarke API für die Arbeit mit 3D-Objekten, -Materialien, -Lichtern und -Kameras.
 
@@ -812,7 +763,7 @@ export default Product3DModel;
 
 In diesem Beispiel verwenden wir THREE.ObjectLoader, um ein 3D-Modell aus einer Datei zu laden.
 
-##### 2.10.1 React Three Fiber
+##### 2.9.1 React Three Fiber
 
 React Three Fiber ist eine Bibliothek zum Rendern von 3D-Grafiken in React mit Three.js. Sie ermöglicht es uns, interaktive 3D-Erlebnisse in unserer Anwendung zu erstellen.
 
@@ -837,19 +788,19 @@ export default Product3DModel;
 
 In diesem Beispiel verwenden wir Canvas aus React Three Fiber, um ein 3D-Modell eines Produkts zu rendern.
 
-##### 2.10.2 @types/three
+##### 2.9.2 @types/three
 
 @types/three enthält TypeScript-Typdefinitionen für Three.js. Dies ermöglicht es uns, Three.js in unserem TypeScript-Code typsicher zu verwenden.
 
-##### 2.10.3 Drei
+##### 2.9.3 Drei
 
 Drei ist eine Sammlung von Hilfsfunktionen und -komponenten für React Three Fiber. Sie vereinfacht die Verwendung von Three.js in React und bietet zusätzliche Funktionen.
 
 #
 
-#### 2.11 Icons
+#### 2.10 Icons
 
-##### 2.11.1 React Icons
+##### 2.10.1 React Icons
 
 React Icons ist eine Sammlung von SVG-Icons, die als React-Komponenten verwendet werden können. Sie bietet uns eine große Auswahl an Icons für verschiedene Anwendungsfälle.
 
@@ -870,7 +821,7 @@ export default IconButton;
 
 In diesem Beispiel verwenden wir das Icon FaSearch aus React Icons, um einen Button mit einem Such-Icon zu erstellen.
 
-##### 2.11.2 Lucide React
+##### 2.10.2 Lucide React
 
 Lucide React ist eine weitere Sammlung von SVG-Icons, die für ihre minimalistische Ästhetik und gute Barrierefreiheit bekannt ist.
 
@@ -900,7 +851,7 @@ In diesem Beispiel verwenden wir das Icon Home aus Lucide React, um einen Link z
 
 #
 
-#### 2.12 Skeletons
+#### 2.11 Skeletons
 
 In diesem Projekt verwenden wir Skeletons, um Platzhalter für Inhalte anzuzeigen, die noch geladen werden. Dies verbessert die Benutzererfahrung, indem es visuelles Feedback gibt, während Daten abgerufen werden.
 
@@ -928,7 +879,7 @@ Eine weitere Stelle, wo Skeletons angewendet werden, ist die Datei `app\[locale]
 
 #
 
-#### 2.13 Zustand
+#### 2.12 Zustand
 
 Zustand ist eine Bibliothek zur Zustandsverwaltung in React. Sie ermöglicht es uns, den Zustand unserer Anwendung auf einfache und effiziente Weise zu verwalten und zwischen Komponenten zu teilen.
 
@@ -960,7 +911,7 @@ In diesem Beispiel verwenden wir zustand, um einen globalen Warenkorb-Zustand zu
 
 #
 
-#### 2.14 @geoapify/react-geocoder-autocomplete
+#### 2.13 @geoapify/react-geocoder-autocomplete
 
 @geoapify/react-geocoder-autocomplete ist eine React-Komponente für die automatische Vervollständigung von Adressen und Orten.
 
@@ -999,66 +950,13 @@ import {
 
 In diesem Beispiel verwenden wir GeocoderAutocomplete, um ein Eingabefeld mit automatischer Adressvervollständigung zu erstellen.
 
-##### 2.14.1 @geoapify/geocoder-autocomplete
+##### 2.13.1 @geoapify/geocoder-autocomplete
 
 @geoapify/geocoder-autocomplete ist die zugrunde liegende Bibliothek für die Adressvervollständigung, die von @geoapify/react-geocoder-autocomplete verwendet wird.
 
 #
 
-#### 2.15 React Intersection Observer (Lazy Loading)
-
-React Intersection Observer ist eine React-Implementierung der Intersection Observer API. Sie ermöglicht es uns, zu erkennen, wann ein Element im Ansichtsbereich des Benutzers sichtbar ist.
-
-```
-// components/LazyLoadedImage.js
-import { useInView } from 'react-intersection-observer';
-
-function LazyLoadedImage({ src, alt }) {
-  const { ref, inView } = useInView();
-
-  return (
-    <img
-      ref={ref}
-      src={inView ? src : ''}
-      alt={alt}
-    />
-  );
-}
-
-export default LazyLoadedImage;
-```
-
-In diesem Beispiel verwenden wir useInView, um zu erkennen, wann das Bild im Ansichtsbereich des Benutzers sichtbar ist. Nur dann wird das Bild geladen.
-
-_**Die Webseite wird durch LazyLoading performanter und verursacht weniger Traffic.**_
-
-#
-
-#### 2.16 Canvas Confetti
-
-Canvas Confetti ist eine Bibliothek zum Anzeigen von Konfetti-Animationen im Browser.
-
-##### 2.16.1 @types/canvas-confetti
-
-@types/canvas-confetti enthält TypeScript-Typdefinitionen für Canvas Confetti.
-
-```
-// components/ConfettiExplosion.js
-import confetti from 'canvas-confetti';
-
-function ConfettiExplosion() {
-  confetti();
-  return null;
-}
-
-export default ConfettiExplosion;
-```
-
-In diesem Beispiel verwenden wir confetti(), um eine Konfetti-Explosion auszulösen.
-
-#
-
-#### 2.17 Axios
+#### 2.14 Axios
 
 Axios ist eine Bibliothek zum Erstellen von HTTP-Anfragen in JavaScript.
 
@@ -1073,8 +971,6 @@ export const getProducts = async () => {
 ```
 
 In diesem Beispiel verwenden wir axios.get, um eine GET-Anfrage an die API-Route /api/products zu senden.
-
-#
 
 ---
 
@@ -1109,9 +1005,9 @@ In diesem Beispiel definieren wir eine Tabelle products mit Drizzle ORM und verw
 
 #### 3.2 Authentifizierung
 
-##### 3.2.1 Next Auth.js
+##### 3.2.1 Auth.js
 
-NextAuth.js ist eine Authentifizierungsbibliothek für Next.js, die verschiedene Authentifizierungsanbieter wie Google, Facebook, Twitter usw. unterstützt. Sie vereinfacht die Implementierung der Benutzerauthentifizierung und -autorisierung in unserer Anwendung.
+Auth.js ist eine Authentifizierungsbibliothek für Next.js, die verschiedene Authentifizierungsanbieter wie Google, Facebook, Twitter usw. unterstützt. Sie vereinfacht die Implementierung der Benutzerauthentifizierung und -autorisierung in unserer Anwendung.
 
 ```
 // pages/api/auth/[...nextauth].js
@@ -1380,7 +1276,7 @@ Durch die Verwendung von Figma in diesem Projekt wird eine enge Zusammenarbeit z
 
 Die Herausforderungen, denen wir in der Entwicklung begegnet sind, lassen sich grob in drei Teile einteilen.
 
-Zunächst stellte die Auswahl des richtigen Technologie-Stacks eine erhebliche Hürde dar. Es war entscheidend, sowohl ein stabiles Backend als auch ein reaktionsschnelles Frontend zu entwickeln, die nahtlos miteinander kommunizieren können. So haben wir anfangs UI Komponenten wie Buttons und ähnliches selbst als Komponente erstellt, sind aber dann im mittleren Teil der Entwicklung größtenteils auf die von shadcn Komponenten zur Verfügung gestellten umgestiegen und haben diese dann noch persönlich gestylt. Die Integration einer sicheren Zahlungsabwicklung war ein weiterer komplexer Bereich, diese haben wir dann mit Hilfe von Stripe implementiert. Es mussten umfassende Sicherheitsmaßnahmen implementiert werden, um mögliche Hackerangriffe zu verhindern (z. B. durch mögliche SQL Injections), was zusätzliche Zeit und Ressourcen erforderte.
+Zunächst stellte die Auswahl des richtigen Technologie-Stacks eine erhebliche Hürde dar. Es war entscheidend, sowohl ein stabiles Backend als auch ein reaktionsschnelles Frontend zu entwickeln, die nahtlos miteinander kommunizieren können. So haben wir anfangs UI Komponenten wie Buttons und ähnliches selbst als Komponente erstellt, sind aber dann im mittleren Teil der Entwicklung größtenteils auf die von shadcn Komponenten zur Verfügung gestellten umgestiegen und haben diese dann noch persönlich gestylt. Die Integration einer sicheren Zahlungsabwicklung war ein weiterer komplexer Bereich, diese haben wir dann mit Hilfe von Stripe implementiert. Es mussten umfassende Sicherheitsmaßnahmen implementiert werden, um mögliche Hackerangriffe zu verhindern (z. B. durch mögliche SQL Injections), was zusätzliche Zeit und Ressourcen erforderte. Auch die Implementierung von Authentication war ein große Herausforderung, da hier auf vorgeferitge einfache Lösungen verzichtet wurde und ein kostenloses Framework mit weniger Abstraktion verwendet wurde.
 
 Das zweite zentrale Thema war die Benutzererfahrung (UX/UI). Hier war es besonders wichtig, ein benutzerfreundliches und ansprechendes Design zu entwickeln. Unser Ziel war es, die Navigation so intuitiv wie möglich zu gestalten, damit die Nutzer schnell und einfach zu den gewünschten Produkten finden. Die Durchführung von Usability-Tests war dabei eine Herausforderung, denn es war nicht leicht, repräsentatives Feedback zu sammeln und sinnvoll umzusetzen. Bei dieser Thematik hat vor allem der Playtest sehr geholfen. Zudem musste die Plattform für mobile Endgeräte optimiert werden, da viele Nutzer über Smartphones und Tablets auf die Seite zugreifen. Dies erforderte eine sorgfältige Anpassung des Designs und der Funktionalität, um auf allen Geräten eine optimale Nutzererfahrung und Responsivität zu gewährleisten.
 
@@ -1410,6 +1306,8 @@ Nach wie vor bleibt auch in der Zukunft unser Ziel, das Einkaufserlebnis für je
 Die Implementierung eines fairen und transparenten Bewertungssystems wäre uns sehr wichtig. Käufer und Verkäufer sollten sich auf unserer Plattform sicher fühlen und einander vertrauen können. Daher würden wir ein Bewertungssystem einführen, das beiden Seiten die Möglichkeit gäbe, ihre Erfahrungen zu teilen. So könnten neue Nutzer schnell erkennen, welche Verkäufer vertrauenswürdig sind und welche Käufer zuverlässig sind. Wir würden auch Maßnahmen ergreifen, um sicherzustellen, dass die Bewertungen echt und glaubwürdig sind.
 
 Eine Technologie, die leider erst zum Schluss unserer Projektarbeit wirklich relevant geworden ist, ist Optimistic UI. Da diese aber erst mit der nächsten React Version rauskommt, konnten wir sie leider noch nicht implementieren. Die Nutzung von Optimistic UI würde bedeuten, dass Aktionen auf der Plattform sofort visuell bestätigt würden, noch bevor sie endgültig verarbeitet sind. Wenn Sie beispielsweise ein Produkt einstellen oder eine Transaktion durchführen, würden Sie sofort sehen, dass Ihre Aktion erfolgreich war. Das würde Wartezeiten reduzieren und die Nutzung unserer Plattform noch angenehmer und effizienter machen. Zusätzlich wäre das ganze Nutzungserlebnis unserer Plattform dadurch noch flüssiger.
+
+Außerdem gibt es noch viele weitere kleinere Optimierungen die man hinzufügen könnte wie zum Beisiel eigene Bilder in my-shop oder zusätzlich der Status eines Produkts, also ob es gebraucht- oder Neuware ist. 
 
 #
 
@@ -1442,8 +1340,18 @@ Tobias Meyhöfer s87766@bht-berlin.de (933280)<br/>
 
 ## Quellen
 
-#### Quellen der Banner-Bilder
+Banner-Bilder
 
-https://www.solidbackgrounds.com <br/>
-https://www.vecteezy.com <br/>
-https://www.freepik.com <br/>
+https://www.solidbackgrounds.com 
+https://www.vecteezy.com 
+https://www.freepik.com
+
+die wichtigsten Technologien
+
+https://vercel.com/
+https://nextjs.org/
+https://stripe.com/de
+https://authjs.dev/
+https://tailwindcss.com/
+https://ui.shadcn.com/
+
